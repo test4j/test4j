@@ -1,0 +1,32 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+	<bean id="tiger" class="org.jtester.module.spring.testedbeans.aop.Cat">
+		<property name="species" value="tiger" />
+		<property name="colour" value="tear stripes" />
+	</bean>
+	<bean id="albatross" class="org.jtester.module.spring.testedbeans.aop.Seabird">
+		<property name="name" value="albatross" />
+	</bean>
+	
+	<!-- Pointcut -->
+	<bean id="methodNamePointcut" class="org.springframework.aop.support.NameMatchMethodPointcut">
+		<property name="mappedNames">
+			<list>
+				<value>*</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- Advices -->
+	<bean id="animalAdvice" class="org.jtester.module.spring.testedbeans.aop.AnimalAdvice" />
+	<!-- Advisor -->
+	<bean id="animalAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<property name="pointcut" ref="methodNamePointcut" />
+		<property name="advice" ref="animalAdvice" />
+	</bean>
+	<bean class="org.springframework.aop.framework.autoproxy.DefaultAdvisorAutoProxyCreator">
+		<property name="proxyTargetClass" value="true" />
+	</bean>
+</beans>

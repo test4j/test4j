@@ -1,0 +1,5 @@
+|connect|
+
+|query|select * from tdd_user|
+|id|first_name|
+|<<myid|<<name|

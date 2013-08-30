@@ -1,0 +1,17 @@
+|connect|
+
+|clean table|tdd_user|
+
+|insert|tdd_user|
+|id|first_name|
+|1|darui.wu|
+
+|commit|
+
+|execute|delete from tdd_user where id in (1)|
+
+|clean table|tdd_user|
+
+|commit|
+
+|execute|delete from tdd_user where id in (1)|

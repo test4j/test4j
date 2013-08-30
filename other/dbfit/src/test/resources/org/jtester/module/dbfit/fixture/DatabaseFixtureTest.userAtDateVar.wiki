@@ -1,0 +1,9 @@
+|connect|
+
+|clean table|tdd_user|
+
+|insert|tdd_user|
+|id|my_date|
+|1|@{date}|
+
+|commit|

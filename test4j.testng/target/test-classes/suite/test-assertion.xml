@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="JTester">
+	<test name="JTester">
+		<groups>
+			<run>
+				<include name="assertion" />
+				<exclude name="broken" />
+				<exclude name="memery-db" />
+				<exclude name="tracer" />
+			</run>
+		</groups>
+		<packages>
+			<package name="org.jtester.*" />
+		</packages>
+	</test>
+</suite>

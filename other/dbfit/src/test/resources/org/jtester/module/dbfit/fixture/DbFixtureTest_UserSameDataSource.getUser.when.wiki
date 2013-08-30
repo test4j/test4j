@@ -1,0 +1,12 @@
+|connect|
+
+|clean table|jtester_user|
+
+|insert|jtester_user|
+|id|is_deleted|
+|1|false|
+|2|false|
+|3|true|
+
+
+

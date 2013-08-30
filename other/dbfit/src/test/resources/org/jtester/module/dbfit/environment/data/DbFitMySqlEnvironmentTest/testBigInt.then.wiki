@@ -1,0 +1,5 @@
+|connect|
+
+|query|select * from tdd_user where big_int=1006245173|
+|post_code|big_int|
+|310012|1006245173|

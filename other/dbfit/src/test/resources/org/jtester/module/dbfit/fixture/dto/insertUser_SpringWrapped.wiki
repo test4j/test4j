@@ -1,0 +1,13 @@
+|org.jtester.module.dbfit.fixture.DatabaseFixture|
+|connect|
+
+|clean table|tdd_user|
+
+|org.jtester.module.dbfit.fixture.dto.TestedSpringFixture|
+|insertUser|org.jtester.fortest.beans.User|
+|first|last|
+|my first name ddd|my last name dd|
+
+|query|select * from tdd_user|
+|first_name|
+|my first name ddd|

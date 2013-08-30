@@ -1,0 +1,38 @@
+<story>
+	<description>验证框架运行then检查的非阻塞式异常</description>
+	<scenario name="有多个then错误">
+		<method type="given" name="init normal">
+			准备数据正常，无异常抛出
+		</method>
+		<method type="when" name="execute normal">
+			正常执行业务方法，无异常抛出
+		</method>
+		<method type="then" name="check error">
+			检查数据发生错误
+			<para name="错误消息">第一个错误a</para>
+		</method>
+		<method type="then" name="check normal">
+			正常检查结果，无异常抛出
+		</method>
+		<method type="then" name="check error">
+			检查数据发生错误
+			<para name="错误消息">第二个错误b</para>
+		</method>
+		<method type="then" name="check scenario error">
+			运行当前测试场景，应该抛出多个then异常
+		</method>
+	</scenario>
+	<scenario name="正常运行，无任何错误抛出">
+		<method type="given" name="init normal">准备数据正常，无异常抛出</method>
+		<method type="when" name="execute normal">正常执行业务方法，无异常抛出</method>
+		<method type="then" name="check normal">正常检查结果，无异常抛出</method>
+		<method type="then" name="check scenario normal">运行当前测试场景，应该无任何异常</method>
+	</scenario>
+	<scenario name="运行测试场景时，在given方法中有异常抛出">
+		<method type="given" name="check scenario exception">运行本测试场景，应该会抛出一个普通的异常</method>
+		<method type="given" name="init error">准备数据，抛出一个异常</method>
+	</scenario>
+</story>
+
+
+

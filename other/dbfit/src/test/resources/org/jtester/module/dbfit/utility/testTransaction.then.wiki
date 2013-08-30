@@ -1,0 +1,7 @@
+|connect|
+
+|rollback|
+
+|query|select count(*) as value from tdd_user where id in (100,110)|
+|value|
+|0| 

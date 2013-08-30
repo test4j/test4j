@@ -1,0 +1,10 @@
+|!-org.jtester.module.dbfit.fixture.DatabaseFixture-!|
+|connect|
+
+|clean table|tdd_user|
+
+|Insert|tdd_user|
+|id|first_name|
+|@{myid}|@{name}|
+
+|commit|

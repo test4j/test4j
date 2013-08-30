@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+ "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id="toBeOverriden" class="org.jtester.fortest.formock.SomeInterface$SomeInterfaceImpl1"/>
+    
+    <bean id="springBeanService" class="org.jtester.fortest.formock.SpringBeanService$SpringBeanServiceImpl1">
+        <constructor-arg ref="toBeOverriden"/>
+        <property name="dependency2" ref="toBeOverriden"/>
+    </bean>
+</beans>

@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="JTester" data-provider-thread-count="20">
+	<listeners>
+		<listener class-name="org.jtester.testng.dataprovider.PrintFailureMethodListener" />
+	</listeners>
+
+	<test name="JTester">
+		<classes>
+			<class name="org.jtester.testng.dataprovider.DataProviderDemo">
+				<methods>
+					<include name="testDemo" />
+				</methods>
+			</class>
+		</classes>
+	</test>
+</suite>

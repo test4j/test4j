@@ -1,0 +1,13 @@
+|connect|
+
+|clean table|jtester_user|
+
+|insert|jtester_user|
+|id|create_date|modified_date|
+|1|<<date|@{datetime}|
+
+|commit|
+
+|query|select * from jtester_user|
+|create_date|modified_date|
+|<<date|@{datetime}|

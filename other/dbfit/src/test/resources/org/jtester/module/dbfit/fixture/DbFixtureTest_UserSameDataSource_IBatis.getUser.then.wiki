@@ -1,0 +1,11 @@
+
+|connect|
+|query|select * from tdd_user where post_code='320001'|
+|post_code|sarary|
+|320001|23.02|
+
+|query|select * from tdd_user where post_code ='310000'|
+|post_code|sarary|
+|310000|1000|
+|310000|1200|
+|310000|1800|

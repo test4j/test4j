@@ -1,0 +1,21 @@
+<story>
+	<scenario name="check map converter">
+		<method type="given" name="give a map para">
+			假定给个Map类型的参数
+			<para name="map">
+				{'key1':'value1',
+				'key2':'value2',
+				'key3':'value3'}
+			</para>
+			验证可以正常转换
+		</method>
+		<method type="then" name="check map">
+			验证DataMap参数
+			<para name="map">
+				{'key1':'value1',
+				'key2':'value2',
+				'key3':'value3'}
+			</para>
+		</method>
+	</scenario>
+</story>

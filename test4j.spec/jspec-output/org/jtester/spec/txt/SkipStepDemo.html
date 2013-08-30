@@ -1,0 +1,45 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style>table {
+	background-color: #FFF;
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+	margin: 30px 40px 0px 40px;
+}
+
+table th {
+	padding-left: 5px;
+	color: #666;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 18px;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	background: #eeeeee;
+	height: 21px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+table td {
+	padding-left: 5px;
+	color: #333;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 16px;
+	height: 19px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	border-left: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+td.success {
+	color: green;
+}
+
+td.suspend {
+	color: gray;
+}
+
+td.failure {
+	color: red;
+}</style></head><body><div><table><tr><th colspan="2">本场景中包含3个执行步骤，无跳过步骤</th></tr><tr><td class="success">inputInitString</td><td>传入初始值=init text</td></tr><tr><td class="success">appendThisString</td><td>把参数=append text添加到初始值后面</td></tr><tr><td class="success">checkFinalText</td><td>因为步骤2被跳过，所以最后的合并字符串=init text,append text</td></tr></table><table><tr><th colspan="2">本场景中包含2个执行步骤，1个跳过步骤</th></tr><tr><td class="success">inputInitString</td><td>传入初始值=init text</td></tr><tr><td class="suspend">appendThisString</td><td>把参数=append text添加到初始值后面</td></tr><tr><td class="success">checkFinalText</td><td>因为步骤2被跳过，所以最后的合并字符串=init text</td></tr></table></div></body></html>

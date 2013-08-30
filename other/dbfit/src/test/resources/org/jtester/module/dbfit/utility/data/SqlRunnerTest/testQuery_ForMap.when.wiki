@@ -1,0 +1,8 @@
+|connect|
+
+|clean table|tdd_user|
+
+|insert|tdd_user|
+|id|first_name|last_name|post_code|my_date|sarary|
+|1|dddd|eeee|dfdfd|2011-03-18|5632|
+|2|dddd2|eeee2|dfdfd2|2011-03-18|5632|

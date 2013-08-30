@@ -1,0 +1,7 @@
+|connect from file|eve|
+
+|clean table|MTN_ALL_TYPES|
+
+|insert|MTN_ALL_TYPES|
+|ID|T_BLOB|T_DATE|T_NUMBER|T_TIMESTAMP|T_VARCHAR|
+|2|t_blob|2011-09-12 00:00:00.0|23243.876|2011-09-05 12:23:34.0|asdfadsf|

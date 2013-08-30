@@ -1,0 +1,13 @@
+{
+    "#class":"org.jtester.fortest.beans.Manager",
+    "secretary":{
+        "name":"Harry Hacker"
+    },
+    "phoneNumber":{
+        #class:"org.jtester.fortest.beans.PhoneNumber",
+        "code":"571",
+        "number":"0571-88886666"
+    },
+    "name":"Tony Tester",
+    "date":"2009-08-07 16:46:08.448"
+}

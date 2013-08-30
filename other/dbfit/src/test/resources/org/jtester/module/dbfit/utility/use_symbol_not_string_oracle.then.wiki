@@ -1,0 +1,6 @@
+|connect from file|oracle|
+
+|query|select ROWNUM, A.ID from Caesar_Customer_Ggs A Where ROWNUM<=:limitrow|
+|ID|
+|SYNC00013220|
+|SYNC00013221|

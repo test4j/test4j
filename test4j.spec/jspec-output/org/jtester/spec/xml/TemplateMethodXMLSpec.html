@@ -1,0 +1,57 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style>table {
+	background-color: #FFF;
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+	margin: 30px 40px 0px 40px;
+}
+
+table th {
+	padding-left: 5px;
+	color: #666;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 18px;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	background: #eeeeee;
+	height: 21px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+table td {
+	padding-left: 5px;
+	color: #333;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 16px;
+	height: 19px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	border-left: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+td.success {
+	color: green;
+}
+
+td.suspend {
+	color: gray;
+}
+
+td.failure {
+	color: red;
+}</style></head><body><div><table><tr><th colspan="2">模板方法验证，修改第一个参数</th></tr><tr><td class="success">initCondiction</td><td>初始化参数，
+列表=[2,3,5]
+Map对象={"key1":"value1",
+				"key2":"value2"}</td></tr><tr><td class="success">checkCondiction</td><td>验证参数，原始条件的值分别是
+列表=[2,3,5]
+Map对象={"key1":"value1",
+				"key2":"value2"}</td></tr></table><table><tr><th colspan="2">模板方法验证，修改第二个参数</th></tr><tr><td class="success">initCondiction</td><td>初始化参数，
+列表=[1,2,3,4]
+Map对象={"key11":"value1",
+				"key12":"value2"}</td></tr><tr><td class="success">checkCondiction</td><td>验证参数，原始条件的值分别是,参数顺序和第一个场景对调
+Map对象={"key11":"value1",
+				"key12":"value2"}
+列表=[1,2,3,4]</td></tr></table></div></body></html>

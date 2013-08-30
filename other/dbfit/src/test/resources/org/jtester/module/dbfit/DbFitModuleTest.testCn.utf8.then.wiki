@@ -1,0 +1,6 @@
+|!-org.jtester.module.dbfit.fixture.DatabaseFixture-!|
+|connect|
+
+|query|select * from char_encoding_test|
+|message|
+|欢迎欢迎|

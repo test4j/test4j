@@ -1,0 +1,44 @@
+GRANT ALL PRIVILEGES ON *.* TO daruiwu@10.16.47.1;
+
+|connect from file||org/jtester/module/dbfit/db.properties|
+
+|clean table|tdd_user|
+
+|insert|tdd_user|
+|id|sarary|
+|1|2345|
+
+|query|select * from tdd_user|
+|id|
+|1|
+
+|commit|
+
+|connect from file|jtester_another|org/jtester/module/dbfit/db.properties|
+
+|clean table|tdd_user|
+
+|insert|tdd_user|
+|id|sarary|
+|2|2345|
+
+|commit|
+
+|query|select * from tdd_user|
+|id|
+|2|
+
+
+|connect from file|jtester_another|
+
+|clean table|tdd_user|
+
+|insert|tdd_user|
+|id|sarary|
+|2|234|
+
+|commit|
+
+|query|select * from tdd_user|
+|id|sarary|
+|2|234|

@@ -1,0 +1,26 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="JTester">
+	<test name="JTester">
+		<groups>
+			<run>
+				<include name="all-test" />
+				<exclude name="broken" />
+				<exclude name="hibernate" />
+				<exclude name="memery-db" />
+				<exclude name="for-test" />
+				<exclude name="testng-demo" />
+				<exclude name="manual" />
+				<exclude name="debug" />
+				<exclude name="oracle" />
+			</run>
+		</groups>
+		<packages>
+			<package name="org.jtester.testng.*" />
+		</packages>
+	</test>
+	<listeners>
+		<listener class-name="org.jtester.testng.report.UserTestReporter" />
+		<!-- <listener class-name="org.jtester.core.testng.JTesterMethodsOrder" 
+			/> -->
+	</listeners>
+</suite>

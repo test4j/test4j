@@ -1,0 +1,25 @@
+{
+    "#class":"list@b32ef3",
+    "#value":[
+        {
+            "#class":"org.jtester.json.helper.complex.ComplexPoJo@b32ed4",
+            "id":null,
+            "gmtCreate":null,
+            "creator":null,
+            "gmtModified":null,
+            "modifier":null,
+            "isDeleted":null,
+            "version":null,
+            "keyName":null,
+            "procinst":null,
+            "actinst":null,
+            "dateValue":{
+                "#class":"Date",
+                "#value":"2011-08-19 15:21:17"
+            },
+            "longValue":null,
+            "stringValue":null,
+            "textValue":null
+        }
+    ]
+}

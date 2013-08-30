@@ -1,0 +1,9 @@
+|connect|
+
+|clean table|jtester_user|
+
+|insert|jtester_user|
+|id|name|
+|1|my_name|
+
+|commit|

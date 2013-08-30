@@ -1,0 +1,27 @@
+<story>
+	<template>
+		<method name="when method" type="when">
+			模板方法测试，参数一
+			<para name="参数1">[1,2,3]</para>
+			,参数二
+			<para name="参数2">{'name':'value'}</para>
+		</method>
+	</template>
+	<scenario name="scenario1">
+		<method name="when method" type="when">
+			<para name="参数2">[2,3,4]</para>
+		</method>
+		<method name="when method" type="then">
+			验证方法，同名不同类型
+			<para name="参数">234</para>
+		</method>
+	</scenario>
+	<scenario name="scenario2">
+		<method name="given method" type="given">
+			<para name="参数">init</para>
+		</method>
+		<method name="when method" type="when">
+			<para name="参数2">[4,5,6]</para>
+		</method>
+	</scenario>
+</story>

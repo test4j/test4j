@@ -1,0 +1,145 @@
+<story>
+	<description>JSpec各种类型参数转换验证</description>
+	<scenario name="各种基本类型转换">
+		<method type="when" name="convert to primitive type">
+			<para name="布尔值"><![CDATA[
+true
+			]]></para>
+			<para name="整型"><![CDATA[
+123
+			]]></para>
+			<para name="长整型"><![CDATA[
+234
+			]]></para>
+			<para name="短整型"><![CDATA[
+23
+			]]></para>
+			<para name="浮点数"><![CDATA[
+23.12
+			]]></para>
+			<para name="双精度"><![CDATA[
+234.23
+			]]></para>
+			<para name="字符串"><![CDATA[
+I am a String
+			]]></para>
+		</method>
+	</scenario>
+	<scenario name="大数据类型转换">
+		<method type="when" name="convert to big decimal and big integer">
+			<para name="大整数"><![CDATA[
+123456789123456789
+			]]></para>
+			<para name="大数字"><![CDATA[
+123456789123456789.12345
+			]]></para>
+		</method>
+	</scenario>
+	<scenario name="日期转换验证">
+		<method type="when" name="convert date">
+			<para name="日期"><![CDATA[
+2010-12-20
+			]]></para>
+			<para name="时间"><![CDATA[
+12:30:45
+			]]></para>
+			<para name="日期加时间"><![CDATA[
+2010-04-14 14:23:57
+			]]></para>
+			<para name="java_sql_Date"><![CDATA[
+2010-04-14
+			]]></para>
+			<para name="java_sql_Timestamp"><![CDATA[
+2010-04-14 14:23:57
+			]]></para>
+		</method>
+	</scenario>
+	<scenario name="一维数组转换">
+		<method type="when" name="convert to int array">
+			<para name="数组"><![CDATA[
+[
+	1,
+	2,
+	3
+]
+			]]></para>
+		</method>
+	</scenario>
+	<scenario name="二维数组转换">
+		<method type="when" name="convert to bool array">
+			<para name="数组"><![CDATA[
+[
+	[
+		true, 
+		false
+	],
+	[
+		true, 
+		true
+	]
+]
+			]]></para>
+		</method>
+	</scenario>
+	<scenario name="Scenario list 转换">
+		<method type="when" name="convert to List">
+			<para name="列表">[true,false]</para>
+		</method>
+	</scenario>
+	<scenario name="验证list泛型转换">
+		<method type="when" name="convert to list generic">
+			<para name="列表"><![CDATA[
+[
+	{
+		'first':'wu',
+		'last' :'davey'
+	},
+	{
+		'first':'he',
+		'last' :'jobs'
+	}
+]
+			]]></para>
+		</method>
+		<method type="when" name="convert to list hashmap">
+			<para name="列表"><![CDATA[
+[
+	{
+		'first':'wu',
+		'last' :'davey'
+	},
+	{
+		'first':'he',
+		'last' :'jobs'
+	}
+]
+			]]></para>
+		</method>
+	</scenario>
+	<scenario name="验证Dto转换">
+		<method type="when" name="convet to dto">
+			<para name="用户"><![CDATA[
+{
+	'first'	:'wu',
+	'last'	:'davey'
+}
+			]]></para>
+		</method>
+	</scenario>
+	<scenario name="DataMap和HashMap转换验证">
+		<method type="when" name="convert to map">
+			<para name="DataMap"><![CDATA[
+{
+	'first':'wu',
+	'last' :'davey'
+}
+			]]></para>
+			<para name="HashMap"><![CDATA[
+{
+	'first'	:'wu',
+	'last'	:'davey'
+}
+			]]></para>
+		</method>
+	</scenario>
+</story>

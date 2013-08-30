@@ -1,0 +1,9 @@
+|connect from file|	eve|
+
+|clean table|MTN_ACTIVITY|
+
+|insert|MTN_ACTIVITY|
+|ID?SEQ_MTN_ACTIVITY.nextval|name|
+|>>my_id|ddd|
+
+|commit|

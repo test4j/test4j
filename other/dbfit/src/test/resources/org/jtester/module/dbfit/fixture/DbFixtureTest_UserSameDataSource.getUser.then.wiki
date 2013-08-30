@@ -1,0 +1,5 @@
+|connect|
+
+|query|select count(*) as count from jtester_user where name='new user'|
+|count|
+|1|

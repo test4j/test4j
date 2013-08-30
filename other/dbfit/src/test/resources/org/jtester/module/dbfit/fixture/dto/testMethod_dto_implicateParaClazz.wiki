@@ -1,0 +1,8 @@
+|org.jtester.module.dbfit.fixture.dto.TestedDtoPropFixture|
+|testMethod_dto_implicateParaClazz|
+|first name|age|addresses|map|my list|
+|a|34|wenyi,wener|key1:value;key2:value|add;ddd|
+|a|34|road1,road2|key1:aaaa;key2:dddd|asdf;adfas;adfa|
+
+
+

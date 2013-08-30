@@ -1,0 +1,9 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="jmockit">
+	<test name="jmockit">
+		<classes>
+			<class name="org.jtester.module.jmockit.mockbug.JMockitMockManagerTest"></class>
+			<class name="org.jtester.module.jmockit.mockbug.JMockitMockManagerTest2"></class>
+		</classes>
+	</test>
+</suite>

@@ -1,0 +1,5 @@
+
+|connect|
+|query|select * from tdd_user where post_code='320001'|
+|post_code|sarary|
+|320001|23.02|

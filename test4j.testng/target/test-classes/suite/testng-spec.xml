@@ -1,0 +1,16 @@
+<!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
+<suite name="JTester">
+	<test name="JTester">
+		<groups>
+			<run>
+				<exclude name="debug" />
+			</run>
+		</groups>
+		<packages>
+			<package name="org.jtester.spec.*"></package>
+		</packages>
+	</test>
+	<listeners>
+		<listener class-name="org.jtester.testng.report.UserTestReporter"></listener>
+	</listeners>
+</suite>

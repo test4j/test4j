@@ -1,0 +1,3 @@
+Premain-Class: org.jtester.core.Startup
+Agent-Class: org.jtester.core.Startup
+Can-Redefine-Classes: true

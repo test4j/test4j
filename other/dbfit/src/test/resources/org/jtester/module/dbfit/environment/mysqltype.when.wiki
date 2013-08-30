@@ -1,0 +1,9 @@
+|connect|
+
+|clean table|all_type|
+
+|insert|all_type|
+|id|my_tinyint_unsigned|
+|1|1|
+
+|commit|

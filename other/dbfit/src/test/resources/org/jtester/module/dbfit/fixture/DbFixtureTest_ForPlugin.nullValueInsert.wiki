@@ -1,0 +1,10 @@
+|connect|
+
+|clean table|tdd_user|
+
+|insert|tdd_user|
+|id|first_name|last_name|post_code|sarary|address_id|my_date|
+|1|<null>|<null>|310000|1000.000|<null>|<null>|
+|2|<null>|<null>|310000|1200.000|<null>|<null>|
+|3|<null>|<null>|352200|1500.000|<null>|<null>|
+|4|<null>|<null>|310000|1800.000|<null>|2009-09-16 23:12:56.0|

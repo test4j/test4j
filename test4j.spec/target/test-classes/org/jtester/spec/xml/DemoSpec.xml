@@ -1,0 +1,16 @@
+<story>
+	<scenario name="spec demo1">
+		<description>验证2个数字相加的结果值</description>
+		<method name="init parameter">
+			初始化参数一和二
+			<para name="参数1">1234</para>
+			<para name="参数2">4567</para>
+		</method>
+		<method skip="true" name="do something">
+		</method>
+		<method name="verify result">
+			验证数一+数二的总和
+			<para name="总和">5801</para>
+		</method>
+	</scenario>
+</story>

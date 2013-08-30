@@ -1,0 +1,8 @@
+|org.jtester.module.dbfit.fixture.dto.TestedDtoPropFixture|
+|testMethod_String|java.lang.String|
+|>>value|
+|a|
+|ab|
+
+
+

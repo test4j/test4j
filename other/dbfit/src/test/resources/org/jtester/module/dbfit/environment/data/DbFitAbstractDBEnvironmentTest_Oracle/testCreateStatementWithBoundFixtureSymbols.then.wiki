@@ -1,0 +1,5 @@
+|connect|
+
+|query|select * from jtester_user|
+|id|name|
+|1|@modified_name|

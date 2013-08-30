@@ -1,0 +1,15 @@
+|connect|
+
+|clean table|tdd_user|
+
+|insert|tdd_user|
+|id|first_name|
+|2|davey.wu|
+
+|set parameter|my_id|2|
+
+|store query|select first_name from tdd_user|>>username|
+
+|query|select * from tdd_user where first_name=@username|
+|id|
+|<<my_id|

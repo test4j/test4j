@@ -1,0 +1,6 @@
+|connect|
+
+|query|select * from tdd_user limit 0,@limited|
+|first_name|
+|dddd|
+|cccc|

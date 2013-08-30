@@ -1,0 +1,5 @@
+eclipse.preferences.version=1
+org.moreunit.prefixes=
+org.moreunit.test_type=testng
+org.moreunit.unitsourcefolder=jtester.dbfit\:src/main/java\:jtester.dbfit\:src/test/java
+org.moreunit.useprojectsettings=true

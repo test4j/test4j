@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+ "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <bean id="dependency1" class="org.jtester.fortest.formock.SomeInterface$SomeInterfaceImpl1"/>
+    
+    <bean id="springBeanService1" class="org.jtester.fortest.formock.SpringBeanService$SpringBeanServiceImpl1">
+        <property name="dependency1" ref="dependency1"/>
+        <property name="dependency2" ref="dependency2"/>
+    </bean>
+    
+    <bean id="springBeanService2" class="org.jtester.fortest.formock.SpringBeanService$SpringBeanServiceImpl1">
+        <property name="dependency1" ref="dependency1"/>
+        <property name="dependency2" ref="dependency3"/>
+    </bean>
+</beans>

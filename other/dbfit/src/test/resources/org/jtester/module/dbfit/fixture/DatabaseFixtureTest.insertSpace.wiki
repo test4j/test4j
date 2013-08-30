@@ -1,0 +1,12 @@
+|connect|
+
+|clean table|tdd_user|
+
+|insert|tdd_user|
+|id|first_name|
+|1|@{space}wu@{space}@{space}@{space}d|
+
+|query|select * from tdd_user|
+|first_name|
+|@{space}wu@{space}@{space}@{space}d|
+

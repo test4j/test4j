@@ -1,0 +1,85 @@
+<fitnesse.wiki.PageData>
+  <content>|!-org.jtester.dbfit.DatabaseFixture-!|&#xd;
+|connect|&#xd;
+&#xd;
+|Query| select &apos;test&apos; as x|&#xd;
+|x|&#xd;
+|test|&#xd;
+&#xd;
+&#xd;
+|Query|select * from tdd_user|&#xd;
+|first_name|&#xd;
+|null|&#xd;
+|null|&#xd;
+|null|&#xd;
+|null|&#xd;
+</content>
+  <properties>
+    <children>
+      <entry>
+        <string>Search</string>
+        <fitnesse.wiki.WikiPageProperty/>
+      </entry>
+      <entry>
+        <string>Help</string>
+        <fitnesse.wiki.WikiPageProperty/>
+      </entry>
+      <entry>
+        <string>Test</string>
+        <fitnesse.wiki.WikiPageProperty/>
+      </entry>
+      <entry>
+        <string>WhereUsed</string>
+        <fitnesse.wiki.WikiPageProperty/>
+      </entry>
+      <entry>
+        <string>saveId</string>
+        <fitnesse.wiki.WikiPageProperty>
+          <value>1249443390547</value>
+        </fitnesse.wiki.WikiPageProperty>
+      </entry>
+      <entry>
+        <string>RecentChanges</string>
+        <fitnesse.wiki.WikiPageProperty/>
+      </entry>
+      <entry>
+        <string>Edit</string>
+        <fitnesse.wiki.WikiPageProperty/>
+      </entry>
+      <entry>
+        <string>LastModified</string>
+        <fitnesse.wiki.WikiPageProperty>
+          <value>20090805113630</value>
+        </fitnesse.wiki.WikiPageProperty>
+      </entry>
+      <entry>
+        <string>Files</string>
+        <fitnesse.wiki.WikiPageProperty/>
+      </entry>
+      <entry>
+        <string>ticketId</string>
+        <fitnesse.wiki.WikiPageProperty>
+          <value>1427973361657786127</value>
+        </fitnesse.wiki.WikiPageProperty>
+      </entry>
+      <entry>
+        <string>Versions</string>
+        <fitnesse.wiki.WikiPageProperty/>
+      </entry>
+      <entry>
+        <string>Refactor</string>
+        <fitnesse.wiki.WikiPageProperty/>
+      </entry>
+      <entry>
+        <string>Suites</string>
+        <fitnesse.wiki.WikiPageProperty/>
+      </entry>
+      <entry>
+        <string>Properties</string>
+        <fitnesse.wiki.WikiPageProperty/>
+      </entry>
+    </children>
+    <symbolicLinks/>
+  </properties>
+  <versions/>
+</fitnesse.wiki.PageData>

@@ -1,0 +1,40 @@
+<story>
+	<template>
+		<method name="init condiction" type="given">
+			初始化参数，
+			<para name="列表">[1,2,3,4]</para>
+			<para name="Map对象">
+				<![CDATA[
+				{"key1":"value1",
+				"key2":"value2"}
+				]]>
+			</para>
+		</method>
+	</template>
+	<scenario name="模板方法验证，修改第一个参数">
+		<method name="init condiction" type="given">
+			<para name="列表">[2,3,5]</para>
+		</method>
+		<method name="check condiction" type="then">
+			验证参数，原始条件的值分别是
+			<para name="列表">[2,3,5]</para>
+			<para name="Map对象">{"key1":"value1",
+				"key2":"value2"}
+			</para>
+		</method>
+	</scenario>
+	<scenario name="模板方法验证，修改第二个参数">
+		<method name="init condiction" type="given">
+			<para name="Map对象">{"key11":"value1",
+				"key12":"value2"}
+			</para>
+		</method>
+		<method name="check condiction" type="then">
+			验证参数，原始条件的值分别是,参数顺序和第一个场景对调
+			<para name="Map对象">{"key11":"value1",
+				"key12":"value2"}
+			</para>
+			<para name="列表">[1,2,3,4]</para>
+		</method>
+	</scenario>
+</story>

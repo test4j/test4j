@@ -1,0 +1,5 @@
+|connectFromFile||eve.properties|
+
+|query|select * from MTN_SEND_OVERVIEW|
+|id|CREATOR|
+|123|:mycreator|

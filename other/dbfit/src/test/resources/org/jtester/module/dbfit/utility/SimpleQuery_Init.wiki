@@ -1,0 +1,15 @@
+|!-org.jtester.module.dbfit.fixture.DatabaseFixture-!|
+
+|connect|
+|clean table|tdd_user|
+|insert|tdd_user|
+|first_name|
+|aaa|
+|bbb|
+|ccc|
+
+|Insert|tdd_user|
+|first_name|last_name|post_code|sarary|
+|darui.wu|wu|310012|1545.0|
+
+|commit|

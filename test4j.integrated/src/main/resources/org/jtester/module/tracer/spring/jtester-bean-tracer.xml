@@ -1,0 +1,16 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
+
+	<!-- Pointcut -->
+	<bean id="jtester-internal-methodname-pointcut" class="org.jtester.module.tracer.spring.TracerMethodRegexPointcut" />
+
+	<!-- Advices -->
+	<bean id="jtester-internal-springbeantracer" class="org.jtester.module.tracer.spring.SpringBeanTracer" />
+	<!-- Advisor -->
+	<bean id="jtester-internal-beantracer-advisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">
+		<property name="pointcut" ref="jtester-internal-methodname-pointcut" />
+		<property name="advice" ref="jtester-internal-springbeantracer" />
+	</bean>
+</beans>

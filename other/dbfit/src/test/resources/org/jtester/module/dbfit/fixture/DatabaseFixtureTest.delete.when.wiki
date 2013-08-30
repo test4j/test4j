@@ -1,0 +1,10 @@
+|connect|
+
+|clean table|tdd_user|
+
+|insert|tdd_user|
+|id|first_name|last_name|
+|1|darui|wu|
+|2|test|test|
+
+

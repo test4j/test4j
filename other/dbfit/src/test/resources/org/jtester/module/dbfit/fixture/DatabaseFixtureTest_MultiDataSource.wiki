@@ -1,0 +1,29 @@
+
+|connect|mysql|com.mysql.jdbc.Driver|jdbc:mysql://localhost/presentationtdd?characterEncoding=UTF8|root|password|
+
+|clean table|tdd_user|
+
+|insert|tdd_user|
+|id|sarary|
+|1|2345|
+
+|query|select * from tdd_user|
+|id|
+|1|
+
+|commit|
+
+|connect|
+
+|clean table|tdd_user|
+
+|insert|tdd_user|
+|id|sarary|
+|1|2345|
+
+|query|select * from tdd_user|
+|id|
+|1|
+
+|commit|
+

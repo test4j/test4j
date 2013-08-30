@@ -1,0 +1,11 @@
+|connectFromFile||eve.properties|
+
+|clean table|MTN_SEND_OVERVIEW|
+
+|insert|MTN_SEND_OVERVIEW|
+|ID|GMT_CREATE|CREATOR|GMT_MODIFIED|MODIFIER|IS_DELETED|PLAN_TITLE|PLAN_TYPE|CREATE_TIME|SEND_COMPLATE_TIME|SEND_USER|SEND_COUNT|TEMPLATE_ID|ACTIVITY_ID|IS_MTN|BATCH_NUMBER|ORG_ID|SEND_TYPE|EXTERNALID|PRIORITY|CHANNEL_SETTING|CONFIGURATION|SOURCE|ORG_ID_PATH|RECEIVED_COUNT|SENDED_COUNT|SUCCESS_COUNT|FAILED_COUNT|FATIGUEFILTERCOUNT|BLACKLISTFILTEREDCOUNT|
+|123|2009-12-25 17:22:02.0|system1|2009-12-25 17:22:02.0|system|n|testTaskforEsbChannelTaskManagerImplTest|<null>|<null>|<null>|zldeng|10|<null>|<null>|<null>|<null>|<null>|e_mail|1516|8|<null>|{"customerFatigueRules":["fatigue0","fatigue1"],"isRemoteSend":false,"isDoSendUpLimitation4Org":false,"isTest":false,"fatigueEnabled":true}|ICBU.POSTOFFICE.DZLTEST|10/1|<null>|<null>|<null>|<null>|<null>|<null>|
+
+|execute|update MTN_SEND_OVERVIEW set CREATOR='myname' where ID=123|
+
+|commit|

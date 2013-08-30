@@ -1,0 +1,12 @@
+|connect|
+|clean table|tdd_user|
+
+|insert|tdd_user|
+|id|post_code|sarary|
+|1|310000|1000|
+|2|310000|1200|
+|3|352200|1500|
+|4|310000|1800|
+|5|DddDdd|2300|
+
+|commit|

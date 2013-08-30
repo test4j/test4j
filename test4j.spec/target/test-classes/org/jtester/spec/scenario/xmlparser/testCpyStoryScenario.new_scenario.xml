@@ -1,0 +1,27 @@
+<scenario name="我拷贝的场景" skip="false">
+	<description>
+		<![CDATA[新的描述]]>
+	</description>
+	<method type="given" name="do init method1">
+		准备数据步骤一
+		<para name="参数一">abc</para>
+		,
+		<para name="参数二">123</para>
+		.
+	</method>
+	<method type="given" name="do init method2" skip="true">
+		准备数据步骤二
+		<para name="参数一">
+			abc
+		</para>
+		<para name="参数二">
+			123
+		</para>
+	</method>
+	<method type="when" name="do something">
+		具体干些什么吧？
+	</method>
+	<method type="then" name="check result">
+		验证数据结果
+	</method>
+</scenario>

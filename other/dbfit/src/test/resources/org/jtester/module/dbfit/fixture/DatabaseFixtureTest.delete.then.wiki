@@ -1,0 +1,24 @@
+|connect|
+
+|query|select * from tdd_user|
+|first_name|
+|darui|
+|test|
+
+|delete|tdd_user|
+|last_name|
+|wu|
+
+|query|select * from tdd_user|
+|first_name|
+|test|
+
+|set parameter|name|test|
+
+|delete|tdd_user|
+|last_name|
+|@{name}|
+
+|query|select count(*) as count from tdd_user|
+|count|
+|0|

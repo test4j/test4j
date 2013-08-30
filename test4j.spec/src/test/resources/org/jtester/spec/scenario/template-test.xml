@@ -1,0 +1,11 @@
+<story>
+	<template>
+		<method name="template one" type="given">
+			初始化步骤，有2个参数
+			<para name="参数1">{"name1":"value1","name2":"value2"}</para>
+			<para name="参数2">[1,2,3,4]</para>
+		</method>
+		<method name="template two" type="when"></method>
+		<method name="template three" type="then"></method>
+	</template>
+</story>

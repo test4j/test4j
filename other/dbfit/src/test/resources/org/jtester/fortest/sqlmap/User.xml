@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//iBATIS.com//DTD SQL Map 2.0//EN" "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="TDD_COMMON">
+    <resultMap id="USER_RM" class="org.jtester.fortest.beans.User">
+        <result property="id" column="id"/>
+        <result property="first" column="first_name"/>
+        <result property="last" column="last_name"/>
+        <result property="postcode" column="post_code"/>
+        <result property="sarary" column="sarary"/>
+    </resultMap>
+
+    <select id="query_users_by_postcode" resultMap="USER_RM" parameterClass="string">
+        <![CDATA[
+		select id,first_name,last_name,post_code,sarary
+		from tdd_user
+		where post_code=#value#
+		]]>
+    </select>
+    
+    <insert id="insert_user" parameterClass="org.jtester.fortest.beans.User">
+        <![CDATA[
+		insert into tdd_user(first_name,last_name,post_code,sarary)
+		values(#first#,#last#,#postcode#,#sarary#)
+		]]>
+    </insert>
+    
+    <select id="query_all_users" resultMap="USER_RM">
+        <![CDATA[
+		select id,first_name,last_name,post_code,sarary
+		from tdd_user
+		]]>
+    </select>
+</sqlMap>

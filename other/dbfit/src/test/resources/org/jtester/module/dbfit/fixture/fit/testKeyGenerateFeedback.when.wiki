@@ -1,0 +1,9 @@
+|connect|
+
+|clean table|tdd_user|
+
+|insert|tdd_user|
+|first_name|last_name|id?|
+|wu|darui|>>[d]|
+
+|commit|

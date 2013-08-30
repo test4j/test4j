@@ -1,0 +1,68 @@
+CREATE TABLE `tdd_user` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `first_name` varchar(20) DEFAULT NULL,
+  `last_name` varchar(20) DEFAULT NULL,
+  `nick_name` varchar(255) DEFAULT NULL,
+  `post_code` char(6) DEFAULT NULL,
+  `sarary` double(15,3) DEFAULT NULL,
+  `address_id` int(11) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `gmt_created` datetime DEFAULT NULL,
+  `creator` varchar(255) DEFAULT NULL,
+  `gmt_modified` datetime DEFAULT NULL,
+  `modifior` varchar(255) DEFAULT NULL,
+  `is_deleted` bit(1) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+
+CREATE TABLE `tdd_address` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `create_date` datetime DEFAULT NULL,
+  `creator` varchar(255) DEFAULT NULL,
+  `modified_date` datetime DEFAULT NULL,
+  `modifior` varchar(255) DEFAULT NULL,
+  `is_deleted` bit(1) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
+  `country` varchar(255) DEFAULT NULL,
+  `city` varchar(255) DEFAULT NULL,
+  `postcode` varchar(255) DEFAULT NULL,
+  `province` varchar(255) DEFAULT NULL,
+  `user_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `FK4313875E892CE089` (`user_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+CREATE TABLE `tdd_types` (
+  `TINYINT` tinyint(4) DEFAULT NULL,
+  `TINYINT_UNSIGNED` tinyint(4) unsigned DEFAULT NULL,
+  `SMALLINT` smallint(6) DEFAULT NULL,
+  `MEDIUMINT` mediumint(9) DEFAULT NULL,
+  `INTEGER` int(11) NOT NULL AUTO_INCREMENT,
+  `BIGINT` bigint(20) DEFAULT NULL,
+  `FLOAT` float(9,3) DEFAULT NULL,
+  `DOUBLE` double(15,3) DEFAULT NULL,
+  `DECIMAL` decimal(11,0) DEFAULT NULL,
+  `DATE` date DEFAULT NULL,
+  `DATETIME` datetime DEFAULT NULL,
+  `TIME` time DEFAULT NULL,
+  `YEAR` year(4) DEFAULT NULL,
+  `CHAR` char(20) DEFAULT NULL,
+  `VARCHAR` varchar(20) DEFAULT NULL,
+  `TINYBLOB` tinyblob,
+  `BLOB` blob,
+  `MEDIUMBLOB` mediumblob,
+  `LONGBLOB` longblob,
+  `TINYTEXT` tinytext,
+  `TEXT` text,
+  `MEDIUMTEXT` mediumtext,
+  `LONGTEXT` longtext,
+  `SET` set('1','2','3','4') DEFAULT NULL,
+  `BINARY` binary(255) DEFAULT NULL,
+  `VARBINARY` varbinary(1000) DEFAULT NULL,
+  `BIT` bit(1) DEFAULT NULL,
+  `BOOLEAN` tinyint(1) DEFAULT NULL,
+  `ENUM` enum('1','2') DEFAULT NULL,
+  PRIMARY KEY (`INTEGER`),
+  UNIQUE KEY `INTEGER` (`INTEGER`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;

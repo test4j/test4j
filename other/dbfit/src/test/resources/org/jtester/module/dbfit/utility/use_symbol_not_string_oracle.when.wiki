@@ -1,0 +1,13 @@
+|connect from file|oracle|
+
+|clean table|Caesar_Customer_Ggs|
+
+|commit|
+
+|insert|Caesar_Customer_Ggs|
+|ID|GMT_CREATE|CREATOR|GMT_MODIFIED|MODIFIER|IS_DELETED|BUSINESS_ROLE|MEMBER_ID|PAYMENT_STYLE|PASSWORD|LEADS_DEGREE|STATUS|LEADS_FROM|COOKIE_ID|IP|CUS_ID|GMT_OLD_CREATE|CSTM_TYPE|MEMBER_TYPE|IS_RENEW|JOIN_REFER|CUSTOMER_MODIFIED|SALES_MODIFIED|OFFER_COUNT|SAMPLE_COUNT|COMPANY_COUNT|FEEDBACK_COUNT|GMT_POST_STAT|SERVICE_BEGIN|SERVICE_END|MEMBER_LEVEL|MEMBER_QUALITY|PROBALILITY|ETC_DEGREE|LAST_SINGLE_CONTACT|LAST_GROUP_CONTACT|LANDING_PAGE|PROMOTION_CODE|VAS_PROBABILITY|VAS_GRADE|PACKAGE_SHOWCASE|VAS_SHOWCASE|COMMENTS|GGS_LEADS_ID|COMPANY_NAME|CATEGORY_ID|PROVINCE|COUNTRY|
+|SYNC00013220|2010-03-08 23:43:12.0|mockLoginId|2010-03-08 23:43:12.0|mockLoginId|n|both|77cnnbxus|wiretransfer|hauming|2|3|free_regist|<null>|127.0.0.1|SYNC00012920|2002-11-06 00:00:00.0|<null>|<null>|Y|http://us.my.alibaba.com/user/join/renew_trustpass_service_select.htm|2008-04-21 00:00:00.0|2010-03-08 23:43:21.0|0|0|0|0|<null>|<null>|2010-04-26 00:00:00.0|RN-A|r|0|<null>|2009-02-09 00:00:00.0|2009-06-16 00:00:00.0|<null>|<null>|7|50|10|0|renew date : 2004-04-26 8mobile: 0932-090262, 269|77|77hauming|3|Taipei Hsien|TW|
+|SYNC00013221|2010-03-08 23:43:13.0|mockLoginId|2010-03-08 23:43:13.0|mockLoginId|n|supplier|78cn200009123|<null>|dteppema01|2|2|free_regist|<null>|127.0.0.1|SYNC00012921|<null>|<null>|<null>|Y|http://us.my.alibaba.com/user/join/renew_trustpass_service_select.htm|2008-04-21 00:00:00.0|2010-03-08 23:43:21.0|0|0|1|0|2005-04-07 00:00:00.0|<null>|2010-04-26 00:00:00.0|NS|n|0|<null>|1970-01-01 00:00:00.0|1970-01-01 00:00:00.0|<null>|<null>|0|0|0|0|<null>|78|78dteppema01|7|<null>|NL|
+|SYNC00013222|2010-03-08 23:43:13.0|mockLoginId|2010-03-08 23:43:13.0|mockLoginId|n|supplier|84cndehui|<null>|nmarmonier|0|2|free_regist|<null>|127.0.0.1|SYNC00012922|<null>|<null>|<null>|Y|http://us.my.alibaba.com/user/join/renew_trustpass_service_select.htm|2008-04-21 00:00:00.0|2010-03-08 23:43:22.0|0|0|0|0|<null>|<null>|2010-04-26 00:00:00.0|NS|y|85|<null>|1970-01-01 00:00:00.0|1970-01-01 00:00:00.0|<null>|<null>|0|0|0|0|<null>|84|84nmarmonier|16|<null>|ES|
+
+

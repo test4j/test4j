@@ -1,0 +1,8 @@
+|org.jtester.module.dbfit.fixture.dto.TestedDtoPropFixture|
+|testMethod_Integer|java.lang.Integer|
+|>>value|
+|3|
+|3|
+
+
+

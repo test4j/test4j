@@ -1,0 +1,8 @@
+|org.jtester.module.dbfit.fixture.dto.TestedDtoPropFixture|
+|testMethod_SingleValue|java.util.Map|
+|>>my map|
+|key1:value;key2:value|
+|key1:aaaa;key2:dddd|
+
+
+

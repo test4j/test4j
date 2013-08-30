@@ -1,0 +1,22 @@
+<test>
+    <call class="org.jtester.module.tracer.TracerServiceDemo" method="sayHello">
+        <paras count="4">
+            <para><![CDATA[1]]></para>
+            <para><![CDATA[2]]></para>
+            <para><![CDATA["name"]]></para>
+            <para><![CDATA[true]]></para>
+        </paras>
+        <call class="org.jtester.module.tracer.TracerServiceDemo" method="sayHelloInternal">
+            <paras count="4">
+                <para><![CDATA[1]]></para>
+                <para><![CDATA[2]]></para>
+                <para><![CDATA["name"]]></para>
+                <para><![CDATA[true]]></para>
+            </paras>
+            <sql><![CDATA[select * from tdd_user]]></sql>
+            <sql><![CDATA[update tdd_user set first_name='xxxx' where id=124]]></sql>
+            <return><![CDATA["your value"]]></return>
+        </call>
+        <throwable><![CDATA[java.lang.RuntimeException:call error]]></throwable>
+    </call>
+</test>

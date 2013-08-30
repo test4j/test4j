@@ -1,0 +1,11 @@
+|connect|
+
+|query|select * from tdd_user|
+|id|first_name|
+|1|name1|
+|2|name2|
+|3|name3|
+|4|!-name --有换行 
+4-!|
+
+|commit|

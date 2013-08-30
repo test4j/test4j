@@ -1,0 +1,16 @@
+|!-org.jtester.module.dbfit.fixture.DatabaseFixture-!|
+|connect|
+
+|Query| select 'test' as x|
+|x|
+|test|
+
+
+|Query|select * from tdd_user|
+|first_name|
+|aaa|
+|bbb|
+|ccc|
+|darui.wu|
+
+

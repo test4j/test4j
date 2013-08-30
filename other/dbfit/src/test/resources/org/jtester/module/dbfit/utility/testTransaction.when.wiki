@@ -1,0 +1,10 @@
+|connect|
+
+|clean table|tdd_user|
+
+|commit|
+
+|insert|tdd_user|
+|id|first_name|
+|100|dddd|
+|110|cccc|

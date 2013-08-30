@@ -1,0 +1,5 @@
+|connect|
+
+|query|select * from all_type|
+|id|my_tinyint_unsigned|
+|1|1|

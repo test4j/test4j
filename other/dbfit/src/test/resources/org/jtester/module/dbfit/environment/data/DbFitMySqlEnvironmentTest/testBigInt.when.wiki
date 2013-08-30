@@ -1,0 +1,8 @@
+|connect|
+
+|clean table|tdd_user|
+
+|insert|tdd_user|
+|id|post_code|big_int|
+|1|310010|1000197694|
+|2|310012|1006245173|

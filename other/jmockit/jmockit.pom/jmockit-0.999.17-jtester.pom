@@ -1,0 +1,125 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+
+	<groupId>com.googlecode.jmockit</groupId>
+	<artifactId>jmockit</artifactId>
+	<version>0.999.17-jtester</version>
+	<packaging>jar</packaging>
+	<name>Main</name>
+	<description>
+      JMockit is a Java toolkit for developer (unit/integration) testing.
+      It contains mocking APIs and other tools, supporting both JUnit and TestNG.
+      The mocking APIs allow all kinds of Java code, without testability restrictions, to be tested
+      in isolation from selected dependencies.
+   </description>
+	<url>http://code.google.com/p/jmockit</url>
+	<licenses>
+		<license>
+			<name>MIT LICENSE</name>
+			<url>http://www.opensource.org/licenses/mit-license.php</url>
+			<distribution>repo</distribution>
+		</license>
+	</licenses>
+	<scm>
+		<url>http://code.google.com/p/jmockit/source/browse/trunk</url>
+		<connection>scm:http://jmockit.googlecode.com/svn/trunk/ jmockit-read-only</connection>
+	</scm>
+	<developers>
+		<developer>
+			<name>Rogério Liesenfeld</name>
+			<email>rliesenfeld@gmail.com</email>
+			<timezone>-3</timezone>
+		</developer>
+	</developers>
+	<inceptionYear>2006</inceptionYear>
+	<issueManagement>
+		<url>http://code.google.com/p/jmockit/issues/list</url>
+	</issueManagement>
+	<mailingLists>
+		<mailingList>
+			<name>JMockit Users</name>
+			<archive>http://groups.google.com/group/jmockit-users</archive>
+			<post>jmockit-users@googlegroups.com</post>
+		</mailingList>
+	</mailingLists>
+
+	<properties>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencies>
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.10</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.testng</groupId>
+			<artifactId>testng</artifactId>
+			<version>6.8</version>
+			<optional>true</optional>
+			<exclusions>
+				<exclusion>
+					<groupId>junit</groupId>
+					<artifactId>junit</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.beanshell</groupId>
+					<artifactId>bsh</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.beust</groupId>
+					<artifactId>jcommander</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>org.yaml</groupId>
+					<artifactId>snakeyaml</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>commons-logging</groupId>
+			<artifactId>commons-logging</artifactId>
+			<version>1.1.1</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>org.slf4j</groupId>
+			<artifactId>slf4j-api</artifactId>
+			<version>1.5.8</version>
+			<optional>true</optional>
+		</dependency>
+		<dependency>
+			<groupId>log4j</groupId>
+			<artifactId>log4j</artifactId>
+			<version>1.2.15</version>
+			<optional>true</optional>
+			<exclusions>
+				<exclusion>
+					<groupId>javax.jms</groupId>
+					<artifactId>jms</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>javax.mail</groupId>
+					<artifactId>mail</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.jmx</groupId>
+					<artifactId>jmxri</artifactId>
+				</exclusion>
+				<exclusion>
+					<groupId>com.sun.jdmk</groupId>
+					<artifactId>jmxtools</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+		<dependency>
+			<groupId>javax.inject</groupId>
+			<artifactId>javax.inject</artifactId>
+			<version>1</version>
+			<optional>true</optional>
+		</dependency>
+	</dependencies>
+</project>

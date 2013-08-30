@@ -1,0 +1,21 @@
+<story>
+	<description>验证各种特殊字符在JSpec中的使用</description>
+	<scenario name="变量中包含特殊字符[">
+		<method type="then" name="check string">
+			<para name="字符串">contain[in string</para>
+		</method>
+	</scenario>
+	<scenario name="变量中同时包含字符[和]">
+		<method type="then" name="check string">
+			<para name="字符串">contain [and] in string</para>
+		</method>
+	</scenario>
+	<scenario name="变量中开头是以[开头的">
+		<method type="then" name="check string">
+			<para name="字符串">[参数错误 - 错误信息]applyId 为空
+			</para>
+		</method>
+	</scenario>
+</story>
+
+

@@ -1,0 +1,48 @@
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8" /><style>table {
+	background-color: #FFF;
+	border: 1px solid #ccc;
+	border-collapse: collapse;
+	margin: 30px 40px 0px 40px;
+}
+
+table th {
+	padding-left: 5px;
+	color: #666;
+	font-weight: bold;
+	font-size: 16px;
+	line-height: 18px;
+	border-bottom: 1px solid #ccc;
+	border-left: 1px solid #ccc;
+	background: #eeeeee;
+	height: 21px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+}
+
+table td {
+	padding-left: 5px;
+	color: #333;
+	font-weight: normal;
+	font-size: 14px;
+	line-height: 16px;
+	height: 19px;
+	padding-top: 3px;
+	padding-bottom: 3px;
+	border-left: 1px solid #ccc;
+	border-bottom: 1px solid #ccc;
+}
+
+td.success {
+	color: green;
+}
+
+td.suspend {
+	color: gray;
+}
+
+td.failure {
+	color: red;
+}</style></head><body><div><table><tr><th colspan="2">变量中包含特殊字符[</th></tr><tr><td class="success">checkString</td><td>
+字符串=contain[in string</td></tr></table><table><tr><th colspan="2">变量中同时包含字符[和]</th></tr><tr><td class="success">checkString</td><td>
+字符串=contain [and] in string</td></tr></table><table><tr><th colspan="2">变量中开头是以[开头的</th></tr><tr><td class="success">checkString</td><td>
+字符串=[参数错误 - 错误信息]applyId 为空</td></tr></table></div></body></html>

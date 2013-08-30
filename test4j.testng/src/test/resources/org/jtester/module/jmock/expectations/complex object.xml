@@ -1,0 +1,26 @@
+<org.jtester.fortest.beans.ComplexObject>
+  <addresses class="java.util.Arrays$ArrayList">
+    <a class="string-array">
+      <string>地址一</string>
+      <string>地址二</string>
+      <string>地址三</string>
+    </a>
+  </addresses>
+  <date>2009-08-10 14:44:04.756 CST</date>
+  <map class="org.jtester.fortest.beans.ComplexObject$1">
+    <loadFactor>0.75</loadFactor>
+    <threshold>12</threshold>
+  </map>
+  <name>I am a test</name>
+  <phoneNumber class="org.jtester.fortest.beans.ComplexObject$PhoneNumber">
+    <areaNo>0571</areaNo>
+    <phone>88886666</phone>
+  </phoneNumber>
+  <sarary>2000.0</sarary>
+  <user>
+    <first>wu</first>
+    <id>0</id>
+    <last>davey</last>
+    <sarary>0.0</sarary>
+  </user>
+</org.jtester.fortest.beans.ComplexObject>

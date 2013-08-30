@@ -1,0 +1,27 @@
+      
+bfs:BFS[a]
+/queue:FIFO
+someNode:Node
+node:Node
+adjList:List
+adj:Node
+
+bfs:queue.new
+bfs:someNode.setLevel(0)
+bfs:queue.insert(someNode)
+[c:loop while queue != ()]
+  bfs:node=queue.remove()
+  bfs:level=node.getLevel()
+  bfs:adjList=node.getAdjacentNodes()
+  [c:loop 0 <= i < #adjList]
+    bfs:adj=adjList.get(i)
+    bfs:nodeLevel=adj.getLevel()
+    [c:alt nodeLevel IS NOT defined]
+      bfs:adj.setLevel(level+1)
+      bfs:queue.insert(adj)
+      --[else]
+      bfs:nothing to do
+    [/c]
+  [/c]
+[/c]
+bfs:queue.destroy() 

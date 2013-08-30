@@ -1,0 +1,65 @@
+<story>
+	<description>用例特性描述</description>
+	<template></template>
+	<scenario name="欢迎场景一" skip="false">
+		<description>场景详细描述</description>
+		<method type="given" name="give greeting ">
+			主人
+			<para name="housemaster">jobs.he</para>
+			，
+			客人
+			<para name="guest">mary.li</para>
+			，欢迎词
+			<para name="greeting">welcome</para>
+			,时间
+			<para name="date">2010-11-12</para>
+		</method>
+		<method type="when" name="do greeting">
+			欢迎
+		</method>
+		<method type="then" name="check greeting">
+			拼成的
+			<para name="完整句子">jobs.he welcome mary.li on 2010-11-12.	</para>
+		</method>
+	</scenario>
+
+	<scenario name="欢迎场景二">
+		<method type="given" name="give greeting">
+			客人
+			<para name="guest">mary.li</para>
+			，主人
+			<para name="housemaster">jobs.he</para>
+			，欢迎词
+			<para name="greeting">welcome</para>
+			,时间
+			<para name="date">2010-11-12</para>
+		</method>
+		<method type="when" name="do greeting">
+			欢迎
+		</method>
+		<method type="then" name="check greeting">
+			<para name="完整句子"><![CDATA["jobs.he welcome mary.li on 2010-11-12."]]>
+			</para>
+		</method>
+	</scenario>
+
+	<scenario name="欢迎场景三" skip="false">
+		<method type="given" name="give greeting">
+			欢迎词
+			<para name="greeting">welcome</para>
+			,时间
+			<para name="date">2010-11-12</para>
+			，客人
+			<para name="guest">mary.li</para>
+			，主人
+			<para name="housemaster">jobs.he</para>
+		</method>
+		<method type="when" name="do greeting">
+			欢迎
+		</method>
+		<method type="then" name="check greeting">
+			<para name="完整句子">jobs.he welcome mary.li on 2010-11-12.
+			</para>
+		</method>
+	</scenario>
+</story>

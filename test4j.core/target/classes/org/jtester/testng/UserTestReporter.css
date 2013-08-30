@@ -1,0 +1,19 @@
+table, td, th {
+  border: solid #777777;
+}
+
+table {
+  background: #F8F8F8;
+  margin: 5px;
+  padding: 0px;
+  border-width: 1px 0px 0px 1px;
+}
+
+td, th {
+  border-width: 0px 1px 1px 0px;
+  padding: 5px;
+}
+
+td.success {background-color: #33FF33;}
+td.skipped {background-color: #dddddd;}
+td.failure {background-color: #DD0000;}
