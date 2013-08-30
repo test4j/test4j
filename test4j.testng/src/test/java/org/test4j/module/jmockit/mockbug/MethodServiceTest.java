@@ -3,12 +3,12 @@ package org.test4j.module.jmockit.mockbug;
 import mockit.Mock;
 
 import org.test4j.module.jmockit.mockbug.TestedMethodService;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @Test
-public class MethodServiceTest extends JTester {
+public class MethodServiceTest extends Test4J {
 
 	@BeforeMethod
 	public void setup() {

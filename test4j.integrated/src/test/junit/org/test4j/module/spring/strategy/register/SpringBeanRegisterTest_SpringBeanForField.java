@@ -7,17 +7,17 @@ import org.test4j.fortest.beans.User;
 import org.test4j.fortest.service.UserDao;
 import org.test4j.fortest.service.UserDaoImpl2;
 import org.test4j.fortest.service.UserService;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.spring.annotations.AutoBeanInject;
+import org.test4j.module.spring.annotations.AutoBeanInject.BeanMap;
 import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.annotations.SpringBeanFrom;
 import org.test4j.module.spring.annotations.SpringContext;
-import org.test4j.module.spring.annotations.AutoBeanInject.BeanMap;
 
-@SpringContext({ "org/jtester/module/spring/testedbeans/xml/data-source.xml" })
+@SpringContext({ "org/test4j/module/spring/testedbeans/xml/data-source.xml" })
 @AutoBeanInject(maps = { @BeanMap(intf = "**.*Service", impl = "**.*ServiceImpl"),
         @BeanMap(intf = "**.*Dao", impl = "**.*DaoImpl") })
-public class SpringBeanRegisterTest_SpringBeanForField implements JTester {
+public class SpringBeanRegisterTest_SpringBeanForField implements Test4J {
     @SpringBeanByName
     private UserService userService;
 

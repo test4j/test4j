@@ -5,10 +5,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.test4j.fortest.reflector.TestException;
 import org.test4j.fortest.reflector.TestObject;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.tools.reflector.MethodAccessor;
 
-public class MethodAccessorTest_VoidMethod implements JTester {
+public class MethodAccessorTest_VoidMethod implements Test4J {
 
     private MethodAccessor<Void> throwingMethod;
 

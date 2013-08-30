@@ -3,7 +3,7 @@ package org.test4j.spec.spring;
 import java.util.Map;
 
 import org.test4j.module.spring.annotations.SpringContext;
-import org.test4j.module.spring.strategy.JTesterSpringContext;
+import org.test4j.module.spring.strategy.Test4JSpringContext;
 import org.test4j.module.spring.utility.SpringModuleHelper;
 import org.test4j.testng.JSpec;
 import org.testng.annotations.BeforeMethod;
@@ -11,7 +11,7 @@ import org.testng.annotations.BeforeMethod;
 @SuppressWarnings("rawtypes")
 @SpringContext(value = { "spring/spring-demo.xml" }, share = true)
 public abstract class SpringBaseDemo extends JSpec {
-    static Map<Class, JTesterSpringContext> SHARED_SPRING_CONTEXT = reflector.getStaticField(SpringModuleHelper.class,
+    static Map<Class, Test4JSpringContext> SHARED_SPRING_CONTEXT = reflector.getStaticField(SpringModuleHelper.class,
                                                                           "SHARED_SPRING_CONTEXT");
 
     @BeforeMethod

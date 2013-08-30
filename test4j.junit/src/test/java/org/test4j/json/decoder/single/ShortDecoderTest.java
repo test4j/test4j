@@ -7,9 +7,9 @@ import org.test4j.json.JSON;
 import org.test4j.json.decoder.single.ShortDecoder;
 import org.test4j.json.helper.JSONFeature;
 import org.test4j.json.helper.JSONMap;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
-public class ShortDecoderTest implements JTester {
+public class ShortDecoderTest implements Test4J {
 
     @Test
     public void testDecodeSimpleValue() {

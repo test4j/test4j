@@ -6,12 +6,12 @@ import java.util.HashMap;
 import java.util.Iterator;
 
 import org.test4j.spec.scenario.step.xml.MethodDescription;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "unchecked", "rawtypes", "serial" })
-public class MethodDescriptionTest extends JTester {
+public class MethodDescriptionTest extends Test4J {
 
 	@Test(dataProvider = "dataForGetVariable")
 	public void testGetVariable(String template, String expected) {

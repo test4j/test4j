@@ -9,14 +9,13 @@ import mockit.Mock;
 
 import org.test4j.spec.inner.IScenario;
 import org.test4j.spec.inner.StepType;
-import org.test4j.spec.scenario.TxtJSpecScenario;
 import org.test4j.spec.scenario.step.JSpecStep;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.test4j.tools.commons.ResourceHelper;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "serial" })
-public class TxtJSpecScenarioTest extends JTester {
+public class TxtJSpecScenarioTest extends Test4J {
 
     @Test(groups = "jspec")
     public void testParseJSpecScenarioFrom_NoScenario() throws Exception {
@@ -28,7 +27,7 @@ public class TxtJSpecScenarioTest extends JTester {
     @Test(groups = "jspec")
     public void testParseJSpecScenarioFrom() throws Exception {
         String file = System.getProperty("user.dir")
-                + "/src/test/resources/org/jtester/spec/scenario/TxtJSpecScenarioTest.testParseSpecScenarioFrom.story";
+                + "/src/test/resources/org/test4j/spec/scenario/TxtJSpecScenarioTest.testParseSpecScenarioFrom.story";
         want.file(file).isExists();
         new MockUp<TxtJSpecScenario>() {
             int   index = 0;
@@ -46,7 +45,7 @@ public class TxtJSpecScenarioTest extends JTester {
     @Test
     public void testJSpecScenario() throws Exception {
         String file = System.getProperty("user.dir")
-                + "/src/test/resources/org/jtester/spec/scenario/TxtJSpecScenarioTest.testJSpecScenario.story";
+                + "/src/test/resources/org/test4j/spec/scenario/TxtJSpecScenarioTest.testJSpecScenario.story";
         want.file(file).isExists();
         String[] arr = ResourceHelper.readLinesFromFile("file://" + file, "utf8");
         List<String> lines = new ArrayList<String>();
@@ -86,8 +85,7 @@ public class TxtJSpecScenarioTest extends JTester {
 
     @Test
     public void testParseJSpecScenarioFrom_ContainSkipScenario() throws Exception {
-        String file = System.getProperty("user.dir")
-                + "/src/test/resources/org/jtester/spec/txt/SkipScenarioDemo.story";
+        String file = System.getProperty("user.dir") + "/src/test/resources/org/test4j/spec/txt/SkipScenarioDemo.story";
         want.file(file).isExists();
         List<IScenario> list = TxtJSpecScenario.parseJSpecScenarioFrom(new FileInputStream(file), null);
         want.list(list).sizeEq(2).propertyEq("isSkip", new Boolean[] { true, false });

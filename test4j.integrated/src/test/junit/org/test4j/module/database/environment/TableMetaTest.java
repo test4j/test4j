@@ -3,11 +3,11 @@ package org.test4j.module.database.environment;
 import mockit.Mock;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 import org.test4j.module.database.environment.TableMeta;
 
-public class TableMetaTest implements JTester {
+public class TableMetaTest implements Test4J {
 
     @Test
     @DataFrom("dataTruncate")

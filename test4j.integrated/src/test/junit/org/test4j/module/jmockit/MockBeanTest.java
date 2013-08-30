@@ -8,16 +8,16 @@ import org.junit.Test;
 import org.test4j.fortest.beans.User;
 import org.test4j.fortest.service.UserDao;
 import org.test4j.fortest.service.UserService;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.database.annotations.Transactional;
 import org.test4j.module.database.annotations.Transactional.TransactionMode;
 import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.annotations.SpringBeanFrom;
 import org.test4j.module.spring.annotations.SpringContext;
 
-@SpringContext({ "org/jtester/module/spring/testedbeans/xml/beans.xml",
-        "org/jtester/module/spring/testedbeans/xml/data-source.xml" })
-public class MockBeanTest implements JTester {
+@SpringContext({ "org/test4j/module/spring/testedbeans/xml/beans.xml",
+        "org/test4j/module/spring/testedbeans/xml/data-source.xml" })
+public class MockBeanTest implements Test4J {
     @SpringBeanByName
     private UserService userService;
 

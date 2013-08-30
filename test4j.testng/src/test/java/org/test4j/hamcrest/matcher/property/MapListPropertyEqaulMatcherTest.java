@@ -7,7 +7,7 @@ import java.util.Map;
 
 import org.test4j.hamcrest.matcher.property.MapListPropertyEqaulMatcher;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.test4j.tools.commons.DateHelper;
 import org.testng.annotations.Test;
 
@@ -15,7 +15,7 @@ import ext.test4j.hamcrest.MatcherAssert;
 
 @SuppressWarnings({ "unchecked", "serial", "rawtypes" })
 @Test
-public class MapListPropertyEqaulMatcherTest extends JTester {
+public class MapListPropertyEqaulMatcherTest extends Test4J {
 
 	public void testMapListPropertyEqaulMatcher() {
 

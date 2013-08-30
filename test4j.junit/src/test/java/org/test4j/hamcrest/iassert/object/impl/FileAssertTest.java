@@ -4,9 +4,9 @@ import java.io.File;
 import java.util.UUID;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
-public class FileAssertTest implements JTester {
+public class FileAssertTest implements Test4J {
     @Test(expected = AssertionError.class)
     public void isExists_AssertionError() {
         String tmp = System.getProperty("java.io.tmpdir");

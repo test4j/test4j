@@ -6,11 +6,10 @@ import java.util.List;
 
 import org.junit.Test;
 import org.test4j.fortest.beans.Manager;
-import org.test4j.junit.JTester;
-import org.test4j.module.JTesterException;
-import org.test4j.tools.commons.JSONHelper;
+import org.test4j.junit.Test4J;
+import org.test4j.module.Test4JException;
 
-public class JsonHelperTest implements JTester {
+public class JsonHelperTest implements Test4J {
     private static String tempDir = System.getProperty("java.io.tmpdir");
 
     @Test
@@ -23,7 +22,7 @@ public class JsonHelperTest implements JTester {
     @Test
     public void fromDat() {
         String filename = "file:" + System.getProperty("user.dir")
-                + "/src/test/resources/org/jtester/tools/commons/manager.dat";
+                + "/src/test/resources/org/test4j/tools/commons/manager.dat";
         want.file(filename).isExists();
 
         Manager manager = JSONHelper.fromDatFile(Manager.class, filename);
@@ -32,7 +31,7 @@ public class JsonHelperTest implements JTester {
 
     @Test
     public void fromDat_Classpath() {
-        String filename = "classpath:org/jtester/tools/commons/manager.dat";
+        String filename = "classpath:org/test4j/tools/commons/manager.dat";
         Manager manager = JSONHelper.fromDatFile(Manager.class, filename);
         want.object(manager).propertyEq("name", "Tony Tester").propertyEq("phoneNumber.number", "0571-88886666");
         want.date(manager.getDate()).isYear(2009).isMonth("08").isHour(16);
@@ -46,9 +45,9 @@ public class JsonHelperTest implements JTester {
         want.file(filename).isExists();
     }
 
-    @Test(expected = JTesterException.class)
+    @Test(expected = Test4JException.class)
     public void fromDat_List() {
-        String filename = "classpath:org/jtester/tools/commons/manager_classnotfound.dat";
+        String filename = "classpath:org/test4j/tools/commons/manager_classnotfound.dat";
         List<?> managers = JSONHelper.fromDatFile(List.class, filename);
         want.collection(managers).sizeEq(2).propertyEq("name", new String[] { "Tony Tester", "Tony Tester" });
     }
@@ -64,7 +63,7 @@ public class JsonHelperTest implements JTester {
     @Test
     public void fromJSON() {
         String filename = "file:" + System.getProperty("user.dir")
-                + "/src/test/resources/org/jtester/tools/commons/manager.json";
+                + "/src/test/resources/org/test4j/tools/commons/manager.json";
         want.file(filename).isExists();
 
         Manager manager = JSONHelper.fromJsonFile(Manager.class, filename);
@@ -73,7 +72,7 @@ public class JsonHelperTest implements JTester {
 
     @Test
     public void fromJSON_Classpath() {
-        String filename = "classpath:org/jtester/tools/commons/manager.json";
+        String filename = "classpath:org/test4j/tools/commons/manager.json";
         Manager manager = JSONHelper.fromJsonFile(Manager.class, filename);
         want.object(manager).propertyEq("name", "Tony Tester").propertyEq("phoneNumber.number", "0571-88886666");
         want.date(manager.getDate()).isYear(2009).isMonth("08").isHour(16);
@@ -98,14 +97,14 @@ public class JsonHelperTest implements JTester {
 
     @Test
     public void fromJSON_List() {
-        String filename = "classpath:org/jtester/tools/commons/managers.json";
+        String filename = "classpath:org/test4j/tools/commons/managers.json";
         List<?> managers = JSONHelper.fromJsonFile(ArrayList.class, filename);
         want.collection(managers).sizeEq(2).propertyEq("name", new String[] { "Tony Tester", "Tony Tester" });
     }
 
     @Test
     public void fromJSON_List2() {
-        String filename = "classpath:org/jtester/tools/commons/managers2.json";
+        String filename = "classpath:org/test4j/tools/commons/managers2.json";
         List<?> managers = JSONHelper.fromJsonFile(ArrayList.class, filename);
         want.collection(managers).sizeEq(2).propertyEq("name", new String[] { "Tony Tester", "Tony Tester" });
     }
@@ -121,7 +120,7 @@ public class JsonHelperTest implements JTester {
     @Test
     public void fromJSON_Array() {
         Manager[] managers = JSONHelper.fromJsonFile(Manager[].class,
-                "classpath:org/jtester/tools/commons/managers-array.json");
+                "classpath:org/test4j/tools/commons/managers-array.json");
         want.array(managers).sizeEq(2).propertyEq("name", new String[] { "Tony Tester", "Tony Tester" });
     }
 }

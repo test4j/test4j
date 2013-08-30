@@ -9,10 +9,10 @@ import org.junit.Before;
 import org.junit.Test;
 import org.test4j.fortest.beans.User;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
 @SuppressWarnings({ "serial", "rawtypes", "unchecked" })
-public class ListAssertTest implements JTester {
+public class ListAssertTest implements Test4J {
     List<User> users;
 
     @Before

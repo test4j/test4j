@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import org.junit.Test;
 import org.test4j.json.encoder.single.spec.SimpleDateFormatEncoder;
 import org.test4j.json.helper.JSONFeature;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class SimpleDateFormatEncoderTest implements JTester {
+public class SimpleDateFormatEncoderTest implements Test4J {
     @Test
     public void testEncode() throws Exception {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");

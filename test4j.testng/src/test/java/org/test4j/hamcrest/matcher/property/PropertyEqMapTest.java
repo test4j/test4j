@@ -1,12 +1,12 @@
 package org.test4j.hamcrest.matcher.property;
 
 import org.test4j.fortest.beans.User;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
 @Test(groups = "assertion")
 @SuppressWarnings("serial")
-public class PropertyEqMapTest extends JTester {
+public class PropertyEqMapTest extends Test4J {
 	@Test(expectedExceptions = AssertionError.class)
 	public void testPropertyEqMap() {
 		User user = new User();

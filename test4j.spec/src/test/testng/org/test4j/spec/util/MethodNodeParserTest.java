@@ -5,12 +5,12 @@ import java.util.List;
 import org.test4j.hamcrest.matcher.string.StringMode;
 import org.test4j.spec.util.MethodNodeParser;
 import org.test4j.spec.util.XmlHelper.MethodNode;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.test4j.tools.commons.ResourceHelper;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class MethodNodeParserTest extends JTester {
+public class MethodNodeParserTest extends Test4J {
 
 	@Test(dataProvider = "dataForIsParaBegin")
 	public void testParseParameterName(String input, String paraName) throws Exception {

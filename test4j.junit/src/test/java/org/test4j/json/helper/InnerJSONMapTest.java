@@ -8,10 +8,10 @@ import org.junit.Test;
 import org.test4j.json.helper.JSONMap;
 import org.test4j.json.helper.JSONObject;
 import org.test4j.json.helper.JSONSingle;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
 @SuppressWarnings("rawtypes")
-public class InnerJSONMapTest implements JTester {
+public class InnerJSONMapTest implements Test4J {
     /**
      * 验证JSONMap数据的有序性,JSONMap必须是LinkedHashMap而不能是HashMap
      */

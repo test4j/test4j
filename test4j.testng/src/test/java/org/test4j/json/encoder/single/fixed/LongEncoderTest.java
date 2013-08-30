@@ -4,29 +4,28 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 
 import org.test4j.json.encoder.EncoderTest;
-import org.test4j.json.encoder.single.fixed.LongEncoder;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-@Test(groups = { "jtester", "json" })
+@Test(groups = { "test4j", "json" })
 public class LongEncoderTest extends EncoderTest {
 
-	@Test(dataProvider = "long_data")
-	public void testEncodeSingleValue(Long number, String expected) throws Exception {
-		LongEncoder encoder = LongEncoder.instance;
-		this.setUnmarkFeature(encoder);
+    @Test(dataProvider = "long_data")
+    public void testEncodeSingleValue(Long number, String expected) throws Exception {
+        LongEncoder encoder = LongEncoder.instance;
+        this.setUnmarkFeature(encoder);
 
-		StringWriter writer = new StringWriter();
-		encoder.encode(number, writer, new ArrayList<String>());
-		String result = writer.toString();
-		want.string(result).isEqualTo(expected);
-	}
+        StringWriter writer = new StringWriter();
+        encoder.encode(number, writer, new ArrayList<String>());
+        String result = writer.toString();
+        want.string(result).isEqualTo(expected);
+    }
 
-	@DataProvider
-	public Object[][] long_data() {
-		return new Object[][] { { 1212L, "1212" },// <br>
-				{ 1000l, "1000" },// <br>
-				{ null, "null" } // <br>
-		};
-	}
+    @DataProvider
+    public Object[][] long_data() {
+        return new Object[][] { { 1212L, "1212" },// <br>
+                { 1000l, "1000" },// <br>
+                { null, "null" } // <br>
+        };
+    }
 }

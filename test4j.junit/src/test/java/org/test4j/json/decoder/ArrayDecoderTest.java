@@ -8,16 +8,15 @@ import java.util.Map;
 
 import org.junit.Test;
 import org.test4j.json.JSON;
-import org.test4j.json.decoder.ArrayDecoder;
 import org.test4j.json.encoder.beans.test.User;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
 @SuppressWarnings("rawtypes")
-public class ArrayDecoderTest implements JTester {
+public class ArrayDecoderTest implements Test4J {
     @Test
     public void testDecode_Reference() {
-        String json = "[{#class:org.jtester.json.encoder.beans.test.User@19762f,id:{#class:Integer,'#value':1},name:{#class:string,'#value':'darui.wu'},age:{#class:Integer,'#value':0},salary:{#class:Double,'#value':0},isFemale:{#class:Boolean,'#value':false}},{#refer:@19762f}]";
+        String json = "[{#class:org.test4j.json.encoder.beans.test.User@19762f,id:{#class:Integer,'#value':1},name:{#class:string,'#value':'darui.wu'},age:{#class:Integer,'#value':0},salary:{#class:Double,'#value':0},isFemale:{#class:Boolean,'#value':false}},{#refer:@19762f}]";
         User[] users = JSON.toObject(json, User[].class);
         want.array(users).sizeEq(2);
         want.object(users[0]).same(users[1]);
@@ -25,7 +24,7 @@ public class ArrayDecoderTest implements JTester {
 
     @Test
     public void testDecode() {
-        String json = "{#class:org.jtester.json.encoder.beans.test.User@19762f,id:{#class:Integer,'#value':1},name:{#class:string,'#value':'darui.wu'},age:{#class:Integer,'#value':0},salary:{#class:Double,'#value':0},isFemale:{#class:Boolean,'#value':false}}";
+        String json = "{#class:org.test4j.json.encoder.beans.test.User@19762f,id:{#class:Integer,'#value':1},name:{#class:string,'#value':'darui.wu'},age:{#class:Integer,'#value':0},salary:{#class:Double,'#value':0},isFemale:{#class:Boolean,'#value':false}}";
 
         User[] users = JSON.toObject("[" + json + "," + json + "]", User[].class);
         want.array(users).sizeEq(2);

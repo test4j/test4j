@@ -5,13 +5,13 @@ import java.util.List;
 
 import org.junit.Test;
 import org.test4j.fortest.beans.Manager;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.commons.FieldHelper;
 import org.test4j.tools.exception.NoSuchFieldRuntimeException;
 
-public class FieldHelperTest implements JTester {
+public class FieldHelperTest implements Test4J {
 
     @Test
     @DataFrom("getFieldData")

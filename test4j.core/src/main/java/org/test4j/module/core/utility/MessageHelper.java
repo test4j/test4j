@@ -95,10 +95,10 @@ public class MessageHelper {
         }
     }
 
-    private static File debugFile = new File(System.getProperty("user.dir") + "/target/jtester.log");
+    private static File debugFile = new File(System.getProperty("user.dir") + "/target/test4j.log");
 
     /**
-     * 用于记录jtester运行时的信息，方便定位复杂的问题<br>
+     * 用于记录test4j运行时的信息，方便定位复杂的问题<br>
      * 正式发布版本中所有方法都改为protected，禁止其它类引用
      * 
      * @author darui.wudr

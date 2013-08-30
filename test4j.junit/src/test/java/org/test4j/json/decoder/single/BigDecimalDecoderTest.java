@@ -8,10 +8,10 @@ import org.test4j.json.JSON;
 import org.test4j.json.decoder.single.BigDecimalDecoder;
 import org.test4j.json.helper.JSONFeature;
 import org.test4j.json.helper.JSONMap;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
 @SuppressWarnings("serial")
-public class BigDecimalDecoderTest implements JTester {
+public class BigDecimalDecoderTest implements Test4J {
 
     @Test
     public void testDecodeSimpleValue() {

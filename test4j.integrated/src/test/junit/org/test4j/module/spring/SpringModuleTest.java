@@ -3,12 +3,12 @@ package org.test4j.module.spring;
 import org.junit.Before;
 import org.junit.Test;
 import org.test4j.fortest.hibernate.AddressService;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.annotations.SpringContext;
 
 @SpringContext({ "file:./extern-spring/project.xml" })
-public class SpringModuleTest implements JTester {
+public class SpringModuleTest implements Test4J {
     @SpringBeanByName("addressService")
     private AddressService addressService;
 

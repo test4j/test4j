@@ -7,10 +7,10 @@ import org.test4j.json.helper.JSONMap;
 import org.test4j.json.helper.JSONObject;
 import org.test4j.json.helper.JSONScanner;
 import org.test4j.json.helper.JSONSingle;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
-public class JSONScannerTest implements JTester {
+public class JSONScannerTest implements Test4J {
 
     @Test
     @DataFrom("jsonKeysData")

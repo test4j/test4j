@@ -3,7 +3,7 @@ package org.test4j.module.spring;
 import mockit.NonStrict;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.spring.annotations.AutoBeanInject;
 import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.annotations.SpringBeanFrom;
@@ -11,7 +11,7 @@ import org.test4j.module.spring.annotations.SpringContext;
 
 @SpringContext
 @AutoBeanInject
-public class SpringTestedContextTest implements JTester {
+public class SpringTestedContextTest implements Test4J {
     @SpringBeanByName(init = "init")
     TestedService testedService;
 

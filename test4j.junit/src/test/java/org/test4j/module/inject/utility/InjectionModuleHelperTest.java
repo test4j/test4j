@@ -2,10 +2,10 @@ package org.test4j.module.inject.utility;
 
 import org.junit.Test;
 import org.test4j.fortest.beans.User;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.inject.annotations.Inject;
 
-public class InjectionModuleHelperTest implements JTester {
+public class InjectionModuleHelperTest implements Test4J {
     User           user  = new User();
 
     @Inject(targets = "user", properties = "first")

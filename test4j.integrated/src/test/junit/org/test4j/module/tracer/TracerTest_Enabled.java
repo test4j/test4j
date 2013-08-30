@@ -10,16 +10,15 @@ import org.junit.Test;
 import org.test4j.database.table.ITable;
 import org.test4j.fortest.hibernate.User;
 import org.test4j.fortest.hibernate.UserService;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.spring.annotations.SpringBeanByType;
 import org.test4j.module.spring.annotations.SpringContext;
-import org.test4j.module.tracer.TracerHelper;
 import org.test4j.tools.commons.ResourceHelper;
 
 @Ignore
 @SuppressWarnings("serial")
-@SpringContext({ "classpath:/org/jtester/fortest/hibernate/project.xml" })
-public class TracerTest_Enabled implements JTester {
+@SpringContext({ "classpath:/org/test4j/fortest/hibernate/project.xml" })
+public class TracerTest_Enabled implements Test4J {
     @SpringBeanByType
     private UserService userService;
 
@@ -60,7 +59,7 @@ public class TracerTest_Enabled implements JTester {
     // (dependsOnMethods = "monitorSpringTrue")
     public void monitorSpringTrue_check() throws FileNotFoundException {
         String tracerInfo = ResourceHelper
-                .readFromFile("target/tracer/org/jtester/tracer/TracerTest#monitorSpringTrue.html");
+                .readFromFile("target/tracer/org/test4j/tracer/TracerTest#monitorSpringTrue.html");
         want.string(tracerInfo).contains("call").contains("paras").contains("result");
     }
 
@@ -89,7 +88,7 @@ public class TracerTest_Enabled implements JTester {
     // (dependsOnMethods = "monitorSpringTrue")
     public void monitorJdbcTrue_check() throws FileNotFoundException {
         String tracerInfo = ResourceHelper
-                .readFromFile("target/tracer/org/jtester/tracer/TracerTest#monitorJdbcTrue.html");
+                .readFromFile("target/tracer/org/test4j/tracer/TracerTest#monitorJdbcTrue.html");
         want.string(tracerInfo).contains("SQL-Statement");
     }
 
@@ -118,7 +117,7 @@ public class TracerTest_Enabled implements JTester {
     // (dependsOnMethods = "monitorSpring_ToInfoString")
     public void monitorSpring_ToInfoString_check() throws FileNotFoundException {
         String tracerInfo = ResourceHelper
-                .readFromFile("target/tracer/org/jtester/tracer/TracerTest#monitorSpring_ToInfoString.html");
-        want.string(tracerInfo).contains("org.jtester.fortest.hibernate.User@");
+                .readFromFile("target/tracer/org/test4j/tracer/TracerTest#monitorSpring_ToInfoString.html");
+        want.string(tracerInfo).contains("org.test4j.fortest.hibernate.User@");
     }
 }

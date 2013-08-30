@@ -9,9 +9,9 @@ import org.test4j.tools.commons.JSONHelper;
 
 @SuppressWarnings({ "rawtypes" })
 public class ExpectationsResult {
-    protected JTesterInvocations currExpectations;
+    protected Test4JInvocations currExpectations;
 
-    protected ExpectationsResult(JTesterInvocations expectations) {
+    protected ExpectationsResult(Test4JInvocations expectations) {
         this.currExpectations = expectations;
     }
 

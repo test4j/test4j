@@ -1,11 +1,10 @@
 package org.test4j.testng;
 
-import org.test4j.testng.JTester;
 import org.test4j.tools.datagen.DataProviderIterator;
 import org.testng.annotations.Test;
 
-@Test(groups = "jtester")
-public class DataProviderIteratorTest extends JTester {
+@Test(groups = "test4j")
+public class DataProviderIteratorTest extends Test4J {
 
     @Test
     public void testCheckDataLength() {

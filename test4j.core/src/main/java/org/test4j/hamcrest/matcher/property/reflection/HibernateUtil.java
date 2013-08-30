@@ -1,6 +1,6 @@
 package org.test4j.hamcrest.matcher.property.reflection;
 
-import org.test4j.module.JTesterException;
+import org.test4j.module.Test4JException;
 
 /**
  * Utility class for handling Hibernate proxies during the comparison.
@@ -118,7 +118,7 @@ public class HibernateUtil {
 			Object lazyInitializer = hibernateProxyClass.getMethod("getHibernateLazyInitializer").invoke(proxy);
 			return lazyInitializer.getClass().getMethod(methodName).invoke(lazyInitializer);
 		} catch (Throwable e) {
-			throw new JTesterException("Unable to invoke method on lazy initializer of Hibernate proxy. Method: "
+			throw new Test4JException("Unable to invoke method on lazy initializer of Hibernate proxy. Method: "
 					+ methodName + ", proxy: " + proxy, e);
 		}
 	}

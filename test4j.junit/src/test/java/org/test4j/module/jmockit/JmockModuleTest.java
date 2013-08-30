@@ -5,12 +5,12 @@ import mockit.Mocked;
 import org.junit.Before;
 import org.junit.Test;
 import org.test4j.fortest.beans.ISpeak;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
 import ext.test4j.hamcrest.MatcherAssert;
 import ext.test4j.hamcrest.core.IsEqual;
 
-public class JmockModuleTest implements JTester {
+public class JmockModuleTest implements Test4J {
     @Mocked
     private ISpeak say;
 

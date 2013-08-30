@@ -5,13 +5,13 @@ import java.math.BigInteger;
 import java.util.Iterator;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 import org.test4j.tools.datagen.AbastractDataGenerator;
 import org.test4j.tools.datagen.IncreaseDataGenerator;
 
 @SuppressWarnings("rawtypes")
-public class IncreaseDataGeneratorTest implements JTester {
+public class IncreaseDataGeneratorTest implements Test4J {
 
     @Test
     @DataFrom("dataIncrease")

@@ -6,14 +6,14 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.test4j.junit.JTesterRunner;
+import org.test4j.junit.Test4JRunner;
 import org.test4j.junit.filter.SuiteType;
 import org.test4j.junit.filter.acceptor.TestInClasspathAcceptor;
 import org.test4j.junit.filter.finder.FilterCondiction;
 import org.test4j.junit.filter.finder.FilterCondictionTest_Suite;
 import org.test4j.module.ICore;
 
-@RunWith(JTesterRunner.class)
+@RunWith(Test4JRunner.class)
 public class TestInClasspathAcceptorTest implements ICore {
 
 	public static class Anything {

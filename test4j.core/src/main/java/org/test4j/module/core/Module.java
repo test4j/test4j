@@ -8,28 +8,26 @@ import org.test4j.module.core.utility.IPropItem;
  * initialization, {@link #getTestListener()} will be called, so that the module
  * can create a callback that can plug into the test exucution sequence. See
  * {@link TestListener} javadoc for more info.
- * 
  */
 public interface Module extends IPropItem {
 
-	/**
-	 * 根据jTester的配置信息初始化各个模块的变量<br>
-	 * <br>
-	 * Initializes the module with the jTester properties.
-	 * 
-	 */
-	void init();
+    /**
+     * 根据test4j的配置信息初始化各个模块的变量<br>
+     * <br>
+     * Initializes the module with the test4j properties.
+     */
+    void init();
 
-	/**
-	 * Gives the module the opportunity to performs initialization that can only
-	 * work after all other modules have been initialized
-	 */
-	void afterInit();
+    /**
+     * Gives the module the opportunity to performs initialization that can only
+     * work after all other modules have been initialized
+     */
+    void afterInit();
 
-	/**
-	 * Creates the test listener for this module.
-	 * 
-	 * @return The test listener, not null
-	 */
-	TestListener getTestListener();
+    /**
+     * Creates the test listener for this module.
+     * 
+     * @return The test listener, not null
+     */
+    TestListener getTestListener();
 }

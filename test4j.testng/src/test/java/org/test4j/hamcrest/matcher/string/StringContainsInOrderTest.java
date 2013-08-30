@@ -1,11 +1,11 @@
 package org.test4j.hamcrest.matcher.string;
 
 import org.test4j.hamcrest.matcher.string.StringMode;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
 @Test(groups = "assertion")
-public class StringContainsInOrderTest extends JTester {
+public class StringContainsInOrderTest extends Test4J {
 
 	@Test
 	public void testMatchesSafely() {

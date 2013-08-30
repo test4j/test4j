@@ -8,10 +8,10 @@ import org.test4j.json.encoder.JSONEncoder;
 import org.test4j.json.encoder.array.ObjectArrayEncoder;
 import org.test4j.json.encoder.beans.test.User;
 import org.test4j.json.helper.JSONFeature;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class ObjectArrayEncoderTest implements JTester {
+public class ObjectArrayEncoderTest implements Test4J {
     @Test
     public void testEncode() throws Exception {
         User[] users = new User[] { User.newInstance(12, "darui.wu"), null };

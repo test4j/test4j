@@ -5,9 +5,9 @@ import org.test4j.fortest.beans.Manager;
 import org.test4j.json.JSON;
 import org.test4j.json.encoder.beans.test.User;
 import org.test4j.json.helper.JSONFeature;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
-public class PoJoEncoderTest implements JTester {
+public class PoJoEncoderTest implements Test4J {
 
     @Test
     public void testWrite_NormalPoJo() {

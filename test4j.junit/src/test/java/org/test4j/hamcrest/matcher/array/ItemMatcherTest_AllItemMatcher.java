@@ -7,13 +7,13 @@ import java.util.Map;
 import org.junit.Test;
 import org.test4j.hamcrest.matcher.array.ListEveryItemMatcher;
 import org.test4j.hamcrest.matcher.modes.ItemsMode;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
 import ext.test4j.hamcrest.Matcher;
 import ext.test4j.hamcrest.MatcherAssert;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class ItemMatcherTest_AllItemMatcher implements JTester {
+public class ItemMatcherTest_AllItemMatcher implements Test4J {
     Matcher              m1      = the.string().contains("abc");
 
     ListEveryItemMatcher matcher = new ListEveryItemMatcher(m1, ItemsMode.AllItems);

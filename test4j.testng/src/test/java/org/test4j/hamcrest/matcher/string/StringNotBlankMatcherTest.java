@@ -2,12 +2,12 @@ package org.test4j.hamcrest.matcher.string;
 
 import java.util.Iterator;
 
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 @Test(groups = "assertion")
-public class StringNotBlankMatcherTest extends JTester {
+public class StringNotBlankMatcherTest extends Test4J {
 
 	@Test(expectedExceptions = AssertionError.class, dataProvider = "dataForNotBlank")
 	public void testNotBlank(String actual) {

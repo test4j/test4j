@@ -15,7 +15,7 @@ import javax.sql.DataSource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.test4j.module.JTesterException;
+import org.test4j.module.Test4JException;
 import org.test4j.module.core.TestContext;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.database.annotations.Transactional.TransactionMode;
@@ -40,7 +40,7 @@ public abstract class BaseEnvironment implements DBEnvironment {
 
     protected DataSourceType                          dataSourceType;
 
-    private JTesterDataSource                         dataSource;
+    private Test4JDataSource                          dataSource;
 
     protected AbstractTypeMap                         typeMap;
 
@@ -50,10 +50,12 @@ public abstract class BaseEnvironment implements DBEnvironment {
         this.dataSourceType = dataSourceType;
     }
 
+    @Override
     public void setDataSource(String driver, String url, String schemas, String username, String password) {
-        this.dataSource = new JTesterDataSource(dataSourceType, driver, url, schemas, username, password);
+        this.dataSource = new Test4JDataSource(dataSourceType, driver, url, schemas, username, password);
     }
 
+    @Override
     public DataSource getDataSource() {
         return this.dataSource;
     }
@@ -66,6 +68,7 @@ public abstract class BaseEnvironment implements DBEnvironment {
      * 
      * @return The <code>DataSource</code>
      */
+    @Override
     public DataSource getDataSourceAndActivateTransactionIfNeeded() {
         ThreadTransactionManager currMethodConnection = threadTransactionManager.get();
         if (currMethodConnection != null) {
@@ -74,22 +77,27 @@ public abstract class BaseEnvironment implements DBEnvironment {
         return dataSource;
     }
 
+    @Override
     public void registerTransactionManagementConfiguration(TransactionManagementConfiguration transactionManagementConfiguration) {
         if (transactionManagementConfiguration == null) {
             transactionManagementConfigurations.add(new TransactionManagementConfiguration() {
+                @Override
                 public boolean isApplicableFor(Object testObject) {
                     return true;
                 }
 
+                @Override
                 public PlatformTransactionManager getSpringPlatformTransactionManager(Object testObject) {
                     DataSource dataSource = getDataSourceAndActivateTransactionIfNeeded();
                     return new DataSourceTransactionManager(dataSource);
                 }
 
+                @Override
                 public boolean isTransactionalResourceAvailable(Object testObject) {
                     return true;
                 }
 
+                @Override
                 public Integer getPreference() {
                     return 1;
                 }
@@ -99,11 +107,13 @@ public abstract class BaseEnvironment implements DBEnvironment {
         }
     }
 
+    @Override
     public void startTransaction() {
         this.threadTransactionManager.set(new ThreadTransactionManager());
         this.threadTransactionManager.get().startTransaction();
     }
 
+    @Override
     public void endTransaction() {
         ThreadTransactionManager currTransactionManager = this.threadTransactionManager.get();
         if (currTransactionManager != null) {
@@ -117,6 +127,7 @@ public abstract class BaseEnvironment implements DBEnvironment {
      * 
      * @return
      */
+    @Override
     public Connection connect() {
         ThreadTransactionManager currMethodConnection = threadTransactionManager.get();
         if (currMethodConnection == null) {
@@ -132,7 +143,7 @@ public abstract class BaseEnvironment implements DBEnvironment {
             connection = currMethodConnection.initMethodConnection(dataSource);
             return connection;
         } catch (SQLException e) {
-            throw new JTesterException(e);
+            throw new Test4JException(e);
         }
     }
 
@@ -179,8 +190,8 @@ public abstract class BaseEnvironment implements DBEnvironment {
                 }
                 this.connection = null;
             } catch (SQLException e) {
-                throw new JTesterException(String.format("close datasource[%s] connection error.",
-                        dataSource.toString()), e);
+                throw new Test4JException(
+                        String.format("close datasource[%s] connection error.", dataSource.toString()), e);
             }
         }
 
@@ -253,6 +264,7 @@ public abstract class BaseEnvironment implements DBEnvironment {
         return commandText;
     }
 
+    @Override
     public void commit() {
         ThreadTransactionManager currTransactionManager = threadTransactionManager.get();
         if (currTransactionManager != null) {
@@ -260,6 +272,7 @@ public abstract class BaseEnvironment implements DBEnvironment {
         }
     }
 
+    @Override
     public void rollback() {
         ThreadTransactionManager currTransactionManager = threadTransactionManager.get();
         if (currTransactionManager != null) {
@@ -267,6 +280,7 @@ public abstract class BaseEnvironment implements DBEnvironment {
         }
     }
 
+    @Override
     public int getExceptionCode(SQLException dbException) {
         return dbException.getErrorCode();
     }
@@ -280,13 +294,14 @@ public abstract class BaseEnvironment implements DBEnvironment {
         return false;
     }
 
+    @Override
     public PreparedStatement createStatementWithBoundFixtureSymbols(String commandText) throws SQLException {
         Connection connection = this.connect();
         PreparedStatement cs = connection.prepareStatement(commandText);
         return cs;
     }
 
-    private Map<String, TableMeta> metas = new HashMap<String, TableMeta>();
+    private final Map<String, TableMeta> metas = new HashMap<String, TableMeta>();
 
     /**
      * 获得数据表的元信息
@@ -295,6 +310,7 @@ public abstract class BaseEnvironment implements DBEnvironment {
      * @return
      * @throws Exception
      */
+    @Override
     public TableMeta getTableMetaData(String table) {
         TableMeta meta = metas.get(table);
         if (meta == null) {
@@ -312,11 +328,13 @@ public abstract class BaseEnvironment implements DBEnvironment {
         return meta;
     }
 
+    @Override
     public Object getDefaultValue(String javaType) {
         Object value = this.typeMap.getDefaultValue(javaType);
         return value;
     }
 
+    @Override
     public Object toObjectValue(String input, String javaType) {
         try {
             Object value = this.typeMap.toObjectByType(input, javaType);
@@ -332,6 +350,7 @@ public abstract class BaseEnvironment implements DBEnvironment {
      * {@inheritDoc} <br>
      * <br>
      */
+    @Override
     @SuppressWarnings("rawtypes")
     public Object converToSqlValue(Object value) {
         if (value instanceof Enum) {

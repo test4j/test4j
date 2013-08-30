@@ -9,33 +9,32 @@ import mockit.Mock;
 import mockit.MockClass;
 import mockit.UsingMocksAndStubs;
 
-import org.test4j.testng.JTester;
-import org.test4j.tools.commons.DateHelper;
+import org.test4j.testng.Test4J;
 import org.test4j.tools.commons.DateUtilTest_MockClass.MockDateUtil;
 import org.testng.annotations.Test;
 
-@Test(groups = "jtester")
+@Test(groups = "test4j")
 @UsingMocksAndStubs({ MockDateUtil.class })
-public class DateUtilTest_MockClass extends JTester {
-	@MockClass(realClass = DateHelper.class)
-	public static class MockDateUtil {
-		@Mock
-		public static Date now() {
-			Calendar cal = DateUtilTest.mockCalendar(2012, 1, 28);
-			return cal.getTime();
-		}
-	}
+public class DateUtilTest_MockClass extends Test4J {
+    @MockClass(realClass = DateHelper.class)
+    public static class MockDateUtil {
+        @Mock
+        public static Date now() {
+            Calendar cal = DateUtilTest.mockCalendar(2012, 1, 28);
+            return cal.getTime();
+        }
+    }
 
-	@Test
-	public void testCurrDateTimeStr_format() {
-		String str = DateHelper.currDateTimeStr("MM/dd/yy hh:mm:ss");
-		want.string(str).isEqualTo("01/28/12 07:58:55");
-	}
+    @Test
+    public void testCurrDateTimeStr_format() {
+        String str = DateHelper.currDateTimeStr("MM/dd/yy hh:mm:ss");
+        want.string(str).isEqualTo("01/28/12 07:58:55");
+    }
 
-	@MockClass(realClass = LoginContext.class, stubs = { "(String)", "logout" })
-	final class MockLoginContextWithStubs {
-		@Mock
-		void login() {
-		} // this could also have been an stub
-	}
+    @MockClass(realClass = LoginContext.class, stubs = { "(String)", "logout" })
+    final class MockLoginContextWithStubs {
+        @Mock
+        void login() {
+        } // this could also have been an stub
+    }
 }

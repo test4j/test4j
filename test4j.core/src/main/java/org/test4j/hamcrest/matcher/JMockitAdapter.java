@@ -13,44 +13,46 @@ import ext.test4j.hamcrest.number.OrderingComparison;
 /**
  * Adapts the<br>
  * <br>
- * {@code ext.jtester.hamcrest.Matcher} interface to
+ * {@code ext.test4j.hamcrest.Matcher} interface to
  * {@link mockit.external.hamcrest.Matcher}.
  */
 @SuppressWarnings({ "rawtypes" })
 public final class JMockitAdapter implements ArgumentMatcher {
-	private final Matcher hamcrestMatcher;
+    private final Matcher hamcrestMatcher;
 
-	public static JMockitAdapter create(final Matcher matcher) {
-		return new JMockitAdapter(matcher);
-	}
+    public static JMockitAdapter create(final Matcher matcher) {
+        return new JMockitAdapter(matcher);
+    }
 
-	private JMockitAdapter(Matcher matcher) {
-		hamcrestMatcher = matcher;
-	}
+    private JMockitAdapter(Matcher matcher) {
+        hamcrestMatcher = matcher;
+    }
 
-	public boolean matches(Object item) {
-		return hamcrestMatcher.matches(item);
-	}
+    @Override
+    public boolean matches(Object item) {
+        return hamcrestMatcher.matches(item);
+    }
 
-	public void writeMismatchPhrase(ArgumentMismatch description) {
-		Description strDescription = new StringDescription();
-		hamcrestMatcher.describeTo(strDescription);
-		description.append(strDescription.toString());
-	}
+    @Override
+    public void writeMismatchPhrase(ArgumentMismatch description) {
+        Description strDescription = new StringDescription();
+        hamcrestMatcher.describeTo(strDescription);
+        description.append(strDescription.toString());
+    }
 
-	public Object getInnerValue() {
-		Matcher innerMatcher = hamcrestMatcher;
+    public Object getInnerValue() {
+        Matcher innerMatcher = hamcrestMatcher;
 
-		while (innerMatcher instanceof ext.test4j.hamcrest.core.Is
-				|| innerMatcher instanceof ext.test4j.hamcrest.core.IsNot) {
-			innerMatcher = getField(innerMatcher.getClass(), Matcher.class, innerMatcher);
-		}
+        while (innerMatcher instanceof ext.test4j.hamcrest.core.Is
+                || innerMatcher instanceof ext.test4j.hamcrest.core.IsNot) {
+            innerMatcher = getField(innerMatcher.getClass(), Matcher.class, innerMatcher);
+        }
 
-		if (innerMatcher instanceof IsEqual || innerMatcher instanceof IsSame
-				|| innerMatcher instanceof OrderingComparison) {
-			return getField(innerMatcher.getClass(), Object.class, innerMatcher);
-		} else {
-			return null;
-		}
-	}
+        if (innerMatcher instanceof IsEqual || innerMatcher instanceof IsSame
+                || innerMatcher instanceof OrderingComparison) {
+            return getField(innerMatcher.getClass(), Object.class, innerMatcher);
+        } else {
+            return null;
+        }
+    }
 }

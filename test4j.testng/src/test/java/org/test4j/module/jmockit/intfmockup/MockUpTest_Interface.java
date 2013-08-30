@@ -4,12 +4,12 @@ import mockit.Mock;
 
 import org.test4j.module.jmockit.intfmockup.ISayHello;
 import org.test4j.module.jmockit.mockbug.SayHelloImpl;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
 @SuppressWarnings("unused")
 @Test
-public class MockUpTest_Interface extends JTester {
+public class MockUpTest_Interface extends Test4J {
 	private ISayHello sayHello1;
 
 	/**

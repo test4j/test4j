@@ -9,11 +9,11 @@ import org.junit.Test;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.json.encoder.beans.test.GenicBean;
 import org.test4j.json.encoder.beans.test.User;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.tools.commons.ListHelper;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })
-public class MapPropertyEqaulMatcherTest implements JTester {
+public class MapPropertyEqaulMatcherTest implements Test4J {
 
     @Test
     public void testMatches() {

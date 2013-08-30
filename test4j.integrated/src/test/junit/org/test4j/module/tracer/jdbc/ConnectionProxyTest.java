@@ -8,18 +8,17 @@ import mockit.Mock;
 
 import org.junit.Test;
 import org.test4j.hamcrest.matcher.string.StringMode;
-import org.test4j.junit.JTester;
-import org.test4j.module.database.environment.JTesterDataSource;
+import org.test4j.junit.Test4J;
+import org.test4j.module.database.environment.Test4JDataSource;
 import org.test4j.module.database.utility.DataSourceType;
 import org.test4j.module.tracer.TracerHelper;
 import org.test4j.module.tracer.TracerLogger;
 import org.test4j.module.tracer.TracerManager;
 import org.test4j.module.tracer.TxtFileTracerLogger;
-import org.test4j.module.tracer.jdbc.IProxyMarker;
 import org.test4j.tools.commons.ConfigHelper;
 import org.test4j.tools.commons.ResourceHelper;
 
-public class ConnectionProxyTest implements JTester {
+public class ConnectionProxyTest implements Test4J {
     @Test
     public void minitorSql() throws Exception {
         new MockUp<TracerHelper>() {
@@ -47,7 +46,7 @@ public class ConnectionProxyTest implements JTester {
         String url = ConfigHelper.databaseUrl();
         String password = ConfigHelper.databasePassword();
 
-        JTesterDataSource proxy = new JTesterDataSource(type, driver, url, "jtester", username, password);
+        Test4JDataSource proxy = new Test4JDataSource(type, driver, url, "test4j", username, password);
 
         Connection conn = proxy.getConnection();
         want.object(conn).clazIs(Connection.class).clazIs(IProxyMarker.class);

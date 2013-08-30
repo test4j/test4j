@@ -7,11 +7,11 @@ import java.util.Date;
 import org.junit.Test;
 import org.test4j.json.encoder.single.spec.DateEncoder;
 import org.test4j.json.helper.JSONFeature;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.tools.commons.DateHelper;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class DateEncoderTest implements JTester {
+public class DateEncoderTest implements Test4J {
     @Test
     public void testEncode() throws Exception {
         Date date = DateHelper.parse("2011-08-01 08:11:41");

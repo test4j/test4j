@@ -112,7 +112,7 @@ public class StringHelper {
                                                                   private static final long serialVersionUID = -5015223773312948340L;
 
                                                                   {
-                                                                      add("\\s*at\\s*org\\.jtester\\.fit\\.FitRunner\\.[^\\s]+");
+                                                                      add("\\s*at\\s*org\\.test4j\\.fit\\.FitRunner\\.[^\\s]+");
                                                                       add("\\s*at\\s*org\\.testng\\.[^\\s]+");
                                                                       add("\\s*at\\s*sun\\.reflect\\.[^\\s]+");
                                                                       add("\\s*at\\s*java\\.lang\\.reflect\\.[^\\s]+");

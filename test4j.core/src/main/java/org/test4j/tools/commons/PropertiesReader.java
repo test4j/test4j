@@ -8,7 +8,7 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Properties;
 
-import org.test4j.module.JTesterException;
+import org.test4j.module.Test4JException;
 import org.test4j.module.core.utility.MessageHelper;
 
 public class PropertiesReader {
@@ -42,7 +42,7 @@ public class PropertiesReader {
 		} catch (FileNotFoundException e) {
 			return null;
 		} catch (Throwable e) {
-			throw new JTesterException("Unable to load configuration file: " + propertiesFileName + " from user home",
+			throw new Test4JException("Unable to load configuration file: " + propertiesFileName + " from user home",
 					e);
 		} finally {
 			closeQuietly(inputStream);
@@ -73,7 +73,7 @@ public class PropertiesReader {
 		} catch (FileNotFoundException e) {
 			return null;
 		} catch (Throwable e) {
-			throw new JTesterException("Unable to load configuration file: " + propertiesFileName, e);
+			throw new Test4JException("Unable to load configuration file: " + propertiesFileName, e);
 		} finally {
 			closeQuietly(inputStream);
 		}

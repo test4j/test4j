@@ -3,10 +3,10 @@ package org.test4j.hamcrest.iassert.object.impl;
 import java.util.Iterator;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
-public class CollectionAssertTest_HasItem_DataProvider implements JTester {
+public class CollectionAssertTest_HasItem_DataProvider implements Test4J {
 
     @SuppressWarnings("rawtypes")
     public static Iterator provide_hasitems() {

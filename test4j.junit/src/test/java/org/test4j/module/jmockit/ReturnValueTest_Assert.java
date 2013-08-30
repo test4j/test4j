@@ -8,13 +8,13 @@ import mockit.Mocked;
 
 import org.junit.Test;
 import org.test4j.fortest.beans.ComplexObject;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.inject.annotations.Inject;
 import org.test4j.module.jmockit.ReturnValueTest.SomeInterface;
 import org.test4j.module.jmockit.ReturnValueTest.SomeService;
 
 @SuppressWarnings({ "rawtypes" })
-public class ReturnValueTest_Assert implements JTester {
+public class ReturnValueTest_Assert implements Test4J {
     public SomeService   someService = new SomeService();
 
     @Mocked

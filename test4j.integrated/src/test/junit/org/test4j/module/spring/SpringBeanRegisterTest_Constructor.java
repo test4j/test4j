@@ -2,7 +2,7 @@ package org.test4j.module.spring;
 
 import org.junit.Ignore;
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.spring.annotations.AutoBeanInject;
 import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.annotations.SpringContext;
@@ -10,7 +10,7 @@ import org.test4j.module.spring.annotations.SpringContext;
 @Ignore
 @SpringContext
 @AutoBeanInject
-public class SpringBeanRegisterTest_Constructor implements JTester {
+public class SpringBeanRegisterTest_Constructor implements Test4J {
 
     @SpringBeanByName
     BeanClass bean;

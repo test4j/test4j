@@ -8,9 +8,9 @@ import mockit.Cascading;
 
 import org.junit.Ignore;
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
-public class CascadeMockDemoTest implements JTester {
+public class CascadeMockDemoTest implements Test4J {
     @Test
     @Ignore
     public void recordAndVerifyExpectationsOnCascadedMocks(@Cascading final Socket mock) throws Exception {

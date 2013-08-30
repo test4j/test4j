@@ -39,12 +39,12 @@ public class JavaGenerator {
             java.append("\n");
         }
 
-        java.append("import org.jtester.spec.JSpec;\n");
+        java.append("import org.test4j.spec.JSpec;\n");
         java.append("import org.testng.annotations.Test;\n");
-        java.append("import org.jtester.spec.step.JSpecScenario;\n");
-        java.append("import org.jtester.spec.annotations.Given;\n");
-        java.append("import org.jtester.spec.annotations.When;\n");
-        java.append("import org.jtester.spec.annotations.Then;\n");
+        java.append("import org.test4j.spec.step.JSpecScenario;\n");
+        java.append("import org.test4j.spec.annotations.Given;\n");
+        java.append("import org.test4j.spec.annotations.When;\n");
+        java.append("import org.test4j.spec.annotations.Then;\n");
         java.append("\n");
 
         java.append("public class ").append(name).append(" extends JSpec {\n");

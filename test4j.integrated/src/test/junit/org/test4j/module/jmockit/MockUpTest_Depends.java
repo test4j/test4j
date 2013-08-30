@@ -6,7 +6,7 @@ import java.util.Date;
 import mockit.Mock;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.spring.annotations.AutoBeanInject;
 import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.annotations.SpringContext;
@@ -17,9 +17,9 @@ import org.test4j.tools.commons.DateHelper;
  * 
  * @author darui.wudr
  */
-@SpringContext("org/jtester/module/spring/testedbeans/xml/data-source.xml")
+@SpringContext("org/test4j/module/spring/testedbeans/xml/data-source.xml")
 @AutoBeanInject
-public class MockUpTest_Depends implements JTester {
+public class MockUpTest_Depends implements Test4J {
     @SpringBeanByName(claz = MyImpl.class)
     MyIntf myIntf;
 
@@ -74,6 +74,7 @@ public class MockUpTest_Depends implements JTester {
     }
 
     public static class MyImpl implements MyIntf {
+        @Override
         public String hello() {
             return "hello";
         }

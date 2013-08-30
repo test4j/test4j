@@ -2,7 +2,6 @@ package org.test4j.module.core;
 
 import java.lang.reflect.Method;
 import java.util.List;
-import java.util.Properties;
 
 import org.test4j.module.core.ClazzAroundObject.ClazzAfterObject;
 import org.test4j.module.core.utility.ConfigurationLoader;
@@ -13,25 +12,7 @@ import org.test4j.module.jmockit.utility.JMockitModuleHelper;
 import org.test4j.tools.commons.ConfigHelper;
 
 /**
- * jtester的核心类，所有事件监听器的总入口<br>
- * Core class of the jtester library, and the main entry point that gives access
- * to the {@link TestContext} and the different {@link Module}s.
- * <p/>
- * An instance of jtester is configured with a certain configuration using the
- * {@link #init(Properties)} method. Normally, only one instance of jtester
- * exists at any time. The default instance can be obtained using the
- * {@link #getInstance()} method. This default instance can be set to a custom
- * initialized instance or instance of a custom subclass using
- * {@link #setInstance(CoreModule)}.
- * <p/>
- * If not set, the singleton instance is initialized by default using
- * {@link #initSingletonInstance()}. This method uses the
- * {@link ConfigurationLoader} to load the configuration. An instance of
- * {@link ModulesManager} is used to initialize and maintain the modules.
- * <p/>
- * jtester itself is also implemented as a module. In fact, an instance of
- * jtester behaves like a module who's behaviour is defined by the added
- * behaviour of all modules.
+ * test4j的核心类，所有事件监听器的总入口<br>
  */
 public class CoreModule {
     static {
@@ -52,7 +33,7 @@ public class CoreModule {
     }
 
     /**
-     * 初始化jTester,要保证这个方法在使用jTester功能之前被调用<br>
+     * 初始化test4j,要保证这个方法在使用test4j功能之前被调用<br>
      * <br>
      * Initializes the singleton instance to the default value, loading the
      * configuration using the {@link ConfigurationLoader}
@@ -70,7 +51,7 @@ public class CoreModule {
     }
 
     /* Listener that observes the execution of tests */
-    private TestListener testListener;
+    private final TestListener testListener;
 
     /**
      * Creates a new instance.

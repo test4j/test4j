@@ -8,13 +8,13 @@ import java.io.Writer;
 import mockit.Mock;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.tracer.TracerLogger;
 import org.test4j.module.tracer.TracerServiceDemo;
 import org.test4j.module.tracer.XmlFileTracerLogger;
 import org.test4j.tools.commons.ResourceHelper;
 
-public class XmlFileTracerLoggerTest implements JTester {
+public class XmlFileTracerLoggerTest implements Test4J {
 
     @Test
     public void testXmlTracer() throws FileNotFoundException {

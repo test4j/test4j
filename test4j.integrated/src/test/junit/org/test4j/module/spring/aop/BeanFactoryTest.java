@@ -13,14 +13,14 @@ import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.test4j.fortest.service.UserAnotherDaoImpl;
 import org.test4j.fortest.service.UserService;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.tracer.spring.SpringBeanTracer;
 
-public class BeanFactoryTest implements JTester {
+public class BeanFactoryTest implements Test4J {
     @Test
     public void testXmlBeanDefinitionReader() {
-        Resource beanRes = new ClassPathResource("org/jtester/module/spring/testedbeans/xml/beans.xml");
-        Resource dbRes = new ClassPathResource("org/jtester/module/spring/testedbeans/xml/data-source.xml");
+        Resource beanRes = new ClassPathResource("org/test4j/module/spring/testedbeans/xml/beans.xml");
+        Resource dbRes = new ClassPathResource("org/test4j/module/spring/testedbeans/xml/data-source.xml");
 
         DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
@@ -41,8 +41,8 @@ public class BeanFactoryTest implements JTester {
 
     @Test
     public void testClassPathContext_autoTracer() {
-        Resource beanRes = new ClassPathResource("org/jtester/module/spring/testedbeans/xml/beans.xml");
-        Resource dbRes = new ClassPathResource("org/jtester/module/spring/testedbeans/xml/data-source.xml");
+        Resource beanRes = new ClassPathResource("org/test4j/module/spring/testedbeans/xml/beans.xml");
+        Resource dbRes = new ClassPathResource("org/test4j/module/spring/testedbeans/xml/data-source.xml");
 
         DefaultListableBeanFactory factory = new DefaultListableBeanFactory();
         XmlBeanDefinitionReader reader = new XmlBeanDefinitionReader(factory);
@@ -51,11 +51,11 @@ public class BeanFactoryTest implements JTester {
         BeanDefinitionRegistry registry = reader.getRegistry();
         SpringBeanTracer.addTracerBeanDefinition(registry);
 
-        Object pointcut = factory.getBean("jtester-internal-methodname-pointcut");
+        Object pointcut = factory.getBean("test4j-internal-methodname-pointcut");
         want.object(pointcut).notNull();
-        Object advice = factory.getBean("jtester-internal-springbeantracer");
+        Object advice = factory.getBean("test4j-internal-springbeantracer");
         want.object(advice).notNull();
-        Object advisor = factory.getBean("jtester-internal-beantracer-advisor");
+        Object advisor = factory.getBean("test4j-internal-beantracer-advisor");
         want.object(advisor).notNull();
         UserService userService = (UserService) factory.getBean("userService");
         want.object(userService).notNull();
@@ -64,17 +64,17 @@ public class BeanFactoryTest implements JTester {
     @Test
     public void testClassPathContext() {
         ClassPathXmlApplicationContext context = new ClassPathXmlApplicationContext(new String[] {
-                "org/jtester/module/spring/testedbeans/xml/data-source.xml",
-                "org/jtester/module/spring/testedbeans/xml/beans.xml",
-                "org/jtester/module/tracer/spring/jtester-bean-tracer.xml" });
-        boolean exists = context.containsBeanDefinition("jtester-internal-beantracer-advisor");
+                "org/test4j/module/spring/testedbeans/xml/data-source.xml",
+                "org/test4j/module/spring/testedbeans/xml/beans.xml",
+                "org/test4j/module/tracer/spring/test4j-bean-tracer.xml" });
+        boolean exists = context.containsBeanDefinition("test4j-internal-beantracer-advisor");
         want.bool(exists).isEqualTo(true);
         ConfigurableListableBeanFactory beanFactory = context.getBeanFactory();
-        BeanDefinition pointcut = beanFactory.getBeanDefinition("jtester-internal-methodname-pointcut");
+        BeanDefinition pointcut = beanFactory.getBeanDefinition("test4j-internal-methodname-pointcut");
         want.object(pointcut).notNull();
-        BeanDefinition advice = beanFactory.getBeanDefinition("jtester-internal-springbeantracer");
+        BeanDefinition advice = beanFactory.getBeanDefinition("test4j-internal-springbeantracer");
         want.object(advice).notNull();
-        BeanDefinition advisor = beanFactory.getBeanDefinition("jtester-internal-beantracer-advisor");
+        BeanDefinition advisor = beanFactory.getBeanDefinition("test4j-internal-beantracer-advisor");
         want.object(advisor).notNull();
     }
 }

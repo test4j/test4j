@@ -3,7 +3,7 @@ package org.test4j.module.jmockit.mockbug;
 import mockit.Mock;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.jmockit.mockbug.TestedMethodService;
 import org.test4j.module.spring.annotations.AutoBeanInject;
 import org.test4j.module.spring.annotations.SpringBeanByName;
@@ -12,7 +12,7 @@ import org.test4j.module.spring.annotations.SpringInitMethod;
 
 @SpringContext
 @AutoBeanInject
-public class MethodServiceTest_SpringInject implements JTester {
+public class MethodServiceTest_SpringInject implements Test4J {
     @SpringBeanByName
     TestedMethodService service;
 

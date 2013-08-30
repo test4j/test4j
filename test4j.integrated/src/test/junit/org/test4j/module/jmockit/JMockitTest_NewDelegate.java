@@ -4,12 +4,12 @@ import mockit.Mocked;
 
 import org.junit.Test;
 import org.test4j.hamcrest.matcher.string.StringMode;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.spring.annotations.AutoBeanInject;
 
 @SuppressWarnings("unused")
 @AutoBeanInject
-public class JMockitTest_NewDelegate implements JTester {
+public class JMockitTest_NewDelegate implements Test4J {
 
     @Mocked
     IPrinter printer;

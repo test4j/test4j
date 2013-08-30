@@ -6,13 +6,13 @@ import java.util.List;
 
 import org.junit.Test;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 import org.test4j.tools.commons.ArrayHelper;
 import org.test4j.tools.commons.ListHelper;
 
 @SuppressWarnings({ "rawtypes", "unchecked", "serial" })
-public class ListHelperTest implements JTester {
+public class ListHelperTest implements Test4J {
 
     @Test
     public void testToList() {

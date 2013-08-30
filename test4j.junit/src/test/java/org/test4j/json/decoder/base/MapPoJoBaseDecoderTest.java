@@ -10,16 +10,16 @@ import org.test4j.json.encoder.beans.test.User;
 import org.test4j.json.helper.JSONArray;
 import org.test4j.json.helper.JSONFeature;
 import org.test4j.json.helper.JSONMap;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
 @SuppressWarnings({ "serial" })
-public class MapPoJoBaseDecoderTest implements JTester {
+public class MapPoJoBaseDecoderTest implements Test4J {
 
     @Test
     public void testDecode() {
         JSONMap json = new JSONMap() {
             {
-                this.putJSON(JSONFeature.ClazzFlag, "org.jtester.json.encoder.beans.test.User@a123b");
+                this.putJSON(JSONFeature.ClazzFlag, "org.test4j.json.encoder.beans.test.User@a123b");
                 this.putJSON("name", "darui.wu");
             }
         };
@@ -37,12 +37,12 @@ public class MapPoJoBaseDecoderTest implements JTester {
         System.out.println(t.getClass().getName());
         JSONMap json = new JSONMap() {
             {
-                this.putJSON(JSONFeature.ClazzFlag, "[Lorg.jtester.json.encoder.beans.test.User;@01");
+                this.putJSON(JSONFeature.ClazzFlag, "[Lorg.test4j.json.encoder.beans.test.User;@01");
                 this.putJSON(JSONFeature.ValueFlag, new JSONArray() {
                     {
                         this.add(new JSONMap() {
                             {
-                                this.putJSON(JSONFeature.ClazzFlag, "org.jtester.json.encoder.beans.test.User@11");
+                                this.putJSON(JSONFeature.ClazzFlag, "org.test4j.json.encoder.beans.test.User@11");
                                 this.putJSON("name", "darui.wu");
                             }
                         });

@@ -11,11 +11,11 @@ import org.test4j.json.JSON;
 import org.test4j.json.decoder.CollectionDecoder;
 import org.test4j.json.decoder.ForTestType;
 import org.test4j.json.encoder.beans.test.User;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
 @SuppressWarnings({ "rawtypes" })
-public class CollectionDecoderTest implements JTester {
+public class CollectionDecoderTest implements Test4J {
 
     @Test
     public void testParseFromJSONArray() {
@@ -26,7 +26,7 @@ public class CollectionDecoderTest implements JTester {
 
     @Test
     public void testDecode_RefValue() {
-        String json = "[{#class:org.jtester.json.encoder.beans.test.User@12c8fa8,id:12,name:'darui.wu',age:0,salary:0,isFemale:false},{#refer:@12c8fa8}]";
+        String json = "[{#class:org.test4j.json.encoder.beans.test.User@12c8fa8,id:12,name:'darui.wu',age:0,salary:0,isFemale:false},{#refer:@12c8fa8}]";
         List<User> list = JSON.toObject(json, ArrayList.class);
         want.collection(list).sizeEq(2);
         User u1 = list.get(0);

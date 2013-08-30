@@ -4,18 +4,18 @@ import org.junit.Test;
 import org.test4j.database.table.ITable;
 import org.test4j.fortest.service.UserService;
 import org.test4j.fortest.service.UserServiceImpl;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.spring.annotations.AutoBeanInject;
+import org.test4j.module.spring.annotations.AutoBeanInject.BeanMap;
 import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.annotations.SpringContext;
 import org.test4j.module.spring.annotations.SpringInitMethod;
-import org.test4j.module.spring.annotations.AutoBeanInject.BeanMap;
 
 @SuppressWarnings("serial")
-@SpringContext({ "org/jtester/module/spring/testedbeans/xml/data-source.xml" })
+@SpringContext({ "org/test4j/module/spring/testedbeans/xml/data-source.xml" })
 @AutoBeanInject(maps = { @BeanMap(intf = "**.*Service", impl = "**.*ServiceImpl"),
         @BeanMap(intf = "**.*Dao", impl = "**.*DaoImpl") })
-public class SpringBeanRegisterTest_RunDbFitInInitMethod implements JTester {
+public class SpringBeanRegisterTest_RunDbFitInInitMethod implements Test4J {
     @SpringBeanByName(claz = UserServiceImplEx.class)
     UserService userService;
 

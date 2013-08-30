@@ -6,25 +6,23 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.test4j.hamcrest.matcher.string.StringMode;
 import org.test4j.spec.inner.StepType;
-import org.test4j.spec.scenario.xmlparser.StoryQName;
-import org.test4j.spec.scenario.xmlparser.StoryXmlBuilder;
 import org.test4j.spec.scenario.xmlparser.entity.ScenarioMethod;
 import org.test4j.spec.scenario.xmlparser.entity.StoryScenario;
 import org.test4j.spec.scenario.xmlparser.entity.TemplateMethod;
 import org.test4j.spec.util.XmlHelper;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.test4j.tools.commons.ResourceHelper;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 @SuppressWarnings("rawtypes")
-public class StoryXmlBuilderTest extends JTester {
+public class StoryXmlBuilderTest extends Test4J {
     Document document;
 
     @BeforeMethod
     public void initDocument() {
-        this.document = XmlHelper.buildFromClasspath("org/jtester/spec/scenario/test-story.xml", "utf-8");
+        this.document = XmlHelper.buildFromClasspath("org/test4j/spec/scenario/test-story.xml", "utf-8");
     }
 
     @Test(groups = "darui.wudr")

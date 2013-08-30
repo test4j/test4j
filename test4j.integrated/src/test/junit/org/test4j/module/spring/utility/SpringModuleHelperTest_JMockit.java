@@ -5,11 +5,11 @@ import java.lang.reflect.Field;
 import mockit.NonStrict;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.jmockit.utility.JMockitModuleHelper;
 import org.test4j.module.spring.annotations.SpringBeanByName;
 
-public class SpringModuleHelperTest_JMockit implements JTester {
+public class SpringModuleHelperTest_JMockit implements Test4J {
 
     @Test
     public void testDoesSpringBeanFieldIllegal() throws Exception {

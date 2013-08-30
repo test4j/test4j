@@ -9,11 +9,11 @@ import mockit.Verifications;
 
 import org.test4j.module.jmockit.demo.InternalInstancesDemo;
 import org.test4j.module.jmockit.demo.Service;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
 @Test(groups = "testng-demo")
-public class InternalInstancesDemoTest extends JTester {
+public class InternalInstancesDemoTest extends Test4J {
 	@Mocked
 	@Capturing(maxInstances = 10)
 	Service service;

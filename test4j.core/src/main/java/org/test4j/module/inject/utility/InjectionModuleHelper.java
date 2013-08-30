@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.Set;
 
-import org.test4j.module.JTesterException;
+import org.test4j.module.Test4JException;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.tools.commons.AnnotationHelper;
 import org.test4j.tools.commons.FieldHelper;
@@ -35,7 +35,7 @@ public class InjectionModuleHelper {
 	 */
 	public static Object injectInto(Object objectToInject, Object target, String property) {
 		if (target == null) {
-			throw new JTesterException("Target for injection should not be null");
+			throw new Test4JException("Target for injection should not be null");
 		}
 		try {
 			FieldAccessor fieldAccessor = new FieldAccessor(target.getClass(), property);
@@ -44,7 +44,7 @@ public class InjectionModuleHelper {
 
 			return oldValue;
 		} catch (Exception e) {
-			throw new JTesterException("Failed to set value using OGNL expression " + property, e);
+			throw new Test4JException("Failed to set value using OGNL expression " + property, e);
 		}
 	}
 
@@ -66,7 +66,7 @@ public class InjectionModuleHelper {
 	 */
 	public static Object injectIntoByType(Object objectToInject, Type objectToInjectType, Object target) {
 		if (target == null) {
-			throw new JTesterException("Target for injection should not be null");
+			throw new Test4JException("Target for injection should not be null");
 		}
 		return injectIntoFieldByType(objectToInject, objectToInjectType, target, target.getClass());
 	}
@@ -83,7 +83,7 @@ public class InjectionModuleHelper {
 			try {
 				annotatedMethod.invoke(target, objectToInject);
 			} catch (IllegalArgumentException e) {
-				throw new JTesterException(
+				throw new Test4JException(
 						"Method "
 								+ annotatedMethod.getName()
 								+ " annotated with "
@@ -91,10 +91,10 @@ public class InjectionModuleHelper {
 								+ " must have exactly one argument with a type equal to or a superclass / implemented interface of "
 								+ objectToInject.getClass().getSimpleName());
 			} catch (IllegalAccessException e) {
-				throw new JTesterException("Unable to inject value into following method annotated with "
+				throw new Test4JException("Unable to inject value into following method annotated with "
 						+ annotation.getName() + ": " + annotatedMethod.getName(), e);
 			} catch (InvocationTargetException e) {
-				throw new JTesterException("Unable to inject value into following method annotated with "
+				throw new Test4JException("Unable to inject value into following method annotated with "
 						+ annotation.getName() + ": " + annotatedMethod.getName(), e);
 			}
 		}
@@ -112,11 +112,11 @@ public class InjectionModuleHelper {
 	 * Performs auto-injection on a field by type of the objectToInject into the
 	 * given target object or targetClass, depending on the value of isStatic.
 	 * The object is injected on one single field, if there is more than one
-	 * candidate field, a {@link JTesterException} is thrown. We try to inject
+	 * candidate field, a {@link Test4JException} is thrown. We try to inject
 	 * the object on the most specific field, this means that when there are
 	 * muliple fields of one of the super-types or implemented interfaces of the
 	 * field, the one that is lowest in the hierarchy is chosen (if possible,
-	 * otherwise, a {@link JTesterException} is thrown.
+	 * otherwise, a {@link Test4JException} is thrown.
 	 * 
 	 * @param objectToInject
 	 *            The object that is injected
@@ -143,7 +143,7 @@ public class InjectionModuleHelper {
 				message.append(" If the target is a generic type, this can be caused by type erasure.");
 			}
 			message.append(" Specify the target field explicitly instead of injecting into by type.");
-			throw new JTesterException(message.toString());
+			throw new Test4JException(message.toString());
 
 		} else if (fieldsWithExactType.size() == 1) {
 			fieldToInjectTo = fieldsWithExactType.iterator().next();
@@ -155,7 +155,7 @@ public class InjectionModuleHelper {
 			// this one is taken. Otherwise, an exception is thrown
 			Set<Field> fieldsOfType = FieldHelper.getFieldsAssignableFrom(targetClass, objectToInjectType);
 			if (fieldsOfType.size() == 0) {
-				throw new JTesterException("No field with (super)type " + objectToInjectType + " found in "
+				throw new Test4JException("No field with (super)type " + objectToInjectType + " found in "
 						+ targetClass.getSimpleName());
 			}
 			for (Field field : fieldsOfType) {
@@ -174,7 +174,7 @@ public class InjectionModuleHelper {
 				}
 			}
 			if (fieldToInjectTo == null) {
-				throw new JTesterException("Multiple candidate target fields found in " + targetClass.getSimpleName()
+				throw new Test4JException("Multiple candidate target fields found in " + targetClass.getSimpleName()
 						+ ", with none of them more specific than all others.");
 			}
 		}

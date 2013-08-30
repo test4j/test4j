@@ -20,7 +20,7 @@ public class ICoreInitial {
     public static ISpringHelper initSpringHelper() {
         try {
             if (springHelperClazz == null) {
-                springHelperClazz = Class.forName("org.jtester.module.spring.utility.SprinHelperImpl");
+                springHelperClazz = Class.forName("org.test4j.module.spring.utility.SprinHelperImpl");
             }
             return (ISpringHelper) springHelperClazz.newInstance();
         } catch (Throwable e) {
@@ -33,7 +33,7 @@ public class ICoreInitial {
     public static IInsertOp newInsertOp() {
         try {
             if (dbInsertOpClazz == null) {
-                dbInsertOpClazz = Class.forName("org.jtester.module.database.dbop.InsertOp");
+                dbInsertOpClazz = Class.forName("org.test4j.module.database.dbop.InsertOp");
             }
             Object o = dbInsertOpClazz.newInstance();
             return (IInsertOp) o;
@@ -44,7 +44,7 @@ public class ICoreInitial {
 
     public static IDBOperator initDBOperator() {
         try {
-            Class claz = Class.forName("org.jtester.module.database.dbop.DBOperator");
+            Class claz = Class.forName("org.test4j.module.database.dbop.DBOperator");
             Object o = Reflector.instance.newInstance(claz);
             return (IDBOperator) o;
         } catch (Throwable e) {

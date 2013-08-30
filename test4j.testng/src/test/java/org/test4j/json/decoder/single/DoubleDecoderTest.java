@@ -3,38 +3,37 @@ package org.test4j.json.decoder.single;
 import java.util.HashMap;
 
 import org.test4j.json.JSON;
-import org.test4j.json.decoder.single.DoubleDecoder;
 import org.test4j.json.helper.JSONMap;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-@Test(groups = { "jtester", "json" })
-public class DoubleDecoderTest extends JTester {
+@Test(groups = { "test4j", "json" })
+public class DoubleDecoderTest extends Test4J {
 
-	public void testDecodeSimpleValue() {
-		JSONMap json = new JSONMap() {
-			private static final long serialVersionUID = 1L;
-			{
-				this.putJSON("#value", 23243.34d);
-			}
-		};
-		DoubleDecoder decoder = DoubleDecoder.toDOUBLE;
-		Double d = decoder.decode(json, Double.class, new HashMap<String, Object>());
-		want.number(d).isEqualTo(23243.34d);
-	}
+    public void testDecodeSimpleValue() {
+        JSONMap json = new JSONMap() {
+            private static final long serialVersionUID = 1L;
+            {
+                this.putJSON("#value", 23243.34d);
+            }
+        };
+        DoubleDecoder decoder = DoubleDecoder.toDOUBLE;
+        Double d = decoder.decode(json, Double.class, new HashMap<String, Object>());
+        want.number(d).isEqualTo(23243.34d);
+    }
 
-	@Test(dataProvider = "simple_value")
-	public void testSimpleValue(String json, double expected) {
-		Double actual = JSON.toObject(json, Double.class);
-		want.number(actual).isEqualTo(expected);
-	}
+    @Test(dataProvider = "simple_value")
+    public void testSimpleValue(String json, double expected) {
+        Double actual = JSON.toObject(json, Double.class);
+        want.number(actual).isEqualTo(expected);
+    }
 
-	@DataProvider
-	public Object[][] simple_value() {
-		return new Object[][] { { "34234.34d", 34234.34d },// <br>
-				{ "'34234.34d'", 34234.34d }, /** <br> */
-				{ "34234.34", 34234.34d } /** <br> */
-		};
-	}
+    @DataProvider
+    public Object[][] simple_value() {
+        return new Object[][] { { "34234.34d", 34234.34d },// <br>
+                { "'34234.34d'", 34234.34d }, /** <br> */
+                { "34234.34", 34234.34d } /** <br> */
+        };
+    }
 }

@@ -7,13 +7,12 @@ import org.junit.Test;
 import org.test4j.fortest.beans.Manager;
 import org.test4j.json.JSON;
 import org.test4j.json.helper.JSONFeature;
-import org.test4j.junit.JTester;
-import org.test4j.tools.commons.JSONHelper;
+import org.test4j.junit.Test4J;
 
-public class JsonHelperTest_JsonString implements JTester {
+public class JsonHelperTest_JsonString implements Test4J {
     @Test
     public void fromJson() {
-        String filename = "classpath:org/jtester/tools/commons/manager.json";
+        String filename = "classpath:org/test4j/tools/commons/manager.json";
         Manager manager = JSONHelper.fromJsonFile(Manager.class, filename);
         want.object(manager).propertyEq("name", "Tony Tester").propertyEq("phoneNumber.number", "0571-88886666");
         want.date(manager.getDate()).isYear(2009).isMonth("08").isHour(16);

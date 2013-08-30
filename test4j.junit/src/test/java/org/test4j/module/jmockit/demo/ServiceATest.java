@@ -14,14 +14,14 @@ import mockit.MockClass;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.jmockit.demo.Database;
 import org.test4j.module.jmockit.demo.EntityX;
 import org.test4j.module.jmockit.demo.ServiceA;
 import org.test4j.module.jmockit.demo.ServiceB;
 
-public class ServiceATest implements JTester {
+public class ServiceATest implements Test4J {
 
     @MockClass(realClass = Database.class)
     public static class MockDatabase {

@@ -7,21 +7,19 @@ import java.util.List;
 import mockit.Mock;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 import org.test4j.module.spring.annotations.AutoBeanInject.BeanMap;
 import org.test4j.module.spring.exception.FindBeanImplClassException;
-import org.test4j.module.spring.strategy.ImplementorFinder;
-import org.test4j.module.spring.strategy.ImplementorFinderEx;
 
 @SuppressWarnings({ "rawtypes" })
-public class ImplementorFinderTest implements JTester {
+public class ImplementorFinderTest implements Test4J {
 
     @Test
     public void testSplitIntfClazzByExpression() {
-        String[] exps = { "org.jtester.", ".*Service" };
-        String[] packs = ImplementorFinderEx.splitIntfClazzByExpression("org.jtester.service.UserService", exps);
-        want.array(packs).sizeEq(3).reflectionEq(new String[] { "org.jtester.", "service", ".UserService" });
+        String[] exps = { "org.test4j.", ".*Service" };
+        String[] packs = ImplementorFinderEx.splitIntfClazzByExpression("org.test4j.service.UserService", exps);
+        want.array(packs).sizeEq(3).reflectionEq(new String[] { "org.test4j.", "service", ".UserService" });
     }
 
     @Test
@@ -32,14 +30,14 @@ public class ImplementorFinderTest implements JTester {
     }
 
     public static Object[][] testRegMatch_dataPorvider() {
-        return new Object[][] { { "org.jtester.**.service.*", "org.jtester.service.UserService", true }, /** <br> */
-        { "org.jtester.**.*", "org.jtester.service.UserService", true }, /** <br> */
-        { "org.jtester1.**.*", "org.jtester.service.UserService", false }, /** <br> */
-        { "org.jtester.**.service.*", "org.jtester.my.service.UserService", true }, /** <br> */
-        { "**.jtester.**.*", "org.jtester.my.service.UserService", true }, /** <br> */
-        { "**.jtester1.**.*", "org.jtester.my.service.UserService", false }, /** <br> */
-        { "**.jtester.**.*Service", "org.jtester.my.service.UserService", true }, /** <br> */
-        { "**.jtester.**.User*", "org.jtester.my.service.UserService", true } /** <br> */
+        return new Object[][] { { "org.test4j.**.service.*", "org.test4j.service.UserService", true }, /** <br> */
+        { "org.test4j.**.*", "org.test4j.service.UserService", true }, /** <br> */
+        { "org.test4j1.**.*", "org.test4j.service.UserService", false }, /** <br> */
+        { "org.test4j.**.service.*", "org.test4j.my.service.UserService", true }, /** <br> */
+        { "**.test4j.**.*", "org.test4j.my.service.UserService", true }, /** <br> */
+        { "**.test4j1.**.*", "org.test4j.my.service.UserService", false }, /** <br> */
+        { "**.test4j.**.*Service", "org.test4j.my.service.UserService", true }, /** <br> */
+        { "**.test4j.**.User*", "org.test4j.my.service.UserService", true } /** <br> */
         };
     }
 
@@ -52,16 +50,15 @@ public class ImplementorFinderTest implements JTester {
 
     public static Object[][] testReplace_dataProvider() {
         return new Object[][] {
-                { "org.jtester.**.*", "org.jtester.**.*Impl", "org.jtester.service.UserService",
-                        "org.jtester.service.UserServiceImpl" },
+                { "org.test4j.**.*", "org.test4j.**.*Impl", "org.test4j.service.UserService",
+                        "org.test4j.service.UserServiceImpl" },
                 /** <br> */
-                { "org.jtester.**.*", "org.jtester.**.impl.*Impl", "org.jtester.service.UserService",
-                        "org.jtester.service.impl.UserServiceImpl" },
+                { "org.test4j.**.*", "org.test4j.**.impl.*Impl", "org.test4j.service.UserService",
+                        "org.test4j.service.impl.UserServiceImpl" },
                 /** <br> */
-                { "**.*", "**.impl.*Impl", "org.jtester.service.UserService",
-                        "org.jtester.service.impl.UserServiceImpl" },
+                { "**.*", "**.impl.*Impl", "org.test4j.service.UserService", "org.test4j.service.impl.UserServiceImpl" },
                 /** <br> */
-                { "**.*Dao", "**.impl.*DaoImpl", "org.jtester.service.UserDao", "org.jtester.service.impl.UserDaoImpl" } };
+                { "**.*Dao", "**.impl.*DaoImpl", "org.test4j.service.UserDao", "org.test4j.service.impl.UserDaoImpl" } };
     }
 
     @Test

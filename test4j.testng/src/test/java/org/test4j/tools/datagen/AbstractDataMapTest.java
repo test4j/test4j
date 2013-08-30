@@ -4,12 +4,12 @@ import java.util.Arrays;
 import java.util.Iterator;
 
 import org.test4j.json.ITypeConverter;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "serial", "rawtypes" })
-public class AbstractDataMapTest extends JTester {
+public class AbstractDataMapTest extends Test4J {
 
 	@Test(dataProvider = "dataForConvert")
 	public void testConvert(final Object value, Object expected) {

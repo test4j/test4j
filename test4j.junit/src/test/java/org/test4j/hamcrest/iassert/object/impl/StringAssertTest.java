@@ -2,9 +2,9 @@ package org.test4j.hamcrest.iassert.object.impl;
 
 import org.junit.Test;
 import org.test4j.hamcrest.matcher.string.StringMode;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
-public class StringAssertTest implements JTester {
+public class StringAssertTest implements Test4J {
 
     @Test
     public void testNotContain() {

@@ -5,8 +5,8 @@ import java.util.Map;
 
 import org.test4j.module.core.TestContext;
 import org.test4j.module.core.utility.MessageHelper;
-import org.test4j.module.spring.strategy.JTesterBeanFactory;
-import org.test4j.module.spring.strategy.JTesterSpringContext;
+import org.test4j.module.spring.strategy.Test4JBeanFactory;
+import org.test4j.module.spring.strategy.Test4JSpringContext;
 import org.test4j.module.spring.strategy.cleaner.SpringBeanCleaner;
 import org.test4j.module.spring.utility.SpringModuleHelper;
 
@@ -34,14 +34,14 @@ public class SpringTestedContext {
 	 * 第一个Object是测试类实例<br>
 	 * 第二个Object是AbstractApplicationContext实例，这里定义为Object类型是为了兼容没有使用spring容器的测试
 	 */
-	private static Map<Class, JTesterSpringContext> springBeanFactories = new HashMap<Class, JTesterSpringContext>();
+	private static Map<Class, Test4JSpringContext> springBeanFactories = new HashMap<Class, Test4JSpringContext>();
 
 	/**
 	 * 存放当前测试实例下的spring application context实例
 	 * 
 	 * @param springContext
 	 */
-	public static void setSpringContext(JTesterSpringContext springContext) {
+	public static void setSpringContext(Test4JSpringContext springContext) {
 		if (springContext == null) {
 			MessageHelper.info("no spring application context for test:" + TestContext.currTestedClazzName());
 			return;
@@ -58,20 +58,20 @@ public class SpringTestedContext {
 	 * 
 	 * @return
 	 */
-	public static JTesterBeanFactory getSpringBeanFactory() {
+	public static Test4JBeanFactory getSpringBeanFactory() {
 		if (TestContext.currTestedClazz() == null) {
 			throw new RuntimeException("the tested object can't be null.");
 		} else {
-			JTesterSpringContext springContext = springBeanFactories.get(TestContext.currTestedClazz());
-			return springContext == null ? null : springContext.getJTesterBeanFactory();
+			Test4JSpringContext springContext = springBeanFactories.get(TestContext.currTestedClazz());
+			return springContext == null ? null : springContext.getTest4JBeanFactory();
 		}
 	}
 
-	public static JTesterSpringContext getSpringContext() {
+	public static Test4JSpringContext getSpringContext() {
 		if (TestContext.currTestedClazz() == null) {
 			throw new RuntimeException("the tested object can't be null.");
 		} else {
-			JTesterSpringContext springContext = springBeanFactories.get(TestContext.currTestedClazz());
+			Test4JSpringContext springContext = springBeanFactories.get(TestContext.currTestedClazz());
 			return springContext;
 		}
 	}

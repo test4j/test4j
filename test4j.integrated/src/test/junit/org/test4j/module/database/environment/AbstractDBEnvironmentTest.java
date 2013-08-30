@@ -7,14 +7,11 @@ import mockit.Mock;
 import org.junit.Test;
 import org.test4j.database.table.ITable;
 import org.test4j.database.table.TddUserTable;
-import org.test4j.junit.JTester;
-import org.test4j.module.database.environment.DBEnvironment;
-import org.test4j.module.database.environment.DBEnvironmentFactory;
-import org.test4j.module.database.environment.TableMeta;
+import org.test4j.junit.Test4J;
 import org.test4j.module.database.environment.TableMeta.ColumnMeta;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })
-public class AbstractDBEnvironmentTest implements JTester {
+public class AbstractDBEnvironmentTest implements Test4J {
 
     @Test
     public void testGetTableMetaData() throws Exception {
@@ -39,9 +36,9 @@ public class AbstractDBEnvironmentTest implements JTester {
             {
                 this.put(IColumn.f_id, "123");
                 this.put(IColumn.f_first_name, "darui.wu");
-                this.put(IColumn.f_post_code, "jteste");
+                this.put(IColumn.f_post_code, "test4j");
                 this.put(IColumn.f_address_id, 0);
-                this.put(IColumn.f_last_name, "jtester");
+                this.put(IColumn.f_last_name, "test4j");
                 this.put(IColumn.f_sarary, 0.0);
             }
         });

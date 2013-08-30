@@ -3,9 +3,9 @@ package org.test4j.hamcrest.iassert.object.impl;
 import java.util.Arrays;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
-public class CollectionAssertTest_SizeMatch implements JTester {
+public class CollectionAssertTest_SizeMatch implements Test4J {
 
     @Test
     public void sizeIs() {

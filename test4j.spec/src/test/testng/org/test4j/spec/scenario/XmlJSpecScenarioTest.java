@@ -12,12 +12,12 @@ import org.test4j.spec.inner.IScenario;
 import org.test4j.spec.inner.StepType;
 import org.test4j.spec.scenario.XmlJSpecScenario;
 import org.test4j.spec.scenario.step.JSpecStep;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.test4j.tools.commons.ResourceHelper;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "unchecked", "rawtypes", "serial" })
-public class XmlJSpecScenarioTest extends JTester {
+public class XmlJSpecScenarioTest extends Test4J {
 
     @Test
     public void testParseJSpecScenarioFrom() throws Exception {

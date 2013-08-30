@@ -7,10 +7,10 @@ import mockit.Mock;
 import mockit.Mockit;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.tools.commons.DateHelper;
 
-public class DateUtilTest_InlineMockClass implements JTester {
+public class DateUtilTest_InlineMockClass implements Test4J {
     @Test
     public void testCurrDateTimeStr_MockUp() throws Exception {
         new MockUp<DateHelper>() {

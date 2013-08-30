@@ -4,13 +4,13 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.test4j.fortest.reflector.TestObject;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 import org.test4j.tools.exception.NoSuchMethodRuntimeException;
 import org.test4j.tools.reflector.MethodAccessor;
 
 @SuppressWarnings({ "rawtypes" })
-public class MethodAccessorTest implements JTester {
+public class MethodAccessorTest implements Test4J {
     TestObject                      test = null;
 
     private MethodAccessor<Integer> getPrivate;

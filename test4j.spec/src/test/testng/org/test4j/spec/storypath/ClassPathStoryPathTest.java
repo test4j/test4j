@@ -7,20 +7,18 @@ import mockit.Mock;
 import org.test4j.spec.annotations.StoryFile;
 import org.test4j.spec.annotations.StoryType;
 import org.test4j.spec.inner.IScenario;
-import org.test4j.spec.storypath.ClassPathStoryPath;
-import org.test4j.spec.storypath.StoryPath;
 import org.test4j.testng.JSpec;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
-public class ClassPathStoryPathTest extends JTester {
+public class ClassPathStoryPathTest extends Test4J {
     @Test(groups = "jspec")
     public void testGetStory() {
         StoryPath path = new ClassPathStoryPath(SpecDemo.class);
         new MockUp<ClassPathStoryPath>() {
             @Mock
             public String getStoryFile(StoryType type, StoryFile story) {
-                return "org/jtester/spec/scenario/TxtJSpecScenarioTest.testParseSpecScenarioFrom.story";
+                return "org/test4j/spec/scenario/TxtJSpecScenarioTest.testParseSpecScenarioFrom.story";
             }
         };
 
@@ -30,7 +28,7 @@ public class ClassPathStoryPathTest extends JTester {
                 return StoryType.TXT;
             }
         };
-        want.object(path).propertyEq("path", "org/jtester/spec/storypath").propertyEq("name", "SpecDemo");
+        want.object(path).propertyEq("path", "org/test4j/spec/storypath").propertyEq("name", "SpecDemo");
         List<IScenario> list = path.getStory(null, null);
         want.list(list).sizeEq(2);
     }

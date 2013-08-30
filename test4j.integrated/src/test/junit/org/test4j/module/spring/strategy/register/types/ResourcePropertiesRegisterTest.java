@@ -2,17 +2,17 @@ package org.test4j.module.spring.strategy.register.types;
 
 import org.junit.Test;
 import org.test4j.fortest.service.UserService;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.spring.annotations.AutoBeanInject;
+import org.test4j.module.spring.annotations.AutoBeanInject.BeanMap;
 import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.annotations.SpringContext;
-import org.test4j.module.spring.annotations.AutoBeanInject.BeanMap;
 import org.test4j.module.spring.testedbeans.resource.UserServiceResourceImpl;
 
-@SpringContext({ "org/jtester/module/spring/testedbeans/xml/data-source.xml",
-        "org/jtester/module/spring/testedbeans/xml/annotation-config.xml" })
+@SpringContext({ "org/test4j/module/spring/testedbeans/xml/data-source.xml",
+        "org/test4j/module/spring/testedbeans/xml/annotation-config.xml" })
 @AutoBeanInject(maps = { @BeanMap(intf = "**.*", impl = "**.*Impl") })
-public class ResourcePropertiesRegisterTest implements JTester {
+public class ResourcePropertiesRegisterTest implements Test4J {
 
     @SpringBeanByName(claz = UserServiceResourceImpl.class)
     UserService userService;

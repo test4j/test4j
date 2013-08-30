@@ -12,59 +12,59 @@ import org.test4j.module.jmockit.demo1.ResourceManager;
 import org.test4j.module.jmockit.demo1.ResourceManagerImpl;
 import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.annotations.SpringContext;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
-@SpringContext("org/jtester/fortest/spring/resourceManager.xml")
-public class ResourceManagerImplTest extends JTester {
+@SpringContext("org/test4j/fortest/spring/resourceManager.xml")
+public class ResourceManagerImplTest extends Test4J {
 
-	@SpringBeanByName
-	ResourceManager resourceManager;
+    @SpringBeanByName
+    ResourceManager     resourceManager;
 
-	@Mocked
-	ResourceManagerImpl mockResourceManager;
+    @Mocked
+    ResourceManagerImpl mockResourceManager;
 
-	@Test
-	public void mockInitTest() {
+    @Test
+    public void mockInitTest() {
 
-		new Expectations() {
-			{
-				resourceManager.getResList("res1");
-				times = 1;
+        new Expectations() {
+            {
+                resourceManager.getResList("res1");
+                times = 1;
 
-				returns(Arrays.asList("", "", ""));
+                returns(Arrays.asList("", "", ""));
 
-				resourceManager.getResList("res2");
-				times = 1;
-				minTimes = 0;
-				maxTimes = 4;
+                resourceManager.getResList("res2");
+                times = 1;
+                minTimes = 0;
+                maxTimes = 4;
 
-				returns(Arrays.asList("", "", ""));
-			}
-		};
+                returns(Arrays.asList("", "", ""));
+            }
+        };
 
-		Collection<?> coll = resourceManager.getResList("res1");
-		want.collection(coll).notNull().sizeEq(3);
+        Collection<?> coll = resourceManager.getResList("res1");
+        want.collection(coll).notNull().sizeEq(3);
 
-		Mockit.setUpMock(ResourceManagerImpl.class, MockResourceManager.class);
-		resourceManager.init();
-		want.bool(beenInited).isEqualTo(true);
-		Collection<?> coll2 = resourceManager.getResList("res1");
-		want.collection(coll2).notNull().sizeEq(2);
-	}
+        Mockit.setUpMock(ResourceManagerImpl.class, MockResourceManager.class);
+        resourceManager.init();
+        want.bool(beenInited).isEqualTo(true);
+        Collection<?> coll2 = resourceManager.getResList("res1");
+        want.collection(coll2).notNull().sizeEq(2);
+    }
 
-	public static boolean beenInited = false;
+    public static boolean beenInited = false;
 
-	public static class MockResourceManager {
-		@Mock
-		public void init() {
-			MessageHelper.info("mock resource manager init");
-			beenInited = true;
-		}
+    public static class MockResourceManager {
+        @Mock
+        public void init() {
+            MessageHelper.info("mock resource manager init");
+            beenInited = true;
+        }
 
-		@Mock
-		public Collection<?> getResList(String resName) {
-			return Arrays.asList("", "");
-		}
-	}
+        @Mock
+        public Collection<?> getResList(String resName) {
+            return Arrays.asList("", "");
+        }
+    }
 }

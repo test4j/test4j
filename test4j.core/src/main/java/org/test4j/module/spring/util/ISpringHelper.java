@@ -1,7 +1,7 @@
 package org.test4j.module.spring.util;
 
 /**
- * jtester测试中获取spring容器相关的接口
+ * test4j测试中获取spring容器相关的接口
  * 
  * @author darui.wudr 2013-1-15 上午9:43:10
  */

@@ -11,13 +11,13 @@ import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.database.IDatabase;
 import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.annotations.SpringContext;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
-@Test(groups = "jtester")
-@SpringContext({ "org/jtester/module/spring/testedbeans/xml/beans.xml",
-        "org/jtester/module/spring/testedbeans/xml/data-source.xml" })
-public class MockitPartialMockSpringBeanTest extends JTester implements IDatabase {
+@Test(groups = "test4j")
+@SpringContext({ "org/test4j/module/spring/testedbeans/xml/beans.xml",
+        "org/test4j/module/spring/testedbeans/xml/data-source.xml" })
+public class MockitPartialMockSpringBeanTest extends Test4J implements IDatabase {
 
     @SpringBeanByName
     private UserService userService;

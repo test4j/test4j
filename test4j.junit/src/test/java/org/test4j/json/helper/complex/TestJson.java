@@ -6,11 +6,11 @@ import org.junit.Test;
 import org.test4j.hamcrest.matcher.modes.ItemsMode;
 import org.test4j.json.JSON;
 import org.test4j.json.helper.JSONFeature;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.tools.commons.DateHelper;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class TestJson implements JTester {
+public class TestJson implements Test4J {
     @Test
     public void testList() {
         ComplexPoJo dbpojo = new ComplexPoJo();

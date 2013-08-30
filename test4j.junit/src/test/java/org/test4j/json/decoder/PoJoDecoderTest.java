@@ -7,10 +7,10 @@ import org.test4j.fortest.beans.Address;
 import org.test4j.fortest.beans.User;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.json.JSON;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
 @SuppressWarnings("serial")
-public class PoJoDecoderTest implements JTester {
+public class PoJoDecoderTest implements Test4J {
 
     @Test
     public void testParseFromJSONMap() {

@@ -8,7 +8,7 @@ import mockit.internal.annotations.MockClassSetup;
 
 import org.springframework.aop.framework.MockCglib2AopProxy;
 import org.springframework.beans.factory.BeanFactory;
-import org.test4j.module.JTesterException;
+import org.test4j.module.Test4JException;
 import org.test4j.module.core.TestContext;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.core.utility.ModulesManager;
@@ -16,7 +16,7 @@ import org.test4j.module.spring.SpringModule;
 import org.test4j.module.spring.SpringTestedContext;
 import org.test4j.module.spring.annotations.SpringContext;
 import org.test4j.module.spring.strategy.ApplicationContextFactory;
-import org.test4j.module.spring.strategy.JTesterSpringContext;
+import org.test4j.module.spring.strategy.Test4JSpringContext;
 import org.test4j.tools.commons.AnnotationHelper;
 import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.commons.ConfigHelper;
@@ -58,7 +58,7 @@ public class SpringModuleHelper {
         }
     }
 
-    private static final Map<Class, JTesterSpringContext> SHARED_SPRING_CONTEXT = new HashMap<Class, JTesterSpringContext>();
+    private static final Map<Class, Test4JSpringContext> SHARED_SPRING_CONTEXT = new HashMap<Class, Test4JSpringContext>();
 
     /**
      * 初始化当前测试类用到的spring application context对象
@@ -67,8 +67,8 @@ public class SpringModuleHelper {
      * @param contextFactory
      * @return does initial spring context successfully
      */
-    public static JTesterSpringContext initSpringContext(Class testClazz, ApplicationContextFactory contextFactory) {
-        JTesterSpringContext springContext = SpringTestedContext.getSpringContext();
+    public static Test4JSpringContext initSpringContext(Class testClazz, ApplicationContextFactory contextFactory) {
+        Test4JSpringContext springContext = SpringTestedContext.getSpringContext();
         if (springContext != null) {
             return springContext;
         }
@@ -79,7 +79,7 @@ public class SpringModuleHelper {
         }
 
         boolean share = annotation.share();
-        JTesterSpringContext context = null;
+        Test4JSpringContext context = null;
         if (share) {
             context = SHARED_SPRING_CONTEXT.get(declaredAnnotationClazz);
         }
@@ -102,13 +102,13 @@ public class SpringModuleHelper {
      * @param ignoreNoSuchBean
      * @return
      */
-    private static JTesterSpringContext newSpringContext(Class testClazz, ApplicationContextFactory contextFactory,
+    private static Test4JSpringContext newSpringContext(Class testClazz, ApplicationContextFactory contextFactory,
                                                          SpringContext annotation) {
         long startTime = System.currentTimeMillis();
         String[] locations = annotation.value();
         boolean allowLazy = annotation.allowLazy();
 
-        JTesterSpringContext springContext = contextFactory.createApplicationContext(Arrays.asList(locations), false,
+        Test4JSpringContext springContext = contextFactory.createApplicationContext(Arrays.asList(locations), false,
                 allowLazy);
         springContext.setShared(annotation.share());
         springContext.refresh();
@@ -128,12 +128,12 @@ public class SpringModuleHelper {
         if (springContext == null) {
             return;
         }
-        if (!(springContext instanceof JTesterSpringContext)) {
+        if (!(springContext instanceof Test4JSpringContext)) {
             String error = String.format("there must be something error, the type[%s] object isn't a spring context.",
                     springContext.getClass().getName());
             throw new RuntimeException(error);
         }
-        JTesterSpringContext context = (JTesterSpringContext) springContext;
+        Test4JSpringContext context = (Test4JSpringContext) springContext;
         if (context.isShared() == false) {
             context.destroy();
             MessageHelper.warn("close spring context for class:" + TestContext.currTestedClazzName());
@@ -151,7 +151,7 @@ public class SpringModuleHelper {
             try {
                 return ((org.springframework.aop.framework.Advised) target).getTargetSource().getTarget();
             } catch (Exception e) {
-                throw new JTesterException(e);
+                throw new Test4JException(e);
             }
         } else {
             return target;

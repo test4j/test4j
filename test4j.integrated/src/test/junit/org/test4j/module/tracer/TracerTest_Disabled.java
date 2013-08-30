@@ -10,16 +10,15 @@ import org.junit.Test;
 import org.test4j.database.table.ITable;
 import org.test4j.fortest.hibernate.User;
 import org.test4j.fortest.hibernate.UserService;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.spring.annotations.SpringBeanByType;
 import org.test4j.module.spring.annotations.SpringContext;
-import org.test4j.module.tracer.TracerHelper;
 import org.test4j.tools.commons.ResourceHelper;
 
 @Ignore
 @SuppressWarnings({ "serial" })
-@SpringContext({ "classpath:/org/jtester/fortest/hibernate/project.xml" })
-public class TracerTest_Disabled implements JTester {
+@SpringContext({ "classpath:/org/test4j/fortest/hibernate/project.xml" })
+public class TracerTest_Disabled implements Test4J {
     @SpringBeanByType
     private UserService userService;
 
@@ -58,7 +57,7 @@ public class TracerTest_Disabled implements JTester {
     // (dependsOnMethods = "monitorSpringFalse")
     public void monitorSpringFalse_check() throws FileNotFoundException {
         String tracerInfo = ResourceHelper
-                .readFromFile("target/tracer/org/jtester/tracer/TracerTest#monitorSpringFalse.html");
+                .readFromFile("target/tracer/org/test4j/tracer/TracerTest#monitorSpringFalse.html");
         want.string(tracerInfo).notContain("paras").notContain("result");
     }
 
@@ -87,7 +86,7 @@ public class TracerTest_Disabled implements JTester {
     // (dependsOnMethods = "monitorSpringFalse")
     public void monitorJdbcFalse_check() throws FileNotFoundException {
         String tracerInfo = ResourceHelper
-                .readFromFile("target/tracer/org/jtester/tracer/TracerTest#monitorJdbcFalse.html");
+                .readFromFile("target/tracer/org/test4j/tracer/TracerTest#monitorJdbcFalse.html");
         want.string(tracerInfo).notContain("SQL-Statement");
     }
 }

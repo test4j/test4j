@@ -25,7 +25,7 @@ import org.test4j.tools.datagen.DataProviderIterator;
  * @author darui.wudr 2013-1-10 下午4:16:42
  */
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public abstract class JSpec implements ISpec, JTester {
+public abstract class JSpec implements ISpec, Test4J {
     static ISpecExecutorFactory                  specFactory   = ICoreInitial.initSpecExecutorFactory();
 
     private final Map<SpecMethodID, ISpecMethod> specMethods;

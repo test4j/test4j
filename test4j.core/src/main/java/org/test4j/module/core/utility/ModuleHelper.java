@@ -7,7 +7,7 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.test4j.module.JTesterException;
+import org.test4j.module.Test4JException;
 import org.test4j.module.core.Module;
 import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.commons.ConfigHelper;
@@ -26,7 +26,7 @@ public class ModuleHelper {
      * 
      * @param moduleClass The class of the module for which we want the default
      *            annotation property values
-     * @param configuration The jtester configuration
+     * @param configuration The test4j configuration
      * @param annotationClasses The annotations for which we want the default
      *            values
      * @return An object that returns the annotation property default values
@@ -58,7 +58,7 @@ public class ModuleHelper {
      * @param moduleClass The module class, not null
      * @param annotationClass The annotation class, not null
      * @param name The property suffix, not null
-     * @param configuration The jtester config, not null
+     * @param configuration The test4j config, not null
      * @return the default value
      */
     private static String getAnnotationPropertyDefault(Class<? extends Module> moduleClass,
@@ -176,7 +176,7 @@ public class ModuleHelper {
             }
         }
         // nothing found, raise exception
-        throw new JTesterException("Could not replace default value. No default value found for annotation: "
+        throw new Test4JException("Could not replace default value. No default value found for annotation: "
                 + annotation + ", property " + annotationProperty + ", defaultValues: " + allDefaultValues);
     }
 }

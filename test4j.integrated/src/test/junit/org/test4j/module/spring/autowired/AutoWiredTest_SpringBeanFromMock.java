@@ -5,7 +5,7 @@ import mockit.Mocked;
 
 import org.junit.Test;
 import org.test4j.fortest.beans.User;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.spring.annotations.SpringBeanByType;
 import org.test4j.module.spring.annotations.SpringBeanFrom;
 import org.test4j.module.spring.annotations.SpringContext;
@@ -13,8 +13,8 @@ import org.test4j.module.spring.testedbeans.autowired.IUserDao;
 import org.test4j.module.spring.testedbeans.autowired.IUserService;
 import org.test4j.module.spring.testedbeans.autowired.UserDaoImpl;
 
-@SpringContext({ "org/jtester/module/spring/testedbeans/autowired/autowired.xml" })
-public class AutoWiredTest_SpringBeanFromMock implements JTester {
+@SpringContext({ "org/test4j/module/spring/testedbeans/autowired/autowired.xml" })
+public class AutoWiredTest_SpringBeanFromMock implements Test4J {
 
     @SpringBeanByType
     IUserService userService;

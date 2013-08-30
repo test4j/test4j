@@ -6,16 +6,16 @@ import mockit.internal.UnexpectedInvocation;
 import org.test4j.fortest.service.CalledService;
 import org.test4j.fortest.service.CallingService;
 import org.test4j.module.inject.annotations.Inject;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
-@Test(groups = { "JTester" })
-public class JMockitExpectationsTest extends JTester {
+@Test(groups = { "test4j" })
+public class JMockitExpectationsTest extends Test4J {
     @Mocked
     @Inject(targets = "callingService")
-    private CalledService  calledService;
+    private CalledService        calledService;
 
-    private CallingService callingService = new CallingService();
+    private final CallingService callingService = new CallingService();
 
     @Test
     public void returnValue() {

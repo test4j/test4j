@@ -4,14 +4,11 @@ import java.util.HashMap;
 
 import org.junit.Test;
 import org.test4j.fortest.reflector.MyServiceImpl.MyTestException;
-import org.test4j.junit.JTester;
-import org.test4j.module.spring.annotations.ExMyService;
-import org.test4j.module.spring.annotations.SpringBeanByName;
-import org.test4j.module.spring.annotations.SpringContext;
+import org.test4j.junit.Test4J;
 
-@SpringContext("org/jtester/module/spring/reflector/reflector-beans.xml")
+@SpringContext("org/test4j/module/spring/reflector/reflector-beans.xml")
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class SuperClazMethodAccessorTest implements JTester {
+public class SuperClazMethodAccessorTest implements Test4J {
     @SpringBeanByName
     private ExMyService myService;
 

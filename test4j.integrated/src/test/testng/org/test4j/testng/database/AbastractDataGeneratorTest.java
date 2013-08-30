@@ -8,13 +8,13 @@ import mockit.Mock;
 import org.test4j.database.table.ITable;
 import org.test4j.database.table.TddUserTable;
 import org.test4j.module.database.IDatabase;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.test4j.tools.datagen.DataSet;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "serial", "rawtypes", "unchecked" })
-@Test(groups = { "jtester", "database" })
-public class AbastractDataGeneratorTest extends JTester implements IDatabase {
+@Test(groups = { "test4j", "database" })
+public class AbastractDataGeneratorTest extends Test4J implements IDatabase {
     @Test
     public void testValue() {
         final List actual = new ArrayList();

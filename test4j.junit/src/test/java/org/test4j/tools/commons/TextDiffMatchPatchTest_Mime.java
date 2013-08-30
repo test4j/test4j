@@ -4,11 +4,11 @@ import java.util.LinkedList;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.tools.commons.TextDiffMatchPatch;
 import org.test4j.tools.commons.TextDiffMatchPatch.Diff;
 
-public class TextDiffMatchPatchTest_Mime implements JTester {
+public class TextDiffMatchPatchTest_Mime implements Test4J {
     private TextDiffMatchPatch textdiff;
 
     @Before

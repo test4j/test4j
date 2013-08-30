@@ -5,11 +5,11 @@ import java.util.Iterator;
 
 import org.junit.Test;
 import org.test4j.json.ITypeConverter;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
 @SuppressWarnings({ "serial", "rawtypes" })
-public class AbstractDataMapTest implements JTester {
+public class AbstractDataMapTest implements Test4J {
 
     @Test
     @DataFrom("dataForConvert")

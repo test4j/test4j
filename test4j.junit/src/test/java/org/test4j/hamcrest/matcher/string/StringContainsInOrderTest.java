@@ -2,9 +2,9 @@ package org.test4j.hamcrest.matcher.string;
 
 import org.junit.Test;
 import org.test4j.hamcrest.matcher.string.StringMode;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
-public class StringContainsInOrderTest implements JTester {
+public class StringContainsInOrderTest implements Test4J {
 
     @Test
     public void testMatchesSafely() {

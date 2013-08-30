@@ -8,9 +8,9 @@ import org.test4j.json.JSON;
 import org.test4j.json.decoder.single.BigIntegerDecoder;
 import org.test4j.json.helper.JSONFeature;
 import org.test4j.json.helper.JSONMap;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
-public class BigIntegerDecoderTest implements JTester {
+public class BigIntegerDecoderTest implements Test4J {
 
     @SuppressWarnings("serial")
     @Test

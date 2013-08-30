@@ -11,11 +11,11 @@ import java.net.URLDecoder;
 import mockit.Mock;
 
 import org.test4j.spec.reader.TitianHttpRequest;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
 @SuppressWarnings("unused")
-public class TitianHttpRequestTest extends JTester {
+public class TitianHttpRequestTest extends Test4J {
 	@Test
 	public void testSendGetRequest_NotConnect() {
 		new MockUp<TitianHttpRequest>() {

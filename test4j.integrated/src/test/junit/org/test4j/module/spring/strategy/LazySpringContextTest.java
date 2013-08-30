@@ -13,14 +13,14 @@ import org.test4j.module.database.IDatabase;
 import org.test4j.module.spring.ISpring;
 import org.test4j.module.spring.annotations.SpringInitMethod;
 import org.test4j.module.spring.strategy.Child;
-import org.test4j.module.spring.strategy.JTesterSpringContext;
+import org.test4j.module.spring.strategy.Test4JSpringContext;
 import org.test4j.module.spring.strategy.LazySpringContext;
 import org.test4j.module.spring.strategy.Parent;
 import org.test4j.module.spring.utility.SpringModuleHelper;
 
 @SuppressWarnings({ "rawtypes" })
 public class LazySpringContextTest extends Child implements IDatabase, ISpring {
-	Map<Class, JTesterSpringContext> SHARED_SPRING_CONTEXT = reflector.getStaticField(SpringModuleHelper.class,
+	Map<Class, Test4JSpringContext> SHARED_SPRING_CONTEXT = reflector.getStaticField(SpringModuleHelper.class,
 			"SHARED_SPRING_CONTEXT");
 
 	/**
@@ -28,7 +28,7 @@ public class LazySpringContextTest extends Child implements IDatabase, ISpring {
 	 */
 	@SpringInitMethod
 	protected void checkSharedSpring() {
-		JTesterSpringContext context = SHARED_SPRING_CONTEXT.get(Parent.class);
+		Test4JSpringContext context = SHARED_SPRING_CONTEXT.get(Parent.class);
 		want.object(context).isNull();
 	}
 
@@ -84,7 +84,7 @@ public class LazySpringContextTest extends Child implements IDatabase, ISpring {
 	 */
 	@Test
 	public void testShareSpring() {
-		JTesterSpringContext context = SHARED_SPRING_CONTEXT.get(Parent.class);
+		Test4JSpringContext context = SHARED_SPRING_CONTEXT.get(Parent.class);
 		want.object(context).notNull();
 	}
 }

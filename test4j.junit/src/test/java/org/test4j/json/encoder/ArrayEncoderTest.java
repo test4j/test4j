@@ -4,9 +4,9 @@ import org.junit.Test;
 import org.test4j.json.JSON;
 import org.test4j.json.encoder.beans.test.User;
 import org.test4j.json.helper.JSONFeature;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
-public class ArrayEncoderTest implements JTester {
+public class ArrayEncoderTest implements Test4J {
 
     @Test
     public void testEncode() {
@@ -15,6 +15,6 @@ public class ArrayEncoderTest implements JTester {
         users[1] = users[0];
 
         String json = JSON.toJSON(users, JSONFeature.UseSingleQuote);
-        want.string(json).contains("#class:'org.jtester.json.encoder.beans.test.User@").contains("#refer:@");
+        want.string(json).contains("#class:'org.test4j.json.encoder.beans.test.User@").contains("#refer:@");
     }
 }

@@ -12,11 +12,11 @@ import org.test4j.json.encoder.beans.test.GenicBean;
 import org.test4j.json.encoder.beans.test.TestedIntf;
 import org.test4j.json.encoder.beans.test.User;
 import org.test4j.json.helper.JSONFeature;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class JSONEncoderTest implements JTester {
+public class JSONEncoderTest implements Test4J {
 
     @Test
     @DataFrom("objects")
@@ -27,7 +27,7 @@ public class JSONEncoderTest implements JTester {
 
     public static Object[][] objects() {
         return new Object[][] {
-                { User.newInstance(12, "darui.wu"), "#class:'org.jtester.json.encoder.beans.test.User@" },// <br>
+                { User.newInstance(12, "darui.wu"), "#class:'org.test4j.json.encoder.beans.test.User@" },// <br>
                 { new int[] { 1, 2, 3 }, "#class:'int[]@" },// <br>
                 { new HashMap(), "#class:'map@" },// <br>
                 { new ArrayList(), "#class:'list@" } // <br>
@@ -51,7 +51,7 @@ public class JSONEncoderTest implements JTester {
         bean.setName("genicBean");
         bean.setRefObject(bean);
         String json = JSON.toJSON(bean, JSONFeature.UseSingleQuote);
-        want.string(json).contains("#class:'org.jtester.json.encoder.beans.test.GenicBean@")
+        want.string(json).contains("#class:'org.test4j.json.encoder.beans.test.GenicBean@")
                 .contains("refObject:{#refer:@");
     }
 
@@ -66,13 +66,14 @@ public class JSONEncoderTest implements JTester {
         };
         String json = JSON.toJSON(user, JSONFeature.UseSingleQuote);
         System.out.println(json);
-        want.string(json).contains("#class:'org.jtester.json.encoder.beans.test.User@");
+        want.string(json).contains("#class:'org.test4j.json.encoder.beans.test.User@");
     }
 
     @Test
     public void testFilterClass() {
         Object proxy = Proxy.newProxyInstance(this.getClass().getClassLoader(), new Class[] { TestedIntf.class },
                 new InvocationHandler() {
+                    @Override
                     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                         return null;
                     }

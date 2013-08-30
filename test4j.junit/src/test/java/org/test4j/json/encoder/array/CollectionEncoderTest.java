@@ -6,13 +6,12 @@ import java.util.List;
 
 import org.junit.Test;
 import org.test4j.json.encoder.JSONEncoder;
-import org.test4j.json.encoder.array.CollectionEncoder;
 import org.test4j.json.encoder.beans.test.User;
 import org.test4j.json.helper.JSONFeature;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class CollectionEncoderTest implements JTester {
+public class CollectionEncoderTest implements Test4J {
     @Test
     public void testEncode() throws Exception {
         List<User> users = new ArrayList<User>();
@@ -45,6 +44,6 @@ public class CollectionEncoderTest implements JTester {
         encoder.encode(users, writer, new ArrayList<String>());
 
         String json = writer.toString();
-        want.string(json).contains("#class:'org.jtester.json.encoder.beans.test.User@").contains("#refer:@");
+        want.string(json).contains("#class:'org.test4j.json.encoder.beans.test.User@").contains("#refer:@");
     }
 }

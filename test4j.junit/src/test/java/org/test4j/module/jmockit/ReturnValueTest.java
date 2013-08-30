@@ -9,11 +9,11 @@ import mockit.Mocked;
 
 import org.junit.Test;
 import org.test4j.fortest.beans.ComplexObject;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.inject.annotations.Inject;
 
 @SuppressWarnings("unchecked")
-public class ReturnValueTest implements JTester {
+public class ReturnValueTest implements Test4J {
 
     public SomeService   someService = new SomeService();
 

@@ -14,7 +14,7 @@ import org.test4j.hamcrest.matcher.property.PropertiesEqualMatcher;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.json.encoder.beans.test.GenicBean;
 import org.test4j.json.encoder.beans.test.User;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 import org.test4j.tools.commons.ArrayHelper;
 import org.test4j.tools.commons.ListHelper;
@@ -22,7 +22,7 @@ import org.test4j.tools.commons.ListHelper;
 import ext.test4j.hamcrest.MatcherAssert;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })
-public class PropertiesEqualMatcherTest implements JTester {
+public class PropertiesEqualMatcherTest implements Test4J {
     @Test
     public void testProperEqual_ComplexAndIgnoreAll() {
         GenicBean[] actuals = new GenicBean[] { GenicBean.newInstance("bean1", newUser("darui.wu")),// <br>

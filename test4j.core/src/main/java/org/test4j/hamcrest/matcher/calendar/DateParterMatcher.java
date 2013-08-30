@@ -6,7 +6,7 @@ import java.util.Date;
 import ext.test4j.hamcrest.BaseMatcher;
 import ext.test4j.hamcrest.Description;
 
-import org.test4j.module.JTesterException;
+import org.test4j.module.Test4JException;
 
 /**
  * 日期类型部分内容(年，月，日，小时，分钟，秒)断言
@@ -26,7 +26,7 @@ public class DateParterMatcher extends BaseMatcher<Date> {
 
 	public boolean matches(Object actual) {
 		if (actual == null) {
-			throw new JTesterException("the actual value can't be null");
+			throw new Test4JException("the actual value can't be null");
 		}
 		Calendar cal = null;
 
@@ -36,7 +36,7 @@ public class DateParterMatcher extends BaseMatcher<Date> {
 			cal = Calendar.getInstance();
 			cal.setTime((Date) actual);
 		} else {
-			throw new JTesterException(
+			throw new Test4JException(
 					"the actual value must be a java.util.Date instance or a java.util.Calendar instance");
 		}
 		int value = cal.get(type.calendarField());

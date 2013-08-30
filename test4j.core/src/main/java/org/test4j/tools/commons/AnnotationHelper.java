@@ -8,7 +8,7 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.test4j.module.JTesterException;
+import org.test4j.module.Test4JException;
 
 /**
  * Annotation工具类
@@ -214,7 +214,7 @@ public class AnnotationHelper {
 		try {
 			return annotation.getMethod(annotationPropertyName);
 		} catch (NoSuchMethodException e) {
-			throw new JTesterException("Could not find annotation property named " + annotationPropertyName
+			throw new Test4JException("Could not find annotation property named " + annotationPropertyName
 					+ " on annotation " + annotation.getName());
 		}
 	}
@@ -223,10 +223,10 @@ public class AnnotationHelper {
 		try {
 			return (T) annotationProperty.invoke(annotation);
 		} catch (IllegalAccessException e) {
-			throw new JTesterException("Error retrieving value of property " + annotationProperty.getName()
+			throw new Test4JException("Error retrieving value of property " + annotationProperty.getName()
 					+ " of annotation of type " + annotation.getClass().getSimpleName(), e);
 		} catch (InvocationTargetException e) {
-			throw new JTesterException("Error retrieving value of property " + annotationProperty.getName()
+			throw new Test4JException("Error retrieving value of property " + annotationProperty.getName()
 					+ " of annotation of type " + annotation.getClass().getSimpleName(), e);
 		}
 	}

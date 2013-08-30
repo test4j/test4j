@@ -2,13 +2,13 @@ package org.test4j.tools.commons;
 
 import java.util.LinkedList;
 
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.test4j.tools.commons.TextDiffMatchPatch;
 import org.test4j.tools.commons.TextDiffMatchPatch.Diff;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
-public class TextDiffMatchPatchTest_Mime extends JTester {
+public class TextDiffMatchPatchTest_Mime extends Test4J {
 	private TextDiffMatchPatch textdiff;
 
 	@BeforeMethod

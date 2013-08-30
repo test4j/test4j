@@ -3,11 +3,11 @@ package org.test4j.module.jmockit.dynamic;
 import mockit.Mocked;
 
 import org.test4j.module.jmockit.dynamic.Collaborator;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
 @Test(groups = "testng-demo")
-public class CollaboratorTest extends JTester {
+public class CollaboratorTest extends Test4J {
 	@Test
 	public void dynamicallyMockAClass() {
 		new Expectations(Collaborator.class) {

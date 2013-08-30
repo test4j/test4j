@@ -4,11 +4,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 import org.test4j.tools.commons.ArrayHelper;
 
-public class ArrayHelperTest implements JTester {
+public class ArrayHelperTest implements Test4J {
     @Test
     public void convert_charArr() {
         char[] chs = { 'a', 'b' };

@@ -4,32 +4,31 @@ import java.util.Map;
 
 import org.junit.Test;
 import org.test4j.json.JSON;
-import org.test4j.json.helper.JSONSingle;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
-public class JSONSingleTest implements JTester {
+public class JSONSingleTest implements Test4J {
 
     @Test
     public void testToClazzName() {
         JSONSingle bean = new JSONSingle();
-        bean.setValue("com.jtester.User@12345");
+        bean.setValue("com.test4j.User@12345");
         String clazzname = bean.toClazzName();
-        want.string(clazzname).isEqualTo("com.jtester.User");
+        want.string(clazzname).isEqualTo("com.test4j.User");
     }
 
     @Test
     public void testToClazzName_NoRef() {
         JSONSingle bean = new JSONSingle();
-        bean.setValue("com.jtester.User");
+        bean.setValue("com.test4j.User");
         String clazzname = bean.toClazzName();
-        want.string(clazzname).isEqualTo("com.jtester.User");
+        want.string(clazzname).isEqualTo("com.test4j.User");
     }
 
     @Test
     public void testToReferenceID() {
         JSONSingle bean = new JSONSingle();
-        bean.setValue("com.jtester.User@12345");
+        bean.setValue("com.test4j.User@12345");
         String clazzname = bean.toReferenceID();
         want.string(clazzname).isEqualTo("@12345");
     }
@@ -37,7 +36,7 @@ public class JSONSingleTest implements JTester {
     @Test
     public void testToReferenceID_NoRef() {
         JSONSingle bean = new JSONSingle();
-        bean.setValue("com.jtester.User");
+        bean.setValue("com.test4j.User");
         String clazzname = bean.toReferenceID();
         want.string(clazzname).isNull();
     }

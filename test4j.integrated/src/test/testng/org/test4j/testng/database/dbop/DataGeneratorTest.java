@@ -8,15 +8,15 @@ import org.test4j.database.table.ITable;
 import org.test4j.database.table.TddUserTable;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.module.database.IDatabase;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.test4j.tools.datagen.DataSet;
 import org.test4j.tools.datagen.EmptyDataSet;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })
-@Test(groups = { "jtester", "database" })
-public class DataGeneratorTest extends JTester implements IDatabase {
+@Test(groups = { "test4j", "database" })
+public class DataGeneratorTest extends Test4J implements IDatabase {
 
     @Test(dataProvider = "dataGenerator")
     public void testParseMapList(final Object input, Object expected) {

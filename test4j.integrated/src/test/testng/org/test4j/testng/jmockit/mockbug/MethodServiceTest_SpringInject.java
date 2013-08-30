@@ -7,13 +7,13 @@ import org.test4j.module.spring.annotations.AutoBeanInject;
 import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.annotations.SpringContext;
 import org.test4j.module.spring.annotations.SpringInitMethod;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
 @Test
 @SpringContext
 @AutoBeanInject
-public class MethodServiceTest_SpringInject extends JTester {
+public class MethodServiceTest_SpringInject extends Test4J {
 	@SpringBeanByName
 	TestedMethodService service;
 

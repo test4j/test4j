@@ -1,10 +1,10 @@
 package org.test4j.module.core;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.inject.annotations.Inject;
 
-public class InjectModuleTest implements JTester {
+public class InjectModuleTest implements Test4J {
 
     OuterClaz outer = new OuterClaz();
 
@@ -12,7 +12,7 @@ public class InjectModuleTest implements JTester {
     InnerClaz inner;
 
     @Test
-    public void testJtesterInject() {
+    public void testTest4JInject() {
         Object o1 = outer.inner;
         try {
             o1.toString();

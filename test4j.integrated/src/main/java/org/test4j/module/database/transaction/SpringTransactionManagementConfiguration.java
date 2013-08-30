@@ -5,7 +5,7 @@ import java.util.Map;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.PlatformTransactionManager;
-import org.test4j.module.JTesterException;
+import org.test4j.module.Test4JException;
 import org.test4j.module.core.TestContext;
 import org.test4j.module.database.annotations.Transactional;
 import org.test4j.module.spring.SpringTestedContext;
@@ -29,7 +29,7 @@ public class SpringTransactionManagementConfiguration implements TransactionMana
 		Map<String, PlatformTransactionManager> platformTransactionManagers = context
 				.getBeansOfType(platformTransactionManagerClass);
 		if (platformTransactionManagers.size() == 0) {
-			throw new JTesterException("Could not find a bean of type "
+			throw new Test4JException("Could not find a bean of type "
 					+ platformTransactionManagerClass.getSimpleName()
 					+ " in the spring ApplicationContext for this class");
 		}
@@ -38,13 +38,13 @@ public class SpringTransactionManagementConfiguration implements TransactionMana
 			String transactionManagerName = AnnotationHelper.getMethodOrClassLevelAnnotationProperty(
 					Transactional.class, "transactionManagerName", "", testMethod, testObject.getClass());
 			if (StringHelper.isBlankOrNull(transactionManagerName))
-				throw new JTesterException(
+				throw new Test4JException(
 						"Found more than one bean of type "
 								+ platformTransactionManagerClass.getSimpleName()
 								+ " in the spring ApplicationContext for this class. Use the transactionManagerName on the @Transactional"
 								+ " annotation to select the correct one.");
 			if (!platformTransactionManagers.containsKey(transactionManagerName))
-				throw new JTesterException("No bean of type " + platformTransactionManagerClass.getSimpleName()
+				throw new Test4JException("No bean of type " + platformTransactionManagerClass.getSimpleName()
 						+ " found in the spring ApplicationContext with the name " + transactionManagerName);
 			return platformTransactionManagers.get(transactionManagerName);
 		}

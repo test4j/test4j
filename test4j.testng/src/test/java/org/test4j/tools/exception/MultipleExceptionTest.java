@@ -2,13 +2,13 @@ package org.test4j.tools.exception;
 
 import java.util.Iterator;
 
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.test4j.tools.exception.MultipleException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 @SuppressWarnings("rawtypes")
-public class MultipleExceptionTest extends JTester {
+public class MultipleExceptionTest extends Test4J {
 
 	@Test(dataProvider = "dataGetMultipleException")
 	public void testGetMultipleException(Throwable[] errors, boolean isNull) {

@@ -11,12 +11,12 @@ import org.test4j.module.database.environment.DBEnvironment;
 import org.test4j.module.database.environment.DBEnvironmentFactory;
 import org.test4j.module.database.environment.TableMeta;
 import org.test4j.module.database.environment.TableMeta.ColumnMeta;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })
-@Test(groups = { "jtester", "database" })
-public class AbstractDBEnvironmentTest extends JTester {
+@Test(groups = { "test4j", "database" })
+public class AbstractDBEnvironmentTest extends Test4J {
 
     @Test
     public void testGetTableMetaData() throws Exception {
@@ -43,7 +43,7 @@ public class AbstractDBEnvironmentTest extends JTester {
                 this.put(IColumn.f_first_name, "darui.wu");
                 this.put(IColumn.f_post_code, "jteste");
                 this.put(IColumn.f_address_id, 0);
-                this.put(IColumn.f_last_name, "jtester");
+                this.put(IColumn.f_last_name, "test4j");
                 this.put(IColumn.f_sarary, 0.0);
             }
         });

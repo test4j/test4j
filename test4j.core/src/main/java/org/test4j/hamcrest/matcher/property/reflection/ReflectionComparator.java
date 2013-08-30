@@ -6,7 +6,7 @@ import java.util.Map;
 
 import org.test4j.hamcrest.matcher.property.comparator.Comparator;
 import org.test4j.hamcrest.matcher.property.difference.Difference;
-import org.test4j.module.JTesterException;
+import org.test4j.module.Test4JException;
 
 /**
  * A comparator for comparing two values by reflection.
@@ -122,7 +122,7 @@ public class ReflectionComparator {
 
 		// check whether a suitable comparator was found
 		if (!compared) {
-			throw new JTesterException(
+			throw new Test4JException(
 					"Could not determine differences. No comparator found that is able to compare the values. Left: "
 							+ expectedValue + ", right " + actualValue);
 		}

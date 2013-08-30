@@ -6,7 +6,7 @@ import org.test4j.json.JSON;
 import org.test4j.tools.datagen.ConstructorArgsGenerator;
 import org.test4j.tools.reflector.FieldAccessor;
 import org.test4j.tools.reflector.MethodAccessor;
-import org.test4j.tools.reflector.imposteriser.JTesterProxy;
+import org.test4j.tools.reflector.imposteriser.Test4JProxy;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class Reflector {
@@ -159,7 +159,7 @@ public class Reflector {
 			throw new RuntimeException("can't get a field from null object.");
 		}
 		Field field = FieldHelper.getField(target, fieldname);
-		Object proxy = JTesterProxy.proxy(target, field);
+		Object proxy = Test4JProxy.proxy(target, field);
 		return (T) proxy;
 	}
 

@@ -5,10 +5,10 @@ import mockit.Mocked;
 import org.junit.Test;
 import org.test4j.fortest.beans.ISpeak;
 import org.test4j.fortest.beans.Person;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.inject.annotations.Inject;
 
-public class JmockModuleTest_Two implements JTester {
+public class JmockModuleTest_Two implements Test4J {
 
     private Person person = new Person();
 

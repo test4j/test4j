@@ -3,11 +3,11 @@ package org.test4j.module.database.utility;
 import org.junit.Test;
 import org.test4j.database.table.ITable;
 import org.test4j.database.table.TddUserTable;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.tools.commons.ListHelper;
 
 @SuppressWarnings({ "serial", "unchecked" })
-public class WantStyleAssertionTest_Database implements JTester {
+public class WantStyleAssertionTest_Database implements Test4J {
 
     @Test
     public void testDatabase() {

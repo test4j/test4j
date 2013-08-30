@@ -2,11 +2,10 @@ package org.test4j.json.helper;
 
 import org.junit.Test;
 import org.test4j.json.encoder.beans.test.User;
-import org.test4j.json.helper.ClazzMap;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
-public class ClazzMapTest implements JTester {
+public class ClazzMapTest implements Test4J {
 
     @Test
     @DataFrom("type_data")
@@ -21,8 +20,8 @@ public class ClazzMapTest implements JTester {
                 { new Integer[0], "Integer[]@" }, // <br>
                 { new String(), "string" }, // <br>
                 { new String[0], "string[]@" }, // <br>
-                { new User(), "org.jtester.json.encoder.beans.test.User@" }, // <br>
-                { new User[0], "[Lorg.jtester.json.encoder.beans.test.User;@" } // <br>
+                { new User(), "org.test4j.json.encoder.beans.test.User@" }, // <br>
+                { new User[0], "[Lorg.test4j.json.encoder.beans.test.User;@" } // <br>
         };
     }
 

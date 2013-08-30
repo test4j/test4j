@@ -4,17 +4,17 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import org.test4j.json.JSON;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
-@Test(groups = { "jtester", "json" })
-public class SimpleDateFormatDecoderTest extends JTester {
+@Test(groups = { "test4j", "json" })
+public class SimpleDateFormatDecoderTest extends Test4J {
 
-	public void testDecode() throws Exception {
+    public void testDecode() throws Exception {
 
-		SimpleDateFormat df = JSON.toObject("'yyyy-MM-dd'", SimpleDateFormat.class);
+        SimpleDateFormat df = JSON.toObject("'yyyy-MM-dd'", SimpleDateFormat.class);
 
-		Date actual = df.parse("2011-09-18");
-		want.date(actual).isYear(2011).isMonth(9).isDay(18);
-	}
+        Date actual = df.parse("2011-09-18");
+        want.date(actual).isYear(2011).isMonth(9).isDay(18);
+    }
 }

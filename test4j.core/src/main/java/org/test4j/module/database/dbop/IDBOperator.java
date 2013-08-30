@@ -103,7 +103,7 @@ public interface IDBOperator {
 
     /**
      * 使用数据源来执行下列的数据库操作<br>
-     * dataSource的名称在jtester.properties文件中定义
+     * dataSource的名称在test4j.properties文件中定义
      * 
      * @param dataSource
      * @return
@@ -111,7 +111,7 @@ public interface IDBOperator {
     public IDBOperator useDB(String dataSource);
 
     /**
-     * 使用jtester.properties中配置的默认数据源
+     * 使用test4j.properties中配置的默认数据源
      * 
      * @return
      */

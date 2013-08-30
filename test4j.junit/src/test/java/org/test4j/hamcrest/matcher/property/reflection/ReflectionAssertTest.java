@@ -17,9 +17,9 @@ import org.test4j.fortest.beans.User;
 import org.test4j.hamcrest.matcher.modes.ItemsMode;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.hamcrest.matcher.string.StringMode;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
-public class ReflectionAssertTest implements JTester {
+public class ReflectionAssertTest implements Test4J {
     @Test
     public void propertyMatch() {
         Manager manager = new Manager();

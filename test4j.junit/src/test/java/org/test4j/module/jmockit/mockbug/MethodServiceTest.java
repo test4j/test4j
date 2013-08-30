@@ -4,10 +4,10 @@ import mockit.Mock;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.jmockit.mockbug.TestedMethodService;
 
-public class MethodServiceTest implements JTester {
+public class MethodServiceTest implements Test4J {
 
     @Before
     public void setup() {

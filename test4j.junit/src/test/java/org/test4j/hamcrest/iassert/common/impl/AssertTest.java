@@ -8,11 +8,11 @@ import java.util.Map;
 
 import org.junit.Test;
 import org.test4j.hamcrest.iassert.common.intf.IAssert;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
 @SuppressWarnings({ "rawtypes" })
-public class AssertTest implements JTester {
+public class AssertTest implements Test4J {
     @Test
     @DataFrom("assertClass")
     public void wanted(IAssert<?, ?> as, Class claz) {

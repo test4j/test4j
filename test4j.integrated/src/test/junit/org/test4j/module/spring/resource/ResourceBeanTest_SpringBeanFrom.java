@@ -7,14 +7,14 @@ import org.junit.Test;
 import org.test4j.fortest.beans.User;
 import org.test4j.fortest.service.UserDao;
 import org.test4j.fortest.service.UserService;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.annotations.SpringBeanFrom;
 import org.test4j.module.spring.annotations.SpringContext;
 import org.test4j.module.spring.testedbeans.resource.UserDaoResourceImpl;
 
-@SpringContext({ "org/jtester/module/spring/testedbeans/resource/resource-bean.xml" })
-public class ResourceBeanTest_SpringBeanFrom implements JTester {
+@SpringContext({ "org/test4j/module/spring/testedbeans/resource/resource-bean.xml" })
+public class ResourceBeanTest_SpringBeanFrom implements Test4J {
 
     @SpringBeanByName
     UserService userService;

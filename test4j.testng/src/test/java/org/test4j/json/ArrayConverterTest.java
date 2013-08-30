@@ -2,10 +2,10 @@ package org.test4j.json;
 
 import org.test4j.json.ITypeConverter;
 import org.test4j.json.JSON;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
-public class ArrayConverterTest extends JTester {
+public class ArrayConverterTest extends Test4J {
 	Boolean[] boolArray;
 
 	@Test(groups = "convert")

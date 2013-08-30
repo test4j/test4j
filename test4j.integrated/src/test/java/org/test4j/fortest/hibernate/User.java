@@ -12,59 +12,59 @@ import javax.persistence.Table;
 import org.hibernate.annotations.Where;
 
 @Entity
-@Table(name = "jtester_user")
+@Table(name = "test4j_user")
 public class User extends BaseBean {
-	private static final long serialVersionUID = 1824736038447664368L;
+    private static final long   serialVersionUID = 1824736038447664368L;
 
-	private String name;
+    private String              name;
 
-	private String email;
+    private String              email;
 
-	private Collection<Address> addresses;
+    private Collection<Address> addresses;
 
-	@Column(name = "wikiName", nullable = true, unique = true)
-	public String getName() {
-		return name;
-	}
+    @Column(name = "wikiName", nullable = true, unique = true)
+    public String getName() {
+        return name;
+    }
 
-	@Column(name = "email", nullable = true, unique = true)
-	public String getEmail() {
-		return email;
-	}
+    @Column(name = "email", nullable = true, unique = true)
+    public String getEmail() {
+        return email;
+    }
 
-	@OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
-	@Where(clause = "is_deleted = 0")
-	public Collection<Address> getAddresses() {
-		return addresses;
-	}
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @Where(clause = "is_deleted = 0")
+    public Collection<Address> getAddresses() {
+        return addresses;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public void setAddresses(Collection<Address> addresses) {
-		this.addresses = addresses;
-	}
+    public void setAddresses(Collection<Address> addresses) {
+        this.addresses = addresses;
+    }
 
-	/**
-	 * Constructs a <code>String</code> with all attributes in name = value
-	 * format.
-	 * 
-	 * @return a <code>String</code> representation of this object.
-	 */
-	public String toString() {
-		final String TAB = "    ";
+    /**
+     * Constructs a <code>String</code> with all attributes in name = value
+     * format.
+     * 
+     * @return a <code>String</code> representation of this object.
+     */
+    @Override
+    public String toString() {
+        final String TAB = "    ";
 
-		String retValue = "";
+        String retValue = "";
 
-		retValue = "User ( " + super.toString() + TAB + "name = " + this.name
-				+ TAB + "email = " + this.email + TAB + "addresses = "
-				+ this.addresses + TAB + " )";
+        retValue = "User ( " + super.toString() + TAB + "name = " + this.name + TAB + "email = " + this.email + TAB
+                + "addresses = " + this.addresses + TAB + " )";
 
-		return retValue;
-	}
+        return retValue;
+    }
 }

@@ -6,14 +6,14 @@ import java.util.Collection;
 import mockit.Mocked;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.jmockit.demo1.ResourceManager;
 import org.test4j.module.jmockit.demo1.ResourceManagerImpl;
 import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.annotations.SpringContext;
 
-@SpringContext("org/jtester/fortest/spring/resourceManager.xml")
-public class ResourceManagerImplTest_WhenThen implements JTester {
+@SpringContext("org/test4j/fortest/spring/resourceManager.xml")
+public class ResourceManagerImplTest_WhenThen implements Test4J {
     @SpringBeanByName
     ResourceManager     resourceManager;
 

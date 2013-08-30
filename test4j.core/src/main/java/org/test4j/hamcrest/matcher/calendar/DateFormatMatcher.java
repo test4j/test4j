@@ -4,7 +4,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 
-import org.test4j.module.JTesterException;
+import org.test4j.module.Test4JException;
 
 import ext.test4j.hamcrest.BaseMatcher;
 import ext.test4j.hamcrest.Description;
@@ -23,7 +23,7 @@ public class DateFormatMatcher extends BaseMatcher {
 
 	public DateFormatMatcher(String format, String date) {
 		if (date == null) {
-			throw new JTesterException("the expected value can't be null!");
+			throw new Test4JException("the expected value can't be null!");
 		}
 		this.date = date;
 		try {
@@ -35,7 +35,7 @@ public class DateFormatMatcher extends BaseMatcher {
 
 	public DateFormatMatcher(SimpleDateFormat format, String date) {
 		if (date == null) {
-			throw new JTesterException("the expected value can't be null!");
+			throw new Test4JException("the expected value can't be null!");
 		}
 		this.date = date;
 		try {
@@ -49,7 +49,7 @@ public class DateFormatMatcher extends BaseMatcher {
 
 	public boolean matches(Object actual) {
 		if (actual == null) {
-			throw new JTesterException("the actual value can't be null");
+			throw new Test4JException("the actual value can't be null");
 		}
 
 		if (actual instanceof Calendar) {
@@ -58,7 +58,7 @@ public class DateFormatMatcher extends BaseMatcher {
 		} else if (actual instanceof Date) {
 			actualDate = format.format((Date) actual);
 		} else {
-			throw new JTesterException(
+			throw new Test4JException(
 					"the actual value must be a java.util.Date instance or a java.util.Calendar instance");
 		}
 		boolean isEqual = this.date.equals(actualDate);

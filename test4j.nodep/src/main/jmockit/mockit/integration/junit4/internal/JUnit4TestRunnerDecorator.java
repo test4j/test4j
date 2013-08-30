@@ -36,122 +36,122 @@ import org.junit.runners.model.FrameworkMethod;
  */
 @MockClass(realClass = FrameworkMethod.class, instantiation = Instantiation.PerMockedInstance)
 public final class JUnit4TestRunnerDecorator extends TestRunnerDecorator {
-	public FrameworkMethod it;
-	private static volatile boolean shouldPrepareForNextTest = true;
+    public FrameworkMethod          it;
+    private static volatile boolean shouldPrepareForNextTest = true;
 
-	@Mock(reentrant = true)
-	public Object invokeExplosively(Object target, Object... params) throws Throwable {
-		Method method = it.getMethod();
-		Class<?> testClass = target == null ? method.getDeclaringClass() : target.getClass();
+    @Mock(reentrant = true)
+    public Object invokeExplosively(Object target, Object... params) throws Throwable {
+        Method method = it.getMethod();
+        Class<?> testClass = target == null ? method.getDeclaringClass() : target.getClass();
 
-		handleMockingOutsideTestMethods(target, testClass);
+        handleMockingOutsideTestMethods(target, testClass);
 
-		// In case it isn't a test method, but a before/after method:
-		if (it.getAnnotation(Test.class) == null) {
-			if (shouldPrepareForNextTest && it.getAnnotation(Before.class) != null) {
-				prepareForNextTest();
-				shouldPrepareForNextTest = false;
-			}
+        // In case it isn't a test method, but a before/after method:
+        if (it.getAnnotation(Test.class) == null) {
+            if (shouldPrepareForNextTest && it.getAnnotation(Before.class) != null) {
+                prepareForNextTest();
+                shouldPrepareForNextTest = false;
+            }
 
-			TestRun.setRunningIndividualTest(target);
-			TestRun.setSavePointForTestMethod(null);
+            TestRun.setRunningIndividualTest(target);
+            TestRun.setSavePointForTestMethod(null);
 
-			try {
-				return it.invokeExplosively(target, params);
-			} catch (Throwable t) {
-				RecordAndReplayExecution.endCurrentReplayIfAny();
-				StackTrace.filterStackTrace(t);
-				throw t;
-			} finally {
-				if (it.getAnnotation(After.class) != null) {
-					shouldPrepareForNextTest = true;
-				}
-			}
-		}
+            try {
+                return it.invokeExplosively(target, params);
+            } catch (Throwable t) {
+                RecordAndReplayExecution.endCurrentReplayIfAny();
+                StackTrace.filterStackTrace(t);
+                throw t;
+            } finally {
+                if (it.getAnnotation(After.class) != null) {
+                    shouldPrepareForNextTest = true;
+                }
+            }
+        }
 
-		if (shouldPrepareForNextTest) {
-			prepareForNextTest();
-		}
+        if (shouldPrepareForNextTest) {
+            prepareForNextTest();
+        }
 
-		shouldPrepareForNextTest = true;
+        shouldPrepareForNextTest = true;
 
-		try {
-			executeTestMethod(target, params);
-			return null; // it's a test method, therefore has void return type
-		} catch (Throwable t) {
-			StackTrace.filterStackTrace(t);
-			throw t;
-		} finally {
-			/** modified by davey.wu **/
-			// TestRun.finishCurrentTestExecution(true);
-			TestRun.finishCurrentTestExecution(false);
-			/** end modified by davey.wu **/
-		}
-	}
+        try {
+            executeTestMethod(target, params);
+            return null; // it's a test method, therefore has void return type
+        } catch (Throwable t) {
+            StackTrace.filterStackTrace(t);
+            throw t;
+        } finally {
+            /** modified by davey.wu **/
+            // TestRun.finishCurrentTestExecution(true);
+            TestRun.finishCurrentTestExecution(false);
+            /** end modified by davey.wu **/
+        }
+    }
 
-	private void handleMockingOutsideTestMethods(Object target, Class<?> testClass) {
-		TestRun.enterNoMockingZone();
+    private void handleMockingOutsideTestMethods(Object target, Class<?> testClass) {
+        TestRun.enterNoMockingZone();
 
-		try {
-			if (target == null) {
-				Class<?> currentTestClass = TestRun.getCurrentTestClass();
+        try {
+            if (target == null) {
+                Class<?> currentTestClass = TestRun.getCurrentTestClass();
 
-				if (currentTestClass != null && testClass.isAssignableFrom(currentTestClass)) {
-					if (it.getAnnotation(AfterClass.class) != null) {
-						cleanUpMocksFromPreviousTestClass();
-					}
-				} else if (it.getAnnotation(BeforeClass.class) != null) {
-					updateTestClassState(null, testClass);
-				}
-			} else if (testClass.isAnnotationPresent(SuiteClasses.class)) {
-				setUpClassLevelMocksAndStubs(testClass);
-			} else {
-				updateTestClassState(target, testClass);
-			}
-		} finally {
-			TestRun.exitNoMockingZone();
-		}
-	}
+                if (currentTestClass != null && testClass.isAssignableFrom(currentTestClass)) {
+                    if (it.getAnnotation(AfterClass.class) != null) {
+                        cleanUpMocksFromPreviousTestClass();
+                    }
+                } else if (it.getAnnotation(BeforeClass.class) != null) {
+                    updateTestClassState(null, testClass);
+                }
+            } else if (testClass.isAnnotationPresent(SuiteClasses.class)) {
+                setUpClassLevelMocksAndStubs(testClass);
+            } else {
+                updateTestClassState(target, testClass);
+            }
+        } finally {
+            TestRun.exitNoMockingZone();
+        }
+    }
 
-	private void executeTestMethod(Object target, Object... parameters) throws Throwable {
-		SavePoint savePoint = new SavePoint();
-		TestRun.setSavePointForTestMethod(savePoint);
+    private void executeTestMethod(Object target, Object... parameters) throws Throwable {
+        SavePoint savePoint = new SavePoint();
+        TestRun.setSavePointForTestMethod(savePoint);
 
-		Method testMethod = it.getMethod();
-		Throwable testFailure = null;
-		boolean testFailureExpected = false;
+        Method testMethod = it.getMethod();
+        Throwable testFailure = null;
+        boolean testFailureExpected = false;
 
-		try {
-			Object[] mockParameters = null;
-			/** modified by davey.wu **/
-			String frameworkMethodName = it.getClass().getName();
-			/** 不判断整个类名，是尽量避免代码package重构带来的影响 **/
-			boolean isJTesterFrameworkMethod = frameworkMethodName.startsWith("org.jtester.junit.")
-					&& frameworkMethodName.endsWith(".FrameworkMethodWithParameters");
-			if (!isJTesterFrameworkMethod) {
-				mockParameters = createInstancesForMockParameters(target, testMethod, parameters, savePoint);
-			}
-			/** end modified by davey.wu **/
-			createInstancesForTestedFields(target);
-			TestRun.setRunningIndividualTest(target);
+        try {
+            Object[] mockParameters = null;
+            /** modified by davey.wu **/
+            String frameworkMethodName = it.getClass().getName();
+            /** 不判断整个类名，是尽量避免代码package重构带来的影响 **/
+            boolean isTest4JFrameworkMethod = frameworkMethodName.startsWith("org.test4j.junit.")
+                    && frameworkMethodName.endsWith(".FrameworkMethodWithParameters");
+            if (!isTest4JFrameworkMethod) {
+                mockParameters = createInstancesForMockParameters(target, testMethod, parameters, savePoint);
+            }
+            /** end modified by davey.wu **/
+            createInstancesForTestedFields(target);
+            TestRun.setRunningIndividualTest(target);
 
-			it.invokeExplosively(target, mockParameters == null ? parameters : mockParameters);
-		} catch (Throwable thrownByTest) {
-			testFailure = thrownByTest;
-			Class<? extends Throwable> expectedType = testMethod.getAnnotation(Test.class).expected();
-			testFailureExpected = expectedType.isAssignableFrom(thrownByTest.getClass());
-		} finally {
-			concludeTestMethodExecution(savePoint, testFailure, testFailureExpected);
-		}
-	}
+            it.invokeExplosively(target, mockParameters == null ? parameters : mockParameters);
+        } catch (Throwable thrownByTest) {
+            testFailure = thrownByTest;
+            Class<? extends Throwable> expectedType = testMethod.getAnnotation(Test.class).expected();
+            testFailureExpected = expectedType.isAssignableFrom(thrownByTest.getClass());
+        } finally {
+            concludeTestMethodExecution(savePoint, testFailure, testFailureExpected);
+        }
+    }
 
-	@Mock(reentrant = true)
-	public void validatePublicVoidNoArg(boolean isStatic, List<Throwable> errors) {
-		if (!isStatic && it.getMethod().getParameterTypes().length > 0) {
-			it.validatePublicVoid(false, errors);
-			return;
-		}
+    @Mock(reentrant = true)
+    public void validatePublicVoidNoArg(boolean isStatic, List<Throwable> errors) {
+        if (!isStatic && it.getMethod().getParameterTypes().length > 0) {
+            it.validatePublicVoid(false, errors);
+            return;
+        }
 
-		it.validatePublicVoidNoArg(isStatic, errors);
-	}
+        it.validatePublicVoidNoArg(isStatic, errors);
+    }
 }

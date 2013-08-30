@@ -1,11 +1,11 @@
 package org.test4j.tools.reflector;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class ReflectorTest_NewInstance implements JTester {
+public class ReflectorTest_NewInstance implements Test4J {
 
     @Test
     @DataFrom("instance_data")

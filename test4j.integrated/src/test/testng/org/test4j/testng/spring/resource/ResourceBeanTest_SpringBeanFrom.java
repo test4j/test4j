@@ -10,33 +10,33 @@ import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.annotations.SpringBeanFrom;
 import org.test4j.module.spring.annotations.SpringContext;
 import org.test4j.module.spring.testedbeans.resource.UserDaoResourceImpl;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
-@Test(groups = "jtester")
-@SpringContext({ "org/jtester/module/spring/testedbeans/resource/resource-bean.xml" })
-public class ResourceBeanTest_SpringBeanFrom extends JTester {
+@Test(groups = "test4j")
+@SpringContext({ "org/test4j/module/spring/testedbeans/resource/resource-bean.xml" })
+public class ResourceBeanTest_SpringBeanFrom extends Test4J {
 
-	@SpringBeanByName
-	UserService userService;
+    @SpringBeanByName
+    UserService userService;
 
-	@SpringBeanFrom
-	@Mocked
-	UserDao userDao;
+    @SpringBeanFrom
+    @Mocked
+    UserDao     userDao;
 
-	public void testResourceBean() {
-		new MockUp<UserDaoResourceImpl>() {
-			@Mock
-			public void insertUser(User user) {
-				want.fail("this api can't be invoke.");
-			}
-		};
+    public void testResourceBean() {
+        new MockUp<UserDaoResourceImpl>() {
+            @Mock
+            public void insertUser(User user) {
+                want.fail("this api can't be invoke.");
+            }
+        };
 
-		new Expectations() {
-			{
-				userDao.insertUser((User) any);
-			}
-		};
-		userService.insertUser(new User());
-	}
+        new Expectations() {
+            {
+                userDao.insertUser((User) any);
+            }
+        };
+        userService.insertUser(new User());
+    }
 }

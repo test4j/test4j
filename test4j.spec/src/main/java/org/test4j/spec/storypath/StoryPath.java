@@ -41,7 +41,7 @@ public abstract class StoryPath {
     public abstract List<IScenario> getStory(StoryFile storyFile, String encoding);
 
     /**
-     * 根据jtester配置文件构造对应的用例文件解析器
+     * 根据test4j配置文件构造对应的用例文件解析器
      * 
      * @return
      */

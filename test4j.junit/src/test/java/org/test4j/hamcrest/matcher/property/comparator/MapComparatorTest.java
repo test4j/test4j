@@ -5,10 +5,10 @@ import java.util.HashMap;
 import org.junit.Test;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.json.encoder.beans.test.User;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
 @SuppressWarnings({ "rawtypes", "unchecked", "serial" })
-public class MapComparatorTest implements JTester {
+public class MapComparatorTest implements Test4J {
     @Test
     public void testMap() {
         want.object(new HashMap() {

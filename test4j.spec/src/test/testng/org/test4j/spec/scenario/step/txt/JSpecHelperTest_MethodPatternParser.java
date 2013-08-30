@@ -4,10 +4,10 @@ import java.lang.reflect.Method;
 
 import org.test4j.spec.annotations.Named;
 import org.test4j.spec.scenario.step.txt.ParameterParser;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
-public class JSpecHelperTest_MethodPatternParser extends JTester {
+public class JSpecHelperTest_MethodPatternParser extends Test4J {
 	@Test
 	public void testGetPatternAsStringFromMethod() throws Exception {
 		String methodname = "hasNameAnno";

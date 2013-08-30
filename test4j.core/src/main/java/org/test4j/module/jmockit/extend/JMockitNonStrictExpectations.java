@@ -13,7 +13,7 @@ import org.test4j.tools.reflector.MethodAccessor;
 import ext.test4j.hamcrest.Matcher;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class JMockitNonStrictExpectations extends NonStrictExpectations implements JTesterInvocations {
+public class JMockitNonStrictExpectations extends NonStrictExpectations implements Test4JInvocations {
 
     @Mocked(methods = { "" })
     protected InvokeTimes             invokerTimes;

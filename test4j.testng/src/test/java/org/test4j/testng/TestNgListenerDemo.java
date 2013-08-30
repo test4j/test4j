@@ -1,7 +1,7 @@
 package org.test4j.testng;
 
 import org.test4j.module.core.utility.MessageHelper;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.ITestContext;
 import org.testng.ITestResult;
 import org.testng.TestNG;
@@ -79,7 +79,7 @@ public class TestNgListenerDemo {
 		}
 	}
 
-	protected class DemoTest extends JTester {
+	protected class DemoTest extends Test4J {
 		public DemoTest() {
 
 		}

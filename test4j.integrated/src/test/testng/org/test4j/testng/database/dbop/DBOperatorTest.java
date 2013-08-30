@@ -8,12 +8,12 @@ import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.module.database.IDatabase;
 import org.test4j.module.database.bean.TddUser;
 import org.test4j.module.database.dbop.SqlSet;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
 @SuppressWarnings("serial")
-@Test(groups = { "jtester", "database" })
-public class DBOperatorTest extends JTester implements IDatabase {
+@Test(groups = { "test4j", "database" })
+public class DBOperatorTest extends Test4J implements IDatabase {
 
     @Test
     public void testClean() {
@@ -102,7 +102,7 @@ public class DBOperatorTest extends JTester implements IDatabase {
 
     public void testExecute_FromFile() {
         final String file = System.getProperty("user.dir")
-                + "/src/test/resources/org/jtester/module/database/dbop/sql-demo.sql";
+                + "/src/test/resources/org/test4j/module/database/dbop/sql-demo.sql";
         db.cleanTable(ITable.t_tdd_user).execute(new File(file));
 
         db.table(ITable.t_tdd_user).count().isEqualTo(2);

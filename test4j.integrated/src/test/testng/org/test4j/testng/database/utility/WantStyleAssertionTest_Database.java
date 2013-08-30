@@ -3,12 +3,12 @@ package org.test4j.testng.database.utility;
 import org.test4j.database.table.ITable;
 import org.test4j.database.table.TddUserTable;
 import org.test4j.module.database.IDatabase;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "serial", "unchecked" })
-@Test(groups = { "jtester", "assertion", "database" })
-public class WantStyleAssertionTest_Database extends JTester implements IDatabase {
+@Test(groups = { "test4j", "assertion", "database" })
+public class WantStyleAssertionTest_Database extends Test4J implements IDatabase {
 
     @Test
     public void testDatabase() {

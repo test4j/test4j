@@ -3,12 +3,12 @@ package org.test4j.spec.util;
 import java.util.Iterator;
 
 import org.test4j.spec.util.ParaConverter;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 @SuppressWarnings("rawtypes")
-public class ParaConverterTest extends JTester {
+public class ParaConverterTest extends Test4J {
 
 	@Test(dataProvider = "dataForGetStringValue")
 	public void testGetStringValue(String input, String expected) {

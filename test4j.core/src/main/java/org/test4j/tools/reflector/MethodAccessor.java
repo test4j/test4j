@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
 
-import org.test4j.module.JTesterException;
+import org.test4j.module.Test4JException;
 import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.commons.ExceptionWrapper;
 import org.test4j.tools.commons.MethodHelper;
@@ -110,7 +110,7 @@ public class MethodAccessor<T> {
 	 * @param arguments
 	 *            The method arguments
 	 * @return The result of the invocation, null if void
-	 * @throws JTesterException
+	 * @throws Test4JException
 	 *             if the method could not be invoked
 	 */
 	public static <T> T invokeMethod(Object target, Method method, Object... arguments) throws Exception {
@@ -130,7 +130,7 @@ public class MethodAccessor<T> {
 		try {
 			return (T) invokeMethod(target, method, arguments);
 		} catch (Exception e) {
-			throw new JTesterException("Unable to invoke method[" + method.getName() + "].", e);
+			throw new Test4JException("Unable to invoke method[" + method.getName() + "].", e);
 		}
 	}
 
@@ -162,7 +162,7 @@ public class MethodAccessor<T> {
 		try {
 			return (T) invokeMethod(target, methodName, paras);
 		} catch (Exception e) {
-			throw new JTesterException("Unable to invoke method[" + methodName + "].", e);
+			throw new Test4JException("Unable to invoke method[" + methodName + "].", e);
 		}
 	}
 }

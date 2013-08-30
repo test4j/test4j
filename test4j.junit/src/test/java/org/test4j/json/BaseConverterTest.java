@@ -4,11 +4,11 @@ import java.util.Iterator;
 
 import org.junit.Test;
 import org.test4j.json.JSONConverter;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
 @SuppressWarnings("rawtypes")
-public class BaseConverterTest implements JTester {
+public class BaseConverterTest implements Test4J {
 
     @Test
     @DataFrom("dataForBaseConverter")

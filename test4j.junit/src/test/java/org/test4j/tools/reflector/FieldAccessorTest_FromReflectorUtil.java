@@ -12,13 +12,13 @@ import org.test4j.fortest.beans.Address;
 import org.test4j.fortest.beans.Employee;
 import org.test4j.fortest.beans.User;
 import org.test4j.fortest.reflector.ForReflectUtil;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.tools.commons.FieldHelper;
 import org.test4j.tools.exception.NoSuchFieldRuntimeException;
 import org.test4j.tools.reflector.PropertyAccessor;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class FieldAccessorTest_FromReflectorUtil implements JTester {
+public class FieldAccessorTest_FromReflectorUtil implements Test4J {
 
     public void setFieldValue() {
         Employee employee = new Employee();

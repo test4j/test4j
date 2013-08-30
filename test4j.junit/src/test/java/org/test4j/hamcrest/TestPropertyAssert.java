@@ -3,9 +3,9 @@ package org.test4j.hamcrest;
 import org.junit.Test;
 import org.test4j.fortest.beans.Address;
 import org.test4j.fortest.beans.User;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
-public class TestPropertyAssert implements JTester {
+public class TestPropertyAssert implements Test4J {
     @Test
     public void assertObject() {
         User user = new User(1, "wu", "darui");

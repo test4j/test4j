@@ -1,10 +1,10 @@
 package org.test4j.tools.commons;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.tools.commons.ClazzHelper;
 
-public class ClazzHelperTest_NewInstance implements JTester {
+public class ClazzHelperTest_NewInstance implements Test4J {
     @Test
     public void testNewInstance_Abstract() {
         try {

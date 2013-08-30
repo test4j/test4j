@@ -9,10 +9,10 @@ import org.test4j.hamcrest.matcher.string.StringMode;
 import org.test4j.spec.exceptions.ScenarioAssertError;
 import org.test4j.spec.scenario.JSpecScenario;
 import org.test4j.spec.scenario.TxtJSpecScenario;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
-public class ScenarioAssertErrorTest extends JTester {
+public class ScenarioAssertErrorTest extends Test4J {
 
 	@Test
 	public void testGetError() {

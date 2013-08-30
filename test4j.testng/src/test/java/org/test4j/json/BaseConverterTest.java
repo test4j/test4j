@@ -3,12 +3,12 @@ package org.test4j.json;
 import java.util.Iterator;
 
 import org.test4j.json.JSONConverter;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 @SuppressWarnings("rawtypes")
-public class BaseConverterTest extends JTester {
+public class BaseConverterTest extends Test4J {
 
 	@Test(dataProvider = "dataForBaseConverter")
 	public void testBaseConvert(String input, Object expected) {

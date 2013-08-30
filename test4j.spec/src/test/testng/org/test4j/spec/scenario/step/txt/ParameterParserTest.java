@@ -5,12 +5,12 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.test4j.spec.scenario.step.txt.ParameterParser;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 @SuppressWarnings("rawtypes")
-public class ParameterParserTest extends JTester {
+public class ParameterParserTest extends Test4J {
 	@Test(dataProvider = "dataForParserSinglePara")
 	public void testParseSinglePara(String words, String key, String value, int expectedIndex) {
 		Map<String, String> paras = new HashMap<String, String>();

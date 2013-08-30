@@ -4,7 +4,7 @@ import org.test4j.hamcrest.TheStyleAssertion;
 import org.test4j.hamcrest.iassert.common.intf.IAssert;
 import org.test4j.hamcrest.matcher.LinkMatcher;
 import org.test4j.hamcrest.matcher.clazz.ClassAssignFromMatcher;
-import org.test4j.module.JTesterException;
+import org.test4j.module.Test4JException;
 import org.test4j.module.jmockit.utility.ExpectationsUtil;
 import org.test4j.tools.commons.PrimitiveHelper;
 import org.test4j.tools.reflector.MethodAccessor;
@@ -106,17 +106,17 @@ public abstract class Assert<T, E extends IAssert> extends BaseMatcher<T> implem
 
 	@Override
 	public boolean equals(Object obj) {
-		throw new JTesterException("the method can't be used,please use isEqualTo() instead");
+		throw new Test4JException("the method can't be used,please use isEqualTo() instead");
 	}
 
 	@Override
 	public int hashCode() {
-		throw new JTesterException("the method can't be used!");
+		throw new Test4JException("the method can't be used!");
 	}
 
 	public T wanted() {
 		if (this.type == AssertType.AssertStyle) {
-			throw new JTesterException("is not an Expectations");
+			throw new Test4JException("is not an Expectations");
 		}
 
 		if (ExpectationsUtil.isJmockitExpectations()) {
@@ -130,7 +130,7 @@ public abstract class Assert<T, E extends IAssert> extends BaseMatcher<T> implem
 
 	public <F> F wanted(Class<F> claz) {
 		if (this.type == AssertType.AssertStyle) {
-			throw new JTesterException("is not an Expectations");
+			throw new Test4JException("is not an Expectations");
 		}
 		if (claz.isPrimitive() == false) {
 			assertThat(new ClassAssignFromMatcher(claz));

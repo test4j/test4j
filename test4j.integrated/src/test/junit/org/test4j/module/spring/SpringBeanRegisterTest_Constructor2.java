@@ -1,14 +1,14 @@
 package org.test4j.module.spring;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.spring.annotations.AutoBeanInject;
 import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.annotations.SpringContext;
 
 @SpringContext
 @AutoBeanInject
-public class SpringBeanRegisterTest_Constructor2 implements JTester {
+public class SpringBeanRegisterTest_Constructor2 implements Test4J {
 
     @SpringBeanByName
     OuterClass outer;

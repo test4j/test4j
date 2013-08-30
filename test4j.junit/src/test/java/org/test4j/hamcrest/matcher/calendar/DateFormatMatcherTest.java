@@ -4,14 +4,14 @@ import java.util.Calendar;
 
 import org.junit.Test;
 import org.test4j.hamcrest.matcher.calendar.DateFormatMatcher;
-import org.test4j.junit.JTester;
-import org.test4j.module.JTesterException;
+import org.test4j.junit.Test4J;
+import org.test4j.module.Test4JException;
 import org.test4j.tools.commons.DateUtilTest;
 
 import ext.test4j.hamcrest.MatcherAssert;
 
 @SuppressWarnings("unchecked")
-public class DateFormatMatcherTest implements JTester {
+public class DateFormatMatcherTest implements Test4J {
     static Calendar cal = DateUtilTest.mockCalendar(2010, 1, 3);
 
     @Test
@@ -32,12 +32,12 @@ public class DateFormatMatcherTest implements JTester {
         }
     }
 
-    @Test(expected = JTesterException.class)
+    @Test(expected = Test4JException.class)
     public void test_ExpectedNull() {
         new DateFormatMatcher("yyyy-MM-dd", null);
     }
 
-    @Test(expected = JTesterException.class)
+    @Test(expected = Test4JException.class)
     public void test_ActualIsNull() {
         DateFormatMatcher matcher = new DateFormatMatcher("yyyy-MM-dd", "2010-01-02");
         MatcherAssert.assertThat(null, matcher);

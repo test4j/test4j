@@ -3,10 +3,10 @@ package org.test4j.module.jmockit.intfmockup;
 import mockit.Mock;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.jmockit.intfmockup.ISayHello;
 
-public class MockUpTest_Interface implements JTester {
+public class MockUpTest_Interface implements Test4J {
     private ISayHello sayHello1;
 
     /**

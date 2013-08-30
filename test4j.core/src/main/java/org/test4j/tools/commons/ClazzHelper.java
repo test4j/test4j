@@ -24,8 +24,7 @@ import java.util.Map;
 
 import mockit.Mockit;
 
-import org.test4j.module.JTesterException;
-import org.test4j.tools.commons.PrimitiveHelper;
+import org.test4j.module.Test4JException;
 import org.test4j.tools.datagen.ConstructorArgsGenerator;
 import org.test4j.tools.exception.NewInstanceException;
 import org.test4j.tools.reflector.MethodAccessor;
@@ -60,7 +59,7 @@ public class ClazzHelper {
     }
 
     /**
-     * Gets the class for the given name. An JTesterException is thrown when the
+     * Gets the class for the given name. An Test4JException is thrown when the
      * class could not be loaded.
      * 
      * @param className The name of the class, not null
@@ -70,7 +69,7 @@ public class ClazzHelper {
         try {
             return (Class<T>) Class.forName(className);
         } catch (Throwable t) {
-            throw new JTesterException("Could not load class with name " + className, t);
+            throw new Test4JException("Could not load class with name " + className, t);
         }
     }
 
@@ -205,7 +204,7 @@ public class ClazzHelper {
      * 
      * @param className The name of the class, not null
      * @return An instance of this class
-     * @throws JTesterException if the class could not be found or no instance
+     * @throws Test4JException if the class could not be found or no instance
      *             could be created
      */
     public static <T> T createInstanceOfType(String className) {
@@ -213,15 +212,15 @@ public class ClazzHelper {
             Class type = Class.forName(className);
             return (T) newInstance(type);
         } catch (ClassCastException e) {
-            throw new JTesterException("Class " + className + " is not of expected type.", e);
+            throw new Test4JException("Class " + className + " is not of expected type.", e);
         } catch (NoClassDefFoundError e) {
-            throw new JTesterException("Unable to load class " + className, e);
+            throw new Test4JException("Unable to load class " + className, e);
         } catch (ClassNotFoundException e) {
-            throw new JTesterException("Class " + className + " not found", e);
-        } catch (JTesterException e) {
+            throw new Test4JException("Class " + className + " not found", e);
+        } catch (Test4JException e) {
             throw e;
         } catch (Throwable e) {
-            throw new JTesterException("Error while instantiating class " + className, e);
+            throw new Test4JException("Error while instantiating class " + className, e);
         }
     }
 
@@ -326,7 +325,7 @@ public class ClazzHelper {
      * @param enumClass The enum class, not null
      * @param enumValueName The name of the enum value, not null
      * @return The actual enum value, not null
-     * @throws JTesterException if no value could be found with the given name
+     * @throws Test4JException if no value could be found with the given name
      */
     public static <T extends Enum<?>> T getEnumValue(Class<T> enumClass, String enumValueName) {
         T[] enumValues = enumClass.getEnumConstants();
@@ -336,7 +335,7 @@ public class ClazzHelper {
                 return enumValue;
             }
         }
-        throw new JTesterException("Unable to find a enum value in enum: " + enumClass + ", with value name: "
+        throw new Test4JException("Unable to find a enum value in enum: " + enumClass + ", with value name: "
                 + enumValueName);
     }
 
@@ -355,10 +354,10 @@ public class ClazzHelper {
             if (argumentTypes.length == 1) {
                 return argumentTypes[0];
             }
-            throw new JTesterException("Unable to determine unique generic type for field: " + field
+            throw new Test4JException("Unable to determine unique generic type for field: " + field
                     + ". The field type declares more than one generic type: " + type);
         }
-        throw new JTesterException("Unable to determine unique generic type for field: " + field
+        throw new Test4JException("Unable to determine unique generic type for field: " + field
                 + ". Field type is not a generic type: " + type);
     }
 
@@ -375,7 +374,7 @@ public class ClazzHelper {
         if (type instanceof ParameterizedType) {
             return (Class<T>) ((ParameterizedType) type).getRawType();
         }
-        throw new JTesterException("Unable to convert Type instance " + type + " to a Class instance.");
+        throw new Test4JException("Unable to convert Type instance " + type + " to a Class instance.");
     }
 
     /**
@@ -534,7 +533,7 @@ public class ClazzHelper {
 
     private static MethodAccessor getSpringModuleHelper() throws ClassNotFoundException {
         if (springModuleHelper == null) {
-            Class claz = Class.forName("org.jtester.module.spring.utility.SpringModuleHelper");
+            Class claz = Class.forName("org.test4j.module.spring.utility.SpringModuleHelper");
             springModuleHelper = new MethodAccessor(claz, "getAdvisedObject", Object.class);
         }
         return springModuleHelper;

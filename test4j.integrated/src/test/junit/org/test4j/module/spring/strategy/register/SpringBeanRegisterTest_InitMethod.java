@@ -1,17 +1,17 @@
 package org.test4j.module.spring.strategy.register;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.spring.annotations.AutoBeanInject;
+import org.test4j.module.spring.annotations.AutoBeanInject.BeanMap;
 import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.annotations.SpringBeanByType;
 import org.test4j.module.spring.annotations.SpringContext;
-import org.test4j.module.spring.annotations.AutoBeanInject.BeanMap;
 
-@SpringContext({ "org/jtester/module/spring/testedbeans/xml/data-source.xml" })
+@SpringContext({ "org/test4j/module/spring/testedbeans/xml/data-source.xml" })
 @AutoBeanInject(maps = { @BeanMap(intf = "**.*Service", impl = "**.*ServiceImpl"),
         @BeanMap(intf = "**.*Dao", impl = "**.*DaoImpl") })
-public class SpringBeanRegisterTest_InitMethod implements JTester {
+public class SpringBeanRegisterTest_InitMethod implements Test4J {
     @SpringBeanByName(claz = InitMethodBeanByName.class, init = "init")
     InitMethodBeanByName beanByName;
 

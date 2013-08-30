@@ -12,15 +12,15 @@ import org.test4j.module.database.annotations.Transactional;
 import org.test4j.module.database.annotations.Transactional.TransactionMode;
 import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.annotations.SpringContext;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 
-@Test(groups = { "jtester" })
+@Test(groups = { "test4j" })
 @SuppressWarnings("serial")
-@SpringContext({ "org/jtester/module/spring/testedbeans/xml/beans.xml",
-        "org/jtester/module/spring/testedbeans/xml/data-source.xml" })
-public class TransactionManagerTest_DisableMode extends JTester implements IDatabase {
+@SpringContext({ "org/test4j/module/spring/testedbeans/xml/beans.xml",
+        "org/test4j/module/spring/testedbeans/xml/data-source.xml" })
+public class TransactionManagerTest_DisableMode extends Test4J implements IDatabase {
     @SpringBeanByName
     private UserService userService;
 

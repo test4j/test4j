@@ -11,7 +11,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
 
-import org.test4j.module.JTesterException;
+import org.test4j.module.Test4JException;
 
 /**
  * 
@@ -205,7 +205,7 @@ public class ClazzFinder {
 			return clazzes;
 		} catch (Throwable e) {
 			String error = String.format("RunInIDE : %s , classpath : %s", String.valueOf(runInIDE), classPath);
-			throw new JTesterException(error, e);
+			throw new Test4JException(error, e);
 		}
 	}
 

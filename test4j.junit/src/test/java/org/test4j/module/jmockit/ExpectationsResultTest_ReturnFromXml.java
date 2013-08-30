@@ -4,10 +4,10 @@ import mockit.Mocked;
 
 import org.junit.Test;
 import org.test4j.fortest.beans.Manager;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.tools.commons.JSONHelper;
 
-public class ExpectationsResultTest_ReturnFromXml implements JTester {
+public class ExpectationsResultTest_ReturnFromXml implements Test4J {
     @Mocked
     private ManagerService service;
 

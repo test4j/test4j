@@ -3,9 +3,9 @@ package org.test4j.tools.commons;
 import mockit.Mocked;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
-public class PrimitiveHelperTest_2 implements JTester {
+public class PrimitiveHelperTest_2 implements Test4J {
     @Mocked
     NumberDeal deal;
 

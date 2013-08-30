@@ -15,29 +15,36 @@
  */
 package ext.test4j.cglib.proxy;
 
-import java.util.*;
+import java.util.Iterator;
+import java.util.List;
 
 import ext.test4j.asm.Type;
-import ext.test4j.cglib.core.*;
+import ext.test4j.cglib.core.ClassEmitter;
+import ext.test4j.cglib.core.CodeEmitter;
+import ext.test4j.cglib.core.MethodInfo;
+import ext.test4j.cglib.core.Signature;
+import ext.test4j.cglib.core.TypeUtils;
 
 @SuppressWarnings({ "rawtypes" })
 class FixedValueGenerator implements CallbackGenerator {
-	public static final FixedValueGenerator INSTANCE = new FixedValueGenerator();
-	private static final Type FIXED_VALUE = TypeUtils.parseType("ext.jtester.cglib.proxy.FixedValue");
-	private static final Signature LOAD_OBJECT = TypeUtils.parseSignature("Object loadObject()");
+    public static final FixedValueGenerator INSTANCE    = new FixedValueGenerator();
+    private static final Type               FIXED_VALUE = TypeUtils.parseType("ext.test4j.cglib.proxy.FixedValue");
+    private static final Signature          LOAD_OBJECT = TypeUtils.parseSignature("Object loadObject()");
 
-	public void generate(ClassEmitter ce, Context context, List methods) {
-		for (Iterator it = methods.iterator(); it.hasNext();) {
-			MethodInfo method = (MethodInfo) it.next();
-			CodeEmitter e = context.beginMethod(ce, method);
-			context.emitCallback(e, context.getIndex(method));
-			e.invoke_interface(FIXED_VALUE, LOAD_OBJECT);
-			e.unbox_or_zero(e.getReturnType());
-			e.return_value();
-			e.end_method();
-		}
-	}
+    @Override
+    public void generate(ClassEmitter ce, Context context, List methods) {
+        for (Iterator it = methods.iterator(); it.hasNext();) {
+            MethodInfo method = (MethodInfo) it.next();
+            CodeEmitter e = context.beginMethod(ce, method);
+            context.emitCallback(e, context.getIndex(method));
+            e.invoke_interface(FIXED_VALUE, LOAD_OBJECT);
+            e.unbox_or_zero(e.getReturnType());
+            e.return_value();
+            e.end_method();
+        }
+    }
 
-	public void generateStatic(CodeEmitter e, Context context, List methods) {
-	}
+    @Override
+    public void generateStatic(CodeEmitter e, Context context, List methods) {
+    }
 }

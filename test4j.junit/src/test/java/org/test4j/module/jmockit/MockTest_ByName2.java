@@ -6,10 +6,10 @@ import org.junit.Test;
 import org.test4j.fortest.formock.SomeInterface;
 import org.test4j.fortest.formock.SpringBeanService;
 import org.test4j.fortest.formock.SpringBeanService.SpringBeanServiceImpl1;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.inject.annotations.Inject;
 
-public class MockTest_ByName2 implements JTester {
+public class MockTest_ByName2 implements Test4J {
 
     private SpringBeanService springBeanService1 = new SpringBeanServiceImpl1();
 

@@ -8,7 +8,7 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 
 import org.test4j.json.JSON;
-import org.test4j.module.JTesterException;
+import org.test4j.module.Test4JException;
 
 /**
  * POJO对象序列化和反序列化工具类
@@ -34,7 +34,7 @@ public class JSONHelper {
 			out.writeObject(o);
 			out.close();
 		} catch (Throwable e) {
-			throw new JTesterException(e);
+			throw new Test4JException(e);
 		}
 	}
 
@@ -65,7 +65,7 @@ public class JSONHelper {
 			in.close();
 			return (T) obj;
 		} catch (Throwable e) {
-			throw new JTesterException(e);
+			throw new Test4JException(e);
 		}
 	}
 

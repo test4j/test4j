@@ -4,10 +4,10 @@ import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.junit.Test;
 import org.springframework.aop.framework.ProxyFactory;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.core.utility.MessageHelper;
 
-public class SpringAroundTest implements JTester {
+public class SpringAroundTest implements Test4J {
 
     @Test
     public void testSpringAround() {

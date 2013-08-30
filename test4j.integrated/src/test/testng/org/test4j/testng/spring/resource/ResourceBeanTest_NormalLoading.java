@@ -7,26 +7,26 @@ import org.test4j.fortest.service.UserService;
 import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.annotations.SpringContext;
 import org.test4j.module.spring.testedbeans.resource.UserDaoResourceImpl;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
-@Test(groups = "jtester")
-@SpringContext({ "org/jtester/module/spring/testedbeans/resource/resource-bean.xml" })
-public class ResourceBeanTest_NormalLoading extends JTester {
+@Test(groups = "test4j")
+@SpringContext({ "org/test4j/module/spring/testedbeans/resource/resource-bean.xml" })
+public class ResourceBeanTest_NormalLoading extends Test4J {
 
-	@SpringBeanByName
-	UserService userService;
+    @SpringBeanByName
+    UserService userService;
 
-	public void testResourceBean() {
-		final boolean[] checked = new boolean[] { false };
-		new MockUp<UserDaoResourceImpl>() {
-			@Mock
-			public void insertUser(User user) {
-				checked[0] = true;
-			}
-		};
+    public void testResourceBean() {
+        final boolean[] checked = new boolean[] { false };
+        new MockUp<UserDaoResourceImpl>() {
+            @Mock
+            public void insertUser(User user) {
+                checked[0] = true;
+            }
+        };
 
-		userService.insertUser(new User());
-		want.bool(checked[0]).is(true);
-	}
+        userService.insertUser(new User());
+        want.bool(checked[0]).is(true);
+    }
 }

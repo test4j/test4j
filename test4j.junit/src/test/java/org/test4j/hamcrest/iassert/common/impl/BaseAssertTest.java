@@ -6,9 +6,9 @@ import java.util.Map;
 import org.junit.Test;
 import org.test4j.hamcrest.matcher.string.StringMode;
 import org.test4j.json.encoder.beans.test.User;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
-public class BaseAssertTest implements JTester {
+public class BaseAssertTest implements Test4J {
 
     @Test(expected = AssertionError.class)
     public void testClazIs() {

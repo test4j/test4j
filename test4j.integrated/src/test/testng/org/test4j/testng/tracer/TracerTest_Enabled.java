@@ -11,15 +11,15 @@ import org.test4j.module.database.IDatabase;
 import org.test4j.module.spring.annotations.SpringBeanByType;
 import org.test4j.module.spring.annotations.SpringContext;
 import org.test4j.module.tracer.TracerHelper;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.test4j.tools.commons.ResourceHelper;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @SuppressWarnings("serial")
-@SpringContext({ "classpath:/org/jtester/fortest/hibernate/project.xml" })
-@Test(groups = { "jtester", "tracer", "broken-install", "hibernate" })
-public class TracerTest_Enabled extends JTester implements IDatabase {
+@SpringContext({ "classpath:/org/test4j/fortest/hibernate/project.xml" })
+@Test(groups = { "test4j", "tracer", "broken-install", "hibernate" })
+public class TracerTest_Enabled extends Test4J implements IDatabase {
     @SpringBeanByType
     private UserService userService;
 
@@ -59,7 +59,7 @@ public class TracerTest_Enabled extends JTester implements IDatabase {
     @Test(dependsOnMethods = "monitorSpringTrue")
     public void monitorSpringTrue_check() throws FileNotFoundException {
         String tracerInfo = ResourceHelper
-                .readFromFile("target/tracer/org/jtester/tracer/TracerTest#monitorSpringTrue.html");
+                .readFromFile("target/tracer/org/test4j/tracer/TracerTest#monitorSpringTrue.html");
         want.string(tracerInfo).contains("call").contains("paras").contains("result");
     }
 
@@ -87,7 +87,7 @@ public class TracerTest_Enabled extends JTester implements IDatabase {
     @Test(dependsOnMethods = "monitorSpringTrue")
     public void monitorJdbcTrue_check() throws FileNotFoundException {
         String tracerInfo = ResourceHelper
-                .readFromFile("target/tracer/org/jtester/tracer/TracerTest#monitorJdbcTrue.html");
+                .readFromFile("target/tracer/org/test4j/tracer/TracerTest#monitorJdbcTrue.html");
         want.string(tracerInfo).contains("SQL-Statement");
     }
 
@@ -115,7 +115,7 @@ public class TracerTest_Enabled extends JTester implements IDatabase {
     @Test(dependsOnMethods = "monitorSpring_ToInfoString")
     public void monitorSpring_ToInfoString_check() throws FileNotFoundException {
         String tracerInfo = ResourceHelper
-                .readFromFile("target/tracer/org/jtester/tracer/TracerTest#monitorSpring_ToInfoString.html");
-        want.string(tracerInfo).contains("org.jtester.fortest.hibernate.User@");
+                .readFromFile("target/tracer/org/test4j/tracer/TracerTest#monitorSpring_ToInfoString.html");
+        want.string(tracerInfo).contains("org.test4j.fortest.hibernate.User@");
     }
 }

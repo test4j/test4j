@@ -4,41 +4,38 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.test4j.json.helper.JSONMap;
-import org.test4j.json.helper.JSONObject;
-import org.test4j.json.helper.JSONSingle;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
 @SuppressWarnings("rawtypes")
-@Test(groups = { "jtester", "json" })
-public class InnerJSONMapTest extends JTester {
+@Test(groups = { "test4j", "json" })
+public class InnerJSONMapTest extends Test4J {
 
-	@Test(description = "验证JSONMap数据的有序性,JSONMap必须是LinkedHashMap而不能是HashMap")
-	public void testLinkedHashMap() {
-		JSONMap map = new JSONMap();
-		map.putJSON("a3", "aa");
-		map.putJSON("a2", "bb");
-		map.putJSON("b1", "cc");
-		StringBuffer buff = new StringBuffer();
-		for (Iterator<JSONObject> iterator = map.values().iterator(); iterator.hasNext();) {
-			JSONSingle single = (JSONSingle) iterator.next();
-			buff.append(single.toStringValue());
-		}
-		String result = buff.toString();
-		want.string(result).isEqualTo("aabbcc");
-	}
+    @Test(description = "验证JSONMap数据的有序性,JSONMap必须是LinkedHashMap而不能是HashMap")
+    public void testLinkedHashMap() {
+        JSONMap map = new JSONMap();
+        map.putJSON("a3", "aa");
+        map.putJSON("a2", "bb");
+        map.putJSON("b1", "cc");
+        StringBuffer buff = new StringBuffer();
+        for (Iterator<JSONObject> iterator = map.values().iterator(); iterator.hasNext();) {
+            JSONSingle single = (JSONSingle) iterator.next();
+            buff.append(single.toStringValue());
+        }
+        String result = buff.toString();
+        want.string(result).isEqualTo("aabbcc");
+    }
 
-	public void testHashMap() {
-		Map<String, String> map = new HashMap<String, String>();
-		map.put("a3", "aa");
-		map.put("a2", "bb");
-		map.put("b1", "cc");
-		StringBuffer buff = new StringBuffer();
-		for (Iterator iterator = map.values().iterator(); iterator.hasNext();) {
-			String name = (String) iterator.next();
-			buff.append(name);
-		}
-		want.string(buff.toString()).notEqualTo("aabbcc");
-	}
+    public void testHashMap() {
+        Map<String, String> map = new HashMap<String, String>();
+        map.put("a3", "aa");
+        map.put("a2", "bb");
+        map.put("b1", "cc");
+        StringBuffer buff = new StringBuffer();
+        for (Iterator iterator = map.values().iterator(); iterator.hasNext();) {
+            String name = (String) iterator.next();
+            buff.append(name);
+        }
+        want.string(buff.toString()).notEqualTo("aabbcc");
+    }
 }

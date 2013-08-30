@@ -6,14 +6,12 @@ import org.junit.Ignore;
 import org.junit.Test;
 import org.test4j.fortest.hibernate.AddressService;
 import org.test4j.fortest.hibernate.UserService;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.inject.annotations.Inject;
-import org.test4j.module.spring.annotations.SpringBeanByName;
-import org.test4j.module.spring.annotations.SpringContext;
 
 @Ignore
-@SpringContext({ "classpath:/org/jtester/fortest/hibernate/project.xml" })
-public class UserServiceTest_ByInjectedMock implements JTester {
+@SpringContext({ "classpath:/org/test4j/fortest/hibernate/project.xml" })
+public class UserServiceTest_ByInjectedMock implements Test4J {
     @SpringBeanByName("userService")
     private UserService    userService;
 

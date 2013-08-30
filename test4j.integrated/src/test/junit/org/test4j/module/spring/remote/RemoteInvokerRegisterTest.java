@@ -10,14 +10,13 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.remoting.caucho.HessianServiceExporter;
 import org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter;
-import org.test4j.junit.JTester;
-import org.test4j.module.spring.remote.RemoteInvokerRegister;
+import org.test4j.junit.Test4J;
 
-public class RemoteInvokerRegisterTest implements JTester {
+public class RemoteInvokerRegisterTest implements Test4J {
     int count = 0;
 
     /**
-     * 测试jtester-remote.properties中的注册的remote type没有指定的case
+     * 测试test4j-remote.properties中的注册的remote type没有指定的case
      */
     @Test
     public void testRegisterSpringBeanRemoteOnServer_Default() {
@@ -53,7 +52,7 @@ public class RemoteInvokerRegisterTest implements JTester {
     }
 
     /**
-     * 测试jtester-remote.properties中的注册的remote type显式指定为httpInvoker的情况
+     * 测试test4j-remote.properties中的注册的remote type显式指定为httpInvoker的情况
      */
     @Test
     public void testRegisterSpringBeanRemoteOnServer_HttpInvoker() {
@@ -89,7 +88,7 @@ public class RemoteInvokerRegisterTest implements JTester {
     }
 
     /**
-     * 测试jtester-remote.properties中的注册的remote type显式指定为httpInvoker和hessian的2种情况
+     * 测试test4j-remote.properties中的注册的remote type显式指定为httpInvoker和hessian的2种情况
      */
     @Test
     public void testRegisterSpringBeanRemoteOnServer_BothHttpInvokerAndHessian() {

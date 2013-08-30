@@ -5,9 +5,9 @@ import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
-public class ObjectContainerAssertTest_ItemMatch implements JTester {
+public class ObjectContainerAssertTest_ItemMatch implements Test4J {
     private List<String> list = new ArrayList<String>();
 
     @Before

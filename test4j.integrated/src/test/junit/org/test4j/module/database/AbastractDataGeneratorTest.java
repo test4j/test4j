@@ -8,11 +8,11 @@ import mockit.Mock;
 import org.junit.Test;
 import org.test4j.database.table.ITable;
 import org.test4j.database.table.TddUserTable;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.tools.datagen.DataSet;
 
 @SuppressWarnings({ "serial", "rawtypes", "unchecked" })
-public class AbastractDataGeneratorTest implements JTester {
+public class AbastractDataGeneratorTest implements Test4J {
     @Test
     public void testValue() {
         final List actual = new ArrayList();

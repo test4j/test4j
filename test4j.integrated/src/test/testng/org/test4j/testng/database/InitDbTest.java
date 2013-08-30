@@ -1,16 +1,16 @@
 package org.test4j.testng.database;
 
 import org.test4j.module.spring.annotations.SpringContext;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
-@SpringContext( { "classpath:/org/jtester/fortest/hibernate/project-placeholder.xml",
-		"classpath:/org/jtester/fortest/hibernate/project-datasource.xml" })
-@Test(groups = "jtester")
-public class InitDbTest extends JTester {
+@SpringContext({ "classpath:/org/test4j/fortest/hibernate/project-placeholder.xml",
+        "classpath:/org/test4j/fortest/hibernate/project-datasource.xml" })
+@Test(groups = "test4j")
+public class InitDbTest extends Test4J {
 
-	@Test
-	public void testInitDb() {
+    @Test
+    public void testInitDb() {
 
-	}
+    }
 }

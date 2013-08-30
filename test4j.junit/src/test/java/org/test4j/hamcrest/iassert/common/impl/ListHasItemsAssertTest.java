@@ -6,10 +6,10 @@ import java.util.List;
 import org.junit.Test;
 import org.test4j.hamcrest.matcher.modes.ItemsMode;
 import org.test4j.hamcrest.matcher.modes.MatchMode;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
 @SuppressWarnings("rawtypes")
-public class ListHasItemsAssertTest implements JTester {
+public class ListHasItemsAssertTest implements Test4J {
 
     @Test
     public void testHasItems_objects() {

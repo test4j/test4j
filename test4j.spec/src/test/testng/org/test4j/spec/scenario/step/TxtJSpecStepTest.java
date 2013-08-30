@@ -6,12 +6,12 @@ import java.util.List;
 import org.test4j.spec.inner.IScenario;
 import org.test4j.spec.inner.StepType;
 import org.test4j.spec.scenario.TxtJSpecScenario;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.test4j.tools.commons.ResourceHelper;
 import org.testng.annotations.Test;
 
 @SuppressWarnings("serial")
-public class TxtJSpecStepTest extends JTester {
+public class TxtJSpecStepTest extends Test4J {
     /**
      * 验证txt文件格式的模板方法
      * 

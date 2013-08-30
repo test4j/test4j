@@ -10,10 +10,9 @@ import org.test4j.database.table.ITable;
 import org.test4j.database.table.TddUserTable;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.hamcrest.matcher.string.StringMode;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.database.annotations.Transactional;
 import org.test4j.module.database.annotations.Transactional.TransactionMode;
-import org.test4j.module.database.dbop.TableOp;
 import org.test4j.module.database.environment.TableMeta.ColumnMeta;
 import org.test4j.tools.commons.ExceptionWrapper;
 import org.test4j.tools.commons.ListHelper;
@@ -21,7 +20,7 @@ import org.test4j.tools.datagen.DataSet;
 
 @SuppressWarnings({ "serial", "unchecked" })
 @Transactional(TransactionMode.COMMIT)
-public class TableOpTest implements JTester {
+public class TableOpTest implements Test4J {
 
     @Test
     public void testInsertData() throws SQLException {
@@ -184,9 +183,9 @@ public class TableOpTest implements JTester {
             {
                 this.put(IColumn.f_id, 1);
                 this.put(IColumn.f_first_name, "darui.wu");
-                this.put(IColumn.f_post_code, "jteste");
+                this.put(IColumn.f_post_code, "test4j");
                 this.put(IColumn.f_address_id, 0);
-                this.put(IColumn.f_last_name, "jtester");
+                this.put(IColumn.f_last_name, "test4j");
                 this.put(IColumn.f_sarary, 0.0);
             }
         }, new TddUserTable() {
@@ -195,9 +194,9 @@ public class TableOpTest implements JTester {
             {
                 this.put(IColumn.f_id, 2);
                 this.put(IColumn.f_first_name, "data.iterator");
-                this.put(IColumn.f_post_code, "jteste");
+                this.put(IColumn.f_post_code, "test4j");
                 this.put(IColumn.f_address_id, 0);
-                this.put(IColumn.f_last_name, "jtester");
+                this.put(IColumn.f_last_name, "test4j");
                 this.put(IColumn.f_sarary, 0.0);
             }
         }));
@@ -221,9 +220,9 @@ public class TableOpTest implements JTester {
             {
                 this.put(IColumn.f_id, 1, 2);
                 this.put(IColumn.f_first_name, "darui.wu", "data.iterator");
-                this.put(IColumn.f_post_code, "jteste");
+                this.put(IColumn.f_post_code, "test4j");
                 this.put(IColumn.f_address_id, 0);
-                this.put(IColumn.f_last_name, "jtester");
+                this.put(IColumn.f_last_name, "test4j");
                 this.put(IColumn.f_sarary, 0.0);
             }
         }, EqMode.IGNORE_ORDER);

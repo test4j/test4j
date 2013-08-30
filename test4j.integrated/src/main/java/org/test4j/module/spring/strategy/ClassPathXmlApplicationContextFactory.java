@@ -12,12 +12,12 @@ public class ClassPathXmlApplicationContextFactory implements ApplicationContext
      * @return A context, on which the <code>refresh()</code> method hasn't been
      *         called yet
      */
-    public JTesterSpringContext createApplicationContext(List<String> locations, boolean refresh, boolean allowLazy) {
+    public Test4JSpringContext createApplicationContext(List<String> locations, boolean refresh, boolean allowLazy) {
         if (allowLazy) {
-            JTesterSpringContext c = new LazySpringContext(locations.toArray(new String[0]), refresh);
+            Test4JSpringContext c = new LazySpringContext(locations.toArray(new String[0]), refresh);
             return c;
         } else {
-            JTesterSpringContext c = new JTesterSpringContext(locations.toArray(new String[0]), refresh);
+            Test4JSpringContext c = new Test4JSpringContext(locations.toArray(new String[0]), refresh);
             return c;
         }
     }

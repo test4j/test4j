@@ -6,10 +6,10 @@ import java.util.Map.Entry;
 
 import org.junit.Before;
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })
-public class MapAssertTest implements JTester {
+public class MapAssertTest implements Test4J {
     private Map<String, String> maps = null;
 
     @Before

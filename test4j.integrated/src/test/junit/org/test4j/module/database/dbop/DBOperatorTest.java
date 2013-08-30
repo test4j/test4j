@@ -6,12 +6,11 @@ import org.junit.Test;
 import org.test4j.database.table.ITable;
 import org.test4j.database.table.TddUserTable;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.database.bean.TddUser;
-import org.test4j.module.database.dbop.SqlSet;
 
 @SuppressWarnings("serial")
-public class DBOperatorTest implements JTester {
+public class DBOperatorTest implements Test4J {
 
     @Test
     public void testClean() {
@@ -94,7 +93,7 @@ public class DBOperatorTest implements JTester {
     @Test
     public void testExecute_FromFile() {
         final String file = System.getProperty("user.dir")
-                + "/src/test/resources/org/jtester/module/database/dbop/sql-demo.sql";
+                + "/src/test/resources/org/test4j/module/database/dbop/sql-demo.sql";
         db.cleanTable(ITable.t_tdd_user).execute(new File(file));
         db.table(ITable.t_tdd_user).count().isEqualTo(2);
     }

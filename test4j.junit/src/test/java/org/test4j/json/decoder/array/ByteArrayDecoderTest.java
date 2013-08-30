@@ -2,9 +2,9 @@ package org.test4j.json.decoder.array;
 
 import org.junit.Test;
 import org.test4j.json.JSON;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
-public class ByteArrayDecoderTest implements JTester {
+public class ByteArrayDecoderTest implements Test4J {
 
     @Test
     public void testParseFromJSONArray() {

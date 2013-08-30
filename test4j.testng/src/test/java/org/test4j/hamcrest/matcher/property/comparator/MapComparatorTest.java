@@ -4,12 +4,12 @@ import java.util.HashMap;
 
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.json.encoder.beans.test.User;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "rawtypes", "unchecked", "serial" })
 @Test
-public class MapComparatorTest extends JTester {
+public class MapComparatorTest extends Test4J {
 
 	public void testMap() {
 		want.object(new HashMap() {

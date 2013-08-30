@@ -3,11 +3,11 @@ package org.test4j.tools.reflector;
 import org.junit.Before;
 import org.junit.Test;
 import org.test4j.fortest.reflector.TestObject;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.tools.exception.NoSuchFieldRuntimeException;
 import org.test4j.tools.reflector.FieldAccessor;
 
-public class FieldAccessorTest_StaticField implements JTester {
+public class FieldAccessorTest_StaticField implements Test4J {
 
     private FieldAccessor<Integer> aStaticPrivate;
 

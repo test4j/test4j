@@ -9,17 +9,16 @@ import mockit.Mock;
 
 import org.junit.Test;
 import org.test4j.hamcrest.matcher.string.StringMode;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
-import org.test4j.module.database.utility.DBHelper;
 import org.test4j.tools.commons.ResourceHelper;
 
 @SuppressWarnings({ "rawtypes", "serial" })
-public class DBHelperTest implements JTester {
+public class DBHelperTest implements Test4J {
 
     @Test
     public void testParseSQL() throws FileNotFoundException {
-        String lines = ResourceHelper.readFromFile("org/jtester/module/database/util/testParseSQL.sql");
+        String lines = ResourceHelper.readFromFile("org/test4j/module/database/util/testParseSQL.sql");
         String[] statments = DBHelper.parseSQL(lines);
         want.array(statments).sizeEq(6);
     }

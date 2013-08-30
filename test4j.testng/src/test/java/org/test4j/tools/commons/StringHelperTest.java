@@ -1,11 +1,11 @@
 package org.test4j.tools.commons;
 
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.test4j.tools.commons.StringHelper;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-public class StringHelperTest extends JTester {
+public class StringHelperTest extends Test4J {
 
 	@Test
 	public void testJoin_Null() {

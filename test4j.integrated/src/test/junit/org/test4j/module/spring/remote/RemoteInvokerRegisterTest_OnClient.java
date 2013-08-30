@@ -8,12 +8,12 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.web.context.support.StaticWebApplicationContext;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.spring.annotations.SpringBeanRemote.SpringBeanRemoteType;
 import org.test4j.module.spring.remote.RemoteInvokerRegister;
 
 @SuppressWarnings({ "rawtypes" })
-public class RemoteInvokerRegisterTest_OnClient implements JTester {
+public class RemoteInvokerRegisterTest_OnClient implements Test4J {
     @Test
     public void testRegisterSpringBeanRemoteOnClient() {
         new MockUp<RemoteInvokerRegister>() {

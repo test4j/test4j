@@ -3,9 +3,9 @@ package org.test4j.hamcrest.matcher.clazz;
 import mockit.Mocked;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
-public class ClassAssignFromMatcherTest implements JTester {
+public class ClassAssignFromMatcherTest implements Test4J {
     @Test
     public void testClassAssignFromMatcher() {
         want.object(new B()).clazIsSubFrom(A.class);

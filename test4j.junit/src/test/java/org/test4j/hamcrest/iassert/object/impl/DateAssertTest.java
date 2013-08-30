@@ -12,12 +12,12 @@ import mockit.Mocked;
 import mockit.internal.UnexpectedInvocation;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.inject.annotations.Inject;
 import org.test4j.tools.commons.DateHelper;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })
-public class DateAssertTest implements JTester {
+public class DateAssertTest implements Test4J {
     private static DateFormat format  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private static Date       date    = null;
     private static Calendar   cal     = null;

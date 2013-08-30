@@ -19,18 +19,20 @@ import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.commons.StringHelper;
 import org.test4j.tools.reflector.FieldAccessor;
 import org.test4j.tools.reflector.PropertyAccessor;
-import org.test4j.tools.reflector.imposteriser.JTesterProxy;
+import org.test4j.tools.reflector.imposteriser.Test4JProxy;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class InjectModule implements Module {
+    @Override
     public void init() {
     }
 
+    @Override
     public void afterInit() {
     }
 
     /**
-     * jtester扩展的注入<br>
+     * test4j扩展的注入<br>
      * 
      * @param testedObject
      */
@@ -73,7 +75,7 @@ public class InjectModule implements Module {
                 continue;
             }
             try {
-                Object injectedObject = JTesterProxy.proxy(testedObject.getClass(), injectField);
+                Object injectedObject = Test4JProxy.proxy(testedObject.getClass(), injectField);
                 injectedInto(testedObject, injectedObject, injectedClazz, inject.targets(), inject.properties());
             } catch (IllegalArgumentException e) {
                 Object injectedObject = new FieldAccessor(testedObject.getClass(), injectField).get(testedObject);
@@ -96,7 +98,7 @@ public class InjectModule implements Module {
             Inject inject = field.getAnnotation(Inject.class);
             if (inject.targets().length == 0) {
                 try {
-                    Object value = JTesterProxy.proxy(testedClazz, field);
+                    Object value = Test4JProxy.proxy(testedClazz, field);
                     values.put(field.getName(), value);
                 } catch (IllegalArgumentException ie) {
                     Object value = new FieldAccessor(testedClazz, field).get(testedObject);
@@ -135,6 +137,7 @@ public class InjectModule implements Module {
         }
     }
 
+    @Override
     public TestListener getTestListener() {
         return new InjectTestListener();
     }

@@ -16,9 +16,9 @@ import org.test4j.hamcrest.iassert.object.intf.IIntegerAssert;
 import org.test4j.hamcrest.iassert.object.intf.ILongAssert;
 import org.test4j.hamcrest.iassert.object.intf.IShortAssert;
 import org.test4j.hamcrest.iassert.object.intf.IStringAssert;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
-public class WantStyleAssertionTest implements JTester {
+public class WantStyleAssertionTest implements Test4J {
     @Test
     public void wantAssert() {
         want.object(want.string(new String())).clazIs(IStringAssert.class);

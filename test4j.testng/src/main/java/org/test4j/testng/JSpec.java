@@ -22,7 +22,7 @@ import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public abstract class JSpec extends JTesterCore implements ISpec, ICore, IMockict, ISpring, IDatabase {
+public abstract class JSpec extends Test4JCore implements ISpec, ICore, IMockict, ISpring, IDatabase {
     static ISpecExecutorFactory                  specFactory   = ICoreInitial.initSpecExecutorFactory();
 
     private final Map<SpecMethodID, ISpecMethod> specMethods;

@@ -41,5 +41,5 @@ public interface ApplicationContextFactory {
 	 * @return A <code>ConfigurableApplicationContext</code>, on which the
 	 *         <code>refresh()</code> method hasn't been called yet
 	 */
-	JTesterSpringContext createApplicationContext(List<String> locations, boolean refresh, boolean shared);
+	Test4JSpringContext createApplicationContext(List<String> locations, boolean refresh, boolean shared);
 }

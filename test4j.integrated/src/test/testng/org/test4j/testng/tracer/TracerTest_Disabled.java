@@ -11,15 +11,15 @@ import org.test4j.module.database.IDatabase;
 import org.test4j.module.spring.annotations.SpringBeanByType;
 import org.test4j.module.spring.annotations.SpringContext;
 import org.test4j.module.tracer.TracerHelper;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.test4j.tools.commons.ResourceHelper;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "serial" })
-@SpringContext({ "classpath:/org/jtester/fortest/hibernate/project.xml" })
-@Test(groups = { "jtester", "tracer", "broken-install", "hibernate" })
-public class TracerTest_Disabled extends JTester implements IDatabase {
+@SpringContext({ "classpath:/org/test4j/fortest/hibernate/project.xml" })
+@Test(groups = { "test4j", "tracer", "broken-install", "hibernate" })
+public class TracerTest_Disabled extends Test4J implements IDatabase {
     @SpringBeanByType
     private UserService userService;
 
@@ -57,7 +57,7 @@ public class TracerTest_Disabled extends JTester implements IDatabase {
     @Test(dependsOnMethods = "monitorSpringFalse")
     public void monitorSpringFalse_check() throws FileNotFoundException {
         String tracerInfo = ResourceHelper
-                .readFromFile("target/tracer/org/jtester/tracer/TracerTest#monitorSpringFalse.html");
+                .readFromFile("target/tracer/org/test4j/tracer/TracerTest#monitorSpringFalse.html");
         want.string(tracerInfo).notContain("paras").notContain("result");
     }
 
@@ -85,7 +85,7 @@ public class TracerTest_Disabled extends JTester implements IDatabase {
     @Test(dependsOnMethods = "monitorSpringFalse")
     public void monitorJdbcFalse_check() throws FileNotFoundException {
         String tracerInfo = ResourceHelper
-                .readFromFile("target/tracer/org/jtester/tracer/TracerTest#monitorJdbcFalse.html");
+                .readFromFile("target/tracer/org/test4j/tracer/TracerTest#monitorJdbcFalse.html");
         want.string(tracerInfo).notContain("SQL-Statement");
     }
 }

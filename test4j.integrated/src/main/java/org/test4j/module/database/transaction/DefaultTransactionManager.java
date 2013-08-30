@@ -15,7 +15,7 @@ import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.TransactionDefinition;
 import org.springframework.transaction.TransactionStatus;
 import org.springframework.transaction.support.DefaultTransactionDefinition;
-import org.test4j.module.JTesterException;
+import org.test4j.module.Test4JException;
 import org.test4j.module.core.TestContext;
 import org.test4j.module.core.utility.MessageHelper;
 
@@ -93,7 +93,7 @@ public class DefaultTransactionManager implements TransactionManager {
         Object testObject = TestContext.currTestedObject();
         Boolean hasActived = testObjectTransactionActiveMap.containsKey(testObject);
         if (hasActived == null) {
-            throw new JTesterException("Trying to commit, while no transaction is currently active");
+            throw new Test4JException("Trying to commit, while no transaction is currently active");
         }
         TransactionStatus transactionStatus = testObjectTransactionStatusMap.get(testObject);
         if (hasActived == Boolean.TRUE && transactionStatus != null) {
@@ -107,7 +107,7 @@ public class DefaultTransactionManager implements TransactionManager {
         Object testObject = TestContext.currTestedObject();
         Boolean hasActived = testObjectTransactionActiveMap.containsKey(testObject);
         if (hasActived == null) {
-            throw new JTesterException("Trying to rollback, while no transaction is currently active");
+            throw new Test4JException("Trying to rollback, while no transaction is currently active");
         }
         TransactionStatus transactionStatus = testObjectTransactionStatusMap.get(testObject);
         if (hasActived == Boolean.TRUE && transactionStatus != null) {
@@ -147,7 +147,7 @@ public class DefaultTransactionManager implements TransactionManager {
                 return transactionManagementConfiguration;
             }
         }
-        throw new JTesterException("No applicable transaction management configuration found for test "
+        throw new Test4JException("No applicable transaction management configuration found for test "
                 + testObject.getClass());
     }
 

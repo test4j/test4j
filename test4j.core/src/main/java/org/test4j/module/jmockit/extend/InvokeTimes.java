@@ -3,7 +3,7 @@ package org.test4j.module.jmockit.extend;
 import mockit.internal.expectations.transformation.ActiveInvocations;
 
 public class InvokeTimes extends ExpectationsResult {
-	InvokeTimes(JTesterInvocations expectations) {
+	InvokeTimes(Test4JInvocations expectations) {
 		super(expectations);
 	}
 

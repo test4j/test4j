@@ -10,8 +10,8 @@ import org.test4j.module.database.DatabaseModule;
 import org.test4j.module.database.environment.DBEnvironmentFactory;
 import org.test4j.module.database.transaction.SpringTransactionManagementConfiguration;
 import org.test4j.module.spring.strategy.ApplicationContextFactory;
-import org.test4j.module.spring.strategy.JTesterBeanFactory;
-import org.test4j.module.spring.strategy.JTesterSpringContext;
+import org.test4j.module.spring.strategy.Test4JBeanFactory;
+import org.test4j.module.spring.strategy.Test4JSpringContext;
 import org.test4j.module.spring.strategy.injector.SpringBeanInjector;
 import org.test4j.module.spring.utility.SpringInitInvoker;
 import org.test4j.module.spring.utility.SpringModuleHelper;
@@ -47,7 +47,7 @@ public class SpringModule implements Module {
 	public void invalidateApplicationContext() {
 		Class testClazz = TestContext.currTestedClazz();
 		SpringTestedContext.removeSpringContext();
-		JTesterSpringContext springContext = SpringModuleHelper.initSpringContext(testClazz, this.contextFactory);
+		Test4JSpringContext springContext = SpringModuleHelper.initSpringContext(testClazz, this.contextFactory);
 		SpringTestedContext.setSpringContext(springContext);
 	}
 
@@ -65,7 +65,7 @@ public class SpringModule implements Module {
 
 			SpringInitInvoker.invokeSpringInitMethod(TestContext.currTestedObject());
 
-			JTesterSpringContext springContext = SpringModuleHelper.initSpringContext(testClazz, contextFactory);
+			Test4JSpringContext springContext = SpringModuleHelper.initSpringContext(testClazz, contextFactory);
 			SpringTestedContext.setSpringContext(springContext);
 		}
 
@@ -76,7 +76,7 @@ public class SpringModule implements Module {
 		 */
 		@Override
 		public void beforeMethod(Object testObject, Method testMethod) {
-			JTesterBeanFactory beanFactory = (JTesterBeanFactory) SpringTestedContext.getSpringBeanFactory();
+			Test4JBeanFactory beanFactory = (Test4JBeanFactory) SpringTestedContext.getSpringBeanFactory();
 			if (beanFactory != null) {
 				SpringBeanInjector.injectSpringBeans(beanFactory, testObject);
 			}

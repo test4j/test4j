@@ -8,13 +8,13 @@ import org.junit.Test;
 import org.test4j.database.table.ITable;
 import org.test4j.database.table.TddUserTable;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 import org.test4j.tools.datagen.DataSet;
 import org.test4j.tools.datagen.EmptyDataSet;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })
-public class DataGeneratorTest implements JTester {
+public class DataGeneratorTest implements Test4J {
 
     @Test
     @DataFrom("dataGenerator")

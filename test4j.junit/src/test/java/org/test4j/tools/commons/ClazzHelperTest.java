@@ -8,13 +8,12 @@ import java.lang.reflect.Proxy;
 import org.junit.Test;
 import org.test4j.json.encoder.beans.test.TestedClazz;
 import org.test4j.json.encoder.beans.test.TestedIntf;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
-import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.datagen.ConstructorArgsGenerator;
 
 @SuppressWarnings("rawtypes")
-public class ClazzHelperTest implements JTester {
+public class ClazzHelperTest implements Test4J {
 
     @Test
     @DataFrom("provideClazzName")
@@ -24,7 +23,7 @@ public class ClazzHelperTest implements JTester {
 
     public static Object[][] provideClazzName() {
         return new String[][] { { "", "" }, { "EefErr", "" },
-                { "org.jtester.utility.ClazzUtilTest", "org.jtester.utility" } };
+                { "org.test4j.utility.ClazzUtilTest", "org.test4j.utility" } };
     }
 
     @Test
@@ -58,6 +57,7 @@ public class ClazzHelperTest implements JTester {
     public static Object[][] proxy_types() {
         Object proxy = Proxy.newProxyInstance(ClazzHelperTest.class.getClassLoader(), new Class[] { TestedIntf.class },
                 new InvocationHandler() {
+                    @Override
                     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
                         return null;
                     }
@@ -81,6 +81,7 @@ public class ClazzHelperTest implements JTester {
     public void testNewInstance() throws Exception {
         PrivateParaConstructor result = reflector.newInstance(PrivateParaConstructor.class,
                 new ConstructorArgsGenerator() {
+                    @Override
                     public Object[] generate(Constructor constructor) {
                         return new Object[] { 1 };
                     }
@@ -95,8 +96,8 @@ public class ClazzHelperTest implements JTester {
 
     @SuppressWarnings("unused")
     private static class PrivateParaConstructor {
-        private int    i;
-        private String str;
+        private final int    i;
+        private final String str;
 
         private PrivateParaConstructor(int i) {
             this.i = i;

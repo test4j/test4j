@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
 
-import org.test4j.module.JTesterException;
+import org.test4j.module.Test4JException;
 
 /**
  * 获得一个类（方法）的测试类（方法）的工具
@@ -84,7 +84,7 @@ public class MethodFinder {
 			try {
 				clazz = Class.forName(classname);
 			} catch (ClassNotFoundException e) {
-				throw new JTesterException(e);
+				throw new Test4JException(e);
 			}
 			Method[] methods = clazz.getMethods();
 			for (Method method : methods) {
@@ -110,7 +110,7 @@ public class MethodFinder {
 			Class claz = Class.forName(classname);
 			return MethodFinder.findTestMethod(claz, methodname);
 		} catch (ClassNotFoundException e) {
-			throw new JTesterException(e);
+			throw new Test4JException(e);
 		}
 	}
 }

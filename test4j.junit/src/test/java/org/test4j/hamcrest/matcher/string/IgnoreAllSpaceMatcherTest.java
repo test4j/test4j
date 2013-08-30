@@ -6,12 +6,12 @@ import org.junit.Test;
 import org.test4j.hamcrest.matcher.string.StringEqualMatcher;
 import org.test4j.hamcrest.matcher.string.StringMatcher;
 import org.test4j.hamcrest.matcher.string.StringMode;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
 import ext.test4j.hamcrest.MatcherAssert;
 
-public class IgnoreAllSpaceMatcherTest implements JTester {
+public class IgnoreAllSpaceMatcherTest implements Test4J {
 
     @Test
     @DataFrom("spaceMatcherData")

@@ -8,14 +8,14 @@ import org.test4j.database.table.ITable;
 import org.test4j.fortest.beans.User;
 import org.test4j.fortest.service.UserService;
 import org.test4j.fortest.service.UserServiceImpl;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.annotations.SpringContext;
 
-@SpringContext({ "org/jtester/module/spring/testedbeans/xml/beans.xml",
-        "org/jtester/module/spring/testedbeans/xml/data-source.xml" })
-public class MockitPartialMockSpringBeanTest implements JTester {
+@SpringContext({ "org/test4j/module/spring/testedbeans/xml/beans.xml",
+        "org/test4j/module/spring/testedbeans/xml/data-source.xml" })
+public class MockitPartialMockSpringBeanTest implements Test4J {
 
     @SpringBeanByName
     private UserService userService;

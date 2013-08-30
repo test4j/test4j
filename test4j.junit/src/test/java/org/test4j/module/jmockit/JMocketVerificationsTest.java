@@ -3,11 +3,11 @@ package org.test4j.module.jmockit;
 import mockit.NonStrict;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.jmockit.extend.JMocketVerifications;
 
-public class JMocketVerificationsTest implements JTester {
+public class JMocketVerificationsTest implements Test4J {
 
     @NonStrict
     Hello hello1;

@@ -3,9 +3,9 @@ package org.test4j.hamcrest.iassert.object.impl;
 import java.util.Arrays;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
-public class CollectionAssertTest_HasItem implements JTester {
+public class CollectionAssertTest_HasItem implements Test4J {
     @Test
     public void hasItems_test1() {
         want.collection(Arrays.asList("aaa", "bbb", "ccc")).hasAllItems("aaa");

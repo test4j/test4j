@@ -1,13 +1,10 @@
 package org.test4j.module.spring.annotations;
 
 import org.junit.Test;
-import org.test4j.junit.JTester;
-import org.test4j.module.spring.annotations.ExMyService;
-import org.test4j.module.spring.annotations.SpringBeanByName;
-import org.test4j.module.spring.annotations.SpringContext;
+import org.test4j.junit.Test4J;
 
-@SpringContext("org/jtester/module/spring/reflector/reflector-invoke.xml")
-public class SuperClazMethodAccessorTest_Invoke implements JTester {
+@SpringContext("org/test4j/module/spring/reflector/reflector-invoke.xml")
+public class SuperClazMethodAccessorTest_Invoke implements Test4J {
     @SpringBeanByName
     private ExMyService myService;
 

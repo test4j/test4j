@@ -14,15 +14,15 @@ import org.test4j.module.database.annotations.Transactional;
 import org.test4j.module.database.annotations.Transactional.TransactionMode;
 import org.test4j.module.database.dbop.TableOp;
 import org.test4j.module.database.environment.TableMeta.ColumnMeta;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.test4j.tools.commons.ExceptionWrapper;
 import org.test4j.tools.datagen.DataSet;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "serial", "unchecked" })
 @Transactional(TransactionMode.COMMIT)
-@Test(groups = { "jtester", "database" })
-public class TableOpTest extends JTester implements IDatabase {
+@Test(groups = { "test4j", "database" })
+public class TableOpTest extends Test4J implements IDatabase {
 
     @Test
     public void testInsertData() throws SQLException {
@@ -180,7 +180,7 @@ public class TableOpTest extends JTester implements IDatabase {
                 this.put(IColumn.f_first_name, "darui.wu");
                 this.put(IColumn.f_post_code, "jteste");
                 this.put(IColumn.f_address_id, 0);
-                this.put(IColumn.f_last_name, "jtester");
+                this.put(IColumn.f_last_name, "test4j");
                 this.put(IColumn.f_sarary, 0.0);
             }
         }, new TddUserTable() {
@@ -191,7 +191,7 @@ public class TableOpTest extends JTester implements IDatabase {
                 this.put(IColumn.f_first_name, "data.iterator");
                 this.put(IColumn.f_post_code, "jteste");
                 this.put(IColumn.f_address_id, 0);
-                this.put(IColumn.f_last_name, "jtester");
+                this.put(IColumn.f_last_name, "test4j");
                 this.put(IColumn.f_sarary, 0.0);
             }
         }));
@@ -216,7 +216,7 @@ public class TableOpTest extends JTester implements IDatabase {
                 this.put(IColumn.f_first_name, "darui.wu", "data.iterator");
                 this.put(IColumn.f_post_code, "jteste");
                 this.put(IColumn.f_address_id, 0);
-                this.put(IColumn.f_last_name, "jtester");
+                this.put(IColumn.f_last_name, "test4j");
                 this.put(IColumn.f_sarary, 0.0);
             }
         }, EqMode.IGNORE_ORDER);

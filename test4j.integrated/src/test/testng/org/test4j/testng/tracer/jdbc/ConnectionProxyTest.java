@@ -7,57 +7,57 @@ import java.sql.Statement;
 import mockit.Mock;
 
 import org.test4j.hamcrest.matcher.string.StringMode;
-import org.test4j.module.database.environment.JTesterDataSource;
+import org.test4j.module.database.environment.Test4JDataSource;
 import org.test4j.module.database.utility.DataSourceType;
 import org.test4j.module.tracer.TracerHelper;
 import org.test4j.module.tracer.TracerLogger;
 import org.test4j.module.tracer.TracerManager;
 import org.test4j.module.tracer.TxtFileTracerLogger;
 import org.test4j.module.tracer.jdbc.IProxyMarker;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.test4j.tools.commons.ConfigHelper;
 import org.test4j.tools.commons.ResourceHelper;
 import org.testng.annotations.Test;
 
-public class ConnectionProxyTest extends JTester {
-	@Test(groups = "jtester")
-	public void minitorSql() throws Exception {
-		new MockUp<TracerHelper>() {
-			@Mock
-			public boolean doesTracerEnabled() {
-				return true;
-			}
-		};
-		new MockUp<TracerLogger>() {
-			@Mock
-			public String getFile(String method, String surfix) {
-				return "ConnectionProxyTest.minitorSql.txt";
-			}
+public class ConnectionProxyTest extends Test4J {
+    @Test(groups = "test4j")
+    public void minitorSql() throws Exception {
+        new MockUp<TracerHelper>() {
+            @Mock
+            public boolean doesTracerEnabled() {
+                return true;
+            }
+        };
+        new MockUp<TracerLogger>() {
+            @Mock
+            public String getFile(String method, String surfix) {
+                return "ConnectionProxyTest.minitorSql.txt";
+            }
 
-			@Mock
-			public TracerLogger instance(boolean logInTxt) {
-				return new TxtFileTracerLogger();
-			}
-		};
-		TracerManager.startTracer();
-		TracerManager.continueJDBC();
-		DataSourceType type = DataSourceType.databaseType("mysql");
-		String username = ConfigHelper.databaseUserName();
-		String driver = ConfigHelper.databaseDriver();
-		String url = ConfigHelper.databaseUrl();
-		String password = ConfigHelper.databasePassword();
+            @Mock
+            public TracerLogger instance(boolean logInTxt) {
+                return new TxtFileTracerLogger();
+            }
+        };
+        TracerManager.startTracer();
+        TracerManager.continueJDBC();
+        DataSourceType type = DataSourceType.databaseType("mysql");
+        String username = ConfigHelper.databaseUserName();
+        String driver = ConfigHelper.databaseDriver();
+        String url = ConfigHelper.databaseUrl();
+        String password = ConfigHelper.databasePassword();
 
-		JTesterDataSource proxy = new JTesterDataSource(type, driver, url, "jtester", username, password);
+        Test4JDataSource proxy = new Test4JDataSource(type, driver, url, "test4j", username, password);
 
-		Connection conn = proxy.getConnection();
-		want.object(conn).clazIs(Connection.class).clazIs(IProxyMarker.class);
-		Statement statement = conn.createStatement();
-		ResultSet rs = statement.executeQuery("select * from tdd_user");
-		want.object(rs).notNull();
+        Connection conn = proxy.getConnection();
+        want.object(conn).clazIs(Connection.class).clazIs(IProxyMarker.class);
+        Statement statement = conn.createStatement();
+        ResultSet rs = statement.executeQuery("select * from tdd_user");
+        want.object(rs).notNull();
 
-		TracerManager.endTracer();
-		String traces = ResourceHelper.readFromFile("file://" + System.getProperty("user.dir")
-				+ "/target/tracer/ConnectionProxyTest.minitorSql.txt");
-		want.string(traces).isEqualTo("#START_SQL\nselect * from tdd_user\n#END_SQL", StringMode.SameAsSpace);
-	}
+        TracerManager.endTracer();
+        String traces = ResourceHelper.readFromFile("file://" + System.getProperty("user.dir")
+                + "/target/tracer/ConnectionProxyTest.minitorSql.txt");
+        want.string(traces).isEqualTo("#START_SQL\nselect * from tdd_user\n#END_SQL", StringMode.SameAsSpace);
+    }
 }

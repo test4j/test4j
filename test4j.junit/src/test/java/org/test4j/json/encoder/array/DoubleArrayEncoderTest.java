@@ -7,10 +7,10 @@ import org.junit.Test;
 import org.test4j.json.encoder.JSONEncoder;
 import org.test4j.json.encoder.array.ObjectArrayEncoder;
 import org.test4j.json.helper.JSONFeature;
-import org.test4j.junit.JTester;
+import org.test4j.junit.Test4J;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class DoubleArrayEncoderTest implements JTester {
+public class DoubleArrayEncoderTest implements Test4J {
     @Test
     public void testEncode() throws Exception {
         double[] values = new double[] { 12.34d, 45.56D };

@@ -5,12 +5,12 @@ import java.util.ArrayList;
 import org.test4j.hamcrest.matcher.modes.ItemsMode;
 import org.test4j.json.JSON;
 import org.test4j.json.helper.JSONFeature;
-import org.test4j.testng.JTester;
+import org.test4j.testng.Test4J;
 import org.test4j.tools.commons.DateHelper;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class TestJson extends JTester {
+public class TestJson extends Test4J {
 	@Test
 	public void testList() {
 		ComplexPoJo dbpojo = new ComplexPoJo();
