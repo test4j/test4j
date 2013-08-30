@@ -5,7 +5,7 @@ import java.util.Map;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.module.spring.strategy.JTesterSpringContext;
 import org.jtester.module.spring.utility.SpringModuleHelper;
-import org.jtester.testng.JSpec;
+import org.test4j.testng.JSpec;
 import org.testng.annotations.BeforeMethod;
 
 @SuppressWarnings("rawtypes")

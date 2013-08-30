@@ -5,7 +5,7 @@ import java.util.Iterator;
 import java.util.Map;
 
 import org.jtester.spec.scenario.step.txt.ParameterParser;
-import org.jtester.testng.JTester;
+import org.test4j.testng.JTester;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

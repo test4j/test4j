@@ -5,12 +5,12 @@ import java.util.Properties;
 import mockit.Mock;
 
 import org.jtester.module.spring.remote.RemoteInvokerRegister;
-import org.jtester.testng.JTester;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.remoting.caucho.HessianServiceExporter;
 import org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter;
+import org.test4j.testng.JTester;
 import org.testng.annotations.Test;
 
 @Test(groups = "jtester")

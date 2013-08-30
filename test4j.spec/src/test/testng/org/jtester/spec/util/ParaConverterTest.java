@@ -3,7 +3,7 @@ package org.jtester.spec.util;
 import java.util.Iterator;
 
 import org.jtester.spec.util.ParaConverter;
-import org.jtester.testng.JTester;
+import org.test4j.testng.JTester;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

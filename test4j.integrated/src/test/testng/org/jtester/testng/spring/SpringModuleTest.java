@@ -3,7 +3,7 @@ package org.jtester.testng.spring;
 import org.jtester.fortest.hibernate.AddressService;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.module.spring.annotations.SpringBeanByName;
-import org.jtester.testng.JTester;
+import org.test4j.testng.JTester;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

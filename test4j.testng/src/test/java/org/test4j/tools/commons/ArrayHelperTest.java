@@ -3,7 +3,7 @@ package org.test4j.tools.commons;
 import java.util.Arrays;
 import java.util.HashMap;
 
-import org.jtester.testng.JTester;
+import org.test4j.testng.JTester;
 import org.test4j.tools.commons.ArrayHelper;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

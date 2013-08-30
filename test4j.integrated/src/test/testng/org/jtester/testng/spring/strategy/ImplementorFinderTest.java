@@ -10,7 +10,7 @@ import org.jtester.module.spring.annotations.AutoBeanInject.BeanMap;
 import org.jtester.module.spring.exception.FindBeanImplClassException;
 import org.jtester.module.spring.strategy.ImplementorFinder;
 import org.jtester.module.spring.strategy.ImplementorFinderEx;
-import org.jtester.testng.JTester;
+import org.test4j.testng.JTester;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

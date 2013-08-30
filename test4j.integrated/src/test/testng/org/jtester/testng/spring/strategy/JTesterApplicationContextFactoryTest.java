@@ -7,7 +7,7 @@ import org.test4j.fortest.formock.SomeInterface.SomeInterfaceImpl2;
 import org.testng.annotations.Test;
 
 @Test(groups = { "JTester" })
-public class JTesterApplicationContextFactoryTest extends org.jtester.testng.JTester {
+public class JTesterApplicationContextFactoryTest extends org.test4j.testng.JTester {
 	private static final String TO_BE_OVERRIDEN_BEAN_NAME = "toBeOverriden";
 	private static final String ANOTHER_BEAN_NAME = "springBeanService";
 

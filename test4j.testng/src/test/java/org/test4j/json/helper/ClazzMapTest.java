@@ -1,8 +1,8 @@
 package org.test4j.json.helper;
 
-import org.jtester.testng.JTester;
 import org.test4j.json.encoder.beans.test.User;
 import org.test4j.json.helper.ClazzMap;
+import org.test4j.testng.JTester;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

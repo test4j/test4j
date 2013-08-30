@@ -1,7 +1,7 @@
 package org.jtester.testng.spring;
 
 import org.jtester.module.spring.annotations.SpringContext;
-import org.jtester.testng.JTester;
+import org.test4j.testng.JTester;
 import org.testng.annotations.Test;
 
 @Test(groups = { "jtester", "mockbean" })

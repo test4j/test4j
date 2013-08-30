@@ -8,9 +8,9 @@ import java.util.List;
 import mockit.Mock;
 
 import org.jtester.spec.scenario.step.JSpecStep;
-import org.jtester.testng.JTester;
 import org.test4j.spec.inner.IScenario;
 import org.test4j.spec.inner.StepType;
+import org.test4j.testng.JTester;
 import org.test4j.tools.commons.ResourceHelper;
 import org.testng.annotations.Test;
 

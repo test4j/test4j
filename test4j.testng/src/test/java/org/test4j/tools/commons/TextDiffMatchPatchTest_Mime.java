@@ -2,7 +2,7 @@ package org.test4j.tools.commons;
 
 import java.util.LinkedList;
 
-import org.jtester.testng.JTester;
+import org.test4j.testng.JTester;
 import org.test4j.tools.commons.TextDiffMatchPatch;
 import org.test4j.tools.commons.TextDiffMatchPatch.Diff;
 import org.testng.annotations.BeforeMethod;

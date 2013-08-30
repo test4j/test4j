@@ -4,10 +4,10 @@ import java.util.List;
 
 import org.jtester.spec.annotations.StoryFile;
 import org.jtester.spec.annotations.StoryType;
-import org.jtester.testng.JSpec;
 import org.test4j.spec.annotations.Given;
 import org.test4j.spec.annotations.Named;
 import org.test4j.spec.inner.IScenario;
+import org.test4j.testng.JSpec;
 import org.testng.annotations.Test;
 
 @StoryFile(type = StoryType.TXT)

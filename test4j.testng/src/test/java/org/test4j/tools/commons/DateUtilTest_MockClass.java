@@ -9,7 +9,7 @@ import mockit.Mock;
 import mockit.MockClass;
 import mockit.UsingMocksAndStubs;
 
-import org.jtester.testng.JTester;
+import org.test4j.testng.JTester;
 import org.test4j.tools.commons.DateHelper;
 import org.test4j.tools.commons.DateUtilTest_MockClass.MockDateUtil;
 import org.testng.annotations.Test;

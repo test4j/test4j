@@ -4,12 +4,12 @@ import mockit.Mock;
 
 import org.jtester.module.spring.annotations.SpringBeanRemote.SpringBeanRemoteType;
 import org.jtester.module.spring.remote.RemoteInvokerRegister;
-import org.jtester.testng.JTester;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.web.context.support.StaticWebApplicationContext;
+import org.test4j.testng.JTester;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({  "rawtypes" })

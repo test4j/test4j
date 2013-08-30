@@ -11,12 +11,12 @@ import java.util.List;
 import mockit.Mock;
 import mockit.MockClass;
 
-import org.jtester.testng.JTester;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.jmockit.demo.Database;
 import org.test4j.module.jmockit.demo.EntityX;
 import org.test4j.module.jmockit.demo.ServiceA;
 import org.test4j.module.jmockit.demo.ServiceB;
+import org.test4j.testng.JTester;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;

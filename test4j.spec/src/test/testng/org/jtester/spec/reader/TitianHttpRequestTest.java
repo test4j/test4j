@@ -10,7 +10,7 @@ import java.net.URLDecoder;
 
 import mockit.Mock;
 
-import org.jtester.testng.JTester;
+import org.test4j.testng.JTester;
 import org.testng.annotations.Test;
 
 @SuppressWarnings("unused")

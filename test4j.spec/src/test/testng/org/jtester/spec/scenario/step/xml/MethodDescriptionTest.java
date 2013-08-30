@@ -4,7 +4,7 @@ import static org.jtester.spec.scenario.step.xml.MethodDescription.VAR_START;
 import java.util.HashMap;
 import java.util.Iterator;
 
-import org.jtester.testng.JTester;
+import org.test4j.testng.JTester;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

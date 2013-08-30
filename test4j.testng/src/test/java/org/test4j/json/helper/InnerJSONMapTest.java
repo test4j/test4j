@@ -4,10 +4,10 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.jtester.testng.JTester;
 import org.test4j.json.helper.JSONMap;
 import org.test4j.json.helper.JSONObject;
 import org.test4j.json.helper.JSONSingle;
+import org.test4j.testng.JTester;
 import org.testng.annotations.Test;
 
 @SuppressWarnings("rawtypes")

@@ -5,7 +5,7 @@ import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.annotations.SpringBeanByType;
 import org.jtester.module.spring.annotations.AutoBeanInject.BeanMap;
-import org.jtester.testng.JTester;
+import org.test4j.testng.JTester;
 import org.testng.annotations.Test;
 
 @SpringContext({ "org/jtester/module/spring/testedbeans/xml/data-source.xml" })

@@ -11,9 +11,9 @@ import org.jtester.spec.scenario.xmlparser.entity.StoryScenario;
 import org.jtester.spec.scenario.xmlparser.entity.TemplateList;
 import org.jtester.spec.scenario.xmlparser.entity.TemplateMethod;
 import org.jtester.spec.util.XmlHelper;
-import org.jtester.testng.JTester;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.spec.inner.StepType;
+import org.test4j.testng.JTester;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

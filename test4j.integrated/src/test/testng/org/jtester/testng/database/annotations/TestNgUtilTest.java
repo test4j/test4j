@@ -2,8 +2,8 @@ package org.jtester.testng.database.annotations;
 
 import java.lang.reflect.Method;
 
-import org.jtester.testng.JTester;
-import org.jtester.testng.utility.TestNgUtil;
+import org.test4j.testng.JTester;
+import org.test4j.testng.utility.TestNgUtil;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

@@ -3,7 +3,7 @@ package org.jtester.testng.spring.annotations;
 import org.jtester.module.spring.annotations.ExMyService;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.module.spring.annotations.SpringBeanByName;
-import org.jtester.testng.JTester;
+import org.test4j.testng.JTester;
 import org.testng.annotations.Test;
 
 @SpringContext("org/jtester/module/spring/reflector/reflector-invoke.xml")

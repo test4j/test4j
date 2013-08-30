@@ -6,10 +6,10 @@ import org.jtester.module.tracer.Hello;
 import org.jtester.module.tracer.NoNullConstructor;
 import org.jtester.module.tracer.spring.SpringBeanTracer;
 import org.jtester.module.tracer.spring.TracerMethodRegexPointcut;
-import org.jtester.testng.JTester;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
+import org.test4j.testng.JTester;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "rawtypes" })

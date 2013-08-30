@@ -4,8 +4,8 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import org.jtester.testng.JTester;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.testng.JTester;
 import org.test4j.tools.commons.ListHelper;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

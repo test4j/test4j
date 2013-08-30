@@ -7,10 +7,10 @@ import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.annotations.SpringBeanFrom;
 import org.jtester.module.spring.testedbeans.resource.UserDaoResourceImpl;
-import org.jtester.testng.JTester;
 import org.test4j.fortest.beans.User;
 import org.test4j.fortest.service.UserDao;
 import org.test4j.fortest.service.UserService;
+import org.test4j.testng.JTester;
 import org.testng.annotations.Test;
 
 @Test(groups = "jtester")

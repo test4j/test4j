@@ -4,8 +4,8 @@ import mockit.Mocked;
 
 import org.jtester.module.spring.annotations.AutoBeanInject;
 import org.jtester.module.spring.annotations.SpringBeanFrom;
-import org.jtester.testng.JTester;
 import org.test4j.hamcrest.matcher.string.StringMode;
+import org.test4j.testng.JTester;
 import org.testng.annotations.Test;
 
 @SuppressWarnings("unused")

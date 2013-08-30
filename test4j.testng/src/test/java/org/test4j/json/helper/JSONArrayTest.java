@@ -1,8 +1,8 @@
 package org.test4j.json.helper;
 
-import org.jtester.testng.JTester;
 import org.test4j.json.helper.JSONArray;
 import org.test4j.json.helper.JSONSingle;
+import org.test4j.testng.JTester;
 import org.testng.annotations.Test;
 
 @Test(groups = { "jtester", "json" })

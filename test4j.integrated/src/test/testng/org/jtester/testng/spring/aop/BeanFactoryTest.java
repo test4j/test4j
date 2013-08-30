@@ -2,7 +2,6 @@ package org.jtester.testng.spring.aop;
 
 import org.jtester.fortest.service.UserAnotherDaoImpl;
 import org.jtester.module.tracer.spring.SpringBeanTracer;
-import org.jtester.testng.JTester;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
@@ -14,6 +13,7 @@ import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
 import org.test4j.fortest.service.UserService;
+import org.test4j.testng.JTester;
 import org.testng.annotations.Test;
 
 @Test(groups = "jtester")

@@ -3,7 +3,7 @@ package org.jtester.testng.database.environment;
 import mockit.Mock;
 
 import org.jtester.module.database.environment.TableMeta;
-import org.jtester.testng.JTester;
+import org.test4j.testng.JTester;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

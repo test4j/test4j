@@ -2,9 +2,9 @@ package org.test4j.json.helper;
 
 import java.util.Map;
 
-import org.jtester.testng.JTester;
 import org.test4j.json.JSON;
 import org.test4j.json.helper.JSONSingle;
+import org.test4j.testng.JTester;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

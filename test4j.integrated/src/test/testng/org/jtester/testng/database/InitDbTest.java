@@ -1,7 +1,7 @@
 package org.jtester.testng.database;
 
 import org.jtester.module.spring.annotations.SpringContext;
-import org.jtester.testng.JTester;
+import org.test4j.testng.JTester;
 import org.testng.annotations.Test;
 
 @SpringContext( { "classpath:/org/jtester/fortest/hibernate/project-placeholder.xml",

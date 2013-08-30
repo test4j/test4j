@@ -1,6 +1,6 @@
 package org.test4j.tools.commons;
 
-import org.jtester.testng.JTester;
+import org.test4j.testng.JTester;
 import org.test4j.tools.commons.ClazzHelper;
 import org.testng.annotations.Test;
 

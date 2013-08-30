@@ -2,8 +2,8 @@ package org.test4j.tools.commons;
 
 import java.util.List;
 
-import org.jtester.testng.JTester;
 import org.test4j.fortest.beans.User;
+import org.test4j.testng.JTester;
 import org.test4j.tools.commons.MethodFinder;
 import org.testng.annotations.Test;
 

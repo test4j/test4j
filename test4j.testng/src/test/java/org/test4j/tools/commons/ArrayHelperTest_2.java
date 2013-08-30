@@ -6,8 +6,8 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.HashSet;
 
-import org.jtester.testng.JTester;
 import org.test4j.fortest.beans.User;
+import org.test4j.testng.JTester;
 import org.test4j.tools.commons.ArrayHelper;
 import org.test4j.tools.commons.ListHelper;
 import org.testng.annotations.DataProvider;

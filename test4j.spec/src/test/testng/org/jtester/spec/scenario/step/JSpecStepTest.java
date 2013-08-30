@@ -8,8 +8,8 @@ import java.util.List;
 
 import org.jtester.spec.scenario.step.JSpecStep;
 import org.jtester.spec.scenario.step.txt.LineType;
-import org.jtester.testng.JTester;
 import org.test4j.spec.inner.StepType;
+import org.test4j.testng.JTester;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

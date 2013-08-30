@@ -2,7 +2,7 @@ package org.jtester.testng.spring.utility;
 
 import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.module.spring.annotations.SpringInitMethod;
-import org.jtester.testng.JTester;
+import org.test4j.testng.JTester;
 import org.testng.annotations.Test;
 
 @SpringContext({ "org/jtester/module/spring/testedbeans/xml/beans.xml",

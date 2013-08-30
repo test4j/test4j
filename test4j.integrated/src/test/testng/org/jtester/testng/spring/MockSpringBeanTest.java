@@ -8,11 +8,11 @@ import org.jtester.module.database.annotations.Transactional;
 import org.jtester.module.database.annotations.Transactional.TransactionMode;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.module.spring.annotations.SpringBeanByName;
-import org.jtester.testng.JTester;
 import org.test4j.fortest.beans.User;
 import org.test4j.fortest.service.UserDao;
 import org.test4j.fortest.service.UserService;
 import org.test4j.module.inject.annotations.Inject;
+import org.test4j.testng.JTester;
 import org.testng.annotations.Test;
 
 @Test(groups = "jtester")
