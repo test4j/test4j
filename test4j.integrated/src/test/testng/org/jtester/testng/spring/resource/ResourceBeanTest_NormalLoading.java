@@ -2,12 +2,12 @@ package org.jtester.testng.spring.resource;
 
 import mockit.Mock;
 
-import org.jtester.fortest.beans.User;
-import org.jtester.fortest.service.UserService;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.testedbeans.resource.UserDaoResourceImpl;
 import org.jtester.testng.JTester;
+import org.test4j.fortest.beans.User;
+import org.test4j.fortest.service.UserService;
 import org.testng.annotations.Test;
 
 @Test(groups = "jtester")

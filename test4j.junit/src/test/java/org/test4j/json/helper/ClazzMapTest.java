@@ -1,10 +1,10 @@
 package org.test4j.json.helper;
 
-import org.jtester.json.encoder.beans.test.User;
-import org.jtester.junit.JTester;
-import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
+import org.test4j.json.encoder.beans.test.User;
 import org.test4j.json.helper.ClazzMap;
+import org.test4j.junit.JTester;
+import org.test4j.junit.annotations.DataFrom;
 
 public class ClazzMapTest implements JTester {
 

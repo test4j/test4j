@@ -3,6 +3,9 @@ package org.jtester.fortest.beans;
 import java.io.Serializable;
 import java.util.Date;
 
+import org.test4j.fortest.beans.Employee;
+import org.test4j.fortest.beans.PhoneNumber;
+
 public class Manager extends Employee {
 	private static final long serialVersionUID = 843725563822394654L;
 	private Employee secretary;

@@ -1,8 +1,8 @@
 package org.jtester.hamcrest;
 
-import org.jtester.fortest.beans.Address;
-import org.jtester.fortest.beans.User;
 import org.jtester.testng.JTester;
+import org.test4j.fortest.beans.Address;
+import org.test4j.fortest.beans.User;
 import org.testng.annotations.Test;
 
 @Test(groups = { "jtester", "assertion" })

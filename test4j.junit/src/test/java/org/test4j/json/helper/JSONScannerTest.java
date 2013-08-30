@@ -1,7 +1,5 @@
 package org.test4j.json.helper;
 
-import org.jtester.junit.JTester;
-import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
 import org.test4j.json.JSON;
 import org.test4j.json.helper.JSONArray;
@@ -9,6 +7,8 @@ import org.test4j.json.helper.JSONMap;
 import org.test4j.json.helper.JSONObject;
 import org.test4j.json.helper.JSONScanner;
 import org.test4j.json.helper.JSONSingle;
+import org.test4j.junit.JTester;
+import org.test4j.junit.annotations.DataFrom;
 
 public class JSONScannerTest implements JTester {
 

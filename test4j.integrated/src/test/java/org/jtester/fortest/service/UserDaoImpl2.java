@@ -3,7 +3,8 @@ package org.jtester.fortest.service;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jtester.fortest.beans.User;
+import org.test4j.fortest.beans.User;
+import org.test4j.fortest.service.UserDao;
 
 public class UserDaoImpl2 implements UserDao {
 

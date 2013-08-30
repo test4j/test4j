@@ -1,5 +1,7 @@
 package org.jtester.fortest.service;
 
+import org.test4j.fortest.service.CalledService;
+
 public class CallingService {
 	private CalledService calledService;
 

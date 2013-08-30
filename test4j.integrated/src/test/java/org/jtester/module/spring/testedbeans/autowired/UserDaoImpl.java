@@ -1,6 +1,6 @@
 package org.jtester.module.spring.testedbeans.autowired;
 
-import org.jtester.fortest.beans.User;
+import org.test4j.fortest.beans.User;
 import org.test4j.module.core.utility.MessageHelper;
 
 public class UserDaoImpl implements IUserDao {

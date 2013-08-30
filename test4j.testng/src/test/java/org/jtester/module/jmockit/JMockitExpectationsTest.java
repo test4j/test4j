@@ -3,9 +3,9 @@ package org.jtester.module.jmockit;
 import mockit.Mocked;
 import mockit.internal.UnexpectedInvocation;
 
-import org.jtester.fortest.service.CalledService;
-import org.jtester.fortest.service.CallingService;
 import org.jtester.testng.JTester;
+import org.test4j.fortest.service.CalledService;
+import org.test4j.fortest.service.CallingService;
 import org.test4j.module.inject.annotations.Inject;
 import org.testng.annotations.Test;
 

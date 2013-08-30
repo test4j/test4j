@@ -2,8 +2,9 @@ package org.jtester.module.jmockit.intfmockup;
 
 import mockit.Mock;
 
-import org.jtester.module.jmockit.mockbug.SayHelloImpl;
 import org.jtester.testng.JTester;
+import org.test4j.module.jmockit.intfmockup.ISayHello;
+import org.test4j.module.jmockit.mockbug.SayHelloImpl;
 import org.testng.annotations.Test;
 
 @SuppressWarnings("unused")

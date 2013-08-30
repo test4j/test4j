@@ -1,12 +1,12 @@
 package org.jtester.testng.spring.strategy.register;
 
-import org.jtester.fortest.service.UserAnotherDao;
-import org.jtester.fortest.service.UserService;
 import org.jtester.module.spring.annotations.AutoBeanInject;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.annotations.AutoBeanInject.BeanMap;
 import org.jtester.testng.JTester;
+import org.test4j.fortest.service.UserAnotherDao;
+import org.test4j.fortest.service.UserService;
 import org.test4j.module.database.IDatabase;
 import org.test4j.module.spring.ISpring;
 import org.testng.annotations.Test;

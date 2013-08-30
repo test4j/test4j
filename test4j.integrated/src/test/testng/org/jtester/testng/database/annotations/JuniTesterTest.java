@@ -2,15 +2,15 @@ package org.jtester.testng.database.annotations;
 
 import java.util.List;
 
-import org.jtester.database.table.ITable;
-import org.jtester.fortest.beans.User;
-import org.jtester.fortest.service.ResourceLoader;
-import org.jtester.fortest.service.UserService;
 import org.jtester.module.spring.annotations.AutoBeanInject;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.module.spring.annotations.SpringInitMethod;
 import org.jtester.testng.JTester;
+import org.test4j.database.table.ITable;
+import org.test4j.fortest.beans.User;
+import org.test4j.fortest.service.ResourceLoader;
+import org.test4j.fortest.service.UserService;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.database.IDatabase;
 import org.testng.annotations.Test;

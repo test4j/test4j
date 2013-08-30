@@ -2,9 +2,6 @@ package org.jtester.module.spring.strategy.register;
 
 import mockit.Mock;
 
-import org.jtester.fortest.service.UserAnotherDao;
-import org.jtester.fortest.service.UserService;
-import org.jtester.junit.JTester;
 import org.jtester.module.spring.annotations.AutoBeanInject;
 import org.jtester.module.spring.annotations.AutoBeanInject.BeanMap;
 import org.jtester.module.spring.annotations.SpringBeanByName;
@@ -13,6 +10,9 @@ import org.jtester.module.tracer.TracerHelper;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.test4j.fortest.service.UserAnotherDao;
+import org.test4j.fortest.service.UserService;
+import org.test4j.junit.JTester;
 
 @Ignore
 @SpringContext({ "org/jtester/module/spring/testedbeans/xml/data-source.xml" })

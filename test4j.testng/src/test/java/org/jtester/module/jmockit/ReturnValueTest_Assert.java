@@ -6,10 +6,10 @@ import java.util.List;
 
 import mockit.Mocked;
 
-import org.jtester.fortest.beans.ComplexObject;
 import org.jtester.module.jmockit.ReturnValueTest.SomeInterface;
 import org.jtester.module.jmockit.ReturnValueTest.SomeService;
 import org.jtester.testng.JTester;
+import org.test4j.fortest.beans.ComplexObject;
 import org.test4j.module.inject.annotations.Inject;
 import org.testng.annotations.Test;
 

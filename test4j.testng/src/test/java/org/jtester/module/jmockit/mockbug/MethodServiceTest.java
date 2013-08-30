@@ -3,6 +3,7 @@ package org.jtester.module.jmockit.mockbug;
 import mockit.Mock;
 
 import org.jtester.testng.JTester;
+import org.test4j.module.jmockit.mockbug.TestedMethodService;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

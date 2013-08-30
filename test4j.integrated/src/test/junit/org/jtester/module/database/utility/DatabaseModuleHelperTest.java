@@ -1,7 +1,7 @@
 package org.jtester.module.database.utility;
 
-import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.junit.JTester;
 
 public class DatabaseModuleHelperTest implements JTester {
     /**

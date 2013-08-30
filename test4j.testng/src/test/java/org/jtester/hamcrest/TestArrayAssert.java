@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jtester.fortest.beans.User;
 import org.jtester.testng.JTester;
+import org.test4j.fortest.beans.User;
 import org.testng.annotations.Test;
 
 @Test(groups = { "jtester", "assertion" })

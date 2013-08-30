@@ -1,6 +1,6 @@
 package org.jtester.spec.steps;
 
-import org.jtester.junit.JSpec;
+import org.test4j.junit.JSpec;
 import org.test4j.spec.SharedData;
 import org.test4j.spec.annotations.Mix;
 

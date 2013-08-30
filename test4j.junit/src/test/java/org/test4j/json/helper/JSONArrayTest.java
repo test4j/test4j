@@ -1,9 +1,9 @@
 package org.test4j.json.helper;
 
-import org.jtester.junit.JTester;
 import org.junit.Test;
 import org.test4j.json.helper.JSONArray;
 import org.test4j.json.helper.JSONSingle;
+import org.test4j.junit.JTester;
 
 public class JSONArrayTest implements JTester {
 

@@ -7,15 +7,15 @@ import mockit.Mock;
 import mockit.Mocked;
 import mockit.Mockit;
 
-import org.jtester.database.table.ITable;
-import org.jtester.fortest.beans.User;
-import org.jtester.fortest.service.UserDao;
 import org.jtester.fortest.service.UserDaoImpl;
-import org.jtester.fortest.service.UserService;
-import org.jtester.junit.JTester;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.junit.Test;
+import org.test4j.database.table.ITable;
+import org.test4j.fortest.beans.User;
+import org.test4j.fortest.service.UserDao;
+import org.test4j.fortest.service.UserService;
+import org.test4j.junit.JTester;
 
 @SuppressWarnings("serial")
 @SpringContext({ "org/jtester/module/spring/testedbeans/xml/beans.xml",

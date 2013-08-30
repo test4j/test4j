@@ -1,4 +1,4 @@
-import org.jtester.junit.suite.AllTestSuite;
+import org.test4j.junit.suite.AllTestSuite;
 
 public class IntegeratedTest extends AllTestSuite {
 

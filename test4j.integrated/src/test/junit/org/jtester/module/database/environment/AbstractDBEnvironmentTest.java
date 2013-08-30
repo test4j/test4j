@@ -4,11 +4,11 @@ import java.util.Map;
 
 import mockit.Mock;
 
-import org.jtester.database.table.ITable;
-import org.jtester.database.table.TddUserTable;
-import org.jtester.junit.JTester;
 import org.jtester.module.database.environment.TableMeta.ColumnMeta;
 import org.junit.Test;
+import org.test4j.database.table.ITable;
+import org.test4j.database.table.TddUserTable;
+import org.test4j.junit.JTester;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })
 public class AbstractDBEnvironmentTest implements JTester {

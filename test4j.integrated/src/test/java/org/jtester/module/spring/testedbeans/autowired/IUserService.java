@@ -1,6 +1,6 @@
 package org.jtester.module.spring.testedbeans.autowired;
 
-import org.jtester.fortest.beans.User;
+import org.test4j.fortest.beans.User;
 
 public interface IUserService {
 	void insertUser(User user);

@@ -2,13 +2,13 @@ package org.jtester.module.jmockit;
 
 import mockit.Mocked;
 
-import org.jtester.fortest.formock.SomeInterface;
-import org.jtester.fortest.formock.SpringBeanService;
-import org.jtester.junit.JTester;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.annotations.SpringBeanFrom;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.junit.Test;
+import org.test4j.fortest.formock.SomeInterface;
+import org.test4j.fortest.formock.SpringBeanService;
+import org.test4j.junit.JTester;
 
 @SpringContext({ "org/jtester/module/spring/testedbeans/xml/mockbeans-withdependency.xml" })
 public class MockBeanTest_MissingDependency implements JTester {

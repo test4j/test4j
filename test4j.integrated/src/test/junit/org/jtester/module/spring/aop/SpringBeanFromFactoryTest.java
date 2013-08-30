@@ -3,12 +3,12 @@ package org.jtester.module.spring.aop;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jtester.fortest.beans.User;
-import org.jtester.fortest.service.UserDao;
-import org.jtester.fortest.service.UserService;
-import org.jtester.junit.JTester;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.junit.Test;
+import org.test4j.fortest.beans.User;
+import org.test4j.fortest.service.UserDao;
+import org.test4j.fortest.service.UserService;
+import org.test4j.junit.JTester;
 import org.test4j.module.core.utility.MessageHelper;
 
 @SpringContext({ "org/jtester/module/spring/testedbeans/aop/proxybeans.xml",

@@ -2,9 +2,9 @@ package org.test4j.tools.commons;
 
 import java.util.LinkedList;
 
-import org.jtester.junit.JTester;
 import org.junit.Before;
 import org.junit.Test;
+import org.test4j.junit.JTester;
 import org.test4j.tools.commons.TextDiffMatchPatch;
 import org.test4j.tools.commons.TextDiffMatchPatch.Diff;
 

@@ -2,13 +2,13 @@ package org.jtester.module.tracer;
 
 import java.lang.reflect.Modifier;
 
-import org.jtester.junit.JTester;
 import org.jtester.module.tracer.spring.SpringBeanTracer;
 import org.jtester.module.tracer.spring.TracerMethodRegexPointcut;
 import org.junit.Test;
 import org.springframework.aop.Advisor;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
+import org.test4j.junit.JTester;
 
 @SuppressWarnings({ "rawtypes" })
 public class SpringBeanTracerTest implements JTester {

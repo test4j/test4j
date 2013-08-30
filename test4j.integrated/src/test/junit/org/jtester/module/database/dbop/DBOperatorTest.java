@@ -2,12 +2,12 @@ package org.jtester.module.database.dbop;
 
 import java.io.File;
 
-import org.jtester.database.table.ITable;
-import org.jtester.database.table.TddUserTable;
-import org.jtester.junit.JTester;
 import org.jtester.module.database.bean.TddUser;
 import org.junit.Test;
+import org.test4j.database.table.ITable;
+import org.test4j.database.table.TddUserTable;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.junit.JTester;
 
 @SuppressWarnings("serial")
 public class DBOperatorTest implements JTester {

@@ -3,11 +3,11 @@ package org.test4j.tools.commons;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.jtester.fortest.beans.Manager;
-import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.fortest.beans.Manager;
 import org.test4j.json.JSON;
 import org.test4j.json.helper.JSONFeature;
+import org.test4j.junit.JTester;
 import org.test4j.tools.commons.JSONHelper;
 
 public class JsonHelperTest_JsonString implements JTester {

@@ -10,10 +10,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jtester.fortest.beans.Employee;
-import org.jtester.fortest.beans.Manager;
-import org.jtester.fortest.beans.User;
 import org.jtester.testng.JTester;
+import org.test4j.fortest.beans.Employee;
+import org.test4j.fortest.beans.Manager;
+import org.test4j.fortest.beans.User;
 import org.test4j.hamcrest.matcher.modes.ItemsMode;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.hamcrest.matcher.string.StringMode;

@@ -4,10 +4,10 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-import org.jtester.junit.JTester;
-import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.junit.JTester;
+import org.test4j.junit.annotations.DataFrom;
 import org.test4j.tools.commons.ArrayHelper;
 import org.test4j.tools.commons.ListHelper;
 

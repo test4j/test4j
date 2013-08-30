@@ -4,9 +4,9 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jtester.fortest.beans.Manager;
-import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.fortest.beans.Manager;
+import org.test4j.junit.JTester;
 import org.test4j.module.JTesterException;
 import org.test4j.tools.commons.JSONHelper;
 

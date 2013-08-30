@@ -1,9 +1,9 @@
 package org.jtester.module.spring.parentcontext;
 
-import org.jtester.fortest.service.UserServiceImpl;
-import org.jtester.junit.JTester;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.test4j.fortest.service.UserServiceImpl;
+import org.test4j.junit.JTester;
 
 @SuppressWarnings("unused")
 public class SpringParentDemo implements JTester {

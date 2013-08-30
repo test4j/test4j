@@ -2,7 +2,7 @@ package org.jtester.fortest.service;
 
 import java.util.List;
 
-import org.jtester.fortest.beans.User;
+import org.test4j.fortest.beans.User;
 
 public interface UserService {
 	public double paySalary(String postcode);

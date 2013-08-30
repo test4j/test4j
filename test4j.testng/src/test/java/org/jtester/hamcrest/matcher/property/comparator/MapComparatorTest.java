@@ -2,9 +2,9 @@ package org.jtester.hamcrest.matcher.property.comparator;
 
 import java.util.HashMap;
 
-import org.jtester.json.encoder.beans.test.User;
 import org.jtester.testng.JTester;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.json.encoder.beans.test.User;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "rawtypes", "unchecked", "serial" })

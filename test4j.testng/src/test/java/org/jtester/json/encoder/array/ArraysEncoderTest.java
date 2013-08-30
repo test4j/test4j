@@ -1,8 +1,8 @@
 package org.jtester.json.encoder.array;
 
-import org.jtester.json.encoder.beans.test.User;
 import org.jtester.testng.JTester;
 import org.test4j.json.JSON;
+import org.test4j.json.encoder.beans.test.User;
 import org.test4j.json.helper.JSONFeature;
 import org.testng.annotations.Test;
 

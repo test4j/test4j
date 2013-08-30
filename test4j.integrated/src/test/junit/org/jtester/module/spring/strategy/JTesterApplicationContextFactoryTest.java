@@ -1,10 +1,10 @@
 package org.jtester.module.spring.strategy;
 
-import org.jtester.fortest.formock.SomeInterface.SomeInterfaceImpl1;
-import org.jtester.fortest.formock.SomeInterface.SomeInterfaceImpl2;
-import org.jtester.fortest.formock.SpringBeanService;
-import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.fortest.formock.SpringBeanService;
+import org.test4j.fortest.formock.SomeInterface.SomeInterfaceImpl1;
+import org.test4j.fortest.formock.SomeInterface.SomeInterfaceImpl2;
+import org.test4j.junit.JTester;
 
 public class JTesterApplicationContextFactoryTest implements JTester {
     private static final String  TO_BE_OVERRIDEN_BEAN_NAME = "toBeOverriden";

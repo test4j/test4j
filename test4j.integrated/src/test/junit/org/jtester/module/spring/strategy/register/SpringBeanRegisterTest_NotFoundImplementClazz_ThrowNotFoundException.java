@@ -1,13 +1,13 @@
 package org.jtester.module.spring.strategy.register;
 
-import org.jtester.fortest.service.UserService;
-import org.jtester.junit.JTester;
 import org.jtester.module.spring.annotations.AutoBeanInject;
 import org.jtester.module.spring.annotations.AutoBeanInject.BeanMap;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.test4j.fortest.service.UserService;
+import org.test4j.junit.JTester;
 
 /**
  * @Scene :使用@AutoBeanInject 来自动注入spring bean，但是无法查找到属性的实现类<br>

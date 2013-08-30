@@ -2,12 +2,12 @@ package org.jtester.module.spring;
 
 import mockit.Mocked;
 
-import org.jtester.fortest.service.UserDao;
-import org.jtester.fortest.service.UserService;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.junit.Test;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.test4j.fortest.service.UserDao;
+import org.test4j.fortest.service.UserService;
 import org.test4j.module.database.IDatabase;
 import org.test4j.module.spring.ISpring;
 

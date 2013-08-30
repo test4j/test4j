@@ -3,10 +3,10 @@ package org.test4j.tools.commons;
 import java.lang.reflect.Field;
 import java.util.List;
 
-import org.jtester.fortest.beans.Manager;
-import org.jtester.junit.JTester;
-import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
+import org.test4j.fortest.beans.Manager;
+import org.test4j.junit.JTester;
+import org.test4j.junit.annotations.DataFrom;
 import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.commons.FieldHelper;
 import org.test4j.tools.exception.NoSuchFieldRuntimeException;

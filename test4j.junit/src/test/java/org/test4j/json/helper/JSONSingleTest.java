@@ -2,11 +2,11 @@ package org.test4j.json.helper;
 
 import java.util.Map;
 
-import org.jtester.junit.JTester;
-import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
 import org.test4j.json.JSON;
 import org.test4j.json.helper.JSONSingle;
+import org.test4j.junit.JTester;
+import org.test4j.junit.annotations.DataFrom;
 
 public class JSONSingleTest implements JTester {
 

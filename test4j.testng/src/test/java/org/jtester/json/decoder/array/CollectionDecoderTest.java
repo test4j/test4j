@@ -7,10 +7,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.jtester.json.decoder.ForTestType;
-import org.jtester.json.encoder.beans.test.User;
 import org.jtester.testng.JTester;
 import org.test4j.json.JSON;
 import org.test4j.json.decoder.CollectionDecoder;
+import org.test4j.json.encoder.beans.test.User;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

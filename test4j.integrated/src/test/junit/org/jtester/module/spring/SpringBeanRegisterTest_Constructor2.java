@@ -1,10 +1,10 @@
 package org.jtester.module.spring;
 
-import org.jtester.junit.JTester;
 import org.jtester.module.spring.annotations.AutoBeanInject;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.junit.Test;
+import org.test4j.junit.JTester;
 
 @SpringContext
 @AutoBeanInject

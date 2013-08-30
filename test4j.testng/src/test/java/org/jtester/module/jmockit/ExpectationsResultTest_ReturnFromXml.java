@@ -2,8 +2,8 @@ package org.jtester.module.jmockit;
 
 import mockit.Mocked;
 
-import org.jtester.fortest.beans.Manager;
 import org.jtester.testng.JTester;
+import org.test4j.fortest.beans.Manager;
 import org.test4j.tools.commons.JSONHelper;
 import org.testng.annotations.Test;
 

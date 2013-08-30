@@ -4,6 +4,8 @@ import mockit.Mocked;
 
 import org.jtester.module.spring.annotations.SpringBeanFrom;
 import org.junit.Test;
+import org.test4j.module.jmockit.mockbug.SayHelloImpl;
+import org.test4j.module.jmockit.mockbug.SayHelloImpl2;
 
 public class JMockitMockManagerTest extends JMockitMockManageBaseTest {
 

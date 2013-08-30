@@ -1,8 +1,8 @@
 package org.jtester.module.database.environment;
 
-import org.jtester.database.table.ITable;
-import org.jtester.database.table.TddUserTable;
 import org.junit.Test;
+import org.test4j.database.table.ITable;
+import org.test4j.database.table.TddUserTable;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.module.database.IDatabase;
 

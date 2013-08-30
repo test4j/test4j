@@ -6,11 +6,11 @@ import java.util.List;
 
 import mockit.Mock;
 
-import org.jtester.junit.JTester;
-import org.jtester.junit.annotations.DataFrom;
 import org.jtester.module.spring.annotations.AutoBeanInject.BeanMap;
 import org.jtester.module.spring.exception.FindBeanImplClassException;
 import org.junit.Test;
+import org.test4j.junit.JTester;
+import org.test4j.junit.annotations.DataFrom;
 
 @SuppressWarnings({ "rawtypes" })
 public class ImplementorFinderTest implements JTester {

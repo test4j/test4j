@@ -10,8 +10,8 @@ import mockit.Mock;
 import mockit.Mocked;
 import mockit.Mockit;
 
-import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.junit.JTester;
 import org.test4j.tools.commons.DateHelper;
 import org.test4j.tools.commons.DateUtilTest.MockDateUtil;
 

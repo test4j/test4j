@@ -2,8 +2,8 @@ package org.test4j.tools.commons;
 
 import mockit.Mocked;
 
-import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.junit.JTester;
 
 public class PrimitiveHelperTest_2 implements JTester {
     @Mocked

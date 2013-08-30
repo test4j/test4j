@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.jtester.junit.JTester;
 import org.junit.Test;
 import org.test4j.json.helper.JSONMap;
 import org.test4j.json.helper.JSONObject;
 import org.test4j.json.helper.JSONSingle;
+import org.test4j.junit.JTester;
 
 @SuppressWarnings("rawtypes")
 public class InnerJSONMapTest implements JTester {

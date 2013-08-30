@@ -5,8 +5,8 @@ import mockit.Mocked;
 import ext.test4j.hamcrest.MatcherAssert;
 import ext.test4j.hamcrest.core.IsEqual;
 
-import org.jtester.fortest.beans.ISpeak;
 import org.jtester.testng.JTester;
+import org.test4j.fortest.beans.ISpeak;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

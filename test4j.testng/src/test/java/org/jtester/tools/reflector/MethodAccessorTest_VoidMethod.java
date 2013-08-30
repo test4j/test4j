@@ -1,8 +1,8 @@
 package org.jtester.tools.reflector;
 
-import org.jtester.fortest.reflector.TestException;
-import org.jtester.fortest.reflector.TestObject;
 import org.jtester.testng.JTester;
+import org.test4j.fortest.reflector.TestException;
+import org.test4j.fortest.reflector.TestObject;
 import org.test4j.tools.reflector.MethodAccessor;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;

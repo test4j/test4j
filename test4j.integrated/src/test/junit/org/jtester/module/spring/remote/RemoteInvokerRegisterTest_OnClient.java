@@ -2,7 +2,6 @@ package org.jtester.module.spring.remote;
 
 import mockit.Mock;
 
-import org.jtester.junit.JTester;
 import org.jtester.module.spring.annotations.SpringBeanRemote.SpringBeanRemoteType;
 import org.junit.Test;
 import org.springframework.beans.BeansException;
@@ -10,6 +9,7 @@ import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.web.context.support.StaticWebApplicationContext;
+import org.test4j.junit.JTester;
 
 @SuppressWarnings({ "rawtypes" })
 public class RemoteInvokerRegisterTest_OnClient implements JTester {

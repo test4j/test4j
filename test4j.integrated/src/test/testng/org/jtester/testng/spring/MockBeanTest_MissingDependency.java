@@ -2,11 +2,11 @@ package org.jtester.testng.spring;
 
 import mockit.Mocked;
 
-import org.jtester.fortest.formock.SomeInterface;
-import org.jtester.fortest.formock.SpringBeanService;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.testng.JTester;
+import org.test4j.fortest.formock.SomeInterface;
+import org.test4j.fortest.formock.SpringBeanService;
 import org.testng.annotations.Test;
 
 @SpringContext({ "org/jtester/module/spring/testedbeans/xml/mockbeans-withdependency.xml" })

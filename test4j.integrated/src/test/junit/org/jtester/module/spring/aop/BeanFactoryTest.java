@@ -1,8 +1,6 @@
 package org.jtester.module.spring.aop;
 
 import org.jtester.fortest.service.UserAnotherDaoImpl;
-import org.jtester.fortest.service.UserService;
-import org.jtester.junit.JTester;
 import org.jtester.module.tracer.spring.SpringBeanTracer;
 import org.junit.Test;
 import org.springframework.beans.factory.config.BeanDefinition;
@@ -15,6 +13,8 @@ import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.Resource;
+import org.test4j.fortest.service.UserService;
+import org.test4j.junit.JTester;
 
 public class BeanFactoryTest implements JTester {
     @Test

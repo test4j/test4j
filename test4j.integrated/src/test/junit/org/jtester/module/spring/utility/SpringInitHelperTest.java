@@ -1,9 +1,9 @@
 package org.jtester.module.spring.utility;
 
-import org.jtester.junit.JTester;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.module.spring.annotations.SpringInitMethod;
 import org.junit.Test;
+import org.test4j.junit.JTester;
 
 @SpringContext({ "org/jtester/module/spring/testedbeans/xml/beans.xml",
         "org/jtester/module/spring/testedbeans/xml/data-source.xml" })

@@ -4,17 +4,17 @@ import java.util.List;
 
 import mockit.NonStrict;
 
-import org.jtester.fortest.beans.User;
-import org.jtester.fortest.service.UserDao;
 import org.jtester.fortest.service.UserDaoImpl;
-import org.jtester.fortest.service.UserService;
-import org.jtester.junit.JTester;
 import org.jtester.module.spring.annotations.AutoBeanInject;
 import org.jtester.module.spring.annotations.AutoBeanInject.BeanMap;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.annotations.SpringBeanFrom;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.junit.Test;
+import org.test4j.fortest.beans.User;
+import org.test4j.fortest.service.UserDao;
+import org.test4j.fortest.service.UserService;
+import org.test4j.junit.JTester;
 
 @SpringContext({ "org/jtester/module/spring/testedbeans/xml/data-source.xml" })
 @AutoBeanInject(maps = @BeanMap(intf = "**.UserAnotherDao", impl = "**.UserAnotherDaoImpl"))

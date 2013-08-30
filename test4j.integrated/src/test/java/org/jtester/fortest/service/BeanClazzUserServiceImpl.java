@@ -2,7 +2,10 @@ package org.jtester.fortest.service;
 
 import java.util.List;
 
-import org.jtester.fortest.beans.User;
+import org.test4j.fortest.beans.User;
+import org.test4j.fortest.service.UserAnotherDao;
+import org.test4j.fortest.service.UserDao;
+import org.test4j.fortest.service.UserService;
 
 @SuppressWarnings("unused")
 public class BeanClazzUserServiceImpl implements UserService {

@@ -1,7 +1,7 @@
 package org.test4j.tools.commons;
 
-import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.junit.JTester;
 import org.test4j.tools.commons.ClazzHelper;
 
 public class ClazzHelperTest_NewInstance implements JTester {

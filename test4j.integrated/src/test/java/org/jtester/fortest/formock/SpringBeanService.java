@@ -1,5 +1,7 @@
 package org.jtester.fortest.formock;
 
+import org.test4j.fortest.formock.SomeInterface;
+
 public interface SpringBeanService {
 	public SomeInterface getDependency1();
 

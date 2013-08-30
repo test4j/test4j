@@ -1,12 +1,12 @@
 package org.jtester.module.spring.strategy;
 
-import org.jtester.fortest.service.UserDao;
-import org.jtester.fortest.service.UserDaoImpl2;
-import org.jtester.junit.JTesterRunner;
 import org.jtester.module.spring.annotations.SpringBeanFrom;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.testng.JTester;
 import org.junit.runner.RunWith;
+import org.test4j.fortest.service.UserDao;
+import org.test4j.fortest.service.UserDaoImpl2;
+import org.test4j.junit.JTesterRunner;
 
 /**
  * 这个基类混合了junit和testng的运行方式

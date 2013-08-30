@@ -3,8 +3,9 @@ package org.jtester.fortest.service;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.jtester.fortest.beans.User;
 import org.springframework.orm.ibatis.support.SqlMapClientDaoSupport;
+import org.test4j.fortest.beans.User;
+import org.test4j.fortest.service.UserDao;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class UserDaoImpl extends SqlMapClientDaoSupport implements UserDao {

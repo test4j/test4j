@@ -7,6 +7,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.test4j.fortest.beans.User;
+
 public class ComplexObject {
 	private String name;
 

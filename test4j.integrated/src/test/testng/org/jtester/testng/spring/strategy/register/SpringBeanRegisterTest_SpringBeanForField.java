@@ -2,16 +2,16 @@ package org.jtester.testng.spring.strategy.register;
 
 import java.util.List;
 
-import org.jtester.fortest.beans.User;
-import org.jtester.fortest.service.UserDao;
-import org.jtester.fortest.service.UserDaoImpl2;
-import org.jtester.fortest.service.UserService;
 import org.jtester.module.spring.annotations.AutoBeanInject;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.annotations.SpringBeanFrom;
 import org.jtester.module.spring.annotations.AutoBeanInject.BeanMap;
 import org.jtester.testng.JTester;
+import org.test4j.fortest.beans.User;
+import org.test4j.fortest.service.UserDao;
+import org.test4j.fortest.service.UserDaoImpl2;
+import org.test4j.fortest.service.UserService;
 import org.testng.annotations.Test;
 
 @SpringContext({ "org/jtester/module/spring/testedbeans/xml/data-source.xml" })

@@ -4,13 +4,13 @@ import java.util.Properties;
 
 import mockit.Mock;
 
-import org.jtester.junit.JTester;
 import org.junit.Test;
 import org.springframework.beans.factory.config.BeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.remoting.caucho.HessianServiceExporter;
 import org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter;
+import org.test4j.junit.JTester;
 
 public class RemoteInvokerRegisterTest implements JTester {
     int count = 0;

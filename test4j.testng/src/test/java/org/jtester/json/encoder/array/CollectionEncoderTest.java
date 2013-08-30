@@ -4,10 +4,10 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jtester.json.encoder.beans.test.User;
 import org.jtester.testng.JTester;
 import org.test4j.json.encoder.JSONEncoder;
 import org.test4j.json.encoder.array.CollectionEncoder;
+import org.test4j.json.encoder.beans.test.User;
 import org.test4j.json.helper.JSONFeature;
 import org.testng.annotations.Test;
 

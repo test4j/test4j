@@ -5,6 +5,8 @@ import mockit.MockUp;
 
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.junit.Test;
+import org.test4j.module.jmockit.mockbug.SayHelloImpl;
+import org.test4j.module.jmockit.mockbug.SayHelloImpl2;
 
 @SuppressWarnings("unused")
 public class JMockitMockManagerTest2 extends JMockitMockManageBaseTest {

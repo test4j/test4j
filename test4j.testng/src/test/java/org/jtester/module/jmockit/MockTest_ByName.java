@@ -2,10 +2,10 @@ package org.jtester.module.jmockit;
 
 import mockit.Mocked;
 
-import org.jtester.fortest.formock.SomeInterface;
-import org.jtester.fortest.formock.SpringBeanService;
-import org.jtester.fortest.formock.SpringBeanService.SpringBeanServiceImpl1;
 import org.jtester.testng.JTester;
+import org.test4j.fortest.formock.SomeInterface;
+import org.test4j.fortest.formock.SpringBeanService;
+import org.test4j.fortest.formock.SpringBeanService.SpringBeanServiceImpl1;
 import org.test4j.module.inject.annotations.Inject;
 import org.testng.annotations.Test;
 

@@ -4,9 +4,9 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
-import org.jtester.fortest.beans.User;
-import org.jtester.fortest.service.UserDao;
-import org.jtester.fortest.service.UserService;
+import org.test4j.fortest.beans.User;
+import org.test4j.fortest.service.UserDao;
+import org.test4j.fortest.service.UserService;
 
 public class UserServiceResourceImpl implements UserService {
 

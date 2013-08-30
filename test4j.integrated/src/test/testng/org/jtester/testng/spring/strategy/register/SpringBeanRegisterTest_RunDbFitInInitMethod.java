@@ -1,14 +1,14 @@
 package org.jtester.testng.spring.strategy.register;
 
-import org.jtester.database.table.ITable;
-import org.jtester.fortest.service.UserService;
-import org.jtester.fortest.service.UserServiceImpl;
 import org.jtester.module.spring.annotations.AutoBeanInject;
 import org.jtester.module.spring.annotations.AutoBeanInject.BeanMap;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.module.spring.annotations.SpringInitMethod;
 import org.jtester.testng.JTester;
+import org.test4j.database.table.ITable;
+import org.test4j.fortest.service.UserService;
+import org.test4j.fortest.service.UserServiceImpl;
 import org.test4j.module.database.IDatabase;
 import org.testng.annotations.Test;
 

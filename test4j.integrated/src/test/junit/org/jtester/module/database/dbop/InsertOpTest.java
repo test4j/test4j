@@ -2,10 +2,10 @@ package org.jtester.module.database.dbop;
 
 import java.util.Iterator;
 
-import org.jtester.database.table.TddUserTable;
-import org.jtester.junit.JTester;
-import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
+import org.test4j.database.table.TddUserTable;
+import org.test4j.junit.JTester;
+import org.test4j.junit.annotations.DataFrom;
 
 @SuppressWarnings({ "rawtypes", "serial" })
 public class InsertOpTest implements JTester {

@@ -1,8 +1,8 @@
 package org.jtester.testng.spring.parentcontext;
 
-import org.jtester.fortest.service.UserServiceImpl;
 import org.jtester.testng.JTester;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.test4j.fortest.service.UserServiceImpl;
 import org.testng.annotations.Test;
 
 public class SpringParentDemo extends JTester {

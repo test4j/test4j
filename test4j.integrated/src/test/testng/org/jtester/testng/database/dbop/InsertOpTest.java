@@ -2,9 +2,9 @@ package org.jtester.testng.database.dbop;
 
 import java.util.Iterator;
 
-import org.jtester.database.table.TddUserTable;
 import org.jtester.module.database.dbop.InsertOp;
 import org.jtester.testng.JTester;
+import org.test4j.database.table.TddUserTable;
 import org.test4j.module.database.IDatabase;
 import org.test4j.tools.commons.DateHelper;
 import org.testng.annotations.DataProvider;

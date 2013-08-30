@@ -5,11 +5,11 @@ import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
-import org.jtester.json.encoder.beans.test.TestedClazz;
-import org.jtester.json.encoder.beans.test.TestedIntf;
-import org.jtester.junit.JTester;
-import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
+import org.test4j.json.encoder.beans.test.TestedClazz;
+import org.test4j.json.encoder.beans.test.TestedIntf;
+import org.test4j.junit.JTester;
+import org.test4j.junit.annotations.DataFrom;
 import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.datagen.ConstructorArgsGenerator;
 

@@ -3,7 +3,6 @@ package org.jtester.testng.spring.autowired;
 import mockit.Mock;
 import mockit.Mocked;
 
-import org.jtester.fortest.beans.User;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.module.spring.annotations.SpringBeanByType;
 import org.jtester.module.spring.annotations.SpringBeanFrom;
@@ -11,6 +10,7 @@ import org.jtester.module.spring.testedbeans.autowired.IUserDao;
 import org.jtester.module.spring.testedbeans.autowired.IUserService;
 import org.jtester.module.spring.testedbeans.autowired.UserDaoImpl;
 import org.jtester.testng.JTester;
+import org.test4j.fortest.beans.User;
 import org.testng.annotations.Test;
 
 @Test(groups = "jtester")

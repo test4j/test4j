@@ -1,10 +1,10 @@
 package org.jtester.spec.xml;
 
-import org.jtester.junit.JSpec;
 import org.jtester.spec.annotations.StoryFile;
 import org.jtester.spec.annotations.StorySource;
 import org.jtester.spec.annotations.StoryType;
 import org.jtester.spec.txt.MultiThenErrorSpec.ErrorType;
+import org.test4j.junit.JSpec;
 import org.test4j.spec.annotations.Given;
 import org.test4j.spec.annotations.Named;
 import org.test4j.spec.annotations.Then;

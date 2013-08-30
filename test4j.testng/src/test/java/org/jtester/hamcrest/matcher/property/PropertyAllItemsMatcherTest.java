@@ -5,8 +5,8 @@ import java.util.List;
 
 import ext.test4j.hamcrest.MatcherAssert;
 
-import org.jtester.fortest.beans.User;
 import org.jtester.testng.JTester;
+import org.test4j.fortest.beans.User;
 import org.test4j.hamcrest.matcher.property.PropertyAllItemsMatcher;
 import org.testng.annotations.Test;
 

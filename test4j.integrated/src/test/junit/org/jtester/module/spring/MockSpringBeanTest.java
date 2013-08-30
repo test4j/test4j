@@ -4,15 +4,15 @@ import java.util.ArrayList;
 
 import mockit.Mocked;
 
-import org.jtester.fortest.beans.User;
-import org.jtester.fortest.service.UserDao;
-import org.jtester.fortest.service.UserService;
-import org.jtester.junit.JTester;
 import org.jtester.module.database.annotations.Transactional;
 import org.jtester.module.database.annotations.Transactional.TransactionMode;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.junit.Test;
+import org.test4j.fortest.beans.User;
+import org.test4j.fortest.service.UserDao;
+import org.test4j.fortest.service.UserService;
+import org.test4j.junit.JTester;
 import org.test4j.module.inject.annotations.Inject;
 
 @SpringContext({ "org/jtester/module/spring/testedbeans/xml/beans.xml",

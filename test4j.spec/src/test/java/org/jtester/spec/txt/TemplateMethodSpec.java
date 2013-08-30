@@ -1,8 +1,8 @@
 package org.jtester.spec.txt;
 
-import org.jtester.junit.JSpec;
 import org.jtester.spec.annotations.StoryFile;
 import org.jtester.spec.annotations.StoryType;
+import org.test4j.junit.JSpec;
 import org.test4j.spec.annotations.Given;
 import org.test4j.spec.annotations.Named;
 import org.test4j.spec.annotations.Then;

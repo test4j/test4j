@@ -2,10 +2,10 @@ package org.jtester.module.jmockit;
 
 import mockit.Mocked;
 
-import org.jtester.junit.JTester;
 import org.jtester.module.spring.annotations.AutoBeanInject;
 import org.junit.Test;
 import org.test4j.hamcrest.matcher.string.StringMode;
+import org.test4j.junit.JTester;
 
 @SuppressWarnings("unused")
 @AutoBeanInject

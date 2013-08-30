@@ -1,11 +1,11 @@
 package org.jtester.module.spring;
 
 import org.jtester.fortest.hibernate.AddressService;
-import org.jtester.junit.JTester;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.junit.Before;
 import org.junit.Test;
+import org.test4j.junit.JTester;
 
 @SpringContext({ "file:./extern-spring/project.xml" })
 public class SpringModuleTest implements JTester {

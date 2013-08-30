@@ -1,9 +1,9 @@
 package org.jtester.testng.spring.strategy;
 
-import org.jtester.fortest.formock.SomeInterface.SomeInterfaceImpl1;
-import org.jtester.fortest.formock.SomeInterface.SomeInterfaceImpl2;
-import org.jtester.fortest.formock.SpringBeanService;
 import org.jtester.module.spring.strategy.JTesterSpringContext;
+import org.test4j.fortest.formock.SpringBeanService;
+import org.test4j.fortest.formock.SomeInterface.SomeInterfaceImpl1;
+import org.test4j.fortest.formock.SomeInterface.SomeInterfaceImpl2;
 import org.testng.annotations.Test;
 
 @Test(groups = { "JTester" })

@@ -2,9 +2,9 @@ package org.jtester.module.jmockit;
 
 import mockit.Mocked;
 
-import org.jtester.fortest.beans.ISpeak;
-import org.jtester.fortest.beans.Person;
 import org.jtester.testng.JTester;
+import org.test4j.fortest.beans.ISpeak;
+import org.test4j.fortest.beans.Person;
 import org.test4j.module.inject.annotations.Inject;
 import org.testng.annotations.Test;
 

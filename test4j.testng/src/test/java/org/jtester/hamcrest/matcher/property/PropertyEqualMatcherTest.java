@@ -5,10 +5,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.jtester.json.encoder.beans.test.User;
 import org.jtester.testng.JTester;
 import org.test4j.hamcrest.matcher.property.PropertyEqualMatcher;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.json.encoder.beans.test.User;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

@@ -4,12 +4,12 @@ import java.util.ArrayList;
 
 import mockit.Mocked;
 
-import org.jtester.fortest.beans.User;
-import org.jtester.fortest.service.UserDao;
-import org.jtester.fortest.service.UserService;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.annotations.SpringBeanFrom;
 import org.junit.Test;
+import org.test4j.fortest.beans.User;
+import org.test4j.fortest.service.UserDao;
+import org.test4j.fortest.service.UserService;
 
 public class MockedBeanByNameTest_Mock extends MockedBeanByNameTest_Base {
     @SpringBeanByName

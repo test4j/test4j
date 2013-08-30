@@ -5,7 +5,7 @@ import java.lang.reflect.Type;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jtester.json.encoder.beans.test.User;
+import org.test4j.json.encoder.beans.test.User;
 
 @SuppressWarnings("rawtypes")
 public class ForTestType {

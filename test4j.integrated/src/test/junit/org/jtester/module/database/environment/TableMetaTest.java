@@ -2,9 +2,9 @@ package org.jtester.module.database.environment;
 
 import mockit.Mock;
 
-import org.jtester.junit.JTester;
-import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
+import org.test4j.junit.JTester;
+import org.test4j.junit.annotations.DataFrom;
 
 public class TableMetaTest implements JTester {
 

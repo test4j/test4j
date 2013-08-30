@@ -1,11 +1,11 @@
 package org.jtester.module.tracer.spring;
 
-import org.jtester.fortest.service.UserAnotherDao;
-import org.jtester.junit.JTester;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.strategy.JTesterSpringContext;
 import org.junit.Test;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.test4j.fortest.service.UserAnotherDao;
+import org.test4j.junit.JTester;
 
 public class TracerMethodRegexPointcutTest implements JTester {
     @SpringBeanByName(claz = FinalUserDao.class)

@@ -2,9 +2,9 @@ package org.jtester.module.database.dbop;
 
 import java.io.File;
 
-import org.jtester.database.table.ITable;
-import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.database.table.ITable;
+import org.test4j.junit.JTester;
 
 public class SqlSetTest implements JTester {
 

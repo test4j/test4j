@@ -1,6 +1,6 @@
 package org.jtester.spec.txt;
 
-import org.jtester.junit.JSpec;
+import org.test4j.junit.JSpec;
 import org.test4j.spec.annotations.Given;
 import org.test4j.spec.inner.IScenario;
 

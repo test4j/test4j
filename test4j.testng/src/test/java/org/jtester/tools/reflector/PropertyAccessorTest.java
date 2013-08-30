@@ -4,8 +4,8 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 
-import org.jtester.json.encoder.beans.test.User;
 import org.jtester.testng.JTester;
+import org.test4j.json.encoder.beans.test.User;
 import org.test4j.tools.exception.NoSuchFieldRuntimeException;
 import org.test4j.tools.reflector.PropertyAccessor;
 import org.testng.annotations.DataProvider;

@@ -3,11 +3,6 @@ package org.jtester.module.database.environment;
 import java.sql.SQLException;
 import java.util.List;
 
-import org.jtester.database.table.ITable;
-import org.jtester.database.table.TddUserTable;
-import org.jtester.fortest.beans.User;
-import org.jtester.fortest.service.UserService;
-import org.jtester.junit.JTester;
 import org.jtester.module.database.annotations.Transactional;
 import org.jtester.module.database.annotations.Transactional.TransactionMode;
 import org.jtester.module.spring.annotations.SpringBeanByName;
@@ -15,6 +10,11 @@ import org.jtester.module.spring.annotations.SpringContext;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.test4j.database.table.ITable;
+import org.test4j.database.table.TddUserTable;
+import org.test4j.fortest.beans.User;
+import org.test4j.fortest.service.UserService;
+import org.test4j.junit.JTester;
 
 @SuppressWarnings("serial")
 @SpringContext({ "org/jtester/module/spring/testedbeans/xml/beans.xml",

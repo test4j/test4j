@@ -1,10 +1,10 @@
 package forfilter.samples;
 
-import static org.jtester.junit.filter.SuiteType.SUITE_TEST_CLASSES;
+import static org.test4j.junit.filter.SuiteType.SUITE_TEST_CLASSES;
 
-import org.jtester.junit.annotations.ClazFinder;
-import org.jtester.junit.suite.ClasspathSuite;
 import org.junit.runner.RunWith;
+import org.test4j.junit.annotations.ClazFinder;
+import org.test4j.junit.suite.ClasspathSuite;
 
 /**
  * Run all test suites in this package except itself (to prevent JUnit's

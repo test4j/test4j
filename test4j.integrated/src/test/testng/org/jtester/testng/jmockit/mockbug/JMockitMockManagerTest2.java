@@ -2,9 +2,9 @@ package org.jtester.testng.jmockit.mockbug;
 
 import mockit.Mock;
 
-import org.jtester.module.jmockit.mockbug.SayHelloImpl;
-import org.jtester.module.jmockit.mockbug.SayHelloImpl2;
 import org.jtester.module.spring.annotations.SpringBeanByName;
+import org.test4j.module.jmockit.mockbug.SayHelloImpl;
+import org.test4j.module.jmockit.mockbug.SayHelloImpl2;
 import org.testng.annotations.Test;
 
 @Test(groups = "jtester")

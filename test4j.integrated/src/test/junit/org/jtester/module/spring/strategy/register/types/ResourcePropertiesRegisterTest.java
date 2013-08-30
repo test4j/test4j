@@ -1,13 +1,13 @@
 package org.jtester.module.spring.strategy.register.types;
 
-import org.jtester.fortest.service.UserService;
-import org.jtester.junit.JTester;
 import org.jtester.module.spring.annotations.AutoBeanInject;
 import org.jtester.module.spring.annotations.AutoBeanInject.BeanMap;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.module.spring.testedbeans.resource.UserServiceResourceImpl;
 import org.junit.Test;
+import org.test4j.fortest.service.UserService;
+import org.test4j.junit.JTester;
 
 @SpringContext({ "org/jtester/module/spring/testedbeans/xml/data-source.xml",
         "org/jtester/module/spring/testedbeans/xml/annotation-config.xml" })

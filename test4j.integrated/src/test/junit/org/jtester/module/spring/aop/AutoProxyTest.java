@@ -1,11 +1,11 @@
 package org.jtester.module.spring.aop;
 
-import org.jtester.junit.JTester;
 import org.jtester.module.spring.testedbeans.aop.Bird;
 import org.jtester.module.spring.testedbeans.aop.Cat;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.test4j.junit.JTester;
 
 public class AutoProxyTest implements JTester {
     @Test

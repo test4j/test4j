@@ -7,11 +7,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jtester.fortest.beans.Address;
-import org.jtester.fortest.beans.Employee;
-import org.jtester.fortest.beans.User;
-import org.jtester.fortest.reflector.ForReflectUtil;
 import org.jtester.testng.JTester;
+import org.test4j.fortest.beans.Address;
+import org.test4j.fortest.beans.Employee;
+import org.test4j.fortest.beans.User;
+import org.test4j.fortest.reflector.ForReflectUtil;
 import org.test4j.tools.commons.FieldHelper;
 import org.test4j.tools.exception.NoSuchFieldRuntimeException;
 import org.test4j.tools.reflector.PropertyAccessor;

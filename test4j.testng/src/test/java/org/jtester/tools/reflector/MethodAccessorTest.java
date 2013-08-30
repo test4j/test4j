@@ -1,7 +1,7 @@
 package org.jtester.tools.reflector;
 
-import org.jtester.fortest.reflector.TestObject;
 import org.jtester.testng.JTester;
+import org.test4j.fortest.reflector.TestObject;
 import org.test4j.tools.exception.NoSuchMethodRuntimeException;
 import org.test4j.tools.reflector.MethodAccessor;
 import org.testng.annotations.AfterMethod;

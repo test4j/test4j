@@ -5,6 +5,7 @@ import mockit.NonStrict;
 import ext.test4j.hamcrest.core.IsEqual;
 
 import org.jtester.testng.JTester;
+import org.test4j.module.jmockit.ISay;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 

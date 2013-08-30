@@ -5,13 +5,13 @@ import java.util.Map;
 
 import mockit.Mock;
 
-import org.jtester.database.table.ITable;
-import org.jtester.database.table.TddUserTable;
 import org.jtester.module.database.environment.DBEnvironment;
 import org.jtester.module.database.environment.DBEnvironmentFactory;
 import org.jtester.module.database.environment.TableMeta;
 import org.jtester.module.database.environment.TableMeta.ColumnMeta;
 import org.jtester.testng.JTester;
+import org.test4j.database.table.ITable;
+import org.test4j.database.table.TddUserTable;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })

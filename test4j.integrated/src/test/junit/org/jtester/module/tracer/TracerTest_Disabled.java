@@ -4,15 +4,15 @@ import java.io.FileNotFoundException;
 
 import mockit.Mock;
 
-import org.jtester.database.table.ITable;
 import org.jtester.fortest.hibernate.User;
 import org.jtester.fortest.hibernate.UserService;
-import org.jtester.junit.JTester;
 import org.jtester.module.spring.annotations.SpringBeanByType;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.test4j.database.table.ITable;
+import org.test4j.junit.JTester;
 import org.test4j.tools.commons.ResourceHelper;
 
 @Ignore

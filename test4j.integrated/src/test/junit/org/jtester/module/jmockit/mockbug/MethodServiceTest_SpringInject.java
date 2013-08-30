@@ -2,12 +2,13 @@ package org.jtester.module.jmockit.mockbug;
 
 import mockit.Mock;
 
-import org.jtester.junit.JTester;
 import org.jtester.module.spring.annotations.AutoBeanInject;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.module.spring.annotations.SpringInitMethod;
 import org.junit.Test;
+import org.test4j.junit.JTester;
+import org.test4j.module.jmockit.mockbug.TestedMethodService;
 
 @SpringContext
 @AutoBeanInject

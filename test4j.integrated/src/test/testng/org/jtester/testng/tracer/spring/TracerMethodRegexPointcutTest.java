@@ -1,11 +1,11 @@
 package org.jtester.testng.tracer.spring;
 
-import org.jtester.fortest.service.UserAnotherDao;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.strategy.JTesterSpringContext;
 import org.jtester.module.tracer.spring.FinalUserDao;
 import org.jtester.testng.JTester;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.test4j.fortest.service.UserAnotherDao;
 import org.testng.annotations.Test;
 
 @Test(groups = { "jtester", "spring" })

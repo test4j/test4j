@@ -7,10 +7,10 @@ import java.util.Iterator;
 
 import mockit.Mock;
 
-import org.jtester.junit.JTester;
-import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
 import org.test4j.hamcrest.matcher.string.StringMode;
+import org.test4j.junit.JTester;
+import org.test4j.junit.annotations.DataFrom;
 import org.test4j.tools.commons.ResourceHelper;
 
 @SuppressWarnings({ "rawtypes", "serial" })

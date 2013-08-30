@@ -4,12 +4,12 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import org.jtester.database.table.ITable;
-import org.jtester.database.table.TddUserTable;
-import org.jtester.junit.JTester;
-import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
+import org.test4j.database.table.ITable;
+import org.test4j.database.table.TddUserTable;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.junit.JTester;
+import org.test4j.junit.annotations.DataFrom;
 import org.test4j.tools.datagen.DataSet;
 import org.test4j.tools.datagen.EmptyDataSet;
 

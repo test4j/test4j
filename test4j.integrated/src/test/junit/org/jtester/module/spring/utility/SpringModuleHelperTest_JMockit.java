@@ -4,9 +4,9 @@ import java.lang.reflect.Field;
 
 import mockit.NonStrict;
 
-import org.jtester.junit.JTester;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.junit.Test;
+import org.test4j.junit.JTester;
 import org.test4j.module.jmockit.utility.JMockitModuleHelper;
 
 public class SpringModuleHelperTest_JMockit implements JTester {

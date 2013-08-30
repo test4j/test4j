@@ -3,8 +3,8 @@ package org.jtester.module.spring.annotations;
 import java.util.HashMap;
 
 import org.jtester.fortest.reflector.MyServiceImpl.MyTestException;
-import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.junit.JTester;
 
 @SpringContext("org/jtester/module/spring/reflector/reflector-beans.xml")
 @SuppressWarnings({ "unchecked", "rawtypes" })

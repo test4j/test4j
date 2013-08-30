@@ -1,5 +1,7 @@
 package org.jtester.fortest.beans;
 
+import org.test4j.fortest.beans.ISpeak;
+
 public class Person {
 	private ISpeak speak;
 
