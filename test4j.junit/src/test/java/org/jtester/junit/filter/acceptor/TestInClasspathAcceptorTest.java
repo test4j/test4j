@@ -7,10 +7,10 @@ import org.jtester.junit.JTesterRunner;
 import org.jtester.junit.filter.SuiteType;
 import org.jtester.junit.filter.finder.FilterCondiction;
 import org.jtester.junit.filter.finder.FilterCondictionTest_Suite;
-import org.jtester.module.ICore;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.test4j.module.ICore;
 
 @RunWith(JTesterRunner.class)
 public class TestInClasspathAcceptorTest implements ICore {

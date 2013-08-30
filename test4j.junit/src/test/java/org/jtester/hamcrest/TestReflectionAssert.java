@@ -7,10 +7,10 @@ import java.util.List;
 
 import org.jtester.fortest.beans.Address;
 import org.jtester.fortest.beans.User;
-import org.jtester.hamcrest.matcher.property.reflection.EqMode;
 import org.jtester.junit.JTester;
 import org.junit.Assert;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 
 public class TestReflectionAssert implements JTester {
     @Test(expected = AssertionError.class)

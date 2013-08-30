@@ -2,13 +2,13 @@ package org.jtester.datafilling.filler.primitive;
 
 import junit.framework.Assert;
 
-import org.jtester.datafilling.Filler;
 import org.jtester.datafilling.annotations.IntegerValuePojo;
 import org.jtester.datafilling.annotations.IntegerValueWithErrorPojo;
-import org.jtester.datafilling.exceptions.PoJoFillException;
 import org.jtester.datafilling.utils.FillDataTestConstants;
-import org.jtester.module.ICore;
 import org.junit.Test;
+import org.test4j.datafilling.Filler;
+import org.test4j.datafilling.exceptions.PoJoFillException;
+import org.test4j.module.ICore;
 
 public class IntegerFillerTest implements ICore {
 

@@ -7,9 +7,9 @@ import java.util.List;
 
 import org.dom4j.CharacterData;
 import org.dom4j.Element;
-import org.jtester.spec.inner.IScenarioStep;
-import org.jtester.spec.inner.StepType;
 import org.jtester.spec.scenario.step.xml.MethodDescription;
+import org.test4j.spec.inner.IScenarioStep;
+import org.test4j.spec.inner.StepType;
 import org.test4j.tools.commons.StringHelper;
 
 @SuppressWarnings("serial")

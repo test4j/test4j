@@ -2,7 +2,7 @@ package org.jtester.datafilling.model;
 
 import java.io.Serializable;
 
-import org.jtester.datafilling.annotations.FillConstructor;
+import org.test4j.datafilling.annotations.FillConstructor;
 
 @SuppressWarnings("serial")
 public class ConstructorWithSelfReferencesButNoDefaultConstructorPojo implements Serializable {

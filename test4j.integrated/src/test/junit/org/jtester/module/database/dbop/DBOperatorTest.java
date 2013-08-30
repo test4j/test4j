@@ -4,10 +4,10 @@ import java.io.File;
 
 import org.jtester.database.table.ITable;
 import org.jtester.database.table.TddUserTable;
-import org.jtester.hamcrest.matcher.property.reflection.EqMode;
 import org.jtester.junit.JTester;
 import org.jtester.module.database.bean.TddUser;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 
 @SuppressWarnings("serial")
 public class DBOperatorTest implements JTester {

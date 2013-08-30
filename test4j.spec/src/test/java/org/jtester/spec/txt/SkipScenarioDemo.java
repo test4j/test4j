@@ -4,8 +4,8 @@ import org.jtester.junit.JSpec;
 import org.jtester.spec.annotations.StoryFile;
 import org.jtester.spec.annotations.StorySource;
 import org.jtester.spec.annotations.StoryType;
-import org.jtester.spec.annotations.When;
-import org.jtester.spec.inner.IScenario;
+import org.test4j.spec.annotations.When;
+import org.test4j.spec.inner.IScenario;
 
 @StoryFile(type = StoryType.TXT, source = StorySource.ClassPath)
 public class SkipScenarioDemo extends JSpec {

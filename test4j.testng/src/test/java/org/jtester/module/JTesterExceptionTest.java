@@ -1,7 +1,7 @@
 package org.jtester.module;
 
-import org.jtester.module.JTesterException;
 import org.jtester.testng.JTester;
+import org.test4j.module.JTesterException;
 import org.testng.annotations.Test;
 
 @Test(groups = "jtester")

@@ -1,8 +1,8 @@
 package org.jtester.module.spring.utility;
 
 import org.jtester.module.spring.SpringTestedContext;
-import org.jtester.module.spring.util.ISpringHelper;
 import org.springframework.beans.factory.BeanFactory;
+import org.test4j.module.spring.util.ISpringHelper;
 
 /**
  * 测试类中spring上下文

@@ -12,19 +12,19 @@ import java.util.Set;
 
 import javax.sql.DataSource;
 
-import org.jtester.module.JTesterException;
-import org.jtester.module.core.TestContext;
-import org.jtester.module.core.utility.MessageHelper;
 import org.jtester.module.database.annotations.Transactional.TransactionMode;
 import org.jtester.module.database.environment.typesmap.AbstractTypeMap;
 import org.jtester.module.database.transaction.DefaultTransactionManager;
 import org.jtester.module.database.transaction.TransactionManagementConfiguration;
 import org.jtester.module.database.transaction.TransactionManager;
 import org.jtester.module.database.utility.DataSourceType;
-import org.jtester.tools.commons.ExceptionWrapper;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.test4j.module.JTesterException;
+import org.test4j.module.core.TestContext;
+import org.test4j.module.core.utility.MessageHelper;
+import org.test4j.tools.commons.ExceptionWrapper;
 
 public abstract class BaseEnvironment implements DBEnvironment {
 

@@ -2,8 +2,8 @@ package org.jtester.spec.scenario.xmlparser.entity;
 
 import java.util.LinkedHashMap;
 
-import org.jtester.spec.inner.StepType;
 import org.jtester.spec.scenario.xmlparser.StoryNodeEntity;
+import org.test4j.spec.inner.StepType;
 
 /**
  * 模板方法定义

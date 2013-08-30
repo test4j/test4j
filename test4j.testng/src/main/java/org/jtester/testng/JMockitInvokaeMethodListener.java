@@ -4,8 +4,8 @@ import java.util.List;
 
 import mockit.integration.testng.internal.TestNGRunnerDecorator;
 
-import org.jtester.module.jmockit.utility.JMockitModuleHelper;
-import org.jtester.tools.reflector.FieldAccessor;
+import org.test4j.module.jmockit.utility.JMockitModuleHelper;
+import org.test4j.tools.reflector.FieldAccessor;
 import org.testng.IInvokedMethodListener;
 import org.testng.ITestContext;
 import org.testng.TestRunner;

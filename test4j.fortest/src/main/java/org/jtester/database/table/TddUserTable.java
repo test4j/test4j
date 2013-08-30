@@ -1,6 +1,6 @@
 package org.jtester.database.table;
 
-import org.jtester.module.ICore.DataMap;
+import org.test4j.module.ICore.DataMap;
 
 /**
  * 数据库 tdd_users 表数据准备或验证

@@ -2,9 +2,9 @@ package org.jtester.json.decoder.single;
 
 import java.util.UUID;
 
-import org.jtester.json.JSON;
 import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.json.JSON;
 
 public class UUIDDecoderTest implements JTester {
 

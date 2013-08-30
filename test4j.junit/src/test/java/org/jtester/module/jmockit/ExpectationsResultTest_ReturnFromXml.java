@@ -4,8 +4,8 @@ import mockit.Mocked;
 
 import org.jtester.fortest.beans.Manager;
 import org.jtester.junit.JTester;
-import org.jtester.tools.commons.JSONHelper;
 import org.junit.Test;
+import org.test4j.tools.commons.JSONHelper;
 
 public class ExpectationsResultTest_ReturnFromXml implements JTester {
     @Mocked

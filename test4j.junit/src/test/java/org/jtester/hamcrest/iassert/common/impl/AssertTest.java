@@ -6,10 +6,10 @@ import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
 
-import org.jtester.hamcrest.iassert.common.intf.IAssert;
 import org.jtester.junit.JTester;
 import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
+import org.test4j.hamcrest.iassert.common.intf.IAssert;
 
 @SuppressWarnings({ "rawtypes" })
 public class AssertTest implements JTester {

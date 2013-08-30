@@ -1,7 +1,7 @@
 package org.jtester.datafilling.annotations;
 
-import org.jtester.datafilling.annotations.FillLong;
 import org.jtester.datafilling.utils.FillDataTestConstants;
+import org.test4j.datafilling.annotations.FillLong;
 
 public class LongValuePojo  {
 	@FillLong(min = 0)

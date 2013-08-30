@@ -5,8 +5,9 @@ import java.net.URI;
 import java.util.ArrayList;
 
 import org.jtester.json.encoder.EncoderTest;
-import org.jtester.json.helper.JSONFeature;
 import org.junit.Test;
+import org.test4j.json.encoder.single.fixed.URIEncoder;
+import org.test4j.json.helper.JSONFeature;
 
 public class URIEncoderTest extends EncoderTest {
 

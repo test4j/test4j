@@ -1,7 +1,9 @@
 package org.jtester.json;
 
-import org.jtester.module.ICore;
 import org.junit.Test;
+import org.test4j.json.ITypeConverter;
+import org.test4j.json.JSON;
+import org.test4j.module.ICore;
 
 public class ArrayConverterTest implements ICore {
     Boolean[] boolArray;

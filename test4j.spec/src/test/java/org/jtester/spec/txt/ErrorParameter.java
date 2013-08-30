@@ -3,9 +3,9 @@ package org.jtester.spec.txt;
 import java.util.Map;
 
 import org.jtester.junit.JSpec;
-import org.jtester.spec.annotations.Given;
-import org.jtester.spec.annotations.Named;
-import org.jtester.spec.inner.IScenario;
+import org.test4j.spec.annotations.Given;
+import org.test4j.spec.annotations.Named;
+import org.test4j.spec.inner.IScenario;
 
 /**
  * 参数错误

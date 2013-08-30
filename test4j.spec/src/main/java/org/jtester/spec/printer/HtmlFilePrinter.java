@@ -4,10 +4,10 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jtester.spec.ISpec;
-import org.jtester.spec.inner.IScenario;
-import org.jtester.spec.inner.IScenarioStep;
-import org.jtester.tools.commons.ResourceHelper;
+import org.test4j.spec.ISpec;
+import org.test4j.spec.inner.IScenario;
+import org.test4j.spec.inner.IScenarioStep;
+import org.test4j.tools.commons.ResourceHelper;
 
 public class HtmlFilePrinter extends AbstractPrinter {
     static String outputDir = System.getProperty("user.dir") + "/jspec-output/";

@@ -3,7 +3,7 @@ package org.jtester.tools.exception;
 import java.util.Iterator;
 
 import org.jtester.testng.JTester;
-import org.jtester.tools.exception.MultipleException;
+import org.test4j.tools.exception.MultipleException;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

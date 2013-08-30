@@ -9,12 +9,12 @@ import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.Node;
 import org.dom4j.io.SAXReader;
-import org.jtester.spec.inner.IScenario;
-import org.jtester.spec.inner.IScenarioStep;
 import org.jtester.spec.scenario.step.JSpecStep;
 import org.jtester.spec.scenario.step.XmlJSpecStep;
 import org.jtester.spec.scenario.step.XmlJSpecStep.XmlJSpecStepTemplate;
 import org.jtester.spec.scenario.xmlparser.StoryQName;
+import org.test4j.spec.inner.IScenario;
+import org.test4j.spec.inner.IScenarioStep;
 import org.test4j.tools.commons.StringHelper;
 
 import ext.test4j.apache.commons.io.IOUtils;

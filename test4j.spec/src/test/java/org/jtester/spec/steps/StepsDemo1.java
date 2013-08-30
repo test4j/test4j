@@ -1,11 +1,11 @@
 package org.jtester.spec.steps;
 
-import org.jtester.spec.Steps;
-import org.jtester.spec.annotations.Given;
-import org.jtester.spec.annotations.Named;
-import org.jtester.spec.annotations.Then;
-import org.jtester.spec.annotations.When;
 import org.jtester.spec.steps.StepsSpec.MyName;
+import org.test4j.spec.Steps;
+import org.test4j.spec.annotations.Given;
+import org.test4j.spec.annotations.Named;
+import org.test4j.spec.annotations.Then;
+import org.test4j.spec.annotations.When;
 
 /**
  * @author darui.wudr 2013-8-22 下午1:58:35

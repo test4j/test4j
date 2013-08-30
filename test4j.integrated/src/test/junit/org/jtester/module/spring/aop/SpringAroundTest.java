@@ -3,9 +3,9 @@ package org.jtester.module.spring.aop;
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
 import org.jtester.junit.JTester;
-import org.jtester.module.core.utility.MessageHelper;
 import org.junit.Test;
 import org.springframework.aop.framework.ProxyFactory;
+import org.test4j.module.core.utility.MessageHelper;
 
 public class SpringAroundTest implements JTester {
 

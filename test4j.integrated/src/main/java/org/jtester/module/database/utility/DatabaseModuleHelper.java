@@ -1,7 +1,7 @@
 package org.jtester.module.database.utility;
 
-import org.jtester.module.core.utility.ModulesManager;
 import org.jtester.module.database.DatabaseModule;
+import org.test4j.module.core.utility.ModulesManager;
 
 /**
  * Class providing access to the functionality of the database module using

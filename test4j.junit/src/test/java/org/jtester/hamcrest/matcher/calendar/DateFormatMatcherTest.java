@@ -3,9 +3,10 @@ package org.jtester.hamcrest.matcher.calendar;
 import java.util.Calendar;
 
 import org.jtester.junit.JTester;
-import org.jtester.module.JTesterException;
-import org.jtester.tools.commons.DateUtilTest;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.calendar.DateFormatMatcher;
+import org.test4j.module.JTesterException;
+import org.test4j.tools.commons.DateUtilTest;
 
 import ext.test4j.hamcrest.MatcherAssert;
 

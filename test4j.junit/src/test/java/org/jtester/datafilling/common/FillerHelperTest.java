@@ -2,9 +2,10 @@ package org.jtester.datafilling.common;
 
 import java.lang.reflect.Type;
 
-import org.jtester.datafilling.FillUp;
-import org.jtester.module.ICore;
 import org.junit.Test;
+import org.test4j.datafilling.FillUp;
+import org.test4j.datafilling.common.FillerHelper;
+import org.test4j.module.ICore;
 
 @SuppressWarnings("rawtypes")
 public class FillerHelperTest implements ICore {

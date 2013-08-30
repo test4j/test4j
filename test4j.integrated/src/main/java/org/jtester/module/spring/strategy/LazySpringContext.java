@@ -1,8 +1,6 @@
 package org.jtester.module.spring.strategy;
 
-import org.jtester.module.core.utility.IPropConst;
 import org.jtester.module.spring.annotations.SpringContext;
-import org.jtester.tools.commons.AnnotationHelper;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.parsing.DefaultsDefinition;
 import org.springframework.beans.factory.parsing.EmptyReaderEventListener;
@@ -11,6 +9,8 @@ import org.springframework.beans.factory.xml.BeanDefinitionParserDelegate;
 import org.springframework.beans.factory.xml.DefaultBeanDefinitionDocumentReader;
 import org.springframework.beans.factory.xml.DocumentDefaultsDefinition;
 import org.springframework.beans.factory.xml.XmlBeanDefinitionReader;
+import org.test4j.module.core.utility.IPropConst;
+import org.test4j.tools.commons.AnnotationHelper;
 
 @SuppressWarnings("rawtypes")
 public class LazySpringContext extends JTesterSpringContext {

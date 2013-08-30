@@ -8,7 +8,7 @@ import java.util.List;
 
 import javax.sql.DataSource;
 
-import org.jtester.module.core.utility.MessageHelper;
+import org.test4j.module.core.utility.MessageHelper;
 
 public class ResourceLoader {
 

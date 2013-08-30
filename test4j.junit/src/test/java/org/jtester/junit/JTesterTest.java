@@ -2,13 +2,13 @@ package org.jtester.junit;
 
 import mockit.Mock;
 
-import org.jtester.hamcrest.matcher.string.StringMode;
-import org.jtester.module.core.CoreModule;
-import org.jtester.module.core.TestListener;
-import org.jtester.module.core.utility.MessageHelper;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.string.StringMode;
+import org.test4j.module.core.CoreModule;
+import org.test4j.module.core.TestListener;
+import org.test4j.module.core.utility.MessageHelper;
 
 /**
  * 整个类用于验证jTester的生命周期

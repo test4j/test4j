@@ -2,7 +2,7 @@ package org.jtester.module.spring.testedbeans.aop;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-import org.jtester.module.core.utility.MessageHelper;
+import org.test4j.module.core.utility.MessageHelper;
 
 public class AnimalAdvice implements MethodInterceptor {
 

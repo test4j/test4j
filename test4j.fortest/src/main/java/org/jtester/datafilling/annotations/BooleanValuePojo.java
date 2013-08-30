@@ -2,7 +2,7 @@ package org.jtester.datafilling.annotations;
 
 import java.io.Serializable;
 
-import org.jtester.datafilling.annotations.FillBoolean;
+import org.test4j.datafilling.annotations.FillBoolean;
 
 @SuppressWarnings("serial")
 public class BooleanValuePojo implements Serializable {

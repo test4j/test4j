@@ -7,10 +7,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jtester.datafilling.annotations.FillList;
-import org.jtester.datafilling.annotations.FillWith;
 import org.jtester.datafilling.strategies.MyBirthdayStrategy;
 import org.jtester.datafilling.strategies.PostCodeStrategy;
+import org.test4j.datafilling.annotations.FillList;
+import org.test4j.datafilling.annotations.FillWith;
 
 @SuppressWarnings("serial")
 public class StrategyPojo implements Serializable {

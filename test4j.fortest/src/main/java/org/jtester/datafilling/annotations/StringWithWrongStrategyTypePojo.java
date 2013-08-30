@@ -1,7 +1,7 @@
 package org.jtester.datafilling.annotations;
 
-import org.jtester.datafilling.annotations.FillWith;
 import org.jtester.datafilling.strategies.WrongTypeStrategy;
+import org.test4j.datafilling.annotations.FillWith;
 public class StringWithWrongStrategyTypePojo {
 
 	@FillWith(value = WrongTypeStrategy.class)

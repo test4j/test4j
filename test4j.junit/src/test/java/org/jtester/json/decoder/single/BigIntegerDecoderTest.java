@@ -3,11 +3,12 @@ package org.jtester.json.decoder.single;
 import java.math.BigInteger;
 import java.util.HashMap;
 
-import org.jtester.json.JSON;
-import org.jtester.json.helper.JSONFeature;
-import org.jtester.json.helper.JSONMap;
 import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.json.JSON;
+import org.test4j.json.decoder.single.BigIntegerDecoder;
+import org.test4j.json.helper.JSONFeature;
+import org.test4j.json.helper.JSONMap;
 
 public class BigIntegerDecoderTest implements JTester {
 

@@ -2,8 +2,8 @@ package org.jtester.junit.statement;
 
 import java.lang.reflect.Method;
 
-import org.jtester.module.core.TestListener;
 import org.junit.runners.model.Statement;
+import org.test4j.module.core.TestListener;
 
 /**
  * 在所有的@Before方法之后，测试方法之前执行TestListener的beforeMethodRunning方法<br>

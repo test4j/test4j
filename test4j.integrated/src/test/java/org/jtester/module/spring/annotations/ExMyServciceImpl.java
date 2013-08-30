@@ -3,8 +3,8 @@ package org.jtester.module.spring.annotations;
 import java.util.HashMap;
 
 import org.jtester.fortest.reflector.MyServiceImpl;
-import org.jtester.module.ICore;
-import org.jtester.tools.reflector.MethodAccessor;
+import org.test4j.module.ICore;
+import org.test4j.tools.reflector.MethodAccessor;
 
 @SuppressWarnings("rawtypes")
 public class ExMyServciceImpl extends MyServiceImpl implements ExMyService, ICore {

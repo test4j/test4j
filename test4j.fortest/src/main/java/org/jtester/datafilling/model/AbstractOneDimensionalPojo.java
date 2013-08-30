@@ -2,7 +2,7 @@ package org.jtester.datafilling.model;
 
 import java.util.Calendar;
 
-import org.jtester.datafilling.annotations.FillInteger;
+import org.test4j.datafilling.annotations.FillInteger;
 
 public abstract class AbstractOneDimensionalPojo {
 

@@ -10,10 +10,10 @@ import org.jtester.fortest.service.UserService;
 import org.jtester.junit.JTester;
 import org.jtester.module.database.annotations.Transactional;
 import org.jtester.module.database.annotations.Transactional.TransactionMode;
-import org.jtester.module.inject.annotations.Inject;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.junit.Test;
+import org.test4j.module.inject.annotations.Inject;
 
 @SpringContext({ "org/jtester/module/spring/testedbeans/xml/beans.xml",
         "org/jtester/module/spring/testedbeans/xml/data-source.xml" })

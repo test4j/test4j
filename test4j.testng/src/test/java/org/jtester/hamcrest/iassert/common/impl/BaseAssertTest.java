@@ -3,9 +3,9 @@ package org.jtester.hamcrest.iassert.common.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jtester.hamcrest.matcher.string.StringMode;
 import org.jtester.json.encoder.beans.test.User;
 import org.jtester.testng.JTester;
+import org.test4j.hamcrest.matcher.string.StringMode;
 import org.testng.annotations.Test;
 
 @Test(groups = { "jtester", "assertion" })

@@ -1,8 +1,8 @@
 package org.jtester.spec.steps;
 
-import org.jtester.spec.Steps;
-import org.jtester.spec.annotations.Step;
 import org.jtester.spec.steps.StepsSpec.MyName;
+import org.test4j.spec.Steps;
+import org.test4j.spec.annotations.Step;
 
 /**
  * @author darui.wudr 2013-8-22 下午2:40:54

@@ -3,10 +3,10 @@ package org.jtester.hamcrest.iassert.common.impl;
 import java.util.Arrays;
 import java.util.List;
 
-import org.jtester.hamcrest.matcher.modes.ItemsMode;
-import org.jtester.hamcrest.matcher.modes.MatchMode;
 import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.modes.ItemsMode;
+import org.test4j.hamcrest.matcher.modes.MatchMode;
 
 @SuppressWarnings("rawtypes")
 public class ListHasItemsAssertTest implements JTester {

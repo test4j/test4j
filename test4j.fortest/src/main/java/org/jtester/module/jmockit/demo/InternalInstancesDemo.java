@@ -3,8 +3,8 @@ package org.jtester.module.jmockit.demo;
 import java.util.Observable;
 import java.util.concurrent.Callable;
 
-import org.jtester.module.core.utility.MessageHelper;
 import org.jtester.module.jmockit.demo.Service.ServiceImpl;
+import org.test4j.module.core.utility.MessageHelper;
 
 @SuppressWarnings({ "rawtypes" })
 public class InternalInstancesDemo {

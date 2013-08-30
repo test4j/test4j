@@ -9,13 +9,13 @@ import org.jtester.junit.annotations.BeforeSuite;
 import org.jtester.junit.filter.ClasspathFilterFactory;
 import org.jtester.junit.filter.FilterFactory;
 import org.jtester.junit.filter.finder.TestClazFinder;
-import org.jtester.tools.commons.MethodHelper;
-import org.jtester.tools.reflector.MethodAccessor;
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.Suite;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.RunnerBuilder;
+import org.test4j.tools.commons.MethodHelper;
+import org.test4j.tools.reflector.MethodAccessor;
 
 public class ClasspathSuite extends Suite {
 

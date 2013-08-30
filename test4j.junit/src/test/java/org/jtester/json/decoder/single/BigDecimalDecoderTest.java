@@ -3,11 +3,12 @@ package org.jtester.json.decoder.single;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
-import org.jtester.json.JSON;
-import org.jtester.json.helper.JSONFeature;
-import org.jtester.json.helper.JSONMap;
 import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.json.JSON;
+import org.test4j.json.decoder.single.BigDecimalDecoder;
+import org.test4j.json.helper.JSONFeature;
+import org.test4j.json.helper.JSONMap;
 
 @SuppressWarnings("serial")
 public class BigDecimalDecoderTest implements JTester {

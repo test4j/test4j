@@ -5,8 +5,6 @@ import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jtester.spec.inner.IScenario;
-import org.jtester.spec.inner.IScenarioStep;
 import org.jtester.spec.reader.LinesReader;
 import org.jtester.spec.reader.StreamLinesReader;
 import org.jtester.spec.reader.StringLinesReader;
@@ -15,6 +13,8 @@ import org.jtester.spec.scenario.step.TxtJSpecStep;
 import org.jtester.spec.scenario.step.TxtJSpecStep.TxtJSpecStepTemplate;
 import org.jtester.spec.scenario.step.txt.LineType;
 import org.jtester.spec.scenario.xmlparser.TxtStoryFeature;
+import org.test4j.spec.inner.IScenario;
+import org.test4j.spec.inner.IScenarioStep;
 
 /**
  * 文本文件描述的故事场景解析器

@@ -4,15 +4,15 @@ import java.lang.reflect.Method;
 
 import mockit.Mock;
 
-import org.jtester.hamcrest.matcher.string.StringMode;
-import org.jtester.module.ICore;
-import org.jtester.module.core.CoreModule;
-import org.jtester.module.core.TestListener;
-import org.jtester.module.core.utility.MessageHelper;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
+import org.test4j.hamcrest.matcher.string.StringMode;
+import org.test4j.module.ICore;
+import org.test4j.module.core.CoreModule;
+import org.test4j.module.core.TestListener;
+import org.test4j.module.core.utility.MessageHelper;
 
 import forfilter.DaveyCategory;
 

@@ -2,9 +2,9 @@ package org.jtester.module.jmockit;
 
 import mockit.NonStrict;
 
-import org.jtester.module.ICore;
 import org.junit.Assert;
 import org.junit.Test;
+import org.test4j.module.ICore;
 
 import ext.test4j.hamcrest.core.IsEqual;
 

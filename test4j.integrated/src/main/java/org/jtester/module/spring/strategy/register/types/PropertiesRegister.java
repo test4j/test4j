@@ -5,9 +5,9 @@ import java.util.Queue;
 import org.jtester.module.spring.exception.FindBeanImplClassException;
 import org.jtester.module.spring.strategy.register.RegisterBeanDefinition;
 import org.jtester.module.spring.strategy.register.RegisterDynamicBean;
-import org.jtester.tools.commons.ClazzConst;
-import org.jtester.tools.commons.ClazzHelper;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
+import org.test4j.tools.commons.ClazzConst;
+import org.test4j.tools.commons.ClazzHelper;
 
 /**
  * 属性依赖注册

@@ -3,11 +3,11 @@ package org.jtester.spec.scenario.step;
 import java.io.InputStream;
 import java.util.List;
 
-import org.jtester.spec.inner.IScenario;
-import org.jtester.spec.inner.StepType;
 import org.jtester.spec.scenario.XmlJSpecScenario;
 import org.jtester.testng.JTester;
-import org.jtester.tools.commons.ResourceHelper;
+import org.test4j.spec.inner.IScenario;
+import org.test4j.spec.inner.StepType;
+import org.test4j.tools.commons.ResourceHelper;
 import org.testng.annotations.Test;
 
 @SuppressWarnings("serial")

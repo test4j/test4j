@@ -3,7 +3,7 @@ package org.jtester.module.tracer;
 import java.io.Writer;
 import java.util.List;
 
-import org.jtester.json.encoder.object.SpecEncoder;
+import org.test4j.json.encoder.object.SpecEncoder;
 
 import com.ibatis.sqlmap.engine.impl.SqlMapClientImpl;
 import com.ibatis.sqlmap.engine.impl.SqlMapExecutorDelegate;

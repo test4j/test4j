@@ -9,8 +9,8 @@ import org.jtester.junit.JTester;
 import org.jtester.module.spring.annotations.AutoBeanInject;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.annotations.SpringContext;
-import org.jtester.tools.commons.DateHelper;
 import org.junit.Test;
+import org.test4j.tools.commons.DateHelper;
 
 /**
  * 验证new MockUp<T> 的作用域

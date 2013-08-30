@@ -5,14 +5,14 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.jtester.module.core.utility.MessageHelper;
 import org.jtester.module.spring.annotations.AutoBeanInject;
 import org.jtester.module.spring.annotations.AutoBeanInject.BeanMap;
 import org.jtester.module.spring.exception.FindBeanImplClassException;
 import org.jtester.module.spring.strategy.ImplementorFinder;
-import org.jtester.tools.commons.ClazzHelper;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.test4j.module.core.utility.MessageHelper;
+import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.commons.StringHelper;
 
 /**

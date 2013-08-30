@@ -1,6 +1,6 @@
 package org.jtester.module.jmockit.mockbug;
 
-import org.jtester.module.core.utility.MessageHelper;
+import org.test4j.module.core.utility.MessageHelper;
 
 public class SayHelloImpl {
 

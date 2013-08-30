@@ -2,12 +2,12 @@ package org.jtester.spec.util;
 
 import java.util.List;
 
-import org.jtester.spec.annotations.Given;
-import org.jtester.spec.annotations.Named;
 import org.jtester.spec.annotations.StoryFile;
 import org.jtester.spec.annotations.StoryType;
-import org.jtester.spec.inner.IScenario;
 import org.jtester.testng.JSpec;
+import org.test4j.spec.annotations.Given;
+import org.test4j.spec.annotations.Named;
+import org.test4j.spec.inner.IScenario;
 import org.testng.annotations.Test;
 
 @StoryFile(type = StoryType.TXT)

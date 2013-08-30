@@ -3,8 +3,8 @@ package org.jtester.tools.datagen;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import org.jtester.json.ITypeConverter;
 import org.jtester.testng.JTester;
+import org.test4j.json.ITypeConverter;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

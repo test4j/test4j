@@ -12,9 +12,9 @@ import mockit.Mocked;
 import mockit.internal.UnexpectedInvocation;
 
 import org.jtester.junit.JTester;
-import org.jtester.module.inject.annotations.Inject;
-import org.jtester.tools.commons.DateHelper;
 import org.junit.Test;
+import org.test4j.module.inject.annotations.Inject;
+import org.test4j.tools.commons.DateHelper;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })
 public class DateAssertTest implements JTester {

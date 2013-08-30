@@ -3,9 +3,9 @@ package org.jtester.module.jmockit;
 import mockit.NonStrict;
 
 import org.jtester.junit.JTester;
-import org.jtester.module.core.utility.MessageHelper;
-import org.jtester.module.jmockit.extend.JMocketVerifications;
 import org.junit.Test;
+import org.test4j.module.core.utility.MessageHelper;
+import org.test4j.module.jmockit.extend.JMocketVerifications;
 
 public class JMocketVerificationsTest implements JTester {
 

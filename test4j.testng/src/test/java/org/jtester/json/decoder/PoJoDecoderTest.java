@@ -4,9 +4,9 @@ import java.util.Arrays;
 
 import org.jtester.fortest.beans.Address;
 import org.jtester.fortest.beans.User;
-import org.jtester.hamcrest.matcher.property.reflection.EqMode;
-import org.jtester.json.JSON;
 import org.jtester.testng.JTester;
+import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.json.JSON;
 import org.testng.annotations.Test;
 
 @SuppressWarnings("serial")

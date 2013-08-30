@@ -5,10 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jtester.hamcrest.matcher.property.reflection.EqMode;
 import org.jtester.junit.JTester;
 import org.junit.Before;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 
 public class MapAssertTest_ReflectProperty implements JTester {
     Map<String, String>       maps = null;

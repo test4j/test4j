@@ -1,16 +1,16 @@
 package org.jtester.spec.xml;
 
 import org.jtester.junit.JSpec;
-import org.jtester.spec.annotations.Given;
-import org.jtester.spec.annotations.Named;
 import org.jtester.spec.annotations.StoryFile;
 import org.jtester.spec.annotations.StorySource;
 import org.jtester.spec.annotations.StoryType;
-import org.jtester.spec.annotations.Then;
-import org.jtester.spec.annotations.When;
-import org.jtester.spec.exceptions.ScenarioAssertError;
-import org.jtester.spec.inner.IScenario;
 import org.jtester.spec.txt.MultiThenErrorSpec.ErrorType;
+import org.test4j.spec.annotations.Given;
+import org.test4j.spec.annotations.Named;
+import org.test4j.spec.annotations.Then;
+import org.test4j.spec.annotations.When;
+import org.test4j.spec.exceptions.ScenarioAssertError;
+import org.test4j.spec.inner.IScenario;
 import org.testng.annotations.AfterMethod;
 
 @SuppressWarnings("rawtypes")

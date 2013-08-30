@@ -6,10 +6,10 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.jtester.junit.annotations.DataFrom;
-import org.jtester.tools.commons.MethodHelper;
-import org.jtester.tools.commons.Reflector;
-import org.jtester.tools.exception.NewInstanceException;
-import org.jtester.tools.exception.NoSuchMethodRuntimeException;
+import org.test4j.tools.commons.MethodHelper;
+import org.test4j.tools.commons.Reflector;
+import org.test4j.tools.exception.NewInstanceException;
+import org.test4j.tools.exception.NoSuchMethodRuntimeException;
 
 @SuppressWarnings("rawtypes")
 public class ParameterDataFromHelper {

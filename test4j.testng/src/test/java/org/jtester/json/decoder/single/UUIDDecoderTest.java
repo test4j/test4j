@@ -2,8 +2,8 @@ package org.jtester.json.decoder.single;
 
 import java.util.UUID;
 
-import org.jtester.json.JSON;
 import org.jtester.testng.JTester;
+import org.test4j.json.JSON;
 import org.testng.annotations.Test;
 
 @Test(groups = { "jtester", "json" })

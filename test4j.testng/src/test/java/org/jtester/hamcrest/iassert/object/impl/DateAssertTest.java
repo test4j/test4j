@@ -11,9 +11,9 @@ import java.util.Map;
 import mockit.Mocked;
 import mockit.internal.UnexpectedInvocation;
 
-import org.jtester.module.inject.annotations.Inject;
 import org.jtester.testng.JTester;
-import org.jtester.tools.commons.DateHelper;
+import org.test4j.module.inject.annotations.Inject;
+import org.test4j.tools.commons.DateHelper;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })

@@ -6,6 +6,7 @@ import java.util.List;
 import org.jtester.fortest.beans.User;
 import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.property.PropertyAnyItemMatcher;
 
 import ext.test4j.hamcrest.MatcherAssert;
 

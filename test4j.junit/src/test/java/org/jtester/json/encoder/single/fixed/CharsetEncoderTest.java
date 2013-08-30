@@ -5,6 +5,7 @@ import java.nio.charset.Charset;
 import org.jtester.json.encoder.EncoderTest;
 import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
+import org.test4j.json.encoder.single.fixed.CharsetEncoder;
 
 public class CharsetEncoderTest extends EncoderTest {
 

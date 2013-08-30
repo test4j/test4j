@@ -4,10 +4,11 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.jtester.json.helper.JSONFeature;
 import org.jtester.junit.JTester;
-import org.jtester.tools.commons.DateHelper;
 import org.junit.Test;
+import org.test4j.json.encoder.single.spec.DateEncoder;
+import org.test4j.json.helper.JSONFeature;
+import org.test4j.tools.commons.DateHelper;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class DateEncoderTest implements JTester {

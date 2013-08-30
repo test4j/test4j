@@ -5,6 +5,9 @@ import java.util.Iterator;
 import org.jtester.junit.JTester;
 import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.string.StringEqualMatcher;
+import org.test4j.hamcrest.matcher.string.StringMatcher;
+import org.test4j.hamcrest.matcher.string.StringMode;
 
 import ext.test4j.hamcrest.MatcherAssert;
 

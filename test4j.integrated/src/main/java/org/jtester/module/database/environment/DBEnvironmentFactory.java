@@ -1,16 +1,16 @@
 package org.jtester.module.database.environment;
 
-import static org.jtester.module.core.utility.IPropItem.PROPKEY_DATABASE_TYPE;
-import static org.jtester.module.core.utility.IPropItem.PROPKEY_DATASOURCE_DRIVERCLASSNAME;
-import static org.jtester.module.core.utility.IPropItem.PROPKEY_DATASOURCE_PASSWORD;
-import static org.jtester.module.core.utility.IPropItem.PROPKEY_DATASOURCE_SCHEMAS;
-import static org.jtester.module.core.utility.IPropItem.PROPKEY_DATASOURCE_URL;
-import static org.jtester.module.core.utility.IPropItem.PROPKEY_DATASOURCE_USERNAME;
 import static org.jtester.module.database.annotations.Transactional.TransactionMode.DEFAULT;
 import static org.jtester.module.database.environment.DBEnvironment.CUSTOMIZED_DATASOURCE_NAME;
 import static org.jtester.module.database.environment.DBEnvironment.DEFAULT_DATASOURCE_FROM;
 import static org.jtester.module.database.environment.DBEnvironment.DEFAULT_DATASOURCE_NAME;
-import static org.jtester.tools.commons.AnnotationHelper.getMethodOrClassLevelAnnotationProperty;
+import static org.test4j.module.core.utility.IPropItem.PROPKEY_DATABASE_TYPE;
+import static org.test4j.module.core.utility.IPropItem.PROPKEY_DATASOURCE_DRIVERCLASSNAME;
+import static org.test4j.module.core.utility.IPropItem.PROPKEY_DATASOURCE_PASSWORD;
+import static org.test4j.module.core.utility.IPropItem.PROPKEY_DATASOURCE_SCHEMAS;
+import static org.test4j.module.core.utility.IPropItem.PROPKEY_DATASOURCE_URL;
+import static org.test4j.module.core.utility.IPropItem.PROPKEY_DATASOURCE_USERNAME;
+import static org.test4j.tools.commons.AnnotationHelper.getMethodOrClassLevelAnnotationProperty;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -18,8 +18,6 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
 
-import org.jtester.module.core.TestContext;
-import org.jtester.module.core.utility.IPropItem;
 import org.jtester.module.database.annotations.Transactional;
 import org.jtester.module.database.annotations.Transactional.TransactionMode;
 import org.jtester.module.database.environment.types.DerbyEnvironment;
@@ -27,8 +25,10 @@ import org.jtester.module.database.environment.types.MySqlEnvironment;
 import org.jtester.module.database.environment.types.OracleEnvironment;
 import org.jtester.module.database.environment.types.SqlServerEnvironment;
 import org.jtester.module.database.utility.DataSourceType;
-import org.jtester.tools.commons.ConfigHelper;
-import org.jtester.tools.commons.ResourceHelper;
+import org.test4j.module.core.TestContext;
+import org.test4j.module.core.utility.IPropItem;
+import org.test4j.tools.commons.ConfigHelper;
+import org.test4j.tools.commons.ResourceHelper;
 import org.test4j.tools.commons.StringHelper;
 
 public final class DBEnvironmentFactory {

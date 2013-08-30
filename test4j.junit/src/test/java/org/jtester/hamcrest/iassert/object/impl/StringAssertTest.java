@@ -1,8 +1,8 @@
 package org.jtester.hamcrest.iassert.object.impl;
 
-import org.jtester.hamcrest.matcher.string.StringMode;
 import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.string.StringMode;
 
 public class StringAssertTest implements JTester {
 

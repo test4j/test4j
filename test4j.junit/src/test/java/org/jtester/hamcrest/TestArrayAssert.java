@@ -5,8 +5,8 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.jtester.fortest.beans.User;
-import org.jtester.module.ICore;
 import org.junit.Test;
+import org.test4j.module.ICore;
 
 public class TestArrayAssert implements ICore {
 	@Test

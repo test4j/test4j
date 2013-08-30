@@ -1,12 +1,12 @@
 package org.jtester.datafilling.filler.primitive;
 
-import org.jtester.datafilling.Filler;
 import org.jtester.datafilling.annotations.LongValuePojo;
 import org.jtester.datafilling.annotations.LongValueWithErrorPojo;
-import org.jtester.datafilling.exceptions.PoJoFillException;
 import org.jtester.datafilling.utils.FillDataTestConstants;
 import org.junit.Assert;
 import org.junit.Test;
+import org.test4j.datafilling.Filler;
+import org.test4j.datafilling.exceptions.PoJoFillException;
 
 public class LongFillerTest {
 

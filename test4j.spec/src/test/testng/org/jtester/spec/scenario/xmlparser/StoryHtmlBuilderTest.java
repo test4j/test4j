@@ -6,10 +6,10 @@ import mockit.Mock;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
-import org.jtester.hamcrest.matcher.string.StringMode;
 import org.jtester.spec.util.XmlHelper;
 import org.jtester.testng.JTester;
-import org.jtester.tools.commons.ResourceHelper;
+import org.test4j.hamcrest.matcher.string.StringMode;
+import org.test4j.tools.commons.ResourceHelper;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

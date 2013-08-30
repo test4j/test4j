@@ -9,6 +9,7 @@ import org.jtester.json.encoder.beans.test.TestedClazz;
 import org.jtester.json.encoder.beans.test.TestedIntf;
 import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
+import org.test4j.json.encoder.single.fixed.ClazzEncoder;
 
 @SuppressWarnings("rawtypes")
 public class ClazzEncoderTest extends EncoderTest {

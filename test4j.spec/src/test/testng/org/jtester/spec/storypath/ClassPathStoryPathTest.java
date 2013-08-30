@@ -6,9 +6,9 @@ import mockit.Mock;
 
 import org.jtester.spec.annotations.StoryFile;
 import org.jtester.spec.annotations.StoryType;
-import org.jtester.spec.inner.IScenario;
 import org.jtester.testng.JSpec;
 import org.jtester.testng.JTester;
+import org.test4j.spec.inner.IScenario;
 import org.testng.annotations.Test;
 
 public class ClassPathStoryPathTest extends JTester {

@@ -2,8 +2,8 @@ package org.jtester.datafilling.annotations;
 
 import java.io.Serializable;
 
-import org.jtester.datafilling.annotations.FillChar;
 import org.jtester.datafilling.utils.FillDataTestConstants;
+import org.test4j.datafilling.annotations.FillChar;
 
 @SuppressWarnings("serial")
 public class CharValuePojo implements Serializable {

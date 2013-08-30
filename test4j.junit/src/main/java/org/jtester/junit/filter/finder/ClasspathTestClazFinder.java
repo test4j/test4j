@@ -11,8 +11,8 @@ import org.jtester.junit.filter.acceptor.TestAcceptor;
 import org.jtester.junit.filter.iterator.DirFileIterator;
 import org.jtester.junit.filter.iterator.JarFileIterator;
 import org.jtester.junit.filter.iterator.NonFileIterator;
-import org.jtester.tools.commons.ClazzHelper;
-import org.jtester.tools.commons.ResourceHelper;
+import org.test4j.tools.commons.ClazzHelper;
+import org.test4j.tools.commons.ResourceHelper;
 
 /**
  * Utility class to find classes within the class path, both inside and outside

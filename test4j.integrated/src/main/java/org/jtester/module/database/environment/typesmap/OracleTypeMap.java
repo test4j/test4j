@@ -13,7 +13,7 @@ import oracle.sql.BLOB;
 import oracle.sql.TIMESTAMP;
 
 import org.jtester.module.database.environment.typesmap.TypeMap.JavaSQLType;
-import org.jtester.tools.commons.DateHelper;
+import org.test4j.tools.commons.DateHelper;
 
 @SuppressWarnings({ "rawtypes", "serial" })
 public class OracleTypeMap extends AbstractTypeMap {

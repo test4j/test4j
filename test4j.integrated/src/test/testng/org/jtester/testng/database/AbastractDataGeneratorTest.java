@@ -7,9 +7,9 @@ import mockit.Mock;
 
 import org.jtester.database.table.ITable;
 import org.jtester.database.table.TddUserTable;
-import org.jtester.module.database.IDatabase;
 import org.jtester.testng.JTester;
-import org.jtester.tools.datagen.DataSet;
+import org.test4j.module.database.IDatabase;
+import org.test4j.tools.datagen.DataSet;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "serial", "rawtypes", "unchecked" })

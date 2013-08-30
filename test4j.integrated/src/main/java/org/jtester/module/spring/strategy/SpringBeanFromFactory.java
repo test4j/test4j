@@ -1,23 +1,23 @@
 package org.jtester.module.spring.strategy;
 
-import static org.jtester.tools.commons.AnnotationHelper.getFieldsAnnotatedWith;
+import static org.test4j.tools.commons.AnnotationHelper.getFieldsAnnotatedWith;
 
 import java.lang.reflect.Field;
 import java.util.HashMap;
 import java.util.Set;
 
-import org.jtester.module.core.TestContext;
-import org.jtester.module.core.utility.MessageHelper;
 import org.jtester.module.spring.annotations.SpringBeanFrom;
 import org.jtester.module.spring.exception.FindBeanImplClassException;
-import org.jtester.tools.commons.FieldHelper;
-import org.jtester.tools.reflector.imposteriser.JTesterProxy;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
+import org.test4j.module.core.TestContext;
+import org.test4j.module.core.utility.MessageHelper;
+import org.test4j.tools.commons.FieldHelper;
 import org.test4j.tools.commons.StringHelper;
+import org.test4j.tools.reflector.imposteriser.JTesterProxy;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class SpringBeanFromFactory implements FactoryBean {// , BeanFactoryAware

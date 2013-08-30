@@ -1,6 +1,7 @@
 package org.jtester.hamcrest.matcher.string;
 
 import org.jtester.testng.JTester;
+import org.test4j.hamcrest.matcher.string.StringMode;
 import org.testng.annotations.Test;
 
 @Test(groups = "assertion")

@@ -4,12 +4,13 @@ import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 
-import org.jtester.module.ICore.DataMap;
 import org.jtester.module.database.environment.DBEnvironment;
 import org.jtester.module.database.environment.DBEnvironmentFactory;
 import org.jtester.module.database.environment.TableMeta;
 import org.jtester.module.database.utility.DBHelper;
-import org.jtester.tools.commons.ExceptionWrapper;
+import org.test4j.module.ICore.DataMap;
+import org.test4j.module.database.dbop.IInsertOp;
+import org.test4j.tools.commons.ExceptionWrapper;
 
 public class InsertOp implements IInsertOp {
     private String        table;

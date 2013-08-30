@@ -7,7 +7,7 @@ import java.util.List;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.jtester.spec.util.XmlHelper;
-import org.jtester.tools.commons.ResourceHelper;
+import org.test4j.tools.commons.ResourceHelper;
 
 /**
  * 将xml格式的用例文件转换为html格式

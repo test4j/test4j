@@ -4,6 +4,7 @@ import java.net.InetSocketAddress;
 
 import org.jtester.json.encoder.EncoderTest;
 import org.junit.Test;
+import org.test4j.json.encoder.single.fixed.SocketAddressEncoder;
 
 public class SocketAddressEncoderTest extends EncoderTest {
 

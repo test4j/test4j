@@ -2,12 +2,12 @@ package org.jtester.module.database;
 
 import java.lang.reflect.Method;
 
-import org.jtester.module.core.Module;
-import org.jtester.module.core.TestListener;
-import org.jtester.module.core.utility.MessageHelper;
 import org.jtester.module.database.environment.DBEnvironment;
 import org.jtester.module.database.environment.DBEnvironmentFactory;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.test4j.module.core.Module;
+import org.test4j.module.core.TestListener;
+import org.test4j.module.core.utility.MessageHelper;
 
 public class DatabaseModule implements Module {
 	/**

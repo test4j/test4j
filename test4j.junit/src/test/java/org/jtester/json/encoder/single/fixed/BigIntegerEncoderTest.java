@@ -4,6 +4,7 @@ import java.math.BigInteger;
 
 import org.jtester.json.encoder.EncoderTest;
 import org.junit.Test;
+import org.test4j.json.encoder.single.fixed.BigIntegerEncoder;
 
 public class BigIntegerEncoderTest extends EncoderTest {
 

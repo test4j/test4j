@@ -6,13 +6,13 @@ import java.util.List;
 
 import org.dom4j.Document;
 import org.dom4j.io.SAXReader;
-import org.jtester.hamcrest.matcher.property.reflection.EqMode;
-import org.jtester.module.ICore.DataMap;
-import org.jtester.spec.inner.IScenario;
-import org.jtester.spec.inner.StepType;
 import org.jtester.spec.scenario.step.JSpecStep;
 import org.jtester.testng.JTester;
-import org.jtester.tools.commons.ResourceHelper;
+import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.module.ICore.DataMap;
+import org.test4j.spec.inner.IScenario;
+import org.test4j.spec.inner.StepType;
+import org.test4j.tools.commons.ResourceHelper;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "unchecked", "rawtypes", "serial" })

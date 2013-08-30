@@ -11,8 +11,6 @@ import java.util.List;
 
 import junit.framework.Assert;
 
-import org.jtester.datafilling.Filler;
-import org.jtester.datafilling.common.FillingConstants;
 import org.jtester.datafilling.model.example.Address;
 import org.jtester.datafilling.model.example.Article;
 import org.jtester.datafilling.model.example.BankAccount;
@@ -20,8 +18,10 @@ import org.jtester.datafilling.model.example.Client;
 import org.jtester.datafilling.model.example.Country;
 import org.jtester.datafilling.model.example.Order;
 import org.jtester.datafilling.model.example.OrderItem;
-import org.jtester.module.ICore;
 import org.junit.Test;
+import org.test4j.datafilling.Filler;
+import org.test4j.datafilling.common.FillingConstants;
+import org.test4j.module.ICore;
 
 public class PoJoFillerExampleDemo implements ICore {
 

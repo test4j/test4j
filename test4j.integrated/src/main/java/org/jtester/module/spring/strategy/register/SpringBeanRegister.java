@@ -4,15 +4,15 @@ import java.lang.reflect.Field;
 import java.util.Queue;
 import java.util.Set;
 
-import org.jtester.module.core.utility.ModulesManager;
-import org.jtester.module.jmockit.JMockitModule;
-import org.jtester.module.jmockit.utility.JMockitModuleHelper;
 import org.jtester.module.spring.annotations.Property;
 import org.jtester.module.spring.exception.FindBeanImplClassException;
-import org.jtester.tools.commons.ClazzHelper;
 import org.springframework.beans.PropertyValue;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.RootBeanDefinition;
+import org.test4j.module.core.utility.ModulesManager;
+import org.test4j.module.jmockit.JMockitModule;
+import org.test4j.module.jmockit.utility.JMockitModuleHelper;
+import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.commons.StringHelper;
 
 @SuppressWarnings("rawtypes")

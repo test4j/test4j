@@ -2,12 +2,12 @@ package org.jtester.json.helper.complex;
 
 import java.util.ArrayList;
 
-import org.jtester.hamcrest.matcher.modes.ItemsMode;
-import org.jtester.json.JSON;
-import org.jtester.json.helper.JSONFeature;
 import org.jtester.junit.JTester;
-import org.jtester.tools.commons.DateHelper;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.modes.ItemsMode;
+import org.test4j.json.JSON;
+import org.test4j.json.helper.JSONFeature;
+import org.test4j.tools.commons.DateHelper;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class TestJson implements JTester {

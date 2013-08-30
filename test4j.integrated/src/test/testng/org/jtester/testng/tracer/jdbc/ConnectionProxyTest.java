@@ -6,7 +6,6 @@ import java.sql.Statement;
 
 import mockit.Mock;
 
-import org.jtester.hamcrest.matcher.string.StringMode;
 import org.jtester.module.database.environment.JTesterDataSource;
 import org.jtester.module.database.utility.DataSourceType;
 import org.jtester.module.tracer.TracerHelper;
@@ -15,8 +14,9 @@ import org.jtester.module.tracer.TracerManager;
 import org.jtester.module.tracer.TxtFileTracerLogger;
 import org.jtester.module.tracer.jdbc.IProxyMarker;
 import org.jtester.testng.JTester;
-import org.jtester.tools.commons.ConfigHelper;
-import org.jtester.tools.commons.ResourceHelper;
+import org.test4j.hamcrest.matcher.string.StringMode;
+import org.test4j.tools.commons.ConfigHelper;
+import org.test4j.tools.commons.ResourceHelper;
 import org.testng.annotations.Test;
 
 public class ConnectionProxyTest extends JTester {

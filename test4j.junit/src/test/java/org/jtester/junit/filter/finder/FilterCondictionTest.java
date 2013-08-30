@@ -5,8 +5,8 @@ import java.util.List;
 import mockit.Mock;
 
 import org.jtester.junit.annotations.DataFrom;
-import org.jtester.module.ICore;
 import org.junit.Test;
+import org.test4j.module.ICore;
 
 public class FilterCondictionTest implements ICore {
 

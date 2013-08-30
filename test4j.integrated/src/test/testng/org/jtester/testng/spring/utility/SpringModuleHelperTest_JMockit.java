@@ -4,9 +4,9 @@ import java.lang.reflect.Field;
 
 import mockit.NonStrict;
 
-import org.jtester.module.jmockit.utility.JMockitModuleHelper;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.testng.JTester;
+import org.test4j.module.jmockit.utility.JMockitModuleHelper;
 import org.testng.annotations.Test;
 
 @Test(groups = { "jtester", "spring" })

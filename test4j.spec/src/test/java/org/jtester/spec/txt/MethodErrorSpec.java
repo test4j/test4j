@@ -1,8 +1,8 @@
 package org.jtester.spec.txt;
 
 import org.jtester.junit.JSpec;
-import org.jtester.spec.annotations.Given;
-import org.jtester.spec.inner.IScenario;
+import org.test4j.spec.annotations.Given;
+import org.test4j.spec.inner.IScenario;
 
 /**
  * @author darui.wudr 2013-8-22 下午3:07:35

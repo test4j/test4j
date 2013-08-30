@@ -3,7 +3,7 @@ package org.jtester.datafilling.model;
 import java.io.Serializable;
 import java.util.List;
 
-import org.jtester.datafilling.annotations.FillConstructor;
+import org.test4j.datafilling.annotations.FillConstructor;
 
 public class NoSetterWithCollectionInConstructorPojo implements Serializable {
 

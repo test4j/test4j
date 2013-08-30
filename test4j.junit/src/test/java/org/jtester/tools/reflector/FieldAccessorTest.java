@@ -2,10 +2,11 @@ package org.jtester.tools.reflector;
 
 import org.jtester.fortest.reflector.TestObject;
 import org.jtester.junit.JTester;
-import org.jtester.tools.exception.NoSuchFieldRuntimeException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.test4j.tools.exception.NoSuchFieldRuntimeException;
+import org.test4j.tools.reflector.FieldAccessor;
 
 @SuppressWarnings("rawtypes")
 public class FieldAccessorTest implements JTester {

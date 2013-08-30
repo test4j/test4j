@@ -6,10 +6,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jtester.module.core.utility.MessageHelper;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.BeanFactoryAware;
+import org.test4j.module.core.utility.MessageHelper;
 
 @SuppressWarnings({ "rawtypes" })
 public class ResourceManagerImpl implements ResourceManager, BeanFactoryAware {

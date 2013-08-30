@@ -10,14 +10,14 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.jtester.spec.ISpec;
-import org.jtester.spec.Steps;
-import org.jtester.spec.annotations.Named;
-import org.jtester.spec.inner.IScenarioStep;
-import org.jtester.spec.inner.ISpecMethod;
-import org.jtester.spec.inner.StepType;
-import org.jtester.tools.commons.AnnotationHelper;
-import org.jtester.tools.reflector.MethodAccessor;
+import org.test4j.spec.ISpec;
+import org.test4j.spec.Steps;
+import org.test4j.spec.annotations.Named;
+import org.test4j.spec.inner.IScenarioStep;
+import org.test4j.spec.inner.ISpecMethod;
+import org.test4j.spec.inner.StepType;
+import org.test4j.tools.commons.AnnotationHelper;
+import org.test4j.tools.reflector.MethodAccessor;
 
 @SuppressWarnings("rawtypes")
 public class SpecMethod implements ISpecMethod {

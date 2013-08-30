@@ -5,9 +5,9 @@ import java.util.Queue;
 import java.util.Set;
 
 import org.jtester.module.spring.strategy.register.RegisterBeanDefinition;
-import org.jtester.tools.commons.AnnotationHelper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.test4j.tools.commons.AnnotationHelper;
 import org.test4j.tools.commons.StringHelper;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })

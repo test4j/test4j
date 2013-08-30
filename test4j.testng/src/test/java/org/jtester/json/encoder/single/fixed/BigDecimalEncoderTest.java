@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 
 import org.jtester.json.encoder.EncoderTest;
+import org.test4j.json.encoder.single.fixed.BigDecimalEncoder;
 import org.testng.annotations.Test;
 
 @Test

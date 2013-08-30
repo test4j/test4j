@@ -4,10 +4,10 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 import java.util.Date;
 
-import org.jtester.json.encoder.single.spec.DateEncoder;
-import org.jtester.json.helper.JSONFeature;
 import org.jtester.testng.JTester;
-import org.jtester.tools.commons.DateHelper;
+import org.test4j.json.encoder.single.spec.DateEncoder;
+import org.test4j.json.helper.JSONFeature;
+import org.test4j.tools.commons.DateHelper;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })

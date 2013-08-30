@@ -6,13 +6,13 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
-import org.jtester.json.JSON;
-import org.jtester.json.decoder.CollectionDecoder;
 import org.jtester.json.decoder.ForTestType;
 import org.jtester.json.encoder.beans.test.User;
 import org.jtester.junit.JTester;
 import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
+import org.test4j.json.JSON;
+import org.test4j.json.decoder.CollectionDecoder;
 
 @SuppressWarnings({ "rawtypes" })
 public class CollectionDecoderTest implements JTester {

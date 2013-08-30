@@ -4,9 +4,10 @@ import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import org.jtester.json.helper.JSONFeature;
 import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.json.encoder.single.spec.SimpleDateFormatEncoder;
+import org.test4j.json.helper.JSONFeature;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class SimpleDateFormatEncoderTest implements JTester {

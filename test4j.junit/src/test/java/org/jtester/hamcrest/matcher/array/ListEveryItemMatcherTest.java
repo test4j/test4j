@@ -4,10 +4,11 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jtester.hamcrest.matcher.mockito.Matches;
-import org.jtester.hamcrest.matcher.modes.ItemsMode;
 import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.array.ListEveryItemMatcher;
+import org.test4j.hamcrest.matcher.mockito.Matches;
+import org.test4j.hamcrest.matcher.modes.ItemsMode;
 
 import ext.test4j.hamcrest.Matcher;
 import ext.test4j.hamcrest.MatcherAssert;

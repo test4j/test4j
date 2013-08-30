@@ -2,9 +2,9 @@ package org.jtester.testng.spring.aop;
 
 import org.aopalliance.intercept.MethodInterceptor;
 import org.aopalliance.intercept.MethodInvocation;
-import org.jtester.module.core.utility.MessageHelper;
 import org.jtester.testng.JTester;
 import org.springframework.aop.framework.ProxyFactory;
+import org.test4j.module.core.utility.MessageHelper;
 import org.testng.annotations.Test;
 
 public class SpringAroundTest extends JTester {

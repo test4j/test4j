@@ -5,13 +5,13 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import org.jtester.spec.annotations.Given;
-import org.jtester.spec.annotations.Named;
-import org.jtester.spec.annotations.Then;
-import org.jtester.spec.annotations.When;
-import org.jtester.spec.inner.ISpecMethod;
-import org.jtester.spec.inner.ISpecMethod.SpecMethodID;
 import org.jtester.testng.JTester;
+import org.test4j.spec.annotations.Given;
+import org.test4j.spec.annotations.Named;
+import org.test4j.spec.annotations.Then;
+import org.test4j.spec.annotations.When;
+import org.test4j.spec.inner.ISpecMethod;
+import org.test4j.spec.inner.ISpecMethod.SpecMethodID;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "unchecked" })

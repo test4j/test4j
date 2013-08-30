@@ -1,7 +1,7 @@
 package org.jtester.datafilling.annotations;
 
-import org.jtester.datafilling.annotations.FillString;
 import org.jtester.datafilling.utils.FillDataTestConstants;
+import org.test4j.datafilling.annotations.FillString;
 
 public class StringValuePojo  {
 

@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.dom4j.Document;
-import org.jtester.hamcrest.matcher.property.reflection.EqMode;
-import org.jtester.spec.inner.StepType;
 import org.jtester.spec.scenario.xmlparser.entity.ScenarioList;
 import org.jtester.spec.scenario.xmlparser.entity.ScenarioMethod;
 import org.jtester.spec.scenario.xmlparser.entity.StoryDescription;
@@ -14,6 +12,8 @@ import org.jtester.spec.scenario.xmlparser.entity.TemplateList;
 import org.jtester.spec.scenario.xmlparser.entity.TemplateMethod;
 import org.jtester.spec.util.XmlHelper;
 import org.jtester.testng.JTester;
+import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.spec.inner.StepType;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

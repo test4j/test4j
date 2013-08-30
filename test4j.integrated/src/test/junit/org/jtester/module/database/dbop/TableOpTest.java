@@ -7,16 +7,16 @@ import mockit.Mock;
 
 import org.jtester.database.table.ITable;
 import org.jtester.database.table.TddUserTable;
-import org.jtester.hamcrest.matcher.property.reflection.EqMode;
-import org.jtester.hamcrest.matcher.string.StringMode;
 import org.jtester.junit.JTester;
 import org.jtester.module.database.annotations.Transactional;
 import org.jtester.module.database.annotations.Transactional.TransactionMode;
 import org.jtester.module.database.environment.TableMeta.ColumnMeta;
-import org.jtester.tools.commons.ExceptionWrapper;
-import org.jtester.tools.commons.ListHelper;
-import org.jtester.tools.datagen.DataSet;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.hamcrest.matcher.string.StringMode;
+import org.test4j.tools.commons.ExceptionWrapper;
+import org.test4j.tools.commons.ListHelper;
+import org.test4j.tools.datagen.DataSet;
 
 @SuppressWarnings({ "serial", "unchecked" })
 @Transactional(TransactionMode.COMMIT)

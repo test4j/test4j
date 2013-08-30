@@ -1,13 +1,13 @@
 package org.jtester.spec.txt;
 
 import org.jtester.junit.JSpec;
-import org.jtester.spec.annotations.Given;
-import org.jtester.spec.annotations.Named;
 import org.jtester.spec.annotations.StoryFile;
 import org.jtester.spec.annotations.StorySource;
 import org.jtester.spec.annotations.StoryType;
-import org.jtester.spec.annotations.Then;
-import org.jtester.spec.annotations.When;
+import org.test4j.spec.annotations.Given;
+import org.test4j.spec.annotations.Named;
+import org.test4j.spec.annotations.Then;
+import org.test4j.spec.annotations.When;
 
 @StoryFile(type = StoryType.TXT, source = StorySource.ClassPath, encoding = "GBK")
 public class JSpecDemo extends JSpec {

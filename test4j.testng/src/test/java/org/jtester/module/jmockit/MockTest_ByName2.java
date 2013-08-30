@@ -5,8 +5,8 @@ import mockit.Mocked;
 import org.jtester.fortest.formock.SomeInterface;
 import org.jtester.fortest.formock.SpringBeanService;
 import org.jtester.fortest.formock.SpringBeanService.SpringBeanServiceImpl1;
-import org.jtester.module.inject.annotations.Inject;
 import org.jtester.testng.JTester;
+import org.test4j.module.inject.annotations.Inject;
 import org.testng.annotations.Test;
 
 @Test(groups = "jtester")

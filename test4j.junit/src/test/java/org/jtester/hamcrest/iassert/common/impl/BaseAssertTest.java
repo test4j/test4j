@@ -3,10 +3,10 @@ package org.jtester.hamcrest.iassert.common.impl;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jtester.hamcrest.matcher.string.StringMode;
 import org.jtester.json.encoder.beans.test.User;
 import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.string.StringMode;
 
 public class BaseAssertTest implements JTester {
 

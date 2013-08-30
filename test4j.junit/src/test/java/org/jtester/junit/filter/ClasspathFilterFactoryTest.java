@@ -7,8 +7,8 @@ import static org.junit.Assert.assertTrue;
 import org.jtester.junit.filter.acceptor.TestInClasspathAcceptor;
 import org.jtester.junit.filter.finder.FilterCondiction;
 import org.jtester.junit.filter.finder.ClasspathTestClazFinder;
-import org.jtester.module.ICore;
 import org.junit.Test;
+import org.test4j.module.ICore;
 
 public class ClasspathFilterFactoryTest implements ICore {
 

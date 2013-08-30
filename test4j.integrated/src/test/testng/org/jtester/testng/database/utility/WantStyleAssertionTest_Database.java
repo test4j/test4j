@@ -2,8 +2,8 @@ package org.jtester.testng.database.utility;
 
 import org.jtester.database.table.ITable;
 import org.jtester.database.table.TddUserTable;
-import org.jtester.module.database.IDatabase;
 import org.jtester.testng.JTester;
+import org.test4j.module.database.IDatabase;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "serial", "unchecked" })

@@ -2,7 +2,7 @@
  */
 package ext.jtester.hamcrest;
 
-import org.jtester.module.ICore;
+import org.test4j.module.ICore;
 import org.testng.annotations.Test;
 
 import ext.test4j.hamcrest.Description;

@@ -3,10 +3,11 @@ package org.jtester.json.encoder.array;
 import java.io.StringWriter;
 import java.util.ArrayList;
 
-import org.jtester.json.encoder.JSONEncoder;
 import org.jtester.json.encoder.beans.test.User;
-import org.jtester.json.helper.JSONFeature;
 import org.jtester.testng.JTester;
+import org.test4j.json.encoder.JSONEncoder;
+import org.test4j.json.encoder.array.ObjectArrayEncoder;
+import org.test4j.json.helper.JSONFeature;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })

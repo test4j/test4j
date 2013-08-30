@@ -2,9 +2,9 @@ package org.jtester.spec.scenario.step.txt;
 
 import java.lang.reflect.Method;
 
-import org.jtester.spec.annotations.Named;
 import org.jtester.spec.scenario.step.txt.ParameterParser;
 import org.jtester.testng.JTester;
+import org.test4j.spec.annotations.Named;
 import org.testng.annotations.Test;
 
 public class JSpecHelperTest_MethodPatternParser extends JTester {

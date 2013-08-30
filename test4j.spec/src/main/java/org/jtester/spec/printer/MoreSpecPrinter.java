@@ -3,9 +3,9 @@ package org.jtester.spec.printer;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jtester.spec.ISpec;
-import org.jtester.spec.inner.IScenario;
-import org.jtester.spec.inner.ISpecPrinter;
+import org.test4j.spec.ISpec;
+import org.test4j.spec.inner.IScenario;
+import org.test4j.spec.inner.ISpecPrinter;
 
 public class MoreSpecPrinter implements ISpecPrinter {
     final List<ISpecPrinter> printers = new ArrayList<ISpecPrinter>();

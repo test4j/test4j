@@ -4,11 +4,11 @@ import java.io.File;
 
 import org.jtester.database.table.ITable;
 import org.jtester.database.table.TddUserTable;
-import org.jtester.hamcrest.matcher.property.reflection.EqMode;
-import org.jtester.module.database.IDatabase;
 import org.jtester.module.database.bean.TddUser;
 import org.jtester.module.database.dbop.SqlSet;
 import org.jtester.testng.JTester;
+import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.module.database.IDatabase;
 import org.testng.annotations.Test;
 
 @SuppressWarnings("serial")

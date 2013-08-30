@@ -3,10 +3,11 @@ package org.jtester.json.encoder.array;
 import java.io.StringWriter;
 import java.util.ArrayList;
 
-import org.jtester.json.encoder.JSONEncoder;
-import org.jtester.json.helper.JSONFeature;
 import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.json.encoder.JSONEncoder;
+import org.test4j.json.encoder.array.ObjectArrayEncoder;
+import org.test4j.json.helper.JSONFeature;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class ByteArrayEncoderTest implements JTester {

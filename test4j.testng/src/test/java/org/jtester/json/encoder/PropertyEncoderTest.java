@@ -1,9 +1,10 @@
 package org.jtester.json.encoder;
 
-import org.jtester.json.JSON;
 import org.jtester.json.encoder.beans.test.User;
-import org.jtester.json.encoder.object.PoJoEncoder;
-import org.jtester.json.helper.JSONFeature;
+import org.test4j.json.JSON;
+import org.test4j.json.encoder.JSONEncoder;
+import org.test4j.json.encoder.object.PoJoEncoder;
+import org.test4j.json.helper.JSONFeature;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })

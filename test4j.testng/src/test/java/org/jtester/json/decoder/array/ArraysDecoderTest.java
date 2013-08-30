@@ -2,9 +2,9 @@ package org.jtester.json.decoder.array;
 
 import java.util.Map;
 
-import org.jtester.json.JSON;
 import org.jtester.json.encoder.beans.test.User;
 import org.jtester.testng.JTester;
+import org.test4j.json.JSON;
 import org.testng.annotations.Test;
 
 @SuppressWarnings("rawtypes")

@@ -7,7 +7,7 @@ import java.net.ConnectException;
 import java.net.URL;
 import java.net.URLConnection;
 
-import org.jtester.spec.ISpec;
+import org.test4j.spec.ISpec;
 
 /**
  * 梯田远程数据读取器

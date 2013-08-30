@@ -3,6 +3,7 @@ package org.jtester.json.encoder.single.fixed;
 import java.nio.charset.Charset;
 
 import org.jtester.json.encoder.EncoderTest;
+import org.test4j.json.encoder.single.fixed.CharsetEncoder;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

@@ -2,9 +2,9 @@ package org.jtester.module.spring.utility;
 
 import java.lang.reflect.Method;
 
-import org.jtester.module.ICore;
-import org.jtester.tools.commons.MethodHelper;
 import org.junit.Test;
+import org.test4j.module.ICore;
+import org.test4j.tools.commons.MethodHelper;
 
 public class SpringInitHelperTest_MethodQualifier implements ICore {
 	@Test

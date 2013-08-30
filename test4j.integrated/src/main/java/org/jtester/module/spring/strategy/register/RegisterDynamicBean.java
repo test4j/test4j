@@ -7,10 +7,10 @@ import org.jtester.module.spring.annotations.AutoBeanInject;
 import org.jtester.module.spring.exception.FindBeanImplClassException;
 import org.jtester.module.spring.strategy.ImplementorFinder;
 import org.jtester.module.spring.strategy.register.types.PropertiesRegister;
-import org.jtester.tools.commons.AnnotationHelper;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
+import org.test4j.tools.commons.AnnotationHelper;
 import org.test4j.tools.commons.StringHelper;
 
 /**

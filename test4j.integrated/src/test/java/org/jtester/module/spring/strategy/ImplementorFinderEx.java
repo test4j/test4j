@@ -1,6 +1,6 @@
 package org.jtester.module.spring.strategy;
 
-import org.jtester.tools.commons.ClazzHelper;
+import org.test4j.tools.commons.ClazzHelper;
 
 public class ImplementorFinderEx extends ImplementorFinder {
 

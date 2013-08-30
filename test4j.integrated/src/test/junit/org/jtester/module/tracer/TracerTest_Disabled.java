@@ -10,10 +10,10 @@ import org.jtester.fortest.hibernate.UserService;
 import org.jtester.junit.JTester;
 import org.jtester.module.spring.annotations.SpringBeanByType;
 import org.jtester.module.spring.annotations.SpringContext;
-import org.jtester.tools.commons.ResourceHelper;
 import org.junit.Before;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.test4j.tools.commons.ResourceHelper;
 
 @Ignore
 @SuppressWarnings({ "serial" })

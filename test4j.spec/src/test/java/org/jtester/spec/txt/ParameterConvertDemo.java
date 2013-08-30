@@ -9,11 +9,11 @@ import java.util.List;
 
 import org.jtester.fortest.beans.User;
 import org.jtester.junit.JSpec;
-import org.jtester.spec.annotations.Named;
 import org.jtester.spec.annotations.StoryFile;
 import org.jtester.spec.annotations.StorySource;
 import org.jtester.spec.annotations.StoryType;
-import org.jtester.spec.annotations.When;
+import org.test4j.spec.annotations.Named;
+import org.test4j.spec.annotations.When;
 
 @SuppressWarnings({ "serial", "rawtypes" })
 @StoryFile(type = StoryType.TXT, source = StorySource.ClassPath)

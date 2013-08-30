@@ -1,8 +1,8 @@
 package org.jtester.json;
 
-import org.jtester.json.ITypeConverter;
-import org.jtester.json.JSON;
 import org.jtester.testng.JTester;
+import org.test4j.json.ITypeConverter;
+import org.test4j.json.JSON;
 import org.testng.annotations.Test;
 
 public class ArrayConverterTest extends JTester {

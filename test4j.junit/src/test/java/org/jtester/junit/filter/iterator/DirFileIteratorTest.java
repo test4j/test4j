@@ -7,10 +7,10 @@ import java.io.File;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
-import org.jtester.hamcrest.matcher.string.StringMode;
 import org.jtester.junit.filter.iterator.DirFileIterator;
-import org.jtester.module.ICore;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.string.StringMode;
+import org.test4j.module.ICore;
 
 public class DirFileIteratorTest implements ICore {
 

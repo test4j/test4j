@@ -2,8 +2,8 @@ package org.jtester.json;
 
 import java.util.Iterator;
 
-import org.jtester.json.JSONConverter;
 import org.jtester.testng.JTester;
+import org.test4j.json.JSONConverter;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

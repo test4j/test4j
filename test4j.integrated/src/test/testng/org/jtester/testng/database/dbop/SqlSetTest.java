@@ -3,9 +3,9 @@ package org.jtester.testng.database.dbop;
 import java.io.File;
 
 import org.jtester.database.table.ITable;
-import org.jtester.module.database.IDatabase;
 import org.jtester.module.database.dbop.SqlSet;
 import org.jtester.testng.JTester;
+import org.test4j.module.database.IDatabase;
 import org.testng.annotations.Test;
 
 @Test(groups = { "jtester", "database" })

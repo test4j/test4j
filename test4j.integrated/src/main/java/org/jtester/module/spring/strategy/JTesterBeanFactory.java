@@ -3,10 +3,10 @@ package org.jtester.module.spring.strategy;
 import javax.sql.DataSource;
 
 import org.jtester.module.database.environment.DBEnvironmentFactory;
-import org.jtester.tools.commons.ConfigHelper;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.test4j.tools.commons.ConfigHelper;
 
 @SuppressWarnings("rawtypes")
 public class JTesterBeanFactory extends DefaultListableBeanFactory {

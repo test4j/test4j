@@ -6,10 +6,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.jtester.fortest.beans.User;
-import org.jtester.hamcrest.matcher.property.reflection.EqMode;
 import org.jtester.junit.JTester;
 import org.junit.Before;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 
 @SuppressWarnings({ "serial", "rawtypes", "unchecked" })
 public class ListAssertTest implements JTester {

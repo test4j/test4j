@@ -7,8 +7,6 @@ import org.jtester.fortest.beans.User;
 import org.jtester.fortest.service.BeanClazzUserServiceImpl;
 import org.jtester.fortest.service.UserDao;
 import org.jtester.fortest.service.UserServiceImpl;
-import org.jtester.module.database.IDatabase;
-import org.jtester.module.spring.ISpring;
 import org.jtester.module.spring.annotations.SpringInitMethod;
 import org.jtester.module.spring.strategy.Child;
 import org.jtester.module.spring.strategy.JTesterSpringContext;
@@ -16,6 +14,8 @@ import org.jtester.module.spring.strategy.LazySpringContext;
 import org.jtester.module.spring.strategy.Parent;
 import org.jtester.module.spring.utility.SpringModuleHelper;
 import org.springframework.beans.factory.NoSuchBeanDefinitionException;
+import org.test4j.module.database.IDatabase;
+import org.test4j.module.spring.ISpring;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "rawtypes" })

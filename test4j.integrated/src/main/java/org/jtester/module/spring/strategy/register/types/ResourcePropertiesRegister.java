@@ -7,7 +7,7 @@ import java.util.Set;
 import javax.annotation.Resource;
 
 import org.jtester.module.spring.strategy.register.RegisterBeanDefinition;
-import org.jtester.tools.commons.AnnotationHelper;
+import org.test4j.tools.commons.AnnotationHelper;
 import org.test4j.tools.commons.StringHelper;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })

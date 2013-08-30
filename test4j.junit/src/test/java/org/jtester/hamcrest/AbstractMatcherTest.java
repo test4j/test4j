@@ -2,8 +2,8 @@
  */
 package org.jtester.hamcrest;
 
-import org.jtester.module.ICore;
 import org.junit.Test;
+import org.test4j.module.ICore;
 
 import ext.test4j.hamcrest.Description;
 import ext.test4j.hamcrest.Matcher;

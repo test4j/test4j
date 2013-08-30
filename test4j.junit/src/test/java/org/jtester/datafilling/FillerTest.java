@@ -2,12 +2,12 @@ package org.jtester.datafilling;
 
 import junit.framework.Assert;
 
-import org.jtester.datafilling.Filler;
 import org.jtester.datafilling.model.dto.A;
 import org.jtester.datafilling.model.dto.B;
 import org.jtester.datafilling.model.dto.ConcreteBusinessObject;
-import org.jtester.module.ICore;
 import org.junit.Test;
+import org.test4j.datafilling.Filler;
+import org.test4j.module.ICore;
 
 public class FillerTest implements ICore {
 

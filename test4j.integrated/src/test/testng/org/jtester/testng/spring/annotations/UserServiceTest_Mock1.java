@@ -4,10 +4,10 @@ import mockit.Mocked;
 
 import org.jtester.fortest.hibernate.AddressService;
 import org.jtester.fortest.hibernate.UserService;
-import org.jtester.module.inject.annotations.Inject;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.testng.JTester;
+import org.test4j.module.inject.annotations.Inject;
 import org.testng.annotations.Test;
 
 @SpringContext({ "classpath:/org/jtester/fortest/hibernate/project.xml" })

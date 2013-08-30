@@ -9,6 +9,7 @@ import java.util.Map;
 import org.jtester.fortest.beans.User;
 import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.property.PropertiesArrayRefEqMatcher;
 
 import ext.test4j.hamcrest.MatcherAssert;
 

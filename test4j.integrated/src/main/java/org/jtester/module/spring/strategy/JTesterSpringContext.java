@@ -1,7 +1,5 @@
 package org.jtester.module.spring.strategy;
 
-import org.jtester.module.core.TestContext;
-import org.jtester.module.core.utility.MessageHelper;
 import org.jtester.module.spring.strategy.register.RegisterDynamicBean;
 import org.jtester.module.tracer.TracerHelper;
 import org.jtester.module.tracer.spring.SpringBeanTracer;
@@ -10,6 +8,8 @@ import org.springframework.beans.factory.BeanFactory;
 import org.springframework.beans.factory.config.ConfigurableListableBeanFactory;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
+import org.test4j.module.core.TestContext;
+import org.test4j.module.core.utility.MessageHelper;
 
 /**
  * {@link ClassPathXmlApplicationContext}的子类，运行使用@MockBean来替代spring中加载的bean值

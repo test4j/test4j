@@ -6,6 +6,7 @@ import org.jtester.junit.JTester;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.test4j.tools.reflector.MethodAccessor;
 
 public class MethodAccessorTest_VoidMethod implements JTester {
 

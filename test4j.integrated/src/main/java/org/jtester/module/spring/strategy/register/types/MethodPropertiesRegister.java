@@ -4,7 +4,7 @@ import java.lang.reflect.Method;
 import java.util.Queue;
 
 import org.jtester.module.spring.strategy.register.RegisterBeanDefinition;
-import org.jtester.tools.commons.ClazzHelper;
+import org.test4j.tools.commons.ClazzHelper;
 
 @SuppressWarnings("rawtypes")
 public class MethodPropertiesRegister extends PropertiesRegister {

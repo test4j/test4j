@@ -26,7 +26,7 @@ package org.jtester.module.jmockit.demo1;
 
 import java.util.List;
 
-import org.jtester.module.core.utility.MessageHelper;
+import org.test4j.module.core.utility.MessageHelper;
 
 public final class Database {
 

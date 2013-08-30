@@ -7,10 +7,10 @@ import java.util.Iterator;
 
 import mockit.Mock;
 
-import org.jtester.hamcrest.matcher.string.StringMode;
 import org.jtester.module.database.utility.DBHelper;
 import org.jtester.testng.JTester;
-import org.jtester.tools.commons.ResourceHelper;
+import org.test4j.hamcrest.matcher.string.StringMode;
+import org.test4j.tools.commons.ResourceHelper;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

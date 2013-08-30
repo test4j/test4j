@@ -7,7 +7,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jtester.module.database.utility.SqlRunner;
-import org.jtester.tools.commons.ExceptionWrapper;
+import org.test4j.module.database.dbop.ISqlSet;
+import org.test4j.tools.commons.ExceptionWrapper;
 
 public class SqlSet implements ISqlSet {
     private List<String> list = new ArrayList<String>();

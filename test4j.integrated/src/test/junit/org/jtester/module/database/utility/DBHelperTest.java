@@ -7,11 +7,11 @@ import java.util.Iterator;
 
 import mockit.Mock;
 
-import org.jtester.hamcrest.matcher.string.StringMode;
 import org.jtester.junit.JTester;
 import org.jtester.junit.annotations.DataFrom;
-import org.jtester.tools.commons.ResourceHelper;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.string.StringMode;
+import org.test4j.tools.commons.ResourceHelper;
 
 @SuppressWarnings({ "rawtypes", "serial" })
 public class DBHelperTest implements JTester {

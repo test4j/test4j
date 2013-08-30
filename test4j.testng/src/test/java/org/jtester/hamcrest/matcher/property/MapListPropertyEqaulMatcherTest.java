@@ -5,9 +5,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jtester.hamcrest.matcher.property.reflection.EqMode;
 import org.jtester.testng.JTester;
-import org.jtester.tools.commons.DateHelper;
+import org.test4j.hamcrest.matcher.property.MapListPropertyEqaulMatcher;
+import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.tools.commons.DateHelper;
 import org.testng.annotations.Test;
 
 import ext.test4j.hamcrest.MatcherAssert;

@@ -2,10 +2,10 @@ package org.jtester.json.decoder.spec;
 
 import java.lang.reflect.Method;
 
-import org.jtester.json.JSON;
 import org.jtester.junit.JTester;
 import org.junit.Ignore;
 import org.junit.Test;
+import org.test4j.json.JSON;
 
 public class MethodDecoderTest implements JTester {
 

@@ -2,9 +2,9 @@ package org.jtester.module.database.environment;
 
 import org.jtester.database.table.ITable;
 import org.jtester.database.table.TddUserTable;
-import org.jtester.hamcrest.matcher.property.reflection.EqMode;
-import org.jtester.module.database.IDatabase;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.module.database.IDatabase;
 
 /**
  * 类BaseEnvironmentTest.java的实现描述：

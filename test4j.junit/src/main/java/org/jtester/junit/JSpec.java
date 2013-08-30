@@ -3,21 +3,21 @@ package org.jtester.junit;
 import java.util.Map;
 
 import org.jtester.junit.annotations.DataFrom;
-import org.jtester.module.core.ICoreInitial;
-import org.jtester.module.core.TestContext;
-import org.jtester.module.jmockit.utility.JMockitModuleHelper;
-import org.jtester.spec.ISpec;
-import org.jtester.spec.ISpecExecutorFactory;
-import org.jtester.spec.SharedData;
-import org.jtester.spec.Steps;
-import org.jtester.spec.inner.IScenario;
-import org.jtester.spec.inner.ISpecMethod;
-import org.jtester.spec.inner.ISpecMethod.SpecMethodID;
-import org.jtester.spec.inner.ISpecPrinter;
-import org.jtester.tools.datagen.DataProviderIterator;
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.test4j.module.core.ICoreInitial;
+import org.test4j.module.core.TestContext;
+import org.test4j.module.jmockit.utility.JMockitModuleHelper;
+import org.test4j.spec.ISpec;
+import org.test4j.spec.ISpecExecutorFactory;
+import org.test4j.spec.SharedData;
+import org.test4j.spec.Steps;
+import org.test4j.spec.inner.IScenario;
+import org.test4j.spec.inner.ISpecMethod;
+import org.test4j.spec.inner.ISpecPrinter;
+import org.test4j.spec.inner.ISpecMethod.SpecMethodID;
+import org.test4j.tools.datagen.DataProviderIterator;
 
 /**
  * junit版本jspec

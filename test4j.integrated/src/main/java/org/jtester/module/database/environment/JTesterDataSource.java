@@ -11,10 +11,10 @@ import java.util.Set;
 import javax.sql.DataSource;
 
 import org.apache.commons.dbcp.BasicDataSource;
-import org.jtester.module.core.utility.MessageHelper;
 import org.jtester.module.database.utility.DataSourceType;
 import org.jtester.module.tracer.jdbc.ConnectionProxy;
-import org.jtester.tools.commons.ConfigHelper;
+import org.test4j.module.core.utility.MessageHelper;
+import org.test4j.tools.commons.ConfigHelper;
 
 /**
  * JTester DataSource

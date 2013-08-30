@@ -2,6 +2,7 @@ package org.jtester.module;
 
 import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.module.JTesterException;
 
 public class JTesterExceptionTest implements JTester {
     @Test(expected = JTesterException.class)

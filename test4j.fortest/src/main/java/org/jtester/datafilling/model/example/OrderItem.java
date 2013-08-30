@@ -2,7 +2,7 @@ package org.jtester.datafilling.model.example;
 
 import java.io.Serializable;
 
-import org.jtester.datafilling.annotations.FillExclude;
+import org.test4j.datafilling.annotations.FillExclude;
 
 public class OrderItem implements Serializable {
 

@@ -6,8 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jtester.datafilling.annotations.FillList;
 import org.jtester.datafilling.utils.FillDataTestConstants;
+import org.test4j.datafilling.annotations.FillList;
 
 public class CollectionAnnotationPojo implements Serializable {
 	private static final long serialVersionUID = 1L;

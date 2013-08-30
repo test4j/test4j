@@ -8,12 +8,12 @@ import mockit.Mocked;
 import mockit.Mockit;
 
 import org.jtester.junit.JTester;
-import org.jtester.module.core.utility.MessageHelper;
 import org.jtester.module.jmockit.demo1.ResourceManager;
 import org.jtester.module.jmockit.demo1.ResourceManagerImpl;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.junit.Test;
+import org.test4j.module.core.utility.MessageHelper;
 
 @SpringContext("org/jtester/fortest/spring/resourceManager.xml")
 public class ResourceManagerImplTest implements JTester {

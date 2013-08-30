@@ -3,6 +3,7 @@ package org.jtester.json.encoder.single.fixed;
 import java.math.BigInteger;
 
 import org.jtester.json.encoder.EncoderTest;
+import org.test4j.json.encoder.single.fixed.BigIntegerEncoder;
 import org.testng.annotations.Test;
 
 public class BigIntegerEncoderTest extends EncoderTest {

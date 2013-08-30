@@ -3,10 +3,10 @@ package org.jtester.datafilling.common;
 import java.lang.reflect.Type;
 import java.util.Map;
 
-import org.jtester.datafilling.common.AttributeInfo;
 import org.jtester.datafilling.model.GenericPojo;
-import org.jtester.module.ICore;
 import org.junit.Test;
+import org.test4j.datafilling.common.AttributeInfo;
+import org.test4j.module.ICore;
 
 @SuppressWarnings("serial")
 public class AttributeInfoTest implements ICore {

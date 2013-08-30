@@ -6,11 +6,11 @@ import java.util.List;
 
 import org.jtester.database.table.ITable;
 import org.jtester.database.table.TddUserTable;
-import org.jtester.hamcrest.matcher.property.reflection.EqMode;
-import org.jtester.module.database.IDatabase;
 import org.jtester.testng.JTester;
-import org.jtester.tools.datagen.DataSet;
-import org.jtester.tools.datagen.EmptyDataSet;
+import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.module.database.IDatabase;
+import org.test4j.tools.datagen.DataSet;
+import org.test4j.tools.datagen.EmptyDataSet;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

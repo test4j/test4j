@@ -5,8 +5,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jtester.json.encoder.JSONEncoder;
 import org.jtester.testng.JTester;
+import org.test4j.json.encoder.JSONEncoder;
+import org.test4j.json.encoder.object.MapEncoder;
 import org.testng.annotations.Test;
 
 @Test(groups = { "jtester", "json" })

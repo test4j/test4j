@@ -20,12 +20,12 @@ import org.jtester.junit.filter.ClasspathFilterFactory;
 import org.jtester.junit.filter.SuiteType;
 import org.jtester.junit.filter.finder.FilterCondiction;
 import org.jtester.junit.filter.finder.TestClazFinder;
-import org.jtester.module.ICore;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runner.notification.RunNotifier;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.RunnerBuilder;
+import org.test4j.module.ICore;
 
 @SuppressWarnings("unchecked")
 public class ClasspathSuiteTest implements ICore {

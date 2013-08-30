@@ -3,11 +3,11 @@ package org.jtester.json.decoder.single;
 import java.math.BigDecimal;
 import java.util.HashMap;
 
-import org.jtester.json.JSON;
-import org.jtester.json.decoder.single.BigDecimalDecoder;
-import org.jtester.json.helper.JSONFeature;
-import org.jtester.json.helper.JSONMap;
 import org.jtester.testng.JTester;
+import org.test4j.json.JSON;
+import org.test4j.json.decoder.single.BigDecimalDecoder;
+import org.test4j.json.helper.JSONFeature;
+import org.test4j.json.helper.JSONMap;
 import org.testng.annotations.Test;
 
 @Test(groups = { "jtester", "json" })

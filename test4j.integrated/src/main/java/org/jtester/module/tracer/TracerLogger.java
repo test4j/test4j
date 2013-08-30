@@ -6,11 +6,11 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.io.Writer;
 
-import org.jtester.json.JSON;
-import org.jtester.json.helper.JSONFeature;
-import org.jtester.module.core.TestContext;
-import org.jtester.tools.commons.DateHelper;
-import org.jtester.tools.commons.ResourceHelper;
+import org.test4j.json.JSON;
+import org.test4j.json.helper.JSONFeature;
+import org.test4j.module.core.TestContext;
+import org.test4j.tools.commons.DateHelper;
+import org.test4j.tools.commons.ResourceHelper;
 
 @SuppressWarnings("rawtypes")
 public abstract class TracerLogger {

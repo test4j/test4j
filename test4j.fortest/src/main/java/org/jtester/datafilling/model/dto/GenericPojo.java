@@ -3,7 +3,7 @@ package org.jtester.datafilling.model.dto;
 import java.util.List;
 import java.util.Map;
 
-import org.jtester.datafilling.annotations.FillList;
+import org.test4j.datafilling.annotations.FillList;
 
 public class GenericPojo<F, S> {
 

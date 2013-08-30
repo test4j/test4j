@@ -8,8 +8,8 @@ import java.io.Writer;
 import mockit.Mock;
 
 import org.jtester.junit.JTester;
-import org.jtester.tools.commons.ResourceHelper;
 import org.junit.Test;
+import org.test4j.tools.commons.ResourceHelper;
 
 public class XmlFileTracerLoggerTest implements JTester {
 

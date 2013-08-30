@@ -7,8 +7,9 @@ import java.util.Map;
 import org.jtester.json.encoder.beans.test.User;
 import org.jtester.junit.JTester;
 import org.jtester.junit.annotations.DataFrom;
-import org.jtester.tools.exception.NoSuchFieldRuntimeException;
 import org.junit.Test;
+import org.test4j.tools.exception.NoSuchFieldRuntimeException;
+import org.test4j.tools.reflector.PropertyAccessor;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })
 public class PropertyAccessorTest implements JTester {

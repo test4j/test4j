@@ -3,13 +3,13 @@ package org.jtester.spec.storypath;
 import java.net.URLDecoder;
 import java.util.List;
 
-import org.jtester.spec.ISpec;
 import org.jtester.spec.annotations.StoryFile;
 import org.jtester.spec.annotations.StoryType;
-import org.jtester.spec.inner.IScenario;
 import org.jtester.spec.reader.TitianHttpRequest;
 import org.jtester.spec.scenario.JSpecScenario;
-import org.jtester.tools.commons.ExceptionWrapper;
+import org.test4j.spec.ISpec;
+import org.test4j.spec.inner.IScenario;
+import org.test4j.tools.commons.ExceptionWrapper;
 
 /**
  * 远程从梯田系统获取用例描述信息

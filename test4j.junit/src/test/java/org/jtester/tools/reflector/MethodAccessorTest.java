@@ -3,10 +3,11 @@ package org.jtester.tools.reflector;
 import org.jtester.fortest.reflector.TestObject;
 import org.jtester.junit.JTester;
 import org.jtester.junit.annotations.DataFrom;
-import org.jtester.tools.exception.NoSuchMethodRuntimeException;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.test4j.tools.exception.NoSuchMethodRuntimeException;
+import org.test4j.tools.reflector.MethodAccessor;
 
 @SuppressWarnings({ "rawtypes" })
 public class MethodAccessorTest implements JTester {

@@ -1,7 +1,7 @@
 package org.jtester.datafilling.annotations;
 
-import org.jtester.datafilling.annotations.FillInteger;
 import org.jtester.datafilling.utils.FillDataTestConstants;
+import org.test4j.datafilling.annotations.FillInteger;
 
 public class IntegerValuePojo {
 

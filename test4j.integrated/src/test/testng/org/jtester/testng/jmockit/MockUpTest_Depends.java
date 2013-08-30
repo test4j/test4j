@@ -9,7 +9,7 @@ import org.jtester.module.spring.annotations.AutoBeanInject;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.testng.JTester;
-import org.jtester.tools.commons.DateHelper;
+import org.test4j.tools.commons.DateHelper;
 import org.testng.annotations.Test;
 
 /**

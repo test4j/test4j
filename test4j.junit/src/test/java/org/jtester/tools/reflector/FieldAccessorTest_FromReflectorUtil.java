@@ -12,9 +12,10 @@ import org.jtester.fortest.beans.Employee;
 import org.jtester.fortest.beans.User;
 import org.jtester.fortest.reflector.ForReflectUtil;
 import org.jtester.junit.JTester;
-import org.jtester.tools.commons.FieldHelper;
-import org.jtester.tools.exception.NoSuchFieldRuntimeException;
 import org.junit.Test;
+import org.test4j.tools.commons.FieldHelper;
+import org.test4j.tools.exception.NoSuchFieldRuntimeException;
+import org.test4j.tools.reflector.PropertyAccessor;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class FieldAccessorTest_FromReflectorUtil implements JTester {

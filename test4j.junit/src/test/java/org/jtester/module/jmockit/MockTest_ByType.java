@@ -5,8 +5,8 @@ import mockit.Mocked;
 import org.jtester.fortest.beans.ISpeak;
 import org.jtester.fortest.beans.Person;
 import org.jtester.junit.JTester;
-import org.jtester.module.inject.annotations.Inject;
 import org.junit.Test;
+import org.test4j.module.inject.annotations.Inject;
 
 public class MockTest_ByType implements JTester {
     // @TestedObject

@@ -4,6 +4,7 @@ import java.util.Locale;
 
 import org.jtester.json.encoder.EncoderTest;
 import org.junit.Test;
+import org.test4j.json.encoder.single.fixed.LocaleEncoder;
 
 public class LocaleEncoderTest extends EncoderTest {
 

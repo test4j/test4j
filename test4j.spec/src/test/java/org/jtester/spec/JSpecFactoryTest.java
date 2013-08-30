@@ -2,9 +2,9 @@ package org.jtester.spec;
 
 import java.util.Set;
 
-import org.jtester.hamcrest.matcher.property.reflection.EqMode;
-import org.jtester.module.ICore;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.module.ICore;
 
 /**
  * @author darui.wudr 2013-1-10 下午9:06:54

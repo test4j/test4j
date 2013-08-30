@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Locale;
 
-import org.jtester.json.ITypeConverter;
-import org.jtester.json.JSON;
+import org.test4j.json.ITypeConverter;
+import org.test4j.json.JSON;
 
 public abstract class ParaConverter {
 

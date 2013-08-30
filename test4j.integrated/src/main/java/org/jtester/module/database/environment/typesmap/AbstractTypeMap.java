@@ -10,7 +10,7 @@ import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jtester.tools.commons.DateHelper;
+import org.test4j.tools.commons.DateHelper;
 import org.test4j.tools.commons.PrimitiveHelper;
 
 @SuppressWarnings({ "rawtypes", "serial" })

@@ -5,7 +5,7 @@ import java.lang.reflect.Method;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.jtester.spec.annotations.Named;
+import org.test4j.spec.annotations.Named;
 
 public class ParameterParser {
 	/**

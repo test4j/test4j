@@ -1,8 +1,8 @@
 package org.jtester.datafilling.strategies;
 
-import org.jtester.datafilling.exceptions.PoJoFillException;
 import org.jtester.datafilling.model.OneDimensionalTestPojo;
-import org.jtester.datafilling.strategy.AttributeStrategy;
+import org.test4j.datafilling.exceptions.PoJoFillException;
+import org.test4j.datafilling.strategy.AttributeStrategy;
 
 public class WrongTypeStrategy implements AttributeStrategy<OneDimensionalTestPojo> {
 

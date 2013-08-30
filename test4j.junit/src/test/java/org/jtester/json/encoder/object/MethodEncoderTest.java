@@ -2,11 +2,11 @@ package org.jtester.json.encoder.object;
 
 import java.lang.reflect.Method;
 
-import org.jtester.json.JSON;
 import org.jtester.json.encoder.EncoderTest;
-import org.jtester.json.encoder.object.spec.MethodEncoder;
-import org.jtester.json.helper.JSONFeature;
 import org.junit.Test;
+import org.test4j.json.JSON;
+import org.test4j.json.encoder.object.spec.MethodEncoder;
+import org.test4j.json.helper.JSONFeature;
 
 public class MethodEncoderTest extends EncoderTest {
 

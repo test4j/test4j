@@ -4,9 +4,9 @@ import java.io.StringWriter;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-import org.jtester.json.encoder.single.spec.SimpleDateFormatEncoder;
-import org.jtester.json.helper.JSONFeature;
 import org.jtester.testng.JTester;
+import org.test4j.json.encoder.single.spec.SimpleDateFormatEncoder;
+import org.test4j.json.helper.JSONFeature;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })

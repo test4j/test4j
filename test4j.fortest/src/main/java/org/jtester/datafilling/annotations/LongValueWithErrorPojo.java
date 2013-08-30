@@ -1,6 +1,6 @@
 package org.jtester.datafilling.annotations;
 
-import org.jtester.datafilling.annotations.FillLong;
+import org.test4j.datafilling.annotations.FillLong;
 
 public class LongValueWithErrorPojo {
 

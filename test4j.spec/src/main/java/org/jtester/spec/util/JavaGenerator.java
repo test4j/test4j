@@ -4,9 +4,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.jtester.spec.inner.IScenarioStep;
 import org.jtester.spec.scenario.JSpecScenario;
 import org.jtester.spec.scenario.step.StepMethod;
+import org.test4j.spec.inner.IScenarioStep;
 import org.test4j.tools.commons.StringHelper;
 
 /**

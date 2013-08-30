@@ -6,10 +6,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.jtester.hamcrest.matcher.property.reflection.EqMode;
 import org.jtester.json.encoder.beans.test.GenicBean;
 import org.jtester.json.encoder.beans.test.User;
 import org.jtester.testng.JTester;
+import org.test4j.hamcrest.matcher.property.PropertiesEqualMatcher;
+import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

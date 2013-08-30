@@ -1,8 +1,8 @@
 package org.jtester.spec.steps;
 
 import org.jtester.junit.JSpec;
-import org.jtester.spec.SharedData;
-import org.jtester.spec.annotations.Mix;
+import org.test4j.spec.SharedData;
+import org.test4j.spec.annotations.Mix;
 
 /**
  * @author darui.wudr 2013-6-3 下午7:06:39

@@ -5,8 +5,8 @@ import java.math.BigInteger;
 import java.util.Iterator;
 
 import org.jtester.testng.JTester;
-import org.jtester.tools.datagen.AbastractDataGenerator;
-import org.jtester.tools.datagen.IncreaseDataGenerator;
+import org.test4j.tools.datagen.AbastractDataGenerator;
+import org.test4j.tools.datagen.IncreaseDataGenerator;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

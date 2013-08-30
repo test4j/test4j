@@ -3,9 +3,9 @@ package org.jtester.json.decoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jtester.hamcrest.matcher.property.reflection.EqMode;
-import org.jtester.json.JSON;
 import org.jtester.testng.JTester;
+import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.json.JSON;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "rawtypes", "serial" })

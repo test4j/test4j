@@ -2,10 +2,10 @@ package org.jtester.json.decoder.single;
 
 import java.util.HashMap;
 
-import org.jtester.json.JSON;
-import org.jtester.json.decoder.single.DoubleDecoder;
-import org.jtester.json.helper.JSONMap;
 import org.jtester.testng.JTester;
+import org.test4j.json.JSON;
+import org.test4j.json.decoder.single.DoubleDecoder;
+import org.test4j.json.helper.JSONMap;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

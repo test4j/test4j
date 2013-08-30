@@ -7,11 +7,11 @@ import junit.framework.TestCase;
 
 import org.jtester.junit.filter.SuiteType;
 import org.jtester.junit.filter.finder.FilterCondiction;
-import org.jtester.tools.commons.AnnotationHelper;
-import org.jtester.tools.commons.ClazzHelper;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.Suite;
+import org.test4j.tools.commons.AnnotationHelper;
+import org.test4j.tools.commons.ClazzHelper;
 
 /**
  * ClassTester implementation to retrieve JUnit38 & 4.x test classes in the

@@ -3,9 +3,10 @@ package org.jtester.json.encoder.single.fixed;
 import java.util.ArrayList;
 
 import org.jtester.json.encoder.EncoderTest;
-import org.jtester.json.helper.ClazzMap;
-import org.jtester.json.helper.JSONFeature;
 import org.junit.Test;
+import org.test4j.json.encoder.single.fixed.EnumEncoder;
+import org.test4j.json.helper.ClazzMap;
+import org.test4j.json.helper.JSONFeature;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class EnumEncoderTest extends EncoderTest {

@@ -1,7 +1,7 @@
 package org.jtester.hamcrest.matcher.property;
 
-import static org.jtester.tools.commons.ListHelper.toList;
 import static org.test4j.tools.commons.ArrayHelper.toArray;
+import static org.test4j.tools.commons.ListHelper.toList;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -9,14 +9,15 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.jtester.hamcrest.matcher.property.reflection.EqMode;
 import org.jtester.json.encoder.beans.test.GenicBean;
 import org.jtester.json.encoder.beans.test.User;
 import org.jtester.junit.JTester;
 import org.jtester.junit.annotations.DataFrom;
-import org.jtester.tools.commons.ListHelper;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.property.PropertiesEqualMatcher;
+import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.tools.commons.ArrayHelper;
+import org.test4j.tools.commons.ListHelper;
 
 import ext.test4j.hamcrest.MatcherAssert;
 

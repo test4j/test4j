@@ -5,6 +5,8 @@ import java.util.Iterator;
 import org.jtester.junit.JTester;
 import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
+import org.test4j.tools.datagen.AbastractDataGenerator;
+import org.test4j.tools.datagen.RepeatDataGenerator;
 
 @SuppressWarnings("rawtypes")
 public class RepeatDataGeneratorTest implements JTester {

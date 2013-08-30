@@ -6,9 +6,10 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import org.jtester.json.JSON;
 import org.jtester.json.encoder.beans.test.User;
 import org.jtester.testng.JTester;
+import org.test4j.json.JSON;
+import org.test4j.json.decoder.ArrayDecoder;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

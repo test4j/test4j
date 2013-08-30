@@ -5,6 +5,7 @@ import java.net.URL;
 
 import org.jtester.json.encoder.EncoderTest;
 import org.junit.Test;
+import org.test4j.json.encoder.single.fixed.URLEncoder;
 
 public class URLEncoderTest extends EncoderTest {
 

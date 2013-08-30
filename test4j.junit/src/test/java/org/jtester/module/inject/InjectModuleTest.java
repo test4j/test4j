@@ -1,10 +1,10 @@
 package org.jtester.module.inject;
 
 import org.jtester.fortest.beans.User;
-import org.jtester.module.ICore;
-import org.jtester.module.inject.annotations.Inject;
-import org.jtester.module.inject.annotations.TestedObject;
 import org.junit.Test;
+import org.test4j.module.ICore;
+import org.test4j.module.inject.annotations.Inject;
+import org.test4j.module.inject.annotations.TestedObject;
 
 /**
  * 类InjectModuleTest.java的实现描述

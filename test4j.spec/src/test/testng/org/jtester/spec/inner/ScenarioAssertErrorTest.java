@@ -5,11 +5,11 @@ import java.util.List;
 
 import mockit.Mock;
 
-import org.jtester.hamcrest.matcher.string.StringMode;
-import org.jtester.spec.exceptions.ScenarioAssertError;
 import org.jtester.spec.scenario.JSpecScenario;
 import org.jtester.spec.scenario.TxtJSpecScenario;
 import org.jtester.testng.JTester;
+import org.test4j.hamcrest.matcher.string.StringMode;
+import org.test4j.spec.exceptions.ScenarioAssertError;
 import org.testng.annotations.Test;
 
 public class ScenarioAssertErrorTest extends JTester {

@@ -8,13 +8,13 @@ import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.jtester.module.core.utility.MessageHelper;
 import org.jtester.module.spring.annotations.SpringInitMethod;
 import org.jtester.module.spring.annotations.AutoBeanInject.BeanMap;
 import org.jtester.module.spring.exception.FindBeanImplClassException;
-import org.jtester.tools.commons.AnnotationHelper;
-import org.jtester.tools.commons.ClazzHelper;
+import org.test4j.module.core.utility.MessageHelper;
+import org.test4j.tools.commons.AnnotationHelper;
 import org.test4j.tools.commons.ArrayHelper;
+import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.commons.StringHelper;
 
 /**

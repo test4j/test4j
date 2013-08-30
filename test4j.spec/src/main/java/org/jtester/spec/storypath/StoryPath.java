@@ -2,13 +2,13 @@ package org.jtester.spec.storypath;
 
 import java.util.List;
 
-import org.jtester.spec.ISpec;
 import org.jtester.spec.annotations.StoryFile;
 import org.jtester.spec.annotations.StorySource;
 import org.jtester.spec.annotations.StoryType;
-import org.jtester.spec.inner.IScenario;
 import org.jtester.spec.reader.TitianHttpRequest;
-import org.jtester.tools.commons.ConfigHelper;
+import org.test4j.spec.ISpec;
+import org.test4j.spec.inner.IScenario;
+import org.test4j.tools.commons.ConfigHelper;
 
 public abstract class StoryPath {
     /**

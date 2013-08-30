@@ -3,11 +3,11 @@ package org.jtester.spec.storypath;
 import java.io.InputStream;
 import java.util.List;
 
-import org.jtester.spec.ISpec;
 import org.jtester.spec.annotations.StoryFile;
 import org.jtester.spec.annotations.StoryType;
-import org.jtester.spec.inner.IScenario;
 import org.jtester.spec.scenario.JSpecScenario;
+import org.test4j.spec.ISpec;
+import org.test4j.spec.inner.IScenario;
 import org.test4j.tools.commons.StringHelper;
 
 /**

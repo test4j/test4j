@@ -3,8 +3,9 @@ package org.jtester.hamcrest.matcher.array;
 import ext.test4j.hamcrest.Matcher;
 import ext.test4j.hamcrest.MatcherAssert;
 
-import org.jtester.hamcrest.matcher.array.SizeOrLengthMatcher.SizeOrLengthMatcherType;
 import org.jtester.testng.JTester;
+import org.test4j.hamcrest.matcher.array.SizeOrLengthMatcher;
+import org.test4j.hamcrest.matcher.array.SizeOrLengthMatcher.SizeOrLengthMatcherType;
 import org.testng.annotations.Test;
 
 @Test(groups = { "jtester", "assertion" })

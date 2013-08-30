@@ -1,9 +1,9 @@
 package org.jtester.json.encoder;
 
 import org.jtester.fortest.beans.Manager;
-import org.jtester.json.JSON;
-import org.jtester.json.helper.JSONFeature;
 import org.jtester.testng.JTester;
+import org.test4j.json.JSON;
+import org.test4j.json.helper.JSONFeature;
 import org.testng.annotations.Test;
 
 @Test

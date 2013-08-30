@@ -4,7 +4,7 @@ import java.lang.reflect.Field;
 import java.util.Set;
 
 import org.jtester.module.spring.annotations.SpringBeanByName;
-import org.jtester.tools.commons.AnnotationHelper;
+import org.test4j.tools.commons.AnnotationHelper;
 import org.test4j.tools.commons.StringHelper;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })

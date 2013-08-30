@@ -6,8 +6,8 @@ import java.util.Collection;
 import java.util.Map;
 import java.util.Set;
 
-import org.jtester.datafilling.annotations.FillConstructor;
-import org.jtester.datafilling.annotations.FillList;
+import org.test4j.datafilling.annotations.FillConstructor;
+import org.test4j.datafilling.annotations.FillList;
 
 public class ImmutableWithGenericCollectionsPojo implements Serializable {
 	private static final long serialVersionUID = 1L;

@@ -1,6 +1,6 @@
 package org.jtester.datafilling.annotations;
 
-import org.jtester.datafilling.annotations.FillByte;
+import org.test4j.datafilling.annotations.FillByte;
 
 public class ByteValueWithErrorPojo {
 	@FillByte(value = "afasdfafa", comment = "This should throw an exception")

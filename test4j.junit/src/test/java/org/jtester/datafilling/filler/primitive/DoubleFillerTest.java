@@ -2,12 +2,12 @@ package org.jtester.datafilling.filler.primitive;
 
 import junit.framework.Assert;
 
-import org.jtester.datafilling.Filler;
 import org.jtester.datafilling.annotations.DoubleValuePojo;
 import org.jtester.datafilling.annotations.DoubleValueWithErrorPojo;
-import org.jtester.datafilling.exceptions.PoJoFillException;
 import org.jtester.datafilling.utils.FillDataTestConstants;
 import org.junit.Test;
+import org.test4j.datafilling.Filler;
+import org.test4j.datafilling.exceptions.PoJoFillException;
 
 public class DoubleFillerTest {
 

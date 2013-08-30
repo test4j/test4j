@@ -5,9 +5,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jtester.json.encoder.JSONEncoder;
 import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.json.encoder.JSONEncoder;
+import org.test4j.json.encoder.object.MapEncoder;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class MapEncoderTest implements JTester {

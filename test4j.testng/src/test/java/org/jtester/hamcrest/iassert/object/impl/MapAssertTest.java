@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.jtester.testng.JTester;
-import org.jtester.tools.exception.NoSuchFieldRuntimeException;
+import org.test4j.tools.exception.NoSuchFieldRuntimeException;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
 

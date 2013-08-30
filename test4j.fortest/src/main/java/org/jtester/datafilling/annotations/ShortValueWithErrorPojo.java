@@ -1,6 +1,6 @@
 package org.jtester.datafilling.annotations;
 
-import org.jtester.datafilling.annotations.FillShort;
+import org.test4j.datafilling.annotations.FillShort;
 
 public class ShortValueWithErrorPojo  {
 

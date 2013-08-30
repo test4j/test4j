@@ -13,10 +13,11 @@ import java.util.Map;
 import org.jtester.fortest.beans.Employee;
 import org.jtester.fortest.beans.Manager;
 import org.jtester.fortest.beans.User;
-import org.jtester.hamcrest.matcher.modes.ItemsMode;
-import org.jtester.hamcrest.matcher.string.StringMode;
 import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.modes.ItemsMode;
+import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.hamcrest.matcher.string.StringMode;
 
 public class ReflectionAssertTest implements JTester {
     @Test

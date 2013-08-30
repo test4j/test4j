@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
-import org.jtester.datafilling.annotations.FillList;
-import org.jtester.datafilling.annotations.FillString;
+import org.test4j.datafilling.annotations.FillList;
+import org.test4j.datafilling.annotations.FillString;
 
 public class Client implements Serializable {
 

@@ -5,9 +5,9 @@ import java.util.List;
 
 import mockit.Mock;
 
-import org.jtester.module.core.utility.ModulesLoader;
 import org.jtester.testng.JTester;
-import org.jtester.tools.commons.ConfigHelper;
+import org.test4j.module.core.utility.ModulesLoader;
+import org.test4j.tools.commons.ConfigHelper;
 import org.testng.annotations.Test;
 
 @Test(groups = "jtester")

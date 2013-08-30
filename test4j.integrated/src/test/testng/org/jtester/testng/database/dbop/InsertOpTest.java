@@ -3,10 +3,10 @@ package org.jtester.testng.database.dbop;
 import java.util.Iterator;
 
 import org.jtester.database.table.TddUserTable;
-import org.jtester.module.database.IDatabase;
 import org.jtester.module.database.dbop.InsertOp;
 import org.jtester.testng.JTester;
-import org.jtester.tools.commons.DateHelper;
+import org.test4j.module.database.IDatabase;
+import org.test4j.tools.commons.DateHelper;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

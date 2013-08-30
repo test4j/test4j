@@ -9,7 +9,6 @@ import org.dom4j.CharacterData;
 import org.dom4j.Document;
 import org.dom4j.Element;
 import org.dom4j.Node;
-import org.jtester.spec.inner.StepType;
 import org.jtester.spec.scenario.step.XmlJSpecStep;
 import org.jtester.spec.scenario.step.xml.MethodDescription;
 import org.jtester.spec.scenario.xmlparser.entity.ScenarioList;
@@ -18,6 +17,7 @@ import org.jtester.spec.scenario.xmlparser.entity.StoryDescription;
 import org.jtester.spec.scenario.xmlparser.entity.StoryScenario;
 import org.jtester.spec.scenario.xmlparser.entity.TemplateList;
 import org.jtester.spec.scenario.xmlparser.entity.TemplateMethod;
+import org.test4j.spec.inner.StepType;
 import org.test4j.tools.commons.StringHelper;
 
 /**

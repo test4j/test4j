@@ -2,10 +2,6 @@ package org.jtester.module.spring;
 
 import java.lang.reflect.Method;
 
-import org.jtester.module.core.Module;
-import org.jtester.module.core.TestContext;
-import org.jtester.module.core.TestListener;
-import org.jtester.module.core.utility.ModulesManager;
 import org.jtester.module.database.DatabaseModule;
 import org.jtester.module.database.environment.DBEnvironmentFactory;
 import org.jtester.module.database.transaction.SpringTransactionManagementConfiguration;
@@ -15,7 +11,11 @@ import org.jtester.module.spring.strategy.JTesterSpringContext;
 import org.jtester.module.spring.strategy.injector.SpringBeanInjector;
 import org.jtester.module.spring.utility.SpringInitInvoker;
 import org.jtester.module.spring.utility.SpringModuleHelper;
-import org.jtester.tools.commons.ConfigHelper;
+import org.test4j.module.core.Module;
+import org.test4j.module.core.TestContext;
+import org.test4j.module.core.TestListener;
+import org.test4j.module.core.utility.ModulesManager;
+import org.test4j.tools.commons.ConfigHelper;
 
 @SuppressWarnings("rawtypes")
 public class SpringModule implements Module {

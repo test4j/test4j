@@ -5,7 +5,8 @@ import java.net.URI;
 import java.util.ArrayList;
 
 import org.jtester.json.encoder.EncoderTest;
-import org.jtester.json.helper.JSONFeature;
+import org.test4j.json.encoder.single.fixed.URIEncoder;
+import org.test4j.json.helper.JSONFeature;
 import org.testng.annotations.Test;
 
 @Test(groups = { "jtester", "json" })

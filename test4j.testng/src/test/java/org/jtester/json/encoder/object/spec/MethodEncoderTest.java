@@ -2,9 +2,10 @@ package org.jtester.json.encoder.object.spec;
 
 import java.lang.reflect.Method;
 
-import org.jtester.json.JSON;
 import org.jtester.json.encoder.EncoderTest;
-import org.jtester.json.helper.JSONFeature;
+import org.test4j.json.JSON;
+import org.test4j.json.encoder.object.spec.MethodEncoder;
+import org.test4j.json.helper.JSONFeature;
 import org.testng.annotations.Test;
 
 @Test(groups = "json")

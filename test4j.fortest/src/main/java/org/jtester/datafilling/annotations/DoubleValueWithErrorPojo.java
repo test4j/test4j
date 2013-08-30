@@ -1,6 +1,6 @@
 package org.jtester.datafilling.annotations;
 
-import org.jtester.datafilling.annotations.FillDouble;
+import org.test4j.datafilling.annotations.FillDouble;
 
 public class DoubleValueWithErrorPojo {
 	@FillDouble(value = "fajhfakh")

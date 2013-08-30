@@ -3,6 +3,7 @@ package org.jtester.json.encoder.single.fixed;
 import java.net.InetSocketAddress;
 
 import org.jtester.json.encoder.EncoderTest;
+import org.test4j.json.encoder.single.fixed.SocketAddressEncoder;
 import org.testng.annotations.Test;
 
 public class SocketAddressEncoderTest extends EncoderTest {

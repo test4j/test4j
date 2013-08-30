@@ -1,6 +1,6 @@
 package org.jtester.testng;
 
-import org.jtester.module.core.utility.MessageHelper;
+import org.test4j.module.core.utility.MessageHelper;
 import org.testng.ITestContext;
 import org.testng.ITestListener;
 import org.testng.ITestResult;

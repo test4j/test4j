@@ -3,14 +3,14 @@ package org.jtester.json.decoder.base;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jtester.json.JSON;
-import org.jtester.json.decoder.PoJoDecoder;
 import org.jtester.json.encoder.beans.test.User;
-import org.jtester.json.helper.JSONArray;
-import org.jtester.json.helper.JSONFeature;
-import org.jtester.json.helper.JSONMap;
 import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.json.JSON;
+import org.test4j.json.decoder.PoJoDecoder;
+import org.test4j.json.helper.JSONArray;
+import org.test4j.json.helper.JSONFeature;
+import org.test4j.json.helper.JSONMap;
 
 @SuppressWarnings({ "serial" })
 public class MapPoJoBaseDecoderTest implements JTester {

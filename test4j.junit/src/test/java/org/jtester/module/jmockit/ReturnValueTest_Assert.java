@@ -8,10 +8,10 @@ import mockit.Mocked;
 
 import org.jtester.fortest.beans.ComplexObject;
 import org.jtester.junit.JTester;
-import org.jtester.module.inject.annotations.Inject;
 import org.jtester.module.jmockit.ReturnValueTest.SomeInterface;
 import org.jtester.module.jmockit.ReturnValueTest.SomeService;
 import org.junit.Test;
+import org.test4j.module.inject.annotations.Inject;
 
 @SuppressWarnings({ "rawtypes" })
 public class ReturnValueTest_Assert implements JTester {

@@ -2,10 +2,10 @@ package org.jtester.hamcrest.matcher.property.comparator;
 
 import java.util.HashMap;
 
-import org.jtester.hamcrest.matcher.property.reflection.EqMode;
 import org.jtester.json.encoder.beans.test.User;
 import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 
 @SuppressWarnings({ "rawtypes", "unchecked", "serial" })
 public class MapComparatorTest implements JTester {

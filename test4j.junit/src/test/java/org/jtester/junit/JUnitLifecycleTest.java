@@ -1,11 +1,11 @@
 package org.jtester.junit;
 
-import org.jtester.module.core.utility.MessageHelper;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
+import org.test4j.module.core.utility.MessageHelper;
 
 public class JUnitLifecycleTest {
 

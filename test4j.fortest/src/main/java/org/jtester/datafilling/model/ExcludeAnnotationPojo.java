@@ -2,7 +2,7 @@ package org.jtester.datafilling.model;
 
 import java.io.Serializable;
 
-import org.jtester.datafilling.annotations.FillExclude;
+import org.test4j.datafilling.annotations.FillExclude;
 
 public class ExcludeAnnotationPojo implements Serializable {
 

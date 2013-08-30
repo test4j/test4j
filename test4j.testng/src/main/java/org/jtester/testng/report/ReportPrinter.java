@@ -7,9 +7,9 @@ import java.io.InputStream;
 import java.util.List;
 import java.util.Map;
 
-import org.jtester.module.core.utility.MessageHelper;
 import org.jtester.testng.report.UserTestReporter.Status;
-import org.jtester.tools.commons.ResourceHelper;
+import org.test4j.module.core.utility.MessageHelper;
+import org.test4j.tools.commons.ResourceHelper;
 
 /**
  * ReportPrinter

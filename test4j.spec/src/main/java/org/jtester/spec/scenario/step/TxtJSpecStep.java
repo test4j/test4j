@@ -5,9 +5,9 @@ import static org.jtester.spec.scenario.step.xml.MethodDescription.VAR_START;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import org.jtester.spec.inner.IScenarioStep;
 import org.jtester.spec.scenario.step.txt.LineType;
 import org.jtester.spec.scenario.step.txt.ParameterParser2;
+import org.test4j.spec.inner.IScenarioStep;
 import org.test4j.tools.commons.StringHelper;
 
 @SuppressWarnings("serial")

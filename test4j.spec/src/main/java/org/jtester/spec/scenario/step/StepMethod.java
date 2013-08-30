@@ -2,9 +2,9 @@ package org.jtester.spec.scenario.step;
 
 import java.util.Map;
 
-import org.jtester.spec.inner.IScenarioStep;
-import org.jtester.spec.inner.ISpecMethod.SpecMethodID;
-import org.jtester.spec.inner.StepType;
+import org.test4j.spec.inner.IScenarioStep;
+import org.test4j.spec.inner.StepType;
+import org.test4j.spec.inner.ISpecMethod.SpecMethodID;
 
 public class StepMethod {
     private SpecMethodID        methodID;

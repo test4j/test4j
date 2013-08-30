@@ -2,15 +2,15 @@ package org.jtester.spec.spring;
 
 import java.util.List;
 
-import org.jtester.hamcrest.matcher.property.reflection.EqMode;
 import org.jtester.module.spring.annotations.SpringBeanByName;
-import org.jtester.spec.annotations.Given;
-import org.jtester.spec.annotations.Named;
 import org.jtester.spec.annotations.StoryFile;
 import org.jtester.spec.annotations.StoryType;
-import org.jtester.spec.annotations.Then;
-import org.jtester.spec.annotations.When;
-import org.jtester.spec.inner.IScenario;
+import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.spec.annotations.Given;
+import org.test4j.spec.annotations.Named;
+import org.test4j.spec.annotations.Then;
+import org.test4j.spec.annotations.When;
+import org.test4j.spec.inner.IScenario;
 import org.testng.annotations.Test;
 
 @StoryFile(type = StoryType.TXT)

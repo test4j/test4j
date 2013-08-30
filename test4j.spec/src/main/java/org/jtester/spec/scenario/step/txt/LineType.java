@@ -1,7 +1,7 @@
 package org.jtester.spec.scenario.step.txt;
 
-import org.jtester.spec.inner.StepType;
 import org.jtester.spec.scenario.step.txt.LineType;
+import org.test4j.spec.inner.StepType;
 
 public enum LineType {
 	/**

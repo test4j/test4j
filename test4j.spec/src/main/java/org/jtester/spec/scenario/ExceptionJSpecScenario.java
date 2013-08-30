@@ -2,9 +2,9 @@ package org.jtester.spec.scenario;
 
 import java.util.List;
 
-import org.jtester.spec.inner.IScenario;
-import org.jtester.spec.inner.IScenarioStep;
-import org.jtester.tools.datagen.DataProviderIterator;
+import org.test4j.spec.inner.IScenario;
+import org.test4j.spec.inner.IScenarioStep;
+import org.test4j.tools.datagen.DataProviderIterator;
 
 /**
  * 场景文件解析错误时，返回一个错误原因的场景列表

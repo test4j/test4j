@@ -8,11 +8,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jtester.spec.exceptions.SkipStepException;
-import org.jtester.spec.inner.IScenarioStep;
-import org.jtester.spec.inner.ISpecMethod.SpecMethodID;
-import org.jtester.spec.inner.StepType;
 import org.jtester.spec.util.ParaConverter;
+import org.test4j.spec.exceptions.SkipStepException;
+import org.test4j.spec.inner.IScenarioStep;
+import org.test4j.spec.inner.StepType;
+import org.test4j.spec.inner.ISpecMethod.SpecMethodID;
 import org.test4j.tools.commons.StringHelper;
 
 @SuppressWarnings("serial")

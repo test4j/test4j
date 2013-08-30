@@ -3,9 +3,9 @@ package org.jtester.json.decoder.single;
 import java.io.File;
 import java.net.URI;
 
-import org.jtester.json.JSON;
 import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.json.JSON;
 
 public class URIDecoderTest implements JTester {
 

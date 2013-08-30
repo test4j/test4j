@@ -7,12 +7,12 @@ import org.jtester.database.table.ITable;
 import org.jtester.database.table.TddUserTable;
 import org.jtester.fortest.beans.User;
 import org.jtester.fortest.service.UserService;
-import org.jtester.module.database.IDatabase;
 import org.jtester.module.database.annotations.Transactional;
 import org.jtester.module.database.annotations.Transactional.TransactionMode;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.testng.JTester;
+import org.test4j.module.database.IDatabase;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.Test;
 

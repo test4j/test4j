@@ -11,7 +11,7 @@ import org.jtester.datafilling.model.example.BankAccount;
 import org.jtester.datafilling.model.example.Country;
 import org.jtester.datafilling.model.example.Order;
 import org.jtester.datafilling.model.example.OrderItem;
-import org.jtester.module.ICore;
+import org.test4j.module.ICore;
 
 public class PoJoFillerExampleDemoHelper implements ICore {
 

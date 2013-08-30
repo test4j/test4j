@@ -6,12 +6,12 @@ import java.util.List;
 
 import org.jtester.database.table.ITable;
 import org.jtester.database.table.TddUserTable;
-import org.jtester.hamcrest.matcher.property.reflection.EqMode;
 import org.jtester.junit.JTester;
 import org.jtester.junit.annotations.DataFrom;
-import org.jtester.tools.datagen.DataSet;
-import org.jtester.tools.datagen.EmptyDataSet;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.tools.datagen.DataSet;
+import org.test4j.tools.datagen.EmptyDataSet;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })
 public class DataGeneratorTest implements JTester {

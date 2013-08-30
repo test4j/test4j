@@ -2,9 +2,9 @@ package org.jtester.datafilling.model.example;
 
 import java.io.Serializable;
 
-import org.jtester.datafilling.annotations.FillConstructor;
-import org.jtester.datafilling.annotations.FillDouble;
-import org.jtester.datafilling.annotations.FillInteger;
+import org.test4j.datafilling.annotations.FillConstructor;
+import org.test4j.datafilling.annotations.FillDouble;
+import org.test4j.datafilling.annotations.FillInteger;
 
 public class Article implements Serializable {
 

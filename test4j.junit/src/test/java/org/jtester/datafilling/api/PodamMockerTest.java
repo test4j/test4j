@@ -19,12 +19,10 @@ import java.util.concurrent.ConcurrentMap;
 
 import junit.framework.Assert;
 
-import org.jtester.datafilling.Filler;
 import org.jtester.datafilling.annotations.ByteValueWithErrorPojo;
 import org.jtester.datafilling.annotations.CollectionAnnotationPojo;
 import org.jtester.datafilling.annotations.StrategyPojo;
 import org.jtester.datafilling.annotations.StringWithWrongStrategyTypePojo;
-import org.jtester.datafilling.exceptions.PoJoFillException;
 import org.jtester.datafilling.model.AbstractTestPojo;
 import org.jtester.datafilling.model.CollectionsPojo;
 import org.jtester.datafilling.model.ConstructorWithSelfReferencesButNoDefaultConstructorPojo;
@@ -51,8 +49,10 @@ import org.jtester.datafilling.model.dto.ProtectedNonDefaultConstructorPojo;
 import org.jtester.datafilling.utils.ExternalRatePodamEnum;
 import org.jtester.datafilling.utils.FillDataTestConstants;
 import org.jtester.datafilling.utils.PodamTestUtils;
-import org.jtester.module.ICore;
 import org.junit.Test;
+import org.test4j.datafilling.Filler;
+import org.test4j.datafilling.exceptions.PoJoFillException;
+import org.test4j.module.ICore;
 
 @SuppressWarnings("unchecked")
 public class PodamMockerTest implements ICore {

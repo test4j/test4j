@@ -6,12 +6,12 @@ import java.lang.reflect.Proxy;
 import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.jtester.json.JSON;
 import org.jtester.json.encoder.beans.test.GenicBean;
 import org.jtester.json.encoder.beans.test.TestedIntf;
 import org.jtester.json.encoder.beans.test.User;
-import org.jtester.json.helper.JSONFeature;
 import org.jtester.testng.JTester;
+import org.test4j.json.JSON;
+import org.test4j.json.helper.JSONFeature;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

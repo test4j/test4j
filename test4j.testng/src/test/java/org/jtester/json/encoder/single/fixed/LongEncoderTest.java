@@ -4,6 +4,7 @@ import java.io.StringWriter;
 import java.util.ArrayList;
 
 import org.jtester.json.encoder.EncoderTest;
+import org.test4j.json.encoder.single.fixed.LongEncoder;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

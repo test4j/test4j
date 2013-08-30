@@ -1,9 +1,9 @@
 package org.jtester.spec.printer;
 
-import org.jtester.spec.ISpec;
-import org.jtester.spec.exceptions.SkipStepException;
-import org.jtester.spec.inner.IScenario;
-import org.jtester.spec.inner.IScenarioStep;
+import org.test4j.spec.ISpec;
+import org.test4j.spec.exceptions.SkipStepException;
+import org.test4j.spec.inner.IScenario;
+import org.test4j.spec.inner.IScenarioStep;
 
 /**
  * 将测试场景运行结果打印到控制台上

@@ -3,6 +3,7 @@ package org.jtester.json.encoder.single.fixed;
 import java.util.regex.Pattern;
 
 import org.jtester.json.encoder.EncoderTest;
+import org.test4j.json.encoder.single.fixed.PatternEncoder;
 import org.testng.annotations.Test;
 
 public class PatternEncoderTest extends EncoderTest {

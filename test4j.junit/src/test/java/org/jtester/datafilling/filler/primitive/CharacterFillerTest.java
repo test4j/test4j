@@ -1,10 +1,10 @@
 package org.jtester.datafilling.filler.primitive;
 
-import org.jtester.datafilling.Filler;
 import org.jtester.datafilling.annotations.CharValuePojo;
 import org.jtester.datafilling.utils.FillDataTestConstants;
 import org.junit.Assert;
 import org.junit.Test;
+import org.test4j.datafilling.Filler;
 
 public class CharacterFillerTest {
 

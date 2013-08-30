@@ -3,8 +3,8 @@ package org.jtester.tools.datagen;
 import java.util.Iterator;
 
 import org.jtester.testng.JTester;
-import org.jtester.tools.datagen.AbastractDataGenerator;
-import org.jtester.tools.datagen.RepeatDataGenerator;
+import org.test4j.tools.datagen.AbastractDataGenerator;
+import org.test4j.tools.datagen.RepeatDataGenerator;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

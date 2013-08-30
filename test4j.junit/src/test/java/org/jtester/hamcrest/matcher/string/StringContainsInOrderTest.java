@@ -2,6 +2,7 @@ package org.jtester.hamcrest.matcher.string;
 
 import org.jtester.junit.JTester;
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.string.StringMode;
 
 public class StringContainsInOrderTest implements JTester {
 

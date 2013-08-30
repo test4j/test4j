@@ -6,8 +6,8 @@ import org.jtester.fortest.formock.SomeInterface;
 import org.jtester.fortest.formock.SpringBeanService;
 import org.jtester.fortest.formock.SpringBeanService.SpringBeanServiceImpl1;
 import org.jtester.junit.JTester;
-import org.jtester.module.inject.annotations.Inject;
 import org.junit.Test;
+import org.test4j.module.inject.annotations.Inject;
 
 public class MockTest_ByName implements JTester {
 

@@ -9,8 +9,8 @@ import mockit.Mocked;
 
 import org.jtester.fortest.beans.ComplexObject;
 import org.jtester.junit.JTester;
-import org.jtester.module.inject.annotations.Inject;
 import org.junit.Test;
+import org.test4j.module.inject.annotations.Inject;
 
 @SuppressWarnings("unchecked")
 public class ReturnValueTest implements JTester {

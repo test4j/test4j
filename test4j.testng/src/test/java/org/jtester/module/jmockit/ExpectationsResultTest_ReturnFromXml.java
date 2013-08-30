@@ -4,7 +4,7 @@ import mockit.Mocked;
 
 import org.jtester.fortest.beans.Manager;
 import org.jtester.testng.JTester;
-import org.jtester.tools.commons.JSONHelper;
+import org.test4j.tools.commons.JSONHelper;
 import org.testng.annotations.Test;
 
 @Test(groups = "jtester")

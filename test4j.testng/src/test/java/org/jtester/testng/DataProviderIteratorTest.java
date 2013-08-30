@@ -1,6 +1,6 @@
 package org.jtester.testng;
 
-import org.jtester.tools.datagen.DataProviderIterator;
+import org.test4j.tools.datagen.DataProviderIterator;
 import org.testng.annotations.Test;
 
 @Test(groups = "jtester")

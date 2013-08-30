@@ -5,7 +5,7 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
-import org.jtester.tools.commons.ResourceHelper;
+import org.test4j.tools.commons.ResourceHelper;
 import org.test4j.tools.commons.StringHelper;
 import org.testng.ITestNGMethod;
 

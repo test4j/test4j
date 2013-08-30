@@ -1,6 +1,6 @@
 package forfilter.tests.ju38;
 
-import org.jtester.module.ICore;
+import org.test4j.module.ICore;
 
 public class JU38ConcreteTest extends JU38AbstractTest implements ICore {
 

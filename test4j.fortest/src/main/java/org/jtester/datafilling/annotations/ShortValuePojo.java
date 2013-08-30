@@ -1,7 +1,7 @@
 package org.jtester.datafilling.annotations;
 
-import org.jtester.datafilling.annotations.FillShort;
 import org.jtester.datafilling.utils.FillDataTestConstants;
+import org.test4j.datafilling.annotations.FillShort;
 
 public class ShortValuePojo {
 	@FillShort(min = FillDataTestConstants.NUMBER_INT_MIN_VALUE)

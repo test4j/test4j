@@ -8,7 +8,7 @@ import java.util.Map;
 import java.util.Queue;
 import java.util.Set;
 
-import org.jtester.datafilling.annotations.FillList;
+import org.test4j.datafilling.annotations.FillList;
 
 public class MultiDimensionalTestPojo {
 

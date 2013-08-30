@@ -2,8 +2,8 @@ package org.jtester.datafilling.annotations;
 
 import java.io.Serializable;
 
-import org.jtester.datafilling.annotations.FillByte;
 import org.jtester.datafilling.utils.FillDataTestConstants;
+import org.test4j.datafilling.annotations.FillByte;
 
 public class ByteValuePojo implements Serializable {
 	private static final long serialVersionUID = 1L;

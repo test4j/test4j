@@ -4,18 +4,18 @@ import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
 
-import org.jtester.hamcrest.iassert.object.intf.IArrayAssert;
-import org.jtester.hamcrest.iassert.object.intf.IBooleanAssert;
-import org.jtester.hamcrest.iassert.object.intf.IByteAssert;
-import org.jtester.hamcrest.iassert.object.intf.ICharacterAssert;
-import org.jtester.hamcrest.iassert.object.intf.IDoubleAssert;
-import org.jtester.hamcrest.iassert.object.intf.IFileAssert;
-import org.jtester.hamcrest.iassert.object.intf.IFloatAssert;
-import org.jtester.hamcrest.iassert.object.intf.IIntegerAssert;
-import org.jtester.hamcrest.iassert.object.intf.ILongAssert;
-import org.jtester.hamcrest.iassert.object.intf.IShortAssert;
-import org.jtester.hamcrest.iassert.object.intf.IStringAssert;
 import org.jtester.testng.JTester;
+import org.test4j.hamcrest.iassert.object.intf.IArrayAssert;
+import org.test4j.hamcrest.iassert.object.intf.IBooleanAssert;
+import org.test4j.hamcrest.iassert.object.intf.IByteAssert;
+import org.test4j.hamcrest.iassert.object.intf.ICharacterAssert;
+import org.test4j.hamcrest.iassert.object.intf.IDoubleAssert;
+import org.test4j.hamcrest.iassert.object.intf.IFileAssert;
+import org.test4j.hamcrest.iassert.object.intf.IFloatAssert;
+import org.test4j.hamcrest.iassert.object.intf.IIntegerAssert;
+import org.test4j.hamcrest.iassert.object.intf.ILongAssert;
+import org.test4j.hamcrest.iassert.object.intf.IShortAssert;
+import org.test4j.hamcrest.iassert.object.intf.IStringAssert;
 import org.testng.annotations.Test;
 
 @Test(groups = { "jtester", "assertion" })

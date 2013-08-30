@@ -2,8 +2,8 @@ package org.jtester.json.decoder.spec;
 
 import java.lang.reflect.Method;
 
-import org.jtester.json.JSON;
 import org.jtester.testng.JTester;
+import org.test4j.json.JSON;
 import org.testng.annotations.Test;
 
 @Test(groups = "json")

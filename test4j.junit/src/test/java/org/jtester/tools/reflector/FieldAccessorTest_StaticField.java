@@ -2,9 +2,10 @@ package org.jtester.tools.reflector;
 
 import org.jtester.fortest.reflector.TestObject;
 import org.jtester.junit.JTester;
-import org.jtester.tools.exception.NoSuchFieldRuntimeException;
 import org.junit.Before;
 import org.junit.Test;
+import org.test4j.tools.exception.NoSuchFieldRuntimeException;
+import org.test4j.tools.reflector.FieldAccessor;
 
 public class FieldAccessorTest_StaticField implements JTester {
 

@@ -8,7 +8,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import org.jtester.tools.commons.JSONHelper;
+import org.test4j.tools.commons.JSONHelper;
 import org.test4j.tools.commons.StringHelper;
 
 @Deprecated

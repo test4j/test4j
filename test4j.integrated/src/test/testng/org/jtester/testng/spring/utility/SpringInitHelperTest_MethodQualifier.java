@@ -2,10 +2,10 @@ package org.jtester.testng.spring.utility;
 
 import java.lang.reflect.Method;
 
-import org.jtester.module.ICore;
 import org.jtester.module.spring.utility.SpringInitDemo;
 import org.jtester.module.spring.utility.SpringInitInvoker;
-import org.jtester.tools.commons.MethodHelper;
+import org.test4j.module.ICore;
+import org.test4j.tools.commons.MethodHelper;
 import org.testng.annotations.Test;
 
 @Test(groups = "jtester")

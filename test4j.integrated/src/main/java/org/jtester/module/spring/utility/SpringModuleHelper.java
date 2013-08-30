@@ -6,20 +6,20 @@ import java.util.Map;
 
 import mockit.internal.annotations.MockClassSetup;
 
-import org.jtester.module.JTesterException;
-import org.jtester.module.core.TestContext;
-import org.jtester.module.core.utility.MessageHelper;
-import org.jtester.module.core.utility.ModulesManager;
 import org.jtester.module.spring.SpringModule;
 import org.jtester.module.spring.SpringTestedContext;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.module.spring.strategy.ApplicationContextFactory;
 import org.jtester.module.spring.strategy.JTesterSpringContext;
-import org.jtester.tools.commons.AnnotationHelper;
-import org.jtester.tools.commons.ClazzHelper;
-import org.jtester.tools.commons.ConfigHelper;
 import org.springframework.aop.framework.MockCglib2AopProxy;
 import org.springframework.beans.factory.BeanFactory;
+import org.test4j.module.JTesterException;
+import org.test4j.module.core.TestContext;
+import org.test4j.module.core.utility.MessageHelper;
+import org.test4j.module.core.utility.ModulesManager;
+import org.test4j.tools.commons.AnnotationHelper;
+import org.test4j.tools.commons.ClazzHelper;
+import org.test4j.tools.commons.ConfigHelper;
 
 @SuppressWarnings("rawtypes")
 public class SpringModuleHelper {

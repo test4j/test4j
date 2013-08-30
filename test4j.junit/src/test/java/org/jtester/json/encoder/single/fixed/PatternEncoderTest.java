@@ -4,6 +4,7 @@ import java.util.regex.Pattern;
 
 import org.jtester.json.encoder.EncoderTest;
 import org.junit.Test;
+import org.test4j.json.encoder.single.fixed.PatternEncoder;
 
 public class PatternEncoderTest extends EncoderTest {
 

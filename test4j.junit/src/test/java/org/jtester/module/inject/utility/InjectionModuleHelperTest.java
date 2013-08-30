@@ -2,8 +2,8 @@ package org.jtester.module.inject.utility;
 
 import org.jtester.fortest.beans.User;
 import org.jtester.junit.JTester;
-import org.jtester.module.inject.annotations.Inject;
 import org.junit.Test;
+import org.test4j.module.inject.annotations.Inject;
 
 public class InjectionModuleHelperTest implements JTester {
     User           user  = new User();

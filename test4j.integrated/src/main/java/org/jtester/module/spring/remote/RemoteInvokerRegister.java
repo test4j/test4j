@@ -6,12 +6,8 @@ import java.util.HashMap;
 import java.util.Properties;
 import java.util.Set;
 
-import org.jtester.module.JTesterException;
-import org.jtester.module.core.utility.MessageHelper;
 import org.jtester.module.spring.annotations.SpringBeanRemote;
 import org.jtester.module.spring.annotations.SpringBeanRemote.SpringBeanRemoteType;
-import org.jtester.tools.commons.AnnotationHelper;
-import org.jtester.tools.commons.FieldHelper;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
@@ -20,6 +16,10 @@ import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.ApplicationContext;
 import org.springframework.remoting.caucho.HessianServiceExporter;
 import org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter;
+import org.test4j.module.JTesterException;
+import org.test4j.module.core.utility.MessageHelper;
+import org.test4j.tools.commons.AnnotationHelper;
+import org.test4j.tools.commons.FieldHelper;
 import org.test4j.tools.commons.StringHelper;
 
 /**

@@ -3,12 +3,12 @@ package org.jtester.module.spring;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jtester.module.core.TestContext;
-import org.jtester.module.core.utility.MessageHelper;
 import org.jtester.module.spring.strategy.JTesterBeanFactory;
 import org.jtester.module.spring.strategy.JTesterSpringContext;
 import org.jtester.module.spring.strategy.cleaner.SpringBeanCleaner;
 import org.jtester.module.spring.utility.SpringModuleHelper;
+import org.test4j.module.core.TestContext;
+import org.test4j.module.core.utility.MessageHelper;
 
 /**
  * 测试spring管理上下文

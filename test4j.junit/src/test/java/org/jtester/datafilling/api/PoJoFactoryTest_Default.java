@@ -11,13 +11,13 @@ import java.util.Map.Entry;
 
 import junit.framework.Assert;
 
-import org.jtester.datafilling.Filler;
 import org.jtester.datafilling.model.dto.GenericAttributePojo;
 import org.jtester.datafilling.model.dto.GenericPojo;
 import org.jtester.datafilling.model.dto.MultiDimensionalConstructorPojo;
 import org.jtester.datafilling.model.dto.MultiDimensionalTestPojo;
 import org.jtester.datafilling.strategies.PoJoParameterizedType;
 import org.junit.Test;
+import org.test4j.datafilling.Filler;
 
 public class PoJoFactoryTest_Default {
 

@@ -1,12 +1,12 @@
 package org.jtester.testng.spring.utility;
 
-import org.jtester.module.database.IDatabase;
-import org.jtester.module.spring.ISpring;
 import org.jtester.module.spring.annotations.AutoBeanInject;
 import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.utility.SpringAfterInit;
 import org.jtester.testng.JTester;
+import org.test4j.module.database.IDatabase;
+import org.test4j.module.spring.ISpring;
 import org.testng.annotations.Test;
 
 @Test(groups = { "jtester" })

@@ -8,8 +8,8 @@ import mockit.Mock;
 import org.jtester.database.table.ITable;
 import org.jtester.database.table.TddUserTable;
 import org.jtester.junit.JTester;
-import org.jtester.tools.datagen.DataSet;
 import org.junit.Test;
+import org.test4j.tools.datagen.DataSet;
 
 @SuppressWarnings({ "serial", "rawtypes", "unchecked" })
 public class AbastractDataGeneratorTest implements JTester {

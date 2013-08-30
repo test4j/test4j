@@ -5,6 +5,7 @@ import java.util.Iterator;
 import org.jtester.junit.JTester;
 import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
+import org.test4j.tools.exception.MultipleException;
 
 @SuppressWarnings("rawtypes")
 public class MultipleExceptionTest implements JTester {

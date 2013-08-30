@@ -3,8 +3,8 @@ package org.jtester.spec.scenario.xmlparser;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.jtester.spec.inner.IScenario;
-import org.jtester.spec.inner.IScenarioStep;
+import org.test4j.spec.inner.IScenario;
+import org.test4j.spec.inner.IScenarioStep;
 
 public class TxtStoryFeature {
     private String              description;

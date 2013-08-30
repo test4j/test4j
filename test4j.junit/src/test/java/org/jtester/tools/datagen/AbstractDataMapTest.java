@@ -3,10 +3,10 @@ package org.jtester.tools.datagen;
 import java.util.Arrays;
 import java.util.Iterator;
 
-import org.jtester.json.ITypeConverter;
 import org.jtester.junit.JTester;
 import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
+import org.test4j.json.ITypeConverter;
 
 @SuppressWarnings({ "serial", "rawtypes" })
 public class AbstractDataMapTest implements JTester {

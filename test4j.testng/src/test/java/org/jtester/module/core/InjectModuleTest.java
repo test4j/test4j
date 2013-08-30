@@ -1,7 +1,7 @@
 package org.jtester.module.core;
 
-import org.jtester.module.inject.annotations.Inject;
 import org.jtester.testng.JTester;
+import org.test4j.module.inject.annotations.Inject;
 import org.testng.annotations.Test;
 
 public class InjectModuleTest extends JTester {
