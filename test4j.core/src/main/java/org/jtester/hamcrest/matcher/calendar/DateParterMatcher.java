@@ -3,8 +3,8 @@ package org.jtester.hamcrest.matcher.calendar;
 import java.util.Calendar;
 import java.util.Date;
 
-import ext.jtester.hamcrest.BaseMatcher;
-import ext.jtester.hamcrest.Description;
+import ext.test4j.hamcrest.BaseMatcher;
+import ext.test4j.hamcrest.Description;
 
 import org.jtester.module.JTesterException;
 

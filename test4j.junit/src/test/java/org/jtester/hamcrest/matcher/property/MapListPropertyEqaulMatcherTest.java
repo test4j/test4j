@@ -10,7 +10,7 @@ import org.jtester.junit.JTester;
 import org.jtester.tools.commons.DateHelper;
 import org.junit.Test;
 
-import ext.jtester.hamcrest.MatcherAssert;
+import ext.test4j.hamcrest.MatcherAssert;
 
 @SuppressWarnings({ "unchecked", "serial", "rawtypes" })
 public class MapListPropertyEqaulMatcherTest implements JTester {

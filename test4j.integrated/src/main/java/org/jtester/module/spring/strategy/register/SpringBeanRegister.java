@@ -10,10 +10,10 @@ import org.jtester.module.jmockit.utility.JMockitModuleHelper;
 import org.jtester.module.spring.annotations.Property;
 import org.jtester.module.spring.exception.FindBeanImplClassException;
 import org.jtester.tools.commons.ClazzHelper;
-import org.jtester.tools.commons.StringHelper;
 import org.springframework.beans.PropertyValue;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.RootBeanDefinition;
+import org.test4j.tools.commons.StringHelper;
 
 @SuppressWarnings("rawtypes")
 public abstract class SpringBeanRegister {

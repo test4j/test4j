@@ -1,15 +1,15 @@
 package ext.jtester.hamcrest.object;
 
-import static ext.jtester.hamcrest.MatcherAssert.assertThat;
-import static ext.jtester.hamcrest.core.IsEqual.equalTo;
-import static ext.jtester.hamcrest.core.IsNot.not;
-import static ext.jtester.hamcrest.object.HasToString.hasToString;
+import static ext.test4j.hamcrest.MatcherAssert.assertThat;
+import static ext.test4j.hamcrest.core.IsEqual.equalTo;
+import static ext.test4j.hamcrest.core.IsNot.not;
+import static ext.test4j.hamcrest.object.HasToString.hasToString;
 
 import org.testng.annotations.Test;
 
 import ext.jtester.hamcrest.AbstractMatcherTest;
-import ext.jtester.hamcrest.Matcher;
-import ext.jtester.hamcrest.StringDescription;
+import ext.test4j.hamcrest.Matcher;
+import ext.test4j.hamcrest.StringDescription;
 
 public class HasToStringTest extends AbstractMatcherTest {
 	private static final String TO_STRING_RESULT = "toString result";

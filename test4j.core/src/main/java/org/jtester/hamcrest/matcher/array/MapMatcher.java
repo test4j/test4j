@@ -2,8 +2,8 @@ package org.jtester.hamcrest.matcher.array;
 
 import java.util.Map;
 
-import ext.jtester.hamcrest.BaseMatcher;
-import ext.jtester.hamcrest.Description;
+import ext.test4j.hamcrest.BaseMatcher;
+import ext.test4j.hamcrest.Description;
 
 public class MapMatcher extends BaseMatcher<Map<?, ?>> {
 	private Object expected;

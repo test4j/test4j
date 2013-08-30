@@ -6,7 +6,7 @@ import org.jtester.module.ICore;
 import org.junit.Assert;
 import org.junit.Test;
 
-import ext.jtester.hamcrest.core.IsEqual;
+import ext.test4j.hamcrest.core.IsEqual;
 
 //@RunWith(JTesterRunner.class)
 public class JMockitNonStrictExpectationsTest implements ICore {

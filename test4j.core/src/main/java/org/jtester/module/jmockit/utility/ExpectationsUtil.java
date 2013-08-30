@@ -1,8 +1,8 @@
 package org.jtester.module.jmockit.utility;
 
-import ext.jtester.hamcrest.Description;
-import ext.jtester.hamcrest.Matcher;
-import ext.jtester.hamcrest.StringDescription;
+import ext.test4j.hamcrest.Description;
+import ext.test4j.hamcrest.Matcher;
+import ext.test4j.hamcrest.StringDescription;
 import mockit.internal.expectations.RecordAndReplayExecution;
 import mockit.internal.expectations.TestOnlyPhase;
 import mockit.internal.expectations.argumentMatching.ArgumentMatcher;
@@ -54,7 +54,7 @@ public class ExpectationsUtil {
 	 * 
 	 * @param matcher
 	 */
-	public static void addArgMatcher(ext.jtester.hamcrest.Matcher matcher) {
+	public static void addArgMatcher(ext.test4j.hamcrest.Matcher matcher) {
 		RecordAndReplayExecution instance = TestRun.getRecordAndReplayForRunningTest(false);
 
 		if (instance == null) {

@@ -3,7 +3,7 @@ package org.jtester.module.tracer;
 import java.io.IOException;
 import java.io.Writer;
 
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 
 @SuppressWarnings("rawtypes")
 public class XmlFileTracerLogger extends TracerLogger {

@@ -1,6 +1,6 @@
 package org.jtester.module.tracer;
 
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 
 public class DbTracerLogger extends XmlFileTracerLogger {
 	@Override

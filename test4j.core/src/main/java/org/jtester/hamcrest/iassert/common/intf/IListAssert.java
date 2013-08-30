@@ -6,7 +6,7 @@ import org.jtester.hamcrest.matcher.modes.ItemsMode;
 import org.jtester.hamcrest.matcher.property.reflection.EqMode;
 import org.jtester.module.ICore.DataMap;
 
-import ext.jtester.hamcrest.Matcher;
+import ext.test4j.hamcrest.Matcher;
 
 /**
  * 

@@ -1,7 +1,7 @@
 package org.jtester.tools.commons;
 
 import org.jtester.testng.JTester;
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

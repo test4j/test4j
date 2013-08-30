@@ -8,8 +8,8 @@ import org.jtester.hamcrest.matcher.modes.ItemsMode;
 import org.jtester.junit.JTester;
 import org.junit.Test;
 
-import ext.jtester.hamcrest.Matcher;
-import ext.jtester.hamcrest.MatcherAssert;
+import ext.test4j.hamcrest.Matcher;
+import ext.test4j.hamcrest.MatcherAssert;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class ItemMatcherTest_AllItemMatcher implements JTester {

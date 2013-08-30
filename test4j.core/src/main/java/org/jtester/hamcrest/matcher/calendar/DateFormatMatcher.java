@@ -6,8 +6,8 @@ import java.util.Date;
 
 import org.jtester.module.JTesterException;
 
-import ext.jtester.hamcrest.BaseMatcher;
-import ext.jtester.hamcrest.Description;
+import ext.test4j.hamcrest.BaseMatcher;
+import ext.test4j.hamcrest.Description;
 
 /**
  * Calendar或Date的格式化值等于期望值断言器

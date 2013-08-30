@@ -11,7 +11,7 @@ import org.jtester.module.spring.annotations.SpringContext;
 import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.module.spring.strategy.JTesterBeanFactory;
 import org.jtester.tools.commons.FieldHelper;
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 class SpringBeanInjectorByName extends SpringBeanInjector {

@@ -5,19 +5,19 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.List;
 
-import ext.jtester.cglib.core.CodeGenerationException;
-import ext.jtester.cglib.core.DefaultNamingPolicy;
-import ext.jtester.cglib.core.NamingPolicy;
-import ext.jtester.cglib.core.Predicate;
-import ext.jtester.cglib.proxy.Callback;
-import ext.jtester.cglib.proxy.CallbackFilter;
-import ext.jtester.cglib.proxy.Enhancer;
-import ext.jtester.cglib.proxy.Factory;
-import ext.jtester.cglib.proxy.InvocationHandler;
-import ext.jtester.cglib.proxy.NoOp;
 
-import ext.jtester.objenesis.Objenesis;
-import ext.jtester.objenesis.ObjenesisStd;
+import ext.test4j.cglib.core.CodeGenerationException;
+import ext.test4j.cglib.core.DefaultNamingPolicy;
+import ext.test4j.cglib.core.NamingPolicy;
+import ext.test4j.cglib.core.Predicate;
+import ext.test4j.cglib.proxy.Callback;
+import ext.test4j.cglib.proxy.CallbackFilter;
+import ext.test4j.cglib.proxy.Enhancer;
+import ext.test4j.cglib.proxy.Factory;
+import ext.test4j.cglib.proxy.InvocationHandler;
+import ext.test4j.cglib.proxy.NoOp;
+import ext.test4j.objenesis.Objenesis;
+import ext.test4j.objenesis.ObjenesisStd;
 
 /**
  * This class lets you imposterise abstract and concrete classes

@@ -3,7 +3,7 @@ package org.jtester.tools.commons;
 import java.io.FileNotFoundException;
 import java.util.LinkedList;
 
-import ext.jtester.apache.commons.lang.StringEscapeUtils;
+import ext.test4j.apache.commons.lang.StringEscapeUtils;
 
 import org.jtester.tools.commons.TextDiffMatchPatch.Diff;
 import org.jtester.tools.commons.TextDiffMatchPatch.Operation;

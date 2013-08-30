@@ -6,7 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import ext.jtester.hamcrest.MatcherAssert;
+import ext.test4j.hamcrest.MatcherAssert;
+
 import org.jtester.fortest.beans.User;
 import org.jtester.testng.JTester;
 import org.testng.annotations.Test;

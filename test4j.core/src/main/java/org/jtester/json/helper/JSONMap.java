@@ -5,7 +5,7 @@ import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.jtester.json.JSONException;
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 
 @SuppressWarnings({ "rawtypes" })
 public class JSONMap extends LinkedHashMap<JSONObject, JSONObject> implements JSONObject {

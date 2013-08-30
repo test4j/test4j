@@ -8,7 +8,6 @@ import java.util.Set;
 import org.jtester.junit.annotations.AnnotationDefaultValue;
 import org.jtester.junit.annotations.Group;
 import org.jtester.junit.annotations.RunGroup;
-import org.jtester.tools.commons.StringHelper;
 import org.junit.experimental.categories.Category;
 import org.junit.runner.Description;
 import org.junit.runner.manipulation.Filter;
@@ -16,6 +15,7 @@ import org.junit.runner.manipulation.NoTestsRemainException;
 import org.junit.runners.Suite;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.RunnerBuilder;
+import org.test4j.tools.commons.StringHelper;
 
 public class Groups extends Suite {
 

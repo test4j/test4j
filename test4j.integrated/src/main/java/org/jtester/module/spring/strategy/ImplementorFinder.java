@@ -13,9 +13,9 @@ import org.jtester.module.spring.annotations.SpringInitMethod;
 import org.jtester.module.spring.annotations.AutoBeanInject.BeanMap;
 import org.jtester.module.spring.exception.FindBeanImplClassException;
 import org.jtester.tools.commons.AnnotationHelper;
-import org.jtester.tools.commons.ArrayHelper;
 import org.jtester.tools.commons.ClazzHelper;
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.ArrayHelper;
+import org.test4j.tools.commons.StringHelper;
 
 /**
  * 根据表达式查找接口实现的工具类

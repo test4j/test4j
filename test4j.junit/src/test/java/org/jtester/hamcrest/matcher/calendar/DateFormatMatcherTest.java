@@ -7,7 +7,7 @@ import org.jtester.module.JTesterException;
 import org.jtester.tools.commons.DateUtilTest;
 import org.junit.Test;
 
-import ext.jtester.hamcrest.MatcherAssert;
+import ext.test4j.hamcrest.MatcherAssert;
 
 @SuppressWarnings("unchecked")
 public class DateFormatMatcherTest implements JTester {

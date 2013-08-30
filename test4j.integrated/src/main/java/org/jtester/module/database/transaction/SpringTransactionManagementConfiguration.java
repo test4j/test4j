@@ -9,9 +9,9 @@ import org.jtester.module.database.annotations.Transactional;
 import org.jtester.module.spring.SpringTestedContext;
 import org.jtester.tools.commons.AnnotationHelper;
 import org.jtester.tools.commons.ClazzHelper;
-import org.jtester.tools.commons.StringHelper;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.PlatformTransactionManager;
+import org.test4j.tools.commons.StringHelper;
 
 @SuppressWarnings("unchecked")
 public class SpringTransactionManagementConfiguration implements TransactionManagementConfiguration {

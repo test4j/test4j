@@ -16,9 +16,9 @@ import org.jtester.hamcrest.matcher.string.StringMode;
 import org.jtester.hamcrest.matcher.string.StringNotBlankMatcher;
 import org.jtester.hamcrest.matcher.string.StringStartWithMatcher;
 
-import ext.jtester.hamcrest.Matcher;
-import ext.jtester.hamcrest.core.AnyOf;
-import ext.jtester.hamcrest.core.IsNot;
+import ext.test4j.hamcrest.Matcher;
+import ext.test4j.hamcrest.core.AnyOf;
+import ext.test4j.hamcrest.core.IsNot;
 
 @SuppressWarnings({ "rawtypes" })
 public class StringAssert extends ComparableAssert<String, IStringAssert> implements IStringAssert {

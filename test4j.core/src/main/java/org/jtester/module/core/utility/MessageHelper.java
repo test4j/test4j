@@ -12,7 +12,7 @@ import org.jtester.tools.commons.ClazzHelper;
 import org.jtester.tools.commons.ConfigHelper;
 import org.jtester.tools.commons.MethodHelper;
 import org.jtester.tools.commons.ResourceHelper;
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 
 public class MessageHelper {
     public static final int DEBUG   = 0;

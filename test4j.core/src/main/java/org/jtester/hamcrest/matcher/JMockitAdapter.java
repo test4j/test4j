@@ -3,12 +3,12 @@ package org.jtester.hamcrest.matcher;
 import static mockit.internal.util.Utilities.getField;
 import mockit.internal.expectations.argumentMatching.ArgumentMatcher;
 import mockit.internal.expectations.argumentMatching.ArgumentMismatch;
-import ext.jtester.hamcrest.Description;
-import ext.jtester.hamcrest.Matcher;
-import ext.jtester.hamcrest.StringDescription;
-import ext.jtester.hamcrest.core.IsEqual;
-import ext.jtester.hamcrest.core.IsSame;
-import ext.jtester.hamcrest.number.OrderingComparison;
+import ext.test4j.hamcrest.Description;
+import ext.test4j.hamcrest.Matcher;
+import ext.test4j.hamcrest.StringDescription;
+import ext.test4j.hamcrest.core.IsEqual;
+import ext.test4j.hamcrest.core.IsSame;
+import ext.test4j.hamcrest.number.OrderingComparison;
 
 /**
  * Adapts the<br>
@@ -41,8 +41,8 @@ public final class JMockitAdapter implements ArgumentMatcher {
 	public Object getInnerValue() {
 		Matcher innerMatcher = hamcrestMatcher;
 
-		while (innerMatcher instanceof ext.jtester.hamcrest.core.Is
-				|| innerMatcher instanceof ext.jtester.hamcrest.core.IsNot) {
+		while (innerMatcher instanceof ext.test4j.hamcrest.core.Is
+				|| innerMatcher instanceof ext.test4j.hamcrest.core.IsNot) {
 			innerMatcher = getField(innerMatcher.getClass(), Matcher.class, innerMatcher);
 		}
 

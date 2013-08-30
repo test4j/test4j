@@ -5,9 +5,9 @@ package org.jtester.hamcrest;
 import org.jtester.module.ICore;
 import org.junit.Test;
 
-import ext.jtester.hamcrest.Description;
-import ext.jtester.hamcrest.Matcher;
-import ext.jtester.hamcrest.StringDescription;
+import ext.test4j.hamcrest.Description;
+import ext.test4j.hamcrest.Matcher;
+import ext.test4j.hamcrest.StringDescription;
 
 public abstract class AbstractMatcherTest implements ICore {
 

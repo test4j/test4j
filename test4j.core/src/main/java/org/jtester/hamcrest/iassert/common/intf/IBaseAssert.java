@@ -2,7 +2,7 @@ package org.jtester.hamcrest.iassert.common.intf;
 
 import org.jtester.hamcrest.iassert.object.intf.IStringAssert;
 
-import ext.jtester.hamcrest.Matcher;
+import ext.test4j.hamcrest.Matcher;
 
 /**
  * the basic asserting matcher

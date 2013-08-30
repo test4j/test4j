@@ -1,7 +1,8 @@
 package org.jtester.hamcrest.iassert.object.impl;
 
-import ext.jtester.hamcrest.Matcher;
-import ext.jtester.hamcrest.core.IsEqual;
+import ext.test4j.hamcrest.Matcher;
+import ext.test4j.hamcrest.core.IsEqual;
+
 import org.jtester.hamcrest.iassert.common.impl.ComparableAssert;
 import org.jtester.hamcrest.iassert.common.intf.IAssert;
 import org.jtester.hamcrest.iassert.object.intf.INumberAssert;

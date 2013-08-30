@@ -16,10 +16,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.jtester.tools.commons.PrimitiveHelper;
 import org.jtester.tools.commons.Reflector;
-import org.jtester.tools.commons.StringHelper;
 import org.jtester.tools.reflector.FieldAccessor;
+import org.test4j.tools.commons.PrimitiveHelper;
+import org.test4j.tools.commons.StringHelper;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class AttributeInfo {

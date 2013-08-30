@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.jtester.spec.util.XmlHelper.MethodNode;
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 
 public class MethodNodeParser {
 	private final char[] chars;

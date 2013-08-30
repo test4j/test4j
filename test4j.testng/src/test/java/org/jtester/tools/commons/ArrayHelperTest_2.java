@@ -8,8 +8,8 @@ import java.util.HashSet;
 
 import org.jtester.fortest.beans.User;
 import org.jtester.testng.JTester;
-import org.jtester.tools.commons.ArrayHelper;
 import org.jtester.tools.commons.ListHelper;
+import org.test4j.tools.commons.ArrayHelper;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

@@ -2,13 +2,13 @@ package org.jtester.hamcrest.matcher.property;
 
 import java.util.List;
 
-import org.jtester.tools.commons.ArrayHelper;
 import org.jtester.tools.commons.ListHelper;
 import org.jtester.tools.reflector.PropertyAccessor;
+import org.test4j.tools.commons.ArrayHelper;
 
-import ext.jtester.hamcrest.BaseMatcher;
-import ext.jtester.hamcrest.Description;
-import ext.jtester.hamcrest.Matcher;
+import ext.test4j.hamcrest.BaseMatcher;
+import ext.test4j.hamcrest.Description;
+import ext.test4j.hamcrest.Matcher;
 
 /**
  * 属性值集合或属性值作为一个对象，要满足指定的断言

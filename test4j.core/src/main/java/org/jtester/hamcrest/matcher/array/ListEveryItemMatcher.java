@@ -5,9 +5,9 @@ import java.util.Collection;
 import org.jtester.hamcrest.matcher.modes.ItemsMode;
 import org.jtester.tools.commons.ListHelper;
 
-import ext.jtester.hamcrest.BaseMatcher;
-import ext.jtester.hamcrest.Description;
-import ext.jtester.hamcrest.Matcher;
+import ext.test4j.hamcrest.BaseMatcher;
+import ext.test4j.hamcrest.Description;
+import ext.test4j.hamcrest.Matcher;
 
 @SuppressWarnings("rawtypes")
 public class ListEveryItemMatcher extends BaseMatcher {

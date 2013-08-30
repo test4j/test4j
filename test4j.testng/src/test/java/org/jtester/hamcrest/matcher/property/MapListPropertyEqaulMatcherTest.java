@@ -10,7 +10,7 @@ import org.jtester.testng.JTester;
 import org.jtester.tools.commons.DateHelper;
 import org.testng.annotations.Test;
 
-import ext.jtester.hamcrest.MatcherAssert;
+import ext.test4j.hamcrest.MatcherAssert;
 
 @SuppressWarnings({ "unchecked", "serial", "rawtypes" })
 @Test

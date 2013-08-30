@@ -1,7 +1,7 @@
 package org.jtester.hamcrest.matcher.property;
 
-import static org.jtester.tools.commons.ArrayHelper.toArray;
 import static org.jtester.tools.commons.ListHelper.toList;
+import static org.test4j.tools.commons.ArrayHelper.toArray;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,11 +14,11 @@ import org.jtester.json.encoder.beans.test.GenicBean;
 import org.jtester.json.encoder.beans.test.User;
 import org.jtester.junit.JTester;
 import org.jtester.junit.annotations.DataFrom;
-import org.jtester.tools.commons.ArrayHelper;
 import org.jtester.tools.commons.ListHelper;
 import org.junit.Test;
+import org.test4j.tools.commons.ArrayHelper;
 
-import ext.jtester.hamcrest.MatcherAssert;
+import ext.test4j.hamcrest.MatcherAssert;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })
 public class PropertiesEqualMatcherTest implements JTester {

@@ -18,7 +18,7 @@ import org.jtester.spec.scenario.xmlparser.entity.StoryDescription;
 import org.jtester.spec.scenario.xmlparser.entity.StoryScenario;
 import org.jtester.spec.scenario.xmlparser.entity.TemplateList;
 import org.jtester.spec.scenario.xmlparser.entity.TemplateMethod;
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 
 /**
  * 将一个xml的document对象转换为StoryFeature对象

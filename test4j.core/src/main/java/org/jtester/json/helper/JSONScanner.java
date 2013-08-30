@@ -1,7 +1,7 @@
 package org.jtester.json.helper;
 
 import org.jtester.json.JSONException;
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 
 public class JSONScanner {
 

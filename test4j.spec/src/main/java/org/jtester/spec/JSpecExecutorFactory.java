@@ -24,8 +24,8 @@ import org.jtester.spec.scenario.step.SpecMethod;
 import org.jtester.spec.storypath.StoryPath;
 import org.jtester.tools.commons.AnnotationHelper;
 import org.jtester.tools.commons.ConfigHelper;
-import org.jtester.tools.commons.StringHelper;
 import org.jtester.tools.datagen.DataProviderIterator;
+import org.test4j.tools.commons.StringHelper;
 
 /**
  * @author darui.wudr 2013-1-10 下午8:33:04

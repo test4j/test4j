@@ -1,11 +1,11 @@
 package org.jtester.hamcrest.matcher.property;
 
-import ext.jtester.hamcrest.BaseMatcher;
-import ext.jtester.hamcrest.Description;
+import ext.test4j.hamcrest.BaseMatcher;
+import ext.test4j.hamcrest.Description;
 
 import org.jtester.hamcrest.matcher.property.reflection.EqMode;
-import org.jtester.tools.commons.StringHelper;
 import org.jtester.tools.reflector.PropertyAccessor;
+import org.test4j.tools.commons.StringHelper;
 
 /**
  * 集合（数组）中对象的多个属性值集合(二维数组)，反射值与期望值相等

@@ -1,7 +1,8 @@
 package org.jtester.hamcrest.matcher.array;
 
-import ext.jtester.hamcrest.Matcher;
-import ext.jtester.hamcrest.MatcherAssert;
+import ext.test4j.hamcrest.Matcher;
+import ext.test4j.hamcrest.MatcherAssert;
+
 import org.jtester.hamcrest.matcher.array.SizeOrLengthMatcher.SizeOrLengthMatcherType;
 import org.jtester.testng.JTester;
 import org.testng.annotations.Test;

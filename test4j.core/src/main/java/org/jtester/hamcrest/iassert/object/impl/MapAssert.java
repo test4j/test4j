@@ -10,9 +10,9 @@ import org.jtester.hamcrest.iassert.object.intf.IMapAssert;
 import org.jtester.hamcrest.matcher.array.MapMatcher;
 import org.jtester.hamcrest.matcher.array.MapMatcher.MapMatcherType;
 
-import ext.jtester.hamcrest.Matcher;
-import ext.jtester.hamcrest.collection.IsMapContaining;
-import ext.jtester.hamcrest.core.AllOf;
+import ext.test4j.hamcrest.Matcher;
+import ext.test4j.hamcrest.collection.IsMapContaining;
+import ext.test4j.hamcrest.core.AllOf;
 
 @SuppressWarnings({ "rawtypes" })
 public class MapAssert extends AllAssert<Map<?, ?>, IMapAssert> implements IMapAssert {

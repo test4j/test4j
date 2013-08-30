@@ -3,7 +3,7 @@ package org.jtester.tools.commons;
 import java.util.Iterator;
 
 import org.jtester.testng.JTester;
-import org.jtester.tools.commons.PrimitiveHelper;
+import org.test4j.tools.commons.PrimitiveHelper;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 

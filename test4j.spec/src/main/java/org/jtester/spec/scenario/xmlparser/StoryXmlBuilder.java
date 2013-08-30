@@ -11,7 +11,7 @@ import org.jtester.spec.scenario.xmlparser.entity.StoryScenario;
 import org.jtester.spec.scenario.xmlparser.entity.TemplateMethod;
 import org.jtester.spec.util.XmlHelper;
 import org.jtester.spec.util.XmlHelper.MethodNode;
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 
 /**
  * xml形式的用例文件构建器

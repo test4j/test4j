@@ -16,10 +16,10 @@ import org.jtester.module.inject.annotations.TestedObject;
 import org.jtester.module.inject.utility.InjectionModuleHelper;
 import org.jtester.tools.commons.AnnotationHelper;
 import org.jtester.tools.commons.ClazzHelper;
-import org.jtester.tools.commons.StringHelper;
 import org.jtester.tools.reflector.FieldAccessor;
 import org.jtester.tools.reflector.PropertyAccessor;
 import org.jtester.tools.reflector.imposteriser.JTesterProxy;
+import org.test4j.tools.commons.StringHelper;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class InjectModule implements Module {

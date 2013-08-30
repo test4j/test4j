@@ -6,6 +6,7 @@ import java.util.HashMap;
 import org.jtester.junit.JTester;
 import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
+import org.test4j.tools.commons.ArrayHelper;
 
 public class ArrayHelperTest implements JTester {
     @Test

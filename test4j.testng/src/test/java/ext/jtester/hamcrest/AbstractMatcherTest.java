@@ -5,6 +5,10 @@ package ext.jtester.hamcrest;
 import org.jtester.module.ICore;
 import org.testng.annotations.Test;
 
+import ext.test4j.hamcrest.Description;
+import ext.test4j.hamcrest.Matcher;
+import ext.test4j.hamcrest.StringDescription;
+
 public abstract class AbstractMatcherTest implements ICore {
 
 	/**

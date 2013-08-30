@@ -10,7 +10,7 @@ import org.jtester.hamcrest.matcher.JMockitAdapter;
 import org.jtester.module.jmockit.utility.ExpectationsUtil;
 import org.jtester.tools.reflector.MethodAccessor;
 
-import ext.jtester.hamcrest.Matcher;
+import ext.test4j.hamcrest.Matcher;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class JMockitNonStrictExpectations extends NonStrictExpectations implements JTesterInvocations {

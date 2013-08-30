@@ -15,14 +15,14 @@ import org.jtester.hamcrest.matcher.property.reflection.ReflectionComparator;
 import org.jtester.hamcrest.matcher.property.report.DefaultDifferenceReport;
 import org.jtester.hamcrest.matcher.property.report.DifferenceReport;
 import org.jtester.module.ICore.DataMap;
-import org.jtester.tools.commons.ArrayHelper;
 import org.jtester.tools.commons.ListHelper;
 import org.jtester.tools.exception.NoSuchFieldRuntimeException;
 import org.jtester.tools.reflector.PropertyAccessor;
+import org.test4j.tools.commons.ArrayHelper;
 
-import ext.jtester.hamcrest.BaseMatcher;
-import ext.jtester.hamcrest.Description;
-import ext.jtester.hamcrest.StringDescription;
+import ext.test4j.hamcrest.BaseMatcher;
+import ext.test4j.hamcrest.Description;
+import ext.test4j.hamcrest.StringDescription;
 
 /**
  * 把实际对象按照Map中的key值取出来，进行反射比较

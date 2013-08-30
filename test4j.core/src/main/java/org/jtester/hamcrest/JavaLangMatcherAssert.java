@@ -1,6 +1,6 @@
 package org.jtester.hamcrest;
 
-import ext.jtester.hamcrest.Matcher;
+import ext.test4j.hamcrest.Matcher;
 
 /**
  * 兼容Java " assert true/false "语法<br>

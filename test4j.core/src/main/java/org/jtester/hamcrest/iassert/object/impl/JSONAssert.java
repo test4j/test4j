@@ -16,9 +16,9 @@ import org.jtester.json.helper.JSONObject;
 import org.jtester.json.helper.JSONScanner;
 import org.jtester.json.helper.JSONSingle;
 
-import ext.jtester.hamcrest.Matcher;
-import ext.jtester.hamcrest.MatcherAssert;
-import ext.jtester.hamcrest.core.Is;
+import ext.test4j.hamcrest.Matcher;
+import ext.test4j.hamcrest.MatcherAssert;
+import ext.test4j.hamcrest.core.Is;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class JSONAssert extends AllAssert<Object, JSONAssert> implements IJSONAssert {

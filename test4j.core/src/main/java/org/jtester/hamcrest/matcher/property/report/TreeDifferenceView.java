@@ -1,6 +1,6 @@
 package org.jtester.hamcrest.matcher.property.report;
 
-import static ext.jtester.apache.commons.lang.ClassUtils.getShortClassName;
+import static ext.test4j.apache.commons.lang.ClassUtils.getShortClassName;
 import static org.jtester.hamcrest.matcher.property.report.DefaultDifferenceReport.MatchType.NO_MATCH;
 
 import java.util.List;

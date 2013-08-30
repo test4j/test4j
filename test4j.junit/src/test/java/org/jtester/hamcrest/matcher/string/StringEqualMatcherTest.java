@@ -4,7 +4,7 @@ import org.jtester.junit.JTester;
 import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
 
-import ext.jtester.hamcrest.MatcherAssert;
+import ext.test4j.hamcrest.MatcherAssert;
 
 public class StringEqualMatcherTest implements JTester {
 

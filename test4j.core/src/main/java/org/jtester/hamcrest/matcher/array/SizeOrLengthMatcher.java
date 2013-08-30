@@ -2,10 +2,10 @@ package org.jtester.hamcrest.matcher.array;
 
 import java.util.Collection;
 
-import ext.jtester.hamcrest.BaseMatcher;
-import ext.jtester.hamcrest.Description;
+import ext.test4j.hamcrest.BaseMatcher;
+import ext.test4j.hamcrest.Description;
 
-import org.jtester.tools.commons.ArrayHelper;
+import org.test4j.tools.commons.ArrayHelper;
 
 public class SizeOrLengthMatcher extends BaseMatcher<Collection<?>> {
 	private int size;

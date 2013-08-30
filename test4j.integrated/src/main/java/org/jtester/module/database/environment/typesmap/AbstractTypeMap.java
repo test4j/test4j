@@ -11,7 +11,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.jtester.tools.commons.DateHelper;
-import org.jtester.tools.commons.PrimitiveHelper;
+import org.test4j.tools.commons.PrimitiveHelper;
 
 @SuppressWarnings({ "rawtypes", "serial" })
 public abstract class AbstractTypeMap {

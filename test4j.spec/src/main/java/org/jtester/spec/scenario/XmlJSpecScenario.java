@@ -15,9 +15,9 @@ import org.jtester.spec.scenario.step.JSpecStep;
 import org.jtester.spec.scenario.step.XmlJSpecStep;
 import org.jtester.spec.scenario.step.XmlJSpecStep.XmlJSpecStepTemplate;
 import org.jtester.spec.scenario.xmlparser.StoryQName;
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 
-import ext.jtester.apache.commons.io.IOUtils;
+import ext.test4j.apache.commons.io.IOUtils;
 
 /**
  * XML文件描述的故事场景解析器

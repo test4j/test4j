@@ -4,7 +4,7 @@ import org.jtester.hamcrest.matcher.property.reflection.EqMode;
 import org.jtester.hamcrest.matcher.string.StringMode;
 import org.jtester.module.ICore.DataMap;
 
-import ext.jtester.hamcrest.Matcher;
+import ext.test4j.hamcrest.Matcher;
 
 /**
  * 针对对象属性进行断言

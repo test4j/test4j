@@ -5,9 +5,9 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 
-import ext.jtester.mozilla.intl.chardet.NsDetector;
-import ext.jtester.mozilla.intl.chardet.NsICharsetDetectionObserver;
-import ext.jtester.mozilla.intl.chardet.NsPSMDetector;
+import ext.test4j.mozilla.intl.chardet.NsDetector;
+import ext.test4j.mozilla.intl.chardet.NsICharsetDetectionObserver;
+import ext.test4j.mozilla.intl.chardet.NsPSMDetector;
 
 public class JChardetFacade extends AbstractCodepageDetector implements NsICharsetDetectionObserver {
 	private static JChardetFacade instance = null;

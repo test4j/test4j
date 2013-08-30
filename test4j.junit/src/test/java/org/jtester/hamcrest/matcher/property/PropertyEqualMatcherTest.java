@@ -1,7 +1,7 @@
 package org.jtester.hamcrest.matcher.property;
 
-import static org.jtester.tools.commons.ArrayHelper.toArray;
 import static org.jtester.tools.commons.ListHelper.toList;
+import static org.test4j.tools.commons.ArrayHelper.toArray;
 
 import java.util.HashMap;
 import java.util.Iterator;
@@ -14,7 +14,7 @@ import org.jtester.junit.JTester;
 import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
 
-import ext.jtester.hamcrest.MatcherAssert;
+import ext.test4j.hamcrest.MatcherAssert;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })
 public class PropertyEqualMatcherTest implements JTester {

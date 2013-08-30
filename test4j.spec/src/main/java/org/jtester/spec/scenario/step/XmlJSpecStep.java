@@ -10,7 +10,7 @@ import org.dom4j.Element;
 import org.jtester.spec.inner.IScenarioStep;
 import org.jtester.spec.inner.StepType;
 import org.jtester.spec.scenario.step.xml.MethodDescription;
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 
 @SuppressWarnings("serial")
 public class XmlJSpecStep extends JSpecStep {

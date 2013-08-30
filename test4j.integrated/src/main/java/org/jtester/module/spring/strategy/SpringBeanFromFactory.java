@@ -11,13 +11,13 @@ import org.jtester.module.core.utility.MessageHelper;
 import org.jtester.module.spring.annotations.SpringBeanFrom;
 import org.jtester.module.spring.exception.FindBeanImplClassException;
 import org.jtester.tools.commons.FieldHelper;
-import org.jtester.tools.commons.StringHelper;
 import org.jtester.tools.reflector.imposteriser.JTesterProxy;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.FactoryBean;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
+import org.test4j.tools.commons.StringHelper;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class SpringBeanFromFactory implements FactoryBean {// , BeanFactoryAware

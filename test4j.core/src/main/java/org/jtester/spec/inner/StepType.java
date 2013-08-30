@@ -2,7 +2,7 @@ package org.jtester.spec.inner;
 
 import java.lang.annotation.Annotation;
 
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 
 public enum StepType {
     Step {

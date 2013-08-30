@@ -4,7 +4,7 @@
  */
 package org.jtester.hamcrest.matcher.mockito;
 
-import ext.jtester.hamcrest.Description;
+import ext.test4j.hamcrest.Description;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public abstract class CompareTo<T extends Comparable<T>> extends ArgumentMatcher<T> {

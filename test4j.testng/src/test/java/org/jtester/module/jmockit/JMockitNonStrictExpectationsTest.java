@@ -2,7 +2,8 @@ package org.jtester.module.jmockit;
 
 import mockit.NonStrict;
 
-import ext.jtester.hamcrest.core.IsEqual;
+import ext.test4j.hamcrest.core.IsEqual;
+
 import org.jtester.testng.JTester;
 import org.testng.Assert;
 import org.testng.annotations.Test;

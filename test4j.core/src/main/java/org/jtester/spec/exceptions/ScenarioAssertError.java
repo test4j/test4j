@@ -3,7 +3,7 @@ package org.jtester.spec.exceptions;
 import java.util.List;
 
 import org.jtester.spec.inner.IScenario;
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 
 public class ScenarioAssertError extends AssertionError {
 

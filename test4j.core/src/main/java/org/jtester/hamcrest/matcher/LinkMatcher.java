@@ -3,11 +3,11 @@ package org.jtester.hamcrest.matcher;
 import java.util.ArrayList;
 import java.util.List;
 
-import ext.jtester.hamcrest.BaseMatcher;
-import ext.jtester.hamcrest.Description;
-import ext.jtester.hamcrest.Matcher;
+import ext.test4j.hamcrest.BaseMatcher;
+import ext.test4j.hamcrest.Description;
+import ext.test4j.hamcrest.Matcher;
 
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 
 @SuppressWarnings("rawtypes")
 public class LinkMatcher<T> extends BaseMatcher<T> {

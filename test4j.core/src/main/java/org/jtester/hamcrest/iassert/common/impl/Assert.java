@@ -6,13 +6,13 @@ import org.jtester.hamcrest.matcher.LinkMatcher;
 import org.jtester.hamcrest.matcher.clazz.ClassAssignFromMatcher;
 import org.jtester.module.JTesterException;
 import org.jtester.module.jmockit.utility.ExpectationsUtil;
-import org.jtester.tools.commons.PrimitiveHelper;
 import org.jtester.tools.reflector.MethodAccessor;
+import org.test4j.tools.commons.PrimitiveHelper;
 
-import ext.jtester.hamcrest.BaseMatcher;
-import ext.jtester.hamcrest.Description;
-import ext.jtester.hamcrest.Matcher;
-import ext.jtester.hamcrest.MatcherAssert;
+import ext.test4j.hamcrest.BaseMatcher;
+import ext.test4j.hamcrest.Description;
+import ext.test4j.hamcrest.Matcher;
+import ext.test4j.hamcrest.MatcherAssert;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public abstract class Assert<T, E extends IAssert> extends BaseMatcher<T> implements IAssert<T, E> {

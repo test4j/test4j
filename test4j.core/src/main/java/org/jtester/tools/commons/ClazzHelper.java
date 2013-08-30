@@ -1,6 +1,6 @@
 package org.jtester.tools.commons;
 
-import static ext.jtester.apache.commons.io.IOUtils.closeQuietly;
+import static ext.test4j.apache.commons.io.IOUtils.closeQuietly;
 import static java.lang.reflect.Modifier.isStatic;
 
 import java.io.ByteArrayOutputStream;
@@ -28,9 +28,10 @@ import org.jtester.module.JTesterException;
 import org.jtester.tools.datagen.ConstructorArgsGenerator;
 import org.jtester.tools.exception.NewInstanceException;
 import org.jtester.tools.reflector.MethodAccessor;
+import org.test4j.tools.commons.PrimitiveHelper;
 
-import ext.jtester.apache.commons.io.IOUtils;
-import ext.jtester.objenesis.ObjenesisHelper;
+import ext.test4j.apache.commons.io.IOUtils;
+import ext.test4j.objenesis.ObjenesisHelper;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class ClazzHelper {

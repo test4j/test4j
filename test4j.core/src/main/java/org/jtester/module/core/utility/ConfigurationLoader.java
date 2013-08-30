@@ -6,7 +6,7 @@ import org.jtester.module.JTesterException;
 import org.jtester.tools.commons.ConfigHelper;
 import org.jtester.tools.commons.PropertiesReader;
 
-import ext.jtester.apache.commons.lang.text.StrSubstitutor;
+import ext.test4j.apache.commons.lang.text.StrSubstitutor;
 
 /**
  * jtester配置文件加载器<br>

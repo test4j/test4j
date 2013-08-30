@@ -12,7 +12,6 @@ import org.jtester.module.spring.annotations.SpringBeanRemote;
 import org.jtester.module.spring.annotations.SpringBeanRemote.SpringBeanRemoteType;
 import org.jtester.tools.commons.AnnotationHelper;
 import org.jtester.tools.commons.FieldHelper;
-import org.jtester.tools.commons.StringHelper;
 import org.springframework.beans.MutablePropertyValues;
 import org.springframework.beans.factory.config.RuntimeBeanReference;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
@@ -21,6 +20,7 @@ import org.springframework.beans.factory.support.RootBeanDefinition;
 import org.springframework.context.ApplicationContext;
 import org.springframework.remoting.caucho.HessianServiceExporter;
 import org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter;
+import org.test4j.tools.commons.StringHelper;
 
 /**
  * Spring httpInvoker动态注册器<br>

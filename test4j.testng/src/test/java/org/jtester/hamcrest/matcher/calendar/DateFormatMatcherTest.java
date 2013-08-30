@@ -7,7 +7,7 @@ import org.jtester.testng.JTester;
 import org.jtester.tools.commons.DateUtilTest;
 import org.testng.annotations.Test;
 
-import ext.jtester.hamcrest.MatcherAssert;
+import ext.test4j.hamcrest.MatcherAssert;
 
 @Test(groups = { "jtester", "assertion" })
 @SuppressWarnings("unchecked")

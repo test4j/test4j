@@ -29,7 +29,7 @@ import org.jtester.module.database.environment.types.SqlServerEnvironment;
 import org.jtester.module.database.utility.DataSourceType;
 import org.jtester.tools.commons.ConfigHelper;
 import org.jtester.tools.commons.ResourceHelper;
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 
 public final class DBEnvironmentFactory {
 	private static Map<String, DBEnvironment> environments = new HashMap<String, DBEnvironment>();

@@ -3,7 +3,7 @@ package org.jtester.hamcrest.iassert.common.intf;
 import org.jtester.hamcrest.matcher.modes.ItemsMode;
 import org.jtester.hamcrest.matcher.modes.MatchMode;
 
-import ext.jtester.hamcrest.Matcher;
+import ext.test4j.hamcrest.Matcher;
 
 /**
  * 数组或collection类型的对象容器断言

@@ -7,8 +7,8 @@ import org.jtester.junit.JTester;
 import org.junit.Before;
 import org.junit.Test;
 
-import ext.jtester.hamcrest.MatcherAssert;
-import ext.jtester.hamcrest.core.IsEqual;
+import ext.test4j.hamcrest.MatcherAssert;
+import ext.test4j.hamcrest.core.IsEqual;
 
 public class JmockModuleTest implements JTester {
     @Mocked

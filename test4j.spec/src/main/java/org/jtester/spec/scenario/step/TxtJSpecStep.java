@@ -8,7 +8,7 @@ import java.util.Map;
 import org.jtester.spec.inner.IScenarioStep;
 import org.jtester.spec.scenario.step.txt.LineType;
 import org.jtester.spec.scenario.step.txt.ParameterParser2;
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 
 @SuppressWarnings("serial")
 public class TxtJSpecStep extends JSpecStep {

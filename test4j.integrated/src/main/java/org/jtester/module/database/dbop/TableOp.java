@@ -14,9 +14,9 @@ import org.jtester.json.JSON;
 import org.jtester.module.ICore.DataMap;
 import org.jtester.module.database.utility.DBHelper;
 import org.jtester.module.database.utility.SqlRunner;
-import org.jtester.tools.commons.StringHelper;
 import org.jtester.tools.datagen.DataSet;
 import org.jtester.tools.datagen.EmptyDataSet;
+import org.test4j.tools.commons.StringHelper;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class TableOp implements ITableOp {

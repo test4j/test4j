@@ -15,9 +15,9 @@ import org.jtester.module.database.environment.normalise.TypeNormaliser;
 import org.jtester.module.database.environment.normalise.TypeNormaliserFactory;
 //import org.jtester.module.dbfit.db.model.DbParameterAccessor;
 import org.jtester.tools.commons.ClazzHelper;
-import org.jtester.tools.commons.StringHelper;
 import org.jtester.tools.exception.NoSuchFieldRuntimeException;
 import org.jtester.tools.reflector.FieldAccessor;
+import org.test4j.tools.commons.StringHelper;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public final class DBHelper {

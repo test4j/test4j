@@ -8,7 +8,7 @@ import org.jtester.spec.annotations.StoryFile;
 import org.jtester.spec.annotations.StoryType;
 import org.jtester.spec.inner.IScenario;
 import org.jtester.spec.scenario.JSpecScenario;
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 
 /**
  * 从本地classpath读取jspec用例描述信息

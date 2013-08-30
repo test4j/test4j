@@ -9,11 +9,11 @@ import org.jtester.hamcrest.matcher.array.ListEveryItemMatcher;
 import org.jtester.hamcrest.matcher.modes.ItemsMode;
 import org.jtester.hamcrest.matcher.modes.MatchMode;
 
-import ext.jtester.hamcrest.Matcher;
-import ext.jtester.hamcrest.collection.IsArrayContaining;
-import ext.jtester.hamcrest.core.AllOf;
-import ext.jtester.hamcrest.core.AnyOf;
-import ext.jtester.hamcrest.core.IsCollectionContaining;
+import ext.test4j.hamcrest.Matcher;
+import ext.test4j.hamcrest.collection.IsArrayContaining;
+import ext.test4j.hamcrest.core.AllOf;
+import ext.test4j.hamcrest.core.AnyOf;
+import ext.test4j.hamcrest.core.IsCollectionContaining;
 
 @SuppressWarnings({ "rawtypes" })
 public class ListHasItemsAssert<T, E extends IAssert> extends BaseAssert<T, E> implements IListHasItemsAssert<E> {

@@ -4,7 +4,7 @@ import org.jtester.testng.JTester;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-import ext.jtester.hamcrest.MatcherAssert;
+import ext.test4j.hamcrest.MatcherAssert;
 
 @Test(groups = { "jtester", "assertion" })
 public class StringEqualMatcherTest extends JTester {

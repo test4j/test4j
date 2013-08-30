@@ -10,7 +10,7 @@ import org.jtester.fortest.beans.User;
 import org.jtester.junit.JTester;
 import org.junit.Test;
 
-import ext.jtester.hamcrest.MatcherAssert;
+import ext.test4j.hamcrest.MatcherAssert;
 
 public class PropertiesArrayRefEqMatcherTest implements JTester {
     PropertiesArrayRefEqMatcher matcher = new PropertiesArrayRefEqMatcher(new String[] { "first", "last" },

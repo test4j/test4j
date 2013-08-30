@@ -3,7 +3,7 @@ package org.jtester.hamcrest.matcher.calendar;
 import java.util.Calendar;
 import java.util.Date;
 
-import ext.jtester.hamcrest.core.IsEqual;
+import ext.test4j.hamcrest.core.IsEqual;
 
 public class DateEqualMatcher extends IsEqual<Date> {
 

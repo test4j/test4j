@@ -1,6 +1,6 @@
 package org.jtester.tools.commons;
 
-import static ext.jtester.apache.commons.io.IOUtils.closeQuietly;
+import static ext.test4j.apache.commons.io.IOUtils.closeQuietly;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -23,8 +23,9 @@ import org.jtester.module.JTesterException;
 import org.jtester.module.core.utility.MessageHelper;
 import org.jtester.tools.cpdetector.CodepageDetectorProxy;
 import org.jtester.tools.cpdetector.JChardetFacade;
+import org.test4j.tools.commons.StringHelper;
 
-import ext.jtester.apache.commons.io.IOUtils;
+import ext.test4j.apache.commons.io.IOUtils;
 
 @SuppressWarnings("rawtypes")
 public class ResourceHelper {

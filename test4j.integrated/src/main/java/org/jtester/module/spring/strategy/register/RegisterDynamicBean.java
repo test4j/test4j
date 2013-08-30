@@ -8,10 +8,10 @@ import org.jtester.module.spring.exception.FindBeanImplClassException;
 import org.jtester.module.spring.strategy.ImplementorFinder;
 import org.jtester.module.spring.strategy.register.types.PropertiesRegister;
 import org.jtester.tools.commons.AnnotationHelper;
-import org.jtester.tools.commons.StringHelper;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.RootBeanDefinition;
+import org.test4j.tools.commons.StringHelper;
 
 /**
  * 动态配置spring context的bean @AutoBeanInject<br>

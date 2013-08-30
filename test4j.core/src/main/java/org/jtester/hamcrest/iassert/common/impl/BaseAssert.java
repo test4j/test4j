@@ -10,17 +10,17 @@ import org.jtester.hamcrest.iassert.object.intf.IStringAssert;
 import org.jtester.hamcrest.matcher.clazz.ClassAssignFromMatcher;
 import org.jtester.tools.commons.ListHelper;
 
-import ext.jtester.hamcrest.Matcher;
-import ext.jtester.hamcrest.collection.IsIn;
-import ext.jtester.hamcrest.core.AllOf;
-import ext.jtester.hamcrest.core.AnyOf;
-import ext.jtester.hamcrest.core.Is;
-import ext.jtester.hamcrest.core.IsAnything;
-import ext.jtester.hamcrest.core.IsEqual;
-import ext.jtester.hamcrest.core.IsNot;
-import ext.jtester.hamcrest.core.IsNull;
-import ext.jtester.hamcrest.core.IsSame;
-import ext.jtester.hamcrest.object.HasToString;
+import ext.test4j.hamcrest.Matcher;
+import ext.test4j.hamcrest.collection.IsIn;
+import ext.test4j.hamcrest.core.AllOf;
+import ext.test4j.hamcrest.core.AnyOf;
+import ext.test4j.hamcrest.core.Is;
+import ext.test4j.hamcrest.core.IsAnything;
+import ext.test4j.hamcrest.core.IsEqual;
+import ext.test4j.hamcrest.core.IsNot;
+import ext.test4j.hamcrest.core.IsNull;
+import ext.test4j.hamcrest.core.IsSame;
+import ext.test4j.hamcrest.object.HasToString;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class BaseAssert<T, E extends IAssert> extends Assert<T, E> implements IAssert<T, E>, IBaseAssert<T, E> {

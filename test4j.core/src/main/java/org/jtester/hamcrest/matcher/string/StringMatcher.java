@@ -1,7 +1,7 @@
 package org.jtester.hamcrest.matcher.string;
 
-import ext.jtester.hamcrest.Description;
-import ext.jtester.hamcrest.TypeSafeMatcher;
+import ext.test4j.hamcrest.Description;
+import ext.test4j.hamcrest.TypeSafeMatcher;
 
 public abstract class StringMatcher extends TypeSafeMatcher<String> {
 	protected StringMode[] modes = null;

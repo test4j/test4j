@@ -10,7 +10,7 @@ import org.jtester.module.JTesterException;
 import org.jtester.module.core.Module;
 import org.jtester.tools.commons.ClazzHelper;
 import org.jtester.tools.commons.ConfigHelper;
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 
 /**
  * A class for loading jTester modules.

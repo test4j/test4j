@@ -2,8 +2,9 @@ package org.jtester.module.jmockit;
 
 import mockit.Mocked;
 
-import ext.jtester.hamcrest.MatcherAssert;
-import ext.jtester.hamcrest.core.IsEqual;
+import ext.test4j.hamcrest.MatcherAssert;
+import ext.test4j.hamcrest.core.IsEqual;
+
 import org.jtester.fortest.beans.ISpeak;
 import org.jtester.testng.JTester;
 import org.testng.annotations.BeforeMethod;

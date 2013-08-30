@@ -14,7 +14,7 @@ import org.jtester.module.ICore.DataMap;
 import org.jtester.tools.commons.ListHelper;
 import org.jtester.tools.datagen.DataSet;
 
-import ext.jtester.hamcrest.Matcher;
+import ext.test4j.hamcrest.Matcher;
 
 @SuppressWarnings("rawtypes")
 public class ListAssert<T, E extends IAssert> extends SizeAssert<T, E> implements IAssert<T, E>, IListAssert<T, E> {

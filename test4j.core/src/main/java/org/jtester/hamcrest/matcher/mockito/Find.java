@@ -7,7 +7,7 @@ package org.jtester.hamcrest.matcher.mockito;
 import java.io.Serializable;
 import java.util.regex.Pattern;
 
-import ext.jtester.hamcrest.Description;
+import ext.test4j.hamcrest.Description;
 
 public class Find extends ArgumentMatcher<String> implements Serializable {
 

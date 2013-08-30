@@ -6,7 +6,7 @@ package org.jtester.hamcrest.matcher.mockito;
 
 import java.io.Serializable;
 
-import ext.jtester.hamcrest.Description;
+import ext.test4j.hamcrest.Description;
 
 
 public class EqualsWithDelta extends ArgumentMatcher<Number> implements Serializable {

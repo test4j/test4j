@@ -10,6 +10,7 @@ import org.jtester.module.JTesterException;
 import org.jtester.module.core.utility.IPropItem;
 import org.jtester.module.core.utility.ConfigurationLoader;
 import org.jtester.module.core.utility.MessageHelper;
+import org.test4j.tools.commons.StringHelper;
 
 /**
  * jtester配置文件工具类

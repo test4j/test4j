@@ -16,7 +16,7 @@ import org.jtester.json.decoder.base.DecoderFactory;
 import org.jtester.json.helper.JSONArray;
 import org.jtester.json.helper.JSONMap;
 import org.jtester.json.helper.JSONObject;
-import org.jtester.tools.commons.PrimitiveHelper;
+import org.test4j.tools.commons.PrimitiveHelper;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class ArrayDecoder extends BaseDecoder {

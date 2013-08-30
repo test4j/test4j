@@ -8,6 +8,7 @@ import org.jtester.hamcrest.matcher.property.reflection.EqMode;
 import org.jtester.junit.JTester;
 import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
+import org.test4j.tools.commons.ArrayHelper;
 
 @SuppressWarnings({ "rawtypes", "unchecked", "serial" })
 public class ListHelperTest implements JTester {

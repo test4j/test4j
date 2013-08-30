@@ -1,6 +1,6 @@
 package org.jtester.hamcrest.matcher.property.report;
 
-import static ext.jtester.apache.commons.lang.ClassUtils.getShortClassName;
+import static ext.test4j.apache.commons.lang.ClassUtils.getShortClassName;
 import static java.lang.reflect.Modifier.isStatic;
 import static java.lang.reflect.Modifier.isTransient;
 import static org.jtester.hamcrest.matcher.property.reflection.HibernateUtil.getUnproxiedValue;

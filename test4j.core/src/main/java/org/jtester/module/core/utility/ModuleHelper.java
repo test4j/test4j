@@ -1,6 +1,6 @@
 package org.jtester.module.core.utility;
 
-import static ext.jtester.apache.commons.lang.ClassUtils.getShortClassName;
+import static ext.test4j.apache.commons.lang.ClassUtils.getShortClassName;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;

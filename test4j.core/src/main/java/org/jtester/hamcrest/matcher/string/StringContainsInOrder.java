@@ -1,9 +1,9 @@
 package org.jtester.hamcrest.matcher.string;
 
-import ext.jtester.hamcrest.Description;
-import ext.jtester.hamcrest.Factory;
-import ext.jtester.hamcrest.Matcher;
-import ext.jtester.hamcrest.TypeSafeMatcher;
+import ext.test4j.hamcrest.Description;
+import ext.test4j.hamcrest.Factory;
+import ext.test4j.hamcrest.Matcher;
+import ext.test4j.hamcrest.TypeSafeMatcher;
 
 public class StringContainsInOrder extends TypeSafeMatcher<String> {
 	private final Iterable<String> substrings;

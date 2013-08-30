@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-import org.jtester.tools.commons.ArrayHelper;
+import org.test4j.tools.commons.ArrayHelper;
 
 public class DataProviderIterator<T> implements Iterator<T[]> {
     private List<T[]>     datas = new ArrayList<T[]>();

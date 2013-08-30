@@ -14,6 +14,7 @@ import java.util.Set;
 import org.jtester.tools.exception.NoSuchMethodRuntimeException;
 import org.jtester.tools.reflector.MethodAccessor;
 import org.jtester.tools.reflector.ReflectionException;
+import org.test4j.tools.commons.PrimitiveHelper;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public final class MethodHelper {

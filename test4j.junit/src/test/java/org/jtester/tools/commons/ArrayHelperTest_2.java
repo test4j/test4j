@@ -10,6 +10,7 @@ import org.jtester.fortest.beans.User;
 import org.jtester.junit.JTester;
 import org.jtester.junit.annotations.DataFrom;
 import org.junit.Test;
+import org.test4j.tools.commons.ArrayHelper;
 
 @SuppressWarnings({ "rawtypes" })
 public class ArrayHelperTest_2 implements JTester {

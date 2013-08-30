@@ -1,8 +1,8 @@
 package org.jtester.hamcrest.matcher.property.reflection;
 
-import static ext.jtester.hamcrest.MatcherAssert.assertThat;
-import static ext.jtester.hamcrest.core.AllOf.allOf;
-import static ext.jtester.hamcrest.core.IsEqual.equalTo;
+import static ext.test4j.hamcrest.MatcherAssert.assertThat;
+import static ext.test4j.hamcrest.core.AllOf.allOf;
+import static ext.test4j.hamcrest.core.IsEqual.equalTo;
 
 import java.util.ArrayList;
 import java.util.Arrays;

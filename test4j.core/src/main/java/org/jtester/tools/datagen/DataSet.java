@@ -6,8 +6,8 @@ import java.util.List;
 import org.jtester.json.JSON;
 import org.jtester.module.ICore.DataMap;
 import org.jtester.module.core.ICoreInitial;
-import org.jtester.tools.commons.ArrayHelper;
 import org.jtester.tools.commons.ExceptionWrapper;
+import org.test4j.tools.commons.ArrayHelper;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public abstract class DataSet {

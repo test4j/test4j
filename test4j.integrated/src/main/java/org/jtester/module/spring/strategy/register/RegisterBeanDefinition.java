@@ -11,9 +11,9 @@ import org.jtester.module.spring.annotations.AutoBeanInject.BeanMap;
 import org.jtester.module.spring.exception.FindBeanImplClassException;
 import org.jtester.module.spring.strategy.ImplementorFinder;
 import org.jtester.tools.commons.ClazzHelper;
-import org.jtester.tools.commons.StringHelper;
 import org.springframework.beans.factory.support.AbstractBeanDefinition;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
+import org.test4j.tools.commons.StringHelper;
 
 /**
  * spring bean定义

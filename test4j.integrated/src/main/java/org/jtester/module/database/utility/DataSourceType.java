@@ -2,7 +2,7 @@ package org.jtester.module.database.utility;
 
 import org.jtester.module.database.exception.UnConfigDataBaseTypeException;
 import org.jtester.tools.commons.ConfigHelper;
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 
 public enum DataSourceType {
 	/**

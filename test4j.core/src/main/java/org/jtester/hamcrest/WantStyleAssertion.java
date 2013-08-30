@@ -42,7 +42,7 @@ import org.jtester.hamcrest.iassert.object.intf.INumberAssert;
 import org.jtester.hamcrest.iassert.object.intf.IObjectAssert;
 import org.jtester.hamcrest.iassert.object.intf.IShortAssert;
 import org.jtester.hamcrest.iassert.object.intf.IStringAssert;
-import org.jtester.tools.commons.ArrayHelper;
+import org.test4j.tools.commons.ArrayHelper;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class WantStyleAssertion {

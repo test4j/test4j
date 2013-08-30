@@ -13,7 +13,7 @@ import org.jtester.spec.inner.IScenarioStep;
 import org.jtester.spec.inner.ISpecMethod.SpecMethodID;
 import org.jtester.spec.inner.StepType;
 import org.jtester.spec.util.ParaConverter;
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 
 @SuppressWarnings("serial")
 public abstract class JSpecStep implements IScenarioStep, Serializable {

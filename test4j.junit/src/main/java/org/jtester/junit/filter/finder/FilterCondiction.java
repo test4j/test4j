@@ -7,7 +7,7 @@ import java.util.List;
 import org.jtester.junit.annotations.AnnotationDefaultValue;
 import org.jtester.junit.annotations.ClazFinder;
 import org.jtester.junit.filter.SuiteType;
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 
 /**
  * 在classpath中查找测试的过滤条件

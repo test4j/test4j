@@ -1,6 +1,6 @@
 package org.jtester.hamcrest.iassert.common.intf;
 
-import ext.jtester.hamcrest.Matcher;
+import ext.test4j.hamcrest.Matcher;
 
 /**
  * jtester断言超基类接口

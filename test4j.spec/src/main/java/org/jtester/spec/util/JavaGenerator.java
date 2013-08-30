@@ -7,7 +7,7 @@ import java.util.Set;
 import org.jtester.spec.inner.IScenarioStep;
 import org.jtester.spec.scenario.JSpecScenario;
 import org.jtester.spec.scenario.step.StepMethod;
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.tools.commons.StringHelper;
 
 /**
  * java代码生成器
