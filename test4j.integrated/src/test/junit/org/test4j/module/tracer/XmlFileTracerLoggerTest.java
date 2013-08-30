@@ -8,10 +8,8 @@ import java.io.Writer;
 import mockit.Mock;
 
 import org.junit.Test;
+import org.test4j.hamcrest.matcher.string.StringMode;
 import org.test4j.junit.Test4J;
-import org.test4j.module.tracer.TracerLogger;
-import org.test4j.module.tracer.TracerServiceDemo;
-import org.test4j.module.tracer.XmlFileTracerLogger;
 import org.test4j.tools.commons.ResourceHelper;
 
 public class XmlFileTracerLoggerTest implements Test4J {
@@ -37,6 +35,6 @@ public class XmlFileTracerLoggerTest implements Test4J {
         log.close();
         String xml = writer.toString();
         String expected = ResourceHelper.readFromFile(XmlFileTracerLoggerTest.class, "XmlFileTracerLoggerTest.xml");
-        want.string(xml).isEqualTo(expected);
+        want.string(xml).isEqualTo(expected, StringMode.IgnoreSpace);
     }
 }
