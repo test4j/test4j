@@ -2,9 +2,9 @@ package org.jtester.spec.spring;
 
 import java.util.Map;
 
-import org.jtester.module.spring.annotations.SpringContext;
-import org.jtester.module.spring.strategy.JTesterSpringContext;
-import org.jtester.module.spring.utility.SpringModuleHelper;
+import org.test4j.module.spring.annotations.SpringContext;
+import org.test4j.module.spring.strategy.JTesterSpringContext;
+import org.test4j.module.spring.utility.SpringModuleHelper;
 import org.test4j.testng.JSpec;
 import org.testng.annotations.BeforeMethod;
 

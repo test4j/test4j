@@ -2,11 +2,11 @@ package org.jtester.spec.spring;
 
 import java.util.List;
 
-import org.jtester.module.spring.annotations.SpringBeanByName;
 import org.jtester.spec.annotations.StoryFile;
 import org.jtester.spec.annotations.StorySource;
 import org.jtester.spec.annotations.StoryType;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.spec.annotations.Given;
 import org.test4j.spec.annotations.Named;
 import org.test4j.spec.annotations.Then;
