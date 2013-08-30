@@ -1,10 +1,10 @@
-package org.jtester.junit.filter.finder;
+package org.test4j.junit.filter.finder;
 
 import java.util.Collection;
 
-import org.jtester.junit.annotations.Group;
-import org.jtester.junit.filter.acceptor.TestAcceptor;
-import org.jtester.junit.filter.acceptor.TestAcceptor.AllTestAcceptor;
+import org.test4j.junit.annotations.Group;
+import org.test4j.junit.filter.acceptor.TestAcceptor;
+import org.test4j.junit.filter.acceptor.TestAcceptor.AllTestAcceptor;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,11 +1,11 @@
-package org.jtester.module.database.dbop;
+package org.test4j.module.database.dbop;
 
-import org.jtester.junit.JTester;
-import org.jtester.junit.annotations.Group;
-import org.jtester.module.database.IDatabase;
+import org.test4j.junit.Test4J;
+import org.test4j.junit.annotations.Group;
+import org.test4j.module.database.IDatabase;
 import org.junit.Test;
 
-public class TableOpTest extends JTester implements IDatabase {
+public class TableOpTest extends Test4J implements IDatabase {
 
 	@Test
 	@Group("oracle")

@@ -1,4 +1,4 @@
-|org.jtester.module.dbfit.fixture.dto.DtoCheckFixture|
+|org.test4j.module.dbfit.fixture.dto.DtoCheckFixture|
 |single dto|
 |name|is male|
 |my name|true|

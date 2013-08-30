@@ -1,9 +1,9 @@
-package mockit.jtester;
+package mockit.test4j;
 
 import mockit.Mock;
 import mockit.MockClass;
 
-import org.jtester.junit.JTesterRunner;
+import org.test4j.junit.Test4JRunner;
 import org.junit.internal.builders.JUnit4Builder;
 import org.junit.runner.Runner;
 
@@ -11,6 +11,6 @@ import org.junit.runner.Runner;
 public class JUnit4BuilderDecorator {
 	@Mock
 	public Runner runnerForClass(Class<?> testClass) throws Throwable {
-		return new JTesterRunner(testClass);
+		return new Test4JRunner(testClass);
 	}
 }

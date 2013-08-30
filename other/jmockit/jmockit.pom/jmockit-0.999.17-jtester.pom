@@ -4,7 +4,7 @@
 
 	<groupId>com.googlecode.jmockit</groupId>
 	<artifactId>jmockit</artifactId>
-	<version>0.999.17-jtester</version>
+	<version>0.999.17-test4j</version>
 	<packaging>jar</packaging>
 	<name>Main</name>
 	<description>

@@ -1,8 +1,8 @@
 |connect|
 
-|clean table|jtester_user|
+|clean table|test4j_user|
 
-|insert|jtester_user|
+|insert|test4j_user|
 |id|is_deleted|
 |1|false|
 |2|false|

@@ -1,10 +1,10 @@
-|org.jtester.module.dbfit.fixture.DatabaseFixture|
+|org.test4j.module.dbfit.fixture.DatabaseFixture|
 |connect|
 
 |clean table|tdd_user|
 
-|org.jtester.module.dbfit.fixture.dto.TestedSpringFixture2|
-|insertUser|org.jtester.fortest.beans.User|
+|org.test4j.module.dbfit.fixture.dto.TestedSpringFixture2|
+|insertUser|org.test4j.fortest.beans.User|
 |first|last|
 |my first name ddd|my last name dd|
 

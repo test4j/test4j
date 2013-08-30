@@ -126,9 +126,9 @@ public final class JUnit4TestRunnerDecorator extends TestRunnerDecorator {
 			/** modified by davey.wu **/
 			String frameworkMethodName = it.getClass().getName();
 			/** 不判断整个类名，是尽量避免代码package重构带来的影响 **/
-			boolean isJTesterFrameworkMethod = frameworkMethodName.startsWith("org.jtester.junit.")
+			boolean istest4jFrameworkMethod = frameworkMethodName.startsWith("org.test4j.junit.")
 					&& frameworkMethodName.endsWith(".FrameworkMethodWithParameters");
-			if (!isJTesterFrameworkMethod) {
+			if (!istest4jFrameworkMethod) {
 				mockParameters = createInstancesForMockParameters(target, testMethod, parameters, savePoint);
 			}
 			/** end modified by davey.wu **/

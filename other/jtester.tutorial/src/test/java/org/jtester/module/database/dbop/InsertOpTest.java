@@ -1,13 +1,13 @@
-package org.jtester.module.database.dbop;
+package org.test4j.module.database.dbop;
 
-import org.jtester.junit.JTester;
-import org.jtester.junit.annotations.Group;
-import org.jtester.module.database.IDatabase;
-import org.jtester.tools.commons.DateHelper;
+import org.test4j.junit.Test4J;
+import org.test4j.junit.annotations.Group;
+import org.test4j.module.database.IDatabase;
+import org.test4j.tools.commons.DateHelper;
 import org.junit.Test;
 
 @SuppressWarnings({ "serial" })
-public class InsertOpTest extends JTester implements IDatabase {
+public class InsertOpTest extends Test4J implements IDatabase {
 	@Test
 	@Group("oracle")
 	public void testInsert_OracleDate() {

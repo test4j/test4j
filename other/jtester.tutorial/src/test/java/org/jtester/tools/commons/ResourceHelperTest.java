@@ -1,15 +1,15 @@
-package org.jtester.tools.commons;
+package org.test4j.tools.commons;
 
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.net.URL;
 
-import org.jtester.junit.JTester;
-import org.jtester.junit.annotations.DataFrom;
-import org.jtester.junit.annotations.Group;
+import org.test4j.junit.Test4J;
+import org.test4j.junit.annotations.DataFrom;
+import org.test4j.junit.annotations.Group;
 import org.junit.Test;
 @Group("common")
-public class ResourceHelperTest extends JTester {
+public class ResourceHelperTest extends Test4J {
 	@Test
 	@DataFrom("dataForIsJarFile")
 	public void testIsJarFile(String file, Boolean isJar) throws Exception {

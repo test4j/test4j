@@ -1,8 +1,8 @@
-|!-org.jtester.module.dbfit.fixture.DatabaseFixture-!|
+|!-org.test4j.module.dbfit.fixture.DatabaseFixture-!|
 |connect|
 
-|clean table|jtester_user|
-|Insert|jtester_user|
+|clean table|test4j_user|
+|Insert|test4j_user|
 |id|is_deleted|
 |1|false|
 |2|false|

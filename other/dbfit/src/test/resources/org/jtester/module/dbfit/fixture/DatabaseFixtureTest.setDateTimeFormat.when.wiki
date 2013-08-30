@@ -1,13 +1,13 @@
 |connect|
 
-|clean table|jtester_user|
+|clean table|test4j_user|
 
-|insert|jtester_user|
+|insert|test4j_user|
 |id|create_date|modified_date|
 |1|<<date|@{datetime}|
 
 |commit|
 
-|query|select * from jtester_user|
+|query|select * from test4j_user|
 |create_date|modified_date|
 |<<date|@{datetime}|

@@ -1,4 +1,4 @@
-|org.jtester.module.dbfit.fixture.dto.TestedDtoPropFixture|
+|org.test4j.module.dbfit.fixture.dto.TestedDtoPropFixture|
 |testMethod_Integer|java.lang.Integer|
 |>>value|
 |3|

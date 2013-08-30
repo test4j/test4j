@@ -1,6 +1,6 @@
 GRANT ALL PRIVILEGES ON *.* TO daruiwu@10.16.47.1;
 
-|connect from file||org/jtester/module/dbfit/db.properties|
+|connect from file||org/test4j/module/dbfit/db.properties|
 
 |clean table|tdd_user|
 
@@ -14,7 +14,7 @@ GRANT ALL PRIVILEGES ON *.* TO daruiwu@10.16.47.1;
 
 |commit|
 
-|connect from file|jtester_another|org/jtester/module/dbfit/db.properties|
+|connect from file|test4j_another|org/test4j/module/dbfit/db.properties|
 
 |clean table|tdd_user|
 
@@ -29,7 +29,7 @@ GRANT ALL PRIVILEGES ON *.* TO daruiwu@10.16.47.1;
 |2|
 
 
-|connect from file|jtester_another|
+|connect from file|test4j_another|
 
 |clean table|tdd_user|
 

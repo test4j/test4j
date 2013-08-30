@@ -1,12 +1,12 @@
-package org.jtester.junit.filter.iterator;
+package org.test4j.junit.filter.iterator;
 
 import static org.junit.Assert.*;
 
 import java.io.File;
 import java.util.Iterator;
 
-import org.jtester.junit.annotations.Group;
-import org.jtester.junit.filter.iterator.JarFileIterator;
+import org.test4j.junit.annotations.Group;
+import org.test4j.junit.filter.iterator.JarFileIterator;
 import org.junit.Test;
 @Group("common")
 public class JarFileIteratorTest {

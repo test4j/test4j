@@ -1,4 +1,4 @@
-|!-org.jtester.module.dbfit.fixture.DatabaseFixture-!|
+|!-org.test4j.module.dbfit.fixture.DatabaseFixture-!|
 
 |connect|
 |clean table|tdd_user|

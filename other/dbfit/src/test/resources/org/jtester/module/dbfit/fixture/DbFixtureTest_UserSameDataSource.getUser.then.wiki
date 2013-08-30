@@ -1,5 +1,5 @@
 |connect|
 
-|query|select count(*) as count from jtester_user where name='new user'|
+|query|select count(*) as count from test4j_user where name='new user'|
 |count|
 |1|

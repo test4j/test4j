@@ -16,7 +16,7 @@ import mockit.internal.annotations.ClassStubbing;
 import mockit.internal.annotations.MockClassSetup;
 import mockit.internal.expectations.mocking.MockedBridge;
 import mockit.internal.util.Utilities;
-import mockit.jtester.JUnit4BuilderDecorator;
+import mockit.test4j.JUnit4BuilderDecorator;
 
 final class JMockitInitialization {
 	private static final String[] NO_STUBBING_FILTERS = {};

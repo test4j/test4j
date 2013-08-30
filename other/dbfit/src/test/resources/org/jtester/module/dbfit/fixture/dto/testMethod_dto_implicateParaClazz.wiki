@@ -1,4 +1,4 @@
-|org.jtester.module.dbfit.fixture.dto.TestedDtoPropFixture|
+|org.test4j.module.dbfit.fixture.dto.TestedDtoPropFixture|
 |testMethod_dto_implicateParaClazz|
 |first name|age|addresses|map|my list|
 |a|34|wenyi,wener|key1:value;key2:value|add;ddd|

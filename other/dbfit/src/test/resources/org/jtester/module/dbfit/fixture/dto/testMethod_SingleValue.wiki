@@ -1,4 +1,4 @@
-|org.jtester.module.dbfit.fixture.dto.TestedDtoPropFixture|
+|org.test4j.module.dbfit.fixture.dto.TestedDtoPropFixture|
 |testMethod_SingleValue|java.util.Map|
 |>>my map|
 |key1:value;key2:value|
