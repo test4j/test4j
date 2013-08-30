@@ -1,21 +1,21 @@
-package org.jtester.module.dbfit;
+package org.test4j.module.dbfit;
 
-import org.jtester.fortest.hibernate.User;
-import org.jtester.fortest.hibernate.UserService;
-import org.jtester.module.dbfit.annotations.DbFit;
-import org.jtester.module.dbfit.annotations.FitVar;
-import org.jtester.module.spring.annotations.SpringContext;
-import org.jtester.module.spring.annotations.SpringBeanByType;
-import org.jtester.testng.JTester;
+import org.test4j.fortest.hibernate.User;
+import org.test4j.fortest.hibernate.UserService;
+import org.test4j.module.dbfit.annotations.DbFit;
+import org.test4j.module.dbfit.annotations.FitVar;
+import org.test4j.module.spring.annotations.SpringContext;
+import org.test4j.module.spring.annotations.SpringBeanByType;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
-@Test(groups = { "JTester", "hibernate" })
-@SpringContext({ "classpath:/org/jtester/fortest/hibernate/project.xml" })
-public class DbFitModuleTest extends JTester {
+@Test(groups = { "test4j", "hibernate" })
+@SpringContext({ "classpath:/org/test4j/fortest/hibernate/project.xml" })
+public class DbFitModuleTest extends Test4J {
 	@SpringBeanByType
 	private UserService userService;
 
-	@DbFit(when = "org/jtester/module/core/DbFitModuleTest.getUser.wiki")
+	@DbFit(when = "org/test4j/module/core/DbFitModuleTest.getUser.wiki")
 	public void getUser() {
 		User user1 = userService.getUser(1);
 		want.object(user1).notNull();

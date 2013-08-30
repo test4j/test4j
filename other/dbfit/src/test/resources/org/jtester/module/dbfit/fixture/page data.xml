@@ -1,5 +1,5 @@
 <fitnesse.wiki.PageData>
-  <content>|!-org.jtester.dbfit.DatabaseFixture-!|&#xd;
+  <content>|!-org.test4j.dbfit.DatabaseFixture-!|&#xd;
 |connect|&#xd;
 &#xd;
 |Query| select &apos;test&apos; as x|&#xd;

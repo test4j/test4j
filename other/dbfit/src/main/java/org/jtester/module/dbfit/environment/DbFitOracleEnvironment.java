@@ -1,4 +1,4 @@
-package org.jtester.module.dbfit.environment;
+package org.test4j.module.dbfit.environment;
 
 import java.io.InputStream;
 import java.sql.CallableStatement;
@@ -10,18 +10,18 @@ import java.util.regex.Pattern;
 
 import oracle.jdbc.rowset.OracleCachedRowSet;
 
-import org.jtester.module.database.environment.DBEnvironment;
-import org.jtester.module.database.environment.normalise.NameNormaliser;
-import org.jtester.module.database.environment.normalise.TypeNormaliser;
-import org.jtester.module.database.environment.normalise.TypeNormaliserFactory;
-import org.jtester.module.database.environment.typesmap.OracleTypeMap;
-import org.jtester.module.database.utility.DBHelper;
-import org.jtester.module.dbfit.model.DbParameterAccessor;
-import org.jtester.module.dbfit.model.OracleBlobTypeAdapter;
-import org.jtester.module.dbfit.model.SqlTimestampParseDelegate;
-import org.jtester.tools.commons.ResourceHelper;
+import org.test4j.module.database.environment.DBEnvironment;
+import org.test4j.module.database.environment.normalise.NameNormaliser;
+import org.test4j.module.database.environment.normalise.TypeNormaliser;
+import org.test4j.module.database.environment.normalise.TypeNormaliserFactory;
+import org.test4j.module.database.environment.typesmap.OracleTypeMap;
+import org.test4j.module.database.utility.DBHelper;
+import org.test4j.module.dbfit.model.DbParameterAccessor;
+import org.test4j.module.dbfit.model.OracleBlobTypeAdapter;
+import org.test4j.module.dbfit.model.SqlTimestampParseDelegate;
+import org.test4j.tools.commons.ResourceHelper;
 
-import ext.jtester.apache.commons.io.IOUtils;
+import ext.test4j.apache.commons.io.IOUtils;
 import fit.TypeAdapter;
 
 @SuppressWarnings({ "rawtypes" })

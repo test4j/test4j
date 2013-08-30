@@ -1,38 +1,38 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>org.jtester</groupId>
-	<artifactId>jtester.tutorial</artifactId>
+	<groupId>org.test4j</groupId>
+	<artifactId>test4j.tutorial</artifactId>
 	<packaging>jar</packaging>
 	<version>2.0.0</version>
-	<name>jtester tutorial</name>
+	<name>test4j tutorial</name>
 
 	<properties>
 		<file_encoding>utf-8</file_encoding>
-		<jtester.version>2.0.0</jtester.version>
+		<test4j.version>2.0.0</test4j.version>
 	</properties>
 
 	<dependencies>
 		<dependency>
-			<groupId>com.aliyun.jtester</groupId>
-			<artifactId>jtester.testng</artifactId>
-			<version>${jtester.version}</version>
+			<groupId>com.aliyun.test4j</groupId>
+			<artifactId>test4j.testng</artifactId>
+			<version>${test4j.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.aliyun.jtester</groupId>
-			<artifactId>jtester.junit</artifactId>
-			<version>${jtester.version}</version>
+			<groupId>com.aliyun.test4j</groupId>
+			<artifactId>test4j.junit</artifactId>
+			<version>${test4j.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.aliyun.jtester</groupId>
-			<artifactId>jtester.integrated</artifactId>
-			<version>${jtester.version}</version>
+			<groupId>com.aliyun.test4j</groupId>
+			<artifactId>test4j.integrated</artifactId>
+			<version>${test4j.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.aliyun.jtester</groupId>
-			<artifactId>jtester.integrated</artifactId>
+			<groupId>com.aliyun.test4j</groupId>
+			<artifactId>test4j.integrated</artifactId>
 			<type>test-jar</type>
-			<version>${jtester.version}</version>
+			<version>${test4j.version}</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>

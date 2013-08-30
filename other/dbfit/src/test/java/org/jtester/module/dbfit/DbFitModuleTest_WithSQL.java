@@ -1,14 +1,14 @@
-package org.jtester.module.dbfit;
+package org.test4j.module.dbfit;
 
-import org.jtester.module.dbfit.annotations.DbFit;
-import org.jtester.module.dbfit.annotations.FitVar;
-import org.jtester.testng.JTester;
+import org.test4j.module.dbfit.annotations.DbFit;
+import org.test4j.module.dbfit.annotations.FitVar;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
-@Test(groups = { "jtester" })
-public class DbFitModuleTest_WithSQL extends JTester {
+@Test(groups = { "test4j" })
+public class DbFitModuleTest_WithSQL extends Test4J {
 
-	@DbFit(when = "org/jtester/module/dbfit/data/DbFitModuleTest_WithSQL/testDbFit.when.sql", 
+	@DbFit(when = "org/test4j/module/dbfit/data/DbFitModuleTest_WithSQL/testDbFit.when.sql", 
 			then = "data/DbFitModuleTest_WithSQL/testDbFit.then.wiki")
 	public void testDbFit() {
 	}

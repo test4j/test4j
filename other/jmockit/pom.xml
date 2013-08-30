@@ -48,13 +48,9 @@
 								<echo message="unwar-zip phase" />
 								<delete dir="${basedir}/target/jmockit" />
 								<mkdir dir="${basedir}/target/jmockit" />
-								<unzip
-									src="${jmockit.m2path}/${project.version}/jmockit-${project.version}.jar"
-									dest="${basedir}/target/jmockit/jar">
+								<unzip src="${jmockit.m2path}/${project.version}/jmockit-${project.version}.jar" dest="${basedir}/target/jmockit/jar">
 								</unzip>
-								<unzip
-									src="${jmockit.m2path}/${project.version}/jmockit-${project.version}-sources.jar"
-									dest="${basedir}/target/jmockit/src">
+								<unzip src="${jmockit.m2path}/${project.version}/jmockit-${project.version}-sources.jar" dest="${basedir}/target/jmockit/src">
 								</unzip>
 								<echo message="copy patch code" />
 								<copy todir="${basedir}/target/jmockit/jar" overwrite="true">
@@ -68,16 +64,13 @@
 								</copy>
 								<echo message="zip jmockit patch jar" />
 								<delete file="${basedir}/target/jmockit-${project.version}.jar" />
-								<delete
-									file="${basedir}/target/jmockit-${project.version}-sources.jar" />
-								<delete dir="${basedir}/target/jmockit/src/org/jtester" />
-								<delete dir="${basedir}/target/jmockit/jar/org/jtester" />
-								<jar destfile="${basedir}/target/jmockit-${project.version}-jtester.jar"
-									basedir="${basedir}/target/jmockit/jar" manifest="${basedir}/target/jmockit/jar/META-INF/MANIFEST.MF">
+								<delete file="${basedir}/target/jmockit-${project.version}-sources.jar" />
+								<delete dir="${basedir}/target/jmockit/src/org/test4j" />
+								<delete dir="${basedir}/target/jmockit/jar/org/test4j" />
+								<jar destfile="${basedir}/target/jmockit-${project.version}-test4j.jar" basedir="${basedir}/target/jmockit/jar"
+									manifest="${basedir}/target/jmockit/jar/META-INF/MANIFEST.MF">
 								</jar>
-								<jar
-									destfile="${basedir}/target/jmockit-${project.version}-jtester-sources.jar"
-									basedir="${basedir}/target/jmockit/src" />
+								<jar destfile="${basedir}/target/jmockit-${project.version}-test4j-sources.jar" basedir="${basedir}/target/jmockit/src" />
 							</tasks>
 						</configuration>
 						<goals>
@@ -89,18 +82,13 @@
 						<phase>install</phase>
 						<configuration>
 							<tasks>
-								<delete dir="${jmockit.m2path}/${project.version}-jtester" />
-								<mkdir dir="${jmockit.m2path}/${project.version}-jtester" />
-								<copy file="${basedir}/target/jmockit-${project.version}-jtester.jar"
-									tofile="${jmockit.m2path}/${project.version}-jtester/jmockit-${project.version}-jtester.jar"
+								<delete dir="${jmockit.m2path}/${project.version}-test4j" />
+								<mkdir dir="${jmockit.m2path}/${project.version}-test4j" />
+								<copy file="${basedir}/target/jmockit-${project.version}-test4j.jar" tofile="${jmockit.m2path}/${project.version}-test4j/jmockit-${project.version}-test4j.jar"
 									overwrite="true" />
-								<copy
-									file="${basedir}/target/jmockit-${project.version}-jtester-sources.jar"
-									tofile="${jmockit.m2path}/${project.version}-jtester/jmockit-${project.version}-jtester-sources.jar"
+								<copy file="${basedir}/target/jmockit-${project.version}-test4j-sources.jar" tofile="${jmockit.m2path}/${project.version}-test4j/jmockit-${project.version}-test4j-sources.jar"
 									overwrite="true" />
-								<copy
-									file="${basedir}/jmockit.pom/jmockit-${project.version}-jtester.pom"
-									tofile="${jmockit.m2path}/${project.version}-jtester/jmockit-${project.version}-jtester.pom"
+								<copy file="${basedir}/jmockit.pom/jmockit-${project.version}-test4j.pom" tofile="${jmockit.m2path}/${project.version}-test4j/jmockit-${project.version}-test4j.pom"
 									overwrite="true" />
 							</tasks>
 						</configuration>

@@ -1,8 +1,8 @@
-package org.jtester.module.dbfit.utility;
+package org.test4j.module.dbfit.utility;
 
-import org.jtester.module.dbfit.annotations.DbFit;
-import org.jtester.module.dbfit.annotations.DbFit.AUTO;
-import org.jtester.testng.JTester;
+import org.test4j.module.dbfit.annotations.DbFit;
+import org.test4j.module.dbfit.annotations.DbFit.AUTO;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
 /**
@@ -13,9 +13,9 @@ import org.testng.annotations.Test;
  */
 @DbFit(when = "data/clazz.wiki", auto = AUTO.AUTO)
 @Test(groups = "for-test")
-public class ForAutoFindDbFit extends JTester {
+public class ForAutoFindDbFit extends Test4J {
 
-	@Test(groups = "jtester")
+	@Test(groups = "test4j")
 	@DbFit(then = "data/ForAutoFindDbFit/test_classwiki_autoLoader.wiki")
 	public void test_classwiki_autoLoader() {
 

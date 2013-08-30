@@ -1,4 +1,4 @@
-package org.jtester.module.dbfit.environment;
+package org.test4j.module.dbfit.environment;
 
 import java.math.BigDecimal;
 import java.sql.PreparedStatement;
@@ -10,10 +10,10 @@ import java.util.List;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import org.jtester.module.database.environment.DBEnvironment;
-import org.jtester.module.database.environment.normalise.NameNormaliser;
-import org.jtester.module.database.utility.DBHelper;
-import org.jtester.module.dbfit.model.DbParameterAccessor;
+import org.test4j.module.database.environment.DBEnvironment;
+import org.test4j.module.database.environment.normalise.NameNormaliser;
+import org.test4j.module.database.utility.DBHelper;
+import org.test4j.module.dbfit.model.DbParameterAccessor;
 
 public class DbFitDB2Environment extends DbFitAbstractDBEnvironment {
 

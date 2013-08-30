@@ -1,19 +1,19 @@
-package org.jtester.module.dbfit.utility;
+package org.test4j.module.dbfit.utility;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jtester.module.dbfit.DbFitModuleTest;
-import org.jtester.module.dbfit.IDbFit;
-import org.jtester.module.dbfit.annotations.DbFit;
-import org.jtester.module.dbfit.utility.DbFitRunner;
-import org.jtester.testng.JTester;
+import org.test4j.module.dbfit.DbFitModuleTest;
+import org.test4j.module.dbfit.IDbFit;
+import org.test4j.module.dbfit.annotations.DbFit;
+import org.test4j.module.dbfit.utility.DbFitRunner;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
-@Test(groups = { "jtester", "dbfit" })
-public class DbFitRunnerTest extends JTester implements IDbFit {
+@Test(groups = { "test4j", "dbfit" })
+public class DbFitRunnerTest extends Test4J implements IDbFit {
 	@Test
-	@DbFit(when = "org/jtester/module/dbfit/utility/SimpleQuery_Init.wiki")
+	@DbFit(when = "org/test4j/module/dbfit/utility/SimpleQuery_Init.wiki")
 	public void runTest_HasName() throws Exception {
 		DbFitRunner tdd = new DbFitRunner("test-output");
 
@@ -21,9 +21,9 @@ public class DbFitRunnerTest extends JTester implements IDbFit {
 	}
 
 	@Test
-	@DbFit(when = "org/jtester/module/dbfit/utility/SimpleQuery_Init.wiki")
+	@DbFit(when = "org/test4j/module/dbfit/utility/SimpleQuery_Init.wiki")
 	public void runTest() throws Exception {
-		fit.runDbFit(null, "org/jtester/module/dbfit/utility/SimpleQuery.wiki");
+		fit.runDbFit(null, "org/test4j/module/dbfit/utility/SimpleQuery.wiki");
 	}
 
 	@Test
@@ -37,10 +37,10 @@ public class DbFitRunnerTest extends JTester implements IDbFit {
 	}
 
 	@Test(description = "测试wiki文件query中使用变量")
-	@DbFit(when = "org/jtester/module/dbfit/utility/SimpleQuery_Init.wiki")
+	@DbFit(when = "org/test4j/module/dbfit/utility/SimpleQuery_Init.wiki")
 	public void test_WikiFileHasVariable() throws Exception {
 		fit.setSymbol("first_name1", "aaa");
 		fit.setSymbol("first_name2", "bbb");
-		fit.runDbFit(null, "org/jtester/module/dbfit/utility/SimpleQuery_userVar.wiki");
+		fit.runDbFit(null, "org/test4j/module/dbfit/utility/SimpleQuery_userVar.wiki");
 	}
 }

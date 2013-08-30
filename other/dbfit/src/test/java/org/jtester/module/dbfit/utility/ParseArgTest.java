@@ -1,15 +1,15 @@
-package org.jtester.module.dbfit.utility;
+package org.test4j.module.dbfit.utility;
 
 import java.util.List;
 import java.util.Map;
 
-import org.jtester.module.dbfit.utility.ParseArg;
-import org.jtester.module.dbfit.utility.SymbolUtil;
-import org.jtester.testng.JTester;
+import org.test4j.module.dbfit.utility.ParseArg;
+import org.test4j.module.dbfit.utility.SymbolUtil;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
-@Test(groups = "jtester")
-public class ParseArgTest extends JTester {
+@Test(groups = "test4j")
+public class ParseArgTest extends Test4J {
 
 	@Test
 	public void testParseMap() {

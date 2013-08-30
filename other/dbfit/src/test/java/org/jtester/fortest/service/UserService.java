@@ -1,19 +1,19 @@
-package org.jtester.fortest.service;
+package org.test4j.fortest.service;
 
 import java.util.List;
 
-import org.jtester.fortest.beans.User;
+import org.test4j.fortest.beans.User;
 
 public interface UserService {
-	public double paySalary(String postcode);
+    public double paySalary(String postcode);
 
-	public void insertUser(User user);
+    public void insertUser(User user);
 
-	public void insertUserWillException(User user) throws Exception;
+    public void insertUserWillException(User user) throws Exception;
 
-	public void insertUserException(User user) throws Exception;
+    public void insertUserException(User user) throws Exception;
 
-	public String getServiceName();
+    public String getServiceName();
 
-	public List<User> findAllUser();
+    public List<User> findAllUser();
 }

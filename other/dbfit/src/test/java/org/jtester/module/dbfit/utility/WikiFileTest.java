@@ -1,11 +1,11 @@
-package org.jtester.module.dbfit.utility;
+package org.test4j.module.dbfit.utility;
 
-import org.jtester.module.dbfit.utility.WikiFile;
-import org.jtester.testng.JTester;
+import org.test4j.module.dbfit.utility.WikiFile;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
-@Test(groups = "jtester")
-public class WikiFileTest extends JTester {
+@Test(groups = "test4j")
+public class WikiFileTest extends Test4J {
 
 	@Test
 	public void testFindWikiFile() throws Exception {

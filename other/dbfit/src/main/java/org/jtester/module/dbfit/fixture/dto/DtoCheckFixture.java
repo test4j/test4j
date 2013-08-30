@@ -1,4 +1,4 @@
-package org.jtester.module.dbfit.fixture.dto;
+package org.test4j.module.dbfit.fixture.dto;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import org.jtester.module.dbfit.utility.ParseArg;
-import org.jtester.tools.reflector.FieldAccessor;
+import org.test4j.module.dbfit.utility.ParseArg;
+import org.test4j.tools.reflector.FieldAccessor;
 
 import fit.Fixture;
 import fit.Parse;

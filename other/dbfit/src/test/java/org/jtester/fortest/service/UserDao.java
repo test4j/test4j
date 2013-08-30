@@ -1,15 +1,15 @@
-package org.jtester.fortest.service;
+package org.test4j.fortest.service;
 
 import java.util.List;
 
-import org.jtester.fortest.beans.User;
+import org.test4j.fortest.beans.User;
 
 public interface UserDao {
-	List<User> findUserByPostcode(String postcode);
+    List<User> findUserByPostcode(String postcode);
 
-	void insertUser(User user);
+    void insertUser(User user);
 
-	List<User> findAllUser();
+    List<User> findAllUser();
 
-	int partialNotMock();
+    int partialNotMock();
 }

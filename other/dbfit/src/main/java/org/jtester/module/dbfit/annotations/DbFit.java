@@ -1,4 +1,4 @@
-package org.jtester.module.dbfit.annotations;
+package org.test4j.module.dbfit.annotations;
 
 import static java.lang.annotation.ElementType.METHOD;
 import static java.lang.annotation.ElementType.TYPE;
@@ -7,13 +7,13 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import org.jtester.module.database.environment.DBEnvironment;
+import org.test4j.module.database.environment.DBEnvironment;
 
 @Target({ TYPE, METHOD })
 @Retention(RUNTIME)
 public @interface DbFit {
 	/**
-	 * 执行dbfit文件的数据源,如果为默认值，则使用jtester的配置项
+	 * 执行dbfit文件的数据源,如果为默认值，则使用test4j的配置项
 	 * 
 	 * @return
 	 */

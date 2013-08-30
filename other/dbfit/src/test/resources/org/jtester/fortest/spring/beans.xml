@@ -6,6 +6,6 @@
  http://www.sprin gframework.org/schema/tx http://www.sprin gframework.org/schema/tx/sprin g-tx-2.0.xsd "
  default-dependency-check="none" default-lazy-init="false" default-autowire="byName">
 
-    <bean id="userService" class="org.jtester.fortest.service.UserServiceImpl"/>
-    <bean id="userDao" class="org.jtester.fortest.service.UserDaoImpl"/>
+    <bean id="userService" class="org.test4j.fortest.service.UserServiceImpl"/>
+    <bean id="userDao" class="org.test4j.fortest.service.UserDaoImpl"/>
 </beans>

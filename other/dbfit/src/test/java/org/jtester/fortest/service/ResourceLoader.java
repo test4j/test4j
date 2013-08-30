@@ -1,4 +1,4 @@
-package org.jtester.fortest.service;
+package org.test4j.fortest.service;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -11,37 +11,37 @@ import javax.sql.DataSource;
 import org.apache.log4j.Logger;
 
 public class ResourceLoader {
-	private final static Logger log4j = Logger.getLogger(ResourceLoader.class);
+    private final static Logger log4j = Logger.getLogger(ResourceLoader.class);
 
-	private List<String> users;
+    private List<String>        users;
 
-	private DataSource dataSource;
+    private DataSource          dataSource;
 
-	public List<String> getUsers() {
-		return users;
-	}
+    public List<String> getUsers() {
+        return users;
+    }
 
-	/**
-	 * 加载资源
-	 * 
-	 * @throws Exception
-	 */
-	public void init() throws Exception {
-		log4j.info("init db");
-		users = new ArrayList<String>();
-		Connection conn = dataSource.getConnection();
-		Statement stmt = conn.createStatement();
-		ResultSet rs = stmt.executeQuery("select id from tdd_user");
-		while (rs.next()) {
-			String id = rs.getString("id");
-			users.add(id);
-		}
-		rs.close();
-		stmt.close();
-		conn.close();
-	}
+    /**
+     * 加载资源
+     * 
+     * @throws Exception
+     */
+    public void init() throws Exception {
+        log4j.info("init db");
+        users = new ArrayList<String>();
+        Connection conn = dataSource.getConnection();
+        Statement stmt = conn.createStatement();
+        ResultSet rs = stmt.executeQuery("select id from tdd_user");
+        while (rs.next()) {
+            String id = rs.getString("id");
+            users.add(id);
+        }
+        rs.close();
+        stmt.close();
+        conn.close();
+    }
 
-	public void setDataSource(DataSource dataSource) {
-		this.dataSource = dataSource;
-	}
+    public void setDataSource(DataSource dataSource) {
+        this.dataSource = dataSource;
+    }
 }

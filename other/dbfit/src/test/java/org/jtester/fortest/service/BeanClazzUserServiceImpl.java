@@ -1,42 +1,42 @@
-package org.jtester.fortest.service;
+package org.test4j.fortest.service;
 
 import java.util.List;
 
-import org.jtester.fortest.beans.User;
+import org.test4j.fortest.beans.User;
 
 @SuppressWarnings("unused")
 public class BeanClazzUserServiceImpl implements UserService {
-	private UserDao userDao;
+    private UserDao        userDao;
 
-	private UserAnotherDao userAnotherDao;
+    private UserAnotherDao userAnotherDao;
 
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
-	}
+    public void setUserDao(UserDao userDao) {
+        this.userDao = userDao;
+    }
 
-	public void setUserAnotherDao(UserAnotherDao userAnotherDao) {
-		this.userAnotherDao = userAnotherDao;
-	}
+    public void setUserAnotherDao(UserAnotherDao userAnotherDao) {
+        this.userAnotherDao = userAnotherDao;
+    }
 
-	public String getServiceName() {
-		return "BeanClazzUserServiceImpl";
-	}
+    public String getServiceName() {
+        return "BeanClazzUserServiceImpl";
+    }
 
-	public void insertUser(User user) {
-	}
+    public void insertUser(User user) {
+    }
 
-	public void insertUserException(User user) throws Exception {
-	}
+    public void insertUserException(User user) throws Exception {
+    }
 
-	public double paySalary(String postcode) {
-		return 0;
-	}
+    public double paySalary(String postcode) {
+        return 0;
+    }
 
-	public List<User> findAllUser() {
-		return this.userDao.findAllUser();
-	}
+    public List<User> findAllUser() {
+        return this.userDao.findAllUser();
+    }
 
-	public void insertUserWillException(User user) throws Exception {
+    public void insertUserWillException(User user) throws Exception {
 
-	}
+    }
 }

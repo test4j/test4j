@@ -1,21 +1,21 @@
-package org.jtester.fortest.service;
+package org.test4j.fortest.service;
 
 public class CallingService {
-	private CalledService calledService;
+    private CalledService calledService;
 
-	public void call(String message) {
-		this.calledService.called(message);
-	}
+    public void call(String message) {
+        this.calledService.called(message);
+    }
 
-	public void expectedBoolean(boolean bl) {
-		this.calledService.expectedBoolean(bl);
-	}
+    public void expectedBoolean(boolean bl) {
+        this.calledService.expectedBoolean(bl);
+    }
 
-	public CalledService getCalledService() {
-		return calledService;
-	}
+    public CalledService getCalledService() {
+        return calledService;
+    }
 
-	public void setCalledService(CalledService calledService) {
-		this.calledService = calledService;
-	}
+    public void setCalledService(CalledService calledService) {
+        this.calledService = calledService;
+    }
 }

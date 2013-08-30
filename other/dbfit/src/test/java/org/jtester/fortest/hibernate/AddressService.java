@@ -1,5 +1,5 @@
-package org.jtester.fortest.hibernate;
+package org.test4j.fortest.hibernate;
 
 public interface AddressService {
-	public String findAddress();
+    public String findAddress();
 }

@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="JTester">
-	<test name="JTester">
+<suite name="test4j">
+	<test name="test4j">
 		<groups>
 			<run>
 				<include name="all-test" />
@@ -14,11 +14,11 @@
 			</run>
 		</groups>
 		<packages>
-			<package name="org.jtester.module.dbfit.*" />
+			<package name="org.test4j.module.dbfit.*" />
 		</packages>
 	</test>
 	<listeners>
-		<listener class-name="org.jtester.testng.report.UserTestReporter" />
-		<!-- <listener class-name="org.jtester.core.testng.JTesterMethodsOrder" /> -->
+		<listener class-name="org.test4j.testng.report.UserTestReporter" />
+		<!-- <listener class-name="org.test4j.core.testng.test4jMethodsOrder" /> -->
 	</listeners>
 </suite>

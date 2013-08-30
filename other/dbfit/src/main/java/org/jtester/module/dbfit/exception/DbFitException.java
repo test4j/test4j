@@ -1,4 +1,4 @@
-package org.jtester.module.dbfit.exception;
+package org.test4j.module.dbfit.exception;
 
 public class DbFitException extends RuntimeException {
 	private static final long serialVersionUID = 2467680894577167851L;

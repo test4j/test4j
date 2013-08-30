@@ -1,4 +1,4 @@
-package org.jtester.module.dbfit.fixture.fit;
+package org.test4j.module.dbfit.fixture.fit;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -6,12 +6,12 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import org.jtester.module.database.environment.normalise.NameNormaliser;
-import org.jtester.module.database.utility.DBHelper;
-import org.jtester.module.dbfit.environment.DbFitEnvironment;
-import org.jtester.module.dbfit.exception.HasMarkedException;
-import org.jtester.module.dbfit.model.DbParameterAccessor;
-import org.jtester.module.dbfit.model.SymbolAccessSetBinding;
+import org.test4j.module.database.environment.normalise.NameNormaliser;
+import org.test4j.module.database.utility.DBHelper;
+import org.test4j.module.dbfit.environment.DbFitEnvironment;
+import org.test4j.module.dbfit.exception.HasMarkedException;
+import org.test4j.module.dbfit.model.DbParameterAccessor;
+import org.test4j.module.dbfit.model.SymbolAccessSetBinding;
 
 import fit.Binding;
 import fit.Fixture;

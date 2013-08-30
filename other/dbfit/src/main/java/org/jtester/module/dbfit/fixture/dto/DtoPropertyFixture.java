@@ -1,14 +1,14 @@
-package org.jtester.module.dbfit.fixture.dto;
+package org.test4j.module.dbfit.fixture.dto;
 
 import java.util.List;
 import java.util.Map;
 
-import org.jtester.module.dbfit.utility.ParseArg;
-import org.jtester.tools.commons.MethodHelper;
-import org.jtester.tools.commons.StringHelper;
-import org.jtester.tools.exception.NoSuchMethodRuntimeException;
-import org.jtester.tools.reflector.FieldAccessor;
-import org.jtester.tools.reflector.MethodAccessor;
+import org.test4j.module.dbfit.utility.ParseArg;
+import org.test4j.tools.commons.MethodHelper;
+import org.test4j.tools.commons.StringHelper;
+import org.test4j.tools.exception.NoSuchMethodRuntimeException;
+import org.test4j.tools.reflector.FieldAccessor;
+import org.test4j.tools.reflector.MethodAccessor;
 
 import fit.Parse;
 import fit.TypeAdapter;

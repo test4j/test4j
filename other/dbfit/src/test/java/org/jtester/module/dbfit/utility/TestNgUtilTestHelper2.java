@@ -1,4 +1,4 @@
-package org.jtester.module.dbfit.utility;
+package org.test4j.module.dbfit.utility;
 
 
 //@Test

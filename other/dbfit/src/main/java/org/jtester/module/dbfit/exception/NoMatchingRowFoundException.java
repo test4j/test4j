@@ -1,4 +1,4 @@
-package org.jtester.module.dbfit.exception;
+package org.test4j.module.dbfit.exception;
 
 public class NoMatchingRowFoundException extends Exception {
 	private static final long serialVersionUID = 1L;

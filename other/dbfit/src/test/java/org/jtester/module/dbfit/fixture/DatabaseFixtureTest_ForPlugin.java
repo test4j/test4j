@@ -1,13 +1,13 @@
-package org.jtester.module.dbfit.fixture;
+package org.test4j.module.dbfit.fixture;
 
-import org.jtester.module.dbfit.annotations.DbFit;
-import org.jtester.testng.JTester;
+import org.test4j.module.dbfit.annotations.DbFit;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
-@Test(groups = "jtester")
-public class DatabaseFixtureTest_ForPlugin extends JTester {
+@Test(groups = "test4j")
+public class DatabaseFixtureTest_ForPlugin extends Test4J {
 
-	@DbFit(when = "DbFixtureTest_ForPlugin.nullValueInsert.wiki")
-	public void nullValueInsert() {
-	}
+    @DbFit(when = "DbFixtureTest_ForPlugin.nullValueInsert.wiki")
+    public void nullValueInsert() {
+    }
 }

@@ -1,4 +1,4 @@
-package org.jtester.module.dbfit.utility;
+package org.test4j.module.dbfit.utility;
 
 import java.sql.SQLException;
 import java.sql.Timestamp;
@@ -6,18 +6,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
-import org.jtester.module.database.annotations.Transactional;
-import org.jtester.module.database.annotations.Transactional.TransactionMode;
-import org.jtester.module.dbfit.IDbFit;
-import org.jtester.module.dbfit.annotations.DbFit;
-import org.jtester.module.dbfit.annotations.DbFit.AUTO;
-import org.jtester.testng.JTester;
+import org.test4j.module.database.annotations.Transactional;
+import org.test4j.module.database.annotations.Transactional.TransactionMode;
+import org.test4j.module.dbfit.IDbFit;
+import org.test4j.module.dbfit.annotations.DbFit;
+import org.test4j.module.dbfit.annotations.DbFit.AUTO;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
-@Test(groups = "jtester")
+@Test(groups = "test4j")
 @DbFit(auto = AUTO.AUTO)
 @SuppressWarnings({ "rawtypes" })
-public class SqlRunnerTest extends JTester implements IDbFit {
+public class SqlRunnerTest extends Test4J implements IDbFit {
 
 	@Test
 	@Transactional(TransactionMode.COMMIT)
@@ -61,7 +61,7 @@ public class SqlRunnerTest extends JTester implements IDbFit {
 
 	@Test
 	public void testExecuteFromFile() throws Exception {
-		fit.executeSQLFile("org/jtester/module/dbfit/utility/data/SqlRunnerTest/testExecuteFromFile.sql");
+		fit.executeSQLFile("org/test4j/module/dbfit/utility/data/SqlRunnerTest/testExecuteFromFile.sql");
 	}
 
 	public static class UserPoJo {

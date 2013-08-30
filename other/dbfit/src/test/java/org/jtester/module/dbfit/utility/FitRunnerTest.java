@@ -1,13 +1,13 @@
-package org.jtester.module.dbfit.utility;
+package org.test4j.module.dbfit.utility;
 
 import java.io.File;
 
-import org.jtester.module.dbfit.utility.FitRunner;
-import org.jtester.testng.JTester;
+import org.test4j.module.dbfit.utility.FitRunner;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
-@Test(groups = "jtester")
-public class FitRunnerTest extends JTester {
+@Test(groups = "test4j")
+public class FitRunnerTest extends Test4J {
 	TestedFitRunner fitRunner = new TestedFitRunner();
 
 	@Test
@@ -36,7 +36,7 @@ public class FitRunnerTest extends JTester {
 
 	// public void testRunExcel() {
 	// fitRunner.runFitExcel(FitRunnerTest.class,
-	// "D:/eclipse/workspace/ali-jtester/src/test/resources/org/jtester/module/dbfit/utility/simple query.xls");
+	// "D:/eclipse/workspace/ali-test4j/src/test/resources/org/test4j/module/dbfit/utility/simple query.xls");
 	// }
 
 	public static class TestedFitRunner extends FitRunner {

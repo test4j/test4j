@@ -1,6 +1,6 @@
-package org.jtester.module.dbfit.fixture;
+package org.test4j.module.dbfit.fixture;
 
-import org.jtester.testng.utility.TestNgUtil;
+import org.test4j.testng.utility.TestNgUtil;
 
 public class DbUnitTestFixture extends DatabaseFixture {
 	public boolean testng(String clazz, String method) {

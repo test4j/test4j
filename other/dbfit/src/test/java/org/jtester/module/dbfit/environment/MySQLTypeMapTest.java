@@ -1,14 +1,14 @@
-package org.jtester.module.dbfit.environment;
+package org.test4j.module.dbfit.environment;
 
-import org.jtester.module.dbfit.annotations.DbFit;
-import org.jtester.testng.JTester;
+import org.test4j.module.dbfit.annotations.DbFit;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
-@Test(groups = "jtester")
-public class MySQLTypeMapTest extends JTester {
+@Test(groups = "test4j")
+public class MySQLTypeMapTest extends Test4J {
 
-	@DbFit(when = "mysqltype.when.wiki", then = "mysqltype.then.wiki")
-	public void testMySqlType() {
+    @DbFit(when = "mysqltype.when.wiki", then = "mysqltype.then.wiki")
+    public void testMySqlType() {
 
-	}
+    }
 }

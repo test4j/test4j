@@ -1,16 +1,16 @@
-package org.jtester.module.dbfit;
+package org.test4j.module.dbfit;
 
-import org.jtester.fortest.beans.User;
-import org.jtester.fortest.service.UserService;
-import org.jtester.module.dbfit.annotations.DbFit;
-import org.jtester.module.spring.annotations.SpringContext;
-import org.jtester.module.spring.annotations.SpringBeanByName;
-import org.jtester.testng.JTester;
+import org.test4j.fortest.beans.User;
+import org.test4j.fortest.service.UserService;
+import org.test4j.module.dbfit.annotations.DbFit;
+import org.test4j.module.spring.annotations.SpringContext;
+import org.test4j.module.spring.annotations.SpringBeanByName;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
-@Test(groups = { "JTester" })
-@SpringContext({ "org/jtester/fortest/spring/beans.xml", "classpath:org/jtester/fortest/spring/data-source.xml" })
-public class DbFitTest extends JTester {
+@Test(groups = { "test4j" })
+@SpringContext({ "org/test4j/fortest/spring/beans.xml", "classpath:org/test4j/fortest/spring/data-source.xml" })
+public class DbFitTest extends Test4J {
 	@SpringBeanByName
 	private UserService userService;
 

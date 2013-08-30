@@ -1,9 +1,9 @@
-package org.jtester.fortest.hibernate;
+package org.test4j.fortest.hibernate;
 
 public interface UserService extends BaseService<User> {
-	public String findAddress();
+    public String findAddress();
 
-	public User getUser(int id);
+    public User getUser(int id);
 
-	public void newUser(User user);
+    public void newUser(User user);
 }

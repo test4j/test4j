@@ -1,16 +1,16 @@
-package org.jtester.module.dbfit.utility;
+package org.test4j.module.dbfit.utility;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import org.jtester.module.dbfit.IDbFit;
-import org.jtester.module.dbfit.utility.SymbolUtil;
-import org.jtester.testng.JTester;
+import org.test4j.module.dbfit.IDbFit;
+import org.test4j.module.dbfit.utility.SymbolUtil;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
-@Test(groups = "jtester")
-public class SymbolUtilTest extends JTester implements IDbFit {
+@Test(groups = "test4j")
+public class SymbolUtilTest extends Test4J implements IDbFit {
 
 	@Test
 	public void testReplacedBySymbols() {

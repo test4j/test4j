@@ -1,4 +1,4 @@
-package org.jtester.module.dbfit.exception;
+package org.test4j.module.dbfit.exception;
 
 /**
  * 

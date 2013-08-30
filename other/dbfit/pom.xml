@@ -2,14 +2,14 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
-		<groupId>org.jtester</groupId>
+		<groupId>org.test4j</groupId>
 		<artifactId>all</artifactId>
 		<version>2.0-SNAPSHOT</version>
 		<relativePath>../all</relativePath>
 	</parent>
 	<artifactId>dbfit</artifactId>
 	<packaging>jar</packaging>
-	<name>jtester dbfit module</name>
+	<name>test4j dbfit module</name>
 
 	<properties>
 		<skipTests>true</skipTests>
@@ -18,17 +18,17 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>org.jtester</groupId>
+			<groupId>org.test4j</groupId>
 			<artifactId>testng</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.jtester</groupId>
+			<groupId>org.test4j</groupId>
 			<artifactId>core</artifactId>
 			<version>${project.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>org.jtester</groupId>
+			<groupId>org.test4j</groupId>
 			<artifactId>integrated</artifactId>
 			<version>${project.version}</version>
 		</dependency>

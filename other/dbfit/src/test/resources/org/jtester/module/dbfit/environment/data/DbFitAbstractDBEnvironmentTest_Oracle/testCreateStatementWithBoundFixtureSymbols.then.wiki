@@ -1,5 +1,5 @@
 |connect|
 
-|query|select * from jtester_user|
+|query|select * from test4j_user|
 |id|name|
 |1|@modified_name|

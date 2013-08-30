@@ -1,8 +1,8 @@
-package org.jtester.module.dbfit.utility;
+package org.test4j.module.dbfit.utility;
 
-import org.jtester.module.dbfit.annotations.DbFit;
-import org.jtester.module.dbfit.annotations.DbFit.AUTO;
-import org.jtester.testng.JTester;
+import org.test4j.module.dbfit.annotations.DbFit;
+import org.test4j.module.dbfit.annotations.DbFit.AUTO;
+import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
 /**
@@ -13,9 +13,9 @@ import org.testng.annotations.Test;
  */
 @DbFit(when = "data/clazz.wiki", auto = AUTO.UN_AUTO)
 @Test(groups = "for-test")
-public class ForAutoFindDbFit2 extends JTester {
+public class ForAutoFindDbFit2 extends Test4J {
 
-	@Test(groups = "jtester", description = "在这个例子中class不加载ForAutoFindDbFit2_wiki文件")
+	@Test(groups = "test4j", description = "在这个例子中class不加载ForAutoFindDbFit2_wiki文件")
 	@DbFit(then = "data/ForAutoFindDbFit2/unauto_load_wiki.wiki")
 	public void test_unautoLoad() {
 

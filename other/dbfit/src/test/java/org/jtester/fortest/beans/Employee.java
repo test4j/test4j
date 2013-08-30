@@ -1,50 +1,50 @@
-package org.jtester.fortest.beans;
+package org.test4j.fortest.beans;
 
 import java.util.Date;
 
 public class Employee implements java.io.Serializable {
-	private static final long serialVersionUID = -7583085914565894622L;
+    private static final long serialVersionUID = -7583085914565894622L;
 
-	private String name;
+    private String            name;
 
-	private transient double sarary;
+    private transient double  sarary;
 
-	private Date date;
+    private Date              date;
 
-	public Employee() {
-		super();
-	}
-	
-	public Employee(String name, double sarary) {
-		this.name = name;
-		this.sarary = sarary;
-	}
+    public Employee() {
+        super();
+    }
 
-	public String getName() {
-		return name;
-	}
+    public Employee(String name, double sarary) {
+        this.name = name;
+        this.sarary = sarary;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public double getSarary() {
-		return sarary;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public void setSarary(double sarary) {
-		this.sarary = sarary;
-	}
+    public double getSarary() {
+        return sarary;
+    }
 
-	public void raiseSalary(double raise) {
-		this.sarary += raise;
-	}
+    public void setSarary(double sarary) {
+        this.sarary = sarary;
+    }
 
-	public Date getDate() {
-		return date;
-	}
+    public void raiseSalary(double raise) {
+        this.sarary += raise;
+    }
 
-	public void setDate(Date date) {
-		this.date = date;
-	}
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
 }

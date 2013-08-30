@@ -1,6 +1,6 @@
-package org.jtester.module.dbfit.utility;
+package org.test4j.module.dbfit.utility;
 
-import org.jtester.module.dbfit.annotations.DbFit;
+import org.test4j.module.dbfit.annotations.DbFit;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;

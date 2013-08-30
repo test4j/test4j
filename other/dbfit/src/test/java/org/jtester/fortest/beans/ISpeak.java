@@ -1,9 +1,9 @@
-package org.jtester.fortest.beans;
+package org.test4j.fortest.beans;
 
 public interface ISpeak {
-	public void say();
+    public void say();
 
-	public int count();
+    public int count();
 
-	public void say(String world);
+    public void say(String world);
 }

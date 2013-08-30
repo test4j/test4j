@@ -1,20 +1,20 @@
-package org.jtester.module.dbfit.fixture.dto;
+package org.test4j.module.dbfit.fixture.dto;
 
-import static org.jtester.tools.commons.AnnotationHelper.getFieldsAnnotatedWith;
+import static org.test4j.tools.commons.AnnotationHelper.getFieldsAnnotatedWith;
 
 import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.Set;
 
-import org.jtester.module.JTesterException;
-import org.jtester.module.spring.annotations.SpringBeanByName;
-import org.jtester.module.spring.annotations.SpringBeanByType;
-import org.jtester.tools.commons.FieldHelper;
-import org.jtester.tools.commons.StringHelper;
+import org.test4j.module.test4jException;
+import org.test4j.module.spring.annotations.SpringBeanByName;
+import org.test4j.module.spring.annotations.SpringBeanByType;
+import org.test4j.tools.commons.FieldHelper;
+import org.test4j.tools.commons.StringHelper;
 import org.springframework.context.ApplicationContext;
 
 /**
- * 用在JTesterSpringFixture中注入spring bean
+ * 用在test4jSpringFixture中注入spring bean
  * 
  * @author darui.wudr
  * 
@@ -59,7 +59,7 @@ public class FixtureBeanInjector {
 				}
 				FieldHelper.setFieldValue(testedObject, field, ctx.getBean(beanName));
 			} catch (Throwable e) {
-				throw new JTesterException(
+				throw new Test4JException(
 						"Unable to assign the Spring bean value to field annotated with @SpringBeanByName", e);
 			}
 		}
@@ -75,7 +75,7 @@ public class FixtureBeanInjector {
 			try {
 				FieldHelper.setFieldValue(testedObject, field, getSpringBeanByType(ctx, field.getType()));
 			} catch (Throwable e) {
-				throw new JTesterException(
+				throw new Test4JException(
 						"Unable to assign the Spring bean value to field annotated with @SpringBeanByType", e);
 			}
 		}
@@ -84,11 +84,11 @@ public class FixtureBeanInjector {
 	private static <T> T getSpringBeanByType(final ApplicationContext ctx, final Class<T> type) {
 		Map<String, T> beans = ctx.getBeansOfType(type);
 		if (beans == null || beans.size() == 0) {
-			throw new JTesterException("Unable to get Spring bean by type. No Spring bean found for type "
+			throw new Test4JException("Unable to get Spring bean by type. No Spring bean found for type "
 					+ type.getSimpleName());
 		}
 		if (beans.size() > 1) {
-			throw new JTesterException(
+			throw new Test4JException(
 					"Unable to get Spring bean by type. More than one possible Spring bean for type "
 							+ type.getSimpleName() + ". Possible beans; " + beans);
 		}

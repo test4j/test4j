@@ -1,15 +1,15 @@
-package org.jtester.module.dbfit.fixture.dto;
+package org.test4j.module.dbfit.fixture.dto;
 
-import org.jtester.fortest.beans.User;
-import org.jtester.fortest.service.UserAnotherDao;
-import org.jtester.fortest.service.UserService;
-import org.jtester.module.dbfit.fixture.dto.DtoPropertyFixture;
-import org.jtester.module.spring.annotations.AutoBeanInject;
-import org.jtester.module.spring.annotations.SpringContext;
-import org.jtester.module.spring.annotations.SpringBeanByName;
-import org.jtester.module.spring.annotations.AutoBeanInject.BeanMap;
+import org.test4j.fortest.beans.User;
+import org.test4j.fortest.service.UserAnotherDao;
+import org.test4j.fortest.service.UserService;
+import org.test4j.module.dbfit.fixture.dto.DtoPropertyFixture;
+import org.test4j.module.spring.annotations.AutoBeanInject;
+import org.test4j.module.spring.annotations.SpringContext;
+import org.test4j.module.spring.annotations.SpringBeanByName;
+import org.test4j.module.spring.annotations.AutoBeanInject.BeanMap;
 
-@SpringContext({ "org/jtester/fortest/spring//beans.xml", "org/jtester/fortest/spring/data-source.xml" })
+@SpringContext({ "org/test4j/fortest/spring//beans.xml", "org/test4j/fortest/spring/data-source.xml" })
 @AutoBeanInject(maps = { @BeanMap(intf = "**.*", impl = "**.*Impl") })
 public class TestedSpringFixture2 extends DtoPropertyFixture {
 	@SpringBeanByName

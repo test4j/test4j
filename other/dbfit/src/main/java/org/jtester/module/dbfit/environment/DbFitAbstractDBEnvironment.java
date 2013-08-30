@@ -1,4 +1,4 @@
-package org.jtester.module.dbfit.environment;
+package org.test4j.module.dbfit.environment;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
@@ -10,19 +10,19 @@ import java.util.regex.Pattern;
 
 import javax.sql.DataSource;
 
-import org.jtester.module.database.environment.DBEnvironment;
-import org.jtester.module.database.environment.TableMeta;
-import org.jtester.module.database.environment.types.DB2Environment;
-import org.jtester.module.database.environment.types.DerbyEnvironment;
-import org.jtester.module.database.environment.types.MySqlEnvironment;
-import org.jtester.module.database.environment.types.OracleEnvironment;
-import org.jtester.module.database.environment.types.SqlServerEnvironment;
-import org.jtester.module.database.transaction.TransactionManagementConfiguration;
-import org.jtester.module.dbfit.model.BigDecimalParseDelegate;
-import org.jtester.module.dbfit.model.DbParameterAccessor;
-import org.jtester.module.dbfit.model.SqlDateParseDelegate;
-import org.jtester.module.dbfit.model.SqlTimestampParseDelegate;
-import org.jtester.module.dbfit.utility.SymbolUtil;
+import org.test4j.module.database.environment.DBEnvironment;
+import org.test4j.module.database.environment.TableMeta;
+import org.test4j.module.database.environment.types.DB2Environment;
+import org.test4j.module.database.environment.types.DerbyEnvironment;
+import org.test4j.module.database.environment.types.MySqlEnvironment;
+import org.test4j.module.database.environment.types.OracleEnvironment;
+import org.test4j.module.database.environment.types.SqlServerEnvironment;
+import org.test4j.module.database.transaction.TransactionManagementConfiguration;
+import org.test4j.module.dbfit.model.BigDecimalParseDelegate;
+import org.test4j.module.dbfit.model.DbParameterAccessor;
+import org.test4j.module.dbfit.model.SqlDateParseDelegate;
+import org.test4j.module.dbfit.model.SqlTimestampParseDelegate;
+import org.test4j.module.dbfit.utility.SymbolUtil;
 
 import fit.TypeAdapter;
 
@@ -45,7 +45,7 @@ public abstract class DbFitAbstractDBEnvironment implements DbFitEnvironment {
 		Connection connection = this.connect();
 		PreparedStatement cs = connection.prepareStatement(sql);
 		for (int i = 0; i < paramNames.length; i++) {
-			Object value = org.jtester.module.dbfit.utility.SymbolUtil.getSymbol(paramNames[i]);
+			Object value = org.test4j.module.dbfit.utility.SymbolUtil.getSymbol(paramNames[i]);
 			cs.setObject(i + 1, value);
 		}
 		return cs;
@@ -151,7 +151,7 @@ public abstract class DbFitAbstractDBEnvironment implements DbFitEnvironment {
 	/**
 	 * by default, this is set to false.
 	 * 
-	 * @see org.jtester.module.database.environment.DBEnvironment#supportsOuputOnInsert()
+	 * @see org.test4j.module.database.environment.DBEnvironment#supportsOuputOnInsert()
 	 */
 	public boolean supportsOuputOnInsert() {
 		return false;

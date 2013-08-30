@@ -1,4 +1,4 @@
-package org.jtester.module.dbfit.annotations;
+package org.test4j.module.dbfit.annotations;
 
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 

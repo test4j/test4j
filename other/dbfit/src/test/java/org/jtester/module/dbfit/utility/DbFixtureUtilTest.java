@@ -1,24 +1,24 @@
-package org.jtester.module.dbfit.utility;
+package org.test4j.module.dbfit.utility;
 
 import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.jtester.module.dbfit.IDbFit;
-import org.jtester.module.dbfit.annotations.DbFit;
-import org.jtester.module.dbfit.utility.DBFitSqlRunner;
-import org.jtester.testng.JTester;
-import org.jtester.tools.commons.ExceptionWrapper;
-import org.jtester.tools.commons.ResourceHelper;
+import org.test4j.module.dbfit.IDbFit;
+import org.test4j.module.dbfit.annotations.DbFit;
+import org.test4j.module.dbfit.utility.DBFitSqlRunner;
+import org.test4j.testng.Test4J;
+import org.test4j.tools.commons.ExceptionWrapper;
+import org.test4j.tools.commons.ResourceHelper;
 import org.testng.annotations.Test;
 
-@Test(groups = "jtester")
-public class DbFixtureUtilTest extends JTester implements IDbFit {
+@Test(groups = "test4j")
+public class DbFixtureUtilTest extends Test4J implements IDbFit {
 
 	@Test
 	@DbFit(when = "testExecuteFromFile.when.wiki", then = "testExecuteFromFile.then.wiki")
 	public void testExecuteFromFile() throws Exception {
-		DBFitSqlRunner.instance.executeFromFile("org/jtester/module/dbfit/utility/executeFile.sql");
+		DBFitSqlRunner.instance.executeFromFile("org/test4j/module/dbfit/utility/executeFile.sql");
 	}
 
 	@DbFit(when = "testTransaction.when.wiki", then = "testTransaction.then.wiki")
@@ -29,7 +29,7 @@ public class DbFixtureUtilTest extends JTester implements IDbFit {
 	@Test(description = "验证变量回显功能_包含匹配和不匹配的情况")
 	@DbFit(when = "testExecuteFromFile.when.wiki")
 	public void testRunDbFit_VerifyVarable() throws Exception {
-		DBFitSqlRunner.instance.executeFromFile("org/jtester/module/dbfit/utility/executeFile.sql");
+		DBFitSqlRunner.instance.executeFromFile("org/test4j/module/dbfit/utility/executeFile.sql");
 		fit.setSymbol("first_name1", "dddd1");
 		fit.setSymbol("first_name2", "eeee");
 

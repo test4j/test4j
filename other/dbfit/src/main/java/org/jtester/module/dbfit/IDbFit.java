@@ -1,7 +1,7 @@
-package org.jtester.module.dbfit;
+package org.test4j.module.dbfit;
 
-import org.jtester.module.database.IDatabase;
+import org.test4j.module.database.IDatabase;
 
 public interface IDbFit extends IDatabase {
-	final JTesterFitnesse fit = new JTesterFitnesse();
+    final Test4JFitnesse fit = new Test4JFitnesse();
 }
