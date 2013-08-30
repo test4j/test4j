@@ -43,3 +43,11 @@
 /test4j.testng/.classpath
 /test4j.testng/.project
 /test4j.testng/.settings
+/test4j.core/.settings
+/test4j.core/target
+/test4j.core/.classpath
+/test4j.core/.project
+/test4j.nodep/.settings
+/test4j.nodep/target
+/test4j.nodep/.classpath
+/test4j.nodep/.project
