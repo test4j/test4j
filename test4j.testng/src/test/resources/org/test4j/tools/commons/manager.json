@@ -1,10 +1,10 @@
 {
-    "#class":"org.jtester.fortest.beans.Manager",
+    "#class":"org.test4j.fortest.beans.Manager",
     "secretary":{
         "name":"Harry Hacker"
     },
     "phoneNumber":{
-        #class:"org.jtester.fortest.beans.PhoneNumber",
+        #class:"org.test4j.fortest.beans.PhoneNumber",
         "code":"571",
         "number":"0571-88886666"
     },

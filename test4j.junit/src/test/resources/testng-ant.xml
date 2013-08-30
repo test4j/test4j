@@ -1,17 +1,17 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="JTester">
-    <test name="JTester">
-        <groups>
-            <run>
-                <include name="JTester"/>
-				<include name="jtester"/>
-                <exclude name="broken"/>
-                <exclude name="memery-db"/>
-                <exclude name="tracer"/>
-            </run>
-        </groups>
-        <packages>
-            <package name="org.jtester.*"/>
-        </packages>
-    </test>
+<suite name="test4j">
+	<test name="test4j">
+		<groups>
+			<run>
+				<include name="test4j" />
+				<include name="test4j" />
+				<exclude name="broken" />
+				<exclude name="memery-db" />
+				<exclude name="tracer" />
+			</run>
+		</groups>
+		<packages>
+			<package name="org.test4j.*" />
+		</packages>
+	</test>
 </suite>

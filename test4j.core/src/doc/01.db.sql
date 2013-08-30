@@ -32,10 +32,10 @@ CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 
 
 #
-# Structure for the `jtester_address` table : 
+# Structure for the `test4j_address` table : 
 #
 
-CREATE TABLE `jtester_address` (
+CREATE TABLE `test4j_address` (
   `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
   `create_date` DATETIME DEFAULT NULL,
   `creator` VARCHAR(255) COLLATE utf8_general_ci DEFAULT NULL,
@@ -54,10 +54,10 @@ CREATE TABLE `jtester_address` (
 AUTO_INCREMENT=2 CHARACTER SET 'utf8' COLLATE 'utf8_general_ci';
 
 #
-# Structure for the `jtester_user` table : 
+# Structure for the `test4j_user` table : 
 #
 
-CREATE TABLE `jtester_user` (
+CREATE TABLE `test4j_user` (
   `id` INTEGER(11) NOT NULL AUTO_INCREMENT,
   `create_date` DATETIME DEFAULT NULL,
   `creator` VARCHAR(255) COLLATE utf8_general_ci DEFAULT NULL,

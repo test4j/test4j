@@ -1,12 +1,12 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="JTester">
-	<test name="JTester">
+<suite name="test4j">
+	<test name="test4j">
 		<classes>
-			<class name="org.jtester.spec.SpringSpecDemo1"></class>
-			<class name="org.jtester.spec.SpringSpecDemo2"></class>
+			<class name="org.test4j.spec.SpringSpecDemo1"></class>
+			<class name="org.test4j.spec.SpringSpecDemo2"></class>
 		</classes>
 	</test>
 	<listeners>
-		<listener class-name="org.jtester.core.testng.UserTestReporter"></listener>
+		<listener class-name="org.test4j.core.testng.UserTestReporter"></listener>
 	</listeners>
 </suite>

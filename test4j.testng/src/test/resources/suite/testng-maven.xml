@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="JTester">
-	<test name="JTester">
+<suite name="test4j">
+	<test name="test4j">
 		<groups>
 			<run>
 				<include name="all-test" />
@@ -9,16 +9,16 @@
 				<exclude name="broken-install" />
 				<exclude name="memery-db" />
 				<exclude name="for-test" />
-				<exclude name="testng-demo"/>
-				<exclude name="manual"/>
+				<exclude name="testng-demo" />
+				<exclude name="manual" />
 				<exclude name="debug" />
 			</run>
 		</groups>
 		<packages>
-			<package name="org.jtester.*" />
+			<package name="org.test4j.*" />
 		</packages>
 	</test>
 	<listeners>
-		<listener class-name="org.jtester.testng.report.UserTestReporter"></listener>
+		<listener class-name="org.test4j.testng.report.UserTestReporter"></listener>
 	</listeners>
 </suite>

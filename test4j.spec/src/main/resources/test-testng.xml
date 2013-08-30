@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="JTester">
-	<test name="JTester">
+<suite name="test4j">
+	<test name="test4j">
 		<groups>
 			<run>
 				<exclude name="broken" />
@@ -8,7 +8,7 @@
 			</run>
 		</groups>
 		<packages>
-			<package name="org.jtester.spec.*" />
+			<package name="org.test4j.spec.*" />
 		</packages>
 	</test>
 </suite>

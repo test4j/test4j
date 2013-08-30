@@ -9,6 +9,6 @@
 
 	<context:annotation-config />
 
-	<bean id="userService" class="org.jtester.module.spring.testedbeans.resource.UserServiceResourceImpl" />
-	<bean id="userDao" class="org.jtester.module.spring.testedbeans.resource.UserDaoResourceImpl" />
+	<bean id="userService" class="org.test4j.module.spring.testedbeans.resource.UserServiceResourceImpl" />
+	<bean id="userDao" class="org.test4j.module.spring.testedbeans.resource.UserDaoResourceImpl" />
 </beans>

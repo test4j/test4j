@@ -1,14 +1,14 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="JTester">
-	<test name="JTester">
+<suite name="test4j">
+	<test name="test4j">
 		<classes>
-			<class name="org.jtester.core.testng.UserTestReporterTest"></class>
-			<class name="org.jtester.module.dbfit.db.fixture.InsertFixtureTest"></class>
+			<class name="org.test4j.core.testng.UserTestReporterTest"></class>
+			<class name="org.test4j.module.dbfit.db.fixture.InsertFixtureTest"></class>
 		</classes>
 	</test>
 	<listeners>
-		<listener class-name="org.jtester.testng.report.UserTestReporter" />
-		<listener class-name="org.jtester.testng.helper.JTesterMethodsOrder" />
+		<listener class-name="org.test4j.testng.report.UserTestReporter" />
+		<listener class-name="org.test4j.testng.helper.Test4JMethodsOrder" />
 	</listeners>
 </suite>
 

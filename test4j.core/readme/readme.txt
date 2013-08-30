@@ -12,4 +12,4 @@ o spring模块增加是否允许强制懒加载的选项
 o 使用db.table方式往数据库中插入数据时，如果是Enum对象，直接获取枚举值的name()
 o 增加了@TestedObject功能
 o 修正数据库配置错误时，输出log无法定位具体错误的问题
-o 修改ICore, IDatabase, ISpring等实现方式。junit测试实现JTester接口，testng测试继承JTester基类。
+o 修改ICore, IDatabase, ISpring等实现方式。junit测试实现test4j接口，testng测试继承test4j基类。

@@ -1,4 +1,4 @@
---use db jtester_another;
+--use db test4j_another;
 
 SET FOREIGN_KEY_CHECKS=0;
 
@@ -39,7 +39,7 @@ CREATE TABLE `foreign_test` (
   CONSTRAINT `foreign_test_fk` FOREIGN KEY (`f_id`) REFERENCES `tdd_user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `jtester_address` (
+CREATE TABLE `test4j_address` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `create_date` datetime DEFAULT NULL,
   `creator` varchar(255) DEFAULT NULL,
@@ -56,7 +56,7 @@ CREATE TABLE `jtester_address` (
   KEY `FK4313875E892CE089` (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-CREATE TABLE `jtester_user` (
+CREATE TABLE `test4j_user` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
   `create_date` datetime DEFAULT NULL,
   `creator` varchar(255) DEFAULT NULL,

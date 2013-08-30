@@ -1,6 +1,6 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="JTester">
-	<test name="JTester">
+<suite name="test4j">
+	<test name="test4j">
 		<groups>
 			<run>
 				<include name="json" />
@@ -10,7 +10,7 @@
 			</run>
 		</groups>
 		<packages>
-			<package name="org.jtester.json.*" />
+			<package name="org.test4j.json.*" />
 		</packages>
 	</test>
 </suite>

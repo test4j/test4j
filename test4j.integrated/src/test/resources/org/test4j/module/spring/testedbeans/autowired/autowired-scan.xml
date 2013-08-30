@@ -10,7 +10,7 @@
 	default-autowire="byType">
 
 
-	<context:component-scan base-package="org.jtester.module.spring.testedbeans.autowired">
-		<context:include-filter type="regex" expression="org.jtester.module.spring.testedbeans.autowired.*" />
+	<context:component-scan base-package="org.test4j.module.spring.testedbeans.autowired">
+		<context:include-filter type="regex" expression="org.test4j.module.spring.testedbeans.autowired.*" />
 	</context:component-scan>
 </beans>

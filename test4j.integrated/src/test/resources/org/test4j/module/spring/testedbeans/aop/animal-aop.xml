@@ -2,11 +2,11 @@
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://www.springframework.org/schema/beans
 		http://www.springframework.org/schema/beans/spring-beans-2.5.xsd">
-	<bean id="tiger" class="org.jtester.module.spring.testedbeans.aop.Cat">
+	<bean id="tiger" class="org.test4j.module.spring.testedbeans.aop.Cat">
 		<property name="species" value="tiger" />
 		<property name="colour" value="tear stripes" />
 	</bean>
-	<bean id="albatross" class="org.jtester.module.spring.testedbeans.aop.Seabird">
+	<bean id="albatross" class="org.test4j.module.spring.testedbeans.aop.Seabird">
 		<property name="name" value="albatross" />
 	</bean>
 	
@@ -22,7 +22,7 @@
 	</bean>
 	
 	<!-- Advices -->
-	<bean id="animalAdvice" class="org.jtester.module.spring.testedbeans.aop.AnimalAdvice" />
+	<bean id="animalAdvice" class="org.test4j.module.spring.testedbeans.aop.AnimalAdvice" />
 	
 	<!-- Advisor -->
 	<bean id="animalAdvisor" class="org.springframework.aop.support.DefaultPointcutAdvisor">

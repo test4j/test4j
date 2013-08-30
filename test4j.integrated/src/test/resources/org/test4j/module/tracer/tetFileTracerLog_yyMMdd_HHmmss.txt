@@ -1,4 +1,4 @@
-#START_INPUT#org.jtester.module.tracer.LogService#getUser#2
+#START_INPUT#org.test4j.module.tracer.LogService#getUser#2
 #START_PARAMETER#1
 1
 #END_PARAMETER
@@ -6,7 +6,7 @@
 'hello'
 #END_PARAMETER
 #END_INPUT
-#START_INPUT#org.jtester.module.tracer.LogService#getUserInternal#2
+#START_INPUT#org.test4j.module.tracer.LogService#getUserInternal#2
 #START_PARAMETER#1
 1
 #END_PARAMETER
@@ -17,9 +17,9 @@
 #START_SQL
 select * from tdd_user
 #END_SQL
-#START_RETURN#org.jtester.module.tracer.LogService#getUserInternal
+#START_RETURN#org.test4j.module.tracer.LogService#getUserInternal
 ['user1','user2']
 #END_RETURN
-#START_EXCEPTION#org.jtester.module.tracer.LogService#getUserInternal
+#START_EXCEPTION#org.test4j.module.tracer.LogService#getUserInternal
 detail message
 #END_EXCEPTION

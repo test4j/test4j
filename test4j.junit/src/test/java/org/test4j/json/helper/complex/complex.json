@@ -2,7 +2,7 @@
     "#class":"list@b32ef3",
     "#value":[
         {
-            "#class":"org.jtester.json.helper.complex.ComplexPoJo@b32ed4",
+            "#class":"org.test4j.json.helper.complex.ComplexPoJo@b32ed4",
             "id":null,
             "gmtCreate":null,
             "creator":null,

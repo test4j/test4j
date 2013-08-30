@@ -1,9 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd">
-<suite name="JTester">
-    <test name="mockbean">
-        <classes>
-            <class name="org.jtester.unitils.spring.MockBeanByNameTest_Mock"/>
-            <class name="org.jtester.unitils.spring.MockBeanByNameTest_NoMock"/>
-        </classes>
-    </test>
+<suite name="test4j">
+	<test name="mockbean">
+		<classes>
+			<class name="org.test4j.module.spring.MockBeanByNameTest_Mock" />
+			<class name="org.test4j.module.spring.MockBeanByNameTest_NoMock" />
+		</classes>
+	</test>
 </suite>

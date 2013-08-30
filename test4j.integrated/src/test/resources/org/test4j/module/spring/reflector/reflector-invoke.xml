@@ -6,5 +6,5 @@
  http://www.sprin gframework.org/schema/tx http://www.sprin gframework.org/schema/tx/sprin g-tx-2.0.xsd "
 	default-dependency-check="none" default-lazy-init="false" default-autowire="byName">
 
-	<bean id="myService" class="org.jtester.module.spring.annotations.ExMyServciceImpl" />
+	<bean id="myService" class="org.test4j.module.spring.annotations.ExMyServciceImpl" />
 </beans>
