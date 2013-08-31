@@ -8,7 +8,6 @@ import org.junit.Test;
 import org.test4j.junit.annotations.DataFrom;
 import org.test4j.module.core.ICoreInitial;
 import org.test4j.module.core.TestContext;
-import org.test4j.module.jmockit.utility.JMockitModuleHelper;
 import org.test4j.spec.ISpec;
 import org.test4j.spec.ISpecExecutorFactory;
 import org.test4j.spec.SharedData;
@@ -97,9 +96,5 @@ public abstract class JSpec extends Test4J implements ISpec {
     final DataProviderIterator<IScenario> scenariosOfStorySpec() {
         DataProviderIterator<IScenario> it = specFactory.findScenario(this.getClass());
         return it;
-    }
-
-    static {
-        JMockitModuleHelper.getJMockitJavaagentHit();
     }
 }

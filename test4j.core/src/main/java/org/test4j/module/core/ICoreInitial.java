@@ -2,7 +2,6 @@ package org.test4j.module.core;
 
 import org.test4j.module.database.dbop.IDBOperator;
 import org.test4j.module.database.dbop.IInsertOp;
-import org.test4j.module.jmockit.utility.JMockitModuleHelper;
 import org.test4j.module.spring.util.ISpringHelper;
 import org.test4j.spec.ISpecExecutorFactory;
 import org.test4j.tools.commons.ConfigHelper;
@@ -66,9 +65,5 @@ public class ICoreInitial {
         } catch (ClassNotFoundException e) {
             throw new RuntimeException(e);
         }
-    }
-
-    static {
-        JMockitModuleHelper.getJMockitJavaagentHit();
     }
 }

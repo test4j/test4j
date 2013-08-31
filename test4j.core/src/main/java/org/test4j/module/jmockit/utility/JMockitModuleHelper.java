@@ -32,7 +32,7 @@ public class JMockitModuleHelper {
         }
     }
 
-    private static final Pattern JAR_REGEX      = Pattern.compile(".*test4j\\.nodep[-.\\d]*.jar");
+    private static final Pattern JAR_REGEX      = Pattern.compile(".*test4j\\.nodep[-._\\d]*(-SNAPSHOT)?.jar");
     private static final String  Nodep_Jar_Path = "test4j.nodep.jar";
 
     private static String        hitsMessage    = null;
