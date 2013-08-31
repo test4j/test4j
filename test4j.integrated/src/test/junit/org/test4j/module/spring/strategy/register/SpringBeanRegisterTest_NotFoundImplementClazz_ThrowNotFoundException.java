@@ -17,7 +17,7 @@ import org.test4j.module.spring.annotations.SpringContext;
 @Ignore
 @SpringContext({ "org/test4j/module/spring/testedbeans/xml/data-source.xml" })
 @AutoBeanInject(maps = { @BeanMap(intf = "**.*Service", impl = "**.*ServiceImpl") }, ignoreNotFound = false)
-public class SpringBeanRegisterTest_NotFoundImplementClazz_ThrowNotFoundException implements Test4J {
+public class SpringBeanRegisterTest_NotFoundImplementClazz_ThrowNotFoundException extends Test4J {
     @SpringBeanByName
     UserService userService;
 

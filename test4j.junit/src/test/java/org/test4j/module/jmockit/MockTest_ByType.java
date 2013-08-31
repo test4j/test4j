@@ -8,13 +8,13 @@ import org.test4j.fortest.beans.Person;
 import org.test4j.junit.Test4J;
 import org.test4j.module.inject.annotations.Inject;
 
-public class MockTest_ByType implements Test4J {
+public class MockTest_ByType extends Test4J {
     // @TestedObject
-    private Person person = new Person();
+    private final Person person = new Person();
 
     @Mocked
     @Inject(targets = "person")
-    private ISpeak speak;
+    private ISpeak       speak;
 
     @Test
     public void sayHello() {

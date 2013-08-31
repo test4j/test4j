@@ -7,7 +7,7 @@ import org.test4j.junit.Test4J;
 import org.test4j.module.spring.testedbeans.aop.Bird;
 import org.test4j.module.spring.testedbeans.aop.Cat;
 
-public class AutoProxyTest implements Test4J {
+public class AutoProxyTest extends Test4J {
     @Test
     public void testAutoProxyTest() {
         String[] paths = { "org/test4j/module/spring/testedbeans/aop/animal-aop.xml" };

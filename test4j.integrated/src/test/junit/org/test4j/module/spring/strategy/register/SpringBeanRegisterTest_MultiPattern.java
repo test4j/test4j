@@ -17,7 +17,7 @@ import org.test4j.module.spring.annotations.SpringContext;
 @AutoBeanInject(maps = { @BeanMap(intf = "**.*Service", impl = "**.*ServiceImpl"),
         @BeanMap(intf = "**.*Dao", impl = "**.impl.*DaoImpl"), /** <br> */
         @BeanMap(intf = "**.*Dao", impl = "**.*DaoImpl") })
-public class SpringBeanRegisterTest_MultiPattern implements Test4J {
+public class SpringBeanRegisterTest_MultiPattern extends Test4J {
     @SpringBeanByName
     private UserService userService;
 

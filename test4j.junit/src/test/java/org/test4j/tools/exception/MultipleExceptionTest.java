@@ -5,10 +5,9 @@ import java.util.Iterator;
 import org.junit.Test;
 import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
-import org.test4j.tools.exception.MultipleException;
 
 @SuppressWarnings("rawtypes")
-public class MultipleExceptionTest implements Test4J {
+public class MultipleExceptionTest extends Test4J {
 
     @Test
     @DataFrom("dataGetMultipleException")

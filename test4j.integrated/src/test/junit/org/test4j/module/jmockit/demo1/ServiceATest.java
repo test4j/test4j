@@ -16,12 +16,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.test4j.junit.Test4J;
 import org.test4j.module.core.utility.MessageHelper;
-import org.test4j.module.jmockit.demo1.Database;
-import org.test4j.module.jmockit.demo1.EntityX;
-import org.test4j.module.jmockit.demo1.ServiceA;
-import org.test4j.module.jmockit.demo1.ServiceB;
 
-public class ServiceATest implements Test4J {
+public class ServiceATest extends Test4J {
 
     @MockClass(realClass = Database.class)
     public static class MockDatabase {

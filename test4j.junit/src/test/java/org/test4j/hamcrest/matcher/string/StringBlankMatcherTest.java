@@ -3,15 +3,13 @@ package org.test4j.hamcrest.matcher.string;
 import java.util.Iterator;
 
 import org.junit.Test;
-import org.test4j.hamcrest.matcher.string.StringBlankMatcher;
-import org.test4j.hamcrest.matcher.string.StringMode;
 import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
 import ext.test4j.hamcrest.MatcherAssert;
 
 @SuppressWarnings("rawtypes")
-public class StringBlankMatcherTest implements Test4J {
+public class StringBlankMatcherTest extends Test4J {
 
     @Test
     @DataFrom("blankString_true")

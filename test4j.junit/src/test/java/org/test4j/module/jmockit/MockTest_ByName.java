@@ -9,17 +9,17 @@ import org.test4j.fortest.formock.SpringBeanService.SpringBeanServiceImpl1;
 import org.test4j.junit.Test4J;
 import org.test4j.module.inject.annotations.Inject;
 
-public class MockTest_ByName implements Test4J {
+public class MockTest_ByName extends Test4J {
 
-    private SpringBeanService springBeanService = new SpringBeanServiceImpl1();
+    private final SpringBeanService springBeanService = new SpringBeanServiceImpl1();
 
     @Inject(targets = "springBeanService", properties = "dependency1")
     @Mocked
-    private SomeInterface     someInterface1;
+    private SomeInterface           someInterface1;
 
     @Inject(targets = "springBeanService", properties = "dependency2")
     @Mocked
-    private SomeInterface     someInterface2;
+    private SomeInterface           someInterface2;
 
     @Test
     public void testMock_ByName() {

@@ -10,7 +10,7 @@ import org.test4j.junit.Test4J;
 import ext.test4j.hamcrest.MatcherAssert;
 import ext.test4j.hamcrest.core.IsEqual;
 
-public class JmockModuleTest implements Test4J {
+public class JmockModuleTest extends Test4J {
     @Mocked
     private ISpeak say;
 

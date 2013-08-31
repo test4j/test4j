@@ -12,11 +12,10 @@ import mockit.Mockit;
 
 import org.junit.Test;
 import org.test4j.junit.Test4J;
-import org.test4j.tools.commons.DateHelper;
 import org.test4j.tools.commons.DateUtilTest.MockDateUtil;
 
 @SuppressWarnings("unused")
-public class DateUtilTest_jmockit implements Test4J {
+public class DateUtilTest_jmockit extends Test4J {
 
     @Test
     public void testCurrDateStr_mockExpectations() {

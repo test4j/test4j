@@ -7,7 +7,7 @@ import org.test4j.junit.Test4J;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.jmockit.extend.JMocketVerifications;
 
-public class JMocketVerificationsTest implements Test4J {
+public class JMocketVerificationsTest extends Test4J {
 
     @NonStrict
     Hello hello1;

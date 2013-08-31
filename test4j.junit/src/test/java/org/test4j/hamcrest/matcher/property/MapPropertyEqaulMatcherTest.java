@@ -13,7 +13,7 @@ import org.test4j.junit.Test4J;
 import org.test4j.tools.commons.ListHelper;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })
-public class MapPropertyEqaulMatcherTest implements Test4J {
+public class MapPropertyEqaulMatcherTest extends Test4J {
 
     @Test
     public void testMatches() {

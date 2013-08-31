@@ -5,7 +5,7 @@ import org.test4j.json.JSON;
 import org.test4j.json.helper.JSONFeature;
 import org.test4j.junit.Test4J;
 
-public class EnumDecoderTest implements Test4J {
+public class EnumDecoderTest extends Test4J {
 
     @Test
     public void testDecode() {

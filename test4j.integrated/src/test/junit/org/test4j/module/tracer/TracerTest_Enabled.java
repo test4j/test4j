@@ -3,6 +3,7 @@ package org.test4j.module.tracer;
 import java.io.FileNotFoundException;
 
 import mockit.Mock;
+import mockit.MockUp;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -11,6 +12,7 @@ import org.test4j.database.table.ITable;
 import org.test4j.fortest.hibernate.User;
 import org.test4j.fortest.hibernate.UserService;
 import org.test4j.junit.Test4J;
+import org.test4j.module.ICore.DataMap;
 import org.test4j.module.spring.annotations.SpringBeanByType;
 import org.test4j.module.spring.annotations.SpringContext;
 import org.test4j.tools.commons.ResourceHelper;
@@ -18,7 +20,7 @@ import org.test4j.tools.commons.ResourceHelper;
 @Ignore
 @SuppressWarnings("serial")
 @SpringContext({ "classpath:/org/test4j/fortest/hibernate/project.xml" })
-public class TracerTest_Enabled implements Test4J {
+public class TracerTest_Enabled extends Test4J {
     @SpringBeanByType
     private UserService userService;
 

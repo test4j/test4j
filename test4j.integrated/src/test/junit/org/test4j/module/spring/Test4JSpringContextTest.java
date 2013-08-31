@@ -12,7 +12,7 @@ import org.test4j.module.spring.annotations.SpringContext;
 @SpringContext({ "org/test4j/module/spring/testedbeans/xml/beans.xml",
         "org/test4j/module/spring/testedbeans/xml/data-source.xml" })
 @AutoBeanInject(maps = @BeanMap(intf = "**.UserAnotherDao", impl = "**.UserAnotherDaoImpl"))
-public class Test4JSpringContextTest implements Test4J {
+public class Test4JSpringContextTest extends Test4J {
     @SpringBeanByName
     private UserService    userService;
 

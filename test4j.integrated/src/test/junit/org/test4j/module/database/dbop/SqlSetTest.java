@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.test4j.database.table.ITable;
 import org.test4j.junit.Test4J;
 
-public class SqlSetTest implements Test4J {
+public class SqlSetTest extends Test4J {
 
     @Test
     public void testReadFrom() {

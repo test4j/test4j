@@ -7,11 +7,9 @@ import org.junit.Test;
 import org.test4j.fortest.beans.Manager;
 import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
-import org.test4j.tools.commons.ClazzHelper;
-import org.test4j.tools.commons.FieldHelper;
 import org.test4j.tools.exception.NoSuchFieldRuntimeException;
 
-public class FieldHelperTest implements Test4J {
+public class FieldHelperTest extends Test4J {
 
     @Test
     @DataFrom("getFieldData")
@@ -42,26 +40,26 @@ public class FieldHelperTest implements Test4J {
 
     @SuppressWarnings("unused")
     public static class ParentClaz {
-        static String  static_field         = "ParentClaz";
+        static String        static_field         = "ParentClaz";
 
-        public String  public_field         = "ParentClaz";
+        public String        public_field         = "ParentClaz";
 
-        private String private_field        = "ParentClaz";
+        private final String private_field        = "ParentClaz";
         // only parent have
-        static String  parent_static_field  = "ParentClaz";
+        static String        parent_static_field  = "ParentClaz";
 
-        public String  parent_public_field  = "ParentClaz";
+        public String        parent_public_field  = "ParentClaz";
 
-        private String parent_private_field = "ParentClaz";
+        private final String parent_private_field = "ParentClaz";
     }
 
     @SuppressWarnings("unused")
     public static class ChildClaz extends ParentClaz {
-        static String  static_field  = "ChildClaz";
+        static String        static_field  = "ChildClaz";
 
-        public String  public_field  = "ChildClaz";
+        public String        public_field  = "ChildClaz";
 
-        private String private_field = "ChildClaz";
+        private final String private_field = "ChildClaz";
     }
 
     @Test

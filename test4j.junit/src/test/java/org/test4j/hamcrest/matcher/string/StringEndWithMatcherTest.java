@@ -1,14 +1,12 @@
 package org.test4j.hamcrest.matcher.string;
 
 import org.junit.Test;
-import org.test4j.hamcrest.matcher.string.StringEndWithMatcher;
-import org.test4j.hamcrest.matcher.string.StringMode;
 import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
 import ext.test4j.hamcrest.MatcherAssert;
 
-public class StringEndWithMatcherTest implements Test4J {
+public class StringEndWithMatcherTest extends Test4J {
 
     @Test
     @DataFrom("endWithDatas")

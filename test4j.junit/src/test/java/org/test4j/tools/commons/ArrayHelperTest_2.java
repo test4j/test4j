@@ -10,11 +10,9 @@ import org.junit.Test;
 import org.test4j.fortest.beans.User;
 import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
-import org.test4j.tools.commons.ArrayHelper;
-import org.test4j.tools.commons.ListHelper;
 
 @SuppressWarnings({ "rawtypes" })
-public class ArrayHelperTest_2 implements Test4J {
+public class ArrayHelperTest_2 extends Test4J {
     @Test
     @DataFrom("arrayProvider")
     public void isArray(Object array) {

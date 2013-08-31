@@ -7,8 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 import org.test4j.junit.Test4J;
 
-public class ObjectContainerAssertTest_ItemMatch implements Test4J {
-    private List<String> list = new ArrayList<String>();
+public class ObjectContainerAssertTest_ItemMatch extends Test4J {
+    private final List<String> list = new ArrayList<String>();
 
     @Before
     public void setup() {

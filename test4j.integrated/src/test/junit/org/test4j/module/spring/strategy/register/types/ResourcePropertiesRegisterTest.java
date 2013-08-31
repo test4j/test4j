@@ -12,7 +12,7 @@ import org.test4j.module.spring.testedbeans.resource.UserServiceResourceImpl;
 @SpringContext({ "org/test4j/module/spring/testedbeans/xml/data-source.xml",
         "org/test4j/module/spring/testedbeans/xml/annotation-config.xml" })
 @AutoBeanInject(maps = { @BeanMap(intf = "**.*", impl = "**.*Impl") })
-public class ResourcePropertiesRegisterTest implements Test4J {
+public class ResourcePropertiesRegisterTest extends Test4J {
 
     @SpringBeanByName(claz = UserServiceResourceImpl.class)
     UserService userService;

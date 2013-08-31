@@ -7,7 +7,7 @@ import org.springframework.aop.framework.ProxyFactory;
 import org.test4j.junit.Test4J;
 import org.test4j.module.core.utility.MessageHelper;
 
-public class SpringAroundTest implements Test4J {
+public class SpringAroundTest extends Test4J {
 
     @Test
     public void testSpringAround() {
@@ -22,6 +22,7 @@ public class SpringAroundTest implements Test4J {
 
     public static class MethodTracer implements MethodInterceptor {
 
+        @Override
         public Object invoke(MethodInvocation invocation) throws Throwable {
             MessageHelper.info("before invoke");
             Object o = invocation.proceed();

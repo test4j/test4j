@@ -8,7 +8,7 @@ import org.test4j.module.spring.annotations.SpringContext;
 
 @SpringContext
 @AutoBeanInject
-public class SpringBeanRegisterTest_Constructor2 implements Test4J {
+public class SpringBeanRegisterTest_Constructor2 extends Test4J {
 
     @SpringBeanByName
     OuterClass outer;

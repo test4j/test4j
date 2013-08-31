@@ -5,9 +5,8 @@ import mockit.Mocked;
 
 import org.junit.Test;
 import org.test4j.junit.Test4J;
-import org.test4j.module.jmockit.dynamic.Collaborator;
 
-public class CollaboratorTest implements Test4J {
+public class CollaboratorTest extends Test4J {
     @Test
     public void dynamicallyMockAClass() {
         new Expectations(Collaborator.class) {

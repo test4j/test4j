@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
-public class CollectionAssertTest_HasItem_DataProvider implements Test4J {
+public class CollectionAssertTest_HasItem_DataProvider extends Test4J {
 
     @SuppressWarnings("rawtypes")
     public static Iterator provide_hasitems() {

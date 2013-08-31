@@ -14,7 +14,7 @@ import org.test4j.tools.datagen.DataSet;
 import org.test4j.tools.datagen.EmptyDataSet;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })
-public class DataGeneratorTest implements Test4J {
+public class DataGeneratorTest extends Test4J {
 
     @Test
     @DataFrom("dataGenerator")

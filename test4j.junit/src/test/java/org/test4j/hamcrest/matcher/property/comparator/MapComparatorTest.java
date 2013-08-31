@@ -8,7 +8,7 @@ import org.test4j.json.encoder.beans.test.User;
 import org.test4j.junit.Test4J;
 
 @SuppressWarnings({ "rawtypes", "unchecked", "serial" })
-public class MapComparatorTest implements Test4J {
+public class MapComparatorTest extends Test4J {
     @Test
     public void testMap() {
         want.object(new HashMap() {

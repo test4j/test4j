@@ -6,7 +6,7 @@ import org.junit.Test;
 import org.test4j.json.JSON;
 import org.test4j.junit.Test4J;
 
-public class FileDecoderTest implements Test4J {
+public class FileDecoderTest extends Test4J {
 
     @Test
     public void testDecodeSimpleValue() {

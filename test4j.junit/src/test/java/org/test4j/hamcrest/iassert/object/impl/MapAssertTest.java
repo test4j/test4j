@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.test4j.junit.Test4J;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })
-public class MapAssertTest implements Test4J {
+public class MapAssertTest extends Test4J {
     private Map<String, String> maps = null;
 
     @Before

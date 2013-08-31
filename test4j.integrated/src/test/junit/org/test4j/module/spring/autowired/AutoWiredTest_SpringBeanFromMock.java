@@ -14,7 +14,7 @@ import org.test4j.module.spring.testedbeans.autowired.IUserService;
 import org.test4j.module.spring.testedbeans.autowired.UserDaoImpl;
 
 @SpringContext({ "org/test4j/module/spring/testedbeans/autowired/autowired.xml" })
-public class AutoWiredTest_SpringBeanFromMock implements Test4J {
+public class AutoWiredTest_SpringBeanFromMock extends Test4J {
 
     @SpringBeanByType
     IUserService userService;

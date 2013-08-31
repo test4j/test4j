@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.test4j.json.JSON;
 import org.test4j.junit.Test4J;
 
-public class ByteArrayDecoderTest implements Test4J {
+public class ByteArrayDecoderTest extends Test4J {
 
     @Test
     public void testParseFromJSONArray() {

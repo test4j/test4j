@@ -11,7 +11,7 @@ import org.test4j.junit.Test4J;
  * @author darui.wudr
  */
 @SuppressWarnings({ "rawtypes" })
-public class ClazzFinderTest implements Test4J {
+public class ClazzFinderTest extends Test4J {
     @Test
     public void findClazz_1() {
         String packagename = ClazzFinder.class.getPackage().getName();

@@ -13,7 +13,7 @@ import org.test4j.module.spring.annotations.SpringContext;
 
 @SpringContext({ "org/test4j/module/spring/testedbeans/aop/proxybeans.xml",
         "org/test4j/module/spring/testedbeans/xml/data-source.xml" })
-public class SpringBeanFromFactoryTest implements Test4J {
+public class SpringBeanFromFactoryTest extends Test4J {
 
     UserDao userDao = new UserDao() {
                         @Override

@@ -9,10 +9,8 @@ import mockit.Verifications;
 
 import org.junit.Test;
 import org.test4j.junit.Test4J;
-import org.test4j.module.jmockit.demo.InternalInstancesDemo;
-import org.test4j.module.jmockit.demo.Service;
 
-public class InternalInstancesDemoTest implements Test4J {
+public class InternalInstancesDemoTest extends Test4J {
     @Mocked
     @Capturing(maxInstances = 10)
     Service service;

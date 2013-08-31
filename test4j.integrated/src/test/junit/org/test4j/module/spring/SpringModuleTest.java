@@ -8,7 +8,7 @@ import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.annotations.SpringContext;
 
 @SpringContext({ "file:./extern-spring/project.xml" })
-public class SpringModuleTest implements Test4J {
+public class SpringModuleTest extends Test4J {
     @SpringBeanByName("addressService")
     private AddressService addressService;
 

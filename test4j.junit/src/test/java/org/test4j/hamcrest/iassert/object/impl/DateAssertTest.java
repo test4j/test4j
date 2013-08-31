@@ -17,7 +17,7 @@ import org.test4j.module.inject.annotations.Inject;
 import org.test4j.tools.commons.DateHelper;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })
-public class DateAssertTest implements Test4J {
+public class DateAssertTest extends Test4J {
     private static DateFormat format  = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
     private static Date       date    = null;
     private static Calendar   cal     = null;
@@ -31,7 +31,7 @@ public class DateAssertTest implements Test4J {
         }
     }
 
-    private TestAppClaz       testApp = new TestAppClaz();
+    private final TestAppClaz testApp = new TestAppClaz();
 
     @Mocked
     @Inject(targets = "testApp")

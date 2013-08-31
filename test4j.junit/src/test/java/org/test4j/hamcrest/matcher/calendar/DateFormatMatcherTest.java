@@ -3,7 +3,6 @@ package org.test4j.hamcrest.matcher.calendar;
 import java.util.Calendar;
 
 import org.junit.Test;
-import org.test4j.hamcrest.matcher.calendar.DateFormatMatcher;
 import org.test4j.junit.Test4J;
 import org.test4j.module.Test4JException;
 import org.test4j.tools.commons.DateUtilTest;
@@ -11,7 +10,7 @@ import org.test4j.tools.commons.DateUtilTest;
 import ext.test4j.hamcrest.MatcherAssert;
 
 @SuppressWarnings("unchecked")
-public class DateFormatMatcherTest implements Test4J {
+public class DateFormatMatcherTest extends Test4J {
     static Calendar cal = DateUtilTest.mockCalendar(2010, 1, 3);
 
     @Test

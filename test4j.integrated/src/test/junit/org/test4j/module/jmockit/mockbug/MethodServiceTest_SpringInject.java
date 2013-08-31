@@ -4,7 +4,6 @@ import mockit.Mock;
 
 import org.junit.Test;
 import org.test4j.junit.Test4J;
-import org.test4j.module.jmockit.mockbug.TestedMethodService;
 import org.test4j.module.spring.annotations.AutoBeanInject;
 import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.annotations.SpringContext;
@@ -12,7 +11,7 @@ import org.test4j.module.spring.annotations.SpringInitMethod;
 
 @SpringContext
 @AutoBeanInject
-public class MethodServiceTest_SpringInject implements Test4J {
+public class MethodServiceTest_SpringInject extends Test4J {
     @SpringBeanByName
     TestedMethodService service;
 

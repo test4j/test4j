@@ -5,12 +5,11 @@ import java.util.HashMap;
 
 import org.junit.Test;
 import org.test4j.json.JSON;
-import org.test4j.json.decoder.single.BigIntegerDecoder;
 import org.test4j.json.helper.JSONFeature;
 import org.test4j.json.helper.JSONMap;
 import org.test4j.junit.Test4J;
 
-public class BigIntegerDecoderTest implements Test4J {
+public class BigIntegerDecoderTest extends Test4J {
 
     @SuppressWarnings("serial")
     @Test

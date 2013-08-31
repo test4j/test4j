@@ -5,7 +5,7 @@ import org.test4j.json.encoder.beans.test.User;
 import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
-public class ClazzMapTest implements Test4J {
+public class ClazzMapTest extends Test4J {
 
     @Test
     @DataFrom("type_data")

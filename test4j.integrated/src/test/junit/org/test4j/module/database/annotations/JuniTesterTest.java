@@ -20,7 +20,7 @@ import org.test4j.module.spring.annotations.SpringInitMethod;
         "org/test4j/module/spring/testedbeans/xml/load-data-init.xml" })
 @AutoBeanInject
 @SuppressWarnings("serial")
-public class JuniTesterTest implements Test4J {
+public class JuniTesterTest extends Test4J {
 
     @SpringBeanByName(claz = ResourceLoaderEx.class)
     ResourceLoader resourceLoader;

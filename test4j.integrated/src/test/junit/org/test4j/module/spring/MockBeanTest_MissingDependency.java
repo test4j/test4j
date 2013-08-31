@@ -12,7 +12,7 @@ import org.test4j.module.spring.annotations.SpringContext;
 
 @Ignore
 @SpringContext({ "org/test4j/module/spring/testedbeans/xml/mockbeans-withdependency.xml" })
-public class MockBeanTest_MissingDependency implements Test4J {
+public class MockBeanTest_MissingDependency extends Test4J {
     @SpringBeanByName
     private SpringBeanService springBeanService1;
 

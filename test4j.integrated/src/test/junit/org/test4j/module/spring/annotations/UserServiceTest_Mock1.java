@@ -11,7 +11,7 @@ import org.test4j.module.inject.annotations.Inject;
 
 @Ignore
 @SpringContext({ "classpath:/org/test4j/fortest/hibernate/project.xml" })
-public class UserServiceTest_Mock1 implements Test4J {
+public class UserServiceTest_Mock1 extends Test4J {
     @SpringBeanByName("userService")
     private UserService    userService;
 

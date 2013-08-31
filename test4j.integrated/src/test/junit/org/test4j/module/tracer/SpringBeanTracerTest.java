@@ -7,13 +7,11 @@ import org.springframework.aop.Advisor;
 import org.springframework.aop.framework.ProxyFactory;
 import org.springframework.aop.support.DefaultPointcutAdvisor;
 import org.test4j.junit.Test4J;
-import org.test4j.module.tracer.Hello;
-import org.test4j.module.tracer.NoNullConstructor;
 import org.test4j.module.tracer.spring.SpringBeanTracer;
 import org.test4j.module.tracer.spring.TracerMethodRegexPointcut;
 
 @SuppressWarnings({ "rawtypes" })
-public class SpringBeanTracerTest implements Test4J {
+public class SpringBeanTracerTest extends Test4J {
     @Test
     public void testAround() {
         Hello target = new Hello();

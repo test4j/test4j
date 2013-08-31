@@ -8,12 +8,11 @@ import java.util.Map;
 
 import org.junit.Test;
 import org.test4j.fortest.beans.User;
-import org.test4j.hamcrest.matcher.property.PropertiesArrayRefEqMatcher;
 import org.test4j.junit.Test4J;
 
 import ext.test4j.hamcrest.MatcherAssert;
 
-public class PropertiesArrayRefEqMatcherTest implements Test4J {
+public class PropertiesArrayRefEqMatcherTest extends Test4J {
     PropertiesArrayRefEqMatcher matcher = new PropertiesArrayRefEqMatcher(new String[] { "first", "last" },
                                                 new String[][] { { "aaa", "bbb" }, { "ccc", "ddd" } });
 

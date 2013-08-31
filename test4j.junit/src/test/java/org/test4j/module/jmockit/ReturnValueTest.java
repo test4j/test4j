@@ -13,7 +13,7 @@ import org.test4j.junit.Test4J;
 import org.test4j.module.inject.annotations.Inject;
 
 @SuppressWarnings("unchecked")
-public class ReturnValueTest implements Test4J {
+public class ReturnValueTest extends Test4J {
 
     public SomeService   someService = new SomeService();
 
@@ -112,10 +112,12 @@ public class ReturnValueTest implements Test4J {
     }
 
     public static class SomeInterfaceImpl implements SomeInterface {
+        @Override
         public ComplexObject someCall(String name, List<?> list, HashMap<String, String> map) {
             return ComplexObject.instance();
         }
 
+        @Override
         public void someCallException() throws IOException {
         }
     }

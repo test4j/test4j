@@ -1,14 +1,12 @@
 package org.test4j.hamcrest.matcher.string;
 
 import org.junit.Test;
-import org.test4j.hamcrest.matcher.string.StringEqualMatcher;
-import org.test4j.hamcrest.matcher.string.StringMode;
 import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
 import ext.test4j.hamcrest.MatcherAssert;
 
-public class StringEqualMatcherTest implements Test4J {
+public class StringEqualMatcherTest extends Test4J {
 
     @Test
     @DataFrom("data_StringEqualMatcher_Equals")

@@ -17,7 +17,7 @@ import org.test4j.module.tracer.TracerHelper;
 @Ignore
 @SpringContext({ "org/test4j/module/spring/testedbeans/xml/data-source.xml" })
 @AutoBeanInject(maps = { @BeanMap(intf = "**.*Service", impl = "**.*222Service") })
-public class SpringBeanRegisterTest_InvalidIntfRegex implements Test4J {
+public class SpringBeanRegisterTest_InvalidIntfRegex extends Test4J {
     @SpringBeanByName
     private UserService    userService;
 

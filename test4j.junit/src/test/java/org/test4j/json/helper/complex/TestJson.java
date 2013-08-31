@@ -10,7 +10,7 @@ import org.test4j.junit.Test4J;
 import org.test4j.tools.commons.DateHelper;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class TestJson implements Test4J {
+public class TestJson extends Test4J {
     @Test
     public void testList() {
         ComplexPoJo dbpojo = new ComplexPoJo();

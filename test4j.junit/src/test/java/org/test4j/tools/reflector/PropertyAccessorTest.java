@@ -9,10 +9,9 @@ import org.test4j.json.encoder.beans.test.User;
 import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 import org.test4j.tools.exception.NoSuchFieldRuntimeException;
-import org.test4j.tools.reflector.PropertyAccessor;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })
-public class PropertyAccessorTest implements Test4J {
+public class PropertyAccessorTest extends Test4J {
 
     @Test
     @DataFrom("testGetPropertyDatas")

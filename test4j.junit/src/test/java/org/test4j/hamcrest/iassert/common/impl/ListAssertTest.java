@@ -12,7 +12,7 @@ import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.junit.Test4J;
 
 @SuppressWarnings({ "serial", "rawtypes", "unchecked" })
-public class ListAssertTest implements Test4J {
+public class ListAssertTest extends Test4J {
     List<User> users;
 
     @Before

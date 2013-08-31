@@ -9,7 +9,7 @@ import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
 @SuppressWarnings({ "serial", "rawtypes" })
-public class AbstractDataMapTest implements Test4J {
+public class AbstractDataMapTest extends Test4J {
 
     @Test
     @DataFrom("dataForConvert")

@@ -12,7 +12,7 @@ import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
 @SuppressWarnings({ "rawtypes" })
-public class AssertTest implements Test4J {
+public class AssertTest extends Test4J {
     @Test
     @DataFrom("assertClass")
     public void wanted(IAssert<?, ?> as, Class claz) {

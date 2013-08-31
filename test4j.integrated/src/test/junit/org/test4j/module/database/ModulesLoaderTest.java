@@ -10,7 +10,7 @@ import org.test4j.junit.Test4J;
 import org.test4j.module.core.utility.ModulesLoader;
 import org.test4j.tools.commons.ConfigHelper;
 
-public class ModulesLoaderTest implements Test4J {
+public class ModulesLoaderTest extends Test4J {
     /**
      * "测试database.type未设置时,database和dbfit模块失效"
      */

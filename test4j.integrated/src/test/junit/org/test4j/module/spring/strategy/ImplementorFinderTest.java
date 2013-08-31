@@ -13,7 +13,7 @@ import org.test4j.module.spring.annotations.AutoBeanInject.BeanMap;
 import org.test4j.module.spring.exception.FindBeanImplClassException;
 
 @SuppressWarnings({ "rawtypes" })
-public class ImplementorFinderTest implements Test4J {
+public class ImplementorFinderTest extends Test4J {
 
     @Test
     public void testSplitIntfClazzByExpression() {

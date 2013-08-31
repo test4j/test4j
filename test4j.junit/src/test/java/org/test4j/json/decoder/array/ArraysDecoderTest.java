@@ -8,7 +8,7 @@ import org.test4j.json.encoder.beans.test.User;
 import org.test4j.junit.Test4J;
 
 @SuppressWarnings("rawtypes")
-public class ArraysDecoderTest implements Test4J {
+public class ArraysDecoderTest extends Test4J {
 
     @Test
     public void testParseFromJSONArray_SpecArrayClaz() {

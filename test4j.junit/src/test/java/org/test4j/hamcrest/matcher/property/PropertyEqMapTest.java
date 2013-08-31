@@ -5,7 +5,7 @@ import org.test4j.fortest.beans.User;
 import org.test4j.junit.Test4J;
 
 @SuppressWarnings("serial")
-public class PropertyEqMapTest implements Test4J {
+public class PropertyEqMapTest extends Test4J {
     @Test(expected = AssertionError.class)
     public void testPropertyEqMap() {
         User user = new User();

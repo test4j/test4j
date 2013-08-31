@@ -11,11 +11,10 @@ import mockit.UsingMocksAndStubs;
 
 import org.junit.Test;
 import org.test4j.junit.Test4J;
-import org.test4j.tools.commons.DateHelper;
 import org.test4j.tools.commons.DateUtilTest_MockClass.MockDateUtil;
 
 @UsingMocksAndStubs({ MockDateUtil.class })
-public class DateUtilTest_MockClass implements Test4J {
+public class DateUtilTest_MockClass extends Test4J {
     @MockClass(realClass = DateHelper.class)
     public static class MockDateUtil {
         @Mock

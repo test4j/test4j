@@ -5,12 +5,11 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 import org.test4j.json.encoder.JSONEncoder;
-import org.test4j.json.encoder.array.ObjectArrayEncoder;
 import org.test4j.json.helper.JSONFeature;
 import org.test4j.junit.Test4J;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class ShortArrayEncoderTest implements Test4J {
+public class ShortArrayEncoderTest extends Test4J {
     @Test
     public void testEncode() throws Exception {
         short[] values = new short[] { 1234, Short.valueOf("4567") };

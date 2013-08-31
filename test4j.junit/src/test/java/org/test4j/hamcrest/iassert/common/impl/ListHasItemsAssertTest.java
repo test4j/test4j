@@ -9,7 +9,7 @@ import org.test4j.hamcrest.matcher.modes.MatchMode;
 import org.test4j.junit.Test4J;
 
 @SuppressWarnings("rawtypes")
-public class ListHasItemsAssertTest implements Test4J {
+public class ListHasItemsAssertTest extends Test4J {
 
     @Test
     public void testHasItems_objects() {

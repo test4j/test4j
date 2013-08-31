@@ -10,7 +10,7 @@ import org.test4j.junit.Test4J;
 import org.test4j.module.database.bean.TddUser;
 
 @SuppressWarnings("serial")
-public class DBOperatorTest implements Test4J {
+public class DBOperatorTest extends Test4J {
 
     @Test
     public void testClean() {

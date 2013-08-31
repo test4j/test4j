@@ -3,9 +3,8 @@ package org.test4j.tools.commons;
 import org.junit.Test;
 import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
-import org.test4j.tools.commons.StringHelper;
 
-public class StringHelperTest implements Test4J {
+public class StringHelperTest extends Test4J {
 
     @Test
     public void testJoin_Null() {

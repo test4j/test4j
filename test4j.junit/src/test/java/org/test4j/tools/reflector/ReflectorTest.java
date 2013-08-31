@@ -3,7 +3,7 @@ package org.test4j.tools.reflector;
 import org.junit.Test;
 import org.test4j.junit.Test4J;
 
-public class ReflectorTest implements Test4J {
+public class ReflectorTest extends Test4J {
     @Test
     public void setField_privateStaticField() {
         reflector.setStaticField(ClazzForReflectTest.class, "myStatic", "zzzzz");

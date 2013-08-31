@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.test4j.junit.Test4J;
 
 @SpringContext("org/test4j/module/spring/reflector/reflector-invoke.xml")
-public class SuperClazMethodAccessorTest_Invoke implements Test4J {
+public class SuperClazMethodAccessorTest_Invoke extends Test4J {
     @SpringBeanByName
     private ExMyService myService;
 

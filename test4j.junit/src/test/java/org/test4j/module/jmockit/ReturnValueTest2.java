@@ -6,7 +6,7 @@ import mockit.internal.UnexpectedInvocation;
 import org.junit.Test;
 import org.test4j.junit.Test4J;
 
-public class ReturnValueTest2 implements Test4J {
+public class ReturnValueTest2 extends Test4J {
     @Mocked
     private SomeInterface someInterface;
 

@@ -9,7 +9,7 @@ import org.test4j.json.JSON;
 import org.test4j.json.helper.JSONFeature;
 import org.test4j.junit.Test4J;
 
-public class JsonHelperTest_JsonString implements Test4J {
+public class JsonHelperTest_JsonString extends Test4J {
     @Test
     public void fromJson() {
         String filename = "classpath:org/test4j/tools/commons/manager.json";

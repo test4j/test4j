@@ -10,7 +10,7 @@ import org.test4j.module.spring.annotations.SpringContext;
 @Ignore
 @SpringContext
 @AutoBeanInject
-public class SpringBeanRegisterTest_Constructor implements Test4J {
+public class SpringBeanRegisterTest_Constructor extends Test4J {
 
     @SpringBeanByName
     BeanClass bean;

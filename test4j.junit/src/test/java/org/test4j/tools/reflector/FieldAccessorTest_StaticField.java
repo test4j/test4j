@@ -5,9 +5,8 @@ import org.junit.Test;
 import org.test4j.fortest.reflector.TestObject;
 import org.test4j.junit.Test4J;
 import org.test4j.tools.exception.NoSuchFieldRuntimeException;
-import org.test4j.tools.reflector.FieldAccessor;
 
-public class FieldAccessorTest_StaticField implements Test4J {
+public class FieldAccessorTest_StaticField extends Test4J {
 
     private FieldAccessor<Integer> aStaticPrivate;
 

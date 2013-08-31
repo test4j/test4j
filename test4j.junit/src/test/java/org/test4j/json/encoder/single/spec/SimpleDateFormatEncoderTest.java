@@ -5,12 +5,11 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
 import org.junit.Test;
-import org.test4j.json.encoder.single.spec.SimpleDateFormatEncoder;
 import org.test4j.json.helper.JSONFeature;
 import org.test4j.junit.Test4J;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class SimpleDateFormatEncoderTest implements Test4J {
+public class SimpleDateFormatEncoderTest extends Test4J {
     @Test
     public void testEncode() throws Exception {
         SimpleDateFormat df = new SimpleDateFormat("yyyy-MM-dd");

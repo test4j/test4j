@@ -5,10 +5,11 @@ import java.util.Iterator;
 import org.junit.Test;
 import org.test4j.junit.annotations.DataFrom;
 import org.test4j.junit.annotations.Group;
+import org.test4j.module.ICore.DataIterator;
 
 @SuppressWarnings("rawtypes")
 @Group({ "davey.wu" })
-public class Test4JTest_Parameter implements Test4J {
+public class Test4JTest_Parameter extends Test4J {
     /**
      * 验证jmockit带mock参数的方法可以正常运行
      * 

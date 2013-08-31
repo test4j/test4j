@@ -5,13 +5,12 @@ import java.util.List;
 
 import org.junit.Test;
 import org.test4j.fortest.beans.User;
-import org.test4j.hamcrest.matcher.property.PropertyItemMatcher;
 import org.test4j.junit.Test4J;
 
 import ext.test4j.hamcrest.MatcherAssert;
 
 @SuppressWarnings("unchecked")
-public class PropertyMatcherTest implements Test4J {
+public class PropertyMatcherTest extends Test4J {
     PropertyItemMatcher matcher = new PropertyItemMatcher("first", the.collection().hasAllItems("aaa", "bbb"));
 
     @Test

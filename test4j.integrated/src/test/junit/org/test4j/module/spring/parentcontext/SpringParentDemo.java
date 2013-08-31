@@ -6,7 +6,7 @@ import org.test4j.fortest.service.UserServiceImpl;
 import org.test4j.junit.Test4J;
 
 @SuppressWarnings("unused")
-public class SpringParentDemo implements Test4J {
+public class SpringParentDemo extends Test4J {
     @Test
     public void demoSpringParent() {
         ClassPathXmlApplicationContext parent = new ClassPathXmlApplicationContext(new String[] {

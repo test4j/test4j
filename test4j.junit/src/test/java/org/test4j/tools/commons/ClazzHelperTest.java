@@ -13,7 +13,7 @@ import org.test4j.junit.annotations.DataFrom;
 import org.test4j.tools.datagen.ConstructorArgsGenerator;
 
 @SuppressWarnings("rawtypes")
-public class ClazzHelperTest implements Test4J {
+public class ClazzHelperTest extends Test4J {
 
     @Test
     @DataFrom("provideClazzName")

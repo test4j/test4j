@@ -20,7 +20,7 @@ import org.test4j.module.spring.annotations.SpringContext;
 @SuppressWarnings("serial")
 @SpringContext({ "org/test4j/module/spring/testedbeans/xml/beans.xml",
         "org/test4j/module/spring/testedbeans/xml/data-source.xml" })
-public class MockitSpringBeanTest implements Test4J {
+public class MockitSpringBeanTest extends Test4J {
     @SpringBeanByName
     private UserService userService;
 

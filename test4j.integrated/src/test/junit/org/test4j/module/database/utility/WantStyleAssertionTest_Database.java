@@ -7,7 +7,7 @@ import org.test4j.junit.Test4J;
 import org.test4j.tools.commons.ListHelper;
 
 @SuppressWarnings({ "serial", "unchecked" })
-public class WantStyleAssertionTest_Database implements Test4J {
+public class WantStyleAssertionTest_Database extends Test4J {
 
     @Test
     public void testDatabase() {

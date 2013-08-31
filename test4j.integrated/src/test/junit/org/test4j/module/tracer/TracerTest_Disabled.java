@@ -18,7 +18,7 @@ import org.test4j.tools.commons.ResourceHelper;
 @Ignore
 @SuppressWarnings({ "serial" })
 @SpringContext({ "classpath:/org/test4j/fortest/hibernate/project.xml" })
-public class TracerTest_Disabled implements Test4J {
+public class TracerTest_Disabled extends Test4J {
     @SpringBeanByType
     private UserService userService;
 

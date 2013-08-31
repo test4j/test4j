@@ -7,10 +7,9 @@ import org.test4j.fortest.reflector.TestObject;
 import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 import org.test4j.tools.exception.NoSuchMethodRuntimeException;
-import org.test4j.tools.reflector.MethodAccessor;
 
 @SuppressWarnings({ "rawtypes" })
-public class MethodAccessorTest implements Test4J {
+public class MethodAccessorTest extends Test4J {
     TestObject                      test = null;
 
     private MethodAccessor<Integer> getPrivate;

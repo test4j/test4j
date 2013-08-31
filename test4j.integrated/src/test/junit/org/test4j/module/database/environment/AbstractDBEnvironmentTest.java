@@ -11,7 +11,7 @@ import org.test4j.junit.Test4J;
 import org.test4j.module.database.environment.TableMeta.ColumnMeta;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })
-public class AbstractDBEnvironmentTest implements Test4J {
+public class AbstractDBEnvironmentTest extends Test4J {
 
     @Test
     public void testGetTableMetaData() throws Exception {

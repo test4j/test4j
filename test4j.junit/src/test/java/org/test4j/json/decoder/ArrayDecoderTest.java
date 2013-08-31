@@ -13,7 +13,7 @@ import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
 @SuppressWarnings("rawtypes")
-public class ArrayDecoderTest implements Test4J {
+public class ArrayDecoderTest extends Test4J {
     @Test
     public void testDecode_Reference() {
         String json = "[{#class:org.test4j.json.encoder.beans.test.User@19762f,id:{#class:Integer,'#value':1},name:{#class:string,'#value':'darui.wu'},age:{#class:Integer,'#value':0},salary:{#class:Double,'#value':0},isFemale:{#class:Boolean,'#value':false}},{#refer:@19762f}]";

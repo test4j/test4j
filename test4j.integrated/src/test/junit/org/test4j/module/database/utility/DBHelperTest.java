@@ -14,7 +14,7 @@ import org.test4j.junit.annotations.DataFrom;
 import org.test4j.tools.commons.ResourceHelper;
 
 @SuppressWarnings({ "rawtypes", "serial" })
-public class DBHelperTest implements Test4J {
+public class DBHelperTest extends Test4J {
 
     @Test
     public void testParseSQL() throws FileNotFoundException {

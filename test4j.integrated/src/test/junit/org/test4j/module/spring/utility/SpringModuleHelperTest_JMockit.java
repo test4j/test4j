@@ -9,7 +9,7 @@ import org.test4j.junit.Test4J;
 import org.test4j.module.jmockit.utility.JMockitModuleHelper;
 import org.test4j.module.spring.annotations.SpringBeanByName;
 
-public class SpringModuleHelperTest_JMockit implements Test4J {
+public class SpringModuleHelperTest_JMockit extends Test4J {
 
     @Test
     public void testDoesSpringBeanFieldIllegal() throws Exception {

@@ -3,7 +3,7 @@ package org.test4j.hamcrest;
 import org.junit.Test;
 import org.test4j.junit.Test4J;
 
-public class TestStringAssert implements Test4J {
+public class TestStringAssert extends Test4J {
     @Test
     public void test11() {
         want.string("ddd").contains("d").contains("d");

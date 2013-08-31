@@ -12,7 +12,7 @@ import org.test4j.junit.Test4J;
  * 
  * @author darui.wudr
  */
-public class MethodFinderTest implements Test4J {
+public class MethodFinderTest extends Test4J {
     @Test
     @Ignore
     public void findTestMethod_1() {

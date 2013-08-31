@@ -5,11 +5,11 @@ import org.test4j.fortest.beans.User;
 import org.test4j.junit.Test4J;
 import org.test4j.module.inject.annotations.Inject;
 
-public class InjectionModuleHelperTest implements Test4J {
-    User           user  = new User();
+public class InjectionModuleHelperTest extends Test4J {
+    User                 user  = new User();
 
     @Inject(targets = "user", properties = "first")
-    private String first = "test user";
+    private final String first = "test user";
 
     @Test
     public void testInjectInto() throws Exception {

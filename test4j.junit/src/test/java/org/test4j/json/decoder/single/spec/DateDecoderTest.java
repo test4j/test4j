@@ -7,7 +7,7 @@ import org.test4j.json.JSON;
 import org.test4j.junit.Test4J;
 import org.test4j.tools.commons.DateHelper;
 
-public class DateDecoderTest implements Test4J {
+public class DateDecoderTest extends Test4J {
     @Test
     public void testEncode() throws Exception {
         Date expected = DateHelper.parse("2011-08-01 08:11:41");

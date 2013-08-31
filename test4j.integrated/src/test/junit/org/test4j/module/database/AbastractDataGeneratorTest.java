@@ -12,7 +12,7 @@ import org.test4j.junit.Test4J;
 import org.test4j.tools.datagen.DataSet;
 
 @SuppressWarnings({ "serial", "rawtypes", "unchecked" })
-public class AbastractDataGeneratorTest implements Test4J {
+public class AbastractDataGeneratorTest extends Test4J {
     @Test
     public void testValue() {
         final List actual = new ArrayList();

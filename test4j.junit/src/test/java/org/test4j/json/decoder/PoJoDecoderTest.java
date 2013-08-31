@@ -10,7 +10,7 @@ import org.test4j.json.JSON;
 import org.test4j.junit.Test4J;
 
 @SuppressWarnings("serial")
-public class PoJoDecoderTest implements Test4J {
+public class PoJoDecoderTest extends Test4J {
 
     @Test
     public void testParseFromJSONMap() {

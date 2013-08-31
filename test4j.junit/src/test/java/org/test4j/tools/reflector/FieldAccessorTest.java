@@ -6,10 +6,9 @@ import org.junit.Test;
 import org.test4j.fortest.reflector.TestObject;
 import org.test4j.junit.Test4J;
 import org.test4j.tools.exception.NoSuchFieldRuntimeException;
-import org.test4j.tools.reflector.FieldAccessor;
 
 @SuppressWarnings("rawtypes")
-public class FieldAccessorTest implements Test4J {
+public class FieldAccessorTest extends Test4J {
 
     private FieldAccessor aPrivate;
 

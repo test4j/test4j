@@ -3,7 +3,7 @@ package org.test4j.hamcrest;
 import org.junit.Test;
 import org.test4j.junit.Test4J;
 
-public class TestNumberAssert implements Test4J {
+public class TestNumberAssert extends Test4J {
     @Test
     public void test1() {
         want.number(3).isBetween(2, 5);

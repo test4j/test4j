@@ -5,13 +5,12 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 import org.test4j.json.encoder.JSONEncoder;
-import org.test4j.json.encoder.array.ObjectArrayEncoder;
 import org.test4j.json.encoder.beans.test.User;
 import org.test4j.json.helper.JSONFeature;
 import org.test4j.junit.Test4J;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class ObjectArrayEncoderTest implements Test4J {
+public class ObjectArrayEncoderTest extends Test4J {
     @Test
     public void testEncode() throws Exception {
         User[] users = new User[] { User.newInstance(12, "darui.wu"), null };

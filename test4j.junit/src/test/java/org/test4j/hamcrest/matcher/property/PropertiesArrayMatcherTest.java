@@ -9,7 +9,7 @@ import org.junit.Test;
 import org.test4j.fortest.beans.User;
 import org.test4j.junit.Test4J;
 
-public class PropertiesArrayMatcherTest implements Test4J {
+public class PropertiesArrayMatcherTest extends Test4J {
 
     @Test
     public void testMatches() {

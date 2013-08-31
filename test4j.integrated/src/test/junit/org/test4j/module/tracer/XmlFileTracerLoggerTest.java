@@ -6,13 +6,14 @@ import java.io.StringWriter;
 import java.io.Writer;
 
 import mockit.Mock;
+import mockit.MockUp;
 
 import org.junit.Test;
 import org.test4j.hamcrest.matcher.string.StringMode;
 import org.test4j.junit.Test4J;
 import org.test4j.tools.commons.ResourceHelper;
 
-public class XmlFileTracerLoggerTest implements Test4J {
+public class XmlFileTracerLoggerTest extends Test4J {
 
     @Test
     public void testXmlTracer() throws FileNotFoundException {

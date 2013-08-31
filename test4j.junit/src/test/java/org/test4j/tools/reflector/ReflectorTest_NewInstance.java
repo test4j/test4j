@@ -5,7 +5,7 @@ import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class ReflectorTest_NewInstance implements Test4J {
+public class ReflectorTest_NewInstance extends Test4J {
 
     @Test
     @DataFrom("instance_data")
@@ -49,6 +49,7 @@ class NoDefaultConstructor implements ISayHello {
         this.name = name;
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -61,6 +62,7 @@ class PrivateConstructor implements ISayHello {
         this.name = "construction";
     }
 
+    @Override
     public String getName() {
         return name;
     }
@@ -73,6 +75,7 @@ abstract class AbstractClazz implements ISayHello {
         this.name = name;
     }
 
+    @Override
     public String getName() {
         return name;
     }

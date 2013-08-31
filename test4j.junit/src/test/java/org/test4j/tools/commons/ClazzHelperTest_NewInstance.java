@@ -2,9 +2,8 @@ package org.test4j.tools.commons;
 
 import org.junit.Test;
 import org.test4j.junit.Test4J;
-import org.test4j.tools.commons.ClazzHelper;
 
-public class ClazzHelperTest_NewInstance implements Test4J {
+public class ClazzHelperTest_NewInstance extends Test4J {
     @Test
     public void testNewInstance_Abstract() {
         try {

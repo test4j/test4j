@@ -16,7 +16,7 @@ import org.test4j.module.spring.annotations.SpringContext;
 
 @SpringContext({ "org/test4j/module/spring/testedbeans/xml/data-source.xml" })
 @AutoBeanInject(maps = { @BeanMap(intf = "**.*Service", impl = "**.*ServiceImpl") })
-public class SpringBeanRegisterTest_ExcludeMockBean implements Test4J {
+public class SpringBeanRegisterTest_ExcludeMockBean extends Test4J {
     @SpringBeanByName
     private UserService    userService;
 

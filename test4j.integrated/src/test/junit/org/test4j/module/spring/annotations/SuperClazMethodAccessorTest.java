@@ -8,7 +8,7 @@ import org.test4j.junit.Test4J;
 
 @SpringContext("org/test4j/module/spring/reflector/reflector-beans.xml")
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class SuperClazMethodAccessorTest implements Test4J {
+public class SuperClazMethodAccessorTest extends Test4J {
     @SpringBeanByName
     private ExMyService myService;
 

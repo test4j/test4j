@@ -19,7 +19,7 @@ import org.test4j.module.spring.annotations.SpringContext;
 @SpringContext({ "org/test4j/module/spring/testedbeans/xml/data-source.xml" })
 @AutoBeanInject(maps = @BeanMap(intf = "**.UserAnotherDao", impl = "**.UserAnotherDaoImpl"))
 @SuppressWarnings("unused")
-public class Test4JClassPathXmlApplicationContextTest_MultiThread implements Test4J {
+public class Test4JClassPathXmlApplicationContextTest_MultiThread extends Test4J {
     @SpringBeanFrom
     @NonStrict
     private UserService userService;

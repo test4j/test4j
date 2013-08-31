@@ -13,7 +13,7 @@ import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.annotations.SpringContext;
 
 @SpringContext("org/test4j/fortest/spring/resourceManager.xml")
-public class ResourceManagerImplTest_WhenThen implements Test4J {
+public class ResourceManagerImplTest_WhenThen extends Test4J {
     @SpringBeanByName
     ResourceManager     resourceManager;
 

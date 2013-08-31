@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
-import org.test4j.hamcrest.matcher.property.PropertyEqualMatcher;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.json.encoder.beans.test.User;
 import org.test4j.junit.Test4J;
@@ -18,7 +17,7 @@ import org.test4j.junit.annotations.DataFrom;
 import ext.test4j.hamcrest.MatcherAssert;
 
 @SuppressWarnings({ "rawtypes", "serial", "unchecked" })
-public class PropertyEqualMatcherTest implements Test4J {
+public class PropertyEqualMatcherTest extends Test4J {
     public void testProperIsArray() {
         Map actual = new HashMap() {
             {

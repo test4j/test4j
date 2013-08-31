@@ -6,7 +6,7 @@ import org.test4j.json.JSON;
 import org.test4j.json.helper.JSONFeature;
 import org.test4j.junit.Test4J;
 
-public class PoJoEncoderTest implements Test4J {
+public class PoJoEncoderTest extends Test4J {
     String json = "";
 
     @Test

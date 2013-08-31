@@ -16,7 +16,7 @@ import org.test4j.fortest.service.UserService;
 import org.test4j.junit.Test4J;
 import org.test4j.module.tracer.spring.SpringBeanTracer;
 
-public class BeanFactoryTest implements Test4J {
+public class BeanFactoryTest extends Test4J {
     @Test
     public void testXmlBeanDefinitionReader() {
         Resource beanRes = new ClassPathResource("org/test4j/module/spring/testedbeans/xml/beans.xml");

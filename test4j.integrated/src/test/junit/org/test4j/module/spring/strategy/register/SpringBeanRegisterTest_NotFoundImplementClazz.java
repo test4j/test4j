@@ -20,7 +20,7 @@ import org.test4j.module.spring.annotations.SpringContext;
  */
 @SpringContext({ "org/test4j/module/spring/testedbeans/xml/data-source.xml" })
 @AutoBeanInject(maps = { @BeanMap(intf = "**.*Service", impl = "**.*ServiceImpl") })
-public class SpringBeanRegisterTest_NotFoundImplementClazz implements Test4J {
+public class SpringBeanRegisterTest_NotFoundImplementClazz extends Test4J {
     @SpringBeanByName
     UserService    userService;
 

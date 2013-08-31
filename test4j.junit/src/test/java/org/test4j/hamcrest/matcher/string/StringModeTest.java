@@ -1,11 +1,10 @@
 package org.test4j.hamcrest.matcher.string;
 
 import org.junit.Test;
-import org.test4j.hamcrest.matcher.string.StringMode;
 import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
-public class StringModeTest implements Test4J {
+public class StringModeTest extends Test4J {
 
     @Test
     @DataFrom("data_IgnoreCase")

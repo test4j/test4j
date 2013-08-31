@@ -19,7 +19,7 @@ import org.test4j.tools.commons.DateHelper;
  */
 @SpringContext("org/test4j/module/spring/testedbeans/xml/data-source.xml")
 @AutoBeanInject
-public class MockUpTest_Depends implements Test4J {
+public class MockUpTest_Depends extends Test4J {
     @SpringBeanByName(claz = MyImpl.class)
     MyIntf myIntf;
 

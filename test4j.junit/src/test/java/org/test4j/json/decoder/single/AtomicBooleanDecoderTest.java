@@ -9,7 +9,7 @@ import org.test4j.json.helper.JSONFeature;
 import org.test4j.json.helper.JSONMap;
 import org.test4j.junit.Test4J;
 
-public class AtomicBooleanDecoderTest implements Test4J {
+public class AtomicBooleanDecoderTest extends Test4J {
     @Test
     public void testAtomicBool() {
         AtomicBoolean expected = new AtomicBoolean(true);

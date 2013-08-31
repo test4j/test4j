@@ -6,7 +6,7 @@ import org.test4j.json.encoder.beans.test.User;
 import org.test4j.json.helper.JSONFeature;
 import org.test4j.junit.Test4J;
 
-public class ArrayEncoderTest implements Test4J {
+public class ArrayEncoderTest extends Test4J {
 
     @Test
     public void testEncode() {

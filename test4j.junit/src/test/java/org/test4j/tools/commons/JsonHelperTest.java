@@ -9,7 +9,7 @@ import org.test4j.fortest.beans.Manager;
 import org.test4j.junit.Test4J;
 import org.test4j.module.Test4JException;
 
-public class JsonHelperTest implements Test4J {
+public class JsonHelperTest extends Test4J {
     private static String tempDir = System.getProperty("java.io.tmpdir");
 
     @Test

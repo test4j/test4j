@@ -10,10 +10,9 @@ import org.springframework.context.support.AbstractApplicationContext;
 import org.springframework.web.context.support.StaticWebApplicationContext;
 import org.test4j.junit.Test4J;
 import org.test4j.module.spring.annotations.SpringBeanRemote.SpringBeanRemoteType;
-import org.test4j.module.spring.remote.RemoteInvokerRegister;
 
 @SuppressWarnings({ "rawtypes" })
-public class RemoteInvokerRegisterTest_OnClient implements Test4J {
+public class RemoteInvokerRegisterTest_OnClient extends Test4J {
     @Test
     public void testRegisterSpringBeanRemoteOnClient() {
         new MockUp<RemoteInvokerRegister>() {

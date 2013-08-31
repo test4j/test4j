@@ -15,10 +15,9 @@ import org.test4j.fortest.reflector.ForReflectUtil;
 import org.test4j.junit.Test4J;
 import org.test4j.tools.commons.FieldHelper;
 import org.test4j.tools.exception.NoSuchFieldRuntimeException;
-import org.test4j.tools.reflector.PropertyAccessor;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class FieldAccessorTest_FromReflectorUtil implements Test4J {
+public class FieldAccessorTest_FromReflectorUtil extends Test4J {
 
     public void setFieldValue() {
         Employee employee = new Employee();

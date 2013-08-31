@@ -5,12 +5,11 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 import org.test4j.json.encoder.JSONEncoder;
-import org.test4j.json.encoder.array.ObjectArrayEncoder;
 import org.test4j.json.helper.JSONFeature;
 import org.test4j.junit.Test4J;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class IntegerArrayEncoderTest implements Test4J {
+public class IntegerArrayEncoderTest extends Test4J {
     @Test
     public void testEncode() throws Exception {
         int[] ints = new int[] { 1, 2, 3 };

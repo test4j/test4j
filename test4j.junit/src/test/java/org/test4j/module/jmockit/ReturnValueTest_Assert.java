@@ -14,7 +14,7 @@ import org.test4j.module.jmockit.ReturnValueTest.SomeInterface;
 import org.test4j.module.jmockit.ReturnValueTest.SomeService;
 
 @SuppressWarnings({ "rawtypes" })
-public class ReturnValueTest_Assert implements Test4J {
+public class ReturnValueTest_Assert extends Test4J {
     public SomeService   someService = new SomeService();
 
     @Mocked

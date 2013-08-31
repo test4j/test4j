@@ -11,7 +11,7 @@ import org.test4j.module.spring.annotations.SpringContext;
 
 @SpringContext
 @AutoBeanInject
-public class SpringTestedContextTest implements Test4J {
+public class SpringTestedContextTest extends Test4J {
     @SpringBeanByName(init = "init")
     TestedService testedService;
 

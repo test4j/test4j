@@ -1,6 +1,7 @@
 package org.test4j.junit;
 
 import mockit.Mock;
+import mockit.MockUp;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
@@ -15,7 +16,7 @@ import org.test4j.module.core.utility.MessageHelper;
  * 
  * @author darui.wudr
  */
-public class Test4JTest implements Test4J {
+public class Test4JTest extends Test4J {
     private static StringBuffer buff = new StringBuffer();
 
     @BeforeClass

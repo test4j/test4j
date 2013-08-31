@@ -9,12 +9,12 @@ import org.test4j.fortest.service.CallingService;
 import org.test4j.junit.Test4J;
 import org.test4j.module.inject.annotations.Inject;
 
-public class JMockitExpectationsTest implements Test4J {
+public class JMockitExpectationsTest extends Test4J {
     @Mocked
     @Inject(targets = "callingService")
-    private CalledService  calledService;
+    private CalledService        calledService;
 
-    private CallingService callingService = new CallingService();
+    private final CallingService callingService = new CallingService();
 
     @Test
     public void returnValue() {

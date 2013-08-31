@@ -20,7 +20,7 @@ import org.test4j.tools.datagen.DataSet;
 
 @SuppressWarnings({ "serial", "unchecked" })
 @Transactional(TransactionMode.COMMIT)
-public class TableOpTest implements Test4J {
+public class TableOpTest extends Test4J {
 
     @Test
     public void testInsertData() throws SQLException {

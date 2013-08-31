@@ -4,13 +4,12 @@ import java.util.HashMap;
 
 import org.junit.Test;
 import org.test4j.json.JSON;
-import org.test4j.json.decoder.single.BooleanDecoder;
 import org.test4j.json.helper.JSONFeature;
 import org.test4j.json.helper.JSONMap;
 import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
-public class BooleanDecoderTest implements Test4J {
+public class BooleanDecoderTest extends Test4J {
 
     @Test
     public void testDecodeSimpleValue() {

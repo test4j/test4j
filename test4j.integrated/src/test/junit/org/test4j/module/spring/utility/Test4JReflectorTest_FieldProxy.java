@@ -9,7 +9,7 @@ import org.test4j.module.spring.annotations.SpringContext;
 
 @SpringContext
 @AutoBeanInject
-public class Test4JReflectorTest_FieldProxy implements Test4J {
+public class Test4JReflectorTest_FieldProxy extends Test4J {
     @SpringBeanByName
     ProxyBean proxyBean;
 

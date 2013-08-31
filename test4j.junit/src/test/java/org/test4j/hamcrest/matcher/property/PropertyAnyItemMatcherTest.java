@@ -5,13 +5,12 @@ import java.util.List;
 
 import org.junit.Test;
 import org.test4j.fortest.beans.User;
-import org.test4j.hamcrest.matcher.property.PropertyAnyItemMatcher;
 import org.test4j.junit.Test4J;
 
 import ext.test4j.hamcrest.MatcherAssert;
 
 @SuppressWarnings("unchecked")
-public class PropertyAnyItemMatcherTest implements Test4J {
+public class PropertyAnyItemMatcherTest extends Test4J {
     PropertyAnyItemMatcher matcher = new PropertyAnyItemMatcher("first", the.string().regular("\\w+\\d+\\w+"));
 
     @Test

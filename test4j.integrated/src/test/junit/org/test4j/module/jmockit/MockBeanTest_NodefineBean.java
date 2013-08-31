@@ -11,7 +11,7 @@ import org.test4j.module.spring.annotations.SpringBeanFrom;
 import org.test4j.module.spring.annotations.SpringContext;
 
 @SpringContext({ "org/test4j/module/spring/testedbeans/xml/springbean service.xml" })
-public class MockBeanTest_NodefineBean implements Test4J {
+public class MockBeanTest_NodefineBean extends Test4J {
     @SpringBeanByName
     private SpringBeanService springBeanService1;
 

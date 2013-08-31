@@ -5,7 +5,7 @@ import java.util.Arrays;
 import org.junit.Test;
 import org.test4j.junit.Test4J;
 
-public class CollectionAssertTest_SizeMatch implements Test4J {
+public class CollectionAssertTest_SizeMatch extends Test4J {
 
     @Test
     public void sizeIs() {

@@ -16,7 +16,7 @@ import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class JSONEncoderTest implements Test4J {
+public class JSONEncoderTest extends Test4J {
 
     @Test
     @DataFrom("objects")

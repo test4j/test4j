@@ -5,12 +5,11 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 import org.test4j.json.encoder.JSONEncoder;
-import org.test4j.json.encoder.array.ObjectArrayEncoder;
 import org.test4j.json.helper.JSONFeature;
 import org.test4j.junit.Test4J;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
-public class LongArrayEncoderTest implements Test4J {
+public class LongArrayEncoderTest extends Test4J {
     @Test
     public void testEncode() throws Exception {
         long[] values = new long[] { 1234, 4556L };

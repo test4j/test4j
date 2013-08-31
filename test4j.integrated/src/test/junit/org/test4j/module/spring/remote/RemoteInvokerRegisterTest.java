@@ -12,7 +12,7 @@ import org.springframework.remoting.caucho.HessianServiceExporter;
 import org.springframework.remoting.httpinvoker.HttpInvokerServiceExporter;
 import org.test4j.junit.Test4J;
 
-public class RemoteInvokerRegisterTest implements Test4J {
+public class RemoteInvokerRegisterTest extends Test4J {
     int count = 0;
 
     /**

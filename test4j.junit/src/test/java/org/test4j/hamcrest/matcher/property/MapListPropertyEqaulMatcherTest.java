@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
-import org.test4j.hamcrest.matcher.property.MapListPropertyEqaulMatcher;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.junit.Test4J;
 import org.test4j.tools.commons.DateHelper;
@@ -14,7 +13,7 @@ import org.test4j.tools.commons.DateHelper;
 import ext.test4j.hamcrest.MatcherAssert;
 
 @SuppressWarnings({ "unchecked", "serial", "rawtypes" })
-public class MapListPropertyEqaulMatcherTest implements Test4J {
+public class MapListPropertyEqaulMatcherTest extends Test4J {
     @Test
     public void testMapListPropertyEqaulMatcher() {
 

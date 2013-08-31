@@ -14,7 +14,7 @@ import org.test4j.module.spring.annotations.SpringContext;
 import org.test4j.module.spring.testedbeans.resource.UserDaoResourceImpl;
 
 @SpringContext({ "org/test4j/module/spring/testedbeans/resource/resource-bean.xml" })
-public class ResourceBeanTest_SpringBeanFrom implements Test4J {
+public class ResourceBeanTest_SpringBeanFrom extends Test4J {
 
     @SpringBeanByName
     UserService userService;

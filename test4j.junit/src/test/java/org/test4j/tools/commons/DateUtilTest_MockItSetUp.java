@@ -8,9 +8,8 @@ import mockit.Mockit;
 
 import org.junit.Test;
 import org.test4j.junit.Test4J;
-import org.test4j.tools.commons.DateHelper;
 
-public class DateUtilTest_MockItSetUp implements Test4J {
+public class DateUtilTest_MockItSetUp extends Test4J {
     public static class MockDateUtil {
         @Mock
         public static Date now() {

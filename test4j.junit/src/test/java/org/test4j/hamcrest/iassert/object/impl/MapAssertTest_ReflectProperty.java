@@ -10,7 +10,7 @@ import org.junit.Test;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.junit.Test4J;
 
-public class MapAssertTest_ReflectProperty implements Test4J {
+public class MapAssertTest_ReflectProperty extends Test4J {
     Map<String, String>       maps = null;
     List<Map<String, String>> list = null;
 

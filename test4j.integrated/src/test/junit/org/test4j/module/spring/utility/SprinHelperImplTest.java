@@ -8,7 +8,7 @@ import org.test4j.module.spring.annotations.SpringContext;
 
 @SpringContext("org/test4j/module/spring/testedbeans/xml/data-source.cglib.xml")
 @AutoBeanInject
-public class SprinHelperImplTest implements Test4J {
+public class SprinHelperImplTest extends Test4J {
 
     @SpringBeanByName(claz = SpringAfterInit.class)
     SpringAfterInit bean;

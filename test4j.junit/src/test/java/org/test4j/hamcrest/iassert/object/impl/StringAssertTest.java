@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.test4j.hamcrest.matcher.string.StringMode;
 import org.test4j.junit.Test4J;
 
-public class StringAssertTest implements Test4J {
+public class StringAssertTest extends Test4J {
 
     @Test
     public void testNotContain() {

@@ -15,7 +15,7 @@ import org.test4j.module.spring.annotations.SpringContext;
 
 @SpringContext({ "org/test4j/module/spring/testedbeans/xml/beans.xml",
         "org/test4j/module/spring/testedbeans/xml/data-source.xml" })
-public class MockitPartialMockSpringBeanTest implements Test4J {
+public class MockitPartialMockSpringBeanTest extends Test4J {
 
     @SpringBeanByName
     private UserService userService;

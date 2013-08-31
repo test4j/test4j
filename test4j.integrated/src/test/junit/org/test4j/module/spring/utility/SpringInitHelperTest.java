@@ -7,7 +7,7 @@ import org.test4j.module.spring.annotations.SpringInitMethod;
 
 @SpringContext({ "org/test4j/module/spring/testedbeans/xml/beans.xml",
         "org/test4j/module/spring/testedbeans/xml/data-source.xml" })
-public class SpringInitHelperTest implements Test4J {
+public class SpringInitHelperTest extends Test4J {
     @Test
     public void testInvokeSpringInitMethod() {
         want.string(privateMethod).isEqualTo("privateMethod");

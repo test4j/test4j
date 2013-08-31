@@ -12,7 +12,7 @@ import org.test4j.fortest.beans.User;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.junit.Test4J;
 
-public class TestReflectionAssert implements Test4J {
+public class TestReflectionAssert extends Test4J {
     @Test(expected = AssertionError.class)
     public void test1() {
         User user1 = new User(1, "John", "Doe");

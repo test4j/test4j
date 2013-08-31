@@ -9,7 +9,7 @@ import org.test4j.module.spring.annotations.AutoBeanInject;
 
 @SuppressWarnings("unused")
 @AutoBeanInject
-public class JMockitTest_NewDelegate implements Test4J {
+public class JMockitTest_NewDelegate extends Test4J {
 
     @Mocked
     IPrinter printer;

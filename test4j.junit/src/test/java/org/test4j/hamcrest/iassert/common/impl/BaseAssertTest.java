@@ -8,7 +8,7 @@ import org.test4j.hamcrest.matcher.string.StringMode;
 import org.test4j.json.encoder.beans.test.User;
 import org.test4j.junit.Test4J;
 
-public class BaseAssertTest implements Test4J {
+public class BaseAssertTest extends Test4J {
 
     @Test(expected = AssertionError.class)
     public void testClazIs() {

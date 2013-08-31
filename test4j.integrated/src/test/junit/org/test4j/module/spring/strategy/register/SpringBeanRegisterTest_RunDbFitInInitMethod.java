@@ -15,7 +15,7 @@ import org.test4j.module.spring.annotations.SpringInitMethod;
 @SpringContext({ "org/test4j/module/spring/testedbeans/xml/data-source.xml" })
 @AutoBeanInject(maps = { @BeanMap(intf = "**.*Service", impl = "**.*ServiceImpl"),
         @BeanMap(intf = "**.*Dao", impl = "**.*DaoImpl") })
-public class SpringBeanRegisterTest_RunDbFitInInitMethod implements Test4J {
+public class SpringBeanRegisterTest_RunDbFitInInitMethod extends Test4J {
     @SpringBeanByName(claz = UserServiceImplEx.class)
     UserService userService;
 

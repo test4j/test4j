@@ -5,7 +5,7 @@ import org.test4j.fortest.beans.Address;
 import org.test4j.fortest.beans.User;
 import org.test4j.junit.Test4J;
 
-public class TestPropertyAssert implements Test4J {
+public class TestPropertyAssert extends Test4J {
     @Test
     public void assertObject() {
         User user = new User(1, "wu", "darui");

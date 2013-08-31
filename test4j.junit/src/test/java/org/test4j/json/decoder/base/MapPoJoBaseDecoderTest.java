@@ -13,7 +13,7 @@ import org.test4j.json.helper.JSONMap;
 import org.test4j.junit.Test4J;
 
 @SuppressWarnings({ "serial" })
-public class MapPoJoBaseDecoderTest implements Test4J {
+public class MapPoJoBaseDecoderTest extends Test4J {
 
     @Test
     public void testDecode() {

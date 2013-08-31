@@ -18,7 +18,7 @@ import org.test4j.module.tracer.TxtFileTracerLogger;
 import org.test4j.tools.commons.ConfigHelper;
 import org.test4j.tools.commons.ResourceHelper;
 
-public class ConnectionProxyTest implements Test4J {
+public class ConnectionProxyTest extends Test4J {
     @Test
     public void minitorSql() throws Exception {
         new MockUp<TracerHelper>() {

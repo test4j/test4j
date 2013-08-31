@@ -7,11 +7,10 @@ import java.util.Map;
 
 import org.junit.Test;
 import org.test4j.json.encoder.JSONEncoder;
-import org.test4j.json.encoder.object.MapEncoder;
 import org.test4j.junit.Test4J;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
-public class MapEncoderTest implements Test4J {
+public class MapEncoderTest extends Test4J {
 
     @Test
     public void testGetPropertyEncoders() throws Exception {

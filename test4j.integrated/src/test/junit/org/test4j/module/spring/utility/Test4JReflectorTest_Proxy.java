@@ -8,7 +8,7 @@ import org.test4j.module.spring.annotations.SpringContext;
 
 @SpringContext("org/test4j/module/spring/testedbeans/xml/data-source.xml")
 @AutoBeanInject
-public class Test4JReflectorTest_Proxy implements Test4J {
+public class Test4JReflectorTest_Proxy extends Test4J {
     @SpringBeanByName(claz = MyImpl.class)
     MyIntf myIntf;
 

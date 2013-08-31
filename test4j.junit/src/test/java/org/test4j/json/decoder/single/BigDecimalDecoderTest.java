@@ -5,13 +5,12 @@ import java.util.HashMap;
 
 import org.junit.Test;
 import org.test4j.json.JSON;
-import org.test4j.json.decoder.single.BigDecimalDecoder;
 import org.test4j.json.helper.JSONFeature;
 import org.test4j.json.helper.JSONMap;
 import org.test4j.junit.Test4J;
 
 @SuppressWarnings("serial")
-public class BigDecimalDecoderTest implements Test4J {
+public class BigDecimalDecoderTest extends Test4J {
 
     @Test
     public void testDecodeSimpleValue() {

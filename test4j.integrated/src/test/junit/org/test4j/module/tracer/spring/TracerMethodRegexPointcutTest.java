@@ -7,7 +7,7 @@ import org.test4j.junit.Test4J;
 import org.test4j.module.spring.annotations.SpringBeanByName;
 import org.test4j.module.spring.strategy.Test4JSpringContext;
 
-public class TracerMethodRegexPointcutTest implements Test4J {
+public class TracerMethodRegexPointcutTest extends Test4J {
     @SpringBeanByName(claz = FinalUserDao.class)
     UserAnotherDao userAnotherDao;
 

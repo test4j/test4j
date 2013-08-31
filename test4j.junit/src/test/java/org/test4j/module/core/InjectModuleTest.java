@@ -4,7 +4,7 @@ import org.junit.Test;
 import org.test4j.junit.Test4J;
 import org.test4j.module.inject.annotations.Inject;
 
-public class InjectModuleTest implements Test4J {
+public class InjectModuleTest extends Test4J {
 
     OuterClaz outer = new OuterClaz();
 
