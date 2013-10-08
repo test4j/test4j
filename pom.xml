@@ -36,7 +36,7 @@
 
 	<properties>
 		<spring.version>2.5.6</spring.version>
-		<release.plugin.version>2.2.1</release.plugin.version>
+		<release.plugin.version>2.4.1</release.plugin.version>
 	</properties>
 
 	<modules>
