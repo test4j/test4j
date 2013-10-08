@@ -7,7 +7,7 @@
 	</parent>
 	<groupId>org.test4j</groupId>
 	<artifactId>test4j.parent</artifactId>
-	<version>2.0.3</version>
+	<version>2.0.4-SNAPSHOT</version>
 	<packaging>pom</packaging>
 	<name>test4j parent pom</name>
 	<description>test4j</description>
@@ -23,7 +23,7 @@
 		<connection>scm:git:git@github.com:test4j/test4j.git</connection>
 		<developerConnection>scm:git:git@github.com:test4j/test4j.git</developerConnection>
 		<url>git@github.com:test4j/test4j.git</url>
-	  <tag>test4j.parent-2.0.3</tag>
+	  <tag>HEAD</tag>
   </scm>
 
 	<developers>
