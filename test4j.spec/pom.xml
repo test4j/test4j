@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>org.test4j</groupId>
@@ -31,24 +32,24 @@
 		</dependency>
 		<!-- must jar end -->
 
-		<!-- provider or test jar -->
+		<!-- provided or test jar -->
 		<dependency>
 			<groupId>org.test4j</groupId>
 			<artifactId>test4j.integrated</artifactId>
 			<version>${project.version}</version>
-			<scope>provider</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.test4j</groupId>
 			<artifactId>test4j.junit</artifactId>
 			<version>${project.version}</version>
-			<scope>provider</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.test4j</groupId>
 			<artifactId>test4j.testng</artifactId>
 			<version>${project.version}</version>
-			<scope>provider</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.test4j</groupId>
@@ -60,17 +61,17 @@
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring</artifactId>
-			<scope>provider</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aspects</artifactId>
-			<scope>provider</scope>
+			<scope>provided</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework</groupId>
 			<artifactId>spring-aop</artifactId>
-			<scope>provider</scope>
+			<scope>provided</scope>
 		</dependency>
 	</dependencies>
 

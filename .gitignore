@@ -72,3 +72,9 @@
 /test4j.spec/target
 /test4j.spec/.classpath
 /test4j.spec/.project
+
+/test4j.integrated/test-output
+
+/test4j.testng/test-output
+
+/test4j.spec/test-output
