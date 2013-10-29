@@ -40,6 +40,11 @@ public class ReflectorTest_NewInstance extends Test4J {
             want.string(message).contains("unsupport").contains("abstract class");
         }
     }
+
+    @Test
+    public void zzz() {
+        System.out.println("============");
+    }
 }
 
 class NoDefaultConstructor implements ISayHello {

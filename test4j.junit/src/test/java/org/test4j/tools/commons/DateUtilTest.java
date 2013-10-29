@@ -80,7 +80,7 @@ public class DateUtilTest extends Test4J {
         return cal.getTime();
     }
 
-    public static class MockDateUtil {
+    public static class MockDateUtil extends MockUp<DateHelper> {
         @Mock
         public static final Date now() {
             Calendar cal = mockCalendar();
