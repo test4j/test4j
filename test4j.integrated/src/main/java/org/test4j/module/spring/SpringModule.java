@@ -10,9 +10,7 @@ import org.test4j.module.database.DatabaseModule;
 import org.test4j.module.database.environment.DBEnvironmentFactory;
 import org.test4j.module.database.transaction.SpringTransactionManagementConfiguration;
 import org.test4j.module.spring.strategy.ApplicationContextFactory;
-import org.test4j.module.spring.strategy.Test4JBeanFactory;
 import org.test4j.module.spring.strategy.Test4JSpringContext;
-import org.test4j.module.spring.strategy.injector.SpringBeanInjector;
 import org.test4j.module.spring.utility.SpringInitInvoker;
 import org.test4j.module.spring.utility.SpringModuleHelper;
 import org.test4j.tools.commons.ConfigHelper;
@@ -79,10 +77,7 @@ public class SpringModule implements Module {
          */
         @Override
         public void beforeMethod(Object testObject, Method testMethod) {
-            Test4JBeanFactory beanFactory = SpringTestedContext.getSpringBeanFactory();
-            if (beanFactory != null) {
-                SpringBeanInjector.injectSpringBeans(beanFactory, testObject);
-            }
+            SpringModuleHelper.setSpringBean(testObject);
         }
 
         @Override
