@@ -1,0 +1,4 @@
+2.0.5
+o jmockit升级到1.5版本
+o Steps类中如果声明了SpringBean，框架会自动进行注入处理
+o 支持@Autowired和@Resource的bean注入方式
