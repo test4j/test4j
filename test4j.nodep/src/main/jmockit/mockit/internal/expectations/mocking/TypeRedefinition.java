@@ -1,13 +1,12 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations.mocking;
 
 import mockit.external.asm4.*;
 import mockit.internal.state.*;
-
-import static mockit.internal.util.Utilities.*;
+import mockit.internal.util.*;
 
 final class TypeRedefinition extends BaseTypeRedefinition
 {
@@ -22,12 +21,8 @@ final class TypeRedefinition extends BaseTypeRedefinition
 
    void redefineTypeForFinalField()
    {
-      adjustTargetClassIfRealClassNameSpecified();
-
       if (targetClass == null || !typeMetadata.injectable && targetClass.isInterface()) {
-         throw new IllegalArgumentException(
-            "Final mock field must be of a class type, or otherwise the real class must be " +
-            "specified through the @Mocked annotation:\n" + typeMetadata.mockId);
+         throw new IllegalArgumentException("Final mock field \"" + typeMetadata.mockId + "\" must be of a class type");
       }
 
       Integer mockedClassId = redefineClassesFromCache();
@@ -43,19 +38,9 @@ final class TypeRedefinition extends BaseTypeRedefinition
 
    InstanceFactory redefineType()
    {
-      adjustTargetClassIfRealClassNameSpecified();
       typeMetadata.buildMockingConfiguration();
 
       return redefineType(typeMetadata.declaredType);
-   }
-
-   private void adjustTargetClassIfRealClassNameSpecified()
-   {
-      String realClassName = typeMetadata.getRealClassName();
-
-      if (realClassName.length() > 0) {
-         targetClass = loadClass(realClassName);
-      }
    }
 
    @Override
@@ -73,6 +58,6 @@ final class TypeRedefinition extends BaseTypeRedefinition
    @Override
    String getNameForConcreteSubclassToCreate()
    {
-      return getNameForGeneratedClass(parentObject.getClass(), typeMetadata.mockId);
+      return GeneratedClasses.getNameForGeneratedClass(parentObject.getClass(), typeMetadata.mockId);
    }
 }

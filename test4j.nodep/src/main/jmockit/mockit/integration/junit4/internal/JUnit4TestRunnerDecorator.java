@@ -1,16 +1,11 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.integration.junit4.internal;
 
 import java.lang.reflect.Method;
-import java.util.List;
 
-import mockit.Expectations;
-import mockit.Instantiation;
-import mockit.Mock;
-import mockit.MockClass;
 import mockit.integration.internal.TestRunnerDecorator;
 import mockit.internal.expectations.RecordAndReplayExecution;
 import mockit.internal.state.SavePoint;
@@ -25,26 +20,19 @@ import org.junit.Test;
 import org.junit.runners.Suite.SuiteClasses;
 import org.junit.runners.model.FrameworkMethod;
 
-/**
- * Startup mock that modifies the JUnit 4.5+ test runner so that it calls back
- * to JMockit immediately after every test executes. When that happens, JMockit
- * will assert any expectations set during the test, including expectations
- * specified through {@link Mock} as well as in {@link Expectations} subclasses.
- * <p/>
- * This class is not supposed to be accessed from user code. JMockit will
- * automatically load it at startup.
- */
-@MockClass(realClass = FrameworkMethod.class, instantiation = Instantiation.PerMockedInstance)
-public final class JUnit4TestRunnerDecorator extends TestRunnerDecorator {
-    public FrameworkMethod          it;
-    private static volatile boolean shouldPrepareForNextTest = true;
+final class JUnit4TestRunnerDecorator extends TestRunnerDecorator {
+    /**
+     * A "volatile boolean" is as good as a
+     * java.util.concurrent.atomic.AtomicBoolean here, since we only need the
+     * basic get/set operations.
+     */
+    private volatile boolean shouldPrepareForNextTest = true;
 
-    @Mock(reentrant = true)
-    public Object invokeExplosively(Object target, Object... params) throws Throwable {
+    Object invokeExplosively(FrameworkMethod it, Object target, Object... params) throws Throwable {
         Method method = it.getMethod();
         Class<?> testClass = target == null ? method.getDeclaringClass() : target.getClass();
 
-        handleMockingOutsideTestMethods(target, testClass);
+        handleMockingOutsideTestMethods(it, target, testClass);
 
         // In case it isn't a test method, but a before/after method:
         if (it.getAnnotation(Test.class) == null) {
@@ -76,7 +64,7 @@ public final class JUnit4TestRunnerDecorator extends TestRunnerDecorator {
         shouldPrepareForNextTest = true;
 
         try {
-            executeTestMethod(target, params);
+            executeTestMethod(it, target, params);
             return null; // it's a test method, therefore has void return type
         } catch (Throwable t) {
             StackTrace.filterStackTrace(t);
@@ -89,7 +77,7 @@ public final class JUnit4TestRunnerDecorator extends TestRunnerDecorator {
         }
     }
 
-    private void handleMockingOutsideTestMethods(Object target, Class<?> testClass) {
+    private void handleMockingOutsideTestMethods(FrameworkMethod it, Object target, Class<?> testClass) {
         TestRun.enterNoMockingZone();
 
         try {
@@ -100,11 +88,11 @@ public final class JUnit4TestRunnerDecorator extends TestRunnerDecorator {
                     if (it.getAnnotation(AfterClass.class) != null) {
                         cleanUpMocksFromPreviousTestClass();
                     }
+                } else if (testClass.isAnnotationPresent(SuiteClasses.class)) {
+                    setUpClassLevelMocksAndStubs(testClass);
                 } else if (it.getAnnotation(BeforeClass.class) != null) {
                     updateTestClassState(null, testClass);
                 }
-            } else if (testClass.isAnnotationPresent(SuiteClasses.class)) {
-                setUpClassLevelMocksAndStubs(testClass);
             } else {
                 updateTestClassState(target, testClass);
             }
@@ -113,7 +101,7 @@ public final class JUnit4TestRunnerDecorator extends TestRunnerDecorator {
         }
     }
 
-    private void executeTestMethod(Object target, Object... parameters) throws Throwable {
+    private void executeTestMethod(FrameworkMethod it, Object target, Object... parameters) throws Throwable {
         SavePoint savePoint = new SavePoint();
         TestRun.setSavePointForTestMethod(savePoint);
 
@@ -133,8 +121,8 @@ public final class JUnit4TestRunnerDecorator extends TestRunnerDecorator {
             }
             /** end modified by davey.wu **/
             createInstancesForTestedFields(target);
-            TestRun.setRunningIndividualTest(target);
 
+            TestRun.setRunningIndividualTest(target);
             it.invokeExplosively(target, mockParameters == null ? parameters : mockParameters);
         } catch (Throwable thrownByTest) {
             testFailure = thrownByTest;
@@ -143,15 +131,5 @@ public final class JUnit4TestRunnerDecorator extends TestRunnerDecorator {
         } finally {
             concludeTestMethodExecution(savePoint, testFailure, testFailureExpected);
         }
-    }
-
-    @Mock(reentrant = true)
-    public void validatePublicVoidNoArg(boolean isStatic, List<Throwable> errors) {
-        if (!isStatic && it.getMethod().getParameterTypes().length > 0) {
-            it.validatePublicVoid(false, errors);
-            return;
-        }
-
-        it.validatePublicVoidNoArg(isStatic, errors);
     }
 }

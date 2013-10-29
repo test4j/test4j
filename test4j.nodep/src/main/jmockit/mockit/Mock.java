@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit;
@@ -36,8 +36,7 @@ import java.lang.annotation.*;
  * @see #invocations invocations
  * @see #minInvocations minInvocations
  * @see #maxInvocations maxInvocations
- * @see #reentrant reentrant
- * @see MockClass
+ * @see MockUp
  */
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
@@ -72,20 +71,4 @@ public @interface Mock
     * @see #minInvocations minInvocations
     */
    int maxInvocations() default -1;
-
-   /**
-    * Indicates whether or not the mock method implementation is allowed to call the corresponding real method on the
-    * {@code it} field before it returns from an execution.
-    * (The {@code it} field is an instance field defined in the mock class with name "it" and of the same type as the
-    * mocked class, which will be set to the real class instance for each indirect call to a mock method.)
-    * By default, such reentrant calls are not allowed because they lead to infinite recursion, with the mock method
-    * calling itself indirectly through the mocked method.
-    * <p/>
-    * When allowed to make such calls, the mock method effectively behaves as <em>advice</em> to the corresponding real
-    * method.
-    * <p/>
-    * As an alternative, consider adding a first parameter of type {@link Invocation} to the mock method, making it
-    * automatically reentrant.
-    */
-   boolean reentrant() default false;
 }

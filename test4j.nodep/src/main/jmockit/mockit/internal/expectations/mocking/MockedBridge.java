@@ -13,28 +13,9 @@ import mockit.internal.util.*;
 
 public final class MockedBridge extends MockingBridge
 {
-   @SuppressWarnings("UnusedDeclaration")
-   public static final InvocationHandler MB = new MockedBridge();
+   public static final MockingBridge MB = new MockedBridge();
 
-   public static void preventEventualClassLoadingConflicts()
-   {
-      // Pre-load certain JMockit classes to avoid NoClassDefFoundError's or re-entrancy loops during class loading
-      // when certain JRE classes are mocked, such as ArrayList or Thread.
-      try {
-         Class.forName("mockit.Capturing");
-         Class.forName("mockit.Delegate");
-         Class.forName("mockit.internal.expectations.invocation.InvocationResults");
-         Class.forName("mockit.internal.expectations.invocation.MockedTypeCascade");
-         Class.forName("mockit.internal.expectations.mocking.BaseTypeRedefinition$MockedClass");
-         Class.forName("mockit.internal.expectations.mocking.SharedFieldTypeRedefinitions");
-         Class.forName("mockit.internal.expectations.mocking.TestedClasses");
-         Class.forName("mockit.internal.expectations.argumentMatching.EqualityMatcher");
-      }
-      catch (ClassNotFoundException ignore) {}
-
-      wasCalledDuringClassLoading();
-      DefaultValues.computeForReturnType("()J");
-   }
+   private MockedBridge() { super(MockedBridge.class); }
 
    public Object invoke(Object mocked, Method method, Object[] args) throws Throwable
    {
@@ -52,7 +33,7 @@ public final class MockedBridge extends MockingBridge
       boolean lockHeldByCurrentThread = RecordAndReplayExecution.RECORD_OR_REPLAY_LOCK.isHeldByCurrentThread();
 
       if (lockHeldByCurrentThread && mocked != null && executionMode == 0) {
-         Object rv = Utilities.evaluateObjectOverride(mocked, mockNameAndDesc, args);
+         Object rv = ObjectMethods.evaluateOverride(mocked, mockNameAndDesc, args);
 
          if (rv != null) {
             return rv;
@@ -66,21 +47,19 @@ public final class MockedBridge extends MockingBridge
       String genericSignature = (String) args[4];
 
       if (lockHeldByCurrentThread && executionMode == 0) {
-         return
-            RecordAndReplayExecution.defaultReturnValue(
-               mocked, mockedClassDesc, mockNameAndDesc, genericSignature, 1, mockArgs);
+         return RecordAndReplayExecution.defaultReturnValue(
+            mocked, mockedClassDesc, mockNameAndDesc, genericSignature, 1, mockArgs);
       }
+
+      int mockAccess = (Integer) args[0];
+      String exceptions = (String) args[5];
 
       TestRun.enterNoMockingZone();
 
       try {
-         int mockAccess = (Integer) args[0];
-         String exceptions = (String) args[5];
-
-         return
-            RecordAndReplayExecution.recordOrReplay(
-               mocked, mockAccess, mockedClassDesc, mockNameAndDesc, genericSignature, exceptions,
-               executionMode, mockArgs);
+         return RecordAndReplayExecution.recordOrReplay(
+            mocked, mockAccess, mockedClassDesc, mockNameAndDesc, genericSignature, exceptions,
+            executionMode, mockArgs);
       }
       finally {
          TestRun.exitNoMockingZone();

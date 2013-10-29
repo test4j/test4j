@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations.mocking;
@@ -46,7 +46,7 @@ public final class DynamicPartialMocking
          redefineClassAndItsSuperClasses(targetClass, false);
       }
       else {
-         targetClass = classOrInstance.getClass();
+         targetClass = GeneratedClasses.getMockedClass(classOrInstance);
          validateTargetClassType(targetClass);
          registerAsMocked(classOrInstance);
          redefineClassAndItsSuperClasses(targetClass, true);
@@ -60,8 +60,8 @@ public final class DynamicPartialMocking
    {
       if (
          targetClass.isInterface() || targetClass.isAnnotation() || targetClass.isArray() ||
-         targetClass.isPrimitive() || Utilities.isWrapperOfPrimitiveType(targetClass) ||
-         Utilities.isGeneratedImplementationClass(targetClass)
+         targetClass.isPrimitive() || AutoBoxing.isWrapperOfPrimitiveType(targetClass) ||
+         GeneratedClasses.isGeneratedImplementationClass(targetClass)
       ) {
          throw new IllegalArgumentException("Invalid type for dynamic mocking: " + targetClass);
       }
@@ -101,7 +101,7 @@ public final class DynamicPartialMocking
 
    private void redefineClass(Class<?> realClass, boolean methodsOnly)
    {
-      ClassReader classReader = new ClassFile(realClass, false).getReader();
+      ClassReader classReader = ClassFile.createReaderOrGetFromCache(realClass);
 
       ExpectationsModifier modifier = new ExpectationsModifier(realClass.getClassLoader(), classReader, null);
       modifier.useDynamicMocking(methodsOnly);

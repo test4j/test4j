@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations.invocation;
@@ -64,10 +64,10 @@ final class ArgumentValuesAndMatchersWithVarargs extends ArgumentValuesAndMatche
    }
 
    @Override
-   Error assertMatch(Object[] replayArgs, Map<Object, Object> instanceMap)
+   Error assertMatch(Object[] replayArgs, Map<Object, Object> instanceMap, CharSequence errorMessagePrefix)
    {
       if (matchers == null) {
-         return assertEquality(replayArgs, instanceMap);
+         return assertEquality(replayArgs, instanceMap, errorMessagePrefix);
       }
 
       VarargsComparison varargsComparison = new VarargsComparison(replayArgs);
@@ -88,17 +88,18 @@ final class ArgumentValuesAndMatchersWithVarargs extends ArgumentValuesAndMatche
          }
 
          if (!expected.matches(actual)) {
-            return signature.argumentMismatchMessage(i, expected, actual);
+            int paramIndex = i < replayArgs.length ? i : replayArgs.length - 1;
+            return signature.argumentMismatchMessage(paramIndex, expected, actual, errorMessagePrefix);
          }
       }
 
       return null;
    }
 
-   private Error assertEquality(Object[] replayArgs, Map<Object, Object> instanceMap)
+   private Error assertEquality(Object[] replayArgs, Map<Object, Object> instanceMap, CharSequence errorMessagePrefix)
    {
       int argCount = replayArgs.length;
-      Error nonVarargsError = assertEquals(values, replayArgs, argCount - 1, instanceMap);
+      Error nonVarargsError = assertEquals(values, replayArgs, argCount - 1, instanceMap, errorMessagePrefix);
 
       if (nonVarargsError != null) {
          return nonVarargsError;
@@ -112,7 +113,8 @@ final class ArgumentValuesAndMatchersWithVarargs extends ArgumentValuesAndMatche
          return varargsComparison.errorForVarargsArraysOfDifferentLengths();
       }
 
-      Error varargsError = assertEquals(expectedValues, actualValues, expectedValues.length, instanceMap);
+      Error varargsError =
+         assertEquals(expectedValues, actualValues, expectedValues.length, instanceMap, errorMessagePrefix);
 
       if (varargsError != null) {
          return new UnexpectedInvocation("Varargs " + varargsError);

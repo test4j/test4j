@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit;
@@ -28,10 +28,6 @@ import java.lang.annotation.*;
  * <a href="http://code.google.com/p/jmockit/source/browse/trunk/main/test/integrationTests/SubclassTest.java">SubclassTest</a>,
  * <a href="http://code.google.com/p/jmockit/source/browse/trunk/main/test/mockit/CapturingImplementationsTest.java">CapturingImplementationsTest</a>,
  * <a href="http://code.google.com/p/jmockit/source/browse/trunk/samples/TimingFramework/test/org/jdesktop/animation/timing/interpolation/PropertySetterTest.java">PropertySetterTest</a>
- *
- * @see #classNames classNames
- * @see #inverse inverse
- * @see #maxInstances maxInstances
  */
 @Inherited
 @Retention(RetentionPolicy.RUNTIME)
@@ -57,19 +53,4 @@ public @interface Capturing
     * Notice that this attribute does not apply to {@code final} mock fields, which cannot be reassigned.
     */
    int maxInstances() default Integer.MAX_VALUE;
-
-   /**
-    * One or more implementation class filters.
-    * Only classes which implement/extend the base type and match at least one filter will be considered.
-    * <p/>
-    * Each filter must contain a {@linkplain java.util.regex.Pattern regular expression} for matching fully qualified
-    * class names.
-    */
-   String[] classNames() default {};
-
-   /**
-    * Indicates whether the implementation filters are to be inverted or not.
-    * If inverted, only the classes matching them are <strong>not</strong> captured.
-    */
-   boolean inverse() default false;
 }

@@ -17,7 +17,11 @@ public final class RealMethod
 
    public RealMethod(String className, String methodNameAndDesc)
    {
-      Class<?> realClass = Utilities.loadClass(className);
+      this(ClassLoad.loadClass(className), methodNameAndDesc);
+   }
+
+   public RealMethod(Class<?> realClass, String methodNameAndDesc)
+   {
       int p = methodNameAndDesc.indexOf('(');
       String methodName = methodNameAndDesc.substring(0, p);
       String methodDesc = methodNameAndDesc.substring(p);
@@ -26,13 +30,20 @@ public final class RealMethod
 
    private Method initialize(Class<?> realClass, String methodName, String methodDesc)
    {
-      Class<?>[] parameterTypes = Utilities.getParameterTypes(methodDesc);
+      Class<?>[] parameterTypes = TypeDescriptor.getParameterTypes(methodDesc);
+      Class<?> ownerClass = realClass;
 
-      try {
-         return realClass.getDeclaredMethod(methodName, parameterTypes);
-      }
-      catch (NoSuchMethodException e) {
-         throw new RuntimeException(e);
+      while (true) {
+         try {
+            return ownerClass.getDeclaredMethod(methodName, parameterTypes);
+         }
+         catch (NoSuchMethodException e) {
+            ownerClass = ownerClass.getSuperclass();
+
+            if (ownerClass == Object.class) {
+               throw new RuntimeException(e);
+            }
+         }
       }
    }
 }

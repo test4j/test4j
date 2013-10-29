@@ -36,6 +36,12 @@ import java.lang.annotation.*;
  * <p/>
  * Whenever constructor or field injection is used, the value of each injectable mock field/parameter goes into
  * <em>at most one</em> matching constructor parameter or instance field of a tested class.
+ * <p/>
+ * The tested class can be {@code abstract}.
+ * In this case, if the tested field is left null then a subclass implementing all abstract methods is automatically
+ * generated and instantiated.
+ * The abstract method implementations are automatically <em>mocked</em> so that expectations can be recorded or
+ * verified on them.
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.FIELD)

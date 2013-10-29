@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2011 Rogério Liesenfeld
+ * Copyright (c) 2006-2012 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 
@@ -19,9 +19,7 @@
  * {@code @BeforeMethod} will be discarded right after the execution of the test or the test method, respectively.
  * </li>
  * <li>
- * Any {@linkplain mockit.MockClass mock class} set up for the whole test class (either through a call to
- * {@link mockit.Mockit#setUpMocks} from inside a {@code @BeforeClass} method, or by annotating the test class with
- * {@link mockit.UsingMocksAndStubs}) will only apply to the tests in this same test class.
+ * Any mock class set up for the whole test class will only apply to the tests in this same test class.
  * That is, you should not explicitly tell JMockit to restore the mocked classes in an {@code @AfterClass} method.
  * </li>
  * <li>

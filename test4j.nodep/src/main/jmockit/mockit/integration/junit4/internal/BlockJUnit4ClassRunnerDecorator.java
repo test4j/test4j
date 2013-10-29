@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.integration.junit4.internal;
@@ -12,16 +12,15 @@ import org.junit.runners.model.*;
 import mockit.*;
 import mockit.integration.internal.*;
 import mockit.internal.state.*;
+import mockit.internal.util.*;
 
 /**
  * Startup mock which works in conjunction with {@link JUnit4TestRunnerDecorator} to provide JUnit 4.5+ integration.
  * <p/>
  * This class is not supposed to be accessed from user code. JMockit will automatically load it at startup.
  */
-@MockClass(realClass = BlockJUnit4ClassRunner.class)
-public final class BlockJUnit4ClassRunnerDecorator
+public final class BlockJUnit4ClassRunnerDecorator extends MockUp<BlockJUnit4ClassRunner>
 {
-   private static final Method createTest;
    private static final Method getTestClass;
 
    static
@@ -30,11 +29,8 @@ public final class BlockJUnit4ClassRunnerDecorator
 
       try {
          getTestClassMethod = ParentRunner.class.getDeclaredMethod("getTestClass");
-         createTest = BlockJUnit4ClassRunner.class.getDeclaredMethod("createTest");
       }
       catch (NoSuchMethodException e) { throw new RuntimeException(e); }
-      
-      createTest.setAccessible(true);
 
       if (getTestClassMethod.isAccessible()) {
          getTestClass = null;
@@ -45,13 +41,13 @@ public final class BlockJUnit4ClassRunnerDecorator
       }
    }
 
-   @Mock(reentrant = true)
-   public static Object createTest(Invocation invocation) throws Throwable
+   @Mock
+   public Object createTest(Invocation invocation) throws Throwable
    {
       TestRun.enterNoMockingZone();
 
       try {
-         BlockJUnit4ClassRunner it = invocation.getInvokedInstance();
+         ParentRunner<?> it = invocation.getInvokedInstance();
          TestClass junitTestClass = getTestClass == null ? it.getTestClass() : (TestClass) getTestClass.invoke(it);
          Class<?> newTestClass = junitTestClass.getJavaClass();
          Class<?> currentTestClass = TestRun.getCurrentTestClass();
@@ -60,10 +56,12 @@ public final class BlockJUnit4ClassRunnerDecorator
             TestRunnerDecorator.cleanUpMocksFromPreviousTestClass();
          }
 
-         return createTest.invoke(it);
+         return invocation.proceed();
       }
       catch (InvocationTargetException e) {
-         throw e.getCause();
+         Throwable cause = e.getCause();
+         StackTrace.filterStackTrace(cause);
+         throw cause;
       }
       finally {
          TestRun.exitNoMockingZone();

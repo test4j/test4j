@@ -11,7 +11,6 @@ import mockit.internal.expectations.invocation.*;
 final class UnorderedVerificationPhase extends BaseVerificationPhase
 {
    final List<VerifiedExpectation> verifiedExpectations;
-   private Expectation aggregate;
 
    UnorderedVerificationPhase(
       RecordAndReplayExecution recordAndReplay,
@@ -24,53 +23,36 @@ final class UnorderedVerificationPhase extends BaseVerificationPhase
    @Override
    protected void findNonStrictExpectation(Object mock, String mockClassDesc, String mockNameAndDesc, Object[] args)
    {
-      aggregate = null;
-
-      if (recordAndReplay.executionState.isToBeMatchedOnInstance(mock, mockNameAndDesc)) {
+      if (!matchInstance && recordAndReplay.executionState.isToBeMatchedOnInstance(mock, mockNameAndDesc)) {
          matchInstance = true;
       }
 
-      for (Expectation expectation : recordAndReplay.executionState.nonStrictExpectations) {
-         if (matches(mock, mockClassDesc, mockNameAndDesc, args, expectation)) {
-            if (matchInstance && argMatchers == null) {
-               currentExpectation = expectation;
-               break;
-            }
+      replayIndex = -1;
 
-            aggregateMatchingExpectations(expectation);
+      for (int i = 0, n = expectationsInReplayOrder.size(); i < n; i++) {
+         Expectation replayExpectation = expectationsInReplayOrder.get(i);
+         Object[] replayArgs = invocationArgumentsInReplayOrder.get(i);
+
+         if (matches(mock, mockClassDesc, mockNameAndDesc, args, replayExpectation, replayArgs)) {
+            replayIndex = i;
+            currentVerification.constraints.invocationCount++;
+            currentExpectation = replayExpectation;
          }
       }
 
-      if (currentExpectation != null) {
-         int minInvocations = 1;
-         int maxInvocations = -1;
-
-         if (numberOfIterations > 0) {
-            minInvocations = maxInvocations = numberOfIterations;
-         }
-
-         verifyConstraints(minInvocations, maxInvocations);
+      if (replayIndex >= 0) {
+         pendingError = verifyConstraints();
       }
    }
 
-   private void aggregateMatchingExpectations(Expectation found)
+   private Error verifyConstraints()
    {
-      if (currentExpectation == null) {
-         currentExpectation = found;
-         return;
-      }
+      ExpectedInvocation lastInvocation = expectationsInReplayOrder.get(replayIndex).invocation;
+      Object[] lastArgs = invocationArgumentsInReplayOrder.get(replayIndex);
+      int minInvocations = numberOfIterations > 0 ? numberOfIterations : 1;
+      int maxInvocations = numberOfIterations > 0 ? numberOfIterations : -1;
 
-      if (aggregate == null) {
-         aggregate = new Expectation(currentExpectation);
-         currentExpectation = aggregate;
-      }
-
-      aggregate.constraints.addInvocationCount(found.constraints);
-   }
-
-   private void verifyConstraints(int minInvocations, int maxInvocations)
-   {
-      pendingError = currentExpectation.verifyConstraints(currentVerification, minInvocations, maxInvocations);
+      return currentVerification.verifyConstraints(lastInvocation, lastArgs, minInvocations, maxInvocations);
    }
 
    @Override
@@ -86,7 +68,12 @@ final class UnorderedVerificationPhase extends BaseVerificationPhase
       validatePresenceOfExpectation(currentVerification);
 
       int multiplier = numberOfIterations <= 1 ? 1 : numberOfIterations;
-      verifyConstraints(multiplier * minInvocations, multiplier * maxInvocations);
+      ExpectedInvocation replayInvocation =
+         replayIndex < 0 ? null : expectationsInReplayOrder.get(replayIndex).invocation;
+      Object[] replayArgs = replayIndex < 0 ? null : invocationArgumentsInReplayOrder.get(replayIndex);
+      pendingError =
+         currentVerification.verifyConstraints(
+            replayInvocation, replayArgs, multiplier * minInvocations, multiplier * maxInvocations);
    }
 
    @Override
@@ -98,15 +85,15 @@ final class UnorderedVerificationPhase extends BaseVerificationPhase
 
       validatePresenceOfExpectation(currentVerification);
 
-      InvocationHandler handler = new InvocationHandler(invocationHandler);
-      int i = 0;
+      InvocationHandlerResult handler = new InvocationHandlerResult(invocationHandler);
+      int matchedExpectations = 0;
 
-      for (int j = 0, n = expectationsInReplayOrder.size(); j < n; j++) {
-         Expectation expectation = expectationsInReplayOrder.get(j);
-         Object[] args = invocationArgumentsInReplayOrder.get(j);
+      for (int i = 0, n = expectationsInReplayOrder.size(); i < n; i++) {
+         Expectation expectation = expectationsInReplayOrder.get(i);
+         Object[] args = invocationArgumentsInReplayOrder.get(i);
 
-         if (evaluateInvocationHandlerIfExpectationMatchesCurrent(expectation, args, handler, i)) {
-            i++;
+         if (evaluateInvocationHandlerIfExpectationMatchesCurrent(expectation, args, handler, matchedExpectations)) {
+            matchedExpectations++;
          }
       }
    }

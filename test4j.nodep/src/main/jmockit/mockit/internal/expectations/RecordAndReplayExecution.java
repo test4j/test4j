@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations;
@@ -41,7 +41,6 @@ public final class RecordAndReplayExecution
       redefinitions = null;
       typesAndTargetObjects = new HashMap<Type, Object>(1);
       dynamicPartialMocking = null;
-      validateThereIsAtLeastOneMockedTypeInScope();
       discoverMockedTypesAndInstancesForMatchingOnInstance();
       failureState = new FailureState();
       replayPhase = new ReplayPhase(this);
@@ -107,7 +106,6 @@ public final class RecordAndReplayExecution
          redefinitions = redefineFieldTypes(targetObject);
          dynamicPartialMocking = applyDynamicPartialMocking(nonStrict, classesOrInstancesToBePartiallyMocked);
 
-         validateThereIsAtLeastOneMockedTypeInScope();
          discoverMockedTypesAndInstancesForMatchingOnInstance();
 
          //noinspection LockAcquiredButNotSafelyReleased
@@ -141,21 +139,6 @@ public final class RecordAndReplayExecution
          redefs.cleanUp();
          StackTrace.filterStackTrace(e);
          throw e;
-      }
-   }
-
-   private void validateThereIsAtLeastOneMockedTypeInScope()
-   {
-      if (
-         redefinitions == null && dynamicPartialMocking == null &&
-         TestRun.getSharedFieldTypeRedefinitions().getTypesRedefined() == 0
-      ) {
-         ParameterTypeRedefinitions paramTypeRedefinitions = TestRun.getExecutingTest().getParameterTypeRedefinitions();
-
-         if (paramTypeRedefinitions == null || paramTypeRedefinitions.getTypesRedefined() == 0) {
-            throw new IllegalStateException(
-               "No mocked types in scope; please declare mock fields or parameters for the types you need mocked");
-         }
       }
    }
 
@@ -228,9 +211,9 @@ public final class RecordAndReplayExecution
          RECORD_OR_REPLAY_LOCK.isHeldByCurrentThread() ||
          TEST_ONLY_PHASE_LOCK.isLocked() && !TEST_ONLY_PHASE_LOCK.isHeldByCurrentThread()
       ) {
-         // This occurs if called from a custom argument matching method, in the instantiation of an @Input value,
-         // in a call to an overridden Object method (equals, hashCode, toString), during static initialization of a
-         // mocked class which calls another mocked method, or from a different thread during a recording/verification.
+         // This occurs if called from a custom argument matching method, in a call to an overridden Object method
+         // (equals, hashCode, toString), during static initialization of a mocked class which calls another mocked
+         // method, or from a different thread during a recording/verification.
          return defaultReturnValue(mock, classDesc, mockDesc, genericSignature, executionMode, args);
       }
 
@@ -297,8 +280,10 @@ public final class RecordAndReplayExecution
    public static Object defaultReturnValue(
       Object mock, String classDesc, String nameAndDesc, String genericSignature, int executionMode, Object[] args)
    {
+      if (executionMode == 1) return Void.class;
+
       if (mock != null) {
-         Object rv = Utilities.evaluateObjectOverride(mock, nameAndDesc, args);
+         Object rv = ObjectMethods.evaluateOverride(mock, nameAndDesc, args);
 
          if (rv != null) {
             return rv;
@@ -368,7 +353,7 @@ public final class RecordAndReplayExecution
    {
       Class<?> mockedClass = mock.getClass();
 
-      if (Utilities.isAnonymousClass(mockedClass)) {
+      if (ClassNaming.isAnonymousClass(mockedClass)) {
          // An anonymous class instantiation always invokes the constructor on the super-class,
          // so that is the class we need to consider, not the anonymous one.
          mockedClass = mockedClass.getSuperclass();

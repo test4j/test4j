@@ -1,15 +1,15 @@
 /*
- * Copyright (c) 2006-2011 Rogério Liesenfeld
+ * Copyright (c) 2006-2012 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations.argumentMatching;
 
-import static mockit.internal.util.Utilities.*;
+import mockit.internal.util.*;
 
 /**
  * Adapts the {@code org.hamcrest.Matcher} interface to {@link ArgumentMatcher}.
  */
-@SuppressWarnings({"UnnecessaryFullyQualifiedName"})
+@SuppressWarnings("UnnecessaryFullyQualifiedName")
 public final class HamcrestAdapter implements ArgumentMatcher
 {
    private final org.hamcrest.Matcher<?> hamcrestMatcher;
@@ -49,7 +49,7 @@ public final class HamcrestAdapter implements ArgumentMatcher
       org.hamcrest.Matcher<?> innerMatcher = hamcrestMatcher;
 
       while (innerMatcher instanceof org.hamcrest.core.Is || innerMatcher instanceof org.hamcrest.core.IsNot) {
-         innerMatcher = getField(innerMatcher.getClass(), org.hamcrest.Matcher.class, innerMatcher);
+         innerMatcher = FieldReflection.getField(innerMatcher.getClass(), org.hamcrest.Matcher.class, innerMatcher);
       }
 
       return innerMatcher;
@@ -61,7 +61,7 @@ public final class HamcrestAdapter implements ArgumentMatcher
          argMatcher instanceof org.hamcrest.core.IsEqual || argMatcher instanceof org.hamcrest.core.IsSame ||
          "org.hamcrest.number.OrderingComparison".equals(argMatcher.getClass().getName())
       ) {
-         return getField(argMatcher.getClass(), Object.class, argMatcher);
+         return FieldReflection.getField(argMatcher.getClass(), Object.class, argMatcher);
       }
 
       return null;

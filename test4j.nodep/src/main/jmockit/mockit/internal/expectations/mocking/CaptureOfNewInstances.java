@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations.mocking;
@@ -10,6 +10,8 @@ import mockit.external.asm4.*;
 import mockit.internal.capturing.*;
 import mockit.internal.state.*;
 import mockit.internal.util.*;
+
+import static mockit.internal.util.FieldReflection.*;
 
 class CaptureOfNewInstances extends CaptureOfImplementations
 {
@@ -35,7 +37,7 @@ class CaptureOfNewInstances extends CaptureOfImplementations
       {
          if (instancesCaptured.size() < typeMetadata.getMaxInstancesToCapture()) {
             if (fieldOwner != null && originalMockInstance == null) {
-               originalMockInstance = Utilities.getFieldValue(typeMetadata.field, fieldOwner);
+               originalMockInstance = getFieldValue(typeMetadata.field, fieldOwner);
             }
 
             instancesCaptured.add(instance);
@@ -47,6 +49,7 @@ class CaptureOfNewInstances extends CaptureOfImplementations
 
       void reset()
       {
+         originalMockInstance = null;
          instancesCaptured.clear();
       }
    }
@@ -91,31 +94,6 @@ class CaptureOfNewInstances extends CaptureOfImplementations
       }
 
       captures.add(new Capture(typeMetadata, mockInstance));
-   }
-
-   @Override
-   protected final ClassSelector createClassSelector()
-   {
-      final String[] classNameFilters = typeMetadata.capturing.classNames();
-      final boolean inverseFilters = typeMetadata.capturing.inverse();
-
-      return new ClassSelector()
-      {
-         public boolean shouldCapture(ClassLoader definingClassLoader, String className)
-         {
-            if (classNameFilters == null || classNameFilters.length == 0) {
-               return true;
-            }
-
-            for (String classNameRegex : classNameFilters) {
-               if (className.matches(classNameRegex)) {
-                  return !inverseFilters;
-               }
-            }
-
-            return inverseFilters;
-         }
-      };
    }
 
    final boolean captureNewInstance(Object fieldOwner, Object mock)

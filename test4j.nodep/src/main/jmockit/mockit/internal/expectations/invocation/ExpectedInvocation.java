@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations.invocation;
@@ -19,6 +19,7 @@ public final class ExpectedInvocation
    private static final Object UNDEFINED_DEFAULT_RETURN = new Object();
 
    public final Object instance;
+   public Object replacementInstance;
    public boolean matchInstance;
    public final InvocationArguments arguments;
    public CharSequence customErrorMessage;
@@ -46,7 +47,7 @@ public final class ExpectedInvocation
 
    private void determineDefaultReturnValueFromMethodSignature()
    {
-      Object rv = Utilities.evaluateObjectOverride(instance, getMethodNameAndDescription(), getArgumentValues());
+      Object rv = ObjectMethods.evaluateOverride(instance, getMethodNameAndDescription(), getArgumentValues());
       defaultReturnValue = rv == null ? UNDEFINED_DEFAULT_RETURN : rv;
    }
 
@@ -56,6 +57,18 @@ public final class ExpectedInvocation
    public String getClassName() { return arguments.getClassName(); }
    public String getMethodNameAndDescription() { return arguments.methodNameAndDesc; }
    public Object[] getArgumentValues() { return arguments.getValues(); }
+   public boolean isConstructor() { return arguments.isForConstructor(); }
+
+   public String getSignatureWithResolvedReturnType()
+   {
+      String signature = arguments.genericSignature;
+
+      if (signature != null && signature.charAt(signature.indexOf(')') + 1) != 'T') {
+         return signature;
+      }
+
+      return arguments.methodNameAndDesc;
+   }
 
    // Matching based on instance or mocked type ///////////////////////////////////////////////////////////////////////
 
@@ -69,8 +82,7 @@ public final class ExpectedInvocation
    {
       return
          isMatch(invokedClassDesc, invokedMethod) &&
-         (getMethodNameAndDescription().charAt(0) == '<' ||
-          !matchInstance || isEquivalentInstance(replayInstance, instanceMap));
+         (arguments.isForConstructor() || !matchInstance || isEquivalentInstance(replayInstance, instanceMap));
    }
 
    private boolean isMatchingMethod(String invokedMethod)
@@ -119,7 +131,7 @@ public final class ExpectedInvocation
       Type rt1 = Type.getType(nameAndDesc.substring(i));
       Type rt2 = Type.getType(invokedMethod.substring(i));
 
-      return Utilities.getClassForType(rt2).isAssignableFrom(Utilities.getClassForType(rt1));
+      return TypeDescriptor.getClassForType(rt2).isAssignableFrom(TypeDescriptor.getClassForType(rt1));
    }
 
    public boolean isEquivalentInstance(Object mockedInstance, Map<Object, Object> instanceMap)
@@ -199,7 +211,7 @@ public final class ExpectedInvocation
       }
 
       if (mock != null) {
-         message.append("\n   on instance: ").append(Utilities.objectIdentity(mock));
+         message.append("\n   on instance: ").append(ObjectMethods.objectIdentity(mock));
       }
 
       message.append("\nwhen was expecting an invocation of").append(this);
@@ -225,6 +237,18 @@ public final class ExpectedInvocation
       return newUnexpectedInvocationWithCause("Unexpected invocation" + this, "Unexpected invocation before" + another);
    }
 
+   public UnexpectedInvocation errorForUnexpectedInvocationFoundBeforeAnother()
+   {
+      String initialMessage = "Invocation occurred unexpectedly before another" + this;
+      return newUnexpectedInvocationWithCause("Unexpected invocation", initialMessage);
+   }
+
+   public UnexpectedInvocation errorForUnexpectedInvocationFoundBeforeAnother(ExpectedInvocation another)
+   {
+      String initialMessage = "Another invocation unexpectedly occurred before" + another;
+      return newUnexpectedInvocationWithCause("Unexpected invocation" + this, initialMessage);
+   }
+
    public UnexpectedInvocation errorForUnexpectedInvocationAfterAnother(ExpectedInvocation another)
    {
       return newUnexpectedInvocationWithCause("Unexpected invocation" + this, "Unexpected invocation after" + another);
@@ -236,7 +260,7 @@ public final class ExpectedInvocation
       String desc = arguments.toString();
 
       if (instance != null) {
-         desc += "\n   on mock instance: " + Utilities.objectIdentity(instance);
+         desc += "\n   on mock instance: " + ObjectMethods.objectIdentity(instance);
       }
 
       return desc;
@@ -254,22 +278,16 @@ public final class ExpectedInvocation
       return description;
    }
 
-   // Default result //////////////////////////////////////////////////////////////////////////////////////////////////
-
-   public Object getDefaultResult()
+   public Error assertThatArgumentsMatch(Object[] replayArgs, Map<Object, Object> instanceMap)
    {
-      return TestRun.getExecutingTest().defaultResults.get(arguments.getGenericSignature(), arguments.exceptions);
+      return arguments.assertMatch(replayArgs, instanceMap, customErrorMessage);
    }
+
+   // Default result //////////////////////////////////////////////////////////////////////////////////////////////////
 
    public Object getDefaultValueForReturnType(TestOnlyPhase phase)
    {
       if (defaultReturnValue == UNDEFINED_DEFAULT_RETURN) {
-         Object defaultResult = getDefaultResult();
-
-         if (defaultResult != null) {
-            return defaultResult;
-         }
-
          String returnTypeDesc = DefaultValues.getReturnTypeDesc(arguments.methodNameAndDesc);
          defaultReturnValue = DefaultValues.computeForType(returnTypeDesc);
 

@@ -1,56 +1,47 @@
 /*
- * Copyright (c) 2006-2011 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.state;
 
 import java.util.*;
 
+import mockit.*;
 import mockit.internal.util.*;
 
 /**
- * Holds a list of instances of mock classes (either regular classes provided by client code, or
- * startup mock classes provided internally by JMockit or by external jars).
+ * Holds a list of instances of mock classes (either regular classes provided by client code, or startup mock classes
+ * provided internally by JMockit or by external jars).
  * <p/>
- * This is needed to allow each redefined real method to call the corresponding mock method on the
- * single global instance for the mock class.
+ * This is needed to allow each redefined real method to call the corresponding mock method on the instance of the mock
+ * class (unless the mock method is {@code static}).
  */
 public final class MockInstances
 {
-   private final List<Object> mocks = new ArrayList<Object>();
-   private final Map<Object, Object> mockedInstancesToMocks = new HashMap<Object, Object>();
+   private final List<MockUp<?>> mocks = new ArrayList<MockUp<?>>();
 
-   public boolean containsInstance(Object mock)
+   int getInstanceCount() { return mocks.size(); }
+   MockUp<?> getMock(int index) { return mocks.get(index); }
+
+   public int addMock(MockUp<?> mock)
    {
-      return mocks.contains(mock);
-   }
+      int i = Utilities.indexOfReference(mocks, mock);
 
-   public int getInstanceCount()
-   {
-      return mocks.size();
-   }
-
-   public Object getMock(int index)
-   {
-      return mocks.get(index);
-   }
-
-   public Object getMock(Class<?> mockClass, Object mockedInstance)
-   {
-      Object mock = mockedInstancesToMocks.get(mockedInstance);
-
-      if (mock == null) {
-         mock = Utilities.newInstance(mockClass);
-         mockedInstancesToMocks.put(mockedInstance, mock);
+      if (i < 0) {
+         i = mocks.size();
+         mocks.add(mock);
       }
 
-      return mock;
+      return i;
    }
 
-   public int addMock(Object mock)
+   void removeInstance(MockUp<?> mock)
    {
-      mocks.add(mock);
-      return mocks.size() - 1;
+      int i = Utilities.indexOfReference(mocks, mock);
+
+      if (i >= 0) {
+         mocks.set(i, null);
+      }
    }
 
    void removeInstances(int fromIndex)
@@ -60,8 +51,18 @@ public final class MockInstances
       }
    }
 
-   public void discardInstances()
+   MockUp<?> findMock(Class<?> mockClass)
    {
-      mocks.clear();
+      int n = mocks.size();
+
+      for (int i = 0; i < n; i++) {
+         MockUp<?> mock = mocks.get(i);
+
+         if (mock != null && mock.getClass() == mockClass) {
+            return mock;
+         }
+      }
+
+      return null;
    }
 }

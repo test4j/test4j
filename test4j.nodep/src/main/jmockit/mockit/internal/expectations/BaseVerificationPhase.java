@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations;
@@ -7,6 +7,7 @@ package mockit.internal.expectations;
 import java.util.*;
 
 import mockit.internal.*;
+import mockit.internal.expectations.argumentMatching.*;
 import mockit.internal.expectations.invocation.*;
 import mockit.internal.util.*;
 
@@ -17,6 +18,7 @@ public abstract class BaseVerificationPhase extends TestOnlyPhase
    private boolean allMockedInvocationsDuringReplayMustBeVerified;
    private Object[] mockedTypesAndInstancesToFullyVerify;
    protected Expectation currentVerification;
+   protected int replayIndex;
    protected Error pendingError;
 
    protected BaseVerificationPhase(
@@ -76,32 +78,33 @@ public abstract class BaseVerificationPhase extends TestOnlyPhase
    abstract void findNonStrictExpectation(Object mock, String mockClassDesc, String mockNameAndDesc, Object[] args);
 
    final boolean matches(
-      Object mock, String mockClassDesc, String mockNameAndDesc, Object[] args, Expectation expectation)
+      Object mock, String mockClassDesc, String mockNameAndDesc, Object[] args,
+      Expectation replayExpectation, Object[] replayArgs)
    {
-      ExpectedInvocation invocation = expectation.invocation;
+      ExpectedInvocation invocation = replayExpectation.invocation;
       Map<Object, Object> instanceMap = getInstanceMap();
 
       if (
          invocation.isMatch(mock, mockClassDesc, mockNameAndDesc, instanceMap) &&
          (!matchInstance || invocation.isEquivalentInstance(mock, instanceMap))
       ) {
-         Object[] argsToVerify =
-            argMatchers == null ? args : invocation.arguments.prepareForVerification(args, argMatchers);
-
-         boolean argumentsMatch = invocation.arguments.isMatch(argsToVerify, instanceMap);
-
-         if (argMatchers != null) {
-            invocation.arguments.setValuesWithNoMatchers(argsToVerify);
-         }
+         Object[] originalArgs = invocation.arguments.prepareForVerification(args, argMatchers);
+         boolean argumentsMatch = invocation.arguments.isMatch(replayArgs, instanceMap);
+         invocation.arguments.setValuesWithNoMatchers(originalArgs);
 
          if (argumentsMatch) {
-            int replayIndex = expectationsInReplayOrder.indexOf(expectation);
-            addVerifiedExpectation(new VerifiedExpectation(expectation, args, argMatchers, replayIndex));
+            addVerifiedExpectation(replayExpectation, replayArgs, argMatchers);
             return true;
          }
       }
 
       return false;
+   }
+
+   private void addVerifiedExpectation(Expectation expectation, Object[] args, List<ArgumentMatcher> matchers)
+   {
+      int i = expectationsInReplayOrder.indexOf(expectation);
+      addVerifiedExpectation(new VerifiedExpectation(expectation, args, matchers, i));
    }
 
    void addVerifiedExpectation(VerifiedExpectation verifiedExpectation)
@@ -135,27 +138,43 @@ public abstract class BaseVerificationPhase extends TestOnlyPhase
    }
 
    final boolean evaluateInvocationHandlerIfExpectationMatchesCurrent(
-      Expectation expectation, Object[] replayArgs, InvocationHandler handler, int invocationIndex)
+      Expectation replayExpectation, Object[] replayArgs, InvocationHandlerResult handler, int matchedInvocations)
    {
-      ExpectedInvocation invocation = expectation.invocation;
-      Object mock = invocation.instance;
-      String mockClassDesc = invocation.getClassDesc();
-      String mockNameAndDesc = invocation.getMethodNameAndDescription();
-      Object[] args = invocation.getArgumentValues();
-      InvocationConstraints constraints = expectation.constraints;
-
-      if (matches(mock, mockClassDesc, mockNameAndDesc, args, currentVerification)) {
-         int originalCount = constraints.invocationCount;
-         constraints.invocationCount = invocationIndex + 1;
+      if (matchesCurrentVerification(replayExpectation, replayArgs)) {
+         InvocationConstraints constraints = currentVerification.constraints;
+         int originalInvocationCount = constraints.invocationCount;
 
          try {
-            handler.produceResult(mock, invocation, constraints, replayArgs);
+            constraints.invocationCount = matchedInvocations + 1;
+            handler.produceResult(
+               replayExpectation.invocation.instance, replayExpectation.invocation, constraints, replayArgs);
          }
          finally {
-            constraints.invocationCount = originalCount;
+            constraints.invocationCount = originalInvocationCount;
          }
 
          return true;
+      }
+
+      return false;
+   }
+
+   private boolean matchesCurrentVerification(Expectation replayExpectation, Object[] replayArgs)
+   {
+      ExpectedInvocation replayInvocation = replayExpectation.invocation;
+      ExpectedInvocation verifiedInvocation = currentVerification.invocation;
+      Map<Object, Object> instanceMap = getInstanceMap();
+
+      if (
+         replayInvocation.isMatch(
+            verifiedInvocation.instance, verifiedInvocation.getClassDesc(),
+            verifiedInvocation.getMethodNameAndDescription(), instanceMap) &&
+         (!matchInstance || replayInvocation.isEquivalentInstance(verifiedInvocation.instance, instanceMap))
+      ) {
+         if (verifiedInvocation.arguments.isMatch(replayArgs, instanceMap)) {
+            addVerifiedExpectation(replayExpectation, replayArgs, verifiedInvocation.arguments.getMatchers());
+            return true;
+         }
       }
 
       return false;
@@ -263,7 +282,7 @@ public abstract class BaseVerificationPhase extends TestOnlyPhase
             }
          }
          else if (invokedInstance == null) {
-            Class<?> invokedClass = Utilities.loadClass(invokedClassName);
+            Class<?> invokedClass = ClassLoad.loadClass(invokedClassName);
 
             if (invokedClass.isInstance(mockedTypeOrInstance)) {
                return true;
@@ -285,15 +304,30 @@ public abstract class BaseVerificationPhase extends TestOnlyPhase
    public final Object getArgumentValueForCurrentVerification(int parameterIndex)
    {
       List<VerifiedExpectation> verifiedExpectations = recordAndReplay.executionState.verifiedExpectations;
-      Expectation lastMatched;
 
       if (verifiedExpectations.isEmpty()) {
-         lastMatched = currentVerification;
-      }
-      else {
-         lastMatched = verifiedExpectations.get(verifiedExpectations.size() - 1).expectation;
+         return currentVerification.invocation.getArgumentValues()[parameterIndex];
       }
 
-      return lastMatched.invocation.getArgumentValues()[parameterIndex];
+      VerifiedExpectation lastMatched = verifiedExpectations.get(verifiedExpectations.size() - 1);
+      return lastMatched.arguments[parameterIndex];
+   }
+
+   public final void discardReplayedInvocations()
+   {
+      if (mockedTypesAndInstancesToFullyVerify == null) {
+         expectationsInReplayOrder.clear();
+         invocationArgumentsInReplayOrder.clear();
+      }
+      else {
+         for (int i = expectationsInReplayOrder.size() - 1; i >= 0; i--) {
+            Expectation expectation = expectationsInReplayOrder.get(i);
+
+            if (isInvocationToBeVerified(expectation.invocation)) {
+               expectationsInReplayOrder.remove(i);
+               invocationArgumentsInReplayOrder.remove(i);
+            }
+         }
+      }
    }
 }

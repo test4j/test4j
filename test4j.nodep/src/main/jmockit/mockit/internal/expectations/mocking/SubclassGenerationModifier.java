@@ -1,12 +1,11 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations.mocking;
 
-import java.lang.reflect.Method;
 import java.lang.reflect.*;
-import java.util.ArrayList;
+import java.lang.reflect.Type;
 import java.util.*;
 
 import static java.util.Arrays.*;
@@ -14,34 +13,46 @@ import static mockit.external.asm4.Opcodes.*;
 
 import mockit.external.asm4.*;
 import mockit.internal.*;
-import mockit.internal.filtering.*;
 import mockit.internal.util.*;
 
-final class SubclassGenerationModifier extends MockedTypeModifier
+public final class SubclassGenerationModifier extends MockedTypeModifier
 {
    private static final int CLASS_ACCESS_MASK = 0xFFFF - ACC_ABSTRACT;
+   private static final int CONSTRUCTOR_ACCESS_MASK = ACC_PUBLIC + ACC_PROTECTED;
 
+   // Fixed initial state:
    private final MockingConfiguration mockingCfg;
    private final Class<?> abstractClass;
    private final String subclassName;
+   private boolean copyConstructors;
+
+   // Helper fields for mutable state:
    private String superClassOfSuperClass;
    private Set<String> superInterfaces;
    private final List<String> implementedMethods;
 
-   SubclassGenerationModifier(
-      MockingConfiguration mockingConfiguration, Class<?> abstractClass, ClassReader classReader, String subclassName)
+   public SubclassGenerationModifier(Type mockedType, ClassReader classReader, String subclassName)
    {
-      super(classReader);
+      this(null, mockedType, classReader, subclassName);
+      copyConstructors = true;
+   }
+
+   SubclassGenerationModifier(
+      MockingConfiguration mockingConfiguration, Type mockedType, ClassReader classReader, String subclassName)
+   {
+      super(classReader, mockedType);
       mockingCfg = mockingConfiguration;
-      this.abstractClass = abstractClass;
+      abstractClass = Utilities.getClassType(mockedType);
       this.subclassName = subclassName.replace('.', '/');
       implementedMethods = new ArrayList<String>();
+      implementationSignature = 'L' + abstractClass.getName().replace('.', '/') + implementationSignature;
    }
 
    @Override
    public void visit(int version, int access, String name, String signature, String superName, String[] interfaces)
    {
-      super.visit(version, access & CLASS_ACCESS_MASK, subclassName, signature, name, null);
+      int subclassAccess = access & CLASS_ACCESS_MASK | ACC_FINAL;
+      super.visit(version, subclassAccess, subclassName, implementationSignature, name, null);
       superClassOfSuperClass = superName;
       superInterfaces = new HashSet<String>(asList(interfaces));
    }
@@ -64,10 +75,48 @@ final class SubclassGenerationModifier extends MockedTypeModifier
    @Override
    public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions)
    {
-      // Inherits from super-class when non-abstract.
-      // Otherwise, creates implementation for abstract method with call to "recordOrReplay".
-      generateImplementationIfAbstractMethod(superClassName, access, name, desc, signature, exceptions);
+      if (copyConstructors && "<init>".equals(name)) {
+         if ((access & CONSTRUCTOR_ACCESS_MASK) != 0) {
+            generateConstructorDelegatingToSuper(desc, signature, exceptions);
+         }
+      }
+      else {
+         // Inherits from super-class when non-abstract.
+         // Otherwise, creates implementation for abstract method with call to "recordOrReplay".
+         generateImplementationIfAbstractMethod(superClassName, access, name, desc, signature, exceptions);
+      }
+
       return null;
+   }
+
+   private void generateConstructorDelegatingToSuper(String desc, String signature, String[] exceptions)
+   {
+      mw = super.visitMethod(ACC_PUBLIC, "<init>", desc, signature, exceptions);
+      mw.visitVarInsn(ALOAD, 0);
+      int var = 1;
+
+      for (mockit.external.asm4.Type paramType : mockit.external.asm4.Type.getArgumentTypes(desc)) {
+         int loadOpcode = getLoadOpcodeForParameterType(paramType.getSort());
+         mw.visitVarInsn(loadOpcode, var);
+         var++;
+      }
+
+      mw.visitMethodInsn(INVOKESPECIAL, superClassName, "<init>", desc);
+      generateEmptyImplementation();
+   }
+
+   private int getLoadOpcodeForParameterType(int paramType)
+   {
+      if (paramType <= mockit.external.asm4.Type.INT) {
+         return ILOAD;
+      }
+
+      switch (paramType) {
+         case mockit.external.asm4.Type.FLOAT:  return FLOAD;
+         case mockit.external.asm4.Type.LONG:   return LLOAD;
+         case mockit.external.asm4.Type.DOUBLE: return DLOAD;
+         default: return ALOAD;
+      }
    }
 
    private void generateImplementationIfAbstractMethod(
@@ -77,7 +126,7 @@ final class SubclassGenerationModifier extends MockedTypeModifier
          String methodNameAndDesc = name + desc;
 
          if (!implementedMethods.contains(methodNameAndDesc)) {
-            if (Modifier.isAbstract(access)) {
+            if ((access & ACC_ABSTRACT) != 0) {
                generateMethodImplementation(className, access, name, desc, signature, exceptions);
             }
 
@@ -86,9 +135,14 @@ final class SubclassGenerationModifier extends MockedTypeModifier
       }
    }
 
+   @SuppressWarnings("AssignmentToMethodParameter")
    private void generateMethodImplementation(
       String className, int access, String name, String desc, String signature, String[] exceptions)
    {
+      if (signature != null) {
+         signature = genericTypeMap.resolveReturnType(signature);
+      }
+
       mw = super.visitMethod(ACC_PUBLIC, name, desc, signature, exceptions);
 
       boolean noFiltersToMatch = mockingCfg == null;
@@ -212,7 +266,7 @@ final class SubclassGenerationModifier extends MockedTypeModifier
 
       private boolean hasMethodImplementation(String name, String desc)
       {
-         Class<?>[] paramTypes = Utilities.getParameterTypes(desc);
+         Class<?>[] paramTypes = TypeDescriptor.getParameterTypes(desc);
 
          try {
             Method method = abstractClass.getMethod(name, paramTypes);

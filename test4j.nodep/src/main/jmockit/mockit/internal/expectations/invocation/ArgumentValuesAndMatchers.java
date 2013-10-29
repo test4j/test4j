@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations.invocation;
@@ -74,16 +74,18 @@ abstract class ArgumentValuesAndMatchers
          !EqualityMatcher.areEqualWhenNonNull(actual, expected);
    }
 
-   abstract Error assertMatch(Object[] replayArgs, Map<Object, Object> instanceMap);
+   abstract Error assertMatch(Object[] replayArgs, Map<Object, Object> instanceMap, CharSequence errorMessagePrefix);
 
-   final Error assertEquals(Object[] expectedValues, Object[] actualValues, int count, Map<Object, Object> instanceMap)
+   final Error assertEquals(
+      Object[] expectedValues, Object[] actualValues, int count, Map<Object, Object> instanceMap,
+      CharSequence errorMessagePrefix)
    {
       for (int i = 0; i < count; i++) {
          Object expected = expectedValues[i];
          Object actual = actualValues[i];
 
          if (isNotEqual(expected, actual, instanceMap)) {
-            return signature.argumentMismatchMessage(i, expected, actual);
+            return signature.argumentMismatchMessage(i, expected, actual, errorMessagePrefix);
          }
       }
 

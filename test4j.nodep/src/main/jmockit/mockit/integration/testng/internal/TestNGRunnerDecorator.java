@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.integration.testng.internal;
@@ -17,27 +17,47 @@ import mockit.internal.state.*;
 
 /**
  * Provides callbacks to be called by the TestNG 5.14+ test runner for each test execution.
- * JMockit will then assert any expectations set during the test, including those specified through {@link mockit.Mock} and
- * those recorded in {@link mockit.Expectations} subclasses.
+ * JMockit will then assert any expectations set during the test, including those specified through {@link mockit.Mock}
+ * and those recorded in {@link mockit.Expectations} subclasses.
  * <p/>
  * This class is not supposed to be accessed from user code. It will be automatically loaded at startup.
  */
 public final class TestNGRunnerDecorator extends TestRunnerDecorator
    implements IInvokedMethodListener, IExecutionListener
 {
-   @MockClass(realClass = Parameters.class, stubs = "checkParameterTypes")
-   public static final class MockParameters
+   public static final class MockParameters extends MockUp<Parameters>
    {
-      @Mock(reentrant = true)
-      public static Object getInjectedParameter(Class<?> c, Method method, ITestContext context, ITestResult testResult)
+      @Mock
+      public static void checkParameterTypes(
+         String methodName, Class<?>[] parameterTypes, String methodAnnotation, String[] parameterNames) {}
+
+      @Mock
+      public static Object getInjectedParameter(
+         Invocation invocation, Class<?> c, Method method, ITestContext context, ITestResult testResult)
       {
-         Object value = Parameters.getInjectedParameter(c, method, context, testResult);
+         Object value = invocation.proceed();
 
          if (value != null) {
             return value;
          }
 
-         return method == null || isMethodWithParametersProvidedByTestNG(method) ? null : "";
+         if (method == null) {
+            // Test execution didn't reach a test method yet.
+            return null;
+         }
+
+         if (method.getParameterTypes().length == 0) {
+            // A test method was reached, but it has no parameters.
+            return null;
+         }
+
+         if (isMethodWithParametersProvidedByTestNG(method)) {
+            // The test method has parameters, but they are to be provided by TestNG, not JMockit.
+            return null;
+         }
+
+         // It's a mock parameter in a test method, to be provided by JMockit.
+         return "";
       }
    }
 
@@ -64,7 +84,7 @@ public final class TestNGRunnerDecorator extends TestRunnerDecorator
    public TestNGRunnerDecorator()
    {
       savePoint = new ThreadLocal<SavePoint>();
-      Mockit.setUpMocks(MockParameters.class);
+      new MockParameters();
       shouldPrepareForNextTest = true;
    }
 

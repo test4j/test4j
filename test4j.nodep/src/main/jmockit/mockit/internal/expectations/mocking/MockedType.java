@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations.mocking;
@@ -7,10 +7,8 @@ package mockit.internal.expectations.mocking;
 import java.lang.annotation.*;
 import java.lang.reflect.*;
 import static java.lang.reflect.Modifier.*;
-import static mockit.internal.util.Utilities.*;
 
 import mockit.*;
-import mockit.internal.filtering.*;
 import mockit.internal.state.*;
 import mockit.internal.util.*;
 
@@ -45,6 +43,7 @@ public final class MockedType
    public final boolean nonStrict;
    public final boolean injectable;
    public final Type declaredType;
+   private final String testMethodDesc;
    public final String mockId;
    MockingConfiguration mockingCfg;
    Object providedValue;
@@ -61,6 +60,7 @@ public final class MockedType
       Injectable injectableAnnotation = field.getAnnotation(Injectable.class);
       injectable = injectableAnnotation != null;
       declaredType = field.getGenericType();
+      testMethodDesc = null;
       mockId = field.getName();
       providedValue = getDefaultInjectableValue(injectableAnnotation);
       registerCascadingIfSpecified();
@@ -81,9 +81,9 @@ public final class MockedType
                return value;
             }
             else if (injectableClass.isPrimitive()) {
-               Class<?> wrapperClass = PRIMITIVE_TO_WRAPPER.get(injectableClass);
+               Class<?> wrapperClass = AutoBoxing.getWrapperType(injectableClass);
                Class<?>[] constructorParameters = {String.class};
-               return newInstance(wrapperClass, constructorParameters, value);
+               return ConstructorReflection.newInstance(wrapperClass, constructorParameters, value);
             }
             else if (injectableClass.isEnum()) {
                @SuppressWarnings({"rawtypes", "unchecked"})
@@ -118,9 +118,22 @@ public final class MockedType
       Injectable injectableAnnotation = getAnnotation(annotationsOnParameter, Injectable.class);
       injectable = injectableAnnotation != null;
       declaredType = parameterType;
+      this.testMethodDesc = testMethodDesc;
       mockId = ParameterNames.getName(testClassDesc, testMethodDesc, paramIndex);
       providedValue = getDefaultInjectableValue(injectableAnnotation);
       registerCascadingIfSpecified();
+   }
+
+   private <A extends Annotation> A getAnnotation(Annotation[] annotations, Class<A> annotation)
+   {
+      for (Annotation paramAnnotation : annotations) {
+         if (paramAnnotation.annotationType() == annotation) {
+            //noinspection unchecked
+            return (A) paramAnnotation;
+         }
+      }
+
+      return null;
    }
 
    MockedType(Class<?> cascadedType)
@@ -134,6 +147,7 @@ public final class MockedType
       nonStrict = true;
       injectable = true;
       declaredType = cascadedType;
+      testMethodDesc = null;
       mockId = "cascaded_" + cascadedType.getName();
    }
 
@@ -156,7 +170,7 @@ public final class MockedType
       return (isAnnotated() || !fieldFromTestClass && !isPrivate(accessModifiers)) && isMockableType();
    }
 
-   boolean isAnnotated()
+   private boolean isAnnotated()
    {
       return mocked != null || capturing != null || cascading != null || nonStrict || injectable;
    }
@@ -168,6 +182,7 @@ public final class MockedType
       }
 
       if (!(declaredType instanceof Class)) {
+         printWarningAboutMockFieldOrParameterLackingAnAnnotation();
          return true;
       }
       
@@ -182,7 +197,24 @@ public final class MockedType
          }
       }
 
+      printWarningAboutMockFieldOrParameterLackingAnAnnotation();
       return true;
+   }
+
+   private void printWarningAboutMockFieldOrParameterLackingAnAnnotation()
+   {
+      if (!ANNOTATED_MOCK_PARAMETERS_ONLY && !isAnnotated()) {
+         if (field == null) {
+            System.out.println(
+               "WARNING: Mock parameter \"" + mockId + "\" should use a mocking annotation such as @Mocked");
+            System.out.println("  at " + TestRun.getCurrentTestClass().getName() + '.' + testMethodDesc);
+         }
+         else {
+            System.out.println(
+               "WARNING: Mock field \"" + mockId + "\" should use a mocking annotation such as @Mocked");
+            System.out.println("  at " + new StackTrace().findPositionInTestMethod());
+         }
+      }
    }
 
    boolean isFinalFieldOrParameter() { return field == null || isFinal(accessModifiers); }
@@ -220,15 +252,13 @@ public final class MockedType
       return capturing == null ? 0 : capturing.maxInstances();
    }
 
-   String getRealClassName() { return mocked == null ? "" : mocked.realClassName(); }
-
    public Object getValueToInject(Object objectWithFields)
    {
       if (field == null) {
          return providedValue;
       }
 
-      Object value = getFieldValue(field, objectWithFields);
+      Object value = FieldReflection.getFieldValue(field, objectWithFields);
 
       if (!injectable) {
          return value;

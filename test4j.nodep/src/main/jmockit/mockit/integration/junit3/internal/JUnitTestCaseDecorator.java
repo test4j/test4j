@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.integration.junit3.internal;
@@ -8,21 +8,11 @@ import java.lang.reflect.*;
 
 import junit.framework.*;
 
-import mockit.*;
 import mockit.integration.internal.*;
 import mockit.internal.state.*;
 import mockit.internal.util.*;
 
-/**
- * Provides an startup mock that modifies the JUnit 3.8 test runner so that it calls back to JMockit for each test
- * execution.
- * When that happens, JMockit will assert any expectations set during the test, including expectations specified through
- * {@link Mock} as well as in {@link Expectations} subclasses.
- * <p/>
- * This class is not supposed to be accessed from user code. JMockit will automatically load it at startup.
- */
-@MockClass(realClass = TestCase.class, instantiation = Instantiation.PerMockedInstance)
-public final class JUnitTestCaseDecorator extends TestRunnerDecorator
+final class JUnitTestCaseDecorator extends TestRunnerDecorator
 {
    private static final Method setUpMethod;
    private static final Method tearDownMethod;
@@ -52,18 +42,15 @@ public final class JUnitTestCaseDecorator extends TestRunnerDecorator
       fName.setAccessible(true);
    }
 
-   public TestCase it;
-
-   @Mock
-   public void runBare() throws Throwable
+   void runBare(TestCase testCase) throws Throwable
    {
-      updateTestClassState(it, it.getClass());
+      updateTestClassState(testCase, testCase.getClass());
 
       prepareForNextTest();
-      TestRun.setRunningIndividualTest(it);
+      TestRun.setRunningIndividualTest(testCase);
 
       try {
-         originalRunBare();
+         originalRunBare(testCase);
       }
       catch (Throwable t) {
          StackTrace.filterStackTrace(t);
@@ -74,22 +61,22 @@ public final class JUnitTestCaseDecorator extends TestRunnerDecorator
       }
    }
 
-   private void originalRunBare() throws Throwable
+   private void originalRunBare(TestCase testCase) throws Throwable
    {
-      setUpMethod.invoke(it);
+      setUpMethod.invoke(testCase);
 
       Throwable exception = null;
 
       try {
-         Method testMethod = findTestMethod();
-         executeTestMethod(testMethod);
+         Method testMethod = findTestMethod(testCase);
+         executeTestMethod(testCase, testMethod);
       }
       catch (Throwable running) {
          exception = running;
       }
       finally {
          TestRun.finishCurrentTestExecution(true);
-         exception = performTearDown(exception);
+         exception = performTearDown(testCase, exception);
       }
 
       if (exception != null) {
@@ -97,11 +84,11 @@ public final class JUnitTestCaseDecorator extends TestRunnerDecorator
       }
    }
 
-   private Method findTestMethod() throws IllegalAccessException
+   private Method findTestMethod(TestCase testCase) throws IllegalAccessException
    {
-      String testMethodName = (String) fName.get(it);
+      String testMethodName = (String) fName.get(testCase);
 
-      for (Method publicMethod : it.getClass().getMethods()) {
+      for (Method publicMethod : testCase.getClass().getMethods()) {
          if (publicMethod.getName().equals(testMethodName)) {
             return publicMethod;
          }
@@ -110,7 +97,7 @@ public final class JUnitTestCaseDecorator extends TestRunnerDecorator
       return runTestMethod;
    }
 
-   private void executeTestMethod(Method testMethod) throws Throwable
+   private void executeTestMethod(TestCase testCase, Method testMethod) throws Throwable
    {
       SavePoint savePoint = new SavePoint();
       TestRun.setSavePointForTestMethod(savePoint);
@@ -118,14 +105,14 @@ public final class JUnitTestCaseDecorator extends TestRunnerDecorator
       Throwable testFailure = null;
 
       try {
-         Object[] mockParameters = createInstancesForMockParameters(it, testMethod, null, savePoint);
-         createInstancesForTestedFields(it);
+         Object[] mockParameters = createInstancesForMockParameters(testCase, testMethod, null, savePoint);
+         createInstancesForTestedFields(testCase);
 
          if (mockParameters == null) {
-            runTestMethod.invoke(it);
+            runTestMethod.invoke(testCase);
          }
          else {
-            testMethod.invoke(it, mockParameters);
+            testMethod.invoke(testCase, mockParameters);
          }
       }
       catch (InvocationTargetException e) {
@@ -144,10 +131,10 @@ public final class JUnitTestCaseDecorator extends TestRunnerDecorator
       }
    }
 
-   private Throwable performTearDown(Throwable thrownByTestMethod)
+   private Throwable performTearDown(TestCase testCase, Throwable thrownByTestMethod)
    {
       try {
-         tearDownMethod.invoke(it);
+         tearDownMethod.invoke(testCase);
          return thrownByTestMethod;
       }
       catch (Throwable tearingDown) {

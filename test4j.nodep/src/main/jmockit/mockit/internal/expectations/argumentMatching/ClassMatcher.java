@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2011 Rogério Liesenfeld
+ * Copyright (c) 2006-2012 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations.argumentMatching;
@@ -15,7 +15,7 @@ public final class ClassMatcher implements ArgumentMatcher
    {
       nameOfExpectedClass = expectedClass.getName();
 
-      Class<?> wrapperTypeIfPrimitive = Utilities.PRIMITIVE_TO_WRAPPER.get(expectedClass);
+      Class<?> wrapperTypeIfPrimitive = AutoBoxing.getWrapperType(expectedClass);
       matchableClass = wrapperTypeIfPrimitive == null ? expectedClass : wrapperTypeIfPrimitive;
    }
 

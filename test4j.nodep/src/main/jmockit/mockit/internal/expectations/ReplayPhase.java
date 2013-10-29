@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations;
@@ -50,24 +50,32 @@ final class ReplayPhase extends Phase
 
    @Override
    Object handleInvocation(
-      Object mock, int mockAccess, String mockClsDesc, String mockDesc, String genericSignature, String exceptions,
+      Object mock, int mockAccess, String mockClassDesc, String mockDesc, String genericSignature, String exceptions,
       boolean withRealImpl, Object[] args) throws Throwable
    {
       Expectation nonStrictExpectation =
-         recordAndReplay.executionState.findNonStrictExpectation(mock, mockClsDesc, mockDesc, args);
+         recordAndReplay.executionState.findNonStrictExpectation(mock, mockClassDesc, mockDesc, args);
+      Object replacementInstance =
+         recordAndReplay.executionState.getReplacementInstanceForMethodInvocation(mock, mockDesc);
 
       if (nonStrictExpectation == null) {
          nonStrictExpectation = createExpectationIfNonStrictInvocation(
-            mock, mockAccess, mockClsDesc, mockDesc, genericSignature, exceptions, args);
+            replacementInstance == null ? mock : replacementInstance,
+            mockAccess, mockClassDesc, mockDesc, genericSignature, exceptions, args);
       }
 
       if (nonStrictExpectation != null) {
          nonStrictInvocations.add(nonStrictExpectation);
          nonStrictInvocationArguments.add(args);
+
+         if (withRealImpl && replacementInstance != null) {
+            return updateConstraintsAndProduceResult(nonStrictExpectation, replacementInstance, args);
+         }
+
          return updateConstraintsAndProduceResult(nonStrictExpectation, mock, withRealImpl, args);
       }
 
-      return handleStrictInvocation(mock, mockClsDesc, mockDesc, withRealImpl, args);
+      return handleStrictInvocation(mock, mockClassDesc, mockDesc, withRealImpl, args);
    }
 
    private Expectation createExpectationIfNonStrictInvocation(
@@ -87,6 +95,22 @@ final class ReplayPhase extends Phase
       return expectation;
    }
 
+   private Object updateConstraintsAndProduceResult(Expectation expectation, Object replacementInstance, Object[] args)
+      throws Throwable
+   {
+      expectation.constraints.incrementInvocationCount();
+
+      if (expectation.recordPhase == null) {
+         expectation.executedRealImplementation = true;
+      }
+      else if (expectation.constraints.isInvocationCountMoreThanMaximumExpected()) {
+         recordAndReplay.setErrorThrown(expectation.invocation.errorForUnexpectedInvocation(args));
+         return null;
+      }
+
+      return expectation.executeRealImplementation(replacementInstance, args);
+   }
+
    private Object updateConstraintsAndProduceResult(
       Expectation expectation, Object mock, boolean withRealImpl, Object[] args) throws Throwable
    {
@@ -95,8 +119,7 @@ final class ReplayPhase extends Phase
 
       if (executeRealImpl) {
          expectation.executedRealImplementation = true;
-         Object defaultResult = expectation.invocation.getDefaultResult();
-         return defaultResult == null ? Void.class : defaultResult;
+         return Void.class;
       }
 
       if (expectation.constraints.isInvocationCountMoreThanMaximumExpected()) {
@@ -126,7 +149,7 @@ final class ReplayPhase extends Phase
                instanceMap.put(invocation.instance, mock);
             }
 
-            Error error = invocation.arguments.assertMatch(replayArgs, instanceMap);
+            Error error = invocation.assertThatArgumentsMatch(replayArgs, instanceMap);
 
             if (error != null) {
                if (strictExpectation.constraints.isInvocationCountInExpectedRange()) {

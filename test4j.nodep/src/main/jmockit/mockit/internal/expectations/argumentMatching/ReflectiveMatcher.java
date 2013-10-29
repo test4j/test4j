@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2011 Rogério Liesenfeld
+ * Copyright (c) 2006-2012 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations.argumentMatching;
@@ -19,19 +19,26 @@ public final class ReflectiveMatcher implements ArgumentMatcher
    public boolean matches(Object argValue)
    {
       if (handlerMethod == null) {
-         handlerMethod = Utilities.findNonPrivateHandlerMethod(handlerObject);
+         handlerMethod = MethodReflection.findNonPrivateHandlerMethod(handlerObject);
       }
 
       matchedValue = argValue;
-      Boolean result = Utilities.invoke(handlerObject, handlerMethod, argValue);
+      Boolean result = MethodReflection.invoke(handlerObject, handlerMethod, argValue);
 
       return result == null || result;
    }
 
    public void writeMismatchPhrase(ArgumentMismatch argumentMismatch)
    {
-      argumentMismatch.append(handlerMethod.getName()).append('(').appendFormatted(matchedValue);
-      argumentMismatch.append(") to return true, got false");
+      if (handlerMethod != null) {
+         argumentMismatch.append(handlerMethod.getName()).append('(');
+         argumentMismatch.appendFormatted(matchedValue);
+         argumentMismatch.append(") (should return true, was false)");
+      }
+      else {
+         argumentMismatch.append('?');
+      }
+
       argumentMismatch.markAsFinished();
    }
 }

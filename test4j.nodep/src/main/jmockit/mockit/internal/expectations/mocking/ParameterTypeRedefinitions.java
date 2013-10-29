@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations.mocking;
@@ -83,7 +83,7 @@ public final class ParameterTypeRedefinitions extends TypeRedefinitions
          registerCaptureOfNewInstances(mock);
       }
 
-      addTargetClass(typeMetadata.withInstancesToCapture(), typeRedefinition.targetClass);
+      addTargetClass();
       typesRedefined++;
 
       return mock;

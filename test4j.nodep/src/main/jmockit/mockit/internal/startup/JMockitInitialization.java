@@ -1,102 +1,111 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.startup;
 
 import java.io.IOException;
 
-import mockit.integration.junit3.internal.JUnitTestCaseDecorator;
+import jmockit.test4j.JUnit4BuilderDecorator;
+
+import mockit.MockUp;
+import mockit.integration.junit3.internal.MockTestCase;
 import mockit.integration.junit3.internal.TestSuiteDecorator;
 import mockit.integration.junit4.internal.BlockJUnit4ClassRunnerDecorator;
-import mockit.integration.junit4.internal.JUnit4TestRunnerDecorator;
+import mockit.integration.junit4.internal.MockFrameworkMethod;
 import mockit.integration.junit4.internal.RunNotifierDecorator;
 import mockit.integration.testng.internal.MockTestNG;
-import mockit.internal.annotations.ClassStubbing;
-import mockit.internal.annotations.MockClassSetup;
-import mockit.internal.expectations.mocking.MockedBridge;
-import mockit.internal.util.Utilities;
-import mockit.test4j.JUnit4BuilderDecorator;
+import mockit.internal.MockingBridge;
+import mockit.internal.mockups.ClassStubbing;
+import mockit.internal.mockups.MockClassSetup;
+import mockit.internal.util.ClassLoad;
+import mockit.internal.util.StackTrace;
+
 
 final class JMockitInitialization {
-	private static final String[] NO_STUBBING_FILTERS = {};
-	private final StartupConfiguration config;
+    private final StartupConfiguration config;
 
-	JMockitInitialization() throws IOException {
-		config = new StartupConfiguration();
-	}
+    JMockitInitialization() throws IOException {
+        config = new StartupConfiguration();
+    }
 
-	void initialize(boolean initializeTestNG) {
-		MockedBridge.preventEventualClassLoadingConflicts();
-		loadInternalStartupMocksForJUnitIntegration();
+    void initialize(boolean initializeTestNG) {
+        MockingBridge.preventEventualClassLoadingConflicts();
+        loadInternalStartupMocksForJUnitIntegration();
 
-		if (initializeTestNG) {
-			try {
-				setUpInternalStartupMock(MockTestNG.class);
-			} catch (Error ignored) {
-			}
-		}
+        if (initializeTestNG && MockTestNG.hasDependenciesInClasspath()) {
+            setUpInternalStartupMock(MockTestNG.class);
+        }
 
-		loadExternalToolsIfAny();
-		stubOutClassesIfAny();
-		setUpStartupMocksIfAny();
-	}
+        loadExternalToolsIfAny();
+        stubOutClassesIfAny();
+        setUpStartupMocksIfAny();
+    }
 
-	private void loadInternalStartupMocksForJUnitIntegration() {
-		if (setUpInternalStartupMock(TestSuiteDecorator.class)) {
-			try {
-				setUpInternalStartupMock(JUnitTestCaseDecorator.class);
-			} catch (VerifyError ignore) {
-				// For some reason, this error occurs when running TestNG tests
-				// from Maven.
-			}
+    private void loadInternalStartupMocksForJUnitIntegration() {
+        if (setUpInternalStartupMock(TestSuiteDecorator.class)) {
+            try {
+                setUpInternalStartupMock(MockTestCase.class);
+            } catch (VerifyError ignore) {
+                // For some reason, this error occurs when running TestNG tests from Maven.
+            }
 
-			setUpInternalStartupMock(RunNotifierDecorator.class);
-			setUpInternalStartupMock(BlockJUnit4ClassRunnerDecorator.class);
-			setUpInternalStartupMock(JUnit4TestRunnerDecorator.class);
-			/** added by davey.wu **/
-			setUpInternalStartupMock(JUnit4BuilderDecorator.class);
-			/** end added by davey.wu **/
-		}
-	}
+            if (!setUpInternalStartupMock(RunNotifierDecorator.class))
+                return;
+            if (!setUpInternalStartupMock(BlockJUnit4ClassRunnerDecorator.class))
+                return;
+            setUpInternalStartupMock(MockFrameworkMethod.class);
+            /** added by davey.wu **/
+            setUpInternalStartupMock(JUnit4BuilderDecorator.class);
+            /** end added by davey.wu **/
+        }
+    }
 
-	private boolean setUpInternalStartupMock(Class<?> mockClass) {
-		try {
-			new MockClassSetup(mockClass).setUpStartupMock();
-			return true;
-		} catch (TypeNotPresentException ignore) {
-			// OK, ignore the startup mock if the necessary third-party class
-			// files are not in the classpath.
-			return false;
-		}
-	}
+    private boolean setUpInternalStartupMock(Class<? extends MockUp<?>> mockClass) {
+        // The startup mock is ignored if the necessary third-party class files are not in the classpath.
+        try {
+            new MockClassSetup(mockClass).redefineMethods();
+            return true;
+        } catch (TypeNotPresentException ignore) {
+            return false;
+        } catch (NoClassDefFoundError ignore) {
+            return false;
+        }
+    }
 
-	private void loadExternalToolsIfAny() {
-		for (String toolClassName : config.externalTools) {
-			new ToolLoader(toolClassName).loadTool();
-		}
-	}
+    private void loadExternalToolsIfAny() {
+        for (String toolClassName : config.externalTools) {
+            try {
+                new ToolLoader(toolClassName).loadTool();
+            } catch (Throwable unexpectedFailure) {
+                StackTrace.filterStackTrace(unexpectedFailure);
+                unexpectedFailure.printStackTrace();
+            }
+        }
+    }
 
-	private void stubOutClassesIfAny() {
-		for (String stubbing : config.classesToBeStubbedOut) {
-			int p = stubbing.indexOf('#');
-			String realClassName = stubbing;
-			String[] filters = NO_STUBBING_FILTERS;
+    private void stubOutClassesIfAny() {
+        for (String realClassName : config.classesToBeStubbedOut) {
+            Class<?> realClass = ClassLoad.loadClass(realClassName.trim());
+            new ClassStubbing(realClass).stubOutAtStartup();
+        }
+    }
 
-			if (p > 0) {
-				realClassName = stubbing.substring(0, p);
-				filters = stubbing.substring(p + 1).split("\\|");
-			}
+    private void setUpStartupMocksIfAny() {
+        for (String mockClassName : config.mockClasses) {
+            try {
+                Class<?> mockClass = ClassLoad.loadClass(mockClassName);
 
-			Class<?> realClass = Utilities.loadClass(realClassName.trim());
-			new ClassStubbing(realClass, true, filters).stubOutAtStartup();
-		}
-	}
-
-	private void setUpStartupMocksIfAny() {
-		for (String mockClassName : config.mockClasses) {
-			Class<?> mockClass = Utilities.loadClass(mockClassName);
-			new MockClassSetup(mockClass).setUpStartupMock();
-		}
-	}
+                if (MockUp.class.isAssignableFrom(mockClass)) {
+                    @SuppressWarnings("unchecked")
+                    Class<MockUp<?>> mockUpSubclass = (Class<MockUp<?>>) mockClass;
+                    new MockClassSetup(mockUpSubclass).redefineMethods();
+                }
+            } catch (UnsupportedOperationException ignored) {
+            } catch (Throwable unexpectedFailure) {
+                StackTrace.filterStackTrace(unexpectedFailure);
+                unexpectedFailure.printStackTrace();
+            }
+        }
+    }
 }

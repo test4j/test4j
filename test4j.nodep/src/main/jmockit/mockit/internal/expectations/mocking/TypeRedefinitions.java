@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2011 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations.mocking;
@@ -23,9 +23,19 @@ class TypeRedefinitions
       targetClasses = new ArrayList<Class<?>>(2);
    }
 
-   protected final void addTargetClass(boolean withInstancesToCapture, Class<?> targetClass)
+   protected final void addTargetClass()
    {
-      if (!withInstancesToCapture || !targetClasses.contains(targetClass)) {
+      Class<?> targetClass = typeMetadata.getClassType();
+      targetClasses.add(targetClass);
+
+      addDuplicateTargetClassRepresentingMultipleCapturedSetsOfClasses(targetClass);
+   }
+
+   private void addDuplicateTargetClassRepresentingMultipleCapturedSetsOfClasses(Class<?> targetClass)
+   {
+      int maxInstancesToCapture = typeMetadata.getMaxInstancesToCapture();
+
+      if (maxInstancesToCapture > 0 && maxInstancesToCapture < Integer.MAX_VALUE) {
          targetClasses.add(targetClass);
       }
    }

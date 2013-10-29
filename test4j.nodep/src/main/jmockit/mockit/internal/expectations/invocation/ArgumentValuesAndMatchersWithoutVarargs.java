@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations.invocation;
@@ -38,10 +38,10 @@ final class ArgumentValuesAndMatchersWithoutVarargs extends ArgumentValuesAndMat
    }
 
    @Override
-   Error assertMatch(Object[] replayArgs, Map<Object, Object> instanceMap)
+   Error assertMatch(Object[] replayArgs, Map<Object, Object> instanceMap, CharSequence errorMessagePrefix)
    {
       if (matchers == null) {
-         return assertEquals(values, replayArgs, replayArgs.length, instanceMap);
+         return assertEquals(values, replayArgs, replayArgs.length, instanceMap, errorMessagePrefix);
       }
 
       for (int i = 0; i < replayArgs.length; i++) {
@@ -55,7 +55,7 @@ final class ArgumentValuesAndMatchersWithoutVarargs extends ArgumentValuesAndMat
          }
 
          if (!expected.matches(actual)) {
-            return signature.argumentMismatchMessage(i, expected, actual);
+            return signature.argumentMismatchMessage(i, expected, actual, errorMessagePrefix);
          }
       }
 

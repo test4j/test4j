@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.capturing;
@@ -17,7 +17,6 @@ public abstract class CaptureOfImplementations implements Runnable
 
    protected CaptureOfImplementations() { captureTransformers = new ArrayList<CaptureTransformer>(); }
 
-   protected abstract ClassSelector createClassSelector();
    protected abstract ClassVisitor createModifier(ClassLoader cl, ClassReader cr, String capturedTypeDesc);
 
    public final void makeSureAllSubtypesAreModified(Class<?> baseType)
@@ -32,8 +31,7 @@ public abstract class CaptureOfImplementations implements Runnable
       }
 
       String baseTypeDesc = Type.getInternalName(baseType);
-      ClassSelector classSelector = createClassSelector();
-      CapturedType captureMetadata = new CapturedType(baseType, classSelector);
+      CapturedType captureMetadata = new CapturedType(baseType);
 
       redefineClassesAlreadyLoaded(captureMetadata, baseTypeDesc);
       createCaptureTransformer(captureMetadata, registerCapturedClasses);
@@ -53,7 +51,15 @@ public abstract class CaptureOfImplementations implements Runnable
    private void redefineClass(Class<?> realClass, String baseTypeDesc)
    {
       if (!TestRun.mockFixture().containsRedefinedClass(realClass)) {
-         ClassReader classReader = new ClassFile(realClass, false).getReader();
+         ClassReader classReader;
+
+         try {
+            classReader = ClassFile.createReaderOrGetFromCache(realClass);
+         }
+         catch (ClassFile.NotFoundException ignore) {
+            return;
+         }
+
          ClassVisitor modifier = createModifier(realClass.getClassLoader(), classReader, baseTypeDesc);
          classReader.accept(modifier, 0);
          byte[] modifiedClass = modifier.toByteArray();

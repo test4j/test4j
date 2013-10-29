@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.startup;
@@ -26,7 +26,7 @@ final class AgentInitialization
             jarFilePath + " command line option.");
       }
       else {
-         throw new IllegalStateException("JMockit requires a Java 5 VM or later.");
+         throw new IllegalStateException("JMockit requires a Java 5+ VM");
       }
    }
 
@@ -70,19 +70,42 @@ final class AgentInitialization
       }
 
       URL location = codeSource.getLocation();
+      String locationPath = location.getPath();
+      String jarFilePath;
 
-      if (location.getPath().endsWith("/jmockit/main/classes/")) {
-         String localJarPath = location.getPath().replace("main/classes/", "jmockit.jar");
-         return new File(localJarPath).getPath();
+      if (locationPath.endsWith("/main/classes/")) {
+         jarFilePath = findLocalJarOrZipFileFromLocationOfCurrentClassFile(locationPath);
+      }
+      else {
+         jarFilePath = findJarFileContainingCurrentClass(location);
       }
 
-      URI jarFileURI; // URI is needed to deal with spaces and non-ASCII characters
+      return jarFilePath;
+   }
 
-      try {
-         jarFileURI = location.toURI();
+   private String findLocalJarOrZipFileFromLocationOfCurrentClassFile(String locationPath)
+   {
+      File localJarFile = new File(locationPath.replace("main/classes/", "jmockit.jar"));
+
+      if (localJarFile.exists()) {
+         return localJarFile.getPath();
       }
-      catch (URISyntaxException e) {
-         throw new RuntimeException(e);
+
+      File localMETAINFFile = new File(locationPath.replace("classes/", "META-INF.zip"));
+      return localMETAINFFile.getPath();
+   }
+
+   private String findJarFileContainingCurrentClass(URL location)
+   {
+      // URI is used to deal with spaces and non-ASCII characters.
+      URI jarFileURI;
+      try { jarFileURI = location.toURI(); } catch (URISyntaxException e) { throw new RuntimeException(e); }
+
+      // Certain environments (JBoss) use something other than "file:", which is not accepted by File.
+      if (!"file".equals(jarFileURI.getScheme())) {
+         String locationPath = location.toExternalForm();
+         int p = locationPath.indexOf(':');
+         return locationPath.substring(p + 2);
       }
 
       return new File(jarFileURI).getPath();

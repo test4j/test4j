@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal;
@@ -18,8 +18,7 @@ public class BaseClassModifier extends ClassVisitor
    private static final int ACCESS_MASK = 0xFFFF - ACC_ABSTRACT - ACC_NATIVE;
    private static final Type VOID_TYPE = Type.getType("Ljava/lang/Void;");
 
-   protected final MethodVisitor methodAnnotationsVisitor = new MethodVisitor()
-   {
+   protected final MethodVisitor methodAnnotationsVisitor = new MethodVisitor() {
       @Override
       public AnnotationVisitor visitAnnotation(String annotationDesc, boolean visible)
       {
@@ -29,7 +28,7 @@ public class BaseClassModifier extends ClassVisitor
       @Override
       public void visitLocalVariable(String name, String desc, String signature, Label start, Label end, int index)
       {
-         registerParameterName(name);
+         registerParameterName(name, index);
       }
 
       @Override
@@ -39,17 +38,19 @@ public class BaseClassModifier extends ClassVisitor
       }
    };
 
-   protected final void registerParameterName(String name)
+   protected final void registerParameterName(String name, int index)
    {
-      ParameterNames.registerName(classDesc, methodName, methodDesc, name);
+      ParameterNames.registerName(classDesc, methodAccess, methodName, methodDesc, name, index);
    }
 
    protected MethodVisitor mw;
    protected boolean useMockingBridge;
    protected String superClassName;
+   protected Label startOfRealImplementation;
    private String classDesc;
-   private String methodName;
-   private String methodDesc;
+   private int methodAccess;
+   protected String methodName;
+   protected String methodDesc;
    private boolean callToAnotherConstructorAlreadyDisregarded;
 
    protected BaseClassModifier(ClassReader classReader)
@@ -73,8 +74,8 @@ public class BaseClassModifier extends ClassVisitor
          // version 49 (Java 1.5) or newer, so we "upgrade" it to avoid a VerifyError:
          modifiedVersion = V1_5;
       }
-      else if (originalVersion == V1_7) {
-         // For some unknown reason the Java 7 JVM throws a VerifyError for the bytecode generated for dynamic mocking:
+      else if (originalVersion >= V1_7) {
+         // For some unknown reason, Java 7+ JVMs throw a VerifyError for the bytecode generated for dynamic mocking:
          modifiedVersion = V1_6;
       }
 
@@ -94,6 +95,7 @@ public class BaseClassModifier extends ClassVisitor
       //noinspection UnnecessarySuperQualifier
       mw = super.visitMethod(access & ACCESS_MASK, name, desc, signature, exceptions);
 
+      methodAccess = access;
       methodName = name;
       methodDesc = desc;
       callToAnotherConstructorAlreadyDisregarded = false;
@@ -166,17 +168,15 @@ public class BaseClassModifier extends ClassVisitor
       }
    }
 
-   protected final void generateCodeToObtainInstanceOfMockingBridge(String mockingBridgeSubclassName)
+   protected final void generateCodeToObtainInstanceOfMockingBridge(MockingBridge mockingBridge)
    {
-      mw.visitLdcInsn(mockingBridgeSubclassName);
-      mw.visitInsn(ICONST_1);
-      mw.visitMethodInsn(INVOKESTATIC, "java/lang/ClassLoader", "getSystemClassLoader", "()Ljava/lang/ClassLoader;");
+      String loggerName = "mockit." + mockingBridge.getClass().hashCode();
+
       mw.visitMethodInsn(
-         INVOKESTATIC, "java/lang/Class", "forName", "(Ljava/lang/String;ZLjava/lang/ClassLoader;)Ljava/lang/Class;");
-      mw.visitLdcInsn("MB");
-      mw.visitMethodInsn(INVOKEVIRTUAL, "java/lang/Class", "getField", "(Ljava/lang/String;)Ljava/lang/reflect/Field;");
-      mw.visitInsn(ACONST_NULL);
-      mw.visitMethodInsn(INVOKEVIRTUAL, "java/lang/reflect/Field", "get", "(Ljava/lang/Object;)Ljava/lang/Object;");
+         INVOKESTATIC, "java/util/logging/LogManager", "getLogManager", "()Ljava/util/logging/LogManager;");
+      mw.visitLdcInsn(loggerName);
+      mw.visitMethodInsn(
+         INVOKEVIRTUAL, "java/util/logging/LogManager", "getLogger", "(Ljava/lang/String;)Ljava/util/logging/Logger;");
    }
 
    protected final void generateCodeToFillArrayElement(int arrayIndex, Object value)
@@ -265,18 +265,22 @@ public class BaseClassModifier extends ClassVisitor
          "(Ljava/lang/Object;Ljava/lang/reflect/Method;[Ljava/lang/Object;)Ljava/lang/Object;");
    }
 
-   protected final void generateDecisionBetweenReturningOrContinuingToRealImplementation(String desc)
+   protected final void generateDecisionBetweenReturningOrContinuingToRealImplementation()
    {
       mw.visitInsn(DUP);
       mw.visitLdcInsn(VOID_TYPE);
 
-      Label startOfRealImplementation = new Label();
+      if (startOfRealImplementation == null) {
+         startOfRealImplementation = new Label();
+      }
+
       mw.visitJumpInsn(IF_ACMPEQ, startOfRealImplementation);
 
-      generateReturnWithObjectAtTopOfTheStack(desc);
+      generateReturnWithObjectAtTopOfTheStack(methodDesc);
 
       mw.visitLabel(startOfRealImplementation);
       mw.visitInsn(POP);
+      startOfRealImplementation = null;
    }
 
    protected final void generateEmptyImplementation(String desc)

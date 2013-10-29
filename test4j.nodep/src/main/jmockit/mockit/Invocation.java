@@ -1,10 +1,11 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit;
 
 import java.lang.reflect.*;
+import java.util.concurrent.*;
 
 import mockit.internal.util.*;
 
@@ -15,13 +16,23 @@ import mockit.internal.util.*;
  * With the <em>Expectations & Verifications</em> API, this parameter can appear in mock methods implemented in
  * {@link Delegate} classes or in validation objects assigned to the
  * {@link Invocations#forEachInvocation forEachInvocation} field.
- * With the <em>Mockups</em> API, it can appear in {@link Mock} methods.
+ * With the <em>Mockups</em> API, it can appear in {@link Mock @Mock} methods.
  * <p/>
  * Sample tests:
  * <a href="http://code.google.com/p/jmockit/source/browse/trunk/main/test/mockit/DelegateInvocationTest.java"
  * >DelegateInvocationTest</a>,
  * <a href="http://code.google.com/p/jmockit/source/browse/trunk/main/test/mockit/MockInvocationTest.java"
  * >MockInvocationTest</a>
+ *
+ * @see #getInvokedInstance()
+ * @see #getInvokedArguments()
+ * @see #getInvocationCount()
+ * @see #getInvocationIndex()
+ * @see #getMinInvocations()
+ * @see #getMaxInvocations()
+ * @see #setMinInvocations(int)
+ * @see #setMaxInvocations(int)
+ * @see #proceed(Object...)
  */
 public class Invocation
 {
@@ -122,10 +133,14 @@ public class Invocation
       onChange();
    }
 
-   /**
-    * For internal use only.
-    */
-   protected void onChange() {}
+   private void onChange()
+   {
+      // Ugly, but prevents this method from appearing in API documentation, which would occur if it was *protected*.
+      //noinspection InstanceofThis
+      if (this instanceof Runnable) {
+         ((Runnable) this).run();
+      }
+   }
 
    /**
     * Allows execution to proceed into the real implementation of the mocked method/constructor.
@@ -151,7 +166,8 @@ public class Invocation
     *
     * @throws UnsupportedOperationException if attempting to proceed into a mocked method which does not belong to an
     * {@linkplain Injectable injectable mocked type} nor to a {@linkplain Expectations#Expectations(Object...) dynamic
-    * partially mocked type}, or into a mocked constructor with replacement arguments
+    * partially mocked type}, into a {@code native} method, or into a mocked constructor while passing replacement
+    * arguments
     */
    public final <T> T proceed(Object... replacementArguments)
    {
@@ -173,7 +189,7 @@ public class Invocation
             realMethod.isVarArgs() ? createArgumentsArrayWithVarargs(replacementArguments) : replacementArguments;
       }
 
-      return Utilities.invoke(invokedInstance, realMethod, actualArgs);
+      return MethodReflection.invoke(invokedInstance, realMethod, actualArgs);
    }
 
    private Object[] createArgumentsArrayWithVarargs(Object[] replacementArguments)
@@ -190,8 +206,14 @@ public class Invocation
       return actualArgs;
    }
 
-   /**
-    * For internal use only.
-    */
-   protected Method getRealMethod() { return null; }
+   private Method getRealMethod()
+   {
+      // Ugly, but prevents this method from appearing in API documentation, which would occur if it was *protected*.
+      try {
+         //noinspection unchecked
+         return ((Callable<Method>) this).call();
+      }
+      catch (RuntimeException e) { throw e; }
+      catch (Exception ignore) { return null; }
+   }
 }

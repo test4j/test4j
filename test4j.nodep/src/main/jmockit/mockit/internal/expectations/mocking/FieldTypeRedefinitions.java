@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2011 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations.mocking;
@@ -9,7 +9,6 @@ import static java.lang.reflect.Modifier.*;
 
 import static mockit.external.asm4.Opcodes.*;
 
-import mockit.*;
 import mockit.internal.state.*;
 
 public abstract class FieldTypeRedefinitions extends TypeRedefinitions
@@ -37,20 +36,14 @@ public abstract class FieldTypeRedefinitions extends TypeRedefinitions
       }
 
       Field[] fields = classWithMockFields.getDeclaredFields();
-      DefaultResults defaultResults = TestRun.getExecutingTest().defaultResults;
 
       for (Field candidateField : fields) {
          int fieldModifiers = candidateField.getModifiers();
 
          if ((fieldModifiers & FIELD_ACCESS_MASK) == 0) {
-            if (candidateField.isAnnotationPresent(Input.class)) {
-               defaultResults.add(candidateField, parentObject);
-            }
-            else {
-               field = candidateField;
-               redefineFieldType(isTestClass, fieldModifiers);
-               field = null;
-            }
+            field = candidateField;
+            redefineFieldType(isTestClass, fieldModifiers);
+            field = null;
          }
       }
    }

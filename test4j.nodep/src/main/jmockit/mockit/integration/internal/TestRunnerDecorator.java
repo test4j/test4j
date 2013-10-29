@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.integration.internal;
@@ -7,6 +7,7 @@ package mockit.integration.internal;
 import java.lang.reflect.*;
 
 import mockit.internal.*;
+import mockit.internal.mockups.*;
 import mockit.internal.expectations.*;
 import mockit.internal.expectations.injection.*;
 import mockit.internal.expectations.mocking.*;
@@ -85,7 +86,26 @@ public class TestRunnerDecorator
       UsingMocksAndStubs mocksAndStubs = testClass.getAnnotation(UsingMocksAndStubs.class);
 
       if (mocksAndStubs != null) {
-         Mockit.setUpMocksAndStubs(mocksAndStubs.value());
+         setUpMocksAndStubs(mocksAndStubs.value());
+      }
+   }
+
+   public static void setUpMocksAndStubs(Class<?>[] mockAndRealClasses)
+   {
+      TestRun.exitNoMockingZone();
+
+      try {
+         for (Class<?> mockOrRealClass : mockAndRealClasses) {
+            if (MockUp.class.isAssignableFrom(mockOrRealClass)) {
+               ConstructorReflection.newInstance(mockOrRealClass);
+            }
+            else {
+               new ClassStubbing(mockOrRealClass).stubOut();
+            }
+         }
+      }
+      finally {
+         TestRun.enterNoMockingZone();
       }
    }
 

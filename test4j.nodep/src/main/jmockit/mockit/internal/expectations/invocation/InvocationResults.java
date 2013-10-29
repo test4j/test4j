@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations.invocation;
@@ -9,6 +9,7 @@ import java.util.*;
 
 import mockit.*;
 import mockit.internal.expectations.invocation.InvocationResult.*;
+import mockit.internal.state.*;
 import mockit.internal.util.*;
 
 public final class InvocationResults
@@ -27,9 +28,23 @@ public final class InvocationResults
 
    public void addReturnValue(Object value)
    {
-      InvocationResult result =
-         value instanceof Delegate ? new DelegatedResult((Delegate<?>) value) : new ReturnValueResult(value);
+      if (value instanceof Delegate) {
+         addDelegatedResult((Delegate<?>) value);
+      }
+      else {
+         addReturnValueResult(value);
+      }
+   }
 
+   public void addDelegatedResult(Delegate<?> delegate)
+   {
+      InvocationResult result = new DelegatedResult(delegate);
+      addResult(result);
+   }
+
+   public void addReturnValueResult(Object value)
+   {
+      InvocationResult result = new ReturnValueResult(value);
       addResult(result);
    }
 
@@ -56,7 +71,7 @@ public final class InvocationResults
 
    private void reportInvalidReturnValue()
    {
-      Class<?> returnType = Utilities.getReturnType(invocation.getMethodNameAndDescription());
+      Class<?> returnType = TypeDescriptor.getReturnType(invocation.getMethodNameAndDescription());
       throw new IllegalArgumentException("Invalid return value for method returning " + returnType);
    }
 
@@ -71,7 +86,7 @@ public final class InvocationResults
 
    private void validateMultiValuedResult(Iterator<?> values)
    {
-      if (!values.hasNext()) {
+      if (values == null || !values.hasNext()) {
          reportInvalidReturnValue();
       }
    }
@@ -128,6 +143,27 @@ public final class InvocationResults
       InvocationResult result = new DeferredResults(values);
       addResult(result);
       constraints.setUnlimitedMaxInvocations();
+   }
+
+   public Object executeRealImplementation(Object instanceToInvoke, Object[] invocationArgs) throws Throwable
+   {
+      if (currentResult == null) {
+         Method methodToInvoke =
+            new RealMethod(instanceToInvoke.getClass(), invocation.getMethodNameAndDescription()).method;
+
+         currentResult = new DynamicInvocationResult(instanceToInvoke, methodToInvoke) {
+            @Override
+            Object produceResult(
+               Object invokedObject, ExpectedInvocation invocation, InvocationConstraints constraints, Object[] args)
+               throws Throwable
+            {
+               TestRun.getExecutingTest().markAsProceedingIntoRealImplementation();
+               return executeMethodToInvoke(args);
+            }
+         };
+      }
+
+      return currentResult.produceResult(instanceToInvoke, null, null, invocationArgs);
    }
 
    public void addThrowable(Throwable t)

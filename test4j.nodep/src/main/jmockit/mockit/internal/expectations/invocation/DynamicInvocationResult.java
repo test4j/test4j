@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations.invocation;
@@ -13,22 +13,21 @@ import mockit.internal.util.*;
 
 abstract class DynamicInvocationResult extends InvocationResult
 {
-   final Object targetObject;
-   Method methodToInvoke;
-   int numberOfRegularParameters;
+   private static final Object[] NO_ARGS = {};
+
+   private final Object targetObject;
+   final Method methodToInvoke;
+   private int numberOfRegularParameters;
    private boolean hasInvocationParameter;
 
    DynamicInvocationResult(Object targetObject, Method methodToInvoke)
    {
       this.targetObject = targetObject;
       this.methodToInvoke = methodToInvoke;
-
-      if (methodToInvoke != null) {
-         determineWhetherMethodToInvokeHasInvocationParameter();
-      }
+      determineWhetherMethodToInvokeHasInvocationParameter();
    }
 
-   final void determineWhetherMethodToInvokeHasInvocationParameter()
+   private void determineWhetherMethodToInvokeHasInvocationParameter()
    {
       Class<?>[] parameters = methodToInvoke.getParameterTypes();
       int n = parameters.length;
@@ -39,7 +38,7 @@ abstract class DynamicInvocationResult extends InvocationResult
    public final Object invokeMethodOnTargetObject(
       Object mockOrRealObject, ExpectedInvocation invocation, InvocationConstraints constraints, Object[] args)
    {
-      Object[] delegateArgs = numberOfRegularParameters == 0 ? Utilities.NO_ARGS : args;
+      Object[] delegateArgs = numberOfRegularParameters == 0 ? NO_ARGS : args;
       Object result;
 
       if (hasInvocationParameter) {
@@ -58,7 +57,7 @@ abstract class DynamicInvocationResult extends InvocationResult
    {
       DelegateInvocation invocation =
          new DelegateInvocation(mockOrRealObject, invokedArgs, expectedInvocation, constraints);
-      Object[] delegateArgsWithInvocation = Utilities.argumentsWithExtraFirstValue(delegateArgs, invocation);
+      Object[] delegateArgsWithInvocation = ParameterReflection.argumentsWithExtraFirstValue(delegateArgs, invocation);
 
       try {
          Object result = executeMethodToInvoke(delegateArgsWithInvocation);
@@ -69,18 +68,18 @@ abstract class DynamicInvocationResult extends InvocationResult
       }
    }
 
-   private Object executeMethodToInvoke(Object[] args)
+   protected final Object executeMethodToInvoke(Object[] args)
    {
       ReentrantLock reentrantLock = RecordAndReplayExecution.RECORD_OR_REPLAY_LOCK;
 
       if (!reentrantLock.isHeldByCurrentThread()) {
-         return Utilities.invoke(targetObject, methodToInvoke, args);
+         return MethodReflection.invoke(targetObject, methodToInvoke, args);
       }
 
       reentrantLock.unlock();
 
       try {
-         return Utilities.invoke(targetObject, methodToInvoke, args);
+         return MethodReflection.invoke(targetObject, methodToInvoke, args);
       }
       finally {
          //noinspection LockAcquiredButNotSafelyReleased

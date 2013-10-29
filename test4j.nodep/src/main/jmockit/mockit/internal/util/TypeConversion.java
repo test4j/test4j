@@ -63,7 +63,7 @@ public final class TypeConversion
       mv.visitTypeInsn(CHECKCAST, typeDesc);
    }
 
-   public static void generateUnboxing(MethodVisitor mv, Type parameterType, int opcode)
+   public static void generateCastOrUnboxing(MethodVisitor mv, Type parameterType, int opcode)
    {
       if (opcode == ASTORE) {
          generateTypeCheck(mv, parameterType);
@@ -101,13 +101,18 @@ public final class TypeConversion
       mv.visitMethodInsn(INVOKEVIRTUAL, typeDesc, UNBOXING_NAME[sort], UNBOXING_DESC[sort]);
    }
 
+   public static boolean isPrimitiveWrapper(String typeDesc)
+   {
+      return PRIMITIVE_WRAPPER_TYPES.contains(typeDesc);
+   }
+
    public static boolean isBoxing(String owner, String name, String desc)
    {
-      return desc.charAt(2) == ')' && "valueOf".equals(name) && PRIMITIVE_WRAPPER_TYPES.contains(owner);
+      return desc.charAt(2) == ')' && "valueOf".equals(name) && isPrimitiveWrapper(owner);
    }
 
    public static boolean isUnboxing(int opcode, String owner, String desc)
    {
-      return opcode == INVOKEVIRTUAL && desc.charAt(1) == ')' && PRIMITIVE_WRAPPER_TYPES.contains(owner);
+      return opcode == INVOKEVIRTUAL && desc.charAt(1) == ')' && isPrimitiveWrapper(owner);
    }
 }

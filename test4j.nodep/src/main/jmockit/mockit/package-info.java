@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2011 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 
@@ -10,17 +10,11 @@
  * expected invocations which are later replayed and implicitly verified.
  * This API makes use of the {@link mockit.Mocked} annotation.
  * <p/>
- * The {@link mockit.Verifications} class, when combined with the {@link mockit.NonStrictExpectations} class or the
- * {@link mockit.NonStrict} annotation, extends the record-replay model to a <em>record-replay-verify</em> model, where
- * the record phase can be left empty, with expected invocations verified explicitly <em>after</em> exercising the code
- * under test (ie, after the replay phase).
+ * The {@link mockit.Verifications} class, when combined with the {@link mockit.NonStrictExpectations} class, extends
+ * the record-replay model to a <em>record-replay-verify</em> model, where the record phase can be left empty, with
+ * expected invocations verified explicitly <em>after</em> exercising the code under test (ie, after the replay phase).
  * <p/>
- * The {@link mockit.Mockit} class contains a group of {@code setUpMock/setUpMocks} static methods that can be used to
- * set up <em>state-oriented</em> mock implementations.
- * They rely on the {@link mockit.Mock} and {@link mockit.MockClass} annotations.
- * <p/>
- * The {@linkplain mockit.MockUp <code>MockUp&lt;T></code>} generic class (where {@code T} is the mocked type) is a
- * convenient wrapper for common uses of the {@link mockit.Mockit#setUpMock(Class, Object)} and
- * {@link mockit.Mockit#setUpMock(Object)} methods, which allows the definition of in-line mocks for individual tests.
+ * The {@linkplain mockit.MockUp <code>MockUp&lt;T></code>} generic class (where {@code T} is the mocked type) allows
+ * the definition of fake implementations for arbitrary classes.
  */
 package mockit;

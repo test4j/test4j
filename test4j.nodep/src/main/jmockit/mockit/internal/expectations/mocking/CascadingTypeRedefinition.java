@@ -31,6 +31,6 @@ public final class CascadingTypeRedefinition extends BaseTypeRedefinition
    @Override
    String getNameForConcreteSubclassToCreate()
    {
-      return Utilities.GENERATED_SUBCLASS_PREFIX + targetClass.getSimpleName();
+      return GeneratedClasses.SUBCLASS_PREFIX + targetClass.getSimpleName();
    }
 }
