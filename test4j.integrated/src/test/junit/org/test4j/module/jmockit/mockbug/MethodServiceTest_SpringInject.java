@@ -1,5 +1,6 @@
 package org.test4j.module.jmockit.mockbug;
 
+import mockit.Invocation;
 import mockit.Mock;
 
 import org.junit.Test;
@@ -18,11 +19,9 @@ public class MethodServiceTest_SpringInject extends Test4J {
     @SpringInitMethod
     protected void mockTestedMethodService() {
         new MockUp<TestedMethodService>() {
-            TestedMethodService it;
-
             @Mock
-            public void $init() {
-                reflector.setField(it, "name", "init mock");
+            public void $init(Invocation it) {
+                reflector.setField(it.getInvokedInstance(), "name", "init mock");
             }
         };
     }
