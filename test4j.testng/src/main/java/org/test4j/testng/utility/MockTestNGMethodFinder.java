@@ -3,26 +3,26 @@ package org.test4j.testng.utility;
 import java.util.ArrayList;
 import java.util.List;
 
-import mockit.Instantiation;
+import mockit.Invocation;
 import mockit.Mock;
-import mockit.MockClass;
+import mockit.MockUp;
 
 import org.testng.ITestNGMethod;
 import org.testng.internal.TestNGMethodFinder;
 
 @SuppressWarnings("rawtypes")
-@MockClass(realClass = TestNGMethodFinder.class, instantiation = Instantiation.PerMockSetup)
-public final class MockTestNGMethodFinder {
+public final class MockTestNGMethodFinder extends MockUp<TestNGMethodFinder> {
     private static final String Test4J_Before_Method = "aBeforeMethod";
     private static final String Test4J_After_Method  = "zAfterMethod";
     private static final String Test4J_Before_Class  = "aBeforeClass";
     private static final String Test4J_After_Class   = "zAfterClass";
 
-    public TestNGMethodFinder   it;
+    //    public TestNGMethodFinder   it;
 
-    @Mock(reentrant = true)
-    public ITestNGMethod[] getBeforeClassMethods(Class cls) {
-        ITestNGMethod[] methods = it.getBeforeClassMethods(cls);
+    @Mock
+    public ITestNGMethod[] getBeforeClassMethods(Invocation invocation, Class cls) {
+        ITestNGMethod[] methods = invocation.proceed(cls);
+        //ITestNGMethod[] methods = it.getBeforeClassMethods(cls);
         List<ITestNGMethod> list = new ArrayList<ITestNGMethod>();
         ITestNGMethod aBeforeClass = null;
         for (ITestNGMethod method : methods) {
@@ -39,9 +39,10 @@ public final class MockTestNGMethodFinder {
         return list.toArray(new ITestNGMethod[0]);
     }
 
-    @Mock(reentrant = true)
-    public ITestNGMethod[] getAfterClassMethods(Class cls) {
-        ITestNGMethod[] methods = it.getAfterClassMethods(cls);
+    @Mock
+    public ITestNGMethod[] getAfterClassMethods(Invocation invocation, Class cls) {
+        ITestNGMethod[] methods = invocation.proceed(cls);
+        //ITestNGMethod[] methods = it.getAfterClassMethods(cls);
 
         List<ITestNGMethod> list = new ArrayList<ITestNGMethod>();
         ITestNGMethod zAfterClass = null;
@@ -59,9 +60,10 @@ public final class MockTestNGMethodFinder {
         return list.toArray(new ITestNGMethod[0]);
     }
 
-    @Mock(reentrant = true)
-    public ITestNGMethod[] getBeforeTestMethods(Class cls) {
-        ITestNGMethod[] methods = it.getBeforeTestMethods(cls);
+    @Mock
+    public ITestNGMethod[] getBeforeTestMethods(Invocation invocation, Class cls) {
+        ITestNGMethod[] methods = invocation.proceed(cls);
+        //ITestNGMethod[] methods = it.getBeforeTestMethods(cls);
 
         List<ITestNGMethod> list = new ArrayList<ITestNGMethod>();
         ITestNGMethod aBeforeMethod = null;
@@ -79,9 +81,10 @@ public final class MockTestNGMethodFinder {
         return list.toArray(new ITestNGMethod[0]);
     }
 
-    @Mock(reentrant = true)
-    public ITestNGMethod[] getAfterTestMethods(Class cls) {
-        ITestNGMethod[] methods = it.getAfterTestMethods(cls);
+    @Mock
+    public ITestNGMethod[] getAfterTestMethods(Invocation invocation, Class cls) {
+        ITestNGMethod[] methods = invocation.proceed(cls);
+        //ITestNGMethod[] methods = it.getAfterTestMethods(cls);
 
         List<ITestNGMethod> list = new ArrayList<ITestNGMethod>();
         ITestNGMethod zAfterMethod = null;

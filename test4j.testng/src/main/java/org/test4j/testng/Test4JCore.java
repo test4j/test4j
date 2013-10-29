@@ -3,8 +3,6 @@ package org.test4j.testng;
 import java.lang.reflect.Method;
 import java.util.List;
 
-import mockit.internal.annotations.MockClassSetup;
-
 import org.test4j.module.core.CoreModule;
 import org.test4j.module.core.TestContext;
 import org.test4j.module.core.utility.ListenerExecutor;
@@ -25,7 +23,7 @@ import org.testng.annotations.BeforeMethod;
 public class Test4JCore extends Test4JHookable {
     static {
         CoreModule.initSingletonInstance();
-        new MockClassSetup(MockTestNGMethodFinder.class).setUpStartupMock();
+        new MockTestNGMethodFinder();
     }
 
     @BeforeClass(alwaysRun = true)
