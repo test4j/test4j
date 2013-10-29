@@ -6,14 +6,14 @@ import java.lang.reflect.Field;
 import java.util.Map;
 import java.util.Set;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.test4j.module.Test4JException;
-import org.test4j.module.spring.annotations.SpringBeanByType;
 import org.test4j.module.spring.annotations.SpringContext;
 import org.test4j.module.spring.strategy.Test4JBeanFactory;
 import org.test4j.tools.commons.FieldHelper;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
-class SpringBeanInjectorByType extends SpringBeanInjector {
+class SpringBeanInjectorByAutowired extends SpringBeanInjector {
     /**
      * {@inheritDoc}<br>
      * <br>
@@ -22,7 +22,7 @@ class SpringBeanInjectorByType extends SpringBeanInjector {
     @Override
     public void injectBy(Test4JBeanFactory beanFactory, Object testedObject) {
         Class testedClazz = testedObject.getClass();
-        Set<Field> fields = getFieldsAnnotatedWith(testedClazz, SpringBeanByType.class);
+        Set<Field> fields = getFieldsAnnotatedWith(testedClazz, Autowired.class);
         for (Field field : fields) {
             try {
                 Object bean = getSpringBeanByType(beanFactory, field.getType());
