@@ -15,13 +15,13 @@ import ext.test4j.hamcrest.Matcher;
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class JMockitNonStrictExpectations extends NonStrictExpectations implements Test4JInvocations {
 
-    @Mocked(methods = { "" })
+    @Mocked({ "" })
     protected InvokeTimes             invokerTimes;
 
-    @Mocked(methods = { "" })
+    @Mocked({ "" })
     protected ExpectationsResult      expectationsResult;
 
-    @Mocked(methods = { "" })
+    @Mocked({ "" })
     protected final TheStyleAssertion the;
 
     public JMockitNonStrictExpectations() {

@@ -1,8 +1,8 @@
 package org.test4j.hamcrest.matcher;
 
-import static mockit.internal.util.Utilities.getField;
 import mockit.internal.expectations.argumentMatching.ArgumentMatcher;
 import mockit.internal.expectations.argumentMatching.ArgumentMismatch;
+import mockit.internal.util.FieldReflection;
 import ext.test4j.hamcrest.Description;
 import ext.test4j.hamcrest.Matcher;
 import ext.test4j.hamcrest.StringDescription;
@@ -45,12 +45,12 @@ public final class JMockitAdapter implements ArgumentMatcher {
 
         while (innerMatcher instanceof ext.test4j.hamcrest.core.Is
                 || innerMatcher instanceof ext.test4j.hamcrest.core.IsNot) {
-            innerMatcher = getField(innerMatcher.getClass(), Matcher.class, innerMatcher);
+            innerMatcher = FieldReflection.getField(innerMatcher.getClass(), Matcher.class, innerMatcher);
         }
 
         if (innerMatcher instanceof IsEqual || innerMatcher instanceof IsSame
                 || innerMatcher instanceof OrderingComparison) {
-            return getField(innerMatcher.getClass(), Object.class, innerMatcher);
+            return FieldReflection.getField(innerMatcher.getClass(), Object.class, innerMatcher);
         } else {
             return null;
         }
