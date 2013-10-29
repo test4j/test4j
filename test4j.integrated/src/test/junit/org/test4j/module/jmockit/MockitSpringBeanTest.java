@@ -5,7 +5,6 @@ import java.util.List;
 
 import mockit.Mock;
 import mockit.Mocked;
-import mockit.Mockit;
 
 import org.junit.Test;
 import org.test4j.database.table.ITable;
@@ -58,7 +57,7 @@ public class MockitSpringBeanTest extends Test4J {
                 this.put("sarary", "0", "0");
             }
         }).commit();
-        Mockit.setUpMock(UserDaoImpl.class, MockUserDao.class);
+        new MockUserDao();
 
         // mock的行为
         double total = this.userService.paySalary("310000");
@@ -67,10 +66,9 @@ public class MockitSpringBeanTest extends Test4J {
         // not mock的行为
         List<User> users = userDao.findAllUser();
         want.number(users.size()).isEqualTo(2);
-        Mockit.tearDownMocks();
     }
 
-    public static class MockUserDao {
+    public static class MockUserDao extends MockUp<UserDaoImpl> {
         @Mock
         public List<User> findUserByPostcode(String postcode) {
             return getUserList();

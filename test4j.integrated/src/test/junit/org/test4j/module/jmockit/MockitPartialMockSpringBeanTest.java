@@ -1,7 +1,6 @@
 package org.test4j.module.jmockit;
 
 import mockit.Mock;
-import mockit.Mockit;
 
 import org.junit.Test;
 import org.test4j.database.table.ITable;
@@ -31,7 +30,7 @@ public class MockitPartialMockSpringBeanTest extends Test4J {
             }
         }).commit();
 
-        Mockit.setUpMock(UserServiceImpl.class, MockUserServiceImpl.class);
+        new MockUserServiceImpl();
 
         double total = this.userService.paySalary("310000");
         want.number(total).isEqualTo(4000d);
@@ -43,7 +42,7 @@ public class MockitPartialMockSpringBeanTest extends Test4J {
 
     private static String wantMock = "unInvoked";
 
-    public static class MockUserServiceImpl {
+    public static class MockUserServiceImpl extends MockUp<UserServiceImpl> {
         @Mock
         public void insertUser(User user) {
             MessageHelper.info("user id:" + user.getId());

@@ -3,6 +3,7 @@ package org.test4j.testng.database;
 import java.util.ArrayList;
 import java.util.List;
 
+import mockit.Invocation;
 import mockit.Mock;
 
 import org.test4j.database.table.ITable;
@@ -19,11 +20,9 @@ public class AbastractDataGeneratorTest extends Test4J implements IDatabase {
     public void testValue() {
         final List actual = new ArrayList();
         new MockUp<DataSet>() {
-            DataSet it;
-
             @Mock
-            public void insert(String table) {
-                List list = reflector.getField(it, "datas");
+            public void insert(Invocation it, String table) {
+                List list = reflector.getField(it.getInvokedInstance(), "datas");
                 actual.addAll(list);
             }
         };

@@ -7,6 +7,7 @@ import java.io.Writer;
 
 import mockit.Mock;
 
+import org.test4j.hamcrest.matcher.string.StringMode;
 import org.test4j.module.tracer.TracerLogger;
 import org.test4j.module.tracer.TracerServiceDemo;
 import org.test4j.module.tracer.XmlFileTracerLogger;
@@ -38,6 +39,6 @@ public class XmlFileTracerLoggerTest extends Test4J {
         log.close();
         String xml = writer.toString();
         String expected = ResourceHelper.readFromFile("org/test4j/module/tracer/XmlFileTracerLoggerTest.xml");
-        want.string(xml).isEqualTo(expected);
+        want.string(xml).isEqualTo(expected, StringMode.IgnoreSpace);
     }
 }

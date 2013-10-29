@@ -178,7 +178,7 @@ public class TableOpTest extends Test4J implements IDatabase {
             {
                 this.put(IColumn.f_id, 1);
                 this.put(IColumn.f_first_name, "darui.wu");
-                this.put(IColumn.f_post_code, "jteste");
+                this.put(IColumn.f_post_code, "test4j");
                 this.put(IColumn.f_address_id, 0);
                 this.put(IColumn.f_last_name, "test4j");
                 this.put(IColumn.f_sarary, 0.0);
@@ -189,7 +189,7 @@ public class TableOpTest extends Test4J implements IDatabase {
             {
                 this.put(IColumn.f_id, 2);
                 this.put(IColumn.f_first_name, "data.iterator");
-                this.put(IColumn.f_post_code, "jteste");
+                this.put(IColumn.f_post_code, "test4j");
                 this.put(IColumn.f_address_id, 0);
                 this.put(IColumn.f_last_name, "test4j");
                 this.put(IColumn.f_sarary, 0.0);
@@ -214,7 +214,7 @@ public class TableOpTest extends Test4J implements IDatabase {
             {
                 this.put(IColumn.f_id, 1, 2);
                 this.put(IColumn.f_first_name, "darui.wu", "data.iterator");
-                this.put(IColumn.f_post_code, "jteste");
+                this.put(IColumn.f_post_code, "test4j");
                 this.put(IColumn.f_address_id, 0);
                 this.put(IColumn.f_last_name, "test4j");
                 this.put(IColumn.f_sarary, 0.0);

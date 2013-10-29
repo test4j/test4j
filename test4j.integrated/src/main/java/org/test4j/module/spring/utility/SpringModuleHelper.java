@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import mockit.internal.annotations.MockClassSetup;
-
 import org.springframework.aop.framework.MockCglib2AopProxy;
 import org.springframework.beans.factory.BeanFactory;
 import org.test4j.module.Test4JException;
@@ -31,7 +29,7 @@ public class SpringModuleHelper {
      * @return
      */
     public static Object getBeanByName(String beanname) {
-        BeanFactory factory = (BeanFactory) SpringTestedContext.getSpringBeanFactory();
+        BeanFactory factory = SpringTestedContext.getSpringBeanFactory();
         if (factory == null) {
             throw new RuntimeException("can't find SpringApplicationContext for tested class:"
                     + TestContext.currTestedClazzName());
@@ -103,7 +101,7 @@ public class SpringModuleHelper {
      * @return
      */
     private static Test4JSpringContext newSpringContext(Class testClazz, ApplicationContextFactory contextFactory,
-                                                         SpringContext annotation) {
+                                                        SpringContext annotation) {
         long startTime = System.currentTimeMillis();
         String[] locations = annotation.value();
         boolean allowLazy = annotation.allowLazy();
@@ -184,6 +182,6 @@ public class SpringModuleHelper {
         if (!isAvailable) {
             return;
         }
-        new MockClassSetup(MockCglib2AopProxy.class).setUpStartupMock();
+        new MockCglib2AopProxy();
     }
 }
