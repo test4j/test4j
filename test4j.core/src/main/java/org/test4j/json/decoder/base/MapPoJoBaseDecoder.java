@@ -37,7 +37,7 @@ public abstract class MapPoJoBaseDecoder<E> extends BaseDecoder {
             if (newID != null) {
                 references.put(newID, target);
             }
-            this.parseFromJSONMap(target, map, references);
+            this.parseFromJSONMap(target, toType, map, references);
             return (T) target;
         }
     }
@@ -66,5 +66,5 @@ public abstract class MapPoJoBaseDecoder<E> extends BaseDecoder {
      * @param references
      * @return
      */
-    protected abstract void parseFromJSONMap(E target, JSONMap jsonMap, Map<String, Object> references);
+    protected abstract void parseFromJSONMap(E target, Type toType, JSONMap jsonMap, Map<String, Object> references);
 }
