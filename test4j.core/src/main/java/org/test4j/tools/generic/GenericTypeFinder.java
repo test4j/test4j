@@ -21,22 +21,19 @@ import java.lang.reflect.TypeVariable;
 public class GenericTypeFinder {
     public static GenericTypeMap findGenericTypes(Type type) {
         GenericTypeMap map = new GenericTypeMap();
-        while (!Object.class.equals(type)) {
-            Class raw = getRawType(type);
-            Type[] args = getTypeArgs(type);
-            TypeVariable[] vars = raw.getTypeParameters();
-            int index = 0;
-            for (Type arg : args) {
-                if (arg instanceof TypeVariable) {
-                    map.putGeneric(vars[index], (TypeVariable) arg);
-                } else {
-                    map.putType(vars[index], arg);
-                }
-                index++;
+        fillInterfaceTypes(type, map);
+        return map;
+    }
+
+    private static void fillInterfaceTypes(Type type, GenericTypeMap typeMap) {
+        while (type != null && !Object.class.equals(type)) {
+            Class raw = fillTypeGenericType(type, typeMap);
+            Type[] interfaces = raw.getGenericInterfaces();
+            for (Type _interface : interfaces) {
+                fillInterfaceTypes(_interface, typeMap);
             }
             type = raw.getGenericSuperclass();
         }
-        return map;
     }
 
     private static Type[] getTypeArgs(Type type) {
@@ -69,5 +66,21 @@ public class GenericTypeFinder {
         //
         // }
         return Object.class;
+    }
+
+    private static Class fillTypeGenericType(Type type, GenericTypeMap map) {
+        Class raw = getRawType(type);
+        Type[] args = getTypeArgs(type);
+        TypeVariable[] vars = raw.getTypeParameters();
+        int index = 0;
+        for (Type arg : args) {
+            if (arg instanceof TypeVariable) {
+                map.putGeneric(vars[index], (TypeVariable) arg);
+            } else {
+                map.putType(vars[index], arg);
+            }
+            index++;
+        }
+        return raw;
     }
 }

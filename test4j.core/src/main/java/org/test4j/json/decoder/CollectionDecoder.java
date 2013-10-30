@@ -15,6 +15,8 @@ import org.test4j.json.helper.JSONArray;
 import org.test4j.json.helper.JSONMap;
 import org.test4j.json.helper.JSONObject;
 import org.test4j.tools.commons.ClazzHelper;
+import org.test4j.tools.generic.GenericTypeFinder;
+import org.test4j.tools.generic.GenericTypeMap;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class CollectionDecoder extends BaseDecoder {
@@ -67,7 +69,8 @@ public class CollectionDecoder extends BaseDecoder {
         Collection list = this.newInstance(toType);
         for (Iterator<JSONObject> it = jsonArray.iterator(); it.hasNext();) {
             JSONObject jsonObject = it.next();
-            Type componentType = super.getComponent(jsonObject, toType, 0);
+            GenericTypeMap typeMap = GenericTypeFinder.findGenericTypes(toType);
+            Type componentType = typeMap.getType(Collection.class, "E");
             IDecoder decoder = DecoderFactory.getDecoder(componentType);
             Object o = decoder.decode(jsonObject, componentType, references);
             list.add(o);

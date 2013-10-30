@@ -2,12 +2,8 @@ package org.test4j.json.decoder.base;
 
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.HashMap;
 
 import org.test4j.json.decoder.IDecoder;
-import org.test4j.json.helper.JSONMap;
-import org.test4j.json.helper.JSONObject;
-import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.tools.commons.ClazzHelper;
 
 /**
@@ -68,30 +64,5 @@ public abstract class BaseDecoder implements IDecoder {
         Class claz = this.getRawType(type, null);
         Object o = ClazzHelper.newInstance(claz);
         return (T) o;
-    }
-
-    protected Type getComponent(JSONObject jo, Type toType, int genericIndex) {
-        Type argType = this.getComponent(toType, genericIndex);
-        if (!(jo instanceof JSONMap)) {
-            return argType;
-        }
-        Type type = ((JSONMap) jo).getClazzFromJSONFProp(argType);
-        return type;
-    }
-
-    protected Type getComponent(Type toType, int genericIndex) {
-        if (toType instanceof Class) {
-            return HashMap.class;
-        } else if (toType instanceof ParameterizedType) {
-            try {
-                return this.getArgType((ParameterizedType) toType, genericIndex);
-            } catch (RuntimeException e) {
-                MessageHelper.error("find component type from " + toType.toString() + "[index=" + genericIndex
-                        + "] error:" + e.getMessage(), e);
-                return HashMap.class;
-            }
-        } else {
-            throw new DecoderException("the CollectionDecoder only accpt collection type, but actual is:" + toType);
-        }
     }
 }

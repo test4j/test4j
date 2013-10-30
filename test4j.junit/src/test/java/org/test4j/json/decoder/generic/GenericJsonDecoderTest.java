@@ -23,7 +23,7 @@ import org.test4j.junit.Test4J;
  * @author darui.wudr 2013-10-29 下午5:54:27
  */
 @SuppressWarnings("serial")
-public class GenericTest extends Test4J {
+public class GenericJsonDecoderTest extends Test4J {
 
     @Test
     public void testGenericList() {
@@ -88,7 +88,7 @@ public class GenericTest extends Test4J {
         want.string(json).isEqualTo("{map:{\"name\":{name:\"test\"}}}");
         GenericMyMap output = JSON.toObject(json, GenericMyMap.class);
         want.object(output).reflectionEq(input);
-        want.object(output.map.get("name")).clazIs(GenericMyMap.class);
+        want.object(output.map.get("name")).clazIs(GenericObj.class);
     }
 
     @Test

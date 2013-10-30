@@ -10,6 +10,8 @@ import org.test4j.json.decoder.base.MapPoJoBaseDecoder;
 import org.test4j.json.helper.JSONMap;
 import org.test4j.json.helper.JSONObject;
 import org.test4j.tools.commons.ClazzHelper;
+import org.test4j.tools.generic.GenericTypeFinder;
+import org.test4j.tools.generic.GenericTypeMap;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class MapDecoder extends MapPoJoBaseDecoder<Map> {
@@ -24,8 +26,9 @@ public class MapDecoder extends MapPoJoBaseDecoder<Map> {
                 continue;
             }
             JSONObject jsonvalue = entry.getValue();
-            Type keyType = super.getComponent(jsonMap, toType, 0);
-            Type valueType = super.getComponent(jsonMap, toType, 1);
+            GenericTypeMap typeMap = GenericTypeFinder.findGenericTypes(toType);
+            Type keyType = typeMap.getType(Map.class, "K");
+            Type valueType = typeMap.getType(Map.class, "V");
 
             Object key = JSON.toObject(jsonkey, keyType, references);
             Object value = JSON.toObject(jsonvalue, valueType, references);

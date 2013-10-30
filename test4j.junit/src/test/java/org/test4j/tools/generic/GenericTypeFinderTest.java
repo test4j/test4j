@@ -10,6 +10,7 @@ package org.test4j.tools.generic;
 import java.lang.reflect.Type;
 import java.util.AbstractMap;
 import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Test;
 import org.test4j.junit.Test4J;
@@ -28,6 +29,8 @@ public class GenericTypeFinderTest extends Test4J {
                 this.putType(AbstractMap.class, "V", GenericObj.class);
                 this.putType(HashMap.class, "K", String.class);
                 this.putType(HashMap.class, "V", GenericObj.class);
+                this.putType(Map.class, "K", String.class);
+                this.putType(Map.class, "V", GenericObj.class);
                 this.putType(MyMap.class, "T", GenericObj.class);
             }
         });
