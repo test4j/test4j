@@ -69,13 +69,18 @@ public class CollectionDecoder extends BaseDecoder {
         Collection list = this.newInstance(toType);
         for (Iterator<JSONObject> it = jsonArray.iterator(); it.hasNext();) {
             JSONObject jsonObject = it.next();
-            GenericTypeMap typeMap = GenericTypeFinder.findGenericTypes(toType);
-            Type componentType = typeMap.getType(Collection.class, "E");
+            Type componentType = getComponentType(toType);
             IDecoder decoder = DecoderFactory.getDecoder(componentType);
             Object o = decoder.decode(jsonObject, componentType, references);
             list.add(o);
         }
         return list;
+    }
+
+    private Type getComponentType(Type toType) {
+        GenericTypeMap typeMap = GenericTypeFinder.findGenericTypes(toType);
+        Type componentType = typeMap.getType(Collection.class, "E");
+        return componentType;
     }
 
     @Override

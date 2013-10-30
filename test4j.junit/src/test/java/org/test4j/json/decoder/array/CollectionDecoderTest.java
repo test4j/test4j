@@ -1,9 +1,8 @@
 package org.test4j.json.decoder.array;
 
 import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import org.junit.Test;
@@ -12,7 +11,6 @@ import org.test4j.json.decoder.CollectionDecoder;
 import org.test4j.json.decoder.ForTestType;
 import org.test4j.json.encoder.beans.test.User;
 import org.test4j.junit.Test4J;
-import org.test4j.junit.annotations.DataFrom;
 
 @SuppressWarnings({ "rawtypes" })
 public class CollectionDecoderTest extends Test4J {
@@ -53,19 +51,16 @@ public class CollectionDecoderTest extends Test4J {
     }
 
     @Test
-    @DataFrom("dataForGetComponent")
-    public void testGetComponent(String toTypeName, Class componentType) throws Exception {
-        Type toType = ForTestType.getType(toTypeName);
-        Type type = reflector.invoke(CollectionDecoder.toCOLLECTION, "getComponent", toType);
-        want.object(type).isEqualTo(componentType);
+    public void testGetComponent() throws Exception {
+        Type toType = ForTestType.getType("objectList");
+        TypeVariable type = (TypeVariable) reflector.invoke(CollectionDecoder.toCOLLECTION, "getComponentType", toType);
+        want.object(type.toString()).isEqualTo("E");
     }
 
-    public static Iterator dataForGetComponent() {
-        return new DataIterator() {
-            {
-                data("objectList", HashMap.class);
-                data("userList", User.class);
-            }
-        };
+    @Test
+    public void testGetComponent2() throws Exception {
+        Type toType = ForTestType.getType("userList");
+        Type type = reflector.invoke(CollectionDecoder.toCOLLECTION, "getComponentType", toType);
+        want.object(type).isEqualTo(User.class);
     }
 }

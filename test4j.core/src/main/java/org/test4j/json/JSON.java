@@ -2,6 +2,7 @@ package org.test4j.json;
 
 import java.io.StringWriter;
 import java.lang.reflect.Type;
+import java.lang.reflect.TypeVariable;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -75,7 +76,7 @@ public final class JSON {
     }
 
     public static final <T> T toObject(JSONObject json, Type type, Map<String, Object> references) {
-        if (type == null || Object.class.equals(type)) {
+        if (type == null || Object.class.equals(type) || type instanceof TypeVariable) {
             return toObject(json, references);
         } else {
             IDecoder decoder = DecoderFactory.getDecoder(type);
