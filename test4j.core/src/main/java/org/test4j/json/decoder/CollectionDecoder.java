@@ -7,10 +7,10 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
+import org.test4j.json.JSON;
 import org.test4j.json.JSONException;
 import org.test4j.json.decoder.base.BaseDecoder;
 import org.test4j.json.decoder.base.DecoderException;
-import org.test4j.json.decoder.base.DecoderFactory;
 import org.test4j.json.helper.JSONArray;
 import org.test4j.json.helper.JSONMap;
 import org.test4j.json.helper.JSONObject;
@@ -70,8 +70,7 @@ public class CollectionDecoder extends BaseDecoder {
         for (Iterator<JSONObject> it = jsonArray.iterator(); it.hasNext();) {
             JSONObject jsonObject = it.next();
             Type componentType = getComponentType(toType);
-            IDecoder decoder = DecoderFactory.getDecoder(componentType);
-            Object o = decoder.decode(jsonObject, componentType, references);
+            Object o = JSON.toObject(jsonObject, componentType, references);
             list.add(o);
         }
         return list;

@@ -10,15 +10,10 @@
 				<exclude name="testng-demo" />
 				<exclude name="manual" />
 				<exclude name="debug" />
-				<exclude name="oracle" />
 			</run>
 		</groups>
 		<packages>
-			<package name="org.test4j.testng.*" />
+			<package name="org.test4j.*" />
 		</packages>
 	</test>
-	<listeners>
-		<listener class-name="org.test4j.testng.report.UserTestReporter" />
-		<!-- <listener class-name="org.test4j.core.testng.Test4JMethodsOrder" /> -->
-	</listeners>
 </suite>
