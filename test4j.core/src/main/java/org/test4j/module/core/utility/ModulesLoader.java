@@ -114,7 +114,7 @@ public class ModulesLoader {
             }
             boolean isEnabled = ConfigHelper.getBoolean(PROPKEY_MODULE_PREFIX + module + PROPKEY_MODULE_SUFFIX_ENABLED,
                     true);
-            if (isEnabled == false) {
+            if (!isEnabled) {
                 continue;
             }
             String moduleEnabledClazz = ConfigHelper.getString(PROPKEY_MODULE_PREFIX + module
@@ -128,7 +128,7 @@ public class ModulesLoader {
                 enabledModules.add(module);
             } else {
                 MessageHelper.warn(String.format("can't find class %s in classpath, so disabled module[%s]",
-                        clazzAvailable, module));
+                        moduleEnabledClazz, module));
             }
         }
         return enabledModules;
