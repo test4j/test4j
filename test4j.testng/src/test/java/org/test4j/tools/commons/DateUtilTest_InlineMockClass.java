@@ -9,7 +9,6 @@ import mockit.Mockit;
 import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
-@SuppressWarnings("unused")
 @Test(groups = "test4j")
 public class DateUtilTest_InlineMockClass extends Test4J {
     @Test

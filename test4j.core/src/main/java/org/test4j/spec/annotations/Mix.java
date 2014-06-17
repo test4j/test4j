@@ -15,5 +15,6 @@ import org.test4j.spec.Steps;
 @Retention(RetentionPolicy.RUNTIME)
 @Target(ElementType.TYPE)
 public @interface Mix {
+    @SuppressWarnings("rawtypes")
     Class<? extends Steps>[] value();
 }

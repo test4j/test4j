@@ -6,7 +6,6 @@ import java.io.StringWriter;
 import java.io.Writer;
 
 import mockit.Mock;
-import mockit.MockUp;
 
 import org.junit.Test;
 import org.test4j.hamcrest.matcher.string.StringMode;

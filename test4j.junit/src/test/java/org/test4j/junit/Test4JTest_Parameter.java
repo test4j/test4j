@@ -5,7 +5,6 @@ import java.util.Iterator;
 import org.junit.Test;
 import org.test4j.junit.annotations.DataFrom;
 import org.test4j.junit.annotations.Group;
-import org.test4j.module.ICore.DataIterator;
 
 @SuppressWarnings("rawtypes")
 @Group({ "davey.wu" })

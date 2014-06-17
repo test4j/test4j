@@ -1,7 +1,6 @@
 package org.test4j.junit;
 
 import mockit.Mock;
-import mockit.MockUp;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;

@@ -7,7 +7,6 @@ import java.util.Iterator;
 import org.junit.Test;
 import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
-import org.test4j.module.ICore.DataIterator;
 
 @SuppressWarnings("rawtypes")
 public class IncreaseDataGeneratorTest extends Test4J {

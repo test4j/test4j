@@ -3,7 +3,6 @@ package org.test4j.module.tracer;
 import java.io.FileNotFoundException;
 
 import mockit.Mock;
-import mockit.MockUp;
 
 import org.junit.Before;
 import org.junit.Ignore;
@@ -12,7 +11,6 @@ import org.test4j.database.table.ITable;
 import org.test4j.fortest.hibernate.User;
 import org.test4j.fortest.hibernate.UserService;
 import org.test4j.junit.Test4J;
-import org.test4j.module.ICore.DataMap;
 import org.test4j.module.spring.annotations.SpringBeanByType;
 import org.test4j.module.spring.annotations.SpringContext;
 import org.test4j.tools.commons.ResourceHelper;

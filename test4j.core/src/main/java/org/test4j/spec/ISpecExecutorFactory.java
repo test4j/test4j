@@ -36,6 +36,7 @@ public interface ISpecExecutorFactory {
      * @param spec
      * @return
      */
+    @SuppressWarnings("rawtypes")
     Map<String, Steps> newSteps(ISpec spec);
 
     /**
