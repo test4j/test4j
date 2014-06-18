@@ -20,15 +20,15 @@ public class ConsolePrinter extends AbstractPrinter {
     @Override
     protected void printHeader(ISpec spec, IScenario scenario) {
         System.out.print("\n\n");
-        StringBuffer buff = new StringBuffer("====================");
-        buff.append("Scenario: ").append(scenario.getName());
-        buff.append("=======================");
+        StringBuffer buff = new StringBuffer();
+        buff.append("Scenario-").append(String.format("%02d", scenario.getIndex())).append(": ")
+                .append(scenario.getName());
         this.title = buff.toString();
-        System.out.println(title);
+        System.out.println("====================" + "Begin " + title + "====================");
     }
 
     protected void printTailer(ISpec spec, IScenario scenario) {
-        System.out.println(title);
+        System.out.println("====================" + "End " + title + "====================");
     }
 
     @Override
