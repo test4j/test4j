@@ -27,4 +27,18 @@ public interface IScenario {
      * @return
      */
     String getName();
+
+    /**
+     * 返回场景序列号
+     * 
+     * @return
+     */
+    int getIndex();
+
+    /**
+     * 设置场景序列号
+     * 
+     * @param index
+     */
+    void setIndex(int index);
 }
