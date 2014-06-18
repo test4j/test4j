@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.startup;
@@ -9,7 +9,6 @@ import java.lang.instrument.*;
 
 import mockit.external.asm4.*;
 import mockit.internal.*;
-import mockit.internal.annotations.*;
 import mockit.internal.util.*;
 
 final class ToolLoader extends ClassVisitor
@@ -24,7 +23,7 @@ final class ToolLoader extends ClassVisitor
       ClassReader cr;
 
       try {
-         cr = ClassFile.readClass(toolClassName);
+         cr = ClassFile.readClass(toolClassName.replace('.', '/'));
       }
       catch (IOException ignore) {
          System.out.println("JMockit: external tool class \"" + toolClassName + "\" not available in classpath");
@@ -70,29 +69,25 @@ final class ToolLoader extends ClassVisitor
 
    private void createAndInstallSpecifiedClassFileTransformer()
    {
-      Class<ClassFileTransformer> transformerClass = Utilities.loadClass(toolClassName);
-      ClassFileTransformer transformer = Utilities.newInstance(transformerClass);
+      Class<ClassFileTransformer> transformerClass = ClassLoad.loadClass(toolClassName);
+      ClassFileTransformer transformer = ConstructorReflection.newInstance(transformerClass);
 
       Startup.instrumentation().addTransformer(transformer);
    }
 
    private void setUpStartupMock()
    {
-      Class<?> mockClass;
+      Class<?> mockClass = ClassLoad.loadClass(toolClassName);
 
-      try {
-         mockClass = Class.forName(toolClassName);
-      }
-      catch (ClassNotFoundException e) {
-         throw new RuntimeException(e);
-      }
-
-      try {
-         new MockClassSetup(mockClass).setUpStartupMock();
-      }
-      catch (TypeNotPresentException e) {
-         // OK, ignores the startup mock if the necessary third-party class files are not in the classpath.
-         System.out.println(e);
+      //noinspection UnnecessaryFullyQualifiedName
+      if (mockit.MockUp.class.isAssignableFrom(mockClass)) {
+         try {
+            ConstructorReflection.newInstance(mockClass);
+         }
+         catch (TypeNotPresentException e) {
+            // OK, ignores the startup mock if the necessary third-party class files are not in the classpath.
+            System.out.println(e);
+         }
       }
    }
 }

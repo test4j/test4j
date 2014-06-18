@@ -16,15 +16,9 @@ public abstract class TestOnlyPhase extends Phase
    protected List<ArgumentMatcher> argMatchers;
    Expectation currentExpectation;
 
-   TestOnlyPhase(RecordAndReplayExecution recordAndReplay)
-   {
-      super(recordAndReplay);
-   }
+   TestOnlyPhase(RecordAndReplayExecution recordAndReplay) { super(recordAndReplay); }
 
-   public final void setNumberOfIterations(int numberOfIterations)
-   {
-      this.numberOfIterations = numberOfIterations;
-   }
+   public final void setNumberOfIterations(int numberOfIterations) { this.numberOfIterations = numberOfIterations; }
 
    public final void setNextInstanceToMatch(Object nextInstanceToMatch)
    {
@@ -57,6 +51,12 @@ public abstract class TestOnlyPhase extends Phase
       for (i--; i < toIndex; i++) {
          argMatchers.add(i, null);
       }
+   }
+
+   public final void setExpectedArgumentType(int parameterIndex, Class<?> argumentType)
+   {
+      ArgumentMatcher newMatcher = new ClassMatcher(argumentType);
+      argMatchers.set(parameterIndex, newMatcher);
    }
 
    final Expectation getCurrentExpectation()

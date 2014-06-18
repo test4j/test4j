@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations.invocation;
@@ -35,7 +35,7 @@ public final class InvocationArguments
    }
 
    String getClassName() { return classDesc.replace('/', '.'); }
-   String getGenericSignature() { return genericSignature == null ? methodNameAndDesc : genericSignature; }
+
    boolean isForConstructor() { return methodNameAndDesc.charAt(0) == '<'; }
 
    public Object[] getValues() { return valuesAndMatchers.values; }
@@ -66,14 +66,20 @@ public final class InvocationArguments
       }
    }
 
-   public Error assertMatch(Object[] replayArgs, Map<Object, Object> instanceMap)
+   public Error assertMatch(Object[] replayArgs, Map<Object, Object> instanceMap, CharSequence errorMessagePrefix)
    {
-      return valuesAndMatchers.assertMatch(replayArgs, instanceMap);
+      return valuesAndMatchers.assertMatch(replayArgs, instanceMap, errorMessagePrefix);
    }
 
-   Error argumentMismatchMessage(int paramIndex, Object expected, Object actual)
+   Error argumentMismatchMessage(int paramIndex, Object expected, Object actual, CharSequence errorMessagePrefix)
    {
       ArgumentMismatch message = new ArgumentMismatch();
+
+      if (errorMessagePrefix != null) {
+         message.append(errorMessagePrefix);
+         message.append('\n');
+      }
+
       message.append("Parameter ");
 
       String parameterName = ParameterNames.getName(classDesc, methodNameAndDesc, paramIndex);

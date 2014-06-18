@@ -1,9 +1,5 @@
 package org.test4j.module.spring.strategy.injector;
 
-import java.lang.annotation.Annotation;
-
-import org.test4j.module.spring.annotations.SpringBeanByName;
-import org.test4j.module.spring.annotations.SpringBeanByType;
 import org.test4j.module.spring.strategy.Test4JBeanFactory;
 
 /**
@@ -13,9 +9,13 @@ import org.test4j.module.spring.strategy.Test4JBeanFactory;
  */
 public abstract class SpringBeanInjector {
 
-    private final static SpringBeanInjector byName = new SpringBeanInjectorByName();
+    private final static SpringBeanInjector byName      = new SpringBeanInjectorByName();
 
-    private final static SpringBeanInjector byType = new SpringBeanInjectorByType();
+    private final static SpringBeanInjector byResource  = new SpringBeanInjectorByResource();
+
+    private final static SpringBeanInjector byType      = new SpringBeanInjectorByType();
+
+    private final static SpringBeanInjector byAutowired = new SpringBeanInjectorByAutowired();
 
     /**
      * 往测试类实例中注入spring bean
@@ -24,8 +24,10 @@ public abstract class SpringBeanInjector {
      */
     public static void injectSpringBeans(Object beanFactory, Object testedObject) {
         if (beanFactory instanceof Test4JBeanFactory) {
-            byName.injectBy((Test4JBeanFactory) beanFactory, testedObject, SpringBeanByName.class);
-            byType.injectBy((Test4JBeanFactory) beanFactory, testedObject, SpringBeanByType.class);
+            byName.injectBy((Test4JBeanFactory) beanFactory, testedObject);
+            byResource.injectBy((Test4JBeanFactory) beanFactory, testedObject);
+            byType.injectBy((Test4JBeanFactory) beanFactory, testedObject);
+            byAutowired.injectBy((Test4JBeanFactory) beanFactory, testedObject);
         } else {
             throw new RuntimeException(String.format(
                     "the type error, object[%s] isn't an instance of Test4JBeanFactory.", beanFactory == null ? null
@@ -41,6 +43,5 @@ public abstract class SpringBeanInjector {
      * @param annotation 字段声明的Annotation
      * @return
      */
-    public abstract void injectBy(Test4JBeanFactory beanFactory, Object testedObject,
-                                  Class<? extends Annotation> annotation);
+    public abstract void injectBy(Test4JBeanFactory beanFactory, Object testedObject);
 }

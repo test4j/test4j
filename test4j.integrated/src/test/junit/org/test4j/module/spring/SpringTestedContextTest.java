@@ -1,6 +1,6 @@
 package org.test4j.module.spring;
 
-import mockit.NonStrict;
+import mockit.Mocked;
 
 import org.junit.Test;
 import org.test4j.junit.Test4J;
@@ -16,7 +16,7 @@ public class SpringTestedContextTest extends Test4J {
     TestedService testedService;
 
     @SpringBeanFrom
-    @NonStrict
+    @Mocked
     TestedDao     testedDao;
 
     @Test

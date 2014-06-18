@@ -1,10 +1,8 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations.transformation;
-
-import java.util.*;
 
 import mockit.external.asm4.*;
 
@@ -19,47 +17,64 @@ final class InvocationBlockModifier extends MethodVisitor
    private final String owner;
    private final boolean callEndInvocations;
 
+   // Takes care of "withCapture()" matchers, if any:
+   private final ArgumentCapturing argumentCapturing;
+
    // Helper fields that allow argument matchers to be moved to the correct positions of their
    // corresponding parameters:
    private final int[] matcherStacks;
-   private int matchersToMove;
-   private Type[] argTypes;
+   private int matcherCount;
+   private Type[] parameterTypes;
 
-   // Helper field used to prevent NPEs from calls to certain "with" methods, when the associated
-   // parameter is of a primitive type:
-   private boolean nullOnTopOfStack;
+   Capture createCapture(int opcode, int var, String typeToCapture)
+   {
+      return new Capture(opcode, var, typeToCapture);
+   }
 
-   // Helper fields used to deal with "withCapture()" matchers:
-   private int matchersFound;
-   private List<Capture> captures;
-   private boolean parameterForCapture;
-
-   private final class Capture
+   final class Capture
    {
       final int opcode;
+      private final int var;
+      private final String typeToCapture;
       private int parameterIndex;
       private boolean parameterIndexFixed;
-      private final int var;
 
-      Capture(int opcode, int var)
+      Capture(int opcode, int var, String typeToCapture)
       {
          this.opcode = opcode;
          this.var = var;
-         parameterIndex = matchersFound - 1;
+         this.typeToCapture = typeToCapture;
+         parameterIndex = matcherCount - 1;
       }
 
       /**
-       * Responsible for performing the following steps:
+       * Generates bytecode that will be responsible for performing the following steps:
        * 1. Get the argument value (an Object) for the last matched invocation.
-       * 2. Typecheck and unbox the Object value to a primitive type, as needed.
+       * 2. Cast to a reference type or unbox to a primitive type, as needed.
        * 3. Store the converted value in its local variable.
        */
       void generateCodeToStoreCapturedValue()
       {
          mv.visitIntInsn(SIPUSH, parameterIndex);
          generateCallToActiveInvocationsMethod("matchedArgument", "(I)Ljava/lang/Object;");
-         generateUnboxing(mv, argTypes[parameterIndex], opcode);
+
+         Type argType = getArgumentType();
+         generateCastOrUnboxing(mv, argType, opcode);
+
          mv.visitVarInsn(opcode, var);
+      }
+
+      private Type getArgumentType()
+      {
+         if (typeToCapture == null) {
+            return parameterTypes[parameterIndex];
+         }
+         else if (typeToCapture.charAt(0) == '[') {
+            return Type.getType(typeToCapture);
+         }
+         else {
+            return Type.getType('L' + typeToCapture + ';');
+         }
       }
 
       boolean fixParameterIndex(int originalIndex, int newIndex)
@@ -72,15 +87,28 @@ final class InvocationBlockModifier extends MethodVisitor
 
          return false;
       }
-   }
 
-   private void addCapture(Capture capture)
-   {
-      if (captures == null) {
-         captures = new ArrayList<Capture>();
+      void generateCallToSetArgumentTypeIfNeeded()
+      {
+         if (typeToCapture != null && !isTypeToCaptureSameAsParameterType()) {
+            mv.visitIntInsn(SIPUSH, parameterIndex);
+            mv.visitLdcInsn(typeToCapture);
+            generateCallToActiveInvocationsMethod("setExpectedArgumentType", "(ILjava/lang/String;)V");
+         }
       }
 
-      captures.add(capture);
+      private boolean isTypeToCaptureSameAsParameterType()
+      {
+         Type parameterType = parameterTypes[parameterIndex];
+         int sort = parameterType.getSort();
+
+         if (sort == Type.OBJECT || sort == Type.ARRAY) {
+            return typeToCapture.equals(parameterType.getInternalName());
+         }
+         else {
+            return isPrimitiveWrapper(typeToCapture);
+         }
+      }
    }
 
    InvocationBlockModifier(MethodVisitor mw, String owner, boolean callEndInvocations)
@@ -88,7 +116,8 @@ final class InvocationBlockModifier extends MethodVisitor
       super(mw);
       this.owner = owner;
       this.callEndInvocations = callEndInvocations;
-      matcherStacks = new int[20];
+      matcherStacks = new int[40];
+      argumentCapturing = new ArgumentCapturing();
    }
 
    private void generateCallToActiveInvocationsMethod(String name, String desc)
@@ -147,8 +176,7 @@ final class InvocationBlockModifier extends MethodVisitor
    {
       mv.visitFieldInsn(GETSTATIC, owner, name, desc);
       generateCallToActiveInvocationsMethod("addArgMatcher", "()V");
-      matcherStacks[matchersToMove++] = mv.stackSize2;
-      matchersFound++;
+      matcherStacks[matcherCount++] = mv.stackSize2;
    }
 
    @Override
@@ -157,52 +185,49 @@ final class InvocationBlockModifier extends MethodVisitor
       if (opcode == INVOKESTATIC && (isBoxing(owner, name, desc) || isAccessMethod(owner, name))) {
          // It's an invocation to a primitive boxing method or to a synthetic method for private access, just ignore it.
          mv.visitMethodInsn(INVOKESTATIC, owner, name, desc);
-         return;
       }
       else if (opcode == INVOKEVIRTUAL && owner.equals(this.owner) && name.startsWith("with")) {
          mv.visitMethodInsn(INVOKEVIRTUAL, owner, name, desc);
-         matcherStacks[matchersToMove++] = mv.stackSize2;
-         nullOnTopOfStack = createPendingCaptureIfNeeded(name, desc);
-         matchersFound++;
-         return;
+         matcherStacks[matcherCount++] = mv.stackSize2;
+         argumentCapturing.registerCapturingMatcherIfApplicable(name, desc);
       }
       else if (isUnboxing(opcode, owner, desc)) {
-         if (nullOnTopOfStack) {
+         if (argumentCapturing.justAfterWithCaptureInvocation) {
             generateCodeToReplaceNullWithZeroOnTopOfStack(desc.charAt(2));
-            nullOnTopOfStack = false;
+            argumentCapturing.justAfterWithCaptureInvocation = false;
          }
          else {
             mv.visitMethodInsn(opcode, owner, name, desc);
          }
-
-         return;
       }
-      else if (matchersToMove > 0) {
-         argTypes = Type.getArgumentTypes(desc);
+      else if (matcherCount == 0) {
+         mv.visitMethodInsn(opcode, owner, name, desc);
+      }
+      else {
+         parameterTypes = Type.getArgumentTypes(desc);
          int stackSize = mv.stackSize2;
          int stackAfter = stackSize - sumOfParameterSizes();
+         boolean mockedInvocationUsingTheMatchers = stackAfter < matcherStacks[0];
 
-         if (stackAfter < matcherStacks[0]) {
+         if (mockedInvocationUsingTheMatchers) {
             generateCallsToMoveArgMatchers(stackAfter);
-            matchersToMove = 0;
+            argumentCapturing.generateCallsToSetArgumentTypesToCaptureIfAny();
+            matcherCount = 0;
          }
-      }
 
-      mv.visitMethodInsn(opcode, owner, name, desc);
-      generateCallsToCaptureMatchedArgumentsIfPending();
-      nullOnTopOfStack = false;
+         mv.visitMethodInsn(opcode, owner, name, desc);
+
+         if (mockedInvocationUsingTheMatchers) {
+            argumentCapturing.generateCallsToCaptureMatchedArgumentsIfPending();
+         }
+
+         argumentCapturing.justAfterWithCaptureInvocation = false;
+      }
    }
 
    private boolean isAccessMethod(String owner, String name)
    {
       return !owner.equals(this.owner) && name.startsWith("access$");
-   }
-
-   private boolean createPendingCaptureIfNeeded(String name, String desc)
-   {
-      boolean withCapture = "withCapture".equals(name);
-      parameterForCapture = withCapture && !desc.contains("List");
-      return withCapture;
    }
 
    private void generateCodeToReplaceNullWithZeroOnTopOfStack(char primitiveTypeCode)
@@ -223,7 +248,7 @@ final class InvocationBlockModifier extends MethodVisitor
    {
       int sum = 0;
 
-      for (Type argType : argTypes) {
+      for (Type argType : parameterTypes) {
          sum += argType.getSize();
       }
 
@@ -236,13 +261,13 @@ final class InvocationBlockModifier extends MethodVisitor
       int nextMatcher = 0;
       int matcherStack = matcherStacks[0];
 
-      for (int i = 0; i < argTypes.length && nextMatcher < matchersToMove; i++) {
-         stack += argTypes[i].getSize();
+      for (int i = 0; i < parameterTypes.length && nextMatcher < matcherCount; i++) {
+         stack += parameterTypes[i].getSize();
 
          if (stack == matcherStack || stack == matcherStack + 1) {
             if (nextMatcher < i) {
                generateCallToMoveArgMatcher(nextMatcher, i);
-               updateCaptureIfAny(nextMatcher, i);
+               argumentCapturing.updateCaptureIfAny(nextMatcher, i);
             }
 
             matcherStack = matcherStacks[++nextMatcher];
@@ -257,34 +282,6 @@ final class InvocationBlockModifier extends MethodVisitor
       generateCallToActiveInvocationsMethod("moveArgMatcher", "(II)V");
    }
 
-   private void updateCaptureIfAny(int originalIndex, int newIndex)
-   {
-      if (captures != null) {
-         for (int i = captures.size() - 1; i >= 0; i--) {
-            Capture capture = captures.get(i);
-
-            if (capture.fixParameterIndex(originalIndex, newIndex)) {
-               break;
-            }
-         }
-      }
-   }
-
-   private void generateCallsToCaptureMatchedArgumentsIfPending()
-   {
-      if (matchersToMove == 0) {
-         if (captures != null) {
-            for (Capture capture : captures) {
-               capture.generateCodeToStoreCapturedValue();
-            }
-
-            captures = null;
-         }
-
-         matchersFound = 0;
-      }
-   }
-
    @Override
    public void visitLocalVariable(String name, String desc, String signature, Label start, Label end, int index)
    {
@@ -296,13 +293,16 @@ final class InvocationBlockModifier extends MethodVisitor
    }
 
    @Override
+   public void visitTypeInsn(int opcode, String type)
+   {
+      argumentCapturing.registerTypeToCaptureIfApplicable(opcode, type);
+      mv.visitTypeInsn(opcode, type);
+   }
+
+   @Override
    public void visitVarInsn(int opcode, int var)
    {
-      if (opcode >= ISTORE && opcode <= ASTORE && parameterForCapture) {
-         addCapture(new Capture(opcode, var));
-         parameterForCapture = false;
-      }
-
+      argumentCapturing.registerAssignmentToCaptureVariableIfApplicable(this, opcode, var);
       mv.visitVarInsn(opcode, var);
    }
 

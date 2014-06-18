@@ -4,14 +4,59 @@
  */
 package mockit.internal.expectations.mocking;
 
+import java.lang.reflect.*;
+import java.lang.reflect.Type;
+
 import mockit.external.asm4.*;
 import mockit.internal.*;
+import mockit.internal.util.*;
 
 import static mockit.external.asm4.Opcodes.*;
 
 class MockedTypeModifier extends BaseClassModifier
 {
-   protected MockedTypeModifier(ClassReader classReader) { super(classReader); }
+   protected GenericTypeReflection genericTypeMap;
+   protected String implementationSignature;
+
+   protected MockedTypeModifier(ClassReader classReader, Type mockedType)
+   {
+      super(classReader);
+
+      if (mockedType != null) {
+         Class<?> mockedClass = Utilities.getClassType(mockedType);
+         genericTypeMap = new GenericTypeReflection(mockedClass, mockedType);
+         implementationSignature = getGenericClassSignature(mockedType);
+      }
+   }
+
+   protected final String getGenericClassSignature(Type mockedType)
+   {
+      StringBuilder signature = new StringBuilder(100);
+
+      if (mockedType instanceof ParameterizedType) {
+         ParameterizedType parameterizedType = (ParameterizedType) mockedType;
+         Type[] typeArguments = parameterizedType.getActualTypeArguments();
+
+         if (typeArguments.length > 0) {
+            signature.append('<');
+
+            for (Type typeArg : typeArguments) {
+               if (typeArg instanceof Class<?>) {
+                  Class<?> classArg = (Class<?>) typeArg;
+                  signature.append('L').append(classArg.getName().replace('.', '/')).append(';');
+               }
+               else {
+                  signature.append('*');
+               }
+            }
+
+            signature.append('>');
+         }
+      }
+
+      signature.append(';');
+      return signature.toString();
+   }
 
    protected final void generateDirectCallToHandler(
       String className, int access, String name, String desc, String genericSignature, String[] exceptions,
@@ -40,7 +85,7 @@ class MockedTypeModifier extends BaseClassModifier
       mw.visitLdcInsn(executionMode);
       
       // Sixth argument: call arguments.
-      Type[] argTypes = Type.getArgumentTypes(desc);
+      mockit.external.asm4.Type[] argTypes = mockit.external.asm4.Type.getArgumentTypes(desc);
       generateCodeToPassMethodArgumentsAsVarargs(isStatic, argTypes);
 
       mw.visitMethodInsn(
@@ -59,7 +104,7 @@ class MockedTypeModifier extends BaseClassModifier
       }
    }
 
-   private void generateCodeToPassMethodArgumentsAsVarargs(boolean isStatic, Type[] argTypes)
+   private void generateCodeToPassMethodArgumentsAsVarargs(boolean isStatic, mockit.external.asm4.Type[] argTypes)
    {
       generateCodeToCreateArrayOfObject(argTypes.length);
       generateCodeToPassMethodArgumentsAsVarargs(argTypes, 0, isStatic ? 0 : 1);

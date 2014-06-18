@@ -5,11 +5,12 @@
 package mockit.internal.expectations.invocation;
 
 import java.lang.reflect.*;
+import java.util.concurrent.*;
 
 import mockit.Invocation;
 import mockit.internal.state.*;
 
-final class DelegateInvocation extends Invocation
+final class DelegateInvocation extends Invocation implements Callable<Method>
 {
    private final InvocationArguments invocationArguments;
    boolean proceedIntoConstructor;
@@ -24,8 +25,11 @@ final class DelegateInvocation extends Invocation
       invocationArguments = expectedInvocation.arguments;
    }
 
-   @Override
-   protected Method getRealMethod()
+   /**
+    * Returns the {@code Method} object corresponding to the mocked method, or {@code null} if it's a mocked
+    * constructor.
+    */
+   public Method call()
    {
       if (invocationArguments.isForConstructor()) {
          proceedIntoConstructor = true;

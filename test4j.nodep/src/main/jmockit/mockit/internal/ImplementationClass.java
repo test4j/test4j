@@ -4,29 +4,31 @@
  */
 package mockit.internal;
 
-import mockit.external.asm4.*;
+import java.lang.reflect.Type;
 
-import static mockit.internal.util.Utilities.*;
+import mockit.external.asm4.*;
+import mockit.internal.util.*;
 
 /**
  * Allows the creation of new implementation classes for interfaces and abstract classes.
  */
 public class ImplementationClass<T>
 {
-   private final Class<T> mockedType;
+   private final Type mockedType;
    private byte[] generatedBytecode;
 
    public ImplementationClass() { mockedType = null; }
-   protected ImplementationClass(Class<T> mockedType) { this.mockedType = mockedType; }
+   protected ImplementationClass(Type mockedType) { this.mockedType = mockedType; }
 
    public final Class<T> generateNewMockImplementationClassForInterface()
    {
-      ClassReader interfaceReader = ClassFile.createClassFileReader(mockedType);
-      String mockClassName = getNameForGeneratedClass(mockedType, mockedType.getSimpleName());
+      Class<?> mockedClass = Utilities.getClassType(mockedType);
+      ClassReader interfaceReader = ClassFile.createClassFileReader(mockedClass);
+      String mockClassName = GeneratedClasses.getNameForGeneratedClass(mockedClass);
       ClassVisitor modifier = createMethodBodyGenerator(interfaceReader, mockClassName);
       interfaceReader.accept(modifier, ClassReader.SKIP_DEBUG);
 
-      return defineNewClass(mockedType.getClassLoader(), modifier, mockClassName);
+      return defineNewClass(mockedClass.getClassLoader(), modifier, mockClassName);
    }
 
    protected ClassVisitor createMethodBodyGenerator(ClassReader typeReader, String className) { return null; }

@@ -15,45 +15,49 @@ import static java.util.Collections.*;
  * Provides default values for each type, typically used for returning default values according to
  * method return types.
  */
+@SuppressWarnings("ZeroLengthArrayAllocation")
 public final class DefaultValues
 {
    private DefaultValues() {}
 
-   private static final Map<String, Object> TYPE_DESC_TO_VALUE_MAP = new HashMap<String, Object>()
-   {
-      {
-         put("Z", false);
-         put("C", '\0');
-         put("B", (byte) 0);
-         put("S", (short) 0);
-         put("I", 0);
-         put("F", 0.0F);
-         put("J", 0L);
-         put("D", 0.0);
-         put("Ljava/util/Collection;", emptyList());
-         put("Ljava/util/List;", emptyList());
-         put("Ljava/util/Set;", emptySet());
-         put("Ljava/util/SortedSet;", unmodifiableSortedSet(new TreeSet<Object>()));
-         put("Ljava/util/Map;", emptyMap());
-         put("Ljava/util/SortedMap;", unmodifiableSortedMap(new TreeMap<Object, Object>()));
-      }
-   };
+   private static final Integer ZERO_INT = 0;
+   private static final Long ZERO_LONG = 0L;
+   private static final Float ZERO_FLOAT = 0.0F;
+   private static final Double ZERO_DOUBLE = 0.0;
+   private static final Byte ZERO_BYTE = 0;
+   private static final Short ZERO_SHORT = 0;
+   private static final Character ZERO_CHAR = '\0';
 
-   private static final Map<String, Object> ELEM_TYPE_TO_ONE_D_ARRAY = new HashMap<String, Object>()
-   {
-      {
-         put("[Z", new boolean[0]);
-         put("[C", new char[0]);
-         put("[B", new byte[0]);
-         put("[S", new short[0]);
-         put("[I", new int[0]);
-         put("[F", new float[0]);
-         put("[J", new long[0]);
-         put("[D", new double[0]);
-         put("[Ljava/lang/Object;", new Object[0]);
-         put("[Ljava/lang/String;", new String[0]);
-      }
-   };
+   private static final Map<String, Object> TYPE_DESC_TO_VALUE_MAP = new HashMap<String, Object>();
+   private static final Map<String, Object> ELEM_TYPE_TO_ONE_D_ARRAY = new HashMap<String, Object>();
+   static {
+      TYPE_DESC_TO_VALUE_MAP.put("Z", Boolean.FALSE);
+      TYPE_DESC_TO_VALUE_MAP.put("C", ZERO_CHAR);
+      TYPE_DESC_TO_VALUE_MAP.put("B", ZERO_BYTE);
+      TYPE_DESC_TO_VALUE_MAP.put("S", ZERO_SHORT);
+      TYPE_DESC_TO_VALUE_MAP.put("I", ZERO_INT);
+      TYPE_DESC_TO_VALUE_MAP.put("F", ZERO_FLOAT);
+      TYPE_DESC_TO_VALUE_MAP.put("J", ZERO_LONG);
+      TYPE_DESC_TO_VALUE_MAP.put("D", ZERO_DOUBLE);
+      TYPE_DESC_TO_VALUE_MAP.put("Ljava/util/Enumeration;", enumeration(emptyList()));
+      TYPE_DESC_TO_VALUE_MAP.put("Ljava/util/Collection;", emptyList());
+      TYPE_DESC_TO_VALUE_MAP.put("Ljava/util/List;", emptyList());
+      TYPE_DESC_TO_VALUE_MAP.put("Ljava/util/Set;", emptySet());
+      TYPE_DESC_TO_VALUE_MAP.put("Ljava/util/SortedSet;", unmodifiableSortedSet(new TreeSet<Object>()));
+      TYPE_DESC_TO_VALUE_MAP.put("Ljava/util/Map;", emptyMap());
+      TYPE_DESC_TO_VALUE_MAP.put("Ljava/util/SortedMap;", unmodifiableSortedMap(new TreeMap<Object, Object>()));
+
+      ELEM_TYPE_TO_ONE_D_ARRAY.put("[Z", new boolean[0]);
+      ELEM_TYPE_TO_ONE_D_ARRAY.put("[C", new char[0]);
+      ELEM_TYPE_TO_ONE_D_ARRAY.put("[B", new byte[0]);
+      ELEM_TYPE_TO_ONE_D_ARRAY.put("[S", new short[0]);
+      ELEM_TYPE_TO_ONE_D_ARRAY.put("[I", new int[0]);
+      ELEM_TYPE_TO_ONE_D_ARRAY.put("[F", new float[0]);
+      ELEM_TYPE_TO_ONE_D_ARRAY.put("[J", new long[0]);
+      ELEM_TYPE_TO_ONE_D_ARRAY.put("[D", new double[0]);
+      ELEM_TYPE_TO_ONE_D_ARRAY.put("[Ljava/lang/Object;", new Object[0]);
+      ELEM_TYPE_TO_ONE_D_ARRAY.put("[Ljava/lang/String;", new String[0]);
+   }
 
    public static Object computeForReturnType(String methodNameAndDesc)
    {
@@ -99,7 +103,7 @@ public final class DefaultValues
    private static Object newEmptyArray(String typeDesc)
    {
       Type type = Type.getType(typeDesc);
-      Class<?> elementType = Utilities.getClassForType(type.getElementType());
+      Class<?> elementType = TypeDescriptor.getClassForType(type.getElementType());
 
       return Array.newInstance(elementType, new int[type.getDimensions()]);
    }
@@ -119,56 +123,57 @@ public final class DefaultValues
    public static Object defaultValueForPrimitiveType(Class<?> type)
    {
       if (type == int.class) {
-         return 0;
+         return ZERO_INT;
       }
       else if (type == boolean.class) {
-         return false;
+         return Boolean.FALSE;
       }
       else if (type == long.class) {
-         return 0L;
+         return ZERO_LONG;
       }
       else if (type == double.class) {
-         return 0.0;
+         return ZERO_DOUBLE;
       }
       else if (type == float.class) {
-         return 0.0F;
+         return ZERO_FLOAT;
       }
       else if (type == char.class) {
-         return '\0';
+         return ZERO_CHAR;
       }
       else if (type == byte.class) {
-         return (byte) 0;
+         return ZERO_BYTE;
       }
       else {
-         return (short) 0;
+         return ZERO_SHORT;
       }
    }
 
-   public static Object computeForWrapperType(java.lang.reflect.Type type)
+   @SuppressWarnings("unchecked")
+   public static <T> T computeForWrapperType(java.lang.reflect.Type type)
    {
       if (type == Integer.class) {
-         return 0;
+         return (T) ZERO_INT;
       }
       else if (type == Boolean.class) {
-         return false;
+         return (T) Boolean.FALSE;
       }
       else if (type == Long.class) {
-         return 0L;
+         return (T) ZERO_LONG;
       }
       else if (type == Double.class) {
-         return 0.0;
+         return (T) ZERO_DOUBLE;
       }
       else if (type == Float.class) {
-         return 0.0F;
+         return (T) ZERO_FLOAT;
       }
       else if (type == Character.class) {
-         return '\0';
+         return (T) ZERO_CHAR;
       }
       else if (type == Byte.class) {
-         return (byte) 0;
+         return (T) ZERO_BYTE;
       }
       else if (type == Short.class) {
-         return (short) 0;
+         return (T) ZERO_SHORT;
       }
 
       return null;

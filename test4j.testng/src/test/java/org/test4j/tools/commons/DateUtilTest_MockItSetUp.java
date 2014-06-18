@@ -4,14 +4,13 @@ import java.util.Calendar;
 import java.util.Date;
 
 import mockit.Mock;
-import mockit.Mockit;
 
 import org.test4j.testng.Test4J;
 import org.testng.annotations.Test;
 
 @Test(groups = "test4j")
 public class DateUtilTest_MockItSetUp extends Test4J {
-    public static class MockDateUtil {
+    public static class MockDateUtil extends MockUp<DateHelper> {
         @Mock
         public static Date now() {
             Calendar cal = DateUtilTest.mockCalendar(2012, 1, 28);
@@ -21,7 +20,7 @@ public class DateUtilTest_MockItSetUp extends Test4J {
 
     @Test
     public void testCurrDateTimeStr_format() {
-        Mockit.setUpMock(DateHelper.class, MockDateUtil.class);
+        new MockDateUtil();
         String str = DateHelper.currDateTimeStr("MM/dd/yy hh:mm:ss");
         want.string(str).isEqualTo("01/28/12 07:58:55");
     }

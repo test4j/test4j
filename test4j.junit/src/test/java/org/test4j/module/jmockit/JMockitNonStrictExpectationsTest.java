@@ -1,6 +1,6 @@
 package org.test4j.module.jmockit;
 
-import mockit.NonStrict;
+import mockit.Mocked;
 
 import org.junit.Assert;
 import org.junit.Test;
@@ -10,12 +10,12 @@ import ext.test4j.hamcrest.core.IsEqual;
 
 //@RunWith(Test4JRunner.class)
 public class JMockitNonStrictExpectationsTest implements ICore {
-    @NonStrict
+    @Mocked
     ISay say;
 
     @Test
     public void testWhen1() {
-        new Expectations() {
+        new NonStrictExpectations() {
             {
                 say.say(anyString);
                 result = "hello, davey.wu";
@@ -31,7 +31,7 @@ public class JMockitNonStrictExpectationsTest implements ICore {
 
     @Test
     public void testWhen2() {
-        new Expectations() {
+        new NonStrictExpectations() {
             {
                 say.say(anyString);
                 result = "hello, davey.wu";

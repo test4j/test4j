@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations.injection;
@@ -12,6 +12,7 @@ final class ParameterNameExtractor extends ClassVisitor
 {
    private final boolean forMethods;
    private String classDesc;
+   private int methodAccess;
    private String methodName;
    private String methodDesc;
 
@@ -36,6 +37,7 @@ final class ParameterNameExtractor extends ClassVisitor
       boolean visitingAMethod = name.charAt(0) != '<';
 
       if (visitingAMethod == forMethods) {
+         methodAccess = access;
          methodName = name;
          methodDesc = desc;
          return new MethodOrConstructorVisitor();
@@ -46,10 +48,21 @@ final class ParameterNameExtractor extends ClassVisitor
 
    private final class MethodOrConstructorVisitor extends MethodVisitor
    {
+      private String previousDesc;
+      private int previousIndex;
+
       @Override
       public void visitLocalVariable(String name, String desc, String signature, Label start, Label end, int index)
       {
-         ParameterNames.registerName(classDesc, methodName, methodDesc, name);
+         int parameterIndex = index;
+
+         if ("J".equals(previousDesc) || "D".equals(previousDesc)) {
+            parameterIndex = previousIndex + 1;
+         }
+
+         ParameterNames.registerName(classDesc, methodAccess, methodName, methodDesc, name, parameterIndex);
+         previousIndex = parameterIndex;
+         previousDesc = desc;
       }
    }
 }

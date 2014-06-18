@@ -17,7 +17,7 @@ final class CaptureOfNewInstancesForFields extends CaptureOfNewInstances
 
       if (captureFound != null) {
          Field mockField = captureFound.typeMetadata.field;
-         Utilities.setFieldValue(mockField, fieldOwner, mock);
+         FieldReflection.setFieldValue(mockField, fieldOwner, mock);
       }
 
       return constructorModifiedForCaptureOnly;

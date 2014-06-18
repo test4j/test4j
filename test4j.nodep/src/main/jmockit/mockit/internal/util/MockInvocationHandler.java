@@ -36,7 +36,7 @@ public final class MockInvocationHandler implements InvocationHandler
             return System.identityHashCode(proxy);
          }
          else if ("toString".equals(methodName)) {
-            return Utilities.objectIdentity(proxy);
+            return ObjectMethods.objectIdentity(proxy);
          }
       }
       else if (declaringClass == Annotation.class) {

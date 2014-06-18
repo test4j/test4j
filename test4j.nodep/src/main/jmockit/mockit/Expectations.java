@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit;
@@ -15,17 +15,16 @@ import mockit.internal.expectations.*;
  *
  * new Expectations() {{
  *    <strong>mock1</strong>.expectedMethod(<em>anyInt</em>); <em>result</em> = 123; <em>times</em> = 2;
- *    <strong>mock2</strong>.anotherExpectedMethod(1, "test"); returns("Abc", "xyz");
- *    <strong>MockedClass</strong>.allowedMethod(); notStrict();
+ *    <strong>mock2</strong>.allowedMethod(1, "test"); result = new String[] {"Abc", "xyz"};
  * }};
- * // Now exercise the tested code according to the recorded expectations.</pre>
- * Typically, this class is used by extending it with <em>anonymous inner classes</em> (so called <em>expectation
- * blocks</em>) inside test methods, which record expectations on mocked types or instances by calling instance methods
+ *
+ * // Now exercise the tested code according to the recorded expectations.
+ * </pre>
+ * Typically, this class is used by extending it with <em>anonymous inner classes</em> inside test methods, the so
+ * called <em>expectation blocks</em>.
+ * Inside such blocks, expectations are recorded on mocked types or mocked instances by calling instance methods
  * on mock fields/parameters, static methods on mocked classes, and/or constructors of mocked classes.
  * Arguments passed in such calls are later matched to the actual arguments passed from the code under test.
- * <p/>
- * Any instance field declared in a subclass is considered a <em>local</em> mock field, provided it has a mockable type
- * and is either non-private or annotated with {@linkplain Mocked @Mocked}.
  * <p/>
  * There are several special fields and methods which can be used in the expectation block, to: a) record desired return
  * values or exceptions/errors to be thrown ({@link #result}, {@link #returns(Object, Object...)}); b) relax or
@@ -52,17 +51,9 @@ import mockit.internal.expectations.*;
  * super-classes are also mocked, and can also have expectations recorded on them.
  * </li>
  * <li>
- * Unless specified otherwise, all expectations defined inside an {@code Expectations} immediate subclass will be
- * <em>strict</em>, meaning that the recorded invocations are <em>expected</em> to occur in the same order during the
- * replay phase, and that non-recorded invocations are <em>not allowed</em>.
- * This default behavior can be overridden for individual expectations through the {@link #notStrict()} method, and for
- * whole mocked types through the {@link NonStrict} annotation.
- * </li>
- * <li>
- * There is a set of API methods that allow the {@linkplain #newInstance(String, Class[], Object...) instantiation of
- * non-accessible (to the test) classes}, the {@linkplain #invoke(Object, String, Object...) invocation of
- * non-accessible methods}, and the {@linkplain #setField(Object, String, Object) setting of non-accessible fields}.
- * Most tests shouldn't need these facilities, though.
+ * All expectations recorded inside an {@code Expectations} immediate subclass will be <em>strict</em>, meaning that
+ * matching invocations are <em>expected</em> to occur in the same order during the replay phase, and that non-recorded
+ * invocations are <em>not allowed</em>.
  * </li>
  * <li>
  * By default, the exact instance on which instance method invocations occur during the replay phase is <em>not</em>
@@ -81,6 +72,9 @@ import mockit.internal.expectations.*;
  * Tutorial</a>
  *
  * @see #Expectations()
+ * @see #Expectations(Object...)
+ * @see #Expectations(Integer, Object...)
+ * @see NonStrictExpectations
  */
 public abstract class Expectations extends Invocations
 {
@@ -89,28 +83,38 @@ public abstract class Expectations extends Invocations
    /**
     * A value assigned to this field will be taken as the result for the current expectation.
     * <p/>
-    * If the value is a {@link Throwable} then it will be <em>thrown</em> when a matching invocation occurs in the
-    * replay phase.
-    * Otherwise, it's assumed to be a <em>return value</em> for a non-void method, and will be returned at replay time
+    * If the value is a {@link Throwable} then it will be <em>thrown</em> when a matching invocation later occurs.
+    * Otherwise, it's assumed to be a <em>return value</em> for a non-<code>void</code> method, and will be returned
     * from a matching invocation.
-    * If the current expectation is for a method which actually <em>returns</em> an exception or error (as opposed to
+    * <p/>
+    * If the recorded expectation is for a method which actually <em>returns</em> an exception or error (as opposed to
     * <em>throwing</em> one), then the {@link #returns(Object)} method should be used instead, as it only applies to
     * return values.
     * <p/>
-    * Attempting to return a value that is incompatible with the method return type will cause a
-    * {@code ClassCastException} to be thrown at replay time.
-    * If, however, the recorded invocation is to a constructor or {@code void} method, then a matching invocation during
-    * replay will be allowed, with the specified return value disregarded.
+    * Assigning a value whose type differs from the method return type will cause an {@code IllegalArgumentException} to
+    * be thrown, unless it can be safely converted to the return type.
+    * One such conversion is from an array to a collection or iterator.
+    * Another is from an array of at least two dimensions to a map, with the first dimension providing the keys and the
+    * second the values.
+    * Yet another conversion is from a single value to a container type holding that value.
     * <p/>
-    * If the value assigned to the field is an array or of a type assignable to {@link Iterable} or to {@link Iterator},
-    * then it is taken as a sequence of <em>consecutive results</em> for the current expectation, as long as the method
-    * return type is not itself of an equivalent array/iterable/iterator type.
+    * Additionally, if the value assigned to the field is an array or is of a type assignable to {@link Iterable} or
+    * {@link Iterator}, and the return type is single-valued, then the assigned multi-valued result is taken as a
+    * sequence of <em>consecutive results</em> for the expectation.
     * Another way to specify consecutive results is to simply write multiple consecutive assignments to the field, for
     * the same expectation.
     * <p/>
-    * Finally, custom results can be provided through a {@linkplain mockit.Delegate} object assigned to the field.
+    * Custom results can be provided through a {@linkplain mockit.Delegate} object assigned to the field.
+    * This applies to {@code void} and non-<code>void</code> methods, as well as for constructors.
     * <p/>
-    * <a href="http://jmockit.googlecode.com/svn/trunk/www/tutorial/BehaviorBasedTesting.html#results">In the Tutorial</a>
+    * Finally, when recording an expectation on a <em>constructor</em> of a mocked class, an arbitrary instance of said
+    * class can be assigned to the field.
+    * In this case, the assigned instance will be used as a "replacement" for all invocations to
+    * <em>instance methods</em> made on <em>other</em> instances, provided they get created sometime later through a
+    * matching constructor invocation.
+    * <p/>
+    * <a href="http://jmockit.googlecode.com/svn/trunk/www/tutorial/BehaviorBasedTesting.html#results">In the
+    * Tutorial</a>
     *
     * @see #returns(Object)
     * @see #returns(Object, Object...)
@@ -294,25 +298,5 @@ public abstract class Expectations extends Invocations
    protected final void returns(Object firstValue, Object... remainingValues)
    {
       getCurrentPhase().addSequenceOfReturnValues(firstValue, remainingValues);
-   }
-
-   // Methods for defining expectation strictness /////////////////////////////////////////////////////////////////////
-
-   /**
-    * Marks the preceding invocation as belonging to a <em>non-strict</em> expectation.
-    * Note that all invocations on {@link NonStrict} mocked types/instances will be automatically considered non-strict.
-    * The same is true for all invocations inside a {@link NonStrictExpectations} block.
-    * <p/>
-    * For a non-strict expectation, any number (including zero) of invocations with matching arguments can occur while
-    * in the replay phase, in any order, and they will all produce the same result (usually, the
-    * {@linkplain #result specified return value}).
-    * Two or more non-strict expectations can be recorded for the same method or constructor, as long as the arguments
-    * differ. Argument matchers can be used as well.
-    * <p/>
-    * Expected invocation counts can also be specified for a non-strict expectation (with one of the "times" fields).
-    */
-   protected final void notStrict()
-   {
-      getCurrentPhase().setNotStrict();
    }
 }

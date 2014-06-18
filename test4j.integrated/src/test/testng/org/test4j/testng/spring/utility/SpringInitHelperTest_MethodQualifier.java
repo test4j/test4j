@@ -30,13 +30,7 @@ public class SpringInitHelperTest_MethodQualifier implements ICore {
     @Test
     public void testIsSpringInitMethod_publicMethod() throws Exception {
         Method method = MethodHelper.getMethod(SpringInitDemo.class, "publicMethod");
-        try {
-            reflector.invokeStatic(SpringInitInvoker.class, "isSpringInitMethod", method);
-            want.fail();
-        } catch (Exception e) {
-            String message = e.getMessage();
-            want.string(message).isEqualTo("@SpringInitMethod should be private, protected or package.");
-        }
+        reflector.invokeStatic(SpringInitInvoker.class, "isSpringInitMethod", method);
     }
 
     @Test

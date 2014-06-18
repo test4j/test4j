@@ -1,6 +1,6 @@
 package org.test4j.testng.spring.strategy.register;
 
-import mockit.NonStrict;
+import mockit.Mocked;
 
 import org.test4j.fortest.service.UserAnotherDao;
 import org.test4j.fortest.service.UserDao;
@@ -26,7 +26,7 @@ public class SpringBeanRegisterTest_NotFoundImplementClazz extends Test4J {
     UserService    userService;
 
     @SpringBeanFrom
-    @NonStrict
+    @Mocked
     UserAnotherDao userAnotherDao;
 
     @Test(description = "找不到属性的实现类时_不注入该springbean")

@@ -2,7 +2,6 @@ package org.test4j.module.spring.strategy.injector;
 
 import static org.test4j.tools.commons.AnnotationHelper.getFieldsAnnotatedWith;
 
-import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.util.Set;
 
@@ -28,7 +27,7 @@ class SpringBeanInjectorByName extends SpringBeanInjector {
      * name.
      */
     @Override
-    public void injectBy(Test4JBeanFactory beanFactory, Object testedObject, Class<? extends Annotation> annotation) {
+    public void injectBy(Test4JBeanFactory beanFactory, Object testedObject) {
         Class testedClazz = testedObject.getClass();
         Set<Field> fields = getFieldsAnnotatedWith(testedClazz, SpringBeanByName.class);
         for (Field field : fields) {

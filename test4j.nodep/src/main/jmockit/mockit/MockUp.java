@@ -1,17 +1,21 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit;
 
 import java.lang.reflect.*;
+import java.util.*;
 
-import mockit.internal.annotations.*;
+import mockit.internal.mockups.*;
 import mockit.internal.startup.*;
+import mockit.internal.state.*;
+import mockit.internal.util.*;
 
 /**
- * A <em>mock-up</em> for a class or interface, to be used in <em>state-based</em> unit tests or to provide a
- * <em>fake</em> implementation for use in integration tests.
+ * A base class used in the creation of a <em>mock-up</em> for a class or interface.
+ * Such mock-ups can be used in <em>state-based</em> unit tests or as <em>fake</em> implementations for use in
+ * integration tests.
  * <pre>
  *
  * // Define and apply a mock-up before exercising the code under test:
@@ -21,7 +25,7 @@ import mockit.internal.startup.*;
  * };
  * </pre>
  * One or more <em>mock methods</em> annotated {@linkplain Mock as such} must be defined in the concrete subclass.
- * Each such method should have a matching "real" method or constructor in the mocked class/interface.
+ * Each {@code @Mock} method should have a matching method or constructor in the mocked class/interface.
  * At runtime, the execution of a mocked method/constructor will get redirected to the corresponding mock method.
  * <p/>
  * <a href="http://jmockit.googlecode.com/svn/trunk/www/tutorial/StateBasedTesting.html">In the Tutorial</a>
@@ -29,10 +33,17 @@ import mockit.internal.startup.*;
  * @param <T> specifies the type (class, interface, etc.) to be mocked; multiple interfaces can be mocked by defining
  * a <em>type variable</em> in the test class or test method, and using it as the type argument;
  * if the type argument itself is a parameterized type, then only its raw type is considered for mocking
+ *
+ * @see #MockUp()
+ * @see #MockUp(Class)
+ * @see #getMockInstance()
+ * @see #tearDown()
  */
 public abstract class MockUp<T>
 {
    static { Startup.verifyInitialization(); }
+
+   private Set<Class<?>> classesToRestore;
    private final T mockInstance;
 
    /**
@@ -50,72 +61,63 @@ public abstract class MockUp<T>
     */
    protected MockUp()
    {
-      Type typeToMock = getTypeToMock();
+      validateMockingAllowed();
+      tearDownPreviousMockUpIfSameMockClassAlreadyApplied();
+
+      Type typeToMock = MockClassSetup.getTypeToMock(getClass());
 
       if (typeToMock instanceof Class<?>) {
          //noinspection unchecked
-         mockInstance = redefineClass((Class<T>) typeToMock);
+         mockInstance = redefineClassOrImplementInterface((Class<T>) typeToMock, null);
       }
       else if (typeToMock instanceof ParameterizedType){
-         mockInstance = redefineClass((ParameterizedType) typeToMock);
+         ParameterizedType parameterizedType = (ParameterizedType) typeToMock;
+         //noinspection unchecked
+         Class<T> realClass = (Class<T>) parameterizedType.getRawType();
+         mockInstance = redefineClassOrImplementInterface(realClass, parameterizedType);
       }
       else { // a TypeVariable
          mockInstance = createMockInstanceForMultipleInterfaces(typeToMock);
       }
    }
 
-   private Type getTypeToMock()
+   private void validateMockingAllowed()
    {
-      Class<?> currentClass = getClass();
-
-      do {
-         Type superclass = currentClass.getGenericSuperclass();
-
-         if (superclass instanceof ParameterizedType) {
-            return ((ParameterizedType) superclass).getActualTypeArguments()[0];
-         }
-         else if (superclass == MockUp.class) {
-            throw new IllegalArgumentException("No type to be mocked");
-         }
-
-         currentClass = (Class<?>) superclass;
+      if (TestRun.isInsideNoMockingZone()) {
+         throw new IllegalStateException("Invalid place to apply a mock-up");
       }
-      while (true);
    }
 
-   private T redefineClass(Class<T> classToMock)
+   private void tearDownPreviousMockUpIfSameMockClassAlreadyApplied()
+   {
+      Class<?> mockClass = getClass();
+      MockUp<?> previousMock = TestRun.getMockClasses().findMock(mockClass);
+
+      if (previousMock != null) {
+         previousMock.tearDown();
+      }
+   }
+
+   private T redefineClassOrImplementInterface(Class<T> classToMock, ParameterizedType typeToMock)
    {
       if (classToMock.isInterface()) {
-         return new MockedImplementationClass<T>(this).generate(classToMock, null);
+         return new MockedImplementationClass<T>(this).generate(classToMock, typeToMock);
       }
 
-      redefineMethods(classToMock);
+      classesToRestore = redefineMethods(classToMock, typeToMock);
       return null;
    }
 
-   private void redefineMethods(Class<T> realClass)
+   private Set<Class<?>> redefineMethods(Class<T> realClass, ParameterizedType mockedType)
    {
-      new MockClassSetup(realClass, null, this, null).redefineMethods();
+      return Startup.initializing ? null : new MockClassSetup(realClass, mockedType, this, null).redefineMethods();
    }
 
-   private T redefineClass(ParameterizedType typeToMock)
-   {
-      @SuppressWarnings("unchecked")
-      Class<T> realClass = (Class<T>) typeToMock.getRawType();
-
-      if (realClass.isInterface()) {
-         return new MockedImplementationClass<T>(this).generate(realClass, typeToMock);
-      }
-
-      new MockClassSetup(realClass, typeToMock, this, null).redefineMethods();
-      return null;
-   }
-
-   @SuppressWarnings("unchecked")
    private T createMockInstanceForMultipleInterfaces(Type typeToMock)
    {
-      T proxy = (T) Mockit.newEmptyProxy(typeToMock);
-      redefineMethods((Class<T>) proxy.getClass());
+      T proxy = EmptyProxy.Impl.newEmptyProxy(null, typeToMock);
+      //noinspection unchecked
+      redefineMethods((Class<T>) proxy.getClass(), null);
       return proxy;
    }
 
@@ -127,34 +129,53 @@ public abstract class MockUp<T>
     *
     * @see #MockUp()
     */
+   @SuppressWarnings("unchecked")
    protected MockUp(Class<?> classToMock)
    {
-      //noinspection unchecked
-      mockInstance = redefineClass((Class<T>) classToMock);
+      validateMockingAllowed();
+      tearDownPreviousMockUpIfSameMockClassAlreadyApplied();
+
+      if (classToMock.isInterface()) {
+         mockInstance = new MockedImplementationClass<T>(this).generate((Class<T>) classToMock, null);
+      }
+      else {
+         classesToRestore = redefineMethods((Class<T>) classToMock, null);
+         mockInstance = null;
+      }
    }
 
    /**
-    * Returns the mock instance created for the interface(s) to be mocked specified by the type parameter {@code T}, or
-    * {@literal null} otherwise (ie, if a class was specified to be mocked).
+    * Returns the mock instance created for the mocked interface(s), or {@literal null} if a class was specified to be
+    * mocked instead.
+    * This mock instance belongs to a dynamically generated class which implements the mocked interface(s).
+    * <p/>
+    * For a given mock-up instance, this method always returns the same mock instance.
+    * <p/>
+    * All methods in the generated implementation class are empty, with non-void methods returning a default value
+    * according to the return type: {@literal 0} for {@code int}, {@literal null} for a reference type, and so on.
+    * <p/>
+    * The {@code equals}, {@code hashCode}, and {@code toString} methods inherited from {@code java.lang.Object} are
+    * overridden with an appropriate implementation in each case:
+    * {@code equals} is implemented by comparing the two object references (the mock instance and the method argument)
+    * for equality; {@code hashCode} is implemented to return the identity hash code for the mock instance; and
+    * {@code toString} returns the standard string representation that {@code Object#toString} would have returned.
     */
    public final T getMockInstance() { return mockInstance; }
 
    /**
-    * Indicates whether the given class should also be mocked.
+    * Discards the mock methods originally set up by instantiating this mock-up object, restoring mocked methods to
+    * their original behaviors.
     * <p/>
-    * If this method is overridden, all subclasses which extend the real class specified through this class's type
-    * parameter {@code &lt;T>} will also be considered for mocking.
-    * The same applies to classes implementing an specified real <em>interface</em>, when that's the case.
-    * The overriding method will be called for each such subclass, to decide whether it should actually be mocked or
-    * not.
-    * <p/>
-    * If not overridden, only the class/interface {@code &lt;T>} is actually mocked.
-    *
-    * @param loader the class loader defining the subclass
-    * @param subclassName the fully qualified name of a class extending/implementing the class/interface that was
-    *                     specified to be mocked through the type parameter {@code &lt;T>}
-    *
-    * @return {@code true} if the subclass should be mocked as well, {@code false} otherwise
+    * JMockit will automatically restore classes mocked by a test at the end of its execution, as well as classes
+    * mocked for the whole test class before the first test in the next test class is executed.
+    * Therefore, this method should rarely be used, if ever.
     */
-   protected boolean shouldBeMocked(ClassLoader loader, String subclassName) { return false; }
+   public final void tearDown()
+   {
+      if (classesToRestore != null) {
+         TestRun.mockFixture().restoreAndRemoveRedefinedClasses(classesToRestore);
+         TestRun.getMockClasses().removeMock(this);
+         classesToRestore = null;
+      }
+   }
 }

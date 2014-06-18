@@ -2,7 +2,7 @@ package org.test4j.testng.spring;
 
 import java.util.List;
 
-import mockit.NonStrict;
+import mockit.Mocked;
 
 import org.test4j.fortest.beans.User;
 import org.test4j.fortest.service.UserDao;
@@ -24,7 +24,7 @@ import org.testng.annotations.Test;
 @SuppressWarnings("unused")
 public class Test4JClassPathXmlApplicationContextTest_MultiThread extends Test4J implements IDatabase, ISpring {
     @SpringBeanFrom
-    @NonStrict
+    @Mocked
     private UserService userService;
 
     @SpringBeanByName(claz = UserDaoImpl.class)

@@ -1,6 +1,6 @@
 package org.test4j.module.jmockit;
 
-import mockit.NonStrict;
+import mockit.Mocked;
 
 import org.junit.Test;
 import org.test4j.junit.Test4J;
@@ -9,7 +9,7 @@ import org.test4j.module.jmockit.extend.JMocketVerifications;
 
 public class JMocketVerificationsTest extends Test4J {
 
-    @NonStrict
+    @Mocked
     Hello hello1;
 
     @Test

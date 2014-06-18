@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit;
@@ -40,10 +40,9 @@ import mockit.internal.util.*;
  * <a href="http://jmockit.googlecode.com/svn/trunk/www/tutorial/BehaviorBasedTesting.html#verification">In the
  * Tutorial</a>
  *
- * @see Expectations#notStrict()
- * @see NonStrict
  * @see #Verifications()
  * @see #Verifications(int)
+ * @see #withCapture()
  */
 public abstract class Verifications extends Invocations
 {
@@ -122,8 +121,8 @@ public abstract class Verifications extends Invocations
       Object owner = localMocks.get(mockedType);
 
       if (owner != null) {
-         Object mock = Utilities.getField(owner.getClass(), mockedType, owner);
-         Utilities.setFieldValue(field, this, mock);
+         Object mock = FieldReflection.getField(owner.getClass(), mockedType, owner);
+         FieldReflection.setFieldValue(field, this, mock);
       }
    }
 

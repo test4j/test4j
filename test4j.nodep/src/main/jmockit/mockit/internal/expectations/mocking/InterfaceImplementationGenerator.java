@@ -4,24 +4,30 @@
  */
 package mockit.internal.expectations.mocking;
 
+import java.lang.reflect.Type;
 import java.util.*;
 
 import static mockit.external.asm4.Opcodes.*;
 
 import mockit.external.asm4.*;
 import mockit.internal.*;
+import mockit.internal.util.*;
 
 final class InterfaceImplementationGenerator extends MockedTypeModifier
 {
-   private final List<String> implementedMethods = new ArrayList<String>();
+   private final List<String> implementedMethods;
    private final String implementationClassName;
    private String interfaceName;
    private String[] initialSuperInterfaces;
 
-   InterfaceImplementationGenerator(ClassReader classReader, String implementationClassName)
+   InterfaceImplementationGenerator(ClassReader classReader, Type mockedType, String implementationClassName)
    {
-      super(classReader);
+      super(classReader, mockedType);
+      implementedMethods = new ArrayList<String>();
       this.implementationClassName = implementationClassName.replace('.', '/');
+      Class<?> mockedInterface = Utilities.getClassType(mockedType);
+      implementationSignature =
+         "Ljava/lang/Object;L" + mockedInterface.getName().replace('.', '/') + implementationSignature;
    }
 
    @Override
@@ -30,10 +36,9 @@ final class InterfaceImplementationGenerator extends MockedTypeModifier
       interfaceName = name;
       initialSuperInterfaces = interfaces;
 
-      String[] implementedInterfaces = {name};
-
       super.visit(
-         version, ACC_PUBLIC + ACC_FINAL, implementationClassName, signature, superName, implementedInterfaces);
+         version, ACC_PUBLIC + ACC_FINAL, implementationClassName, implementationSignature,
+         superName, new String[] {name});
 
       generateDefaultConstructor();
    }
@@ -71,12 +76,17 @@ final class InterfaceImplementationGenerator extends MockedTypeModifier
       return null;
    }
 
+   @SuppressWarnings("AssignmentToMethodParameter")
    private void generateMethodImplementation(
       int access, String name, String desc, String signature, String[] exceptions)
    {
       String methodNameAndDesc = name + desc;
 
       if (!implementedMethods.contains(methodNameAndDesc)) {
+         if (signature != null) {
+            signature = genericTypeMap.resolveReturnType(signature);
+         }
+
          mw = super.visitMethod(ACC_PUBLIC, name, desc, signature, exceptions);
          generateDirectCallToHandler(interfaceName, access, name, desc, signature, exceptions, 0);
          generateReturnWithObjectAtTopOfTheStack(desc);

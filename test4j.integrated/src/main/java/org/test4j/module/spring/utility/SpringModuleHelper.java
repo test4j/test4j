@@ -4,8 +4,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 
-import mockit.internal.annotations.MockClassSetup;
-
 import org.springframework.aop.framework.MockCglib2AopProxy;
 import org.springframework.beans.factory.BeanFactory;
 import org.test4j.module.Test4JException;
@@ -16,7 +14,9 @@ import org.test4j.module.spring.SpringModule;
 import org.test4j.module.spring.SpringTestedContext;
 import org.test4j.module.spring.annotations.SpringContext;
 import org.test4j.module.spring.strategy.ApplicationContextFactory;
+import org.test4j.module.spring.strategy.Test4JBeanFactory;
 import org.test4j.module.spring.strategy.Test4JSpringContext;
+import org.test4j.module.spring.strategy.injector.SpringBeanInjector;
 import org.test4j.tools.commons.AnnotationHelper;
 import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.commons.ConfigHelper;
@@ -31,13 +31,30 @@ public class SpringModuleHelper {
      * @return
      */
     public static Object getBeanByName(String beanname) {
-        BeanFactory factory = (BeanFactory) SpringTestedContext.getSpringBeanFactory();
+        BeanFactory factory = SpringTestedContext.getSpringBeanFactory();
         if (factory == null) {
             throw new RuntimeException("can't find SpringApplicationContext for tested class:"
                     + TestContext.currTestedClazzName());
         } else {
             Object bean = factory.getBean(beanname);
             return bean;
+        }
+    }
+
+    /**
+     * 往测试对象中注入spring bean<br>
+     * 支持注解<br>
+     * o @SpringBeanByName <br>
+     * o @SpringBeanByType <br>
+     * o @Autowired <br>
+     * o @Resource
+     * 
+     * @param injected
+     */
+    public static void setSpringBean(Object injected) {
+        Test4JBeanFactory beanFactory = SpringTestedContext.getSpringBeanFactory();
+        if (beanFactory != null) {
+            SpringBeanInjector.injectSpringBeans(beanFactory, injected);
         }
     }
 
@@ -103,7 +120,7 @@ public class SpringModuleHelper {
      * @return
      */
     private static Test4JSpringContext newSpringContext(Class testClazz, ApplicationContextFactory contextFactory,
-                                                         SpringContext annotation) {
+                                                        SpringContext annotation) {
         long startTime = System.currentTimeMillis();
         String[] locations = annotation.value();
         boolean allowLazy = annotation.allowLazy();
@@ -184,6 +201,6 @@ public class SpringModuleHelper {
         if (!isAvailable) {
             return;
         }
-        new MockClassSetup(MockCglib2AopProxy.class).setUpStartupMock();
+        new MockCglib2AopProxy();
     }
 }

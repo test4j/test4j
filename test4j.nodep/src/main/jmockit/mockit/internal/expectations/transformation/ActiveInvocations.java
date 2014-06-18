@@ -7,6 +7,7 @@ package mockit.internal.expectations.transformation;
 import mockit.internal.expectations.*;
 import mockit.internal.expectations.argumentMatching.*;
 import mockit.internal.state.*;
+import mockit.internal.util.*;
 
 @SuppressWarnings("UnusedDeclaration")
 public final class ActiveInvocations
@@ -33,6 +34,20 @@ public final class ActiveInvocations
 
          if (currentPhase != null) {
             currentPhase.moveArgMatcher(originalMatcherIndex, toIndex);
+         }
+      }
+   }
+
+   public static void setExpectedArgumentType(int parameterIndex, String typeDesc)
+   {
+      RecordAndReplayExecution instance = TestRun.getRecordAndReplayForRunningTest();
+
+      if (instance != null) {
+         TestOnlyPhase currentPhase = instance.getCurrentTestOnlyPhase();
+
+         if (currentPhase != null) {
+            Class<?> argumentType = ClassLoad.loadByInternalName(typeDesc);
+            currentPhase.setExpectedArgumentType(parameterIndex, argumentType);
          }
       }
    }

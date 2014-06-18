@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2011 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.integration.junit4;
@@ -20,7 +20,7 @@ import mockit.internal.startup.*;
  */
 public final class JMockit extends BlockJUnit4ClassRunner
 {
-   static { Startup.initializeIfNeeded(); }
+   static { Startup.initializeIfPossible(); }
 
    /**
     * Constructs a new instance of the test runner.

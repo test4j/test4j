@@ -7,7 +7,7 @@ package mockit;
 /**
  * An empty interface to be used with the {@link Expectations#result} field or the
  * <a href="Expectations.html#with(mockit.Delegate)">{@code Invocations#with(Delegate)}</a> method, allowing test code
- * to define invocation results or argument matching rules based on test-specific logic.
+ * to freely define invocation results or argument matching rules, respectively.
  * <p/>
  * The name and parameters of the delegate method must fit one of the following alternatives:
  * <ul>

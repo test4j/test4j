@@ -6,7 +6,6 @@ import java.lang.reflect.Field;
 import java.util.regex.Pattern;
 
 import mockit.Mocked;
-import mockit.NonStrict;
 
 import org.test4j.module.core.utility.MessageHelper;
 
@@ -21,10 +20,6 @@ public class JMockitModuleHelper {
     public static void doesSpringBeanFieldIllegal(Field field) {
         Annotation[] annotations = field.getAnnotations();
         for (Annotation annotation : annotations) {
-            if (NonStrict.class.isInstance(annotation)) {
-                throw new RuntimeException(
-                        "@SpringBeanByName/@SpringBeanByType can't define with @NonStrict together. you may be hope to use @SpringBeanFrom @NonStrict.");
-            }
             if (Mocked.class.isInstance(annotation)) {
                 throw new RuntimeException(
                         "@SpringBeanByName/@SpringBeanByType can't define with @Mocked together. you may be hope to use @SpringBeanFrom @Mocked.");

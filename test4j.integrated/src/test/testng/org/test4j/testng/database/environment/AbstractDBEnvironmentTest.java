@@ -41,7 +41,7 @@ public class AbstractDBEnvironmentTest extends Test4J {
             {
                 this.put(IColumn.f_id, "123");
                 this.put(IColumn.f_first_name, "darui.wu");
-                this.put(IColumn.f_post_code, "jteste");
+                this.put(IColumn.f_post_code, "test4j");
                 this.put(IColumn.f_address_id, 0);
                 this.put(IColumn.f_last_name, "test4j");
                 this.put(IColumn.f_sarary, 0.0);

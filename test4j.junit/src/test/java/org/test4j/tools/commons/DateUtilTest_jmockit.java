@@ -8,13 +8,12 @@ import java.util.Date;
 import mockit.Delegate;
 import mockit.Mock;
 import mockit.Mocked;
-import mockit.Mockit;
 
 import org.junit.Test;
 import org.test4j.junit.Test4J;
 import org.test4j.tools.commons.DateUtilTest.MockDateUtil;
 
-@SuppressWarnings("unused")
+@SuppressWarnings({ "unused", "rawtypes" })
 public class DateUtilTest_jmockit extends Test4J {
 
     @Test
@@ -52,18 +51,16 @@ public class DateUtilTest_jmockit extends Test4J {
 
     @Test
     public void testCurrDateStr() {
-        Mockit.setUpMock(DateHelper.class, MockDateUtil.class);
+        new MockDateUtil();
         String str = DateHelper.currDateStr();
         want.string(str).isEqualTo("2010-02-12");
-        Mockit.tearDownMocks();
     }
 
     @Test
     public void testCurrDateTimeStr() {
-        Mockit.setUpMock(DateHelper.class, MockDateUtil.class);
+        new MockDateUtil();
         String str = DateHelper.currDateTimeStr();
         want.string(str).isEqualTo("2010-02-12 19:58:55");
-        Mockit.tearDownMocks();
     }
 
     @Test
@@ -81,10 +78,9 @@ public class DateUtilTest_jmockit extends Test4J {
 
     @Test
     public void testCurrDateTimeStr_format() {
-        Mockit.setUpMock(DateHelper.class, MockDateUtil.class);
+        new MockDateUtil();
         String str = DateHelper.currDateTimeStr("MM/dd/yy hh:mm:ss");
         want.string(str).isEqualTo("02/12/10 07:58:55");
-        Mockit.tearDownMocks();
     }
 
     @Test
@@ -101,7 +97,6 @@ public class DateUtilTest_jmockit extends Test4J {
         want.string(str).isEqualTo("2311-01-27");
     }
 
-    @SuppressWarnings("rawtypes")
     public static class MyDateUtilNowDelegate implements Delegate {
         public Date now() {
             Calendar cal = mockCalendar(2311, 1, 27);

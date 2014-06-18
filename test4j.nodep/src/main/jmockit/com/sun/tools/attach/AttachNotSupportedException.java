@@ -25,7 +25,7 @@
 
 package com.sun.tools.attach;
 
-// for javadoc
+import com.sun.tools.attach.spi.AttachProvider;         // for javadoc
 
 /**
  * Thrown by {@link com.sun.tools.attach.VirtualMachine#attach

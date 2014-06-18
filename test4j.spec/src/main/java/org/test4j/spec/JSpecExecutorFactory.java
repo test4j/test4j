@@ -8,9 +8,7 @@ import java.util.Map;
 import java.util.Set;
 
 import org.test4j.module.core.utility.MessageHelper;
-import org.test4j.spec.ISpec;
-import org.test4j.spec.ISpecExecutorFactory;
-import org.test4j.spec.Steps;
+import org.test4j.module.spring.utility.SpringModuleHelper;
 import org.test4j.spec.annotations.Mix;
 import org.test4j.spec.annotations.StoryFile;
 import org.test4j.spec.exceptions.ScenarioAssertError;
@@ -18,9 +16,9 @@ import org.test4j.spec.exceptions.SkipStepException;
 import org.test4j.spec.inner.IScenario;
 import org.test4j.spec.inner.IScenarioStep;
 import org.test4j.spec.inner.ISpecMethod;
+import org.test4j.spec.inner.ISpecMethod.SpecMethodID;
 import org.test4j.spec.inner.ISpecPrinter;
 import org.test4j.spec.inner.StepType;
-import org.test4j.spec.inner.ISpecMethod.SpecMethodID;
 import org.test4j.spec.printer.MoreSpecPrinter;
 import org.test4j.spec.scenario.ExceptionJSpecScenario;
 import org.test4j.spec.scenario.Story;
@@ -62,6 +60,7 @@ public class JSpecExecutorFactory implements ISpecExecutorFactory {
         for (Class<? extends Steps> claz : mix.value()) {
             try {
                 Steps instance = claz.newInstance();
+                SpringModuleHelper.setSpringBean(instance);
                 instance.setSharedData(spec.getSharedData());
                 stepsInstances.put(claz.getName(), instance);
             } catch (Exception e) {

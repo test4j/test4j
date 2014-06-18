@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2011 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.integration.testng;
@@ -24,7 +24,7 @@ public final class Initializer implements ITestNGListener
 {
    public Initializer()
    {
-      if (Startup.initializeIfNeeded()) {
+      if (Startup.initializeIfPossible()) {
          //noinspection deprecation
          TestNGRunnerDecorator.registerWithTestNG(TestNG.getDefault());
       }

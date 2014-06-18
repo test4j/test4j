@@ -28,7 +28,6 @@ import java.util.Map;
 import org.junit.Before;
 import org.junit.Test;
 import org.test4j.module.ICore;
-import org.test4j.tools.commons.TextDiffMatchPatch;
 import org.test4j.tools.commons.TextDiffMatchPatch.Diff;
 import org.test4j.tools.commons.TextDiffMatchPatch.LinesToCharsResult;
 import org.test4j.tools.commons.TextDiffMatchPatch.Patch;
@@ -604,7 +603,7 @@ public class TextDiffMatchPatchTest implements ICore {
         // Test that we didn't take forever (be forgiving).
         // Theoretically this test could fail very occasionally if the
         // OS task swaps or locks up for a second at the wrong moment.
-        want.bool(dmp.Diff_Timeout * 1000 * 2 > endTime - startTime).is("diff_main: Timeout max.", true);
+        want.bool(dmp.Diff_Timeout * 1000 * 10 > endTime - startTime).is("diff_main: Timeout max.", true);
         dmp.Diff_Timeout = 0;
 
         // Test the linemode speedup.

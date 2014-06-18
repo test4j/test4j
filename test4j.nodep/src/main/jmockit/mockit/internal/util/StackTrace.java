@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.util;
@@ -31,6 +31,8 @@ public final class StackTrace
 
    private final Throwable t;
    private final StackTraceElement[] elements;
+
+   public StackTrace() { this(new Throwable()); }
 
    public StackTrace(Throwable t)
    {
@@ -74,13 +76,17 @@ public final class StackTrace
 
    public static void filterStackTrace(Throwable t)
    {
-      StackTrace st = new StackTrace(t);
-      int n = st.getDepth();
+      new StackTrace(t).filter();
+   }
+
+   public void filter()
+   {
+      int n = getDepth();
       StackTraceElement[] filteredST = new StackTraceElement[n];
       int j = 0;
 
       for (int i = 0; i < n; i++) {
-         StackTraceElement ste = st.getElement(i);
+         StackTraceElement ste = getElement(i);
 
          if (ste.getFileName() != null) {
             String where = ste.getClassName();
@@ -99,7 +105,7 @@ public final class StackTrace
       Throwable cause = t.getCause();
 
       if (cause != null) {
-         filterStackTrace(cause);
+         new StackTrace(cause).filter();
       }
    }
 
@@ -116,5 +122,24 @@ public final class StackTrace
    private static boolean isJMockitMethod(String where)
    {
       return where.startsWith("mockit.") && (where.contains(".internal.") || !where.contains("Test"));
+   }
+
+   public StackTraceElement findPositionInTestMethod()
+   {
+      int n = getDepth();
+
+      for (int i = 0; i < n; i++) {
+         StackTraceElement ste = getElement(i);
+
+         if (ste.getFileName() != null) {
+            String where = ste.getClassName();
+
+            if (!isSunMethod(ste) && !isTestFrameworkMethod(where) && !isJMockitMethod(where)) {
+               return ste;
+            }
+         }
+      }
+
+      return null;
    }
 }

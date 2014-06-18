@@ -2,8 +2,6 @@ package org.test4j.json.decoder.array;
 
 import java.lang.reflect.Type;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 import org.test4j.json.JSON;
@@ -11,7 +9,6 @@ import org.test4j.json.decoder.CollectionDecoder;
 import org.test4j.json.decoder.ForTestType;
 import org.test4j.json.encoder.beans.test.User;
 import org.test4j.testng.Test4J;
-import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 @SuppressWarnings({ "rawtypes" })
@@ -50,22 +47,5 @@ public class CollectionDecoderTest extends Test4J {
         Type type = ForTestType.getType("userList");
         boolean isAccepted = CollectionDecoder.toCOLLECTION.accept(type);
         want.bool(isAccepted).is(true);
-    }
-
-    @Test(dataProvider = "dataForGetComponent")
-    public void testGetComponent(String toTypeName, Class componentType) throws Exception {
-        Type toType = ForTestType.getType(toTypeName);
-        Type type = reflector.invoke(CollectionDecoder.toCOLLECTION, "getComponent", toType);
-        want.object(type).isEqualTo(componentType);
-    }
-
-    @DataProvider
-    public Iterator dataForGetComponent() {
-        return new DataIterator() {
-            {
-                data("objectList", HashMap.class);
-                data("userList", User.class);
-            }
-        };
     }
 }

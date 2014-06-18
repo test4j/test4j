@@ -47,13 +47,13 @@ final class SuperConstructorCollector extends ClassVisitor
       samePackage = p1 == p2 && (p1 < 0 || classDesc.substring(0, p1).equals(superClassDesc.substring(0, p2)));
    }
 
-   private ClassReader createClassReader(String className)
+   private ClassReader createClassReader(String classDesc)
    {
       try {
-         return ClassFile.readClass(className);
+         return ClassFile.readClass(classDesc);
       }
       catch (IOException e) {
-         throw new RuntimeException("Failed to read class file for " + className, e);
+         throw new RuntimeException("Failed to read class file for " + classDesc.replace('/', '.'), e);
       }
    }
 

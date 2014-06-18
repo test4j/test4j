@@ -1,7 +1,6 @@
 package org.test4j.testng.spring.strategy.register;
 
 import mockit.Mocked;
-import mockit.NonStrict;
 
 import org.test4j.fortest.service.UserAnotherDao;
 import org.test4j.fortest.service.UserDao;
@@ -28,7 +27,7 @@ public class SpringBeanRegisterTest_ExcludeMockBean extends Test4J implements ID
     private UserAnotherDao userAnotherDao;
 
     @SpringBeanFrom
-    @NonStrict
+    @Mocked
     private UserDao        userDao;
 
     public void getSpringBean_MockedBean() {

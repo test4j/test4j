@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2011 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.integration.junit3.internal;
@@ -16,8 +16,7 @@ import mockit.*;
  * <p/>
  * This class is not supposed to be accessed from user code. JMockit will automatically load it at startup.
  */
-@MockClass(realClass = TestSuite.class, instantiation = Instantiation.PerMockSetup)
-public final class TestSuiteDecorator
+public final class TestSuiteDecorator extends MockUp<TestSuite>
 {
    @Mock
    public boolean isTestMethod(Method m)

@@ -18,7 +18,6 @@ import mockit.internal.util.*;
  * Provides common user API for both the {@linkplain Expectations record} and {@linkplain Verifications verification}
  * phases of a test.
  */
-@SuppressWarnings("unchecked")
 abstract class Invocations
 {
    static { Startup.verifyInitialization(); }
@@ -286,6 +285,7 @@ abstract class Invocations
 
       if (matcher instanceof HamcrestAdapter) {
          Object argValue = ((HamcrestAdapter) matcher).getInnerValue();
+         //noinspection unchecked
          return (T) argValue;
       }
 
@@ -331,7 +331,7 @@ abstract class Invocations
       ParameterizedType type = (ParameterizedType) genericInterfaces[0];
       Type parameterType = type.getActualTypeArguments()[0];
 
-      return (T) DefaultValues.computeForWrapperType(parameterType);
+      return DefaultValues.computeForWrapperType(parameterType);
    }
 
    private void addMatcher(ArgumentMatcher matcher)
@@ -376,6 +376,7 @@ abstract class Invocations
       addMatcher(new ArgumentMatcher() {
          public boolean matches(Object replayValue)
          {
+            //noinspection unchecked
             valueHolderForMultipleInvocations.add((T) replayValue);
             return true;
          }
@@ -587,16 +588,20 @@ abstract class Invocations
    // Methods for instantiating non-accessible classes ////////////////////////////////////////////////////////////////
 
    /**
-    * Specifies an expectation for a constructor of a given class.
+    * Specifies an expectation for a mocked constructor of a given class.
     * <p/>
-    * This is useful for invoking non-accessible constructors ({@code private} ones, for example) from the test, which
-    * otherwise could not be called normally. It should not be used for accessible constructors.
+    * This is only meant for constructors that are not accessible from the test (<code>private</code> constructors,
+    * usually), and therefore cannot be invoked normally.
+    * <p/>
+    * Note that, in general, it's not recommended to mock and/or invoke {@code private} constructors from a test, since
+    * such constructors are merely implementation details of the tested code, and as such should not appear in test
+    * code.
     * <p/>
     * <a href="http://jmockit.googlecode.com/svn/trunk/www/tutorial/BehaviorBasedTesting.html#deencapsulation">In the
     * Tutorial</a>
     *
     * @param className the fully qualified name of the desired class
-    * @param parameterTypes the formal parameter types for the desired constructor, possibly empty
+    * @param parameterTypes the formal parameter types for the desired constructor
     * @param initArgs the invocation arguments for the constructor, which must be consistent with the specified
     * parameter types
     * @param <T> interface or super-class type to which the returned instance should be assignable
@@ -608,7 +613,7 @@ abstract class Invocations
     */
    protected final <T> T newInstance(String className, Class<?>[] parameterTypes, Object... initArgs)
    {
-      return (T) Utilities.newInstance(className, parameterTypes, initArgs);
+      return ConstructorReflection.newInstance(className, parameterTypes, initArgs);
    }
 
    /**
@@ -621,10 +626,12 @@ abstract class Invocations
     * if a null value needs to be passed, the {@code Class} object for the parameter type must be passed instead
     *
     * @throws IllegalArgumentException if one of the given arguments is {@code null}
+    *
+    * @see #newInnerInstance(String, Object, Object...)
     */
    protected final <T> T newInstance(String className, Object... nonNullInitArgs)
    {
-      return (T) Utilities.newInstance(className, nonNullInitArgs);
+      return ConstructorReflection.newInstance(className, nonNullInitArgs);
    }
 
    /**
@@ -640,20 +647,49 @@ abstract class Invocations
    protected final <T> T newInnerInstance(
       String innerClassSimpleName, Object outerClassInstance, Object... nonNullInitArgs)
    {
-      return (T) Utilities.newInnerInstance(innerClassSimpleName, outerClassInstance, nonNullInitArgs);
+      return ConstructorReflection.newInnerInstance(innerClassSimpleName, outerClassInstance, nonNullInitArgs);
    }
 
    // Methods for invoking non-accessible methods on instances or classes /////////////////////////////////////////////
 
    /**
-    * Specifies an expectation for an instance method, with a given list of arguments.
+    * Specifies an expectation on a mocked instance method having the given name and parameter types, with the given
+    * argument values.
     * <p/>
-    * This is useful when a method is not accessible from the test (it's {@code private}, for example), and therefore
-    * cannot be called normally. It should not be used to call accessible methods.
+    * This is only meant for methods that are not accessible from the test (<code>private</code> methods, usually), and
+    * therefore cannot be called normally.
     * <p/>
-    * Additionally, this can also be used to directly test private methods, when there is no other way to do so, or it
-    * would be too difficult by indirect means.
-    * Note that in such a case the target instance will actually be a "real" (non-mocked) object.
+    * Note that, in general, it's not recommended to mock and/or call {@code private} methods from a test, since such
+    * methods are merely implementation details of the tested code, and as such should not appear in test code.
+    * <p/>
+    * <a href="http://jmockit.googlecode.com/svn/trunk/www/tutorial/BehaviorBasedTesting.html#deencapsulation">In the
+    * Tutorial</a>
+    *
+    * @param objectWithMethod the instance on which the invocation is to be done; must not be null
+    * @param methodName the name of the expected method
+    * @param parameterTypes the formal parameter types for the desired method
+    * @param methodArgs zero or more expected parameter values for the expectation
+    *
+    * @return the return value from the invoked method, wrapped if primitive
+    *
+    * @see #invoke(Object, String, Object...)
+    * @see #invoke(Class, String, Class[], Object...)
+    */
+   protected final <T> T invoke(
+      Object objectWithMethod, String methodName, Class<?>[] parameterTypes, Object... methodArgs)
+   {
+      return
+         MethodReflection.invoke(objectWithMethod.getClass(), objectWithMethod, methodName, parameterTypes, methodArgs);
+   }
+
+   /**
+    * Specifies an expectation for a mocked instance method, with a given list of arguments.
+    * <p/>
+    * This is only meant for methods that are not accessible from the test (<code>private</code> methods, usually), and
+    * therefore cannot be called normally.
+    * <p/>
+    * Note that, in general, it's not recommended to mock and/or call {@code private} methods from a test, since such
+    * methods are merely implementation details of the tested code, and as such should not appear in test code.
     * <p/>
     * <a href="http://jmockit.googlecode.com/svn/trunk/www/tutorial/BehaviorBasedTesting.html#deencapsulation">In the
     * Tutorial</a>
@@ -668,21 +704,47 @@ abstract class Invocations
     * @throws IllegalArgumentException if a null reference was provided for a parameter
     *
     * @see #invoke(Class, String, Object...)
+    * @see #invoke(Object, String, Class[], Object...)
     */
    protected final <T> T invoke(Object objectWithMethod, String methodName, Object... methodArgs)
    {
-      return (T) Utilities.invoke(objectWithMethod.getClass(), objectWithMethod, methodName, methodArgs);
+      return MethodReflection.invoke(objectWithMethod.getClass(), objectWithMethod, methodName, methodArgs);
    }
 
    /**
-    * Specifies an expectation for a {@code static} method, with a given list of arguments.
+    * Specifies an expectation for a mocked {@code static} method having the given name and parameter types, with a
+    * given list of arguments.
     * <p/>
-    * This is useful when a method is not accessible from the test (it's {@code private}, for example), and therefore
-    * cannot be called normally. It should not be used to call accessible methods.
+    * This is only meant for methods that are not accessible from the test (<code>private</code> methods, usually), and
+    * therefore cannot be called normally.
     * <p/>
-    * Additionally, this can also be used to directly test private methods, when there is no other way to do so, or it
-    * would be too difficult by indirect means.
-    * Note that in such a case the target class would not be mocked.
+    * Note that, in general, it's not recommended to mock and/or call {@code private} methods from a test, since such
+    * methods are merely implementation details of the tested code, and as such should not appear in test code.
+    *
+    * @param methodOwner the class on which the invocation is to be done; must not be null
+    * @param methodName the name of the expected static method
+    * @param parameterTypes the formal parameter types for the desired method
+    * @param methodArgs zero or more expected parameter values for the expectation
+    *
+    * @return the return value from the invoked method, wrapped if primitive
+    *
+    * @see #invoke(Class, String, Object...)
+    * @see #invoke(Object, String, Class[], Object...)
+    */
+   protected final <T> T invoke(
+      Class<?> methodOwner, String methodName, Class<?>[] parameterTypes, Object... methodArgs)
+   {
+      return MethodReflection.invoke(methodOwner, null, methodName, parameterTypes, methodArgs);
+   }
+
+   /**
+    * Specifies an expectation for a mocked {@code static} method, with a given list of arguments.
+    * <p/>
+    * This is only meant for methods that are not accessible from the test (<code>private</code> methods, usually), and
+    * therefore cannot be called normally.
+    * <p/>
+    * Note that, in general, it's not recommended to mock and/or call {@code private} methods from a test, since such
+    * methods are merely implementation details of the tested code, and as such should not appear in test code.
     *
     * @param methodOwner the class on which the invocation is to be done; must not be null
     * @param methodName the name of the expected static method
@@ -692,10 +754,13 @@ abstract class Invocations
     * @return the return value from the invoked method, wrapped if primitive
     *
     * @throws IllegalArgumentException if a null reference was provided for a parameter
+    *
+    * @see #invoke(Class, String, Class[], Object...)
+    * @see #invoke(Object, String, Object...)
     */
    protected final <T> T invoke(Class<?> methodOwner, String methodName, Object... methodArgs)
    {
-      return (T) Utilities.invoke(methodOwner, null, methodName, methodArgs);
+      return MethodReflection.invoke(methodOwner, null, methodName, methodArgs);
    }
 
    // Methods for getting/setting non-accessible fields on instances or classes ///////////////////////////////////////
@@ -713,7 +778,7 @@ abstract class Invocations
     */
    protected final <T> T getField(Object fieldOwner, String fieldName)
    {
-      return (T) Utilities.getField(fieldOwner.getClass(), fieldName, fieldOwner);
+      return FieldReflection.getField(fieldOwner.getClass(), fieldName, fieldOwner);
    }
 
    /**
@@ -730,7 +795,7 @@ abstract class Invocations
     */
    protected final <T> T getField(Object fieldOwner, Class<T> fieldType)
    {
-      return Utilities.getField(fieldOwner.getClass(), fieldType, fieldOwner);
+      return FieldReflection.getField(fieldOwner.getClass(), fieldType, fieldOwner);
    }
 
    /**
@@ -743,7 +808,7 @@ abstract class Invocations
     */
    protected final <T> T getField(Class<?> fieldOwner, String fieldName)
    {
-      return (T) Utilities.getField(fieldOwner, fieldName, null);
+      return FieldReflection.getField(fieldOwner, fieldName, null);
    }
 
    /**
@@ -756,7 +821,7 @@ abstract class Invocations
     */
    protected final <T> T getField(Class<?> fieldOwner, Class<T> fieldType)
    {
-      return Utilities.getField(fieldOwner, fieldType, null);
+      return FieldReflection.getField(fieldOwner, fieldType, null);
    }
 
    /**
@@ -773,7 +838,7 @@ abstract class Invocations
     */
    protected final void setField(Object fieldOwner, String fieldName, Object fieldValue)
    {
-      Utilities.setField(fieldOwner.getClass(), fieldOwner, fieldName, fieldValue);
+      FieldReflection.setField(fieldOwner.getClass(), fieldOwner, fieldName, fieldValue);
    }
 
    /**
@@ -785,7 +850,7 @@ abstract class Invocations
     */
    protected final void setField(Object fieldOwner, Object fieldValue)
    {
-      Utilities.setField(fieldOwner.getClass(), fieldOwner, null, fieldValue);
+      FieldReflection.setField(fieldOwner.getClass(), fieldOwner, null, fieldValue);
    }
 
    /**
@@ -797,7 +862,7 @@ abstract class Invocations
     */
    protected final void setField(Class<?> fieldOwner, String fieldName, Object fieldValue)
    {
-      Utilities.setField(fieldOwner, null, fieldName, fieldValue);
+      FieldReflection.setField(fieldOwner, null, fieldName, fieldValue);
    }
 
    /**
@@ -809,6 +874,6 @@ abstract class Invocations
     */
    protected final void setField(Class<?> fieldOwner, Object fieldValue)
    {
-      Utilities.setField(fieldOwner, null, null, fieldValue);
+      FieldReflection.setField(fieldOwner, null, null, fieldValue);
    }
 }

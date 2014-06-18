@@ -4,7 +4,6 @@
  */
 package mockit.internal;
 
-import java.io.*;
 import java.lang.instrument.*;
 import java.util.*;
 import java.util.Map.*;
@@ -75,18 +74,11 @@ public final class RedefinitionEngine
 
    public void restoreOriginalDefinition(Class<?> aClass)
    {
-      if (!Utilities.isGeneratedImplementationClass(aClass)) {
+      if (!GeneratedClasses.isGeneratedImplementationClass(aClass)) {
          realClass = aClass;
-         byte[] realClassFile = new ClassFile(aClass, false).getBytecode();
+         byte[] realClassFile = ClassFile.createReaderOrGetFromCache(aClass).b;
          redefineMethods(realClassFile);
       }
-   }
-
-   public void restoreToDefinitionBeforeStartup(Class<?> aClass) throws IOException
-   {
-      realClass = aClass;
-      byte[] realClassFile = ClassFile.readClass(aClass).b;
-      redefineMethods(realClassFile);
    }
 
    private void restoreToDefinition(Class<?> aClass, byte[] definitionToRestore)
@@ -97,7 +89,7 @@ public final class RedefinitionEngine
 
    public void restoreToDefinition(String className, byte[] definitionToRestore)
    {
-      Class<?> aClass = Utilities.loadClass(className);
+      Class<?> aClass = ClassLoad.loadClass(className);
       restoreToDefinition(aClass, definitionToRestore);
    }
 }

@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations.mocking;
@@ -11,24 +11,31 @@ import static java.lang.reflect.Modifier.*;
 import static mockit.external.asm4.Opcodes.*;
 
 import mockit.external.asm4.*;
-import mockit.internal.filtering.*;
 import mockit.internal.startup.*;
+import mockit.internal.util.*;
 
 final class ExpectationsModifier extends MockedTypeModifier
 {
    private static final int METHOD_ACCESS_MASK = ACC_SYNTHETIC + ACC_ABSTRACT;
-   private static final Map<String, String> DEFAULT_FILTERS = new HashMap<String, String>() {{
-      put("java/lang/Object", "<init> getClass hashCode");
-      put("java/lang/String", "");
-      put("java/lang/AbstractStringBuilder", "");
-      put("java/lang/StringBuilder", "");
-      put("java/lang/StringBuffer", "");
-      put("java/lang/System", "arraycopy getProperties getSecurityManager");
-      put("java/util/Hashtable", "get");
-      put("java/lang/Throwable", "<init> fillInStackTrace");
-      put("java/lang/Exception", "<init>");
-      put("java/lang/Thread", "currentThread isInterrupted");
-   }};
+
+   private static final Map<String, String> DEFAULT_FILTERS = new HashMap<String, String>();
+   static {
+      DEFAULT_FILTERS.put("java/lang/Object", "<init> getClass hashCode");
+      DEFAULT_FILTERS.put("java/lang/String", "");
+      DEFAULT_FILTERS.put("java/lang/AbstractStringBuilder", "");
+      DEFAULT_FILTERS.put("java/lang/StringBuilder", "");
+      DEFAULT_FILTERS.put("java/lang/StringBuffer", "");
+      DEFAULT_FILTERS.put("java/lang/System", "arraycopy getProperties getSecurityManager identityHashCode");
+      DEFAULT_FILTERS.put("java/lang/Throwable", "<init> fillInStackTrace");
+      DEFAULT_FILTERS.put("java/lang/Exception", "<init>");
+      DEFAULT_FILTERS.put("java/lang/Thread", "currentThread isInterrupted interrupted");
+      DEFAULT_FILTERS.put("java/util/Hashtable", "get hash");
+      DEFAULT_FILTERS.put("java/util/ArrayList", "");
+      DEFAULT_FILTERS.put("java/util/HashMap", "");
+      DEFAULT_FILTERS.put("java/util/jar/JarEntry", "<init>");
+      DEFAULT_FILTERS.put("java/util/logging/LogManager",
+                          "getLogger getLogManager getUserContext readPrimordialConfiguration");
+   }
 
    private final MockingConfiguration mockingCfg;
    private String className;
@@ -41,7 +48,7 @@ final class ExpectationsModifier extends MockedTypeModifier
 
    ExpectationsModifier(ClassLoader classLoader, ClassReader classReader, MockedType typeMetadata)
    {
-      super(classReader);
+      super(classReader, null);
 
       if (typeMetadata == null) {
          mockingCfg = null;
@@ -81,7 +88,7 @@ final class ExpectationsModifier extends MockedTypeModifier
    @Override
    public void visit(int version, int access, String name, String signature, String superName, String[] interfaces)
    {
-      if ("java/lang/Class".equals(name)) {
+      if ("java/lang/Class".equals(name) || "java/lang/ClassLoader".equals(name) ) {
          throw new IllegalArgumentException("Class " + name.replace('/', '.') + " is not mockable");
       }
 
@@ -95,6 +102,10 @@ final class ExpectationsModifier extends MockedTypeModifier
       else {
          className = name;
          defaultFilters = DEFAULT_FILTERS.get(name);
+
+         if (defaultFilters != null && defaultFilters.length() == 0) {
+            throw VisitInterruptedException.INSTANCE;
+         }
       }
    }
 
@@ -146,20 +157,20 @@ final class ExpectationsModifier extends MockedTypeModifier
       if (useMockingBridge) {
          return
             generateCallToHandlerThroughMockingBridge(
-               access, name, desc, signature, exceptions, internalClassName, actualExecutionMode);
+               access, signature, exceptions, internalClassName, actualExecutionMode);
       }
 
       generateDirectCallToHandler(internalClassName, access, name, desc, signature, exceptions, actualExecutionMode);
 
       if (actualExecutionMode > 0) {
-         generateDecisionBetweenReturningOrContinuingToRealImplementation(desc);
+         generateDecisionBetweenReturningOrContinuingToRealImplementation();
 
          // Constructors of non-JRE classes can't be modified (unless running with "-noverify") in a way that
          // "super(...)/this(...)" get called twice, so we disregard such calls when copying the original bytecode.
-         return visitingConstructor ? new DynamicConstructorModifier() : copyOriginalImplementationCode(access, desc);
+         return visitingConstructor ? new DynamicConstructorModifier() : copyOriginalImplementationCode(access);
       }
 
-      generateReturnWithObjectAtTopOfTheStack(desc);
+      generateReturnWithObjectAtTopOfTheStack(methodDesc);
       mw.visitMaxs(1, 0);
       return methodAnnotationsVisitor;
    }
@@ -180,7 +191,7 @@ final class ExpectationsModifier extends MockedTypeModifier
    {
       mw = super.visitMethod(access, "<clinit>", "()V", null, null);
 
-      if (!noFilters && matchesFilters || noFilters && stubOutClassInitialization) {
+      if (!noFilters && matchesFilters || stubOutClassInitialization) {
          generateEmptyImplementation();
          return null;
       }
@@ -211,7 +222,7 @@ final class ExpectationsModifier extends MockedTypeModifier
          isStaticMethodToBeIgnored(access) ||
          isNativeMethodForDynamicMocking(access) ||
          useMockingBridge && isPrivate(access) && isNative(access) ||
-         defaultFilters != null && (defaultFilters.length() == 0 || defaultFilters.contains(name));
+         defaultFilters != null && defaultFilters.contains(name);
    }
 
    private boolean isConstructorToBeIgnored(String name) { return ignoreConstructors && "<init>".equals(name); }
@@ -242,24 +253,23 @@ final class ExpectationsModifier extends MockedTypeModifier
    }
 
    private MethodVisitor generateCallToHandlerThroughMockingBridge(
-      int access, String name, String desc, String genericSignature, String[] exceptions, String internalClassName,
-      int executionMode)
+      int access, String genericSignature, String[] exceptions, String internalClassName, int executionMode)
    {
-      generateCodeToObtainInstanceOfMockingBridge(MockedBridge.class.getName());
+      generateCodeToObtainInstanceOfMockingBridge(MockedBridge.MB);
 
       // First and second "invoke" arguments:
       boolean isStatic = generateCodeToPassThisOrNullIfStaticMethod(access);
       mw.visitInsn(ACONST_NULL);
 
       // Create array for call arguments (third "invoke" argument):
-      Type[] argTypes = Type.getArgumentTypes(desc);
+      Type[] argTypes = Type.getArgumentTypes(methodDesc);
       generateCodeToCreateArrayOfObject(7 + argTypes.length);
 
       int i = 0;
       generateCodeToFillArrayElement(i++, access);
       generateCodeToFillArrayElement(i++, internalClassName);
-      generateCodeToFillArrayElement(i++, name);
-      generateCodeToFillArrayElement(i++, desc);
+      generateCodeToFillArrayElement(i++, methodName);
+      generateCodeToFillArrayElement(i++, methodDesc);
       generateCodeToFillArrayElement(i++, genericSignature);
       generateCodeToFillArrayElement(i++, getListOfExceptionsAsSingleString(exceptions));
       generateCodeToFillArrayElement(i++, executionMode);
@@ -267,18 +277,18 @@ final class ExpectationsModifier extends MockedTypeModifier
       generateCodeToPassMethodArgumentsAsVarargs(argTypes, i, isStatic ? 0 : 1);
       generateCallToInvocationHandler();
 
-      generateDecisionBetweenReturningOrContinuingToRealImplementation(desc);
+      generateDecisionBetweenReturningOrContinuingToRealImplementation();
 
       // Copies the entire original implementation even for a constructor, in which case the complete bytecode inside
       // the constructor fails the strict verification activated by "-Xfuture". However, this is necessary to allow the
       // full execution of a JRE constructor when the call was not meant to be mocked.
-      return copyOriginalImplementationCode(access, desc);
+      return copyOriginalImplementationCode(access);
    }
 
-   private MethodVisitor copyOriginalImplementationCode(int access, String desc)
+   private MethodVisitor copyOriginalImplementationCode(int access)
    {
       if (isNative(access)) {
-         generateEmptyImplementation(desc);
+         generateEmptyImplementation(methodDesc);
          return methodAnnotationsVisitor;
       }
 
@@ -292,7 +302,7 @@ final class ExpectationsModifier extends MockedTypeModifier
       @Override
       public final void visitLocalVariable(String name, String desc, String signature, Label start, Label end, int idx)
       {
-         registerParameterName(name);
+         registerParameterName(name, idx);
 
          // For some reason, the start position for "this" gets displaced by bytecode inserted at the beginning,
          // in a method modified by the EMMA tool. If not treated, this causes a ClassFormatError.

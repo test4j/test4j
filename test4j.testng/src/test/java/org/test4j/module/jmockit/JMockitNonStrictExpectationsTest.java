@@ -1,6 +1,6 @@
 package org.test4j.module.jmockit;
 
-import mockit.NonStrict;
+import mockit.Mocked;
 
 import org.test4j.testng.Test4J;
 import org.testng.Assert;
@@ -10,13 +10,12 @@ import ext.test4j.hamcrest.core.IsEqual;
 
 @Test(groups = "test4j")
 public class JMockitNonStrictExpectationsTest extends Test4J {
-    // @Mocked
-    @NonStrict
+    @Mocked
     ISay say;
 
     @Test
     public void testWhen1() {
-        new Expectations() {
+        new NonStrictExpectations() {
             {
                 say.say(anyString);
                 result = "hello, davey.wu";
@@ -33,7 +32,7 @@ public class JMockitNonStrictExpectationsTest extends Test4J {
 
     @Test
     public void testWhen2() {
-        new Expectations() {
+        new NonStrictExpectations() {
             {
                 say.say(anyString);
                 result = "hello, davey.wu";

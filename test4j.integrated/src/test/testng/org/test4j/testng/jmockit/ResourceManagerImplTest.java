@@ -5,7 +5,6 @@ import java.util.Collection;
 
 import mockit.Mock;
 import mockit.Mocked;
-import mockit.Mockit;
 
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.jmockit.demo1.ResourceManager;
@@ -46,7 +45,7 @@ public class ResourceManagerImplTest extends Test4J {
         Collection<?> coll = resourceManager.getResList("res1");
         want.collection(coll).notNull().sizeEq(3);
 
-        Mockit.setUpMock(ResourceManagerImpl.class, MockResourceManager.class);
+        new MockResourceManager();
         resourceManager.init();
         want.bool(beenInited).isEqualTo(true);
         Collection<?> coll2 = resourceManager.getResList("res1");
@@ -55,7 +54,7 @@ public class ResourceManagerImplTest extends Test4J {
 
     public static boolean beenInited = false;
 
-    public static class MockResourceManager {
+    public static class MockResourceManager extends MockUp<ResourceManagerImpl> {
         @Mock
         public void init() {
             MessageHelper.info("mock resource manager init");

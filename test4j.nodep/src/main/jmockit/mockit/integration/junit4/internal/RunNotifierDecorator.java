@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.integration.junit4.internal;
@@ -9,6 +9,7 @@ import org.junit.runner.*;
 
 import mockit.*;
 import mockit.integration.internal.*;
+import mockit.internal.startup.*;
 import mockit.internal.state.*;
 
 /**
@@ -16,19 +17,38 @@ import mockit.internal.state.*;
  * <p/>
  * This class is not supposed to be accessed from user code. JMockit will automatically load it at startup.
  */
-@MockClass(realClass = RunNotifier.class)
-public final class RunNotifierDecorator
+public final class RunNotifierDecorator extends MockUp<RunNotifier>
 {
-   @Mock(reentrant = true)
+   @Mock
+   public static void fireTestRunStarted(Invocation invocation, Description description)
+   {
+      if (description != null) {
+         UsingMocksAndStubs mocksAndStubs = description.getAnnotation(UsingMocksAndStubs.class);
+
+         if (mocksAndStubs != null) {
+            Class<?>[] mockAndRealClasses = mocksAndStubs.value();
+            Startup.initializing = true;
+
+            try {
+               TestRunnerDecorator.setUpMocksAndStubs(mockAndRealClasses);
+            }
+            finally {
+               Startup.initializing = false;
+            }
+         }
+      }
+
+      invocation.proceed();
+   }
+
+   @Mock
    public static void fireTestRunFinished(Invocation invocation, Result result)
    {
       TestRun.enterNoMockingZone();
 
       try {
          TestRunnerDecorator.cleanUpMocksFromPreviousTestClass();
-
-         RunNotifier it = invocation.getInvokedInstance();
-         it.fireTestRunFinished(result);
+         invocation.proceed();
       }
       finally {
          TestRun.exitNoMockingZone();

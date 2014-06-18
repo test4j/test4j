@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.capturing;
@@ -13,22 +13,20 @@ import mockit.internal.*;
 import mockit.internal.state.*;
 import mockit.internal.util.*;
 
+import static mockit.internal.util.GeneratedClasses.*;
+
 final class CaptureTransformer implements ClassFileTransformer
 {
-   private final CapturedType metadata;
    private final String capturedType;
    private final CaptureOfImplementations modifierFactory;
-   private final SuperTypeCollector superTypeCollector;
    private final Map<String, byte[]> transformedClasses;
    private boolean inactive;
 
    CaptureTransformer(
       CapturedType metadata, CaptureOfImplementations modifierFactory, boolean registerTransformedClasses)
    {
-      this.metadata = metadata;
       capturedType = Type.getInternalName(metadata.baseType);
       this.modifierFactory = modifierFactory;
-      superTypeCollector = new SuperTypeCollector();
       transformedClasses = registerTransformedClasses ? new HashMap<String, byte[]>(2) : null;
    }
 
@@ -61,17 +59,15 @@ final class CaptureTransformer implements ClassFileTransformer
       }
 
       ClassReader cr = new ClassReader(classfileBuffer);
+      SuperTypeCollector superTypeCollector = new SuperTypeCollector(loader);
 
       try {
          cr.accept(superTypeCollector, ClassReader.SKIP_DEBUG);
       }
       catch (VisitInterruptedException ignore) {
-         if (superTypeCollector.classExtendsCapturedType) {
+         if (superTypeCollector.classExtendsCapturedType && !isGeneratedClass(internalClassName)) {
             String className = internalClassName.replace('/', '.');
-
-            if (metadata.isToBeCaptured(loader, className)) {
-               return modifyAndRegisterClass(loader, className, cr);
-            }
+            return modifyAndRegisterClass(loader, className, cr);
          }
       }
 
@@ -97,7 +93,10 @@ final class CaptureTransformer implements ClassFileTransformer
 
    private final class SuperTypeCollector extends ClassVisitor
    {
+      private final ClassLoader loader;
       boolean classExtendsCapturedType;
+
+      private SuperTypeCollector(ClassLoader loader) { this.loader = loader; }
 
       @Override
       public void visit(int version, int access, String name, String signature, String superName, String[] interfaces)
@@ -117,9 +116,8 @@ final class CaptureTransformer implements ClassFileTransformer
          }
 
          if (!classExtendsCapturedType && !"java/lang/Object".equals(superName)) {
-            String superClassName = superName.replace('/', '.');
-            ClassReader cr = ClassFile.createClassFileReader(superClassName);
-            cr.accept(superTypeCollector, ClassReader.SKIP_DEBUG);
+            ClassReader cr = ClassFile.createClassFileReader(loader, superName);
+            cr.accept(this, ClassReader.SKIP_DEBUG);
          }
 
          throw VisitInterruptedException.INSTANCE;

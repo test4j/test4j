@@ -34,7 +34,7 @@ public class JsonHelperTest extends Test4J {
         String filename = "classpath:org/test4j/tools/commons/manager.dat";
         Manager manager = JSONHelper.fromDatFile(Manager.class, filename);
         want.object(manager).propertyEq("name", "Tony Tester").propertyEq("phoneNumber.number", "0571-88886666");
-        want.date(manager.getDate()).isYear(2009).isMonth("08").isHour(16);
+        want.date(manager.getDate()).isYear(2013).isMonth("10").isHour(13);
     }
 
     @Test

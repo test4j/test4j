@@ -1,6 +1,6 @@
 package org.test4j.module.spring.strategy.register;
 
-import mockit.NonStrict;
+import mockit.Mocked;
 
 import org.junit.Test;
 import org.test4j.fortest.service.UserAnotherDao;
@@ -25,7 +25,7 @@ public class SpringBeanRegisterTest_NotFoundImplementClazz extends Test4J {
     UserService    userService;
 
     @SpringBeanFrom
-    @NonStrict
+    @Mocked
     UserAnotherDao userAnotherDao;
 
     @Test

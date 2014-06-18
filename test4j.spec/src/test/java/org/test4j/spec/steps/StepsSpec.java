@@ -1,6 +1,7 @@
 package org.test4j.spec.steps;
 
 import org.test4j.junit.JSpec;
+import org.test4j.module.spring.annotations.SpringContext;
 import org.test4j.spec.SharedData;
 import org.test4j.spec.annotations.Mix;
 
@@ -8,6 +9,7 @@ import org.test4j.spec.annotations.Mix;
  * @author darui.wudr 2013-6-3 下午7:06:39
  */
 @Mix({ StepsDemo1.class, StepsDemo2.class })
+@SpringContext("spring/spring-demo.xml")
 public class StepsSpec extends JSpec {
 
     @Override

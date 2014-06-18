@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.state;
@@ -31,7 +31,6 @@ public final class ExecutingTest
    private final List<Object> strictMocks = new ArrayList<Object>();
 
    private final Map<String, MockedTypeCascade> cascadingTypes = new HashMap<String, MockedTypeCascade>(4);
-   public final DefaultResults defaultResults = new DefaultResults();
 
    RecordAndReplayExecution getRecordAndReplay(boolean createIfUndefined)
    {
@@ -248,7 +247,7 @@ public final class ExecutingTest
          ) {
             Map.Entry<MockedType, Object> fieldAndOwner = itr.next();
             MockedType typeMetadata = fieldAndOwner.getKey();
-            Object mock = Utilities.getFieldValue(typeMetadata.field, fieldAndOwner.getValue());
+            Object mock = FieldReflection.getFieldValue(typeMetadata.field, fieldAndOwner.getValue());
 
             // A null field value will occur for invocations executed during initialization of the owner instance.
             if (mock != null) {
@@ -358,7 +357,6 @@ public final class ExecutingTest
 
       strictMocks.clear();
       clearNonSharedCascadingTypes();
-      defaultResults.clear();
    }
 
    private void clearNonSharedCascadingTypes()

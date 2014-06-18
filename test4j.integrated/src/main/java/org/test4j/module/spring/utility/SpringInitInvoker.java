@@ -1,7 +1,6 @@
 package org.test4j.module.spring.utility;
 
 import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
 
 import org.test4j.module.spring.annotations.SpringInitMethod;
 
@@ -44,10 +43,10 @@ public class SpringInitInvoker {
         if (springInitMethod == null) {
             return false;
         }
-        int mod = method.getModifiers();
-        if (Modifier.isPublic(mod)) {
-            throw new RuntimeException("@SpringInitMethod should be private, protected or package.");
-        }
+        //        int mod = method.getModifiers();
+        //        if (Modifier.isPublic(mod)) {
+        //            throw new RuntimeException("@SpringInitMethod should be private, protected or package.");
+        //        }
 
         Class<?>[] paras = method.getParameterTypes();
         if (paras.length != 0) {

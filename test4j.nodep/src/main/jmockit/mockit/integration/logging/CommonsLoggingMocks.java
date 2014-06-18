@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2011 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.integration.logging;
@@ -18,11 +18,9 @@ import mockit.*;
  * <p/>
  * <a href="http://jmockit.googlecode.com/svn/trunk/www/tutorial/UsingMocksAndStubs.html">Tutorial</a>
  */
-@SuppressWarnings({"UnusedDeclaration"})
-@MockClass(realClass = LogFactory.class)
-public final class CommonsLoggingMocks
+public final class CommonsLoggingMocks extends MockUp<LogFactory>
 {
-   private static final Log MOCK_LOG = Mockit.newEmptyProxy(Log.class);
+   private static final Log MOCK_LOG = new MockUp<Log>(){}.getMockInstance();
 
    private CommonsLoggingMocks() {}
 

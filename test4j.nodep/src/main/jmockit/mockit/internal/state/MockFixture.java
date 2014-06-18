@@ -1,5 +1,5 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.state;
@@ -19,18 +19,6 @@ import mockit.internal.util.*;
 public final class MockFixture
 {
    /**
-    * Classes with fixed bytecode definitions, that is, those to which the class should eventually be restored if
-    * modified for a particular test.
-    * <p/>
-    * This map is meant to be used by other bytecode instrumentation tools (such as JMockit Coverage), which need to
-    * avoid having their bytecode redefinitions/transformations getting discarded when mocked classes get restored.
-    * <p/>
-    * The modified bytecode arrays in the map allow a new redefinition for a given class to be made, on top of the
-    * fixed definition.
-    */
-   private final Map<String, byte[]> fixedClassDefinitions = new HashMap<String, byte[]>();
-
-   /**
     * Similar to {@code redefinedClasses}, but for classes modified by a {@code ClassFileTransformer} such as the
     * {@code CaptureTransformer}, and containing the pre-transform bytecode instead of the modified one.
     */
@@ -45,7 +33,7 @@ public final class MockFixture
     * (in the case of the Mockups API), or to restore the class to a previous definition (provided the map is copied
     * between redefinitions of the same class).
     */
-   private final Map<Class<?>, byte[]> redefinedClasses = new HashMap<Class<?>, byte[]>(8);
+   private final Map<Class<?>, byte[]> redefinedClasses = new IdentityHashMap<Class<?>, byte[]>(8);
 
    /**
     * Subset of all currently redefined classes which contain one or more native methods.
@@ -63,17 +51,13 @@ public final class MockFixture
     * This allows any global state associated to a mock class to be discarded when the corresponding real class is
     * later restored to its original definition.
     */
-   private final Map<Class<?>, String> realClassesToMockClasses = new HashMap<Class<?>, String>(8);
+   private final Map<Class<?>, String> realClassesToMockClasses = new IdentityHashMap<Class<?>, String>(8);
 
    private final List<Class<?>> mockedClasses = new ArrayList<Class<?>>();
-   private final Map<Class<?>, InstanceFactory> mockedTypesAndInstances = new HashMap<Class<?>, InstanceFactory>();
+   private final Map<Class<?>, InstanceFactory> mockedTypesAndInstances =
+      new IdentityHashMap<Class<?>, InstanceFactory>();
 
    // Methods to add/remove transformed/redefined classes /////////////////////////////////////////////////////////////
-
-   public void addFixedClass(String className, byte[] fixedClassfile)
-   {
-      fixedClassDefinitions.put(className, fixedClassfile);
-   }
 
    public void addTransformedClass(String className, byte[] pretransformClassfile)
    {
@@ -100,7 +84,7 @@ public final class MockFixture
 
    public void registerMockedClass(Class<?> mockedType)
    {
-      if (!mockedClasses.contains(mockedType) && !Utilities.isGeneratedImplementationClass(mockedType)) {
+      if (!mockedClasses.contains(mockedType) && !GeneratedClasses.isGeneratedImplementationClass(mockedType)) {
          mockedClasses.add(mockedType);
       }
    }
@@ -131,7 +115,7 @@ public final class MockFixture
    {
       if (mockedType.isInterface() || Modifier.isAbstract(mockedType.getModifiers())) {
          for (Entry<Class<?>, InstanceFactory> entry : mockedTypesAndInstances.entrySet()) {
-            Class<?> baseType = Utilities.getMockedClassOrInterfaceType(entry.getKey());
+            Class<?> baseType = GeneratedClasses.getMockedClassOrInterfaceType(entry.getKey());
 
             if (baseType == mockedType) {
                return entry.getValue();
@@ -278,12 +262,9 @@ public final class MockFixture
 
    // Getter methods for the maps of transformed/redefined classes ////////////////////////////////////////////////////
 
-   public byte[] getFixedClassfile(String className) { return fixedClassDefinitions.get(className); }
-
    public Set<String> getTransformedClasses() { return new HashSet<String>(transformedClasses.keySet()); }
    public Map<Class<?>, byte[]> getRedefinedClasses() { return new HashMap<Class<?>, byte[]>(redefinedClasses); }
 
-   public int getRedefinedClassCount() { return redefinedClasses.size(); }
    public byte[] getRedefinedClassfile(Class<?> redefinedClass) { return redefinedClasses.get(redefinedClass); }
 
    public boolean containsRedefinedClass(Class<?> redefinedClass)

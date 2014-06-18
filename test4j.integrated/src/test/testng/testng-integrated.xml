@@ -3,7 +3,6 @@
 	<test name="test4j">
 		<groups>
 			<run>
-				<include name="all-test" />
 				<exclude name="broken" />
 				<exclude name="hibernate" />
 				<exclude name="memery-db" />

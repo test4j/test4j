@@ -14,13 +14,13 @@ import ext.test4j.hamcrest.Matcher;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class JMockitExpectations extends Expectations implements Test4JInvocations {
-    @Mocked(methods = { "" })
+    @Mocked({ "" })
     protected InvokeTimes             invokerTimes;
 
-    @Mocked(methods = { "" })
+    @Mocked({ "" })
     protected ExpectationsResult      expectationsResult;
 
-    @Mocked(methods = { "" })
+    @Mocked({ "" })
     protected final TheStyleAssertion the;
 
     public JMockitExpectations() {
@@ -45,6 +45,7 @@ public class JMockitExpectations extends Expectations implements Test4JInvocatio
         return new InvokeTimes(this);
     }
 
+    @Override
     public void thenReturn(Object value) {
         super.returns(value);
     }
@@ -53,6 +54,7 @@ public class JMockitExpectations extends Expectations implements Test4JInvocatio
         ActiveInvocations.addResult(e);
     }
 
+    @Override
     public void thenReturn(Object firstValue, Object... remainingValues) {
         super.returns(firstValue, remainingValues);
     }

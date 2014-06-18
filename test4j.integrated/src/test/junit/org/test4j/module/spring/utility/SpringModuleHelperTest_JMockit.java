@@ -2,7 +2,7 @@ package org.test4j.module.spring.utility;
 
 import java.lang.reflect.Field;
 
-import mockit.NonStrict;
+import mockit.Mocked;
 
 import org.junit.Test;
 import org.test4j.junit.Test4J;
@@ -27,6 +27,6 @@ public class SpringModuleHelperTest_JMockit extends Test4J {
 
 class TestedClazz {
     @SpringBeanByName
-    @NonStrict
+    @Mocked
     Object field;
 }

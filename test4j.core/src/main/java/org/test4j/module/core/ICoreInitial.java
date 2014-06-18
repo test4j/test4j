@@ -19,10 +19,11 @@ public class ICoreInitial {
     public static ISpringHelper initSpringHelper() {
         try {
             if (springHelperClazz == null) {
-                springHelperClazz = Class.forName("org.test4j.module.spring.utility.SprinHelperImpl");
+                springHelperClazz = Class.forName("org.test4j.module.spring.utility.SpringHelperImpl");
             }
             return (ISpringHelper) springHelperClazz.newInstance();
         } catch (Throwable e) {
+            e.printStackTrace();
             return null;
         }
     }

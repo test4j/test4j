@@ -22,7 +22,7 @@ public class ModulesLoaderTest extends Test4J {
             }
         };
         List<String> list = reflector.invokeStatic(ModulesLoader.class, "filterModules",
-                Arrays.asList("jmock", "jmockit", "inject", "tracer"));
-        want.collection(list).not(the.collection().hasItems("database")).sizeEq(4);
+                Arrays.asList("database", "jmockit", "inject", "tracer"));
+        want.collection(list).not(the.collection().hasItems("database")).sizeEq(2);
     }
 }

@@ -1,12 +1,12 @@
 /*
- * Copyright (c) 2006-2012 Rogério Liesenfeld
+ * Copyright (c) 2006-2013 Rogério Liesenfeld
  * This file is subject to the terms of the MIT license (see LICENSE.txt).
  */
 package mockit.internal.expectations;
 
 import mockit.internal.expectations.invocation.*;
 import mockit.internal.state.*;
-import static mockit.internal.util.Utilities.*;
+import mockit.internal.util.*;
 
 public final class RecordPhase extends TestOnlyPhase
 {
@@ -31,11 +31,6 @@ public final class RecordPhase extends TestOnlyPhase
    public void addSequenceOfReturnValues(Object firstValue, Object[] remainingValues)
    {
       getCurrentExpectation().addSequenceOfReturnValues(firstValue, remainingValues);
-   }
-
-   public void setNotStrict()
-   {
-      recordAndReplay.executionState.makeNonStrict(currentExpectation);
    }
 
    @Override
@@ -78,7 +73,7 @@ public final class RecordPhase extends TestOnlyPhase
       Object specified = nextInstanceToMatch;
 
       if (mock != specified) {
-         Class<?> mockedClass = getMockedClass(mock);
+         Class<?> mockedClass = GeneratedClasses.getMockedClass(mock);
 
          if (!mockedClass.isInstance(specified)) {
             return mock;

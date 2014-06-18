@@ -22,7 +22,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import mockit.Mockit;
+import mockit.MockUp;
 
 import org.test4j.module.Test4JException;
 import org.test4j.tools.datagen.ConstructorArgsGenerator;
@@ -426,7 +426,8 @@ public class ClazzHelper {
 
     private static <T> T innerNewInstance(Class<T> claz) {
         if (claz.isInterface()) {
-            return Mockit.newEmptyProxy(claz);
+            return (T) new MockUp(claz) {
+            }.getMockInstance();
         }
         int modifiers = claz.getModifiers();
         if (Modifier.isAbstract(modifiers)) {
