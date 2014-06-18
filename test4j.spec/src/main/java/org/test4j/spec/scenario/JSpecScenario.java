@@ -56,7 +56,7 @@ public abstract class JSpecScenario implements IScenario {
     }
 
     public final String getName() {
-        return String.format("%02d - %s", index, scenario);
+        return this.scenario;
     }
 
     public final String getDescription() {
@@ -90,6 +90,6 @@ public abstract class JSpecScenario implements IScenario {
 
     @Override
     public final String toString() {
-        return this.scenario.replaceAll("\\s", " ");
+        return String.format("%02d - %s", index, this.scenario.replaceAll("\\s", " "));
     }
 }

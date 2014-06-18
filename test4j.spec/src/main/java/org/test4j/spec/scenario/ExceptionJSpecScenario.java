@@ -50,4 +50,10 @@ public final class ExceptionJSpecScenario implements IScenario {
     public void setIndex(int index) {
         this.index = index;
     }
+
+    @Override
+    public String toString() {
+        String msg = exception.getMessage();
+        return String.format("%02d - %s", index, msg.replaceAll("\\s", " "));
+    }
 }
