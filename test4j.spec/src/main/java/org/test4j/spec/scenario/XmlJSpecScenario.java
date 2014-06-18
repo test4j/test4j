@@ -53,7 +53,7 @@ public class XmlJSpecScenario extends JSpecScenario {
         }
     }
 
-    private static List<IScenario> parseJSpecScenarioFrom(Document document) {
+    private static Story parseJSpecScenarioFrom(Document document) {
         List<IScenario> scenarios = new ArrayList<IScenario>();
 
         List<IScenarioStep> templates = parseJSpecTemplate(document);
@@ -62,7 +62,9 @@ public class XmlJSpecScenario extends JSpecScenario {
             JSpecScenario scenario = new XmlJSpecScenario(scenarioNode, templates);
             scenarios.add(scenario);
         }
-        return scenarios;
+        Story story = new Story();
+        story.setScenarios(scenarios);
+        return story;
     }
 
     /**
@@ -88,15 +90,15 @@ public class XmlJSpecScenario extends JSpecScenario {
      * @param encoding 文本流编码，如果为null，则自动获取，如果自动获取失败，则使用默认编码
      * @return
      */
-    public static List<IScenario> parseJSpecScenarioFrom(InputStream is, String encoding) {
+    public static Story parseJSpecScenarioFrom(InputStream is, String encoding) {
         try {
             SAXReader reader = new SAXReader();
             if (StringHelper.isEmpty(encoding) == false) {
                 reader.setEncoding(encoding);
             }
             Document document = reader.read(is);
-            List<IScenario> scenarios = parseJSpecScenarioFrom(document);
-            return scenarios;
+            Story story = parseJSpecScenarioFrom(document);
+            return story;
         } catch (Exception e) {
             throw new RuntimeException("parse story xml file error.", e);
         } finally {
@@ -111,7 +113,7 @@ public class XmlJSpecScenario extends JSpecScenario {
      * @param encoding
      * @return
      */
-    public static List<IScenario> parseJSpecScenarioFrom(String xml, String encoding) {
+    public static Story parseJSpecScenarioFrom(String xml, String encoding) {
         StringReader strReader = new StringReader(xml);
         try {
             SAXReader reader = new SAXReader();
@@ -119,8 +121,8 @@ public class XmlJSpecScenario extends JSpecScenario {
                 reader.setEncoding(encoding);
             }
             Document document = reader.read(strReader);
-            List<IScenario> scenarios = parseJSpecScenarioFrom(document);
-            return scenarios;
+            Story story = parseJSpecScenarioFrom(document);
+            return story;
         } catch (Exception e) {
             throw new RuntimeException("parse story xml file error.", e);
         } finally {

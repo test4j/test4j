@@ -23,6 +23,8 @@ import org.test4j.spec.inner.StepType;
 import org.test4j.spec.inner.ISpecMethod.SpecMethodID;
 import org.test4j.spec.printer.MoreSpecPrinter;
 import org.test4j.spec.scenario.ExceptionJSpecScenario;
+import org.test4j.spec.scenario.Story;
+import org.test4j.spec.scenario.TestScenario;
 import org.test4j.spec.scenario.step.SpecMethod;
 import org.test4j.spec.storypath.StoryPath;
 import org.test4j.tools.commons.AnnotationHelper;
@@ -97,16 +99,18 @@ public class JSpecExecutorFactory implements ISpecExecutorFactory {
             StoryFile storyFile = AnnotationHelper.getClassLevelAnnotation(StoryFile.class, clazz);
             StoryPath storyPath = StoryPath.factory(clazz, storyFile);
             String encoding = this.getEncoding(storyFile);
-            List<IScenario> scenarios = storyPath.getStory(storyFile, encoding);
-            if (scenarios == null || scenarios.size() == 0) {
+            Story story = storyPath.getStory(storyFile, encoding);
+            if (story == null || story.getScenarios() == null || story.getScenarios().size() == 0) {
                 Exception e = new RuntimeException("no scenario defined in spec " + clazz.getName());
                 return ExceptionJSpecScenario.iterator(e);
             }
             DataProviderIterator<IScenario> it = new DataProviderIterator<IScenario>();
             int index = 1;
-            for (IScenario scenario : scenarios) {
+            for (IScenario scenario : story.getScenarios()) {
                 if (indexs == null || indexs.contains(index)) {
-                    it.data(scenario);
+                    TestScenario testScenario = new TestScenario(story.getBeforeScenario(), scenario,
+                            story.getAfterScenario());
+                    it.data(testScenario);
                 }
                 index++;
             }

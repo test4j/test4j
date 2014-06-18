@@ -1,14 +1,13 @@
 package org.test4j.spec.storypath;
 
 import java.net.URLDecoder;
-import java.util.List;
 
 import org.test4j.spec.ISpec;
 import org.test4j.spec.annotations.StoryFile;
 import org.test4j.spec.annotations.StoryType;
-import org.test4j.spec.inner.IScenario;
 import org.test4j.spec.reader.TitianHttpRequest;
 import org.test4j.spec.scenario.JSpecScenario;
+import org.test4j.spec.scenario.Story;
 import org.test4j.tools.commons.ExceptionWrapper;
 
 /**
@@ -27,12 +26,12 @@ public class TitianStoryPath extends StoryPath {
     }
 
     @Override
-    public List<IScenario> getStory(StoryFile story, String encoding) {
+    public Story getStory(StoryFile storyFile, String encoding) {
         try {
             String feature = getFeature();
-            StoryType type = getStoryType(story);
-            List<IScenario> list = JSpecScenario.parseFrom(type, feature);
-            return list;
+            StoryType type = getStoryType(storyFile);
+            Story story = JSpecScenario.parseFrom(type, feature);
+            return story;
         } catch (Exception e) {
             ExceptionWrapper.throwRuntimeException(e);
             return null;

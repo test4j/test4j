@@ -42,14 +42,13 @@ public class ConsolePrinter extends AbstractPrinter {
             buff.append("FAILURE ");
         }
         buff.append(step.getType().name()).append("\t: ").append(step.getMethod());
+        System.out.println(buff.toString());
         if (step.isSuccess() == false) {
             Throwable e = step.getError();
             if (e != null && !(e instanceof SkipStepException)) {
                 buff.append("\n\t").append(e.getMessage());
             }
             System.err.println(buff.toString());
-        } else {
-            System.out.println(buff.toString());
         }
     }
 }

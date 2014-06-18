@@ -1,4 +1,4 @@
-package org.test4j.spec.scenario.xmlparser;
+package org.test4j.spec.scenario;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,14 +6,24 @@ import java.util.List;
 import org.test4j.spec.inner.IScenario;
 import org.test4j.spec.inner.IScenarioStep;
 
-public class TxtStoryFeature {
+public class Story {
     private String              description;
 
     private List<IScenarioStep> templates;
-
+    /**
+     * 场景前执行步骤
+     */
+    private IScenario           beforeScenario;
+    /**
+     * 场景后执行步骤
+     */
+    private IScenario           afterScenario;
+    /**
+     * 场景列表
+     */
     private List<IScenario>     scenarios;
 
-    public TxtStoryFeature() {
+    public Story() {
         this.description = "";
         this.templates = new ArrayList<IScenarioStep>();
         this.scenarios = new ArrayList<IScenario>();
@@ -41,5 +51,21 @@ public class TxtStoryFeature {
 
     public void setScenarios(List<IScenario> scenarios) {
         this.scenarios = scenarios;
+    }
+
+    public IScenario getBeforeScenario() {
+        return beforeScenario;
+    }
+
+    public void setBeforeScenario(IScenario beforeScenario) {
+        this.beforeScenario = beforeScenario;
+    }
+
+    public IScenario getAfterScenario() {
+        return afterScenario;
+    }
+
+    public void setAfterScenario(IScenario afterScenario) {
+        this.afterScenario = afterScenario;
     }
 }

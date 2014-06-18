@@ -72,7 +72,7 @@ public abstract class JSpecScenario implements IScenario {
         }
     }
 
-    public static List<IScenario> parseFrom(StoryType type, String story) {
+    public static Story parseFrom(StoryType type, String story) {
         if (type == StoryType.XML) {
             return XmlJSpecScenario.parseJSpecScenarioFrom(story, "utf-8");
         } else {
@@ -80,7 +80,7 @@ public abstract class JSpecScenario implements IScenario {
         }
     }
 
-    public static List<IScenario> parseFrom(StoryType type, InputStream stream, String encoding) {
+    public static Story parseFrom(StoryType type, InputStream stream, String encoding) {
         if (type == StoryType.XML) {
             return XmlJSpecScenario.parseJSpecScenarioFrom(stream, encoding);
         } else {

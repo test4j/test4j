@@ -14,7 +14,6 @@ import org.test4j.spec.scenario.step.JSpecStep;
 import org.test4j.spec.scenario.step.TxtJSpecStep;
 import org.test4j.spec.scenario.step.TxtJSpecStep.TxtJSpecStepTemplate;
 import org.test4j.spec.scenario.step.txt.LineType;
-import org.test4j.spec.scenario.xmlparser.TxtStoryFeature;
 
 /**
  * 文本文件描述的故事场景解析器
@@ -81,13 +80,13 @@ public class TxtJSpecScenario extends JSpecScenario {
         }
     }
 
-    static List<IScenario> parseJSpecScenarioFrom(LinesReader reader) {
-        TxtStoryFeature storyFeature = parseTxtStoryFeatureFrom(reader);
-        return storyFeature.getScenarios();
+    static Story parseJSpecScenarioFrom(LinesReader reader) {
+        Story story = parseTxtStoryFeatureFrom(reader);
+        return story;
     }
 
-    public static TxtStoryFeature parseTxtStoryFeatureFrom(LinesReader reader) {
-        TxtStoryFeature storyFeature = new TxtStoryFeature();
+    public static Story parseTxtStoryFeatureFrom(LinesReader reader) {
+        Story storyFeature = new Story();
         try {
             String line = parseStepTemplates(reader, storyFeature);
             // 如果已经读完文本，直接返回
@@ -97,15 +96,24 @@ public class TxtJSpecScenario extends JSpecScenario {
             // 依次读取每个场景的文本描述
             List<String> lines = new ArrayList<String>();
             lines.add(line);
+            //当前场景类型
+            LineType currScenarioType = LineType.scenarioType(line);
             do {
                 line = reader.readLine();
                 if (line == null || LineType.isScenarioLine(line)) {
                     IScenario scenario = new TxtJSpecScenario(lines, storyFeature.getTemplates());
-                    scenario.setIndex(storyFeature.getScenarios().size() + 1);
-                    storyFeature.getScenarios().add(scenario);
+                    if (currScenarioType == LineType.BeforeScenario) {
+                        storyFeature.setBeforeScenario(scenario);
+                    } else if (currScenarioType == LineType.AfterScenario) {
+                        storyFeature.setAfterScenario(scenario);
+                    } else {
+                        scenario.setIndex(storyFeature.getScenarios().size() + 1);
+                        storyFeature.getScenarios().add(scenario);
+                    }
                     if (line != null) {
                         lines = new ArrayList<String>();
                         lines.add(line);
+                        currScenarioType = LineType.scenarioType(line);
                     }
                 } else {
                     lines.add(line);
@@ -127,7 +135,7 @@ public class TxtJSpecScenario extends JSpecScenario {
      * @return
      * @throws IOException
      */
-    static String parseStepTemplates(LinesReader reader, TxtStoryFeature storyFeature) throws IOException {
+    static String parseStepTemplates(LinesReader reader, Story storyFeature) throws IOException {
         String line = reader.readLine();
         // 跳过第一个场景或模板之前的描述文字
         StringBuffer description = new StringBuffer();
@@ -177,11 +185,11 @@ public class TxtJSpecScenario extends JSpecScenario {
         templates.add(template);
     }
 
-    public static List<IScenario> parseJSpecScenarioFrom(String story) {
-        String lines[] = story.split("\n");
+    public static Story parseJSpecScenarioFrom(String storyContext) {
+        String lines[] = storyContext.split("\n");
         LinesReader reader = new StringLinesReader(lines);
-        List<IScenario> scenarios = parseJSpecScenarioFrom(reader);
-        return scenarios;
+        Story story = parseJSpecScenarioFrom(reader);
+        return story;
     }
 
     /***
@@ -191,9 +199,9 @@ public class TxtJSpecScenario extends JSpecScenario {
      * @param encoding 文本流编码，如果为null，则自动获取，如果自动获取失败，则使用默认编码
      * @return
      */
-    public static List<IScenario> parseJSpecScenarioFrom(InputStream is, String encoding) {
+    public static Story parseJSpecScenarioFrom(InputStream is, String encoding) {
         LinesReader reader = new StreamLinesReader(is, encoding);
-        List<IScenario> scenarios = parseJSpecScenarioFrom(reader);
-        return scenarios;
+        Story story = parseJSpecScenarioFrom(reader);
+        return story;
     }
 }

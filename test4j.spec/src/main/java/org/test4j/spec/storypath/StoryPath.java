@@ -1,13 +1,11 @@
 package org.test4j.spec.storypath;
 
-import java.util.List;
-
 import org.test4j.spec.ISpec;
 import org.test4j.spec.annotations.StoryFile;
 import org.test4j.spec.annotations.StorySource;
 import org.test4j.spec.annotations.StoryType;
-import org.test4j.spec.inner.IScenario;
 import org.test4j.spec.reader.TitianHttpRequest;
+import org.test4j.spec.scenario.Story;
 import org.test4j.tools.commons.ConfigHelper;
 
 public abstract class StoryPath {
@@ -38,7 +36,7 @@ public abstract class StoryPath {
      * @param encoding 如果没有指定编码，则按照默认方式解析
      * @return
      */
-    public abstract List<IScenario> getStory(StoryFile storyFile, String encoding);
+    public abstract Story getStory(StoryFile storyFile, String encoding);
 
     /**
      * 根据test4j配置文件构造对应的用例文件解析器

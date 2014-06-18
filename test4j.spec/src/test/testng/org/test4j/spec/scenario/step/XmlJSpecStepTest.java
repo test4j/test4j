@@ -20,7 +20,7 @@ public class XmlJSpecStepTest extends Test4J {
     @Test
     public void testParseStep() throws Exception {
         InputStream is = ResourceHelper.getResourceAsStream(XmlJSpecStepTest.class, "template-step.xml");
-        List<IScenario> scenarios = XmlJSpecScenario.parseJSpecScenarioFrom(is, "utf-8");
+        List<IScenario> scenarios = XmlJSpecScenario.parseJSpecScenarioFrom(is, "utf-8").getScenarios();
         want.list(scenarios).sizeEq(2).reflectionEqMap(2, new DataMap() {
             {
                 this.put("scenario", "scenario1", "scenario2");

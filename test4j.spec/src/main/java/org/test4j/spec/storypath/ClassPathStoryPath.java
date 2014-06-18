@@ -1,13 +1,12 @@
 package org.test4j.spec.storypath;
 
 import java.io.InputStream;
-import java.util.List;
 
 import org.test4j.spec.ISpec;
 import org.test4j.spec.annotations.StoryFile;
 import org.test4j.spec.annotations.StoryType;
-import org.test4j.spec.inner.IScenario;
 import org.test4j.spec.scenario.JSpecScenario;
+import org.test4j.spec.scenario.Story;
 import org.test4j.tools.commons.StringHelper;
 
 /**
@@ -62,16 +61,16 @@ public class ClassPathStoryPath extends StoryPath {
     }
 
     @Override
-    public List<IScenario> getStory(StoryFile story, String encoding) {
-        StoryType type = getStoryType(story);
-        String storyFile = this.getStoryFile(type, story);
-        InputStream stream = classLoader.getResourceAsStream(storyFile);
+    public Story getStory(StoryFile storyFile, String encoding) {
+        StoryType type = getStoryType(storyFile);
+        String storyPath = this.getStoryFile(type, storyFile);
+        InputStream stream = classLoader.getResourceAsStream(storyPath);
         if (stream == null) {
-            throw new RuntimeException("Story path '" + storyFile + "' not found by class loader " + classLoader);
+            throw new RuntimeException("Story path '" + storyPath + "' not found by class loader " + classLoader);
         }
-        List<IScenario> list = JSpecScenario.parseFrom(type, stream, encoding);
+        Story story = JSpecScenario.parseFrom(type, stream, encoding);
         this.clean();
-        return list;
+        return story;
     }
 
     protected String resolveName(Class<? extends ISpec> claz) {

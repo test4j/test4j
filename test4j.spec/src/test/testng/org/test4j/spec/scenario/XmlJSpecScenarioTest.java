@@ -22,7 +22,7 @@ public class XmlJSpecScenarioTest extends Test4J {
     @Test
     public void testParseJSpecScenarioFrom() throws Exception {
         InputStream is = ResourceHelper.getResourceAsStream(XmlJSpecScenarioTest.class, "test-story.xml");
-        List<IScenario> scenarios = XmlJSpecScenario.parseJSpecScenarioFrom(is, "utf-8");
+        List<IScenario> scenarios = XmlJSpecScenario.parseJSpecScenarioFrom(is, "utf-8").getScenarios();
         List list = Arrays.asList( // <br>
                 new EmptyJSpecScenario("用例场景一", false, "场景详细描述"), /** <br> */
                 new EmptyJSpecScenario("用例场景二", true, "场景详细描述"));

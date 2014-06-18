@@ -13,38 +13,38 @@ import org.test4j.spec.scenario.xmlparser.entity.TemplateList;
  */
 @SuppressWarnings("serial")
 public class StoryFeature implements Serializable {
-	private StoryDescription description;
+    private StoryDescription description;
 
-	private TemplateList templates;
+    private TemplateList     templates;
 
-	private ScenarioList scenarios;
+    private ScenarioList     scenarios;
 
-	public StoryDescription getDescription() {
-		return description;
-	}
+    public StoryDescription getDescription() {
+        return description;
+    }
 
-	public void setDescription(StoryDescription description) {
-		this.description = description;
-	}
+    public void setDescription(StoryDescription description) {
+        this.description = description;
+    }
 
-	public TemplateList getTemplates() {
-		return templates;
-	}
+    public TemplateList getTemplates() {
+        return templates;
+    }
 
-	public void setTemplates(TemplateList templates) {
-		this.templates = templates;
-	}
+    public void setTemplates(TemplateList templates) {
+        this.templates = templates;
+    }
 
-	public ScenarioList getScenarios() {
-		return scenarios;
-	}
+    public ScenarioList getScenarios() {
+        return scenarios;
+    }
 
-	public void setScenarios(ScenarioList scenarios) {
-		this.scenarios = scenarios;
-	}
+    public void setScenarios(ScenarioList scenarios) {
+        this.scenarios = scenarios;
+    }
 
-	public static String convetTextToHTML(String text) {
-		String html = text.replaceAll("\\n", "<br/>").replaceAll("\\s", "&nbsp;");
-		return html;
-	}
+    public static String convetTextToHTML(String text) {
+        String html = text.replaceAll("\\n", "<br/>").replaceAll("\\s", "&nbsp;");
+        return html;
+    }
 }

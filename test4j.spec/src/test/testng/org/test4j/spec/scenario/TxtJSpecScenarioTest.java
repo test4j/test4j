@@ -20,8 +20,8 @@ public class TxtJSpecScenarioTest extends Test4J {
     @Test(groups = "jspec")
     public void testParseJSpecScenarioFrom_NoScenario() throws Exception {
         String lines = "line1" + "\n" + "line2";
-        List<IScenario> list = TxtJSpecScenario.parseJSpecScenarioFrom(lines);
-        want.list(list).sizeEq(0);
+        Story story = TxtJSpecScenario.parseJSpecScenarioFrom(lines);
+        want.list(story.getScenarios()).sizeEq(0);
     }
 
     @Test(groups = "jspec")
@@ -38,7 +38,7 @@ public class TxtJSpecScenarioTest extends Test4J {
                 want.list(lines).sizeEq(count[index++]);
             }
         };
-        List<IScenario> list = TxtJSpecScenario.parseJSpecScenarioFrom(new FileInputStream(file), null);
+        List<IScenario> list = TxtJSpecScenario.parseJSpecScenarioFrom(new FileInputStream(file), null).getScenarios();
         want.list(list).sizeEq(2);
     }
 
@@ -87,7 +87,7 @@ public class TxtJSpecScenarioTest extends Test4J {
     public void testParseJSpecScenarioFrom_ContainSkipScenario() throws Exception {
         String file = System.getProperty("user.dir") + "/src/test/resources/org/test4j/spec/txt/SkipScenarioDemo.story";
         want.file(file).isExists();
-        List<IScenario> list = TxtJSpecScenario.parseJSpecScenarioFrom(new FileInputStream(file), null);
+        List<IScenario> list = TxtJSpecScenario.parseJSpecScenarioFrom(new FileInputStream(file), null).getScenarios();
         want.list(list).sizeEq(2).propertyEq("isSkip", new Boolean[] { true, false });
     }
 }

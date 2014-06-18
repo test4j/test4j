@@ -29,7 +29,7 @@ public class ClassPathStoryPathTest extends Test4J {
             }
         };
         want.object(path).propertyEq("path", "org/test4j/spec/storypath").propertyEq("name", "SpecDemo");
-        List<IScenario> list = path.getStory(null, null);
+        List<IScenario> list = path.getStory(null, null).getScenarios();
         want.list(list).sizeEq(2);
     }
 
