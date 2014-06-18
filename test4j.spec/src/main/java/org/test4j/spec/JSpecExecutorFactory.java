@@ -129,10 +129,15 @@ public class JSpecExecutorFactory implements ISpecExecutorFactory {
     /**
      * 需要被执行的场景序号,序号从1开始
      */
-    public static final String SCENARIO_RUN_INDEX = "SIndex";
+    public static final String SCENARIO_RUN_INDEX1 = "SIndex";
+
+    public static final String SCENARIO_RUN_INDEX2 = "si";
 
     public static Set<Integer> findScenarioRunIndex() {
-        String sIndexes = System.getProperty(SCENARIO_RUN_INDEX);
+        String sIndexes = System.getProperty(SCENARIO_RUN_INDEX1);
+        if (StringHelper.isBlankOrNull(sIndexes)) {
+            sIndexes = System.getProperty(SCENARIO_RUN_INDEX2);
+        }
         if (StringHelper.isBlankOrNull(sIndexes)) {
             return null;
         }

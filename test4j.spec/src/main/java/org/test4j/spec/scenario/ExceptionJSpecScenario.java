@@ -38,4 +38,16 @@ public final class ExceptionJSpecScenario implements IScenario {
     public String getName() {
         return exception == null ? ExceptionJSpecScenario.class.getName() : exception.getMessage();
     }
+
+    int index = 0;
+
+    @Override
+    public int getIndex() {
+        return index;
+    }
+
+    @Override
+    public void setIndex(int index) {
+        this.index = index;
+    }
 }

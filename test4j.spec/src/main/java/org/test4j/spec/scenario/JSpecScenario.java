@@ -10,6 +10,8 @@ import org.test4j.spec.inner.IScenario;
 import org.test4j.spec.inner.IScenarioStep;
 
 public abstract class JSpecScenario implements IScenario {
+    protected int                       index;
+
     protected String                    scenario;
 
     protected String                    description;
@@ -30,6 +32,20 @@ public abstract class JSpecScenario implements IScenario {
         return this.isSkip;
     }
 
+    @Override
+    public int getIndex() {
+        return index;
+    }
+
+    @Override
+    public void setIndex(int index) {
+        this.index = index;
+    }
+
+    public String getScenario() {
+        return scenario;
+    }
+
     /**
      * 返回场景的步骤
      * 
@@ -40,7 +56,7 @@ public abstract class JSpecScenario implements IScenario {
     }
 
     public final String getName() {
-        return scenario;
+        return String.format("%02d - %s", index, scenario);
     }
 
     public final String getDescription() {

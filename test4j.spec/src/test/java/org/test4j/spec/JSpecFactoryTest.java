@@ -14,7 +14,7 @@ public class JSpecFactoryTest implements ICore {
 
     @Test
     public void testFindScenarioRunIndex() throws Exception {
-        System.setProperty(JSpecExecutorFactory.SCENARIO_RUN_INDEX, "1,2");
+        System.setProperty(JSpecExecutorFactory.SCENARIO_RUN_INDEX1, "1,2");
         Set<Integer> indexs = JSpecExecutorFactory.findScenarioRunIndex();
         want.list(indexs).reflectionEq(new Integer[] { 1, 2 }, EqMode.IGNORE_ORDER);
     }

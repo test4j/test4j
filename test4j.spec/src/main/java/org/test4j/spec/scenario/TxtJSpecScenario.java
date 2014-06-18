@@ -101,6 +101,7 @@ public class TxtJSpecScenario extends JSpecScenario {
                 line = reader.readLine();
                 if (line == null || LineType.isScenarioLine(line)) {
                     IScenario scenario = new TxtJSpecScenario(lines, storyFeature.getTemplates());
+                    scenario.setIndex(storyFeature.getScenarios().size() + 1);
                     storyFeature.getScenarios().add(scenario);
                     if (line != null) {
                         lines = new ArrayList<String>();
