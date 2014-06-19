@@ -22,7 +22,7 @@ public class SpringTestedContextTest extends Test4J {
     @Test
     public void testSetContext() {
         System.out.println("");
-        new Expectations() {
+        new NonStrictExpectations() {
             {
                 testedDao.sayNo();
                 result = "mock";

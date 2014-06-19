@@ -24,6 +24,6 @@ public class ModulesLoaderTest extends Test4J {
         };
         List<String> list = reflector.invokeStatic(ModulesLoader.class, "filterModules",
                 Arrays.asList("database", "dbfit", "jmock", "jmockit", "inject", "spring", "tracer"));
-        want.collection(list).not(the.collection().hasItems("database")).sizeEq(5);
+        want.collection(list).not(the.collection().hasItems("database"));
     }
 }

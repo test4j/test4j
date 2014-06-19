@@ -20,7 +20,7 @@ public class SpringModuleHelperTest_JMockit extends Test4J {
             want.fail();
         } catch (Exception e) {
             String message = e.getMessage();
-            want.string(message).containsInOrder("@SpringBeanByName/@SpringBeanByType", "@NonStrict");
+            want.string(message).containsInOrder("@SpringBeanByName/@SpringBeanByType", "@Mocked");
         }
     }
 }

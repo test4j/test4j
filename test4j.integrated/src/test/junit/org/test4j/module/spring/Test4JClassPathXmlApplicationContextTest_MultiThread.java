@@ -2,6 +2,7 @@ package org.test4j.module.spring;
 
 import java.util.List;
 
+import mockit.Delegate;
 import mockit.Mocked;
 
 import org.junit.Test;
@@ -34,10 +35,11 @@ public class Test4JClassPathXmlApplicationContextTest_MultiThread extends Test4J
      * 
      * @throws InterruptedException
      */
+    @SuppressWarnings("rawtypes")
     @Test
     public void testGetBean() throws InterruptedException {
         count = 0;
-        new Expectations() {
+        new NonStrictExpectations() {
             {
                 userService.findAllUser();
                 result = new Delegate() {
