@@ -97,7 +97,7 @@ public class SpringBeanFromFactory implements FactoryBean {// , BeanFactoryAware
         beanDefinition.setBeanClassName(SpringBeanFromFactory.class.getName());
         beanDefinition.setScope("singleton");
         beanDefinition.setAutowireCandidate(true);
-        beanDefinition.setLazyInit(true);
+        beanDefinition.setLazyInit(false);
 
         beanDefinition.setAutowireMode(AbstractBeanDefinition.AUTOWIRE_BY_NAME);
 
