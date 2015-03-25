@@ -36,42 +36,42 @@ public class MessageHelper {
         }
     }
 
-    public static void debug(String info) {
+    public static void debug(Object info) {
         if (level <= DEBUG) {
-            mark(DEBUG, "DEBUG: " + info);
+            mark(DEBUG, "DEBUG: " + String.valueOf(info));
         }
     }
 
-    public static void warn(String warn) {
+    public static void warn(Object warn) {
         if (level <= WARNING) {
             mark(WARNING, "WARNING: " + warn);
         }
     }
 
-    public static void warn(String warn, Throwable e) {
+    public static void warn(Object warn, Throwable e) {
         if (level <= WARNING) {
-            mark(WARNING, "WARNING: " + warn);
+            mark(WARNING, "WARNING: " + String.valueOf(warn));
             e.printStackTrace();
         }
     }
 
-    public static void info(String info) {
+    public static void info(Object info) {
         if (level <= INFO) {
-            mark(INFO, "INFO: " + info);
+            mark(INFO, "INFO: " + String.valueOf(info));
         }
     }
 
-    public static void error(String err) {
-        mark(ERROR, "ERROR: " + err);
+    public static void error(Object err) {
+        mark(ERROR, "ERROR: " + String.valueOf(err));
     }
 
-    public static void error(String err, Throwable e) {
-        mark(ERROR, "ERROR: " + err);
+    public static void error(Object err, Throwable e) {
+        mark(ERROR, "ERROR: " + String.valueOf(err));
         e.printStackTrace();
     }
 
-    public static void mark(String marker, Throwable e) {
-        System.out.println(marker);
+    public static void mark(Object marker, Throwable e) {
+        System.out.println(String.valueOf(marker));
         e.printStackTrace();
     }
 
