@@ -8,7 +8,7 @@ import org.test4j.spec.annotations.Mix;
 /**
  * @author darui.wudr 2013-6-3 下午7:06:39
  */
-@Mix({ StepsDemo1.class, StepsDemo2.class })
+@Mix({ StepsDemo1.class, StepsDemo2.class, StepsDemo3.class })
 @SpringContext("spring/spring-demo.xml")
 public class StepsSpec extends JSpec {
 

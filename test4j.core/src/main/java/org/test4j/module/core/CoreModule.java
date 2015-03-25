@@ -44,10 +44,15 @@ public class CoreModule {
         if (hasInitial) {
             return;
         }
-        hasInitial = true;
-        ConfigurationLoader.loading();
-        MessageHelper.level = ConfigHelper.logLevel();
-        instance = new CoreModule();
+        try {
+            hasInitial = true;
+            ConfigurationLoader.loading();
+            MessageHelper.level = ConfigHelper.logLevel();
+            instance = new CoreModule();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            throw e;
+        }
     }
 
     /* Listener that observes the execution of tests */

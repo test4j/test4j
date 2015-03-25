@@ -51,17 +51,19 @@ public class JSpecExecutorFactory implements ISpecExecutorFactory {
     }
 
     @Override
-    public Map<String, Steps> newSteps(ISpec spec) {
-        Map<String, Steps> stepsInstances = new HashMap<String, Steps>();
+    public Map<String, Object> newSteps(ISpec spec) {
+        Map<String, Object> stepsInstances = new HashMap<String, Object>();
         Mix mix = AnnotationHelper.getClassLevelAnnotation(Mix.class, spec.getClass());
         if (mix == null) {
             return stepsInstances;
         }
         for (Class<? extends Steps> claz : mix.value()) {
             try {
-                Steps instance = claz.newInstance();
+                Object instance = claz.newInstance();
                 SpringModuleHelper.setSpringBean(instance);
-                instance.setSharedData(spec.getSharedData());
+                if (instance instanceof Steps) {
+                    ((Steps) instance).setSharedData(spec.getSharedData());
+                }
                 stepsInstances.put(claz.getName(), instance);
             } catch (Exception e) {
                 String error = "new " + claz.getName() + " error, the Steps must have default Constructor. error:"

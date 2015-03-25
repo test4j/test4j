@@ -11,7 +11,6 @@ import org.test4j.module.core.TestContext;
 import org.test4j.spec.ISpec;
 import org.test4j.spec.ISpecExecutorFactory;
 import org.test4j.spec.SharedData;
-import org.test4j.spec.Steps;
 import org.test4j.spec.inner.IScenario;
 import org.test4j.spec.inner.ISpecMethod;
 import org.test4j.spec.inner.ISpecMethod.SpecMethodID;
@@ -23,13 +22,13 @@ import org.test4j.tools.datagen.DataProviderIterator;
  * 
  * @author darui.wudr 2013-1-10 下午4:16:42
  */
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({ "unchecked" })
 public abstract class JSpec extends Test4J implements ISpec {
     static ISpecExecutorFactory                  specFactory   = ICoreInitial.initSpecExecutorFactory();
 
     private final Map<SpecMethodID, ISpecMethod> specMethods;
 
-    private Map<String, Steps>                   stepsInstances;
+    private Map<String, Object>                  stepsInstances;
 
     private static ThreadLocal<ISpecPrinter>     threadPrinter = new ThreadLocal<ISpecPrinter>();
 
@@ -55,7 +54,7 @@ public abstract class JSpec extends Test4J implements ISpec {
     }
 
     @Override
-    public final Steps getStepsInstance(String stepClazzName) {
+    public final Object getStepsInstance(String stepClazzName) {
         return this.stepsInstances.get(stepClazzName);
     }
 

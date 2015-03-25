@@ -11,7 +11,6 @@ import java.util.Map;
 import java.util.Set;
 
 import org.test4j.spec.ISpec;
-import org.test4j.spec.Steps;
 import org.test4j.spec.annotations.Named;
 import org.test4j.spec.inner.IScenarioStep;
 import org.test4j.spec.inner.ISpecMethod;
@@ -90,10 +89,11 @@ public class SpecMethod implements ISpecMethod {
     public Object execute(ISpec spec, IScenarioStep step) {
         try {
             Object[] args = step.getArguments(paraNameds, paraTypes);
-            Steps instance = spec.getStepsInstance(this.getClazzName());
+            Object instance = spec.getStepsInstance(this.getClazzName());
             Object o = this.accessor.invokeUnThrow(instance == null ? spec : instance, args);
             return o;
         } catch (Throwable e) {
+            e.printStackTrace();
             String err = String.format("Invoke spec method[%s] error:%s", step.getMethod(), e.getMessage());
             throw new RuntimeException(err, e);
         }

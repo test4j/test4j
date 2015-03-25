@@ -5,8 +5,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.test4j.spec.Steps;
-
 /**
  * JSpec步骤定义片段文件混合
  * 
@@ -16,5 +14,5 @@ import org.test4j.spec.Steps;
 @Target(ElementType.TYPE)
 public @interface Mix {
     @SuppressWarnings("rawtypes")
-    Class<? extends Steps>[] value();
+    Class[] value();
 }

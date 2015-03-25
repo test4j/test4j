@@ -58,11 +58,9 @@ public class Test4JRunner extends BlockJUnit4ClassRunner {
         try {
             Object tested = super.createTest();
             return tested;
-        } catch (Error e) {
-            this.error = new RuntimeException(e);
-            throw e;
         } catch (Exception e) {
-            this.error = new RuntimeException(e);
+            e.printStackTrace();
+            this.error = new RuntimeException(e.getMessage(), e);
             throw e;
         }
     }
@@ -72,7 +70,8 @@ public class Test4JRunner extends BlockJUnit4ClassRunner {
             this.testedObject = super.createTest();
             TestContext.setContext(this.testedObject, null);
         } catch (Throwable e) {
-            this.error = new RuntimeException(e);
+            e.printStackTrace();
+            this.error = new RuntimeException(e.getMessage(), e);
         }
     }
 

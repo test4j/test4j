@@ -36,8 +36,7 @@ public interface ISpecExecutorFactory {
      * @param spec
      * @return
      */
-    @SuppressWarnings("rawtypes")
-    Map<String, Steps> newSteps(ISpec spec);
+    Map<String, Object> newSteps(ISpec spec);
 
     /**
      * 查找可以（或需要）运行的场景列表

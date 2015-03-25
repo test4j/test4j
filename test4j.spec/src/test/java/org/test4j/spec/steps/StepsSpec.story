@@ -22,3 +22,6 @@ When doing
 	
 Then check para
 	【验证数据=hello, davey.wu】
+	
+Then printSomething3
+	不是继承Steps接口的mix

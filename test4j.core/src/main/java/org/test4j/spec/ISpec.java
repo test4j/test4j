@@ -5,7 +5,6 @@ package org.test4j.spec;
  * 
  * @author darui.wudr 2013-1-10 下午4:15:50
  */
-@SuppressWarnings("rawtypes")
 public interface ISpec {
 
     /**
@@ -14,7 +13,7 @@ public interface ISpec {
      * @param clazzName
      * @return
      */
-    Steps getStepsInstance(String stepClazzName);
+    Object getStepsInstance(String stepClazzName);
 
     /**
      * 返回共享数据设置类

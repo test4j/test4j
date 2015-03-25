@@ -58,4 +58,9 @@ public class TestScenario implements IScenario {
     public void setIndex(int index) {
         this.index = index;
     }
+
+    @Override
+    public String toString() {
+        return currScenario.toString();
+    }
 }

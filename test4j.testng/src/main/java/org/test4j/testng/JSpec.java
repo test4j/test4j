@@ -11,23 +11,22 @@ import org.test4j.module.spring.ISpring;
 import org.test4j.spec.ISpec;
 import org.test4j.spec.ISpecExecutorFactory;
 import org.test4j.spec.SharedData;
-import org.test4j.spec.Steps;
 import org.test4j.spec.inner.IScenario;
 import org.test4j.spec.inner.ISpecMethod;
-import org.test4j.spec.inner.ISpecPrinter;
 import org.test4j.spec.inner.ISpecMethod.SpecMethodID;
+import org.test4j.spec.inner.ISpecPrinter;
 import org.test4j.tools.datagen.DataProviderIterator;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.DataProvider;
 
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({ "unchecked" })
 public abstract class JSpec extends Test4JCore implements ISpec, ICore, IMockict, ISpring, IDatabase {
     static ISpecExecutorFactory                  specFactory   = ICoreInitial.initSpecExecutorFactory();
 
     private final Map<SpecMethodID, ISpecMethod> specMethods;
 
-    private Map<String, Steps>                   stepsInstances;
+    private Map<String, Object>                  stepsInstances;
 
     private static ThreadLocal<ISpecPrinter>     threadPrinter = new ThreadLocal<ISpecPrinter>();
 
@@ -36,7 +35,7 @@ public abstract class JSpec extends Test4JCore implements ISpec, ICore, IMockict
     }
 
     @Override
-    public Steps getStepsInstance(String stepClazzName) {
+    public Object getStepsInstance(String stepClazzName) {
         return this.stepsInstances.get(stepClazzName);
     }
 
