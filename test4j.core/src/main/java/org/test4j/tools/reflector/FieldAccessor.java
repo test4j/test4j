@@ -100,4 +100,20 @@ public class FieldAccessor<T> {
         }
         set(null, value);
     }
+
+    public static Object getFieldValue(Object target, String field) {
+        return new FieldAccessor(target, field).get(target);
+    }
+
+    public static void setFieldValue(Object target, String field, Object value) {
+        new FieldAccessor(target, field).set(target, value);
+    }
+
+    public static Object getStaticFieldValue(Class clazz, String field) {
+        return new FieldAccessor(clazz, field).getStatic();
+    }
+
+    public static void setStaticFieldValue(Class clazz, String field, Object value) {
+        new FieldAccessor(clazz, field).setStatic(value);
+    }
 }

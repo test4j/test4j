@@ -13,20 +13,19 @@ import org.test4j.module.ICore;
 
 public class ClasspathFilterFactoryTest implements ICore {
 
-	@Test
-	public void creationParametersAreHandedToTester() {
-		FilterCondiction filter = new FilterCondiction(true, new String[] { "pos", "!neg" },
-				new SuiteType[] { SuiteType.JUNT4_TEST_CLASSES }, new Class<?>[] { Object.class, getClass() },
-				new Class<?>[] { String.class });
-		ClasspathTestClazFinder finder = new ClasspathTestClazFinder(new TestInClasspathAcceptor(filter),
-				"my.class.path");
-		assertEquals("my.class.path", reflector.getField(finder, "classpathProperty"));
-		TestInClasspathAcceptor tester = (TestInClasspathAcceptor) finder.getTester();
-		assertTrue(tester.searchInJars());
-		assertArrayEquals(new String[] { "pos" }, filter.getPositiveFilters().toArray());
-		assertArrayEquals(new String[] { "neg" }, filter.getNegationFilters().toArray());
-		want.list(filter.getSuiteTypes()).reflectionEq(new SuiteType[] { SuiteType.JUNT4_TEST_CLASSES });
-		assertArrayEquals(new Class<?>[] { Object.class, getClass() }, filter.getIncludedBaseTypes());
-		assertArrayEquals(new Class<?>[] { String.class }, filter.getExcludedBaseTypes());
-	}
+    @Test
+    public void creationParametersAreHandedToTester() {
+        FilterCondiction filter = new FilterCondiction(true, new String[] { "pos", "!neg" },
+                new SuiteType[] { SuiteType.JUNT4_TEST_CLASSES }, new Class<?>[] { Object.class, getClass() },
+                new Class<?>[] { String.class });
+        ClasspathTestClazFinder finder = new ClasspathTestClazFinder(new TestInClasspathAcceptor(filter));
+        assertEquals("my.class.path", reflector.getField(finder, "classpathProperty"));
+        TestInClasspathAcceptor tester = (TestInClasspathAcceptor) finder.getTester();
+        assertTrue(tester.searchInJars());
+        assertArrayEquals(new String[] { "pos" }, filter.getPositiveFilters().toArray());
+        assertArrayEquals(new String[] { "neg" }, filter.getNegationFilters().toArray());
+        want.list(filter.getSuiteTypes()).reflectionEq(new SuiteType[] { SuiteType.JUNT4_TEST_CLASSES });
+        assertArrayEquals(new Class<?>[] { Object.class, getClass() }, filter.getIncludedBaseTypes());
+        assertArrayEquals(new Class<?>[] { String.class }, filter.getExcludedBaseTypes());
+    }
 }
