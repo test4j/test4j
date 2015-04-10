@@ -1,4 +1,4 @@
-package org.test4j.junit.suite;
+package org.test4j.junit.suitetest.suite;
 
 import java.lang.reflect.Method;
 import java.util.Collections;

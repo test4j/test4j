@@ -6,7 +6,7 @@ import static org.test4j.junit.filter.SuiteType.JUNT4_TEST_CLASSES;
 import org.junit.runner.RunWith;
 import org.test4j.junit.annotations.ClazFinder;
 import org.test4j.junit.annotations.ClazFinder.BaseType;
-import org.test4j.junit.suite.ClasspathSuite;
+import org.test4j.junit.suitetest.suite.ClasspathSuite;
 
 import forfilter.tests.p2.AbstractP2Test;
 

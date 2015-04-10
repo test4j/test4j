@@ -1,4 +1,4 @@
-package org.test4j.junit.suite;
+package org.test4j.junit.suitetest.suite;
 
 import static org.junit.Assert.assertSame;
 import static org.test4j.junit.filter.SuiteType.JUNIT38_TEST_CLASSES;
@@ -23,6 +23,7 @@ import org.test4j.junit.filter.ClasspathFilterFactory;
 import org.test4j.junit.filter.SuiteType;
 import org.test4j.junit.filter.finder.FilterCondiction;
 import org.test4j.junit.filter.finder.TestClazFinder;
+import org.test4j.junit.suitetest.suite.ClasspathSuite;
 import org.test4j.module.ICore;
 
 @SuppressWarnings("unchecked")

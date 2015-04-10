@@ -1,5 +1,5 @@
-import org.test4j.junit.suite.AllTestSuite;
+import org.test4j.junit.suitetest.AllTest;
 
-public class IntegeratedTest extends AllTestSuite {
+public class IntegeratedTest extends AllTest {
 
 }
