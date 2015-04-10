@@ -199,7 +199,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-release-plugin</artifactId>
-				<version>${release.plugin.version}</version>
+				<version>${release.plugin.version}</version><!--$NO-MVN-MAN-VER$-->
 <!-- 				<configuration> -->
 <!-- 					<arguments>-Dgpg.passphrase=${gpg.passphrase}</arguments> -->
 <!-- 				</configuration> -->

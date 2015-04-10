@@ -5,11 +5,10 @@ import java.util.List;
 import mockit.Mock;
 
 import org.junit.Test;
+import org.test4j.junit.Test4J;
 import org.test4j.junit.annotations.DataFrom;
-import org.test4j.junit.filter.finder.FilterCondiction;
-import org.test4j.module.ICore;
 
-public class FilterCondictionTest implements ICore {
+public class FilterCondictionTest extends Test4J {
 
     @Test
     @DataFrom("dataForFilterPatterns")

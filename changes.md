@@ -2,6 +2,7 @@
 - TestScenario toString改进
 - 初始化测试类异常打印
 - Mix对象不再强制继承Steps接口
+- fix：使用Test4JSuite时，根据 @TestFinder查找测试类的bug； 根据@Group查找测试类的bug。
 
 ###2.0.6###
 - 场景测试增加BeforeScenario， AfterScenario关键字。<br> 
