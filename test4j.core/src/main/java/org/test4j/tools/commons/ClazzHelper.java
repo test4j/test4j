@@ -25,6 +25,7 @@ import java.util.Map;
 import mockit.MockUp;
 
 import org.test4j.module.Test4JException;
+import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.tools.datagen.ConstructorArgsGenerator;
 import org.test4j.tools.exception.NewInstanceException;
 import org.test4j.tools.reflector.MethodAccessor;
@@ -444,6 +445,7 @@ public class ClazzHelper {
                 return (T) o;
             }
         } catch (Throwable e) {
+            MessageHelper.warn("new instance[" + claz.getName() + "] error", e);
             return (T) ObjenesisHelper.newInstance(claz);
         }
         return (T) ObjenesisHelper.newInstance(claz);
@@ -468,6 +470,7 @@ public class ClazzHelper {
             constructor.setAccessible(isAccessor);
             return (T) o;
         } catch (Exception e) {
+            MessageHelper.warn("new instance[" + claz.getName() + "] error.", e);
             return (T) ObjenesisHelper.newInstance(claz);
         }
     }
@@ -555,7 +558,7 @@ public class ClazzHelper {
                 return target;
             }
         } catch (Exception e) {
-            e.printStackTrace();
+            MessageHelper.warn("get proxy object error.", e);
             return target;
         }
     }

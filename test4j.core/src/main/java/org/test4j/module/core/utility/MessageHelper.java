@@ -36,43 +36,30 @@ public class MessageHelper {
         }
     }
 
-    public static void debug(Object info) {
+    public static void debug(Object info, Throwable... throwables) {
         if (level <= DEBUG) {
             mark(DEBUG, "DEBUG: " + String.valueOf(info));
+            printExceptions(throwables);
         }
     }
 
-    public static void warn(Object warn) {
+    public static void warn(Object warn, Throwable... throwables) {
         if (level <= WARNING) {
             mark(WARNING, "WARNING: " + warn);
+            printExceptions(throwables);
         }
     }
 
-    public static void warn(Object warn, Throwable e) {
-        if (level <= WARNING) {
-            mark(WARNING, "WARNING: " + String.valueOf(warn));
-            e.printStackTrace();
-        }
-    }
-
-    public static void info(Object info) {
+    public static void info(Object info, Throwable... throwables) {
         if (level <= INFO) {
             mark(INFO, "INFO: " + String.valueOf(info));
+            printExceptions(throwables);
         }
     }
 
-    public static void error(Object err) {
+    public static void error(Object err, Throwable... throwables) {
         mark(ERROR, "ERROR: " + String.valueOf(err));
-    }
-
-    public static void error(Object err, Throwable e) {
-        mark(ERROR, "ERROR: " + String.valueOf(err));
-        e.printStackTrace();
-    }
-
-    public static void mark(Object marker, Throwable e) {
-        System.out.println(String.valueOf(marker));
-        e.printStackTrace();
+        printExceptions(throwables);
     }
 
     /**
@@ -112,6 +99,15 @@ public class MessageHelper {
             writer.close();
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private static void printExceptions(Throwable[] throwables) {
+        if (throwables == null || throwables.length == 0) {
+            return;
+        }
+        for (Throwable e : throwables) {
+            e.printStackTrace();
         }
     }
 }

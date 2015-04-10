@@ -6,12 +6,13 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.test4j.junit.annotations.DataFrom;
+import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.tools.commons.MethodHelper;
 import org.test4j.tools.commons.Reflector;
 import org.test4j.tools.exception.NewInstanceException;
 import org.test4j.tools.exception.NoSuchMethodRuntimeException;
 
-@SuppressWarnings("rawtypes")
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class ParameterDataFromHelper {
     /**
      * 构造一系列有参的测试方法
@@ -57,7 +58,6 @@ public class ParameterDataFromHelper {
         }
     }
 
-    @SuppressWarnings("unchecked")
     private static Object getDataFromMethod(String dataFromMethod, Class testClazz, Class dataFromClaz) {
         try {
             if (dataFromClaz.isAssignableFrom(testClazz)) {
@@ -74,8 +74,9 @@ public class ParameterDataFromHelper {
                 Object data = MethodHelper.invokeStatic(dataFromClaz, dataFromMethod);
                 return data;
             } catch (NoSuchMethodRuntimeException e2) {
-                throw new RuntimeException(
-                        "The @DataFrom method isn't a static method or isn't declared in a concrete class.", e2);
+                String err = "The @DataFrom method isn't a static method or isn't declared in a concrete class.";
+                MessageHelper.error(err, e1, e2);
+                throw new RuntimeException(err, e2);
             }
         }
     }
