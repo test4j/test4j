@@ -1,5 +1,5 @@
-import org.test4j.junit.suitetest.Test4JSuite;
+import org.test4j.junit.suitetest.ClassPathSuiteTest;
 
-public class IntegeratedTest extends Test4JSuite {
+public class IntegeratedTest extends ClassPathSuiteTest {
 
 }

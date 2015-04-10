@@ -18,9 +18,9 @@ import org.test4j.junit.annotations.RunGroup;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.tools.commons.StringHelper;
 
-public class Groups extends Suite {
+public class GroupSuite extends Suite {
 
-    public Groups(Class<?> klass, RunnerBuilder builder) throws InitializationError {
+    public GroupSuite(Class<?> klass, RunnerBuilder builder) throws InitializationError {
         super(klass, builder);
         try {
             RunGroup annotation = SuiteHelper.findRunGroup(klass, builder);

@@ -25,14 +25,14 @@ import org.test4j.junit.filter.finder.TestClazFinder;
 import org.test4j.module.ICore;
 
 @SuppressWarnings("unchecked")
-public class ClasspathSuiteTest implements ICore {
+public class ClassPathSuiteTest implements ICore {
 
     private TestClazFinder finder;
 
     @Mocked({ "runners" })
     private RunnerBuilder  builder;
 
-    @RunWith(ClasspathSuite.class)
+    @RunWith(ClassPathSuite.class)
     private static class PlainSuite {
     }
 
@@ -54,11 +54,11 @@ public class ClasspathSuiteTest implements ICore {
                 return finder;
             }
         };
-        new ClasspathSuite(PlainSuite.class, builder);
+        new ClassPathSuite(PlainSuite.class, builder);
     }
 
-    @RunWith(ClasspathSuite.class)
-    @ClazFinder(patterns = { "filter1", "!filter2" }, inJars = true, value = { SUITE_TEST_CLASSES, JUNIT38_TEST_CLASSES }, baseType = @BaseType(includes = ClasspathSuiteTest.class, excludes = { ClasspathSuite.class }))
+    @RunWith(ClassPathSuite.class)
+    @ClazFinder(patterns = { "filter1", "!filter2" }, inJars = true, value = { SUITE_TEST_CLASSES, JUNIT38_TEST_CLASSES }, baseType = @BaseType(includes = ClassPathSuiteTest.class, excludes = { ClassPathSuite.class }))
     private static class ComplexSuite {
     }
 
@@ -77,11 +77,11 @@ public class ClasspathSuiteTest implements ICore {
                 want.object(testerFilter).reflectionEq(
                         new FilterCondiction(true, new String[] { "filter1", "!filter2" }, new SuiteType[] {
                                 SUITE_TEST_CLASSES, JUNIT38_TEST_CLASSES },
-                                new Class<?>[] { ClasspathSuiteTest.class }, new Class<?>[] { ClasspathSuite.class }));
+                                new Class<?>[] { ClassPathSuiteTest.class }, new Class<?>[] { ClassPathSuite.class }));
                 return finder;
             }
         };
-        new ClasspathSuite(ComplexSuite.class, builder);
+        new ClassPathSuite(ComplexSuite.class, builder);
     }
 
     private static class Test1 {
@@ -107,7 +107,7 @@ public class ClasspathSuiteTest implements ICore {
                 return finder;
             }
         };
-        new ClasspathSuite(PlainSuite.class, builder);
+        new ClassPathSuite(PlainSuite.class, builder);
         assertSame(Test1.class, listOfClasses.get(0));
         assertSame(Test2.class, listOfClasses.get(1));
     }

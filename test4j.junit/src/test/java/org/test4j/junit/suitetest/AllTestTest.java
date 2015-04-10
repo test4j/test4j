@@ -1,7 +1,7 @@
 package org.test4j.junit.suitetest;
 
-import org.test4j.junit.suitetest.Test4JSuite;
+import org.test4j.junit.suitetest.ClassPathSuiteTest;
 
-public class AllTestTest extends Test4JSuite {
+public class AllTestTest extends ClassPathSuiteTest {
 
 }

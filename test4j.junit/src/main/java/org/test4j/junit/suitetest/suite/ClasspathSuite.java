@@ -18,15 +18,15 @@ import org.test4j.junit.filter.finder.TestClazFinder;
 import org.test4j.tools.commons.MethodHelper;
 import org.test4j.tools.reflector.MethodAccessor;
 
-public class ClasspathSuite extends Suite {
+public class ClassPathSuite extends Suite {
 
     private final Class<?> suiteClass;
 
-    public ClasspathSuite(Class<?> suiteClass, RunnerBuilder builder) throws InitializationError {
+    public ClassPathSuite(Class<?> suiteClass, RunnerBuilder builder) throws InitializationError {
         this(suiteClass, builder, new ClasspathFilterFactory());
     }
 
-    public ClasspathSuite(Class<?> suiteClass, RunnerBuilder builder, FilterFactory filterFactory)
+    public ClassPathSuite(Class<?> suiteClass, RunnerBuilder builder, FilterFactory filterFactory)
             throws InitializationError {
         super(builder, suiteClass, getSortedTestclasses(suiteClass, builder, filterFactory));
         this.suiteClass = suiteClass;

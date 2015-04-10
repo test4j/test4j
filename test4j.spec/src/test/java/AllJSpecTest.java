@@ -1,7 +1,7 @@
 import org.test4j.junit.annotations.ClazFinder;
-import org.test4j.junit.suitetest.Test4JSuite;
+import org.test4j.junit.suitetest.ClassPathSuiteTest;
 
 @ClazFinder(patterns = { "org.test4j.spec.*" })
-public class AllJSpecTest extends Test4JSuite {
+public class AllJSpecTest extends ClassPathSuiteTest {
 
 }

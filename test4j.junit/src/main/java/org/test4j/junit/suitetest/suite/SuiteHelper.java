@@ -1,10 +1,12 @@
 package org.test4j.junit.suitetest.suite;
 
+import java.lang.annotation.Annotation;
 import java.util.Set;
 
 import org.junit.runners.model.RunnerBuilder;
 import org.test4j.junit.annotations.ClazFinder;
 import org.test4j.junit.annotations.RunGroup;
+import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.tools.reflector.FieldAccessor;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -17,7 +19,7 @@ public class SuiteHelper {
      * @return
      */
     public static ClazFinder findClazFinder(Class suiteClazz, RunnerBuilder builder) {
-        ClazFinder annotation = (ClazFinder) findAnnotation(suiteClazz, builder, RunGroup.class);
+        ClazFinder annotation = findAnnotation(suiteClazz, builder, ClazFinder.class);
         return annotation;
     }
 
@@ -29,25 +31,32 @@ public class SuiteHelper {
      * @return
      */
     public static RunGroup findRunGroup(Class suiteClazz, RunnerBuilder builder) {
-        RunGroup annotation = (RunGroup) findAnnotation(suiteClazz, builder, RunGroup.class);
+        RunGroup annotation = findAnnotation(suiteClazz, builder, RunGroup.class);
         return annotation;
     }
 
-    private static Object findAnnotation(Class suiteClazz, RunnerBuilder builder, Class annotationClaz) {
-        Object annotation = suiteClazz.getAnnotation(annotationClaz);
-        if (annotation != null) {
-            return annotation;
-        }
-        Set<Class> parents = (Set<Class>) FieldAccessor.getFieldValue(builder, "parents");
-        if (parents == null || parents.size() == 0) {
-            return null;
-        }
-        for (Class parent : parents) {
-            annotation = parent.getAnnotation(annotationClaz);
+    private static <T extends Annotation> T findAnnotation(Class suiteClazz, RunnerBuilder builder,
+                                                           Class<T> annotationClaz) {
+        try {
+            T annotation = (T) suiteClazz.getAnnotation(annotationClaz);
             if (annotation != null) {
                 return annotation;
             }
+            Set<Class> parents = (Set<Class>) FieldAccessor.getFieldValue(builder, "parents");
+            if (parents == null || parents.size() == 0) {
+                return null;
+            }
+            for (Class parent : parents) {
+                annotation = (T) parent.getAnnotation(annotationClaz);
+                if (annotation != null) {
+                    return annotation;
+                }
+            }
+            return null;
+        } catch (RuntimeException e) {
+            MessageHelper.error("find annotation[" + annotationClaz.getName() + "] from suite error:" + e.getMessage(),
+                    e);
+            throw e;
         }
-        return null;
     }
 }
