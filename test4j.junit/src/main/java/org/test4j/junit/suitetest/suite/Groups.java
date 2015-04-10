@@ -23,7 +23,7 @@ public class Groups extends Suite {
     public Groups(Class<?> klass, RunnerBuilder builder) throws InitializationError {
         super(klass, builder);
         try {
-            RunGroup annotation = klass.getAnnotation(RunGroup.class);
+            RunGroup annotation = SuiteHelper.findRunGroup(klass, builder);
             String[] includedGroups = annotation == null ? AnnotationDefaultValue.DEFAULT_GROUP_VALUE : annotation
                     .includes();
             String[] excludedGroups = annotation == null ? AnnotationDefaultValue.DEFAULT_GROUP_VALUE : annotation

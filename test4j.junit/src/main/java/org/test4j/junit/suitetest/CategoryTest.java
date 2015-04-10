@@ -10,6 +10,6 @@ import org.junit.runners.Suite;
  * @author darui.wudr
  */
 @RunWith(Categories.class)
-@Suite.SuiteClasses({ ClasspathTest.class })
+@Suite.SuiteClasses({ Test4JSuite.class })
 public abstract class CategoryTest {
 }

@@ -4,7 +4,6 @@ import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
-import java.util.Set;
 
 import org.junit.runner.notification.Failure;
 import org.junit.runner.notification.RunNotifier;
@@ -17,7 +16,6 @@ import org.test4j.junit.filter.ClasspathFilterFactory;
 import org.test4j.junit.filter.FilterFactory;
 import org.test4j.junit.filter.finder.TestClazFinder;
 import org.test4j.tools.commons.MethodHelper;
-import org.test4j.tools.reflector.FieldAccessor;
 import org.test4j.tools.reflector.MethodAccessor;
 
 public class ClasspathSuite extends Suite {
@@ -34,11 +32,9 @@ public class ClasspathSuite extends Suite {
         this.suiteClass = suiteClass;
     }
 
-    @SuppressWarnings({ "rawtypes", "unchecked" })
     private static Class<?>[] getSortedTestclasses(Class<?> suiteClass, RunnerBuilder builder,
                                                    FilterFactory filterFactory) {
-        Set<Class> parents = (Set<Class>) FieldAccessor.getFieldValue(builder, "parents");
-        ClazFinder clazFinder = filterFactory.findClazFinder(suiteClass, parents);
+        ClazFinder clazFinder = SuiteHelper.findClazFinder(suiteClass, builder);
 
         TestClazFinder finder = filterFactory.createFinder(clazFinder);
         List<Class<?>> testclasses = finder.find();
