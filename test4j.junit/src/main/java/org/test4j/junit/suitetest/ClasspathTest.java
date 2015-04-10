@@ -9,5 +9,5 @@ import org.test4j.junit.suitetest.suite.ClasspathSuite;
  * @author darui.wudr
  */
 @RunWith(ClasspathSuite.class)
-public class AllTest {
+public class ClasspathTest {
 }
