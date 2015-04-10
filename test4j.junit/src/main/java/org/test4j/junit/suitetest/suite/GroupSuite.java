@@ -125,36 +125,19 @@ public class GroupSuite extends Suite {
 
         private Set<String> groups(Description description) {
             Set<String> groups = new HashSet<String>();
-            String[] directGroups = directGroup(description);
-            groups.addAll(Arrays.asList(directGroups));
-            String[] parentGroups = directGroup(parentDescription(description));
-            groups.addAll(Arrays.asList(parentGroups));
+            Group group = description.getAnnotation(Group.class);
+            if (group != null) {
+                groups.addAll(Arrays.asList(group.value()));
+            }
+            Class<?> testClaz = description.getTestClass();
+            while (!Object.class.equals(testClaz)) {
+                group = testClaz.getAnnotation(Group.class);
+                if (group != null) {
+                    groups.addAll(Arrays.asList(group.value()));
+                }
+                testClaz = testClaz.getSuperclass();
+            }
             return groups;
-        }
-
-        private Description parentDescription(Description description) {
-            Class<?> testClass = description.getTestClass();
-            if (testClass == null)
-                return null;
-            Description parentDescription = Description.createSuiteDescription(testClass);
-            return parentDescription;
-        }
-
-        /**
-         * 直接在测试上标记的分组信息
-         * 
-         * @param description
-         * @return
-         */
-        private String[] directGroup(Description description) {
-            if (description == null) {
-                return AnnotationDefaultValue.DEFAULT_GROUP_VALUE;
-            }
-            Group annotation = description.getAnnotation(Group.class);
-            if (annotation == null) {
-                return AnnotationDefaultValue.DEFAULT_GROUP_VALUE;
-            }
-            return annotation.value();
         }
     }
 }

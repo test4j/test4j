@@ -11,7 +11,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.RunnerBuilder;
 import org.test4j.junit.annotations.BeforeSuite;
-import org.test4j.junit.annotations.ClazFinder;
+import org.test4j.junit.annotations.TestPath;
 import org.test4j.junit.filter.ClasspathFilterFactory;
 import org.test4j.junit.filter.FilterFactory;
 import org.test4j.junit.filter.finder.TestClazFinder;
@@ -34,7 +34,7 @@ public class ClassPathSuite extends Suite {
 
     private static Class<?>[] getSortedTestclasses(Class<?> suiteClass, RunnerBuilder builder,
                                                    FilterFactory filterFactory) {
-        ClazFinder clazFinder = SuiteHelper.findClazFinder(suiteClass, builder);
+        TestPath clazFinder = SuiteHelper.findClazFinder(suiteClass, builder);
 
         TestClazFinder finder = filterFactory.createFinder(clazFinder);
         List<Class<?>> testclasses = finder.find();

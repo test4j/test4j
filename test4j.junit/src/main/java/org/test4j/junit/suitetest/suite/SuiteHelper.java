@@ -4,7 +4,7 @@ import java.lang.annotation.Annotation;
 import java.util.Set;
 
 import org.junit.runners.model.RunnerBuilder;
-import org.test4j.junit.annotations.ClazFinder;
+import org.test4j.junit.annotations.TestPath;
 import org.test4j.junit.annotations.RunGroup;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.tools.reflector.FieldAccessor;
@@ -18,8 +18,8 @@ public class SuiteHelper {
      * @param parents
      * @return
      */
-    public static ClazFinder findClazFinder(Class suiteClazz, RunnerBuilder builder) {
-        ClazFinder annotation = findAnnotation(suiteClazz, builder, ClazFinder.class);
+    public static TestPath findClazFinder(Class suiteClazz, RunnerBuilder builder) {
+        TestPath annotation = findAnnotation(suiteClazz, builder, TestPath.class);
         return annotation;
     }
 

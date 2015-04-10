@@ -1,9 +1,9 @@
 package org.test4j.datafilling;
 
-import org.test4j.junit.annotations.ClazFinder;
+import org.test4j.junit.annotations.TestPath;
 import org.test4j.junit.suitetest.ClassPathSuiteTest;
 
-@ClazFinder(patterns = "org.test4j.datafilling.*")
+@TestPath(patterns = "org.test4j.datafilling.*")
 public class PojoGenSuite extends ClassPathSuiteTest {
 
 }

@@ -16,8 +16,8 @@ import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.RunnerBuilder;
-import org.test4j.junit.annotations.ClazFinder;
-import org.test4j.junit.annotations.ClazFinder.BaseType;
+import org.test4j.junit.annotations.TestPath;
+import org.test4j.junit.annotations.TestPath.BaseType;
 import org.test4j.junit.filter.ClasspathFilterFactory;
 import org.test4j.junit.filter.SuiteType;
 import org.test4j.junit.filter.finder.FilterCondiction;
@@ -58,7 +58,7 @@ public class ClassPathSuiteTest implements ICore {
     }
 
     @RunWith(ClassPathSuite.class)
-    @ClazFinder(patterns = { "filter1", "!filter2" }, inJars = true, value = { SUITE_TEST_CLASSES, JUNIT38_TEST_CLASSES }, baseType = @BaseType(includes = ClassPathSuiteTest.class, excludes = { ClassPathSuite.class }))
+    @TestPath(patterns = { "filter1", "!filter2" }, inJars = true, value = { SUITE_TEST_CLASSES, JUNIT38_TEST_CLASSES }, baseType = @BaseType(includes = ClassPathSuiteTest.class, excludes = { ClassPathSuite.class }))
     private static class ComplexSuite {
     }
 

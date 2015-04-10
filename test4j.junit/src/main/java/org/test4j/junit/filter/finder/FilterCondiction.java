@@ -5,7 +5,7 @@ import java.util.Arrays;
 import java.util.List;
 
 import org.test4j.junit.annotations.AnnotationDefaultValue;
-import org.test4j.junit.annotations.ClazFinder;
+import org.test4j.junit.annotations.TestPath;
 import org.test4j.junit.filter.SuiteType;
 import org.test4j.tools.commons.StringHelper;
 
@@ -110,7 +110,7 @@ public class FilterCondiction {
 		}
 	}
 
-	public void initFilters(ClazFinder testFilterAnnotation) {
+	public void initFilters(TestPath testFilterAnnotation) {
 		if (testFilterAnnotation == null) {
 			return;
 		}

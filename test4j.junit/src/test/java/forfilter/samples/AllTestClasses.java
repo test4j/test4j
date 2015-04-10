@@ -6,11 +6,11 @@ import junit.framework.JUnit4TestAdapter;
 
 import org.junit.runner.RunWith;
 import org.test4j.junit.annotations.BeforeSuite;
-import org.test4j.junit.annotations.ClazFinder;
+import org.test4j.junit.annotations.TestPath;
 import org.test4j.junit.suitetest.suite.ClassPathSuite;
 
 @RunWith(ClassPathSuite.class)
-@ClazFinder(inJars = true, patterns = { "injar.*", "tests.*" }, value = { JUNIT38_TEST_CLASSES, JUNT4_TEST_CLASSES })
+@TestPath(inJars = true, patterns = { "injar.*", "tests.*" }, value = { JUNIT38_TEST_CLASSES, JUNT4_TEST_CLASSES })
 public class AllTestClasses {
 
 	public static junit.framework.Test suite() {

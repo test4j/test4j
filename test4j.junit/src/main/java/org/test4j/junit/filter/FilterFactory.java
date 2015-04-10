@@ -1,6 +1,6 @@
 package org.test4j.junit.filter;
 
-import org.test4j.junit.annotations.ClazFinder;
+import org.test4j.junit.annotations.TestPath;
 import org.test4j.junit.filter.finder.FilterCondiction;
 import org.test4j.junit.filter.finder.TestClazFinder;
 
@@ -11,7 +11,7 @@ public interface FilterFactory {
      * @param clazFinder
      * @return
      */
-    TestClazFinder createFinder(ClazFinder clazFinder);
+    TestClazFinder createFinder(TestPath clazFinder);
 
     /**
      * 根据classpath系统值和过滤条件创建测试类查找器
