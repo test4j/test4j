@@ -53,10 +53,10 @@ public interface DbFitOp {
      *  dbname	     定义在test4j.properties文件中的数据库名称
      *  定义示例如下
      * 	dbname.database.type=oracle
-     * 	dbname.database.url=jdbc:oracle:thin:@localhost:1523:crms?args[applicationEncoding=UTF-8,databaseEncoding=UTF-8]
+     * 	dbname.database.url=
      * 	dbname.database.userName=yourdb_test
      * 	dbname.database.password=ca
-     * 	dbname.database.driverClassName=com.alibaba.china.jdbc.SimpleDriver
+     * 	dbname.database.driverClassName=
      * </pre>
      * 
      * @param dbname 定义在test4j.properties文件中的数据库名称<br>
@@ -77,7 +77,7 @@ public interface DbFitOp {
      * 	dbname.database.url=jdbc:oracle:thin:@localhost:1523:crms?args[applicationEncoding=UTF-8,databaseEncoding=UTF-8]
      * 	dbname.database.userName=yourdb_test
      * 	dbname.database.password=ca
-     * 	dbname.database.driverClassName=com.alibaba.china.jdbc.SimpleDriver
+     * 	dbname.database.driverClassName=
      * </pre>
      * 
      * @param dataSourceName 数据库配置的前缀, ${dataSourceName}.database.type =...
