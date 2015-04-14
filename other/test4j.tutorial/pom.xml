@@ -14,22 +14,22 @@
 
 	<dependencies>
 		<dependency>
-			<groupId>com.aliyun.test4j</groupId>
+			<groupId>org.test4j</groupId>
 			<artifactId>test4j.testng</artifactId>
 			<version>${test4j.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.aliyun.test4j</groupId>
+			<groupId>org.test4j</groupId>
 			<artifactId>test4j.junit</artifactId>
 			<version>${test4j.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.aliyun.test4j</groupId>
+			<groupId>org.test4j</groupId>
 			<artifactId>test4j.integrated</artifactId>
 			<version>${test4j.version}</version>
 		</dependency>
 		<dependency>
-			<groupId>com.aliyun.test4j</groupId>
+			<groupId>org.test4j</groupId>
 			<artifactId>test4j.integrated</artifactId>
 			<type>test-jar</type>
 			<version>${test4j.version}</version>

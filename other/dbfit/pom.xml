@@ -35,11 +35,6 @@
 
 		<!-- fitness -->
 		<dependency>
-			<groupId>com.alibaba.external</groupId>
-			<artifactId>test.fitnesse</artifactId>
-			<version>20100211</version>
-		</dependency>
-		<dependency>
 			<groupId>javax.annotation</groupId>
 			<artifactId>jsr250-api</artifactId>
 			<scope>provided</scope>
