@@ -46,8 +46,7 @@ public class ClassPathSuiteTest implements ICore {
         }.getMockInstance();
         new MockUp<ClasspathFilterFactory>() {
             @Mock(invocations = 1)
-            public TestClazFinder create(String classpathProperty, FilterCondiction testerFilter) {
-                want.string(classpathProperty).isEqualTo("java.class.path");
+            public TestClazFinder create(FilterCondiction testerFilter) {
                 want.object(testerFilter).reflectionEq(
                         new FilterCondiction(false, new String[0], new SuiteType[] { JUNT4_TEST_CLASSES },
                                 new Class<?>[] { Object.class }, new Class<?>[0]));
@@ -72,8 +71,7 @@ public class ClassPathSuiteTest implements ICore {
         }.getMockInstance();
         new MockUp<ClasspathFilterFactory>() {
             @Mock(invocations = 1)
-            public TestClazFinder create(String classpathProperty, FilterCondiction testerFilter) {
-                want.string(classpathProperty).isEqualTo("my.class.path");
+            public TestClazFinder create(FilterCondiction testerFilter) {
                 want.object(testerFilter).reflectionEq(
                         new FilterCondiction(true, new String[] { "filter1", "!filter2" }, new SuiteType[] {
                                 SUITE_TEST_CLASSES, JUNIT38_TEST_CLASSES },
@@ -103,7 +101,7 @@ public class ClassPathSuiteTest implements ICore {
         }.getMockInstance();
         new MockUp<ClasspathFilterFactory>() {
             @Mock(invocations = 1)
-            public TestClazFinder create(String classpathProperty, FilterCondiction testerFilter) {
+            public TestClazFinder create(FilterCondiction testerFilter) {
                 return finder;
             }
         };

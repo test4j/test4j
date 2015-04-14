@@ -1,11 +1,9 @@
 package org.test4j.junit.filter;
 
 import static org.junit.Assert.assertArrayEquals;
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
-import org.test4j.junit.filter.SuiteType;
 import org.test4j.junit.filter.acceptor.TestInClasspathAcceptor;
 import org.test4j.junit.filter.finder.ClasspathTestClazFinder;
 import org.test4j.junit.filter.finder.FilterCondiction;
@@ -19,7 +17,6 @@ public class ClasspathFilterFactoryTest implements ICore {
                 new SuiteType[] { SuiteType.JUNT4_TEST_CLASSES }, new Class<?>[] { Object.class, getClass() },
                 new Class<?>[] { String.class });
         ClasspathTestClazFinder finder = new ClasspathTestClazFinder(new TestInClasspathAcceptor(filter));
-        assertEquals("my.class.path", reflector.getField(finder, "classpathProperty"));
         TestInClasspathAcceptor tester = (TestInClasspathAcceptor) finder.getTester();
         assertTrue(tester.searchInJars());
         assertArrayEquals(new String[] { "pos" }, filter.getPositiveFilters().toArray());
