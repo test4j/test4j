@@ -1,5 +1,0 @@
-|org.test4j.module.dbfit.fixture.dto.DtoCheckFixture|
-|my checked dto|
-|name|age|parary|is male|
-|ddd|24|45454.3|true|
-|eee|43|45.3|false|

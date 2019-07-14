@@ -1,5 +1,0 @@
-|org.test4j.module.dbfit.utility.FitRunnerTest_RunFit$SymbolPropertyFixture|
-|checkDto|
-|name|age|is male|
-|@{name}|34|true|
-|<<name|34|false|

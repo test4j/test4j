@@ -1,3 +1,0 @@
-asdfsdaf
-<para name="name1">asdfsadf</para>
-<para name="name2">asdfsadf</para>

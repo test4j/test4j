@@ -1,9 +1,0 @@
-|connect|
-
-|clean table|tdd_user|
-
-|insert|tdd_user|
-|id|big_int|
-|1|9999999|
-
-|commit|

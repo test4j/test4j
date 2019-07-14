@@ -1,3 +1,0 @@
-|connect|
-
-|execute|select * from test4j_user|

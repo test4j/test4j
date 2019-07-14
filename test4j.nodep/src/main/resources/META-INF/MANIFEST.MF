@@ -1,5 +1,0 @@
-Manifest-Version: 1.0
-Premain-Class: mockit.internal.startup.Startup
-Agent-Class: mockit.internal.startup.Startup
-Can-Redefine-Classes: true
-Implementation-Version: 1.3

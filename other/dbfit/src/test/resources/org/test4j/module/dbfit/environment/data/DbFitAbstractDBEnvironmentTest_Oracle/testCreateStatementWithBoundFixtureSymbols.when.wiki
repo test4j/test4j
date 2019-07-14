@@ -1,9 +1,0 @@
-|connect|
-
-|clean table|test4j_user|
-
-|insert|test4j_user|
-|id|name|
-|1|my_name|
-
-|commit|

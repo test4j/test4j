@@ -1,8 +1,0 @@
-|org.test4j.module.dbfit.fixture.dto.TestedDtoPropFixture|
-|testMethod_dto|org.test4j.module.dbfit.fixture.dto.TestedDtoPropFixture$MyDto|
-|first name|age|addresses|map|my list|date|
-|a|34|wenyi,wener|key1:value;key2:value|add;ddd|2010-12-10|
-|a|34|road1,road2|key1:aaaa;key2:dddd|asdf;adfas;adfa|2010-12-10|
-
-
-

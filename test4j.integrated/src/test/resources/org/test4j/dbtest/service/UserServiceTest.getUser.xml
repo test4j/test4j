@@ -1,6 +1,0 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<dataset>
-	<test4j_user ID="1" is_deleted="false" />
-	<test4j_user ID="2" is_deleted="false" />
-	<test4j_user ID="3" is_deleted="true" />
-</dataset>

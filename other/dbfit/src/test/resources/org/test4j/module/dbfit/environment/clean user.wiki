@@ -1,5 +1,0 @@
-|connect|
-
-|clean table|tdd_user|
-
-|commit|
