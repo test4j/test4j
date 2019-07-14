@@ -1,0 +1,32 @@
+table,td,th {
+	border: solid #777777;
+}
+
+table {
+	background: #F8F8F8;
+	margin: 5px;
+	padding: 0px;
+	border-width: 1px 0px 0px 1px;
+}
+
+td,th {
+	border-width: 0px 1px 1px 0px;
+	padding: 5px;
+	text-align: center;
+}
+
+td.green {
+	background-color: green;
+}
+
+td.gray {
+	background-color: gray;
+}
+
+td.yellow {
+	background-color: yellow;
+}
+
+td.red {
+	background-color: red;
+}
