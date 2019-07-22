@@ -13,7 +13,7 @@ public interface ISizedAssert<T, E extends IAssert> extends IAssert<T, E> {
      * 数组长度或collection中元素个数等于期望值
      *
      * @param size 期望值
-     * @return
+     * @return 断言自身
      */
     default E sizeIs(int size) {
         SizeOrLengthMatcher matcher = new SizeOrLengthMatcher(size, SizeOrLengthMatcher.SizeOrLengthMatcherType.EQ);
@@ -27,7 +27,7 @@ public interface ISizedAssert<T, E extends IAssert> extends IAssert<T, E> {
      * 数组长度或collection中元素个数等于期望值
      *
      * @param size 期望值
-     * @return
+     * @return 断言自身
      */
     default E sizeEq(int size) {
         SizeOrLengthMatcher matcher = new SizeOrLengthMatcher(size, SizeOrLengthMatcher.SizeOrLengthMatcherType.EQ);
@@ -41,7 +41,7 @@ public interface ISizedAssert<T, E extends IAssert> extends IAssert<T, E> {
      * 数组长度或collection中元素个数大于期望值
      *
      * @param size 期望值
-     * @return
+     * @return 断言自身
      */
     default E sizeGt(int size) {
         SizeOrLengthMatcher matcher = new SizeOrLengthMatcher(size, SizeOrLengthMatcher.SizeOrLengthMatcherType.GT);
@@ -55,7 +55,7 @@ public interface ISizedAssert<T, E extends IAssert> extends IAssert<T, E> {
      * 数组长度或collection中元素个数大于等于期望值
      *
      * @param size 期望值
-     * @return
+     * @return 断言自身
      */
     default E sizeGe(int size) {
         SizeOrLengthMatcher matcher = new SizeOrLengthMatcher(size, SizeOrLengthMatcher.SizeOrLengthMatcherType.GE);
@@ -69,7 +69,7 @@ public interface ISizedAssert<T, E extends IAssert> extends IAssert<T, E> {
      * 数组长度或collection中元素个数小于期望值
      *
      * @param size 期望值
-     * @return
+     * @return 断言自身
      */
     default E sizeLt(int size) {
         SizeOrLengthMatcher matcher = new SizeOrLengthMatcher(size, SizeOrLengthMatcher.SizeOrLengthMatcherType.LT);
@@ -83,7 +83,7 @@ public interface ISizedAssert<T, E extends IAssert> extends IAssert<T, E> {
      * 数组长度或collection中元素个数小于等于期望值
      *
      * @param size 期望值
-     * @return
+     * @return 断言自身
      */
     default E sizeLe(int size) {
         SizeOrLengthMatcher matcher = new SizeOrLengthMatcher(size, SizeOrLengthMatcher.SizeOrLengthMatcherType.LE);
@@ -97,7 +97,7 @@ public interface ISizedAssert<T, E extends IAssert> extends IAssert<T, E> {
      *
      * @param min
      * @param max
-     * @return
+     * @return 断言自身
      */
     default E sizeBetween(int min, int max) {
         SizeOrLengthMatcher geMatcher = new SizeOrLengthMatcher(min, SizeOrLengthMatcher.SizeOrLengthMatcherType.GE);
@@ -113,7 +113,7 @@ public interface ISizedAssert<T, E extends IAssert> extends IAssert<T, E> {
      * 数组长度或collection中元素个数不等于期望值
      *
      * @param size 期望值
-     * @return
+     * @return 断言自身
      */
     default E sizeNe(int size) {
         SizeOrLengthMatcher matcher = new SizeOrLengthMatcher(size, SizeOrLengthMatcher.SizeOrLengthMatcherType.NE);

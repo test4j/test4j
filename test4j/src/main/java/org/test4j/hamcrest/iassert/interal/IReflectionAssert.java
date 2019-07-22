@@ -26,7 +26,7 @@ public interface IReflectionAssert<T, E extends IAssert> extends IAssert<T, E> {
      * @param property 对象属性名称
      * @param expected 期望值
      * @param modes
-     * @return
+     * @return 断言自身
      */
     default E propertyEq(String property, Object expected, EqMode... modes) {
         if (expected instanceof Matcher) {
@@ -44,7 +44,7 @@ public interface IReflectionAssert<T, E extends IAssert> extends IAssert<T, E> {
      * @param expected
      * @param mode
      * @param more
-     * @return
+     * @return 断言自身
      */
     default E propertyEq(String property, String expected, StringMode mode, StringMode... more) {
         StringMode[] modes = new StringMode[more.length + 1];
@@ -64,7 +64,7 @@ public interface IReflectionAssert<T, E extends IAssert> extends IAssert<T, E> {
      * @param properties
      * @param expected
      * @param modes
-     * @return
+     * @return 断言自身
      */
     default E propertyEq(String[] properties, Object expected, EqMode... modes) {
         if (expected instanceof Matcher) {
@@ -79,7 +79,7 @@ public interface IReflectionAssert<T, E extends IAssert> extends IAssert<T, E> {
      *
      * @param property
      * @param matcher
-     * @return
+     * @return 断言自身
      */
     default E propertyMatch(String property, Matcher matcher) {
         PropertyItemMatcher _matcher = new PropertyItemMatcher(property, matcher);
@@ -92,7 +92,7 @@ public interface IReflectionAssert<T, E extends IAssert> extends IAssert<T, E> {
      *
      * @param expected 期望对象
      * @param modes    比较模式,详见org.test4j.hamcrest.matcher.property.reflection.EqMode
-     * @return
+     * @return 断言自身
      */
     default E eqReflect(Object expected, EqMode... modes) {
         if (expected instanceof Matcher) {
@@ -108,7 +108,7 @@ public interface IReflectionAssert<T, E extends IAssert> extends IAssert<T, E> {
      * 在忽略期望值是null或默认值的情况下二者是相等的
      *
      * @param expected
-     * @return
+     * @return 断言自身
      */
     default E eqIgnoreDefault(Object expected) {
         if (expected instanceof Matcher) {
@@ -122,7 +122,7 @@ public interface IReflectionAssert<T, E extends IAssert> extends IAssert<T, E> {
      * 在忽略顺序，默认值，日期的情况下二者是相等的
      *
      * @param expected
-     * @return
+     * @return 断言自身
      */
     default E eqIgnoreAll(Object expected) {
         if (expected instanceof Matcher) {
@@ -137,7 +137,7 @@ public interface IReflectionAssert<T, E extends IAssert> extends IAssert<T, E> {
      * 在忽略元素顺序情况下二者是相等的
      *
      * @param expected
-     * @return
+     * @return 断言自身
      */
     default E eqIgnoreOrder(Object expected) {
         if (expected instanceof Matcher) {
@@ -156,7 +156,7 @@ public interface IReflectionAssert<T, E extends IAssert> extends IAssert<T, E> {
      * 无非这里是把属性写到了Map中，方便一一对应
      *
      * @param expected
-     * @return
+     * @return 断言自身
      */
     default E eqMap(Map expected, EqMode... modes) {
         if (expected instanceof IDataMap) {
@@ -166,11 +166,25 @@ public interface IReflectionAssert<T, E extends IAssert> extends IAssert<T, E> {
         }
     }
 
+    /**
+     * 断言对象和Map对象比较
+     *
+     * @param expected
+     * @param modes
+     * @return 断言自身
+     */
     default E eqHashMap(Map expected, EqMode... modes) {
         MapPropertyEqaulMatcher matcher = new MapPropertyEqaulMatcher(expected, modes);
         return this.assertThat(matcher);
     }
 
+    /**
+     * 断言对象和IDataMap对象比较
+     *
+     * @param expected
+     * @param modes
+     * @return 断言自身
+     */
     default E eqDataMap(IDataMap expected, EqMode... modes) {
         if (this.getAssertObject().isArrayOrList()) {
             Matcher matcher = MatcherBuilder.listEqMapMatcher(expected, modes);

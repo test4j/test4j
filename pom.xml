@@ -44,9 +44,9 @@
     </properties>
 
     <modules>
-        <module>test4j</module>
-        <module>test4j.example</module>
         <module>test4j.nodep</module>
+        <module>test4j</module>
+<!--        <module>test4j.example</module>-->
     </modules>
     <dependencyManagement>
         <dependencies>

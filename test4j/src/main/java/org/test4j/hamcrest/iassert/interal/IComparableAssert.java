@@ -23,7 +23,7 @@ public interface IComparableAssert<T, E extends IComparableAssert> extends IAsse
      * 断言对象小于期望值max
      *
      * @param max 期望最大值
-     * @return
+     * @return 断言自身
      */
     default E isLt(T max) {
         MatcherHelper.assetCanComparable(max);
@@ -36,7 +36,7 @@ public interface IComparableAssert<T, E extends IComparableAssert> extends IAsse
      * 断言对象小于等于期望值max
      *
      * @param max 期望最大值
-     * @return
+     * @return 断言自身
      */
     default E isLe(T max) {
         MatcherHelper.assetCanComparable(max);
@@ -49,7 +49,7 @@ public interface IComparableAssert<T, E extends IComparableAssert> extends IAsse
      * 断言对象大于期望值min
      *
      * @param min 期望最小值
-     * @return
+     * @return 断言自身
      */
     default E isGt(T min) {
         MatcherHelper.assetCanComparable(min);
@@ -63,7 +63,7 @@ public interface IComparableAssert<T, E extends IComparableAssert> extends IAsse
      * 断言对象大于等于期望值min
      *
      * @param min 期望最小值
-     * @return
+     * @return 断言自身
      */
     default E isGe(T min) {
         MatcherHelper.assetCanComparable(min);
@@ -76,7 +76,7 @@ public interface IComparableAssert<T, E extends IComparableAssert> extends IAsse
      *
      * @param min 期望最小值
      * @param max 期望最大值
-     * @return
+     * @return 断言自身
      */
     default E isBetween(T min, T max) {
         MatcherHelper.assetCanComparable(min);
@@ -93,6 +93,9 @@ public interface IComparableAssert<T, E extends IComparableAssert> extends IAsse
     /**
      * want the actual number is less than the expected number.<br>
      * same as {@link #isLt(Object)}
+     *
+     * @param max
+     * @return 断言自身
      */
     default E isLessThan(T max) {
         return this.isLt(max);
@@ -101,6 +104,9 @@ public interface IComparableAssert<T, E extends IComparableAssert> extends IAsse
     /**
      * want the actual number is less than or equal to the expected number.<br>
      * same as {@link #isLe(Object)}
+     *
+     * @param max
+     * @return 断言自身
      */
     default E isLessEqual(T max) {
         return this.isLe(max);
@@ -109,6 +115,9 @@ public interface IComparableAssert<T, E extends IComparableAssert> extends IAsse
     /**
      * want the actual number is greater than the expected number.<br>
      * same as {@link #isGt(Object)}
+     *
+     * @param min
+     * @return 断言自身
      */
     default E isGreaterThan(T min) {
         return this.isGt(min);
@@ -117,6 +126,9 @@ public interface IComparableAssert<T, E extends IComparableAssert> extends IAsse
     /**
      * want the actual number is greater than or equal to the expected number.<br>
      * same as {@link #isGe(Object)}
+     *
+     * @param min
+     * @return 断言自身
      */
     default E isGreaterEqual(T min) {
         return this.isGe(min);

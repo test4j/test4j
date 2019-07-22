@@ -25,7 +25,7 @@ public interface IBaseAssert<T, E extends IAssert> extends Matcher<T>, IAssert<T
      * 对象的toString等于期望值
      *
      * @param expected
-     * @return
+     * @return 断言自身
      */
     default E eqToString(String expected) {
         Matcher<String> matcher = HasToString.hasToString(expected);
@@ -36,7 +36,7 @@ public interface IBaseAssert<T, E extends IAssert> extends Matcher<T>, IAssert<T
      * 对象的toString符合断言器判断
      *
      * @param matcher
-     * @return
+     * @return 断言自身
      */
     default E eqToString(IStringAssert matcher) {
         Matcher<String> _matcher = HasToString.hasToString(matcher);
@@ -48,7 +48,7 @@ public interface IBaseAssert<T, E extends IAssert> extends Matcher<T>, IAssert<T
      * same as method "isEqualTo(T)"
      *
      * @param expected 期望值
-     * @return
+     * @return 断言自身
      */
     default E eq(T expected) {
         Matcher matcher = IsEqual.equalTo(expected);
@@ -60,7 +60,7 @@ public interface IBaseAssert<T, E extends IAssert> extends Matcher<T>, IAssert<T
      * same as method "eq(T)"
      *
      * @param expected 期望值
-     * @return
+     * @return 断言自身
      */
     default E isEqualTo(T expected) {
         Matcher matcher = IsEqual.equalTo(expected);
@@ -72,7 +72,7 @@ public interface IBaseAssert<T, E extends IAssert> extends Matcher<T>, IAssert<T
      *
      * @param message  错误信息
      * @param expected 期望值
-     * @return
+     * @return 断言自身
      */
     default E isEqualTo(String message, T expected) {
         Object _expected = this.getAssertObject().isNumberAndConvert(expected);
@@ -84,7 +84,7 @@ public interface IBaseAssert<T, E extends IAssert> extends Matcher<T>, IAssert<T
      * 断言对象不等于期望的值
      *
      * @param expected 期望值
-     * @return
+     * @return 断言自身
      */
     default E notEqualTo(T expected) {
         Matcher matcher = IsNot.not(IsEqual.equalTo(expected));
@@ -95,7 +95,7 @@ public interface IBaseAssert<T, E extends IAssert> extends Matcher<T>, IAssert<T
      * 断言对象可以在期望值里面找到
      *
      * @param values 期望值
-     * @return
+     * @return 断言自身
      */
     default E in(T... values) {
         Matcher<T> matcher = IsIn.isOneOf(values);
@@ -106,7 +106,7 @@ public interface IBaseAssert<T, E extends IAssert> extends Matcher<T>, IAssert<T
      * 断言对象不可以在期望值里面找到
      *
      * @param values 期望值
-     * @return
+     * @return 断言自身
      */
     default E notIn(T... values) {
         Matcher _matcher = IsNot.not(IsIn.isOneOf(values));
@@ -117,7 +117,7 @@ public interface IBaseAssert<T, E extends IAssert> extends Matcher<T>, IAssert<T
      * 断言对象的类型等于期望类型
      *
      * @param expected 期望类型
-     * @return
+     * @return 断言自身
      */
     default E clazIs(Class expected) {
         Matcher matcher = Is.isA(expected);
@@ -128,7 +128,7 @@ public interface IBaseAssert<T, E extends IAssert> extends Matcher<T>, IAssert<T
      * 断言对象的类型是期望类型的子类
      *
      * @param claz
-     * @return
+     * @return 断言自身
      */
     default E clazIsSubFrom(Class claz) {
         ClassAssignFromMatcher matcher = new ClassAssignFromMatcher(claz);
@@ -141,7 +141,7 @@ public interface IBaseAssert<T, E extends IAssert> extends Matcher<T>, IAssert<T
      *
      * @param matcher  对象行为定义，具体定义参见 ext.test4j.hamcrest.Matcher
      * @param matchers
-     * @return
+     * @return 断言自身
      */
     default E any(E matcher, E... matchers) {
         List<Matcher<? super Object>> list = ListHelper.toList(matchers);
@@ -156,7 +156,7 @@ public interface IBaseAssert<T, E extends IAssert> extends Matcher<T>, IAssert<T
      *
      * @param matcher
      * @param matchers
-     * @return
+     * @return 断言自身
      */
     default E all(E matcher, E... matchers) {
         List<Matcher<? super Object>> list = ListHelper.toList(matchers);
@@ -169,7 +169,7 @@ public interface IBaseAssert<T, E extends IAssert> extends Matcher<T>, IAssert<T
      * 断言对象不符合matcher所定义的行为
      *
      * @param matcher 对象行为定义，具体定义参见 ext.test4j.hamcrest.Matcher
-     * @return
+     * @return 断言自身
      */
     default E not(E matcher) {
         Matcher<T> _matcher = IsNot.not(matcher);
@@ -181,7 +181,7 @@ public interface IBaseAssert<T, E extends IAssert> extends Matcher<T>, IAssert<T
      *
      * @param matcher
      * @param matchers
-     * @return
+     * @return 断言自身
      */
     default E notAny(Matcher matcher, Matcher... matchers) {
         List<Matcher<? super Object>> ms = new ArrayList<>();
@@ -198,7 +198,7 @@ public interface IBaseAssert<T, E extends IAssert> extends Matcher<T>, IAssert<T
      *
      * @param matcher
      * @param matchers
-     * @return
+     * @return 断言自身
      */
     default E notAll(Matcher matcher, Matcher... matchers) {
         List<Matcher<? super Object>> ms = new ArrayList<>();
@@ -214,7 +214,7 @@ public interface IBaseAssert<T, E extends IAssert> extends Matcher<T>, IAssert<T
      * 断言对象和期望值是同一个对象
      *
      * @param value 期望值
-     * @return
+     * @return 断言自身
      */
     default E same(T value) {
         Matcher _matcher = IsSame.sameInstance(value);
@@ -224,7 +224,7 @@ public interface IBaseAssert<T, E extends IAssert> extends Matcher<T>, IAssert<T
     /**
      * 断言对象可以使任意的值
      *
-     * @return
+     * @return 断言自身
      */
     default E any() {
         Matcher _matcher = IsAnything.anything();
@@ -234,7 +234,7 @@ public interface IBaseAssert<T, E extends IAssert> extends Matcher<T>, IAssert<T
     /**
      * 断言对象值等于null
      *
-     * @return
+     * @return 断言自身
      */
     default E isNull() {
         Matcher _matcher = IsNull.nullValue();
@@ -244,7 +244,7 @@ public interface IBaseAssert<T, E extends IAssert> extends Matcher<T>, IAssert<T
     /**
      * 断言对象值等于null
      *
-     * @return
+     * @return 断言自身
      */
     default E isNull(String message) {
         Matcher _matcher = IsNull.nullValue();
@@ -254,7 +254,7 @@ public interface IBaseAssert<T, E extends IAssert> extends Matcher<T>, IAssert<T
     /**
      * 断言对象值不等于null
      *
-     * @return
+     * @return 断言自身
      */
     default E notNull() {
         Matcher _matcher = IsNull.notNullValue();
@@ -264,7 +264,7 @@ public interface IBaseAssert<T, E extends IAssert> extends Matcher<T>, IAssert<T
     /**
      * 断言对象值不等于null
      *
-     * @return
+     * @return 断言自身
      */
     default E notNull(String message) {
         Matcher _matcher = IsNull.notNullValue();

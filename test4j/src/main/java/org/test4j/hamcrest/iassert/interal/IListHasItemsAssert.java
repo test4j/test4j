@@ -25,7 +25,7 @@ public interface IListHasItemsAssert<T, E extends IAssert> extends IAssert<T, E>
      *
      * @param item  expected item
      * @param items other expected items
-     * @return
+     * @return 断言自身
      */
     default E hasAllItems(Object item, Object... items) {
         this.getAssertObject().assertTargetClassNotNull();
@@ -40,7 +40,7 @@ public interface IListHasItemsAssert<T, E extends IAssert> extends IAssert<T, E>
      * argument.
      *
      * @param value
-     * @return
+     * @return 断言自身
      */
     default E hasItems(Object value) {
         this.getAssertObject().assertTargetClassNotNull();
@@ -57,7 +57,7 @@ public interface IListHasItemsAssert<T, E extends IAssert> extends IAssert<T, E>
      *
      * @param item
      * @param items
-     * @return
+     * @return 断言自身
      */
     default E hasItems(Object item, Object... items) {
         return this.hasAllItems(item, items);
@@ -69,7 +69,7 @@ public interface IListHasItemsAssert<T, E extends IAssert> extends IAssert<T, E>
      *
      * @param item  expected item
      * @param items other expected items
-     * @return
+     * @return 断言自身
      */
     default E hasAnyItems(Object item, Object... items) {
         this.getAssertObject().assertTargetClassNotNull();
@@ -85,7 +85,7 @@ public interface IListHasItemsAssert<T, E extends IAssert> extends IAssert<T, E>
      *
      * @param matcher
      * @param matchers
-     * @return
+     * @return 断言自身
      */
     default E allItemsMatchAll(Matcher matcher, Matcher... matchers) {
         List<Matcher<? super T>> list = MatcherHelper.getItemsMatchers(ItemsMode.AllItems, matcher, matchers);
@@ -98,7 +98,7 @@ public interface IListHasItemsAssert<T, E extends IAssert> extends IAssert<T, E>
      *
      * @param matcher
      * @param matchers
-     * @return
+     * @return 断言自身
      */
     default E allItemsMatchAny(Matcher matcher, Matcher... matchers) {
         List<Matcher<? super T>> list = MatcherHelper.getItemsMatchers(ItemsMode.AllItems, matcher, matchers);
@@ -111,7 +111,7 @@ public interface IListHasItemsAssert<T, E extends IAssert> extends IAssert<T, E>
      *
      * @param matcher
      * @param matchers
-     * @return
+     * @return 断言自身
      */
     default E anyItemsMatchAll(Matcher matcher, Matcher... matchers) {
         Matcher m = MatcherHelper.getAnyItemsMatchAll(matcher, matchers);
@@ -124,7 +124,7 @@ public interface IListHasItemsAssert<T, E extends IAssert> extends IAssert<T, E>
      *
      * @param matcher
      * @param matchers
-     * @return
+     * @return 断言自身
      */
     default E anyItemsMatchAny(Matcher matcher, Matcher... matchers) {
         List<Matcher<? super T>> list = MatcherHelper.getItemsMatchers(ItemsMode.AnyItems, matcher, matchers);
@@ -150,7 +150,7 @@ public interface IListHasItemsAssert<T, E extends IAssert> extends IAssert<T, E>
      * @param matchMode
      * @param matcher
      * @param matchers
-     * @return
+     * @return 断言自身
      */
     default E match(ItemsMode itemsMode, MatchMode matchMode, Matcher matcher, Matcher... matchers) {
         if (itemsMode == ItemsMode.AllItems && matchMode == MatchMode.MatchAll) {

@@ -34,19 +34,42 @@ public interface IAssert<T, E extends IAssert> extends Matcher<T> {
      *
      * @param <F>
      * @param claz
-     * @return
+     * @return 断言自身
      */
     <F> F wanted(Class<F> claz);
 
+    /**
+     * 打印断言对象
+     *
+     * @return 断言自身
+     */
     default E print() {
         MessageHelper.info(JSON.toJSON(this.getAssertObject().getValue(), true));
         return (E) this;
     }
 
+    /**
+     * 断言
+     *
+     * @param matcher
+     * @return 断言自身
+     */
     E assertThat(Matcher matcher);
 
+    /**
+     * 断言
+     *
+     * @param message
+     * @param matcher
+     * @return 断言自身
+     */
     E assertThat(String message, Matcher matcher);
 
+    /**
+     * 返回断言对象
+     *
+     * @return 断言自身
+     */
     AssertObject getAssertObject();
 
     enum AssertType {

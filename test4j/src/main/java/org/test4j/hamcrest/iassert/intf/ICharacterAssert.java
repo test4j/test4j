@@ -11,8 +11,10 @@ public interface ICharacterAssert
         extends
         IBaseAssert<Character, ICharacterAssert> {
     /**
+     * 断言字符为ch
+     *
      * @param ch
-     * @return
+     * @return 断言自身
      */
     ICharacterAssert is(char ch);
 }

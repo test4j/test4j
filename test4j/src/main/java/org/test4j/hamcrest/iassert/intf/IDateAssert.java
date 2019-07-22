@@ -18,7 +18,7 @@ public interface IDateAssert<T>
      * 和长整型时间比较
      *
      * @param time
-     * @return
+     * @return 断言自身
      */
     IDateAssert<T> isEqualTo(long time);
 
@@ -26,7 +26,7 @@ public interface IDateAssert<T>
      * 和calendar比较
      *
      * @param calendar
-     * @return
+     * @return 断言自身
      */
     IDateAssert<T> isEqualTo(Calendar calendar);
 
@@ -34,7 +34,7 @@ public interface IDateAssert<T>
      * 日历值的年等于期望值
      *
      * @param year 期望值
-     * @return
+     * @return 断言自身
      */
     IDateAssert<T> isYear(int year);
 
@@ -42,7 +42,7 @@ public interface IDateAssert<T>
      * 日历值的年等于期望值
      *
      * @param year 期望值
-     * @return
+     * @return 断言自身
      */
     IDateAssert<T> isYear(String year);
 
@@ -50,7 +50,7 @@ public interface IDateAssert<T>
      * 日历值的月份等于期望值
      *
      * @param month 期望值
-     * @return
+     * @return 断言自身
      */
     IDateAssert<T> isMonth(int month);
 
@@ -58,7 +58,7 @@ public interface IDateAssert<T>
      * 日历值的月份等于期望值
      *
      * @param month 期望值
-     * @return
+     * @return 断言自身
      */
     IDateAssert<T> isMonth(String month);
 
@@ -66,7 +66,7 @@ public interface IDateAssert<T>
      * 日历值的日期等于期望值
      *
      * @param day 期望值
-     * @return
+     * @return 断言自身
      */
     IDateAssert<T> isDay(int day);
 
@@ -74,7 +74,7 @@ public interface IDateAssert<T>
      * 日历值的日期等于期望值
      *
      * @param day 期望值
-     * @return
+     * @return 断言自身
      */
     IDateAssert<T> isDay(String day);
 
@@ -82,7 +82,7 @@ public interface IDateAssert<T>
      * 日历值的小时(24小时制)等于期望值
      *
      * @param hour 期望值
-     * @return
+     * @return 断言自身
      */
     IDateAssert<T> isHour(int hour);
 
@@ -90,7 +90,7 @@ public interface IDateAssert<T>
      * 日历值的小时(24小时制)等于期望值
      *
      * @param hour 期望值
-     * @return
+     * @return 断言自身
      */
     IDateAssert<T> isHour(String hour);
 
@@ -98,7 +98,7 @@ public interface IDateAssert<T>
      * 日历值的分钟等于期望值
      *
      * @param minute 期望值
-     * @return
+     * @return 断言自身
      */
     IDateAssert<T> isMinute(int minute);
 
@@ -106,7 +106,7 @@ public interface IDateAssert<T>
      * 日历值的分钟等于期望值
      *
      * @param minute 期望值
-     * @return
+     * @return 断言自身
      */
     IDateAssert<T> isMinute(String minute);
 
@@ -114,7 +114,7 @@ public interface IDateAssert<T>
      * 日历值的秒等于期望值
      *
      * @param second 期望值
-     * @return
+     * @return 断言自身
      */
     IDateAssert<T> isSecond(int second);
 
@@ -122,7 +122,7 @@ public interface IDateAssert<T>
      * 日历值的秒等于期望值
      *
      * @param second 期望值
-     * @return
+     * @return 断言自身
      */
     IDateAssert<T> isSecond(String second);
 
@@ -131,7 +131,7 @@ public interface IDateAssert<T>
      *
      * @param expected
      * @param format
-     * @return
+     * @return 断言自身
      */
     IDateAssert<T> eqByFormat(String expected, String format);
 
@@ -140,7 +140,7 @@ public interface IDateAssert<T>
      * 默认格式为: yyyy-MM-dd 或 yyyy-MM-dd hh24:mm:ss
      *
      * @param expected
-     * @return
+     * @return 断言自身
      */
     IDateAssert<T> eqByFormat(String expected);
 }
