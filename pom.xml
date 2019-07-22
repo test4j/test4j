@@ -30,7 +30,7 @@
     <developers>
         <developer>
             <id>davey.wu</id>
-            <name>吴大瑞</name>
+            <name>darui.wu</name>
             <email>darui.wu@163.com</email>
         </developer>
     </developers>
@@ -225,23 +225,23 @@
 
     <build>
         <plugins>
-            <!--			<plugin>-->
-            <!--				<groupId>org.apache.maven.plugins</groupId>-->
-            <!--				<artifactId>maven-gpg-plugin</artifactId>-->
-            <!--				<version>1.4</version>-->
-            <!--				<configuration>-->
-            <!--					<passphrase>${gpg.passphrase}</passphrase>-->
-            <!--				</configuration>-->
-            <!--				<executions>-->
-            <!--					<execution>-->
-            <!--						<id>sign-artifacts</id>-->
-            <!--						<phase>verify</phase>-->
-            <!--						<goals>-->
-            <!--							<goal>sign</goal>-->
-            <!--						</goals>-->
-            <!--					</execution>-->
-            <!--				</executions>-->
-            <!--			</plugin>-->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-gpg-plugin</artifactId>
+                <version>1.6</version>
+<!--                <configuration>-->
+<!--                    <passphrase>${gpg.passphrase}</passphrase>-->
+<!--                </configuration>-->
+                <executions>
+                    <execution>
+                        <id>sign-artifacts</id>
+                        <phase>verify</phase>
+                        <goals>
+                            <goal>sign</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-release-plugin</artifactId>
@@ -264,7 +264,6 @@
                         <groupId>org.codehaus.plexus</groupId>
                         <artifactId>plexus-compiler-javac</artifactId>
                         <version>2.8.5</version>
-                        <!--						<version>1.8.1-patch</version>-->
                     </dependency>
                 </dependencies>
             </plugin>
@@ -326,12 +325,12 @@
     </build>
     <distributionManagement>
         <snapshotRepository>
-            <id>sonatype-nexus-snapshots</id>
+            <id>snapshot</id>
             <name>Sonatype Nexus snapshot repository</name>
             <url>https://oss.sonatype.org/content/repositories/snapshots</url>
         </snapshotRepository>
         <repository>
-            <id>sonatype-nexus-staging</id>
+            <id>release</id>
             <name>Sonatype Nexus release repository</name>
             <url>https://oss.sonatype.org/service/local/staging/deploy/maven2/</url>
         </repository>

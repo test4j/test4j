@@ -6,7 +6,6 @@ import org.test4j.tools.commons.ArrayHelper;
 import org.test4j.tools.commons.Reflector;
 import org.test4j.tools.datagen.AbstractDataGenerator;
 import org.test4j.tools.datagen.AbstractDataMap;
-import org.test4j.tools.datagen.DataProviderIterator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -83,8 +82,5 @@ public interface ICore {
         public static DataMap create() {
             return new DataMap();
         }
-    }
-
-    class DataIterator extends DataProviderIterator<Object> {
     }
 }
