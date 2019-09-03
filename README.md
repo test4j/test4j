@@ -11,11 +11,10 @@ test4j是一个单元测试和集成测试的框架，它提供了以下特性
 - 场景化业务测试，模块化步骤
 - 和jmockit组合使用
 
-##使用
+##使用##
 - maven pom.xml文件定义
 
 ```xml
-<project>
 <properties>
     <jmockit.version>1.4.5</jmockit.version>
 </properties>
@@ -57,5 +56,4 @@ test4j是一个单元测试和集成测试的框架，它提供了以下特性
         </plugin>
     </plugins>
 </build>
-</project>
 ```

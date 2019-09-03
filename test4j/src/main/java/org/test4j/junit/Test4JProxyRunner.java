@@ -11,7 +11,6 @@ import org.junit.runners.ParentRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestClass;
-import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.spring.interal.SpringEnv;
 
 import java.lang.annotation.Annotation;
@@ -22,7 +21,6 @@ public class Test4JProxyRunner extends BlockJUnit4ClassRunner {
 
     public Test4JProxyRunner(Class<?> testClass) throws Exception {
         super(testClass);
-        MessageHelper.info("\n\n=====use Test4JProxyRunner=====\n\n");
     }
 
     @Override

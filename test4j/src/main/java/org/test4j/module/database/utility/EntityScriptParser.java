@@ -11,18 +11,17 @@ import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
 public class EntityScriptParser {
-    private static final String NEW_LINE_JOIN = ",\n\t" ;
+    private static final String NEW_LINE_JOIN = ",\n\t";
 
-    private Class klass;
+    private final Class klass;
 
-    public EntityScriptParser(Class klass) {
+    private final DbTypeConvert typeConvert;
+
+    public EntityScriptParser(DbTypeConvert typeConvert, Class klass) {
+        this.typeConvert = typeConvert == null ? new NonDbTypeConvert() : typeConvert;
         this.klass = klass;
     }
 
-    public static String convertType(String type) {
-        // 默认， 如果没有特殊处理，返回原类型
-        return type;
-    }
 
     /**
      * 根据实体klasses定义自动生成数据库脚本
@@ -30,9 +29,9 @@ public class EntityScriptParser {
      * @param klasses
      * @return
      */
-    public static String script(Class... klasses) {
+    public static String script(DbTypeConvert typeConvert, Class... klasses) {
         return Arrays.stream(klasses)
-                .map(EntityScriptParser::new)
+                .map(klass -> new EntityScriptParser(typeConvert, klass))
                 .map(EntityScriptParser::h2sql)
                 .collect(joining("\n\n"));
     }
@@ -91,7 +90,7 @@ public class EntityScriptParser {
     }
 
     private String convertColumnType(String type) {
-        String _type = convertType(type.toLowerCase());
+        String _type = typeConvert.convertType(type);
         return _type == null ? type : _type;
     }
 
@@ -136,6 +135,28 @@ public class EntityScriptParser {
                 this.primary = def.primary();
                 this.notNull = def.notNull();
             }
+        }
+    }
+
+    public interface DbTypeConvert {
+        /**
+         * 原生数据库字段类型转换为测试数据库（内存库）字段类型
+         *
+         * @param type 原生数据库字段类型
+         * @return 测试数据库（内存库）字段类型
+         */
+        String convertType(String type);
+    }
+
+    public static class NonDbTypeConvert implements DbTypeConvert {
+        /**
+         * 默认， 如果没有特殊处理，返回原类型
+         *
+         * @param type
+         * @return
+         */
+        public String convertType(String type) {
+            return type;
         }
     }
 }

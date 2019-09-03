@@ -14,11 +14,6 @@ import org.test4j.tools.commons.StringHelper;
 
 /**
  * A class for loading test4j modules.
- * <p/>
- * The core names set by the {@link #PROPKEY_MODULES} property which modules
- * will be loaded. <br>
- * These names can then be used to construct properties that define the
- * classnames and optionally the dependencies of these modules. E.g.
  *
  * <pre>
  * <code>
@@ -84,10 +79,11 @@ public class ModulesLoader {
                 ((Module) module).init();// initialize module
                 modules.add((Module) module);
             } catch (Throwable t) {
-                String error = "An exception occured during the loading of core module " + moduleName
-                        + " with module class name " + className;
-                // throw new Test4JException(error, t);
-                System.out.println(error);
+                String error = "An exception[" + t.getClass().getName() + "] error:" + t.getMessage();
+                MessageHelper.warn("============disable module:" + moduleName + "========");
+                MessageHelper.warn("========================");
+                MessageHelper.warn(error);
+                MessageHelper.warn("========================");
             }
         }
         ModulesManager.initManager(modules);

@@ -4,7 +4,7 @@
     <parent>
         <groupId>org.test4j</groupId>
         <artifactId>test4j.parent</artifactId>
-        <version>2.5.0</version>
+        <version>2.5.1</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
     <artifactId>test4j</artifactId>
@@ -16,8 +16,8 @@
 
     <dependencies>
         <dependency>
-            <groupId>org.test4j</groupId>
-            <artifactId>test4j.nodep</artifactId>
+            <groupId>com.github.atool</groupId>
+            <artifactId>mbplus</artifactId>
         </dependency>
         <dependency>
             <groupId>org.objenesis</groupId>
