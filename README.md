@@ -16,7 +16,7 @@ test4j是一个单元测试和集成测试的框架，它提供了以下特性
 
 ```xml
 <properties>
-    <jmockit.version>1.4.5</jmockit.version>
+    <jmockit.version>1.45</jmockit.version>
 </properties>
 <dependencies>
     <dependency>
@@ -49,7 +49,7 @@ test4j是一个单元测试和集成测试的框架，它提供了以下特性
                 <testFailureIgnore>true</testFailureIgnore>
                 <parallel>all</parallel>
                 <!-- 重要，argLine用于surefire插件启动jmockit和test4j -->
-                <argLine>-javaagent:"${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar -Dfakes=org.test4j.junit.Test4JBuilder</argLine>
+                <argLine>-javaagent:"${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar" -Dfakes=org.test4j.junit.Test4JBuilder</argLine>
                 <forkMode>always</forkMode>
                 <threadCount>1</threadCount>
             </configuration>
