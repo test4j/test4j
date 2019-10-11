@@ -120,6 +120,7 @@ public class StepResult {
                 list.add(temp.substring(start, end + 1));
                 temp = temp.substring(end + 1);
             } else {
+                list.add(temp);
                 break;
             }
         }

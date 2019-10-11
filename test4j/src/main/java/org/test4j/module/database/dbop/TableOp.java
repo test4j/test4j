@@ -145,7 +145,7 @@ public class TableOp implements ITableOp {
     public ICollectionAssert queryWhere(String where) {
         this.setDbOperator(true);
         try {
-            String _where = StringHelper.isBlankOrNull(where) ? "" : "where " + where;
+            String _where = StringHelper.isBlankOrNull(where) ? "" : " where " + where;
             String query = "select * from " + table + _where;
             List list = SqlRunner.queryMapList(env, query);
             return new CollectionAssert(list);
@@ -158,7 +158,7 @@ public class TableOp implements ITableOp {
     public ICollectionAssert printAndAssert(String where) {
         this.setDbOperator(true);
         try {
-            String _where = StringHelper.isBlankOrNull(where) ? "" : "where " + where;
+            String _where = StringHelper.isBlankOrNull(where) ? "" : " where " + where;
             String query = "select * from " + table + _where;
             List list = SqlRunner.queryMapList(env, query);
             MessageHelper.info(query + "\n\t" + JSON.toJSON(list, true));

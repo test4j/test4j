@@ -16,6 +16,7 @@ import java.io.Serializable;
 import java.lang.reflect.Field;
 import java.lang.reflect.Method;
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
@@ -23,9 +24,12 @@ import java.util.concurrent.locks.ReentrantLock;
 import static java.util.stream.Collectors.joining;
 
 public class MixProxy<T> implements MethodInterceptor {
-    private static final String To_String_Method = "toString";
-
-    private static final String HashCode_Method = "hasCode";
+    private static final Set<String> Skip_Methods = new HashSet<String>() {
+        {
+            this.add("toString");
+            this.add("hashCode");
+        }
+    };
 
     private String klass;
     private boolean injected = false;
@@ -113,7 +117,7 @@ public class MixProxy<T> implements MethodInterceptor {
     }
 
     private boolean isSkipMethod(String method, String klass) {
-        if (To_String_Method.equals(method) || HashCode_Method.equals(method)) {
+        if (Skip_Methods.contains(method)) {
             return true;
         } else if (ICore.class.getName().equals(klass)) {
             return true;

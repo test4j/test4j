@@ -65,4 +65,22 @@ public abstract class AbstractDataGenerator {
     public static AbstractDataGenerator increase(Number from, Number step) {
         return new IncreaseDataGenerator(from, step);
     }
+
+    /**
+     * 按格式输出
+     *
+     * @param format 字符串格式， 比如 "abc%sABC",abc是前缀，ABC是后缀，%s是序号
+     * @param from
+     * @param step
+     * @return
+     */
+    public static AbstractDataGenerator increase(String format, Number from, Number step) {
+        return new IncreaseDataGenerator(from, step) {
+            @Override
+            public Object generate(int index) {
+                Object _index = super.generate(index);
+                return String.format(format, _index);
+            }
+        };
+    }
 }
