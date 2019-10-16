@@ -26,7 +26,7 @@ public interface IMix<T> extends ICore, ISpring, IDatabase {
      *
      * @return
      */
-    default Object getData() {
-        return SpecContext.getSharedData();
+    default T getData() {
+        return (T)SpecContext.getSharedData();
     }
 }

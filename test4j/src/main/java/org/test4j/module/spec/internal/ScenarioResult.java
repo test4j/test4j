@@ -66,7 +66,7 @@ public class ScenarioResult implements Serializable {
             }
         } catch (Throwable e) {
             if(eKlass != null){
-                SpecContext.setExceptedException(e);
+                SpecContext.setExpectedException(e);
             }else {
                 result.setError(e);
                 throw e;

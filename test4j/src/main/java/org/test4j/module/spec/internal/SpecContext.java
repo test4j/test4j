@@ -9,7 +9,7 @@ package org.test4j.module.spec.internal;
 public class SpecContext {
     private static ThreadLocal<Object> sharedData = new ThreadLocal<>();
 
-    private static ThreadLocal<Throwable> exceptedException = new ThreadLocal<>();
+    private static ThreadLocal<Throwable> expectedException = new ThreadLocal<>();
 
     /**
      * 设置story测试步骤共享数据
@@ -34,8 +34,8 @@ public class SpecContext {
      *
      * @param e
      */
-    public static void setExceptedException(Throwable e) {
-        exceptedException.set(e);
+    public static void setExpectedException(Throwable e) {
+        expectedException.set(e);
     }
 
     /**
@@ -43,12 +43,12 @@ public class SpecContext {
      *
      * @return
      */
-    public static Throwable getExceptedException() {
-        return exceptedException.get();
+    public static Throwable getExpectedException() {
+        return expectedException.get();
     }
 
     public static void clean() {
-        exceptedException.remove();
+        expectedException.remove();
         sharedData.remove();
     }
 }

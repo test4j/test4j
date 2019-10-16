@@ -34,7 +34,7 @@ public class ScenarioThen implements IThen {
     @Override
     public IThen want(Consumer<Throwable> consumer) throws RuntimeException {
         try {
-            consumer.accept(SpecContext.getExceptedException());
+            consumer.accept(SpecContext.getExpectedException());
             return this;
         } catch (Throwable e) {
             throw new RuntimeException("步骤 - 异常验证错误：" + e.getMessage(), e);
