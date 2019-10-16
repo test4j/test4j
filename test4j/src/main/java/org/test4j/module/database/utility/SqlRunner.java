@@ -150,6 +150,7 @@ public class SqlRunner {
                 } else {
                     st.setObject(index, value);
                 }
+                index++;
             } catch (Throwable e) {
                 throw new RuntimeException("set column[" + key + "] value error:" + e.getMessage(), e);
             }

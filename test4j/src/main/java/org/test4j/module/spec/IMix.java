@@ -2,6 +2,7 @@ package org.test4j.module.spec;
 
 import org.test4j.module.ICore;
 import org.test4j.module.database.IDatabase;
+import org.test4j.module.spec.internal.SpecContext;
 import org.test4j.module.spring.ISpring;
 
 /**
@@ -10,22 +11,22 @@ import org.test4j.module.spring.ISpring;
  *
  * @author darui.wudr 2013-6-3 下午7:04:36
  */
-public interface IMix<T extends SharedData> extends ICore, ISpring, IDatabase {
+public interface IMix<T> extends ICore, ISpring, IDatabase {
     /**
      * 设置共享数据
      *
      * @param data
      */
-    default void setSharedData(T data) {
-        throw new RuntimeException("please over write this method in Mix Class.");
+    default void setData(T data) {
+        SpecContext.setSharedData(data);
     }
 
-    class Default<T extends SharedData> implements IMix<T> {
-        protected T shared;
-
-        @Override
-        public void setSharedData(T data) {
-            this.shared = data;
-        }
+    /**
+     * 返回共享数据
+     *
+     * @return
+     */
+    default Object getData() {
+        return SpecContext.getSharedData();
     }
 }

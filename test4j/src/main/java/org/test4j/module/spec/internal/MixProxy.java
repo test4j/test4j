@@ -1,6 +1,5 @@
 package org.test4j.module.spec.internal;
 
-
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
@@ -24,10 +23,12 @@ import java.util.concurrent.locks.ReentrantLock;
 import static java.util.stream.Collectors.joining;
 
 public class MixProxy<T> implements MethodInterceptor {
-    private static final Set<String> Skip_Methods = new HashSet<String>() {
+    private static final Set<String> Ignore_Methods = new HashSet<String>() {
         {
             this.add("toString");
             this.add("hashCode");
+            this.add("setData");
+            this.add("getData");
         }
     };
 
@@ -104,9 +105,6 @@ public class MixProxy<T> implements MethodInterceptor {
         try {
             result = methodProxy.invokeSuper(obj, args);
             return result;
-        } catch (Throwable e) {
-            scenario.getLastStep().setError(e);
-            throw e;
         } finally {
             try {
                 scenario.getLastStep().setDescription(name, description, args, result);
@@ -117,7 +115,7 @@ public class MixProxy<T> implements MethodInterceptor {
     }
 
     private boolean isSkipMethod(String method, String klass) {
-        if (Skip_Methods.contains(method)) {
+        if (Ignore_Methods.contains(method)) {
             return true;
         } else if (ICore.class.getName().equals(klass)) {
             return true;

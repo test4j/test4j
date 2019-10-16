@@ -4,6 +4,7 @@ package org.test4j.module.spec.internal;
 import lombok.Getter;
 import lombok.Setter;
 import org.test4j.function.SExecutor;
+import org.test4j.module.ICore;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.tools.commons.StringHelper;
 
@@ -53,15 +54,23 @@ public class ScenarioResult implements Serializable {
      * @param type
      * @param description
      * @param lambda
+     * @param eKlass
      * @throws Exception
      */
-    public void doStep(StepType type, String description, SExecutor lambda) throws Exception {
+    public void doStep(StepType type, String description, SExecutor lambda, Class<? extends Throwable> eKlass) throws Exception {
         StepResult result = this.addResult(type, description);
         try {
             lambda.doIt();
+            if (eKlass != null) {
+                ICore.want.fail("expected exception: " + eKlass.getName());
+            }
         } catch (Throwable e) {
-            result.setError(e);
-            throw e;
+            if(eKlass != null){
+                SpecContext.setExceptedException(e);
+            }else {
+                result.setError(e);
+                throw e;
+            }
         }
     }
 
@@ -70,10 +79,12 @@ public class ScenarioResult implements Serializable {
      *
      * @param type
      * @param lambda
+     * @param eKlass
+     *
      * @throws Exception
      */
-    public void doStep(StepType type, SExecutor lambda) throws Exception {
-        this.doStep(type, null, lambda);
+    public void doStep(StepType type, SExecutor lambda, Class<? extends Throwable> eKlass) throws Exception {
+        this.doStep(type, null, lambda, eKlass);
     }
 
     private StepResult addResult(StepType type, String description) {

@@ -12,7 +12,7 @@ public class ScenarioGiven implements IGiven {
     @Override
     public IGiven given(String description, SExecutor lambda) throws RuntimeException {
         try {
-            this.scenario.doStep(StepType.Given, description, lambda);
+            this.scenario.doStep(StepType.Given, description, lambda, null);
             return this;
         } catch (Throwable e) {
             throw new RuntimeException("步骤 - " + description + ", 执行错误：" + e.getMessage(), e);
@@ -22,7 +22,7 @@ public class ScenarioGiven implements IGiven {
     @Override
     public IGiven given(SExecutor lambda) throws RuntimeException {
         try {
-            this.scenario.doStep(StepType.Given, lambda);
+            this.scenario.doStep(StepType.Given, lambda, null);
             return this;
         } catch (Throwable e) {
             throw new RuntimeException("步骤 - 执行错误：" + e.getMessage(), e);
@@ -32,7 +32,7 @@ public class ScenarioGiven implements IGiven {
     @Override
     public IThen when(String description, SExecutor lambda) throws RuntimeException {
         try {
-            this.scenario.doStep(StepType.When, description, lambda);
+            this.scenario.doStep(StepType.When, description, lambda, null);
             return new ScenarioThen(this.scenario);
         } catch (Throwable e) {
             throw new RuntimeException("步骤 - " + description + ", 执行错误：" + e.getMessage(), e);
@@ -42,7 +42,27 @@ public class ScenarioGiven implements IGiven {
     @Override
     public IThen when(SExecutor lambda) throws RuntimeException {
         try {
-            this.scenario.doStep(StepType.When, lambda);
+            this.scenario.doStep(StepType.When, lambda, null);
+            return new ScenarioThen(this.scenario);
+        } catch (Throwable e) {
+            throw new RuntimeException("步骤 - 执行错误：" + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public IThen when(String description, SExecutor lambda, Class<? extends Throwable> eKlass) throws RuntimeException {
+        try {
+            this.scenario.doStep(StepType.When, description, lambda, eKlass);
+            return new ScenarioThen(this.scenario);
+        } catch (Throwable e) {
+            throw new RuntimeException("步骤 - " + description + ",执行错误：" + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public IThen when(SExecutor lambda, Class<? extends Throwable> eKlass) throws RuntimeException {
+        try {
+            this.scenario.doStep(StepType.When, lambda, eKlass);
             return new ScenarioThen(this.scenario);
         } catch (Throwable e) {
             throw new RuntimeException("步骤 - 执行错误：" + e.getMessage(), e);

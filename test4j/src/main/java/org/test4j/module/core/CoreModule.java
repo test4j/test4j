@@ -1,15 +1,14 @@
 package org.test4j.module.core;
 
-import java.lang.reflect.Method;
-import java.util.List;
-
 import org.test4j.module.core.internal.Test4JTestContext;
 import org.test4j.module.core.internal.TestListener;
 import org.test4j.module.core.utility.ClazzAroundObject.ClazzAfterObject;
 import org.test4j.module.core.utility.*;
+import org.test4j.module.spec.internal.SpecContext;
 import org.test4j.tools.commons.ConfigHelper;
 
-import static org.test4j.module.core.utility.ClazzAroundObject.*;
+import java.lang.reflect.Method;
+import java.util.List;
 
 /**
  * test4j的核心类，所有事件监听器的总入口<br>
@@ -118,6 +117,7 @@ public class CoreModule {
             ModulesManager.getTestListeners_Reverse()
                     .forEach(listener -> listener.afterClass(testObject));
             Test4JTestContext.setContext(new ClazzAfterObject(testObject.getClass()), null);
+            SpecContext.clean();
         }
 
         @Override
