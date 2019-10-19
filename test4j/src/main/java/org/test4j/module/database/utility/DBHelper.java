@@ -17,6 +17,8 @@ import org.test4j.exception.NoSuchFieldRuntimeException;
 import org.test4j.tools.datagen.IDataMap;
 import org.test4j.tools.reflector.FieldAccessor;
 
+import static org.test4j.tools.commons.StringHelper.join;
+
 @SuppressWarnings({"rawtypes", "unchecked"})
 public final class DBHelper {
 
@@ -297,5 +299,39 @@ public final class DBHelper {
         }
         TypeNormaliser tn = TypeNormaliserFactory.getNormaliser(klass);
         return tn == null ? currVal : tn.normalise(currVal);
+    }
+
+    /**
+     * 构建h2数据库表table的唯一键脚本
+     *
+     * @param table  指定表
+     * @param fields 索引字段
+     * @return
+     */
+    public static String buildH2Unique(String table, String... fields) {
+        if (fields == null || fields.length == 0) {
+            return "";
+        }
+        return new StringBuilder()
+                .append(join(String.format("ALTER TABLE %s ADD CONSTRAINT UNIQ_", table), "_", fields, " "))
+                .append(join("UNIQUE(", ",", fields, ");"))
+                .toString().toUpperCase();
+    }
+
+    /**
+     * 构建h2数据库表table的普通索引脚本
+     *
+     * @param table  指定表
+     * @param fields 索引字段
+     * @return
+     */
+    public static String buildH2Index(String table, String... fields) {
+        if (fields == null || fields.length == 0) {
+            return "";
+        }
+        return new StringBuilder()
+                .append(join(String.format("CREATE INDEX IDX_%s_", table), "_", fields, " "))
+                .append(join(table + "ON (", ",", fields, "); "))
+                .toString().toUpperCase();
     }
 }

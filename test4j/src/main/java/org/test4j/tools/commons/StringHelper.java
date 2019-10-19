@@ -6,10 +6,9 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
+
+import static java.util.stream.Collectors.joining;
 
 public class StringHelper {
     public static final String EMPTY = "";
@@ -672,5 +671,19 @@ public class StringHelper {
             builder.append(" ");
         }
         return builder.toString();
+    }
+
+    /**
+     * 按照分隔符split把strings拼接起来
+     *
+     * @param split
+     * @param strings
+     * @return
+     */
+    public static String join(String start, String split, String[] strings, String end) {
+        return new StringBuilder(start)
+                .append(Arrays.stream(strings).collect(joining(split)))
+                .append(end)
+                .toString();
     }
 }
