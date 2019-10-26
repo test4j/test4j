@@ -84,6 +84,9 @@ public class ModulesLoader {
                 MessageHelper.warn("========================");
                 MessageHelper.warn(error);
                 MessageHelper.warn("========================");
+                if (t instanceof Error) {
+                    t.printStackTrace();
+                }
             }
         }
         ModulesManager.initManager(modules);
