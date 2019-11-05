@@ -3,7 +3,7 @@ package org.test4j.tools.reflector.imposteriser;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-import org.test4j.module.core.internal.Test4JTestContext;
+import org.test4j.module.core.internal.Test4JContext;
 import org.test4j.tools.reflector.FieldAccessor;
 
 /**
@@ -30,7 +30,7 @@ public class FieldProxy implements Invokable {
 	}
 
 	public Object invoke(Invocation invocation) throws Throwable {
-		Object test = Test4JTestContext.currTestedObject();
+		Object test = Test4JContext.currTestedObject();
 		Object fieldValue = accessor.get(test);
 		if (fieldValue == null) {
 			throw new NullPointerException(String.format("field[%s] value of object[%s] is null.", fieldName,

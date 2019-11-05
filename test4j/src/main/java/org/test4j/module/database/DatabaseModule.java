@@ -33,6 +33,7 @@ public class DatabaseModule implements Module {
     /**
      * @return The {@link TestListener} associated with this module
      */
+    @Override
     public TestListener getTestListener() {
         return new DatabaseTestListener();
     }
@@ -48,7 +49,7 @@ public class DatabaseModule implements Module {
          * {@inheritDoc}
          */
         @Override
-        public void beforeSetup(Object testObject, Method testMethod) {
+        public void beforeMethod(Object testObject, Method testMethod) {
             Test4JSqlContext.clean();
             if (!SpringEnv.isSpringEnv()) {
                 return;

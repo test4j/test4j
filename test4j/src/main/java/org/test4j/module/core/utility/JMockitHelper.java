@@ -1,6 +1,6 @@
 package org.test4j.module.core.utility;
 
-import org.test4j.junit.Test4JBuilder;
+import org.test4j.tools.commons.ClazzHelper;
 
 import java.io.File;
 import java.util.regex.Pattern;
@@ -10,7 +10,8 @@ public class JMockitHelper {
 
     private static final Pattern JAR_REGEX = Pattern.compile(".*jmockit[-._\\d]*(-SNAPSHOT)?.jar");
     private static final String Nodep_Jar_Path = "jmockit.jar";
-    private static final String Fake_JUnit_Builder = "-Dfakes=" + Test4JBuilder.class.getName();
+
+    private static final String Test4JBuilder_Class = "org.test4j.junit.Test4JBuilder";
 
     private static String hitsMessage = null;
 
@@ -28,7 +29,11 @@ public class JMockitHelper {
             hitsMessage = buff.toString();
             MessageHelper
                     .warn("If JMockit isn't initialized. Please check that your JVM is started with command option:");
-            System.err.println("\t -javaagent:" + jarPath + " " + Fake_JUnit_Builder);
+            String fakeBuilder = "";
+            if (ClazzHelper.isClassAvailable(Test4JBuilder_Class)) {
+                fakeBuilder = " -Dfake=" + Test4JBuilder_Class;
+            }
+            System.err.println("\t -javaagent:" + jarPath + fakeBuilder);
         }
         return hitsMessage;
     }

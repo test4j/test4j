@@ -14,16 +14,6 @@ public abstract class TestListener {
         // empty
     }
 
-    /**
-     * 在 @Before方法前执行
-     *
-     * @param testObject The test instance, not null
-     * @param testMethod The test method, not null
-     */
-    public void beforeSetup(Object testObject, Method testMethod) {
-        // empty
-    }
-
 
     /**
      * 在测试方法执行前，setup方法后

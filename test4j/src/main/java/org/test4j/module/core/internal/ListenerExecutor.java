@@ -36,7 +36,7 @@ public class ListenerExecutor {
     }
 
     /**
-     * 执行setup method事件
+     * 执行测试方法开始的事件
      * 
      * @param testedObject 测试对象
      * @param testedMethod 测试方法
@@ -48,25 +48,10 @@ public class ListenerExecutor {
         MessageHelper.info("\n" + hits);
 
         try {
-            getTestListener().beforeSetup(testedObject, testedMethod);
-            return null;
-        } catch (Throwable e) {
-            e.printStackTrace();
-            return e;
-        }
-    }
-
-    /**
-     * 执行测试方法开始的事件
-     * 
-     * @param testedMethod 测试方法
-     * @return 返回事件异常
-     */
-    public static Throwable executeBeforeRunningEvents(Object testedObject, Method testedMethod) {
-        try {
             getTestListener().beforeMethod(testedObject, testedMethod);
             return null;
         } catch (Throwable e) {
+            e.printStackTrace();
             return e;
         }
     }

@@ -13,7 +13,7 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
 import org.test4j.exception.Test4JException;
-import org.test4j.module.core.internal.Test4JTestContext;
+import org.test4j.module.core.internal.Test4JContext;
 import org.test4j.module.spring.annotations.BeforeSpringContext;
 import org.test4j.tools.commons.AnnotationHelper;
 import org.test4j.tools.commons.ClazzHelper;
@@ -37,7 +37,7 @@ public class SpringModuleHelper {
      * @return
      */
     public static Optional<ApplicationContext> getSpringContext() {
-        WeakReference<ApplicationContext> reference = springBeanFactories.get(Test4JTestContext.currTestedClazz());
+        WeakReference<ApplicationContext> reference = springBeanFactories.get(Test4JContext.currTestedClazz());
         if (reference == null || reference.get() == null) {
             return Optional.empty();
         } else {
@@ -51,7 +51,7 @@ public class SpringModuleHelper {
      * @param context
      */
     public static void setSpringContext(ApplicationContext context) {
-        springBeanFactories.put(Test4JTestContext.currTestedClazz(), new WeakReference<>(context));
+        springBeanFactories.put(Test4JContext.currTestedClazz(), new WeakReference<>(context));
     }
 
     public static boolean existBean(String name) {
@@ -130,7 +130,7 @@ public class SpringModuleHelper {
         } else if (platformTransactionManagerMap.size() == 1) {
             return Optional.ofNullable(platformTransactionManagerMap.values().iterator().next());
         } else {
-            Method testMethod = Test4JTestContext.currTestedMethod();
+            Method testMethod = Test4JContext.currTestedMethod();
             String managerName = AnnotationHelper.getMethodOrClassLevelAnnotationProperty(
                     Transactional.class, "value", "", testMethod, testedObject.getClass()
             );

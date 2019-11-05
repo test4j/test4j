@@ -1,16 +1,13 @@
 package org.test4j.tools.commons;
 
-import static ext.test4j.apache.commons.io.IOUtils.closeQuietly;
+import org.test4j.exception.Test4JException;
+import org.test4j.module.core.utility.MessageHelper;
 
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Properties;
-
-import org.test4j.exception.Test4JException;
-import org.test4j.junit.Test4J;
-import org.test4j.module.core.utility.MessageHelper;
 
 public class PropertiesReader {
 
@@ -56,7 +53,7 @@ public class PropertiesReader {
             throw new IllegalArgumentException("Properties Filename must be given.");
         }
         Properties properties = new Properties();
-        try (InputStream inputStream = ResourceHelper.getResourceAsStream(Test4J.class.getClassLoader(), propertiesFileName)) {
+        try (InputStream inputStream = ResourceHelper.getResourceAsStream(PropertiesReader.class.getClassLoader(), propertiesFileName)) {
             if (inputStream != null) {
                 properties.load(inputStream);
             }

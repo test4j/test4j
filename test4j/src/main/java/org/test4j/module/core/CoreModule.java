@@ -1,6 +1,6 @@
 package org.test4j.module.core;
 
-import org.test4j.module.core.internal.Test4JTestContext;
+import org.test4j.module.core.internal.Test4JContext;
 import org.test4j.module.core.internal.TestListener;
 import org.test4j.module.core.utility.ClazzAroundObject.ClazzAfterObject;
 import org.test4j.module.core.utility.*;
@@ -86,28 +86,21 @@ public class CoreModule {
         @Override
         public void beforeClass(Class testClazz) {
             MessageHelper.resetLog4jLevel();
-            Test4JTestContext.setContext(testClazz);
+            Test4JContext.setContext(testClazz);
             ModulesManager.getTestListeners()
                     .forEach(listener -> listener.beforeClass(testClazz));
         }
 
         @Override
-        public void beforeSetup(Object testObject, Method testMethod) {
-            Test4JTestContext.setContext(testObject, testMethod);
-            ModulesManager.getTestListeners()
-                    .forEach(listener -> listener.beforeSetup(testObject, testMethod));
-        }
-
-        @Override
         public void beforeMethod(Object testObject, Method testMethod) {
-            Test4JTestContext.setContext(testObject, testMethod);
+            Test4JContext.setContext(testObject, testMethod);
             ModulesManager.getTestListeners()
                     .forEach(listener -> listener.beforeMethod(testObject, testMethod));
         }
 
         @Override
         public void afterMethod(Object testObject, Method testMethod, Throwable throwable) {
-            Test4JTestContext.setContext(testObject, testMethod);
+            Test4JContext.setContext(testObject, testMethod);
             ModulesManager.getTestListeners_Reverse()
                     .forEach(listener -> listener.afterMethod(testObject, testMethod, throwable));
         }
@@ -116,7 +109,7 @@ public class CoreModule {
         public void afterClass(Object testObject) {
             ModulesManager.getTestListeners_Reverse()
                     .forEach(listener -> listener.afterClass(testObject));
-            Test4JTestContext.setContext(new ClazzAfterObject(testObject.getClass()), null);
+            Test4JContext.setContext(new ClazzAfterObject(testObject.getClass()), null);
             SpecContext.clean();
         }
 

@@ -1,11 +1,13 @@
 package org.test4j.module.database.utility;
 
+import cn.org.atool.fluent.mybatis.annotation.ColumnDef;
 import com.baomidou.mybatisplus.annotation.TableName;
-import cn.org.atool.mbplus.annotation.ColumnDef;
 import org.test4j.tools.commons.AnnotationHelper;
 
 import java.lang.reflect.Field;
-import java.util.*;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Set;
 
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
@@ -155,6 +157,7 @@ public class EntityScriptParser {
          * @param type
          * @return
          */
+        @Override
         public String convertType(String type) {
             return type;
         }

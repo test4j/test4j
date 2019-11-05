@@ -5,7 +5,7 @@ import java.util.Optional;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.test4j.module.core.Module;
-import org.test4j.module.core.internal.Test4JTestContext;
+import org.test4j.module.core.internal.Test4JContext;
 import org.test4j.module.core.internal.TestListener;
 import org.test4j.module.spring.interal.SpringEnv;
 import org.test4j.module.spring.interal.SpringModuleHelper;
@@ -54,7 +54,7 @@ public class SpringModule implements Module {
      * @return
      */
     public static Optional<PlatformTransactionManager> getTransactionManager() {
-        return SpringModuleHelper.getSpringPlatformTransactionManager(Test4JTestContext.currTestedObject());
+        return SpringModuleHelper.getSpringPlatformTransactionManager(Test4JContext.currTestedObject());
     }
 
     public static void injectSpringBeans(Object testedObject) {

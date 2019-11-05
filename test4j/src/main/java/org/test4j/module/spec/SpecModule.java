@@ -36,7 +36,7 @@ public class SpecModule implements Module {
 
 
         @Override
-        public void beforeSetup(Object testedObject, Method testMethod) {
+        public void beforeMethod(Object testedObject, Method testMethod) {
             if (testedObject instanceof IStory) {
                 MixProxy.createMixes(testedObject);
                 MixProxy.mix(testedObject);

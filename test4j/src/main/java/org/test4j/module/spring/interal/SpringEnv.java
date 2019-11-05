@@ -1,6 +1,6 @@
 package org.test4j.module.spring.interal;
 
-import org.test4j.module.core.internal.Test4JTestContext;
+import org.test4j.module.core.internal.Test4JContext;
 import org.test4j.tools.commons.AnnotationHelper;
 
 import java.lang.annotation.Annotation;
@@ -17,13 +17,14 @@ public class SpringEnv {
     };
 
     public static boolean isSpringEnv() {
-        Class klass = Test4JTestContext.currTestedClazz();
+        Class klass = Test4JContext.currTestedClazz();
         return isSpringEnv(klass);
     }
 
     public static void setSpringEnv(Class<?> klass) {
         classIsSpring.put(klass, isSpringTest(klass));
     }
+
 
     public static boolean isSpringEnv(Class klass) {
         return classIsSpring.get(klass) == null ? false : classIsSpring.get(klass);
