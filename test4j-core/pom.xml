@@ -7,7 +7,7 @@
         <version>2.5.4-SNAPSHOT</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>test4j</artifactId>
+    <artifactId>test4j-core</artifactId>
     <packaging>jar</packaging>
     <name>test4j core module</name>
     <properties>

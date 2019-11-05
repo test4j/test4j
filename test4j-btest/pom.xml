@@ -14,7 +14,7 @@
     <dependencies>
         <dependency>
             <groupId>org.test4j</groupId>
-            <artifactId>test4j</artifactId>
+            <artifactId>test4j-core</artifactId>
             <version>${project.version}</version>
         </dependency>
     </dependencies>

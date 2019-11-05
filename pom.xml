@@ -45,7 +45,7 @@
     </properties>
 
     <modules>
-        <module>test4j</module>
+        <module>test4j-core</module>
         <module>test4j-btest</module>
         <module>test4j-junit4</module>
         <module>test4j-junit5</module>
