@@ -11,6 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>test4j-testng</artifactId>
+    <name>test4j testng</name>
     <dependencies>
         <dependency>
             <groupId>org.testng</groupId>

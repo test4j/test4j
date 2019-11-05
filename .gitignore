@@ -12,3 +12,6 @@ test4j/target
 test4j.nodep/target
 test4j.example/target
 test4j-core/target
+test4j-btest/target
+test4j-junit4/target
+test4j-junit5/target

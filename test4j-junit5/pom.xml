@@ -11,6 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>test4j-junit5</artifactId>
+    <name>test4j junit5</name>
     <dependencies>
         <dependency>
             <groupId>org.test4j</groupId>

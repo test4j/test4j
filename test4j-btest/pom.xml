@@ -11,6 +11,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>test4j-btest</artifactId>
+    <name>test4j base for test</name>
     <dependencies>
         <dependency>
             <groupId>org.test4j</groupId>
