@@ -1,4 +1,4 @@
-package org.test4j.junit5;
+package org.test4j.junit4;
 
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;

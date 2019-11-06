@@ -10,14 +10,18 @@ import java.util.Optional;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.ApplicationContext;
+import org.springframework.test.context.TestContext;
+import org.springframework.test.context.TestContextManager;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.Transactional;
 import org.test4j.exception.Test4JException;
 import org.test4j.module.core.internal.Test4JContext;
+import org.test4j.module.spring.SpringModule;
 import org.test4j.module.spring.annotations.BeforeSpringContext;
 import org.test4j.tools.commons.AnnotationHelper;
 import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.commons.StringHelper;
+import org.test4j.tools.reflector.MethodAccessor;
 
 import javax.sql.DataSource;
 
@@ -167,5 +171,39 @@ public class SpringModuleHelper {
         } else {
             return target;
         }
+    }
+
+    /**
+     * 有些版本getTestContext禁止访问，所以这里反射调用
+     *
+     * @param contextManager
+     * @return
+     */
+    public static ApplicationContext getApplicationContext(TestContextManager contextManager) {
+        //return contextManager.getTestContext().getApplicationContext();
+        try {
+            TestContext testContext = MethodAccessor.invokeMethod(contextManager, "getTestContext");
+            return testContext.getApplicationContext();
+        } catch (Exception e) {
+            throw new RuntimeException("get Spring Application Context error: " + e.getMessage(), e);
+        }
+    }
+
+    /**
+     * 在测试spring容器启动前后执行
+     * 1. 执行@BeforeSpringContext 方法
+     * 2. 初始化测试实例注入
+     * 3. 注册spring容器
+     *
+     * @param testInstance
+     * @param contextManager
+     * @throws Exception
+     */
+    public static void doSpringInitial(Object testInstance, TestContextManager contextManager) throws Exception {
+        SpringModule.invokeSpringInitMethod(testInstance);
+        Test4JContext.setSpringTestContextManager(contextManager);
+        contextManager.prepareTestInstance(testInstance);
+        ApplicationContext applicationContext = getApplicationContext(contextManager);
+        SpringModule.setSpringContext(applicationContext);
     }
 }

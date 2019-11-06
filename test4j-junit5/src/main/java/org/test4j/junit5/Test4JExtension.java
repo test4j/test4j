@@ -17,14 +17,15 @@
 package org.test4j.junit5;
 
 import org.junit.jupiter.api.extension.*;
-import org.springframework.test.context.TestContextManager;
 import org.test4j.module.core.internal.Test4JContext;
 import org.test4j.module.spring.interal.SpringEnv;
 
 import java.lang.reflect.Method;
 
-import static org.test4j.junit5.JUnit5Helper.*;
+import static org.test4j.junit5.JUnit5Helper.getStore;
+import static org.test4j.junit5.JUnit5Helper.getTestContextManager;
 import static org.test4j.module.core.CoreModule.getTestListener;
+import static org.test4j.module.spring.interal.SpringModuleHelper.doSpringInitial;
 
 /**
  * {@code SpringExtension} integrates the <em>Spring TestContext Framework</em>
@@ -35,7 +36,7 @@ import static org.test4j.module.core.CoreModule.getTestListener;
  * {@code @SpringJUnitJupiterWebConfig}.
  *
  * @author Sam Brannen
- * @see TestContextManager
+ * @see org.springframework.test.context.TestContextManager
  * @since 5.0
  */
 public class Test4JExtension implements
@@ -46,19 +47,21 @@ public class Test4JExtension implements
         AfterEachCallback {
 
     /**
-     * Delegates to {@link TestContextManager#beforeTestClass}.
+     * Delegates to {@link org.springframework.test.context.TestContextManager#beforeTestClass}.
      */
     @Override
     public void beforeAll(ExtensionContext context) throws Exception {
-        Test4JContext.setContext(context.getRequiredTestClass());
-        getTestListener().beforeClass(context.getRequiredTestClass());
-        if (SpringEnv.isSpringEnv(context.getRequiredTestClass())) {
+        Class testedClass = context.getRequiredTestClass();
+        Test4JContext.setContext(testedClass);
+        SpringEnv.setSpringEnv(testedClass);
+        getTestListener().beforeClass(testedClass);
+        if(SpringEnv.isSpringEnv(testedClass)){
             getTestContextManager(context).beforeTestClass();
         }
     }
 
     /**
-     * Delegates to {@link TestContextManager#afterTestClass}.
+     * Delegates to {@link org.springframework.test.context.TestContextManager#afterTestClass}.
      */
     @Override
     public void afterAll(ExtensionContext context) throws Exception {
@@ -71,20 +74,20 @@ public class Test4JExtension implements
     }
 
     /**
-     * Delegates to {@link TestContextManager#prepareTestInstance}.
+     * Delegates to {@link org.springframework.test.context.TestContextManager#prepareTestInstance}.
      */
     @Override
     public void postProcessTestInstance(Object testInstance, ExtensionContext context) throws Exception {
         Test4JContext.setContext(testInstance, null);
         SpringEnv.setSpringEnv(context.getRequiredTestClass());
         if (SpringEnv.isSpringEnv(context.getRequiredTestClass())) {
-            doSpringInitial(testInstance, context);
+            doSpringInitial(testInstance, getTestContextManager(context));
         }
     }
 
 
     /**
-     * Delegates to {@link TestContextManager#beforeTestMethod}.
+     * Delegates to {@link org.springframework.test.context.TestContextManager#beforeTestMethod}.
      */
     @Override
     public void beforeEach(ExtensionContext context) throws Exception {
@@ -97,7 +100,7 @@ public class Test4JExtension implements
     }
 
     /**
-     * Delegates to {@link TestContextManager#afterTestMethod}.
+     * Delegates to {@link org.springframework.test.context.TestContextManager#afterTestMethod}.
      */
     @Override
     public void afterEach(ExtensionContext context) throws Exception {

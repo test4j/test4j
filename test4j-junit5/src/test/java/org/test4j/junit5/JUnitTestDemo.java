@@ -3,7 +3,6 @@ package org.test4j.junit5;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.test4j.junit5.Test4J;
 import org.test4j.module.ICore;
 import org.test4j.tools.datagen.DataProvider;
 

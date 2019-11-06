@@ -1,5 +1,6 @@
 package org.test4j.junit5;
 
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.test4j.example.mix.ServiceMix;
@@ -13,6 +14,7 @@ public class StoryTestDemo extends Test4J implements IStory {
     @Mix
     private ServiceMix serviceMix;
 
+    @DisplayName("story测试场景演示")
     @Test
     public void test() {
         story.scenario("story测试场景演示")

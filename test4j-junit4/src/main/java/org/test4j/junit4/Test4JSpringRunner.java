@@ -5,12 +5,11 @@ import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.InitializationError;
 import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestClass;
-import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.TestContextManager;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.test4j.module.core.CoreModule;
 import org.test4j.module.core.internal.Test4JContext;
-import org.test4j.module.spring.SpringModule;
+import org.test4j.module.spring.interal.SpringModuleHelper;
 
 import java.lang.annotation.Annotation;
 import java.util.List;
@@ -35,19 +34,9 @@ public class Test4JSpringRunner extends SpringJUnit4ClassRunner implements ITest
     public Object createTest() throws Exception {
         Object testInstance = getTestClass().getOnlyConstructor().newInstance();
         Test4JContext.setContext(testInstance, null);
-        SpringModule.invokeSpringInitMethod(testInstance);
         TestContextManager contextManager = this.getTestContextManager();
-        {
-            Test4JContext.setSpringTestContextManager(contextManager);
-            contextManager.prepareTestInstance(testInstance);
-            ApplicationContext applicationContext = this.getApplicationContext(contextManager);
-            SpringModule.setSpringContext(applicationContext);
-        }
+        SpringModuleHelper.doSpringInitial(testInstance, contextManager);
         return testInstance;
-    }
-
-    private ApplicationContext getApplicationContext(TestContextManager contextManager) {
-        return contextManager.getTestContext().getApplicationContext();
     }
 
     @Override

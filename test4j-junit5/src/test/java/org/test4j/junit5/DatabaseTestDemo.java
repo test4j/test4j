@@ -1,7 +1,6 @@
 package org.test4j.junit5;
 
 import org.junit.jupiter.api.Test;
-import org.test4j.junit5.Test4J;
 
 public class DatabaseTestDemo extends Test4J {
     @Test
