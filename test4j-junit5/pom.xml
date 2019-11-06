@@ -12,6 +12,9 @@
 
     <artifactId>test4j-junit5</artifactId>
     <name>test4j junit5</name>
+    <properties>
+        <junit5.version>5.5.2</junit5.version>
+    </properties>
     <dependencies>
         <dependency>
             <groupId>org.test4j</groupId>
@@ -19,21 +22,21 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.junit.jupiter</groupId>
+            <artifactId>junit-jupiter</artifactId>
+            <version>${junit5.version}</version>
+        </dependency>
+        <dependency>
             <groupId>org.junit.platform</groupId>
-            <artifactId>junit-platform-launcher</artifactId>
+            <artifactId>junit-platform-runner</artifactId>
             <version>1.5.2</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>junit</artifactId>
+                    <groupId>junit</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-engine</artifactId>
-            <version>5.5.2</version>
-        </dependency>
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-params</artifactId>
-            <version>5.5.2</version>
-        </dependency>
-
         <dependency>
             <groupId>org.test4j</groupId>
             <artifactId>test4j-btest</artifactId>

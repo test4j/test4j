@@ -38,7 +38,7 @@
     <properties>
         <spring.version>5.2.0.RELEASE</spring.version>
         <release.plugin.version>2.4.1</release.plugin.version>
-        <jmockit.version>1.45</jmockit.version>
+        <jmockit.version>1.48</jmockit.version>
         <fluent-mybatis.version>1.0.3</fluent-mybatis.version>
         <test.jvm.args>
             <![CDATA[-javaagent:"${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar"]]></test.jvm.args>
