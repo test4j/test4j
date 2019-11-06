@@ -1,4 +1,4 @@
-package org.test4j.junit;
+package org.test4j.junit4;
 
 import java.lang.reflect.Method;
 import java.util.Arrays;

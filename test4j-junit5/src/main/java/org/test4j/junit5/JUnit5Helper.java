@@ -1,4 +1,4 @@
-package org.test4j.junit;
+package org.test4j.junit5;
 
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ExtensionContext.Store;
@@ -9,12 +9,11 @@ import org.test4j.module.core.internal.Test4JContext;
 import org.test4j.module.spring.SpringModule;
 
 /**
- * TODO:类说明
  *
  * @author darui.wu
  * @create 2019/11/5 4:16 下午
  */
-public class SpringExtensionHelper {
+public class JUnit5Helper {
     /**
      * {@link ExtensionContext.Namespace} in which {@code TestContextManagers} are stored,
      * keyed by test class.

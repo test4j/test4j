@@ -1,4 +1,4 @@
-package org.test4j.junit;
+package org.test4j.junit5;
 
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.test4j.module.ICore;

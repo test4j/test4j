@@ -1,4 +1,4 @@
-package org.test4j.junit;
+package org.test4j.junit4;
 
 import org.junit.runner.RunWith;
 import org.test4j.module.ICore;

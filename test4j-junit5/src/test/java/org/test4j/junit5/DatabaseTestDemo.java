@@ -1,10 +1,11 @@
-package org.test4j.junit;
+package org.test4j.junit5;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.test4j.junit5.Test4J;
 
 public class DatabaseTestDemo extends Test4J {
     @Test
-    public void test() {
+    void test() {
         String table = "db_test_demo_table";
         db.execute(new StringBuilder()
                 .append("drop table if exists ").append(table).append(";")

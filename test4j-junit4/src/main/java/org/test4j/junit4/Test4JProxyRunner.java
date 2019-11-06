@@ -1,4 +1,4 @@
-package org.test4j.junit;
+package org.test4j.junit4;
 
 import mockit.Invocation;
 import mockit.Mock;
@@ -11,7 +11,6 @@ import org.junit.runners.ParentRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestClass;
-import org.test4j.module.core.utility.JMockitHelper;
 import org.test4j.module.spring.interal.SpringEnv;
 
 import java.lang.annotation.Annotation;

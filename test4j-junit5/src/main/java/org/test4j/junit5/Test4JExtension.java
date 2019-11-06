@@ -14,22 +14,16 @@
  * limitations under the License.
  */
 
-package org.test4j.junit;
+package org.test4j.junit5;
 
 import org.junit.jupiter.api.extension.*;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.TestContextManager;
-import org.test4j.junit.web.SpringJUnitJupiterWebConfig;
 import org.test4j.module.core.internal.Test4JContext;
-import org.test4j.module.core.utility.JMockitHelper;
 import org.test4j.module.spring.interal.SpringEnv;
 
-import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
 
-import static org.test4j.junit.SpringExtensionHelper.*;
+import static org.test4j.junit5.JUnit5Helper.*;
 import static org.test4j.module.core.CoreModule.getTestListener;
 
 /**
@@ -41,8 +35,6 @@ import static org.test4j.module.core.CoreModule.getTestListener;
  * {@code @SpringJUnitJupiterWebConfig}.
  *
  * @author Sam Brannen
- * @see SpringJUnitJupiterConfig
- * @see SpringJUnitJupiterWebConfig
  * @see TestContextManager
  * @since 5.0
  */
@@ -117,43 +109,4 @@ public class Test4JExtension implements
         }
         getTestListener().afterMethod(testInstance, testMethod, testException);
     }
-
-    /**
-     * Determine if the value for the {@link Parameter} in the supplied {@link ParameterContext}
-     * should be autowired from the test's {@link ApplicationContext}.
-     * <p>Returns {@code true} if the parameter is declared in a {@link Constructor}
-     * that is annotated with {@link Autowired @Autowired} and otherwise delegates to
-     * {@link ParameterAutowireUtils#isAutowirable}.
-     * <p><strong>WARNING</strong>: If the parameter is declared in a {@code Constructor}
-     * that is annotated with {@code @Autowired}, Spring will assume the responsibility
-     * for resolving all parameters in the constructor. Consequently, no other registered
-     * {@link ParameterResolver} will be able to resolve parameters.
-     *
-     * @see #resolveParameter
-     * @see ParameterAutowireUtils#isAutowirable
-     */
-//    @Override
-//    public boolean supportsParameter(ParameterContext parameterContext, ExtensionContext extensionContext) {
-//        Parameter parameter = parameterContext.getParameter();
-//        Executable executable = parameter.getDeclaringExecutable();
-//        return (executable instanceof Constructor &&
-//                AnnotatedElementUtils.hasAnnotation(executable, Autowired.class)) ||
-//                ParameterAutowireUtils.isAutowirable(parameter);
-//    }
-
-    /**
-     * Resolve a value for the {@link Parameter} in the supplied {@link ParameterContext} by
-     * retrieving the corresponding dependency from the test's {@link ApplicationContext}.
-     * <p>Delegates to {@link ParameterAutowireUtils#resolveDependency}.
-     *
-     * @see #supportsParameter
-     * @see ParameterAutowireUtils#resolveDependency
-     */
-//    @Override
-//    public Object resolveParameter(ParameterContext parameterContext, ExtensionContext extensionContext) {
-//        Parameter parameter = parameterContext.getParameter();
-//        Class<?> testClass = extensionContext.getRequiredTestClass();
-//        ApplicationContext applicationContext = getApplicationContext(extensionContext);
-//        return ParameterAutowireUtils.resolveDependency(parameter, testClass, applicationContext);
-//    }
 }

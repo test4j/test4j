@@ -1,6 +1,9 @@
-package org.test4j.junit;
+package org.test4j.junit5;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
+import org.test4j.junit5.Test4J;
 import org.test4j.module.ICore;
 import org.test4j.tools.datagen.DataProvider;
 
@@ -14,9 +17,9 @@ public class JUnitTestDemo extends Test4J {
         ICore.want.number(count).isEqualTo(10);
     }
 
-    @DataFrom("dataForDataFrom")
-    @Test
-    public void testDataFrom(String actual, String expected) {
+    @ParameterizedTest
+    @MethodSource("dataForDataFrom")
+    void testDataFrom(String actual, String expected) {
         want.string(actual).eq(expected);
     }
 

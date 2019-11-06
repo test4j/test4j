@@ -1,9 +1,10 @@
-package org.test4j.junit;
+package org.test4j.junit5;
 
 import org.junit.Test;
 import org.springframework.test.context.ContextConfiguration;
 import org.test4j.example.mix.ServiceMix;
 import org.test4j.example.spring.SpringConfig;
+import org.test4j.junit4.Test4J;
 import org.test4j.module.spec.IStory;
 import org.test4j.module.spec.annotations.Mix;
 

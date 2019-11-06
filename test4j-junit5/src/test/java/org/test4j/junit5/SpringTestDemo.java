@@ -1,10 +1,11 @@
-package org.test4j.junit;
+package org.test4j.junit5;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.test4j.example.spring.ServiceA;
 import org.test4j.example.spring.SpringConfig;
+import org.test4j.junit5.Test4J;
 
 /**
  * 使用spring容器测试简单示例
