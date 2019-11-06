@@ -3,11 +3,8 @@ package org.test4j.junit5;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.api.extension.ExtensionContext.Namespace;
 import org.junit.jupiter.api.extension.ExtensionContext.Store;
-import org.springframework.context.ApplicationContext;
 import org.springframework.test.context.TestContextManager;
 import org.springframework.util.Assert;
-import org.test4j.module.core.internal.Test4JContext;
-import org.test4j.module.spring.SpringModule;
 
 /**
  * @author darui.wu
