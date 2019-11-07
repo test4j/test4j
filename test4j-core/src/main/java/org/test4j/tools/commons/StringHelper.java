@@ -518,10 +518,7 @@ public class StringHelper {
      * @return
      */
     public final static boolean isSpace(char ch) {
-        if (ch > 255) {
-            return false;
-        }
-        return Space_Chars[ch];
+        return ch > 255 ? false : Space_Chars[ch];
     }
 
     public static final boolean isBlank(String str) {

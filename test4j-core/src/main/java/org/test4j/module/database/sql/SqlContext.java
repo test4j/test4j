@@ -2,9 +2,11 @@ package org.test4j.module.database.sql;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.test4j.tools.commons.StringHelper;
 
 import java.util.List;
+
+import static org.test4j.module.database.utility.SQLUtility.filterSpace;
+import static org.test4j.tools.commons.StringHelper.trim;
 
 @Data
 @Accessors(chain = true)
@@ -17,14 +19,14 @@ public class SqlContext {
     }
 
     public SqlContext(String sql, Object[] parameters) {
-        this.sql = StringHelper.trim(sql);
+        this.sql = filterSpace(trim(sql));
         if (parameters != null) {
             this.parameters = parameters;
         }
     }
 
     public SqlContext(String sql, List parameters) {
-        this.sql = StringHelper.trim(sql);
+        this.sql = filterSpace(trim(sql));
         if (parameters != null && !parameters.isEmpty()) {
             this.parameters = parameters.toArray();
         }

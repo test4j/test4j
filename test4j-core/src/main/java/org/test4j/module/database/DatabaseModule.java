@@ -23,7 +23,6 @@ public class DatabaseModule implements Module {
     public void init() {
         MessageHelper.info("PlatformTransactionManager class init.");
         PlatformTransactionManager.class.getName();
-        new MybatisConfigurationMock();
     }
 
     @Override
@@ -42,15 +41,8 @@ public class DatabaseModule implements Module {
      * The {@link TestListener} for this module
      */
     protected class DatabaseTestListener extends TestListener {
-
-        /**
-         * 初始化测试方法的事务<br>
-         * <br>
-         * {@inheritDoc}
-         */
         @Override
-        public void beforeMethod(Object testObject, Method testMethod) {
-            Test4JSqlContext.clean();
+        public void beforeClass(Class testClazz) {
             if (!SpringEnv.isSpringEnv()) {
                 return;
             }
@@ -65,6 +57,16 @@ public class DatabaseModule implements Module {
             }
         }
 
+        /**
+         * 初始化测试方法的事务<br>
+         * <br>
+         * {@inheritDoc}
+         */
+        @Override
+        public void beforeMethod(Object testObject, Method testMethod) {
+            Test4JSqlContext.clean();
+            new MybatisConfigurationMock();
+        }
         /**
          * 移除测试方法的事务<br>
          * <br>
