@@ -2,21 +2,23 @@ package org.test4j.module.database.sql;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.test4j.module.core.utility.MessageHelper;
+import org.test4j.module.database.IDataSourceCreator;
 import org.test4j.module.database.utility.DataSourceType;
 import org.test4j.tools.commons.ConfigHelper;
 
+import javax.sql.DataSource;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.test4j.module.core.internal.IPropItem.*;
-import static org.test4j.module.database.sql.Test4JDataSource.wrapper;
 
-public class Test4JDataSourceHelper {
+public class DataSourceDefaultCreator implements IDataSourceCreator {
     private static final Set<String> registered = new HashSet<>();
 
-    static Test4JDataSource createLocalDataSource(String dataSourceName) {
+    @Override
+    public DataSource createDataSource(String dataSourceName) {
         DataSourceType type = type(dataSourceName);
         String schemaName = ConfigHelper.getDataSourceKey(dataSourceName, PROP_KEY_DATASOURCE_SCHEMA);
 
@@ -33,7 +35,7 @@ public class Test4JDataSourceHelper {
             dataSource.setPassword(password(dataSourceName));
         }
 
-        return wrapper(type, schemaName, dataSourceName, dataSource);
+        return dataSource;
     }
 
     /**
@@ -87,13 +89,11 @@ public class Test4JDataSourceHelper {
         return ConfigHelper.getDataSourceKey(dataSourceName, PROP_KEY_DATASOURCE_URL);
     }
 
-
     private static String username(String dataSourceName) {
         return ConfigHelper.getDataSourceKey(dataSourceName, PROP_KEY_DATASOURCE_USERNAME);
     }
 
     private static String password(String dataSourceName) {
         return ConfigHelper.getDataSourceKey(dataSourceName, PROP_KEY_DATASOURCE_PASSWORD);
-
     }
 }

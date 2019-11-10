@@ -1,4 +1,4 @@
-package org.test4j.module.database.utility;
+package org.test4j.module.database.sql;
 
 import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
@@ -8,9 +8,7 @@ import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.jdbc.datasource.init.ScriptException;
 import org.springframework.jdbc.datasource.init.UncategorizedScriptException;
 import org.springframework.util.Assert;
-import org.test4j.module.core.utility.ModulesManager;
-import org.test4j.module.database.DatabaseModule;
-import org.test4j.module.IScript;
+import org.test4j.module.database.IDataSourceScript;
 import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.commons.ConfigHelper;
 import org.test4j.tools.commons.StringHelper;
@@ -27,12 +25,11 @@ import java.util.Map;
 import static org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript;
 
 /**
- * Class providing access to the functionality of the database module using
- * static methods. Meant to be used directly in unit tests.
+ * @author wudarui
  */
-public class DatabaseModuleHelper {
+public class DataSourceScriptHelper {
     /**
-     * key: dataSource hasCode
+     * key: dataSource name
      */
     static Map<String, Boolean> DATASOURCE_SCRIPT_HAS_INIT = new HashMap<>();
 
@@ -67,10 +64,10 @@ public class DatabaseModuleHelper {
     private static void runFromScriptFactory(DataSource dataSource, String factory) {
         try {
             Object instance = ClazzHelper.createInstanceOfType(factory);
-            if (!(instance instanceof IScript)) {
-                throw new RuntimeException("the script class should implement interface: " + IScript.class.getName());
+            if (!(instance instanceof IDataSourceScript)) {
+                throw new RuntimeException("the script class should implement interface: " + IDataSourceScript.class.getName());
             }
-            String script = ((IScript) instance).script();
+            String script = ((IDataSourceScript) instance).script();
             Assert.notNull(script, "script can't be null.");
             Connection connection = DataSourceUtils.getConnection(dataSource);
             try {

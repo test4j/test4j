@@ -43,11 +43,6 @@ public class SpringModule implements Module {
         SpringModuleHelper.setSpringContext(beanFactory);
     }
 
-
-    public static <T> T getBeanByName(String beanName) {
-        return (T) SpringModuleHelper.getBeanByName(beanName);
-    }
-
     /**
      * 返回spring事务
      *
@@ -71,7 +66,6 @@ public class SpringModule implements Module {
      */
     @Override
     public void init() {
-        new AbstractBeanFactoryMock();
     }
 
     @Override
@@ -88,6 +82,11 @@ public class SpringModule implements Module {
      * The {@link TestListener} for this module
      */
     protected class SpringTestListener extends TestListener {
+        @Override
+        public void beforeClass(Class testClazz) {
+            new AbstractBeanFactoryMock();
+        }
+
         @Override
         protected String getName() {
             return "SpringTestListener";

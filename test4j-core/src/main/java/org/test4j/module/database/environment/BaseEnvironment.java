@@ -13,7 +13,7 @@ import org.test4j.function.EConsumer;
 import org.test4j.function.EFunction;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.database.environment.typesmap.AbstractTypeMap;
-import org.test4j.module.database.sql.Test4JDataSource;
+import org.test4j.module.database.sql.DataSourceCreatorFactory;
 import org.test4j.module.database.utility.DataSourceType;
 import org.test4j.tools.commons.ExceptionWrapper;
 
@@ -31,7 +31,7 @@ public abstract class BaseEnvironment implements DBEnvironment {
     protected BaseEnvironment(DataSourceType dataSourceType, String dataSourceName, String schema) {
         this.dataSourceName = dataSourceName;
         this.dataSourceType = dataSourceType;
-        this.dataSource = Test4JDataSource.create(dataSourceName);
+        this.dataSource = DataSourceCreatorFactory.create(dataSourceName);
     }
 
     @Override

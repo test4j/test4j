@@ -1,4 +1,4 @@
-package org.test4j.module;
+package org.test4j.module.database;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 import static org.test4j.module.database.utility.DBHelper.buildH2Index;
 import static org.test4j.module.database.utility.DBHelper.buildH2Unique;
 
-public interface IScript {
+public interface IDataSourceScript {
     /**
      * 指定的类型转换
      */

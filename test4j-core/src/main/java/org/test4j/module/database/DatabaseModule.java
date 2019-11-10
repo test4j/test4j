@@ -9,15 +9,11 @@ import org.test4j.module.core.internal.TestListener;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.database.environment.DBEnvironmentFactory;
 import org.test4j.module.database.mock.MybatisConfigurationMock;
+import org.test4j.module.database.sql.DataSourceCreatorFactory;
 import org.test4j.module.database.sql.Test4JDataSource;
-import org.test4j.module.database.sql.Test4JDataSourceHelper;
 import org.test4j.module.database.sql.Test4JSqlContext;
-import org.test4j.module.database.utility.DatabaseModuleHelper;
 import org.test4j.module.spring.interal.SpringEnv;
-import org.test4j.module.spring.interal.SpringModuleHelper;
 import org.test4j.tools.commons.ConfigHelper;
-
-import javax.sql.DataSource;
 
 public class DatabaseModule implements Module {
 
@@ -50,8 +46,7 @@ public class DatabaseModule implements Module {
             }
             List<String> dataSources = ConfigHelper.getDataSourceList();
             for (String dataSourceName : dataSources) {
-                DataSource dataSource = Test4JDataSource.create(dataSourceName);
-                DatabaseModuleHelper.runInitScripts(dataSource, dataSourceName);
+                DataSourceCreatorFactory.create(dataSourceName);
             }
         }
 
@@ -65,6 +60,7 @@ public class DatabaseModule implements Module {
             Test4JSqlContext.clean();
             new MybatisConfigurationMock();
         }
+
         /**
          * 移除测试方法的事务<br>
          * <br>
@@ -78,7 +74,7 @@ public class DatabaseModule implements Module {
 
         @Override
         protected String getName() {
-            return "DatabaseTestListener" ;
+            return "DatabaseTestListener";
         }
     }
 }
