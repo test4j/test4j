@@ -5,24 +5,21 @@ import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.database.utility.DataSourceType;
 import org.test4j.tools.commons.ConfigHelper;
 
-import javax.sql.DataSource;
 import java.sql.Driver;
 import java.sql.DriverManager;
 import java.util.HashSet;
 import java.util.Set;
 
 import static org.test4j.module.core.internal.IPropItem.*;
+import static org.test4j.module.database.sql.Test4JDataSource.wrapper;
 
 public class Test4JDataSourceHelper {
     private static final Set<String> registered = new HashSet<>();
 
-    public static DataSource createLocalDataSource(String dataSourceName) {
+    static Test4JDataSource createLocalDataSource(String dataSourceName) {
         DataSourceType type = type(dataSourceName);
         String schemaName = ConfigHelper.getDataSourceKey(dataSourceName, PROP_KEY_DATASOURCE_SCHEMA);
-        return createLocalDataSource(type, dataSourceName, schemaName);
-    }
 
-    public static DataSource createLocalDataSource(DataSourceType type, String dataSourceName, String schemaName) {
         checkDoesTestDB(type, dataSourceName, schemaName);
         registerDriver(dataSourceName);
         MessageHelper.info("Creating data source. Driver: " + driver(dataSourceName) + ", url: " + url(dataSourceName) + ", user: " + username(dataSourceName)
@@ -36,7 +33,7 @@ public class Test4JDataSourceHelper {
             dataSource.setPassword(password(dataSourceName));
         }
 
-        return dataSource;
+        return wrapper(type, schemaName, dataSourceName, dataSource);
     }
 
     /**

@@ -26,7 +26,6 @@ public class ModuleHelper {
      * 
      * @param moduleClass The class of the module for which we want the default
      *            annotation property values
-     * @param configuration The test4j configuration
      * @param annotationClasses The annotations for which we want the default
      *            values
      * @return An object that returns the annotation property default values
@@ -58,11 +57,11 @@ public class ModuleHelper {
      * @param moduleClass The module class, not null
      * @param annotationClass The annotation class, not null
      * @param name The property suffix, not null
-     * @param configuration The test4j config, not null
      * @return the default value
      */
     private static String getAnnotationPropertyDefault(Class<? extends Module> moduleClass,
-                                                       Class<? extends Annotation> annotationClass, String name) {
+                                                       Class<? extends Annotation> annotationClass,
+                                                       String name) {
         String propertyName = getShortClassName(moduleClass) + "." + getShortClassName(annotationClass) + "." + name
                 + ".default";
         if (!ConfigHelper.hasProperty(propertyName)) {

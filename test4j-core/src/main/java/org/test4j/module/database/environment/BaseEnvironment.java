@@ -31,7 +31,7 @@ public abstract class BaseEnvironment implements DBEnvironment {
     protected BaseEnvironment(DataSourceType dataSourceType, String dataSourceName, String schema) {
         this.dataSourceName = dataSourceName;
         this.dataSourceType = dataSourceType;
-        this.dataSource = Test4JDataSource.createTest4JDataSource(dataSourceType, schema, dataSourceName);
+        this.dataSource = Test4JDataSource.create(dataSourceName);
     }
 
     @Override

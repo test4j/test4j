@@ -14,11 +14,10 @@ public class AbstractBeanFactoryMock extends MockUp<AbstractBeanFactory> {
     public <T> T doGetBean(Invocation it,
                            String name, Class<T> requiredType, final Object[] args, boolean typeCheckOnly)
             throws BeansException {
-        Object bean = it.proceed(name, requiredType, args, typeCheckOnly);
-        if (bean instanceof DataSource) {
-            return (T) Test4JDataSource.wrapperWithTest4JDataSource(name, (DataSource) bean);
+        if (Test4JDataSource.isDataSource(name)) {
+            return (T) Test4JDataSource.create(name);
         } else {
-            return (T) bean;
+            return it.proceed(name, requiredType, args, typeCheckOnly);
         }
     }
 }

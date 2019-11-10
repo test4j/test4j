@@ -18,6 +18,7 @@ import org.test4j.tools.commons.StringHelper;
 import javax.sql.DataSource;
 import java.io.ByteArrayInputStream;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,25 +31,17 @@ import static org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScr
  * static methods. Meant to be used directly in unit tests.
  */
 public class DatabaseModuleHelper {
-    static Map<String, Boolean> HAS_INIT_DATASOURCE_SCRIPT = new HashMap<>();
-
     /**
-     * Gets the instance DatabaseModule that is registered in the modules
-     * repository. This instance implements the actual behavior of the static
-     * methods in this class. This way, other implementations can be plugged in,
-     * while keeping the simplicity of using static methods.
-     *
-     * @return the instance, not null
+     * key: dataSource hasCode
      */
-    public static DatabaseModule getDatabaseModule() {
-        return ModulesManager.getModuleInstance(DatabaseModule.class);
-    }
+    static Map<String, Boolean> DATASOURCE_SCRIPT_HAS_INIT = new HashMap<>();
 
     public static void runInitScripts(DataSource dataSource, String beanName) {
         if (dataSource == null) {
             return;
         }
-        if (HAS_INIT_DATASOURCE_SCRIPT.containsKey(beanName)) {
+
+        if (DATASOURCE_SCRIPT_HAS_INIT.containsKey(beanName)) {
             return;
         } else {
             String factory = ConfigHelper.getDataSourceKey(beanName, "script.factory");
@@ -57,7 +50,17 @@ public class DatabaseModuleHelper {
             } else {
                 runFromScriptFactory(dataSource, factory);
             }
-            HAS_INIT_DATASOURCE_SCRIPT.put(beanName, true);
+            commitScript(dataSource);
+            DATASOURCE_SCRIPT_HAS_INIT.put(beanName, true);
+        }
+    }
+
+    private static void commitScript(DataSource dataSource) {
+        try {
+            dataSource.getConnection().commit();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            throw new RuntimeException("commit datasource script error:" + e.getMessage(), e);
         }
     }
 

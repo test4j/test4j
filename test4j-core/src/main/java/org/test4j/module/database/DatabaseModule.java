@@ -9,6 +9,8 @@ import org.test4j.module.core.internal.TestListener;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.database.environment.DBEnvironmentFactory;
 import org.test4j.module.database.mock.MybatisConfigurationMock;
+import org.test4j.module.database.sql.Test4JDataSource;
+import org.test4j.module.database.sql.Test4JDataSourceHelper;
 import org.test4j.module.database.sql.Test4JSqlContext;
 import org.test4j.module.database.utility.DatabaseModuleHelper;
 import org.test4j.module.spring.interal.SpringEnv;
@@ -48,12 +50,8 @@ public class DatabaseModule implements Module {
             }
             List<String> dataSources = ConfigHelper.getDataSourceList();
             for (String dataSourceName : dataSources) {
-                DataSource dataSource = SpringModuleHelper.getBeanByName(dataSourceName);
-                if (dataSource == null) {
-                    MessageHelper.warn("undefined spring bean: " + dataSourceName);
-                    continue;
-                }
-                DatabaseModuleHelper.runInitScripts((DataSource) dataSource, dataSourceName);
+                DataSource dataSource = Test4JDataSource.create(dataSourceName);
+                DatabaseModuleHelper.runInitScripts(dataSource, dataSourceName);
             }
         }
 

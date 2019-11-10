@@ -2,6 +2,8 @@ package org.test4j.module.database.sql;
 
 import java.io.PrintWriter;
 import java.sql.*;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Logger;
 
 import javax.sql.DataSource;
@@ -19,6 +21,7 @@ import org.test4j.module.spring.interal.SpringEnv;
  */
 @ToString
 public class Test4JDataSource implements DataSource {
+
     private final DataSource dataSource;
 
     private final DataSourceType type;
@@ -40,30 +43,6 @@ public class Test4JDataSource implements DataSource {
         this.dataSource = dataSource;
         DatabaseModuleHelper.runInitScripts(this, this.dataSourceName);
     }
-
-    public static DataSource createTest4JDataSource(DataSourceType type, String schemaName, String dataSourceName) {
-        DataSource dataSource = null;
-        if (SpringEnv.isSpringEnv()) {
-            dataSource = SpringModule.getBeanByName(dataSourceName);
-        }
-        if (dataSource == null) {
-            dataSource = Test4JDataSourceHelper.createLocalDataSource(type, dataSourceName, schemaName);
-        }
-        if (!(dataSource instanceof Test4JDataSource)) {
-            dataSource = wrapperWithTest4JDataSource(type, schemaName, dataSourceName, dataSource);
-        }
-        return dataSource;
-    }
-
-    public static DataSource wrapperWithTest4JDataSource(String beanName, DataSource dataSource) {
-        return dataSource instanceof Test4JDataSource ? dataSource : new Test4JDataSource(beanName, dataSource);
-    }
-
-    public static DataSource wrapperWithTest4JDataSource(DataSourceType type, String schemaName, String dataSourceName, DataSource dataSource) {
-        return dataSource instanceof Test4JDataSource ? dataSource :
-                new Test4JDataSource(type, schemaName, dataSourceName, dataSource);
-    }
-
 
     @Override
     public Connection getConnection() throws SQLException {
@@ -112,5 +91,27 @@ public class Test4JDataSource implements DataSource {
     @Override
     public boolean isWrapperFor(Class<?> iface) throws SQLException {
         return dataSource.isWrapperFor(iface);
+    }
+
+    public static Test4JDataSource wrapper(DataSourceType type, String schemaName, String dataSourceName, DataSource dataSource) {
+        return dataSource instanceof Test4JDataSource ? (Test4JDataSource) dataSource :
+                new Test4JDataSource(type, schemaName, dataSourceName, dataSource);
+    }
+
+
+    public static Map<String, Test4JDataSource> EXIST_DATASOURCE = new HashMap<>();
+
+    public static boolean isDataSource(String beanName) {
+        return EXIST_DATASOURCE.containsKey(beanName);
+    }
+
+    public static DataSource create(String dataSourceName) {
+        if (EXIST_DATASOURCE.containsKey(dataSourceName)) {
+            return EXIST_DATASOURCE.get(dataSourceName);
+        } else {
+            Test4JDataSource dataSource = Test4JDataSourceHelper.createLocalDataSource(dataSourceName);
+            EXIST_DATASOURCE.put(dataSourceName, dataSource);
+            return dataSource;
+        }
     }
 }
