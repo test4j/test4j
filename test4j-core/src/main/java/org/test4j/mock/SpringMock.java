@@ -1,4 +1,4 @@
-package org.test4j.module.spring.mock;
+package org.test4j.mock;
 
 import mockit.Invocation;
 import mockit.Mock;
@@ -10,7 +10,16 @@ import org.test4j.module.database.sql.DataSourceCreatorFactory;
 
 import javax.sql.DataSource;
 
-public class AbstractBeanFactoryMock extends MockUp<AbstractBeanFactory> {
+/**
+ * @author darui.wu
+ */
+public class SpringMock extends MockUp<AbstractBeanFactory> {
+    public static boolean hasMock = false;
+
+    public SpringMock() {
+        hasMock = true;
+    }
+
     @Mock
     public <T> T doGetBean(Invocation it,
                            String name,

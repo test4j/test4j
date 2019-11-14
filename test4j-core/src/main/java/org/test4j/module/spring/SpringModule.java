@@ -2,6 +2,7 @@ package org.test4j.module.spring;
 
 import java.util.Optional;
 
+import mockit.internal.startup.Startup;
 import org.springframework.context.ApplicationContext;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.test4j.module.core.Module;
@@ -9,7 +10,7 @@ import org.test4j.module.core.internal.Test4JContext;
 import org.test4j.module.core.internal.TestListener;
 import org.test4j.module.spring.interal.SpringEnv;
 import org.test4j.module.spring.interal.SpringModuleHelper;
-import org.test4j.module.spring.mock.AbstractBeanFactoryMock;
+import org.test4j.mock.SpringMock;
 
 
 @SuppressWarnings("rawtypes")
@@ -43,15 +44,6 @@ public class SpringModule implements Module {
         SpringModuleHelper.setSpringContext(beanFactory);
     }
 
-    /**
-     * 返回spring事务
-     *
-     * @return
-     */
-    public static Optional<PlatformTransactionManager> getTransactionManager() {
-        return SpringModuleHelper.getSpringPlatformTransactionManager(Test4JContext.currTestedObject());
-    }
-
     public static void injectSpringBeans(Object testedObject) {
         if (SpringEnv.isSpringEnv() && getSpringContext().isPresent()) {
             SpringModuleHelper.injectSpringBeans(testedObject);
@@ -66,6 +58,11 @@ public class SpringModule implements Module {
      */
     @Override
     public void init() {
+        if (!SpringMock.hasMock) {
+            Startup.initializing = true;
+            new SpringMock();
+            Startup.initializing = false;
+        }
     }
 
     @Override
@@ -82,11 +79,6 @@ public class SpringModule implements Module {
      * The {@link TestListener} for this module
      */
     protected class SpringTestListener extends TestListener {
-        @Override
-        public void beforeClass(Class testClazz) {
-            new AbstractBeanFactoryMock();
-        }
-
         @Override
         protected String getName() {
             return "SpringTestListener";

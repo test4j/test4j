@@ -1,7 +1,6 @@
 package org.test4j.example.mix;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.test.annotation.SystemProfileValueSource;
 import org.test4j.example.spring.ServiceA;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.spec.IMix;

@@ -1,6 +1,7 @@
 package org.test4j.module.database.utility;
 
 import cn.org.atool.fluent.mybatis.annotation.ColumnDef;
+import cn.org.atool.fluent.mybatis.annotation.ColumnDef.PrimaryType;
 import com.baomidou.mybatisplus.annotation.TableName;
 import org.test4j.tools.commons.AnnotationHelper;
 
@@ -41,20 +42,21 @@ public class EntityScriptParser {
     public String h2sql() {
         String tableName = this.getTableName();
         List<ColumnDefine> columns = this.findColumns();
-        return new StringBuilder()
+        StringBuilder buff = new StringBuilder()
                 .append(String.format("drop table IF exists %s;\n", tableName))
                 .append(String.format("CREATE TABLE \"%s\" (\n\t", tableName))
-                .append(this.parseColumn(columns))
-                .append(NEW_LINE_JOIN)
-                .append(String.format("PRIMARY KEY (%s)", this.findPrimaryFieldNames(columns)))
-                .append(");\n")
-                .toString();
+                .append(this.parseColumn(columns));
+        String key = this.findPrimaryFieldNames(columns);
+        if (key != null && !"".equals(key.trim())) {
+            buff.append(NEW_LINE_JOIN)
+                    .append(String.format("PRIMARY KEY (%s)", key));
+        }
+        return buff.append(");\n").toString();
     }
-
 
     private String findPrimaryFieldNames(List<ColumnDefine> columns) {
         return columns.stream()
-                .filter(column -> column.primary)
+                .filter(column -> column.primaryType != PrimaryType.None)
                 .map(column -> column.name)
                 .collect(joining(","));
     }
@@ -74,10 +76,15 @@ public class EntityScriptParser {
     }
 
     private String parseColumn(ColumnDefine column) {
-        if (column.primary) {
+        if (column.primaryType == PrimaryType.AutoIncrease) {
             return String.format("%s %s NOT NULL AUTO_INCREMENT",
                     this.quotation(column.name),
                     this.convertColumnType(column.type));
+        }else if (column.primaryType == PrimaryType.Customized) {
+            return String.format("%s %s NOT NULL",
+                    this.quotation(column.name),
+                    this.convertColumnType(column.type)
+            );
         } else {
             return String.format("%s %s %s",
                     this.quotation(column.name),
@@ -120,7 +127,7 @@ public class EntityScriptParser {
          *
          * @return
          */
-        boolean primary;
+        PrimaryType primaryType;
 
         /**
          * 允许字段为null
@@ -134,7 +141,7 @@ public class EntityScriptParser {
             ColumnDef def = field.getAnnotation(ColumnDef.class);
             if (def != null) {
                 this.type = def.type();
-                this.primary = def.primary();
+                this.primaryType = def.primary();
                 this.notNull = def.notNull();
             }
         }

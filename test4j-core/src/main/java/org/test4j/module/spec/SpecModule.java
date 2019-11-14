@@ -4,6 +4,7 @@ import org.test4j.module.core.Module;
 import org.test4j.module.core.internal.TestListener;
 import org.test4j.module.spec.internal.MixProxy;
 import org.test4j.module.spec.internal.ScenarioResult;
+import org.test4j.module.spec.internal.StoryPrinter;
 
 import java.lang.reflect.Method;
 
@@ -47,9 +48,17 @@ public class SpecModule implements Module {
         @Override
         public void afterMethod(Object testObject, Method testMethod, Throwable testThrowable) {
             if (testObject instanceof IStory) {
-                currScenario().print();
+                String scenarioPath = testObject.getClass().getName() + "__" + testMethod.getName();
+                String scenarioName = currScenario().getScenarioName();
+                String scenarioResult = currScenario().scenarioResult();
+                StoryPrinter.print(scenarioPath, scenarioName, scenarioResult, testThrowable);
             }
             Curr_Result.remove();
+        }
+
+        @Override
+        public void afterClass(Class testClass) {
+            StoryPrinter.printScenarioIndex(testClass.getSimpleName());
         }
     }
 }

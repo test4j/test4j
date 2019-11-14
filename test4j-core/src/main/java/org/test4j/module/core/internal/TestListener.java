@@ -40,10 +40,10 @@ public abstract class TestListener {
     /**
      * 在 @AfterClass之前执行
      *
-     * @param testObject
+     * @param testClass
      * @throws Exception
      */
-    public void afterClass(Object testObject) {
+    public void afterClass(Class testClass) {
         // empty
     }
 

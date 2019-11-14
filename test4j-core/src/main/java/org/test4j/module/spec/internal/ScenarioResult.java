@@ -26,6 +26,7 @@ public class ScenarioResult implements Serializable {
     }
 
     @Setter
+    @Getter
     private String scenarioName;
 
     private List<StepResult> steps = new ArrayList<>();
@@ -65,9 +66,9 @@ public class ScenarioResult implements Serializable {
                 ICore.want.fail("expected exception: " + eKlass.getName());
             }
         } catch (Throwable e) {
-            if(eKlass != null){
+            if (eKlass != null) {
                 SpecContext.setExpectedException(e);
-            }else {
+            } else {
                 result.setError(e);
                 throw e;
             }
@@ -80,7 +81,6 @@ public class ScenarioResult implements Serializable {
      * @param type
      * @param lambda
      * @param eKlass
-     *
      * @throws Exception
      */
     public void doStep(StepType type, SExecutor lambda, Class<? extends Throwable> eKlass) throws Exception {
@@ -100,7 +100,7 @@ public class ScenarioResult implements Serializable {
     /**
      * 输出测试结果
      */
-    public void print() {
+    public String scenarioResult() {
         StringBuilder buff = new StringBuilder();
         buff.append("\n\n")
                 .append("=========Scenario: ").append(this.scenarioName).append(" =============\n");
@@ -110,6 +110,6 @@ public class ScenarioResult implements Serializable {
         if (exception != null) {
             buff.append(StringHelper.exceptionTrace(this.exception, Filter_List));
         }
-        MessageHelper.info(buff.toString());
+        return buff.toString();
     }
 }

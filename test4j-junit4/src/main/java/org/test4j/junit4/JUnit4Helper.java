@@ -29,7 +29,7 @@ public class JUnit4Helper {
             public void evaluate() throws Throwable {
                 getTestListener().beforeClass(Test4JContext.currTestedClazz());
                 supplier.get().evaluate();
-                getTestListener().afterClass(Test4JContext.currTestedObject());
+                getTestListener().afterClass(Test4JContext.currTestedClazz());
             }
         };
     }

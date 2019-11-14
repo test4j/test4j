@@ -55,7 +55,7 @@ public class Test4JExtension implements
         Test4JContext.setContext(testedClass);
         SpringEnv.setSpringEnv(testedClass);
         getTestListener().beforeClass(testedClass);
-        if(SpringEnv.isSpringEnv(testedClass)){
+        if (SpringEnv.isSpringEnv(testedClass)) {
             getTestContextManager(context).beforeTestClass();
         }
     }

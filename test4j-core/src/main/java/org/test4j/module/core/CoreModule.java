@@ -106,10 +106,10 @@ public class CoreModule {
         }
 
         @Override
-        public void afterClass(Object testObject) {
+        public void afterClass(Class testClass) {
             ModulesManager.getTestListeners_Reverse()
-                    .forEach(listener -> listener.afterClass(testObject));
-            Test4JContext.setContext(new ClazzAfterObject(testObject.getClass()), null);
+                    .forEach(listener -> listener.afterClass(testClass));
+            Test4JContext.setContext(testClass);
             SpecContext.clean();
         }
 

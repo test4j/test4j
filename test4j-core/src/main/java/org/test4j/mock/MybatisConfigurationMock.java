@@ -1,4 +1,4 @@
-package org.test4j.module.database.mock;
+package org.test4j.mock;
 
 import mockit.Invocation;
 import mockit.Mock;
@@ -19,9 +19,18 @@ import org.test4j.tools.commons.StringHelper;
 
 import static java.util.stream.Collectors.toList;
 
+/**
+ * @author darui.wu
+ */
 public class MybatisConfigurationMock extends MockUp<Configuration> {
+    public static boolean hasMock = false;
+
+    public MybatisConfigurationMock() {
+        hasMock = true;
+    }
+
     @Mock
-    public StatementHandler newStatementHandler(Invocation it,Executor executor, MappedStatement mappedStatement, Object parameterObject, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) {
+    public StatementHandler newStatementHandler(Invocation it, Executor executor, MappedStatement mappedStatement, Object parameterObject, RowBounds rowBounds, ResultHandler resultHandler, BoundSql boundSql) {
         StatementHandler statementHandler = it.proceed(executor, mappedStatement, parameterObject, rowBounds, resultHandler, boundSql);
         BoundSql sql = boundSql;
         if (sql == null) {

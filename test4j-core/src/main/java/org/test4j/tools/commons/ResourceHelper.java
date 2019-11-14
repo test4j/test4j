@@ -1,17 +1,12 @@
 package org.test4j.tools.commons;
 
-import static ext.test4j.apache.commons.io.IOUtils.closeQuietly;
+import ext.test4j.apache.commons.io.IOUtils;
+import org.test4j.exception.Test4JException;
+import org.test4j.module.core.utility.MessageHelper;
+import org.test4j.tools.cpdetector.CodepageDetectorProxy;
+import org.test4j.tools.cpdetector.JChardetFacade;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.FileWriter;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.OutputStream;
+import java.io.*;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.Charset;
@@ -19,12 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import org.test4j.exception.Test4JException;
-import org.test4j.module.core.utility.MessageHelper;
-import org.test4j.tools.cpdetector.CodepageDetectorProxy;
-import org.test4j.tools.cpdetector.JChardetFacade;
-
-import ext.test4j.apache.commons.io.IOUtils;
+import static ext.test4j.apache.commons.io.IOUtils.closeQuietly;
 
 @SuppressWarnings("rawtypes")
 public class ResourceHelper {
@@ -116,8 +106,8 @@ public class ResourceHelper {
      * @param content
      */
     public static void writeStringToFile(File file, String content) {
+        mkFileParentDir(file);
         try (FileWriter writer = new FileWriter(file, false)) {
-            mkFileParentDir(file);
             writer.write(content);
         } catch (IOException e) {
             throw new RuntimeException(e);
@@ -330,6 +320,14 @@ public class ResourceHelper {
             }
             URL url = ResourceHelper.class.getClassLoader().getResource(resource);
             return url;
+        }
+    }
+
+    public static String readFromClasspath(String file) {
+        try (InputStream is = ResourceHelper.class.getClassLoader().getResourceAsStream(file)) {
+            return readFromStream(is);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
         }
     }
 
