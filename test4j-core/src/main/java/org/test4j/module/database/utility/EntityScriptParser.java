@@ -80,7 +80,7 @@ public class EntityScriptParser {
             return String.format("%s %s NOT NULL AUTO_INCREMENT",
                     this.quotation(column.name),
                     this.convertColumnType(column.type));
-        }else if (column.primaryType == PrimaryType.Customized) {
+        } else if (column.primaryType == PrimaryType.Customized) {
             return String.format("%s %s NOT NULL",
                     this.quotation(column.name),
                     this.convertColumnType(column.type)

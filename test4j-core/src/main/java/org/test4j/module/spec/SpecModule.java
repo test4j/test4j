@@ -5,6 +5,7 @@ import org.test4j.module.core.internal.TestListener;
 import org.test4j.module.spec.internal.MixProxy;
 import org.test4j.module.spec.internal.ScenarioResult;
 import org.test4j.module.spec.internal.StoryPrinter;
+import org.test4j.tools.commons.ResourceHelper;
 
 import java.lang.reflect.Method;
 
@@ -17,6 +18,7 @@ public class SpecModule implements Module {
 
     @Override
     public void init() {
+        ResourceHelper.deleteFileOrDir(StoryPrinter.getStoryPath());
     }
 
     @Override
