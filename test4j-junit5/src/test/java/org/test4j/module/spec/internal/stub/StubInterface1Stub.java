@@ -17,13 +17,11 @@ import org.test4j.exception.Test4JException;
 @Component
 public class StubInterface1Stub extends MockUp<StubInterface1Stub> implements StubInterface1 {
 
-	@Mock
 	@Override
 	public int aFunctionMethod(Function<List<Map<String, ?>>, String> arg1, List<? extends Set<ServiceA>> arg2) {
 		throw new AssertionError("not mock");
 	}
 
-	@Mock
 	@Override
 	public void aVoidMethod(int arg1, Double arg2) throws Test4JException {
 		throw new AssertionError("not mock");

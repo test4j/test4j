@@ -15,13 +15,11 @@ import org.test4j.example.stub.StubInterface2;
 @Component
 public class StubInterface2Stub extends MockUp<StubInterface2Stub> implements StubInterface2 {
 
-	@Mock
 	@Override
 	public <E> Set<? super BigDecimal> function3(Class<E> arg1) {
 		throw new AssertionError("not mock");
 	}
 
-	@Mock
 	@Override
 	public <T extends Serializable & Comparable, F extends Date> F newDate(Class<? super T> arg1) {
 		throw new AssertionError("not mock");

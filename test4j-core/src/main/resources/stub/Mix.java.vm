@@ -14,6 +14,7 @@ public class ${klass}Mix implements IMix {
     public void demo(int input1, int input2) {
         new ${klass}Stub() {
             //@Mock
+            //@Override
             public void mockYourMethod(){
                 //具体mock实现
             }

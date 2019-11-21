@@ -41,10 +41,13 @@ public class StubGenerator {
                 .collect(joining("\n"));
         String mixFields = mixes.stream()
                 .map(mix -> {
-                    return String.format("\tpublic final %s %s = new %s();",
-                            mix, mix.substring(0, 1).toLowerCase() + mix.substring(1), mix);
+                    String field = mix.substring(0, 1).toLowerCase() + mix.substring(1);
+                    return new StringBuilder()
+                            .append("\n\t@Mix")
+                            .append(String.format("\n\tpublic %s %s;", mix, field))
+                            .toString();
                 })
-                .collect(joining("\n\n"));
+                .collect(joining("\n"));
 
         String template = ResourceHelper.readFromClasspath("stub/Mixes.java.vm");
         String context = template.replaceAll(PACKAGE_REG, _package)
@@ -135,10 +138,8 @@ public class StubGenerator {
             methods.sort(Comparator.comparing(Method::getName));
             for (Method method : methods) {
                 StringBuilder buff = new StringBuilder()
-                        .append("\n\t@Mock\n")
-                        .append("\t@Override\n")
-                        .append("\tpublic ");
-
+                        .append("\n\t@Override")
+                        .append("\n\tpublic ");
 
                 buff.append(this.initMethodType(method))
                         .append(this.initKlass(method.getGenericReturnType()))

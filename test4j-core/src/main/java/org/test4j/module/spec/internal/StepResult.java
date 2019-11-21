@@ -40,7 +40,7 @@ public class StepResult {
     @Override
     public String toString() {
         StringBuilder buff = new StringBuilder();
-        buff.append(type).append(": ").append(description).append("\n");
+        buff.append(type).append(": ").append(description == null ? "" : description).append("\n");
         if (success) {
             buff.append("\tsuccess: ").append(message);
         } else {

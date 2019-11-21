@@ -33,8 +33,20 @@ public class ScenarioThen implements IThen {
 
     @Override
     public IThen want(Consumer<Throwable> consumer) throws RuntimeException {
+        SExecutor lambda = () -> {
+            Throwable expected = SpecContext.getExpectedException();
+            if (expected == null) {
+                throw new AssertionError("Expecting an exception, but not!");
+            }
+            try {
+                consumer.accept(expected);
+            } catch (Throwable e) {
+                e.printStackTrace();
+                throw new AssertionError("expected an Exception error: " + e.getMessage(), expected);
+            }
+        };
         try {
-            consumer.accept(SpecContext.getExpectedException());
+            this.scenario.doStep(StepType.Then, "异常验证", lambda, null);
             return this;
         } catch (Throwable e) {
             throw new RuntimeException("步骤 - 异常验证错误：" + e.getMessage(), e);
