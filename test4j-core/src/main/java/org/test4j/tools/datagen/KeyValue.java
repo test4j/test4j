@@ -33,7 +33,7 @@ public class KeyValue<M extends IDataMap> {
      * o 如果转换后的数组序号小于0，按0处理<br/>
      * o 如果转换后的数组序号大于数组size-1，按size-1处理
      *
-     * @param changeIndex 
+     * @param changeIndex
      * @param values
      * @return
      */
@@ -221,7 +221,7 @@ public class KeyValue<M extends IDataMap> {
         DataGenerator generator = new DataGenerator() {
             @Override
             public Object generate(int index) {
-                int _index = random.nextInt() % randoms.length;
+                int _index = Math.abs(random.nextInt()) % randoms.length;
                 return randoms[_index];
             }
         };

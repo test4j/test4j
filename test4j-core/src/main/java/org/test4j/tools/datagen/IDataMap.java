@@ -52,13 +52,37 @@ public interface IDataMap<DM> {
      */
     Object get(String key);
 
+    /**
+     * 返回单个value值时long的场景
+     *
+     * @param key
+     * @return
+     */
     long getLong(String key);
 
+    /**
+     * 返回单个value值时布尔值的场景
+     *
+     * @param key
+     * @return
+     */
     boolean getBoolean(String key);
 
+    /**
+     * 返回单个value值时String的场景
+     *
+     * @param key
+     * @return
+     */
     String getString(String key);
 
-    List getList(String key);
+    /**
+     * 返回单个value值是list的场景
+     *
+     * @param key
+     * @return
+     */
+    List listValues(String key);
 
     DM valueSize(int size);
 

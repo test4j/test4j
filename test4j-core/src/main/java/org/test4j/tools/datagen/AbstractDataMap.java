@@ -72,11 +72,8 @@ public abstract class AbstractDataMap<DM extends ICore.DataMap>
     }
 
     @Override
-    public List getList(String key) {
+    public List listValues(String key) {
         Object value = get(key);
-        if (value instanceof List) {
-            return (List) value;
-        }
         List list = new ArrayList();
         for (int loop = 0; loop < valueSize; loop++) {
             list.add(this.getIndexValue(value, loop));
