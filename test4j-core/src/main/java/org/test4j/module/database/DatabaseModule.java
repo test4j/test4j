@@ -1,29 +1,25 @@
 package org.test4j.module.database;
 
-import java.lang.reflect.Method;
-import java.util.List;
-
-import mockit.internal.startup.Startup;
-import org.springframework.transaction.PlatformTransactionManager;
+import org.test4j.mock.Mocker;
 import org.test4j.module.core.Module;
 import org.test4j.module.core.internal.TestListener;
-import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.database.environment.DBEnvironmentFactory;
-import org.test4j.mock.MybatisConfigurationMock;
 import org.test4j.module.database.sql.DataSourceCreatorFactory;
 import org.test4j.module.database.sql.Test4JSqlContext;
 import org.test4j.module.spring.interal.SpringEnv;
 import org.test4j.tools.commons.ConfigHelper;
 
+import java.lang.reflect.Method;
+import java.util.List;
+
+/**
+ * @author darui.wu
+ */
 public class DatabaseModule implements Module {
 
     @Override
     public void init() {
-        if (!MybatisConfigurationMock.hasMock) {
-            Startup.initializing = true;
-            new MybatisConfigurationMock();
-            Startup.initializing = false;
-        }
+        Mocker.mockMybatisConfiguration();
     }
 
     @Override

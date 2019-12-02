@@ -14,7 +14,7 @@ import javax.sql.DataSource;
  * @author darui.wu
  */
 public class SpringMock extends MockUp<AbstractBeanFactory> {
-    public static boolean hasMock = false;
+    static boolean hasMock = false;
 
     public SpringMock() {
         hasMock = true;
@@ -27,12 +27,19 @@ public class SpringMock extends MockUp<AbstractBeanFactory> {
                            final Object[] args,
                            boolean typeCheckOnly)
             throws BeansException {
-        if (DataSourceCreatorFactory.isDataSource(name) ||
-                (requiredType != null && requiredType.isAssignableFrom(DataSource.class))) {
+        if (this.isDataSource(name, requiredType)) {
             MessageHelper.info("===========AbstractBeanFactoryMock===========");
             return (T) DataSourceCreatorFactory.create(name);
         } else {
             return it.proceed(name, requiredType, args, typeCheckOnly);
+        }
+    }
+
+    private <T> boolean isDataSource(String name, Class<T> requiredType) {
+        if (DataSourceCreatorFactory.isDataSource(name)) {
+            return true;
+        } else {
+            return requiredType != null && requiredType.isAssignableFrom(DataSource.class);
         }
     }
 }

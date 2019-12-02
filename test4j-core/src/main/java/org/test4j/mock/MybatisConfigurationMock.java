@@ -23,7 +23,7 @@ import static java.util.stream.Collectors.toList;
  * @author darui.wu
  */
 public class MybatisConfigurationMock extends MockUp<Configuration> {
-    public static boolean hasMock = false;
+    static boolean hasMock = false;
 
     public MybatisConfigurationMock() {
         hasMock = true;

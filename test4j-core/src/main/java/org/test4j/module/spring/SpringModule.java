@@ -1,18 +1,17 @@
 package org.test4j.module.spring;
 
-import java.util.Optional;
-
-import mockit.internal.startup.Startup;
 import org.springframework.context.ApplicationContext;
-import org.springframework.transaction.PlatformTransactionManager;
+import org.test4j.mock.Mocker;
 import org.test4j.module.core.Module;
-import org.test4j.module.core.internal.Test4JContext;
 import org.test4j.module.core.internal.TestListener;
 import org.test4j.module.spring.interal.SpringEnv;
 import org.test4j.module.spring.interal.SpringModuleHelper;
-import org.test4j.mock.SpringMock;
 
+import java.util.Optional;
 
+/**
+ * @author darui.wu
+ */
 @SuppressWarnings("rawtypes")
 public class SpringModule implements Module {
 
@@ -58,11 +57,7 @@ public class SpringModule implements Module {
      */
     @Override
     public void init() {
-        if (!SpringMock.hasMock) {
-            Startup.initializing = true;
-            new SpringMock();
-            Startup.initializing = false;
-        }
+        Mocker.mockSpringDataSource();
     }
 
     @Override
