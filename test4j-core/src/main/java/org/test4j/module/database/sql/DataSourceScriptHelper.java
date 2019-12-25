@@ -42,12 +42,15 @@ public class DataSourceScriptHelper {
             return;
         } else {
             String factory = ConfigHelper.getDataSourceKey(beanName, "script.factory");
+            boolean runned = false;
             if (StringHelper.isBlankOrNull(factory)) {
-                runFromClasspathResource(dataSource, beanName);
+                runned = runFromClasspathResource(dataSource, beanName);
             } else {
-                runFromScriptFactory(dataSource, factory);
+                runned = runFromScriptFactory(dataSource, factory);
             }
-            commitScript(dataSource);
+            if (runned) {
+                commitScript(dataSource);
+            }
             DATASOURCE_SCRIPT_HAS_INIT.put(beanName, true);
         }
     }
@@ -61,7 +64,7 @@ public class DataSourceScriptHelper {
         }
     }
 
-    private static void runFromScriptFactory(DataSource dataSource, String factory) {
+    private static boolean runFromScriptFactory(DataSource dataSource, String factory) {
         try {
             Object instance = ClazzHelper.createInstanceOfType(factory);
             if (!(instance instanceof IDataSourceScript)) {
@@ -76,6 +79,7 @@ public class DataSourceScriptHelper {
             } finally {
                 DataSourceUtils.releaseConnection(connection, dataSource);
             }
+            return true;
         } catch (ScriptException e) {
             throw e;
         } catch (Exception e) {
@@ -83,10 +87,10 @@ public class DataSourceScriptHelper {
         }
     }
 
-    private static void runFromClasspathResource(DataSource dataSource, String beanName) {
+    private static boolean runFromClasspathResource(DataSource dataSource, String beanName) {
         List<Resource> resources = getResources(beanName);
         if (resources.isEmpty()) {
-            return;
+            return false;
         }
         Assert.notNull(dataSource, "DataSource must be provided.");
         try {
@@ -99,6 +103,7 @@ public class DataSourceScriptHelper {
             } finally {
                 DataSourceUtils.releaseConnection(connection, dataSource);
             }
+            return true;
         } catch (ScriptException e) {
             throw e;
         } catch (Exception e) {

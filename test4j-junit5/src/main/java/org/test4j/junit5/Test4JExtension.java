@@ -56,7 +56,7 @@ public class Test4JExtension implements
         SpringEnv.setSpringEnv(testedClass);
         getTestListener().beforeClass(testedClass);
         if (SpringEnv.isSpringEnv(testedClass)) {
-            getTestContextManager(context).beforeTestClass();
+            JUnit5Helper.beforeTestClass(context);
         }
     }
 
@@ -66,7 +66,9 @@ public class Test4JExtension implements
     @Override
     public void afterAll(ExtensionContext context) throws Exception {
         try {
-            getTestContextManager(context).afterTestClass();
+            if (SpringEnv.isSpringEnv()) {
+                JUnit5Helper.afterTestClass(context);
+            }
             getTestListener().afterClass(context.getRequiredTestClass());
         } finally {
             getStore(context).remove(context.getRequiredTestClass());

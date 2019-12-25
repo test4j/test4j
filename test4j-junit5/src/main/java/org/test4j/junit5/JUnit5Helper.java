@@ -32,4 +32,12 @@ public class JUnit5Helper {
         Store store = getStore(context);
         return store.getOrComputeIfAbsent(testClass, TestContextManager::new, TestContextManager.class);
     }
+
+    public static void beforeTestClass(ExtensionContext context) throws Exception {
+        getTestContextManager(context).beforeTestClass();
+    }
+
+    public static void afterTestClass(ExtensionContext context) throws Exception {
+        getTestContextManager(context).afterTestClass();
+    }
 }

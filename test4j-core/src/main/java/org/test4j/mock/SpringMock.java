@@ -7,8 +7,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.support.AbstractBeanFactory;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.database.sql.DataSourceCreatorFactory;
-
-import javax.sql.DataSource;
+import org.test4j.tools.commons.ConfigHelper;
 
 /**
  * @author darui.wu
@@ -39,7 +38,8 @@ public class SpringMock extends MockUp<AbstractBeanFactory> {
         if (DataSourceCreatorFactory.isDataSource(name)) {
             return true;
         } else {
-            return requiredType != null && requiredType.isAssignableFrom(DataSource.class);
+            return ConfigHelper.getDataSourceList().contains(name);
+            //return requiredType != null && requiredType.isAssignableFrom(DataSource.class);
         }
     }
 }
