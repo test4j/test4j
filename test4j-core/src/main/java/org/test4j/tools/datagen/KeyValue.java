@@ -38,6 +38,9 @@ public class KeyValue<M extends IDataMap> {
      * @return
      */
     public M values(Function<Integer, Integer> changeIndex, Object... values) {
+        if (changeIndex == null) {
+            throw new RuntimeException("changeIndex function can't be null. if first argument is object, please use values((Object)null)");
+        }
         if (values == null || values.length == 0) {
             throw new RuntimeException("the values should be specified.");
         }
