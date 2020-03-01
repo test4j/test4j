@@ -32,14 +32,15 @@ public final class DBEnvironmentFactory {
             throw new RuntimeException("DatabaseType can't be null.");
         }
         switch (dataSourceType) {
-            case MYSQL:
+            case MySql:
             case H2DB:
+            case MariaDB:
                 return new MySqlEnvironment(dataSourceName, dataSourceSchema);
-            case ORACLE:
+            case Oracle:
                 return new OracleEnvironment(dataSourceName, dataSourceSchema);
-            case SQLSERVER:
+            case SqlServer:
                 return new SqlServerEnvironment(dataSourceName, dataSourceSchema);
-            case DERBYDB:
+            case DerbyDB:
                 return new DerbyEnvironment(dataSourceName, dataSourceSchema);
             default:
                 throw new RuntimeException("unsupport database type:" + dataSourceType.name());

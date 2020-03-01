@@ -6,7 +6,7 @@ import org.test4j.module.database.utility.DataSourceType;
 
 public class OracleEnvironment extends BaseEnvironment {
 	public OracleEnvironment(String dataSourceName, String dataSourceFrom) {
-		super(DataSourceType.ORACLE, dataSourceName, dataSourceFrom);
+		super(DataSourceType.Oracle, dataSourceName, dataSourceFrom);
 		typeMap = new OracleTypeMap();
 	}
 

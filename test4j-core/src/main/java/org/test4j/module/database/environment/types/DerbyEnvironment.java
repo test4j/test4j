@@ -11,7 +11,7 @@ import org.test4j.module.database.utility.DataSourceType;
  */
 public class DerbyEnvironment extends BaseEnvironment {
 	public DerbyEnvironment(String dataSourceName, String dataSourceFrom) {
-		super(DataSourceType.DERBYDB, dataSourceName, dataSourceFrom);
+		super(DataSourceType.DerbyDB, dataSourceName, dataSourceFrom);
 		this.typeMap = null;// TODO
 	}
 

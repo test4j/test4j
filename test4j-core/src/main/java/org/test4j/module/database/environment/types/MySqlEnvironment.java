@@ -6,7 +6,7 @@ import org.test4j.module.database.utility.DataSourceType;
 
 public class MySqlEnvironment extends BaseEnvironment {
 	public MySqlEnvironment(String dataSourceName, String dataSourceFrom) {
-		super(DataSourceType.MYSQL, dataSourceName, dataSourceFrom);
+		super(DataSourceType.MySql, dataSourceName, dataSourceFrom);
 		typeMap = new MySQLTypeMap();
 	}
 

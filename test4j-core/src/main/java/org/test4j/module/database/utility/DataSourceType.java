@@ -6,8 +6,7 @@ import org.test4j.tools.commons.StringHelper;
 
 public enum DataSourceType {
     /**
-     * H2Db<br>
-     * "org.hibernate.dialect.H2Dialect", "public", "public"
+     * H2Db
      */
     H2DB() {
         @Override
@@ -16,8 +15,7 @@ public enum DataSourceType {
         }
     },
     /**
-     * HsqlDb<br>
-     * "org.hibernate.dialect.HSQLDialect", "public", "public"
+     * HsqlDb
      */
     HSQLDB() {
         @Override
@@ -25,22 +23,23 @@ public enum DataSourceType {
             return true;
         }
     },
-    MYSQL(),
+    MySql(),
+    MariaDB() {
+        @Override
+        public boolean isMemoryDB() {
+            return true;
+        }
+    },
 
-    ORACLE(),
+    Oracle(),
 
-    SQLSERVER(),
+    SqlServer(),
 
-    DERBYDB(),
+    DerbyDB(),
 
     DB2(),
 
-    UNSUPPORT();
-
-
-    private DataSourceType() {
-    }
-
+    UnSupport();
 
     public boolean isMemoryDB() {
         return false;
