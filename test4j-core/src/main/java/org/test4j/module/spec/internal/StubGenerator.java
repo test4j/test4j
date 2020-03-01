@@ -49,7 +49,7 @@ public class StubGenerator {
                 })
                 .collect(joining("\n"));
 
-        String template = ResourceHelper.readFromClasspath("stub/Mixes.java.vm");
+        String template = ResourceHelper.readFromClasspath("templates/stub/Mixes.java.vm");
         String context = template.replaceAll(PACKAGE_REG, _package)
                 .replace("${mixImports}", mixImports)
                 .replace("${mixFields}", mixFields);
@@ -68,7 +68,7 @@ public class StubGenerator {
         String methods = generator.methods.stream()
                 .collect(joining("\n"));
 
-        String template = ResourceHelper.readFromClasspath("stub/Stub.java.vm");
+        String template = ResourceHelper.readFromClasspath("templates/stub/Stub.java.vm");
         String context = template.replaceAll(PACKAGE_REG, generator._package)
                 .replaceAll(KLASS_REG, generator.klass.getSimpleName())
                 .replace("${imports}", imports)
@@ -91,7 +91,7 @@ public class StubGenerator {
             return;
         }
 
-        String template = ResourceHelper.readFromClasspath("stub/Mix.java.vm");
+        String template = ResourceHelper.readFromClasspath("templates/stub/Mix.java.vm");
         String context = template.replaceAll(PACKAGE_REG, generator._package)
                 .replaceAll(KLASS_REG, generator.klass.getSimpleName());
         writeStringToFile(mixFile, context);
