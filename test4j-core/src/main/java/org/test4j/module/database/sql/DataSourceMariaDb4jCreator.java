@@ -40,7 +40,7 @@ public class DataSourceMariaDb4jCreator {
         String schema = DataSourceDefaultCreator.schema(dataSourceName);
         String username = DataSourceDefaultCreator.username(dataSourceName);
         String password = DataSourceDefaultCreator.password(dataSourceName);
-        String driver = ConfigHelper.getString("db.mariaDB4j.driver");
+        String driver = ConfigHelper.getString("dataSource.mariaDB4j.driver");
 
         DBConfigurationBuilder config = newBuilder().setPort(0);
         DB mariaDB = newEmbeddedDB(config.build());
