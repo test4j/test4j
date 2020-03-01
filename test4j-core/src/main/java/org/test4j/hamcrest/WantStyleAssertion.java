@@ -1,5 +1,11 @@
 package org.test4j.hamcrest;
 
+import org.test4j.function.SExecutor;
+import org.test4j.hamcrest.iassert.AssertHelper;
+import org.test4j.hamcrest.iassert.impl.*;
+import org.test4j.hamcrest.iassert.intf.*;
+import org.test4j.tools.commons.ArrayHelper;
+
 import java.io.File;
 import java.math.BigDecimal;
 import java.math.BigInteger;
@@ -7,41 +13,6 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
-
-import org.test4j.hamcrest.iassert.impl.ArrayAssert;
-import org.test4j.hamcrest.iassert.impl.BooleanAssert;
-import org.test4j.hamcrest.iassert.impl.ByteAssert;
-import org.test4j.hamcrest.iassert.impl.CharacterAssert;
-import org.test4j.hamcrest.iassert.impl.CollectionAssert;
-import org.test4j.hamcrest.iassert.impl.DateAssert;
-import org.test4j.hamcrest.iassert.impl.DoubleAssert;
-import org.test4j.hamcrest.iassert.impl.FileAssert;
-import org.test4j.hamcrest.iassert.impl.FloatAssert;
-import org.test4j.hamcrest.iassert.impl.IntegerAssert;
-import org.test4j.hamcrest.iassert.impl.LongAssert;
-import org.test4j.hamcrest.iassert.impl.MapAssert;
-import org.test4j.hamcrest.iassert.impl.NumberAssert;
-import org.test4j.hamcrest.iassert.impl.ObjectAssert;
-import org.test4j.hamcrest.iassert.impl.ShortAssert;
-import org.test4j.hamcrest.iassert.impl.StringAssert;
-import org.test4j.hamcrest.iassert.intf.IArrayAssert;
-import org.test4j.hamcrest.iassert.intf.IBooleanAssert;
-import org.test4j.hamcrest.iassert.intf.IByteAssert;
-import org.test4j.hamcrest.iassert.intf.ICharacterAssert;
-import org.test4j.hamcrest.iassert.intf.ICollectionAssert;
-import org.test4j.hamcrest.iassert.intf.IDateAssert;
-import org.test4j.hamcrest.iassert.intf.IDoubleAssert;
-import org.test4j.hamcrest.iassert.intf.IFileAssert;
-import org.test4j.hamcrest.iassert.intf.IFloatAssert;
-import org.test4j.hamcrest.iassert.intf.IIntegerAssert;
-import org.test4j.hamcrest.iassert.intf.IJSONAssert;
-import org.test4j.hamcrest.iassert.intf.ILongAssert;
-import org.test4j.hamcrest.iassert.intf.IMapAssert;
-import org.test4j.hamcrest.iassert.intf.INumberAssert;
-import org.test4j.hamcrest.iassert.intf.IObjectAssert;
-import org.test4j.hamcrest.iassert.intf.IShortAssert;
-import org.test4j.hamcrest.iassert.intf.IStringAssert;
-import org.test4j.tools.commons.ArrayHelper;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class WantStyleAssertion {
@@ -442,5 +413,16 @@ public class WantStyleAssertion {
      */
     public IDateAssert<Date> date(Date date) {
         return new DateAssert<Date>(date, Date.class);
+    }
+
+    /**
+     * 期望执行异常
+     *
+     * @param executor 具体执行动作
+     * @param eKlass   期望执行抛出的异常类型列表
+     * @return
+     */
+    public IStringAssert exception(SExecutor executor, Class<? extends Throwable>... eKlass) {
+        return AssertHelper.exception(executor, eKlass);
     }
 }
