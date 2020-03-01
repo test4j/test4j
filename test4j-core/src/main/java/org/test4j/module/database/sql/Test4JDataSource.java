@@ -21,7 +21,6 @@ public class Test4JDataSource implements DataSource {
 
     private final String dataSourceName;
 
-
     Test4JDataSource(String beanName, DataSource dataSource) {
         this.dataSourceName = beanName;
         this.dataSource = dataSource;
@@ -74,6 +73,4 @@ public class Test4JDataSource implements DataSource {
     public boolean isWrapperFor(Class<?> iface) throws SQLException {
         return dataSource.isWrapperFor(iface);
     }
-
-
 }

@@ -1,6 +1,7 @@
 package org.test4j.module.database.sql;
 
 import org.test4j.module.database.IDataSourceCreator;
+import org.test4j.module.database.utility.DataSourceType;
 import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.commons.ConfigHelper;
 
@@ -29,6 +30,10 @@ public class DataSourceCreatorFactory {
     }
 
     public static Test4JDataSource createDataSource(String dataSourceName) {
+        DataSourceType dbType = DataSourceDefaultCreator.type(dataSourceName);
+        if (dbType == DataSourceType.MariaDB) {
+            return DataSourceMariaDb4jCreator.createTest4JDataSource(dataSourceName);
+        }
         String factory = ConfigHelper.getDataSourceKey(dataSourceName, "create.factory");
         IDataSourceCreator dataSourceFactory = new DataSourceDefaultCreator();
         if (factory != null && !"".equals(factory.trim())) {

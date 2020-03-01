@@ -76,24 +76,28 @@ public class DataSourceDefaultCreator implements IDataSourceCreator {
         }
     }
 
-    private static DataSourceType type(String dataSourceName) {
+    public static DataSourceType type(String dataSourceName) {
         String type = ConfigHelper.getDataSourceKey(dataSourceName, PROP_KEY_DATASOURCE_TYPE);
         return DataSourceType.databaseType(type);
     }
 
-    private static String driver(String dataSourceName) {
+    public static String driver(String dataSourceName) {
         return ConfigHelper.getDataSourceKey(dataSourceName, PROP_KEY_DATASOURCE_DRIVER);
     }
 
-    private static String url(String dataSourceName) {
+    public static String url(String dataSourceName) {
         return ConfigHelper.getDataSourceKey(dataSourceName, PROP_KEY_DATASOURCE_URL);
     }
 
-    private static String username(String dataSourceName) {
+    public static String username(String dataSourceName) {
         return ConfigHelper.getDataSourceKey(dataSourceName, PROP_KEY_DATASOURCE_USERNAME);
     }
 
-    private static String password(String dataSourceName) {
+    public static String password(String dataSourceName) {
         return ConfigHelper.getDataSourceKey(dataSourceName, PROP_KEY_DATASOURCE_PASSWORD);
+    }
+
+    public static String schema(String dataSourceName){
+        return ConfigHelper.getDataSourceKey(dataSourceName, PROP_KEY_DATASOURCE_SCHEMA);
     }
 }

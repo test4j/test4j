@@ -253,33 +253,22 @@ public class ConfigHelper implements IPropItem {
     }
 
     /**
-     * 默认数据库驱动class
+     * 返回指定数据源的数据库类型
      *
+     * @param dataSource
      * @return
      */
-    public static String databaseDriver() {
-        return getDataSourceKey(getDefaultDataSource(), PROP_KEY_DATASOURCE_DRIVER);
+    public static String databaseType(String dataSource) {
+        return getDataSourceKey(dataSource, PROP_KEY_DATASOURCE_TYPE);
     }
 
     /**
-     * 默认数据库连接url
+     * 返回默认的数据库类型
      *
      * @return
      */
-    public static String databaseUrl() {
-        return getDataSourceKey(getDefaultDataSource(), PROP_KEY_DATASOURCE_URL);
-    }
-
-    public static String databaseUserName() {
-        return getDataSourceKey(getDefaultDataSource(), PROP_KEY_DATASOURCE_USERNAME);
-    }
-
-    public static String databasePassword() {
-        return getDataSourceKey(getDefaultDataSource(), PROP_KEY_DATASOURCE_PASSWORD);
-    }
-
     public static String defaultDatabaseType() {
-        return getDataSourceKey(getDefaultDataSource(), PROP_KEY_DATASOURCE_TYPE);
+        return databaseType(getDefaultDataSource());
     }
 
     public static String getDataSourceKey(String dataSourceName, String key) {
@@ -293,8 +282,8 @@ public class ConfigHelper implements IPropItem {
      * @return
      */
     public static boolean doesOnlyTestDatabase() {
-        String onlytest = properties.getProperty(CONNECT_ONLY_TESTDB);
-        return !"FALSE".equalsIgnoreCase(onlytest);
+        String onlyTest = properties.getProperty(CONNECT_ONLY_TESTDB);
+        return !"FALSE".equalsIgnoreCase(onlyTest);
     }
 
     /**
