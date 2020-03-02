@@ -9,6 +9,7 @@ import org.springframework.jdbc.datasource.init.ScriptException;
 import org.springframework.jdbc.datasource.init.UncategorizedScriptException;
 import org.springframework.util.Assert;
 import org.test4j.module.database.IDataSourceScript;
+import org.test4j.module.database.utility.DataSourceType;
 import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.commons.ConfigHelper;
 import org.test4j.tools.commons.StringHelper;
@@ -23,6 +24,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.springframework.jdbc.datasource.init.ScriptUtils.executeSqlScript;
+import static org.test4j.module.database.sql.DataSourceDefaultCreator.type;
 
 /**
  * @author wudarui
@@ -42,13 +44,14 @@ public class DataSourceScriptHelper {
             return;
         } else {
             String factory = ConfigHelper.getDataSourceKey(beanName, "script.factory");
-            boolean runned = false;
+            boolean hasRun;
             if (StringHelper.isBlankOrNull(factory)) {
-                runned = runFromClasspathResource(dataSource, beanName);
+                hasRun = runFromClasspathResource(dataSource, beanName);
             } else {
-                runned = runFromScriptFactory(dataSource, factory);
+                DataSourceType type = type(beanName);
+                hasRun = runFromScriptFactory(type, dataSource, factory);
             }
-            if (runned) {
+            if (hasRun) {
                 commitScript(dataSource);
             }
             DATASOURCE_SCRIPT_HAS_INIT.put(beanName, true);
@@ -57,7 +60,7 @@ public class DataSourceScriptHelper {
 
     private static void commitScript(DataSource dataSource) {
         try {
-            if(!dataSource.getConnection().getAutoCommit()) {
+            if (!dataSource.getConnection().getAutoCommit()) {
                 dataSource.getConnection().commit();
             }
         } catch (SQLException e) {
@@ -66,13 +69,13 @@ public class DataSourceScriptHelper {
         }
     }
 
-    private static boolean runFromScriptFactory(DataSource dataSource, String factory) {
+    private static boolean runFromScriptFactory(DataSourceType type, DataSource dataSource, String factory) {
         try {
             Object instance = ClazzHelper.createInstanceOfType(factory);
             if (!(instance instanceof IDataSourceScript)) {
                 throw new RuntimeException("the script class should implement interface: " + IDataSourceScript.class.getName());
             }
-            String script = ((IDataSourceScript) instance).script();
+            String script = ((IDataSourceScript) instance).script(type);
             Assert.notNull(script, "script can't be null.");
             Connection connection = DataSourceUtils.getConnection(dataSource);
             try {

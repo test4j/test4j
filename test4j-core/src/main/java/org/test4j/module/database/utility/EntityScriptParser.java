@@ -33,15 +33,15 @@ public abstract class EntityScriptParser {
      * @param klasses
      * @return
      */
-    public static String script(DbTypeConvert typeConvert, Class... klasses) {
+    public static String script(DataSourceType type, DbTypeConvert typeConvert, Class... klasses) {
         return Arrays.stream(klasses)
-                .map(klass -> EntityScriptParser.newScriptParser(typeConvert, klass))
+                .map(klass -> EntityScriptParser.newScriptParser(type, typeConvert, klass))
                 .map(EntityScriptParser::script)
                 .collect(joining("\n\n"));
     }
 
-    protected static EntityScriptParser newScriptParser(DbTypeConvert typeConvert, Class klass) {
-        switch (typeConvert.dataSourceType()) {
+    protected static EntityScriptParser newScriptParser(DataSourceType type, DbTypeConvert typeConvert, Class klass) {
+        switch (type) {
             case MySql:
             case MariaDB4J:
                 return new MysqlScript(typeConvert, klass);
@@ -134,10 +134,6 @@ public abstract class EntityScriptParser {
     }
 
     public interface DbTypeConvert {
-        default DataSourceType dataSourceType() {
-            return DataSourceType.MariaDB4J;
-        }
-
         /**
          * 原生数据库字段类型转换为测试数据库（内存库）字段类型
          *

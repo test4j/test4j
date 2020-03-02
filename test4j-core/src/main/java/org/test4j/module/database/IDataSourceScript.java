@@ -2,6 +2,7 @@ package org.test4j.module.database;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
+import org.test4j.module.database.utility.DataSourceType;
 import org.test4j.module.database.utility.EntityScriptParser;
 import org.test4j.module.database.utility.EntityScriptParser.DbTypeConvert;
 import org.test4j.module.database.utility.EntityScriptParser.NonDbTypeConvert;
@@ -40,8 +41,8 @@ public interface IDataSourceScript {
      *
      * @return
      */
-    default String script() {
-        return EntityScriptParser.script(this.dbTypeConvert(), this.getTableKlass()) +
+    default String script(DataSourceType type) {
+        return EntityScriptParser.script(type, this.dbTypeConvert(), this.getTableKlass()) +
                 "\n\n" +
                 IndexList.script(this.getIndexList());
     }
