@@ -34,7 +34,7 @@ public final class DBEnvironmentFactory {
         switch (dataSourceType) {
             case MySql:
             case H2DB:
-            case MariaDB:
+            case MariaDB4J:
                 return new MySqlEnvironment(dataSourceName, dataSourceSchema);
             case Oracle:
                 return new OracleEnvironment(dataSourceName, dataSourceSchema);

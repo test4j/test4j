@@ -31,7 +31,7 @@ public class DataSourceCreatorFactory {
 
     public static Test4JDataSource createDataSource(String dataSourceName) {
         DataSourceType dbType = DataSourceDefaultCreator.type(dataSourceName);
-        if (dbType == DataSourceType.MariaDB) {
+        if (dbType == DataSourceType.MariaDB4J) {
             return DataSourceMariaDb4jCreator.createTest4JDataSource(dataSourceName);
         }
         String factory = ConfigHelper.getDataSourceKey(dataSourceName, "create.factory");

@@ -24,7 +24,7 @@ public enum DataSourceType {
         }
     },
     MySql(),
-    MariaDB() {
+    MariaDB4J() {
         @Override
         public boolean isMemoryDB() {
             return true;
@@ -61,11 +61,11 @@ public enum DataSourceType {
         if (StringHelper.isBlankOrNull(_type)) {
             throw new UnConfigDataBaseTypeException("please config 'db.dataSource.type' in file[test4j.properties]");
         }
-        try {
-            DataSourceType dbType = DataSourceType.valueOf(_type.toUpperCase());
-            return dbType;
-        } catch (Throwable e) {
-            throw new RuntimeException("unknown database type", e);
+        for (DataSourceType dbType : DataSourceType.values()) {
+            if (dbType.name().equalsIgnoreCase(_type)) {
+                return dbType;
+            }
         }
+        throw new RuntimeException("unknown database type:" + _type);
     }
 }
