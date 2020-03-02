@@ -22,6 +22,12 @@
             <version>${project.version}</version>
         </dependency>
         <dependency>
+            <groupId>org.test4j</groupId>
+            <artifactId>test4j-db-dep</artifactId>
+            <version>${project.version}</version>
+            <type>pom</type>
+        </dependency>
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
             <version>${junit5.version}</version>
