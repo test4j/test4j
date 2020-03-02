@@ -3,6 +3,8 @@ package org.test4j.module.database.utility;
 import cn.org.atool.fluent.mybatis.annotation.ColumnDef;
 import cn.org.atool.fluent.mybatis.annotation.ColumnDef.PrimaryType;
 import com.baomidou.mybatisplus.annotation.TableName;
+import org.test4j.module.database.utility.script.H2Script;
+import org.test4j.module.database.utility.script.MariaDB4jScript;
 import org.test4j.tools.commons.AnnotationHelper;
 
 import java.lang.reflect.Field;
@@ -13,18 +15,17 @@ import java.util.Set;
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
-public class EntityScriptParser {
-    private static final String NEW_LINE_JOIN = ",\n\t";
+public abstract class EntityScriptParser {
+    protected static final String NEW_LINE_JOIN = ",\n\t";
 
-    private final Class klass;
+    protected final Class klass;
 
-    private final DbTypeConvert typeConvert;
+    protected final DbTypeConvert typeConvert;
 
     public EntityScriptParser(DbTypeConvert typeConvert, Class klass) {
         this.typeConvert = typeConvert == null ? new NonDbTypeConvert() : typeConvert;
         this.klass = klass;
     }
-
 
     /**
      * 根据实体klasses定义自动生成数据库脚本
@@ -34,34 +35,34 @@ public class EntityScriptParser {
      */
     public static String script(DbTypeConvert typeConvert, Class... klasses) {
         return Arrays.stream(klasses)
-                .map(klass -> new EntityScriptParser(typeConvert, klass))
-                .map(EntityScriptParser::h2sql)
+                .map(klass -> EntityScriptParser.newScriptParser(typeConvert, klass))
+                .map(EntityScriptParser::script)
                 .collect(joining("\n\n"));
     }
 
-    public String h2sql() {
-        String tableName = this.getTableName();
-        List<ColumnDefine> columns = this.findColumns();
-        StringBuilder buff = new StringBuilder()
-                .append(String.format("drop table IF exists %s;\n", tableName))
-                .append(String.format("CREATE TABLE \"%s\" (\n\t", tableName))
-                .append(this.parseColumn(columns));
-        String key = this.findPrimaryFieldNames(columns);
-        if (key != null && !"".equals(key.trim())) {
-            buff.append(NEW_LINE_JOIN)
-                    .append(String.format("PRIMARY KEY (%s)", key));
+    protected static EntityScriptParser newScriptParser(DbTypeConvert typeConvert, Class klass) {
+        if (typeConvert.dataSourceType() == DataSourceType.MariaDB4J) {
+            return new MariaDB4jScript(typeConvert, klass);
+        } else {
+            return new H2Script(typeConvert, klass);
         }
-        return buff.append(");\n").toString();
     }
 
-    private String findPrimaryFieldNames(List<ColumnDefine> columns) {
+    /**
+     * 构造具体的脚步语句
+     *
+     * @return
+     */
+    public abstract String script();
+
+    protected String findPrimaryFieldNames(List<ColumnDefine> columns) {
         return columns.stream()
                 .filter(column -> column.primaryType != PrimaryType.None)
                 .map(column -> column.name)
                 .collect(joining(","));
     }
 
-    private List<ColumnDefine> findColumns() {
+    protected List<ColumnDefine> findColumns() {
         Set<Field> annotations = AnnotationHelper.getFieldsAnnotatedWith(klass, ColumnDef.class);
         if (annotations == null || annotations.isEmpty()) {
             return null;
@@ -69,41 +70,24 @@ public class EntityScriptParser {
         return annotations.stream().map(ColumnDefine::new).collect(toList());
     }
 
-    private String parseColumn(List<ColumnDefine> columns) {
+    protected String parseColumn(List<ColumnDefine> columns) {
         return columns.stream()
                 .map(this::parseColumn)
                 .collect(joining(NEW_LINE_JOIN));
     }
 
-    private String parseColumn(ColumnDefine column) {
-        if (column.primaryType == PrimaryType.AutoIncrease) {
-            return String.format("%s %s NOT NULL AUTO_INCREMENT",
-                    this.quotation(column.name),
-                    this.convertColumnType(column.type));
-        } else if (column.primaryType == PrimaryType.Customized) {
-            return String.format("%s %s NOT NULL",
-                    this.quotation(column.name),
-                    this.convertColumnType(column.type)
-            );
-        } else {
-            return String.format("%s %s %s",
-                    this.quotation(column.name),
-                    this.convertColumnType(column.type),
-                    column.notNull ? "NOT NULL" : "DEFAULT NULL"
-            );
-        }
-    }
+    protected  abstract String parseColumn(ColumnDefine column);
 
-    private String quotation(String column) {
+    protected String quotation(String column) {
         return String.format("\"%s\"", column);
     }
 
-    private String convertColumnType(String type) {
+    protected String convertColumnType(String type) {
         String _type = typeConvert.convertType(type);
         return _type == null ? type : _type;
     }
 
-    private String getTableName() {
+    protected String getTableName() {
         TableName annotation = AnnotationHelper.getClassLevelAnnotation(TableName.class, klass);
         if (annotation == null) {
             throw new RuntimeException("the entity class[" + klass.getName() + "] should be defined by @TableName");
@@ -112,29 +96,29 @@ public class EntityScriptParser {
         }
     }
 
-    private static class ColumnDefine {
-        String name;
+    protected static class ColumnDefine {
+        public String name;
 
         /**
          * 数据库字段类型
          *
          * @return
          */
-        String type;
+        public String type;
 
         /**
          * 是否主键
          *
          * @return
          */
-        PrimaryType primaryType;
+        public PrimaryType primaryType;
 
         /**
          * 允许字段为null
          *
          * @return
          */
-        boolean notNull;
+        public boolean notNull;
 
         public ColumnDefine(Field field) {
             this.name = field.getName();
@@ -148,6 +132,10 @@ public class EntityScriptParser {
     }
 
     public interface DbTypeConvert {
+        default DataSourceType dataSourceType() {
+            return DataSourceType.MariaDB4J;
+        }
+
         /**
          * 原生数据库字段类型转换为测试数据库（内存库）字段类型
          *
