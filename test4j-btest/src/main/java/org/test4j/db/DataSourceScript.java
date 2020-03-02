@@ -1,4 +1,4 @@
-package org.test4j.fortest;
+package org.test4j.db;
 
 import org.test4j.db.datamap.table.AddressTableMap;
 import org.test4j.db.datamap.table.UserTableMap;
