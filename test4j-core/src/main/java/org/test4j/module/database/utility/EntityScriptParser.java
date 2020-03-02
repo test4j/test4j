@@ -4,7 +4,7 @@ import cn.org.atool.fluent.mybatis.annotation.ColumnDef;
 import cn.org.atool.fluent.mybatis.annotation.ColumnDef.PrimaryType;
 import com.baomidou.mybatisplus.annotation.TableName;
 import org.test4j.module.database.utility.script.H2Script;
-import org.test4j.module.database.utility.script.MariaDB4jScript;
+import org.test4j.module.database.utility.script.MysqlScript;
 import org.test4j.tools.commons.AnnotationHelper;
 
 import java.lang.reflect.Field;
@@ -41,10 +41,12 @@ public abstract class EntityScriptParser {
     }
 
     protected static EntityScriptParser newScriptParser(DbTypeConvert typeConvert, Class klass) {
-        if (typeConvert.dataSourceType() == DataSourceType.MariaDB4J) {
-            return new MariaDB4jScript(typeConvert, klass);
-        } else {
-            return new H2Script(typeConvert, klass);
+        switch (typeConvert.dataSourceType()) {
+            case MySql:
+            case MariaDB4J:
+                return new MysqlScript(typeConvert, klass);
+            default:
+                return new H2Script(typeConvert, klass);
         }
     }
 
@@ -76,7 +78,7 @@ public abstract class EntityScriptParser {
                 .collect(joining(NEW_LINE_JOIN));
     }
 
-    protected  abstract String parseColumn(ColumnDefine column);
+    protected abstract String parseColumn(ColumnDefine column);
 
     protected String quotation(String column) {
         return String.format("\"%s\"", column);

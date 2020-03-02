@@ -5,8 +5,11 @@ import org.test4j.module.database.utility.EntityScriptParser;
 
 import java.util.List;
 
-public class MariaDB4jScript extends EntityScriptParser {
-    public MariaDB4jScript(DbTypeConvert typeConvert, Class klass) {
+/**
+ * mysql语法生成
+ */
+public class MysqlScript extends EntityScriptParser {
+    public MysqlScript(DbTypeConvert typeConvert, Class klass) {
         super(typeConvert, klass);
     }
 

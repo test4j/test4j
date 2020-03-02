@@ -57,7 +57,9 @@ public class DataSourceScriptHelper {
 
     private static void commitScript(DataSource dataSource) {
         try {
-            dataSource.getConnection().commit();
+            if(!dataSource.getConnection().getAutoCommit()) {
+                dataSource.getConnection().commit();
+            }
         } catch (SQLException e) {
             e.printStackTrace();
             throw new RuntimeException("commit datasource script error:" + e.getMessage(), e);
