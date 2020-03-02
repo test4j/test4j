@@ -1,13 +1,13 @@
 package org.test4j.hamcrest.matcher.property.comparator;
 
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.List;
-
 import org.test4j.hamcrest.matcher.property.difference.CollectionDifference;
 import org.test4j.hamcrest.matcher.property.difference.Difference;
 import org.test4j.hamcrest.matcher.property.reflection.ReflectionComparator;
 import org.test4j.tools.commons.ListHelper;
+
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * Comparator for collections and arrays. All elements are compared in the same

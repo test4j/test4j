@@ -1,8 +1,8 @@
 package org.test4j.tools.reflector.imposteriser;
 
-import java.lang.reflect.Field;
-
 import org.test4j.tools.commons.FieldHelper;
+
+import java.lang.reflect.Field;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 public final class Test4JProxy {

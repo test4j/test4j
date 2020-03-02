@@ -2,7 +2,6 @@ package org.test4j.module.spring.interal;
 
 import org.springframework.beans.factory.BeanFactory;
 import org.test4j.module.spring.SpringModule;
-import org.test4j.module.spring.interal.SpringModuleHelper;
 
 /**
  * test4j测试中获取spring容器相关的接口

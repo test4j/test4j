@@ -1,10 +1,10 @@
 package org.test4j.junit4;
 
+import org.junit.runners.model.FrameworkMethod;
+
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
-
-import org.junit.runners.model.FrameworkMethod;
 
 public class FrameworkMethodWithParameters extends FrameworkMethod {
     private Object[] parameters;

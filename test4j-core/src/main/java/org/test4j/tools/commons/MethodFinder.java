@@ -1,10 +1,10 @@
 package org.test4j.tools.commons;
 
+import org.test4j.exception.Test4JException;
+
 import java.lang.reflect.Method;
 import java.util.LinkedList;
 import java.util.List;
-
-import org.test4j.exception.Test4JException;
 
 /**
  * 获得一个类（方法）的测试类（方法）的工具

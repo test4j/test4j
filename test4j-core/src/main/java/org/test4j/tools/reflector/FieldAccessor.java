@@ -1,9 +1,9 @@
 package org.test4j.tools.reflector;
 
+import org.test4j.tools.commons.FieldHelper;
+
 import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
-
-import org.test4j.tools.commons.FieldHelper;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class FieldAccessor<T> {

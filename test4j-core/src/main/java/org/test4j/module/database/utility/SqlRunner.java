@@ -1,21 +1,16 @@
 package org.test4j.module.database.utility;
 
+import org.test4j.module.database.environment.DBEnvironment;
+import org.test4j.tools.commons.ResourceHelper;
+import org.test4j.tools.datagen.IDataMap;
+
 import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
-import org.test4j.module.ICore.DataMap;
-import org.test4j.module.database.environment.DBEnvironment;
-import org.test4j.module.database.environment.DBEnvironmentFactory;
-import org.test4j.tools.commons.ExceptionWrapper;
-import org.test4j.tools.commons.ResourceHelper;
-import org.test4j.tools.datagen.IDataMap;
 
 /**
  * sql 执行器

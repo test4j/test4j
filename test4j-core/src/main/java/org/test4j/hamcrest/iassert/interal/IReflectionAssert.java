@@ -4,7 +4,6 @@ import org.hamcrest.Matcher;
 import org.test4j.hamcrest.matcher.property.*;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.hamcrest.matcher.string.StringMode;
-import org.test4j.module.ICore.DataMap;
 import org.test4j.tools.datagen.IDataMap;
 
 import java.util.Map;

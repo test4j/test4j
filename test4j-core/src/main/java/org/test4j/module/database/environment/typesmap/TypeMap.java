@@ -1,8 +1,8 @@
 package org.test4j.module.database.environment.typesmap;
 
-import java.util.HashMap;
-
 import org.test4j.module.database.environment.typesmap.TypeMap.JavaSQLType;
+
+import java.util.HashMap;
 
 @SuppressWarnings("rawtypes")
 public class TypeMap extends HashMap<String, JavaSQLType> {

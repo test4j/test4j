@@ -1,6 +1,9 @@
 package org.test4j.tools.commons;
 
-import static org.test4j.tools.commons.ClazzHelper.createInstanceOfType;
+import org.test4j.exception.Test4JException;
+import org.test4j.module.core.internal.IPropItem;
+import org.test4j.module.core.utility.ConfigurationLoader;
+import org.test4j.module.core.utility.MessageHelper;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -8,10 +11,7 @@ import java.util.List;
 import java.util.Properties;
 import java.util.stream.Collectors;
 
-import org.test4j.exception.Test4JException;
-import org.test4j.module.core.utility.ConfigurationLoader;
-import org.test4j.module.core.internal.IPropItem;
-import org.test4j.module.core.utility.MessageHelper;
+import static org.test4j.tools.commons.ClazzHelper.createInstanceOfType;
 
 /**
  * test4j配置文件工具类

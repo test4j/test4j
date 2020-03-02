@@ -1,11 +1,5 @@
 package org.test4j.hamcrest.matcher.property;
 
-import static org.test4j.hamcrest.matcher.property.reflection.ReflectionComparatorFactory.createRefectionComparator;
-
-import java.util.Collection;
-import java.util.List;
-
-
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.test4j.hamcrest.matcher.property.difference.Difference;
@@ -13,6 +7,11 @@ import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.hamcrest.matcher.property.reflection.ReflectionComparator;
 import org.test4j.hamcrest.matcher.property.report.DefaultDifferenceReport;
 import org.test4j.hamcrest.matcher.property.report.DifferenceReport;
+
+import java.util.Collection;
+import java.util.List;
+
+import static org.test4j.hamcrest.matcher.property.reflection.ReflectionComparatorFactory.createRefectionComparator;
 
 /**
  * 以反射的方式验证2个对象是否相等

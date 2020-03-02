@@ -5,10 +5,10 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
+import org.test4j.exception.Test4JException;
 import org.test4j.hamcrest.TheStyleAssertion;
 import org.test4j.hamcrest.matcher.LinkMatcher;
 import org.test4j.hamcrest.matcher.clazz.ClassAssignFromMatcher;
-import org.test4j.exception.Test4JException;
 import org.test4j.tools.commons.PrimitiveHelper;
 import org.test4j.tools.reflector.MethodAccessor;
 

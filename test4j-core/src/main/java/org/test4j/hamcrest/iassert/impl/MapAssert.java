@@ -1,10 +1,5 @@
 package org.test4j.hamcrest.iassert.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import org.hamcrest.Matcher;
 import org.hamcrest.collection.IsMapContaining;
 import org.hamcrest.core.AllOf;
@@ -12,6 +7,11 @@ import org.test4j.hamcrest.iassert.interal.Assert;
 import org.test4j.hamcrest.iassert.intf.IMapAssert;
 import org.test4j.hamcrest.matcher.array.MapMatcher;
 import org.test4j.hamcrest.matcher.array.MapMatcher.MapMatcherType;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 
 @SuppressWarnings({"rawtypes"})

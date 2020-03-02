@@ -1,14 +1,13 @@
 package org.test4j.hamcrest.iassert.impl;
 
-import java.io.File;
-
-
 import org.hamcrest.Matcher;
 import org.test4j.hamcrest.iassert.interal.Assert;
 import org.test4j.hamcrest.iassert.intf.IFileAssert;
 import org.test4j.hamcrest.matcher.file.FileExistsMatcher;
-import org.test4j.hamcrest.matcher.file.FileMatchers;
 import org.test4j.hamcrest.matcher.file.FileExistsMatcher.FileExistsMatcherType;
+import org.test4j.hamcrest.matcher.file.FileMatchers;
+
+import java.io.File;
 
 public class FileAssert extends Assert<File, IFileAssert> implements IFileAssert {
     public FileAssert() {

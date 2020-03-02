@@ -1,5 +1,8 @@
 package org.test4j.module.database.environment.typesmap;
 
+import org.test4j.tools.commons.DateHelper;
+import org.test4j.tools.commons.PrimitiveHelper;
+
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -9,9 +12,6 @@ import java.sql.Time;
 import java.sql.Timestamp;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.test4j.tools.commons.DateHelper;
-import org.test4j.tools.commons.PrimitiveHelper;
 
 @SuppressWarnings({ "rawtypes", "serial" })
 public abstract class AbstractTypeMap {

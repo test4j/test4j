@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.test4j.function.SExecutor;
 import org.test4j.module.ICore;
-import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.tools.commons.StringHelper;
 
 import java.io.Serializable;

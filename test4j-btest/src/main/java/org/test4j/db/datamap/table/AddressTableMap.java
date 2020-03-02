@@ -2,9 +2,9 @@ package org.test4j.db.datamap.table;
 
 import cn.org.atool.fluent.mybatis.annotation.ColumnDef;
 import cn.org.atool.fluent.mybatis.annotation.ColumnDef.PrimaryType;
+import com.baomidou.mybatisplus.annotation.TableName;
 import org.test4j.db.mapping.AddressMP;
 import org.test4j.db.mapping.AddressMP.Column;
-import com.baomidou.mybatisplus.annotation.TableName;
 import org.test4j.module.ICore.DataMap;
 import org.test4j.tools.datagen.KeyValue;
 

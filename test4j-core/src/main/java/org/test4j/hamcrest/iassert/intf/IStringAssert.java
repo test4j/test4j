@@ -3,7 +3,6 @@ package org.test4j.hamcrest.iassert.intf;
 import org.test4j.hamcrest.iassert.interal.IBaseAssert;
 import org.test4j.hamcrest.iassert.interal.ICharAssert;
 import org.test4j.hamcrest.iassert.interal.IComparableAssert;
-import org.test4j.hamcrest.matcher.string.StringMode;
 
 /**
  * 字符串对象断言接口

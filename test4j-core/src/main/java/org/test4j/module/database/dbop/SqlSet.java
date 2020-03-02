@@ -1,14 +1,14 @@
 package org.test4j.module.database.dbop;
 
+import org.test4j.module.database.environment.DBEnvironment;
+import org.test4j.module.database.utility.SqlRunner;
+import org.test4j.tools.commons.ExceptionWrapper;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStream;
 import java.util.ArrayList;
 import java.util.List;
-
-import org.test4j.module.database.environment.DBEnvironment;
-import org.test4j.module.database.utility.SqlRunner;
-import org.test4j.tools.commons.ExceptionWrapper;
 
 public class SqlSet implements ISqlSet {
     private List<String> list = new ArrayList<String>();

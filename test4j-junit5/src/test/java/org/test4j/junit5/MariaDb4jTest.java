@@ -1,6 +1,5 @@
 package org.test4j.junit5;
 
-import org.h2.engine.User;
 import org.junit.jupiter.api.Test;
 import org.test4j.db.datamap.table.UserTableMap;
 

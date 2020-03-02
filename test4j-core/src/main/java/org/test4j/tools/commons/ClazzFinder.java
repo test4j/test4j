@@ -1,5 +1,7 @@
 package org.test4j.tools.commons;
 
+import org.test4j.exception.Test4JException;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.Enumeration;
@@ -10,8 +12,6 @@ import java.util.jar.Attributes;
 import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.jar.Manifest;
-
-import org.test4j.exception.Test4JException;
 
 /**
  * 

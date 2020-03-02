@@ -1,10 +1,10 @@
 package org.test4j.hamcrest.iassert.intf;
 
-import java.util.Map;
-
 import org.test4j.hamcrest.iassert.interal.IBaseAssert;
 import org.test4j.hamcrest.iassert.interal.IReflectionAssert;
 import org.test4j.hamcrest.iassert.interal.ISizedAssert;
+
+import java.util.Map;
 
 /**
  * map对象断言接口

@@ -1,12 +1,12 @@
 package org.test4j.hamcrest.matcher.calendar;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.test4j.exception.Test4JException;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 
 /**

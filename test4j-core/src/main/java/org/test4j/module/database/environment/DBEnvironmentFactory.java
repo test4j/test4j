@@ -1,11 +1,5 @@
 package org.test4j.module.database.environment;
 
-import static org.test4j.module.core.internal.IPropItem.*;
-import static org.test4j.module.database.utility.DataSourceType.*;
-
-import java.sql.SQLException;
-import java.util.*;
-
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.database.environment.types.DerbyEnvironment;
 import org.test4j.module.database.environment.types.MySqlEnvironment;
@@ -13,6 +7,15 @@ import org.test4j.module.database.environment.types.OracleEnvironment;
 import org.test4j.module.database.environment.types.SqlServerEnvironment;
 import org.test4j.module.database.utility.DataSourceType;
 import org.test4j.tools.commons.ConfigHelper;
+
+import java.sql.SQLException;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
+
+import static org.test4j.module.core.internal.IPropItem.PROP_KEY_DATASOURCE_SCHEMA;
+import static org.test4j.module.core.internal.IPropItem.PROP_KEY_DATASOURCE_TYPE;
+import static org.test4j.module.database.utility.DataSourceType.databaseType;
 
 public final class DBEnvironmentFactory {
     private static Map<String, DBEnvironment> environments = new HashMap<String, DBEnvironment>();

@@ -1,12 +1,11 @@
 package org.test4j.tools.commons;
 
-import java.io.FileNotFoundException;
-import java.util.LinkedList;
-
+import ext.test4j.apache.commons.lang.StringEscapeUtils;
 import org.test4j.tools.commons.TextDiffMatchPatch.Diff;
 import org.test4j.tools.commons.TextDiffMatchPatch.Operation;
 
-import ext.test4j.apache.commons.lang.StringEscapeUtils;
+import java.io.FileNotFoundException;
+import java.util.LinkedList;
 
 public class TextDiffHelper {
     private static String style = "" ;

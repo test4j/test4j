@@ -1,17 +1,17 @@
 package org.test4j.module.inject;
 
+import org.test4j.exception.Test4JException;
+import org.test4j.module.core.utility.MessageHelper;
+import org.test4j.tools.commons.AnnotationHelper;
+import org.test4j.tools.commons.FieldHelper;
+import org.test4j.tools.reflector.FieldAccessor;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Type;
 import java.util.Set;
-
-import org.test4j.exception.Test4JException;
-import org.test4j.module.core.utility.MessageHelper;
-import org.test4j.tools.commons.AnnotationHelper;
-import org.test4j.tools.commons.FieldHelper;
-import org.test4j.tools.reflector.FieldAccessor;
 
 /**
  * Class containing static methods that implement explicit injection using OGNL

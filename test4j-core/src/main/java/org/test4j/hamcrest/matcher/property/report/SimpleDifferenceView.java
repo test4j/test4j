@@ -1,8 +1,8 @@
 package org.test4j.hamcrest.matcher.property.report;
 
-import static org.test4j.hamcrest.matcher.property.report.DefaultDifferenceReport.MAX_LINE_SIZE;
-
 import org.test4j.hamcrest.matcher.property.difference.Difference;
+
+import static org.test4j.hamcrest.matcher.property.report.DefaultDifferenceReport.MAX_LINE_SIZE;
 
 public class SimpleDifferenceView implements DifferenceView {
 

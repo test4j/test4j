@@ -1,40 +1,10 @@
 package org.test4j.hamcrest;
 
+import org.test4j.hamcrest.iassert.impl.*;
+import org.test4j.hamcrest.iassert.intf.*;
+
 import java.util.Calendar;
 import java.util.Date;
-
-import org.test4j.hamcrest.iassert.impl.ArrayAssert;
-import org.test4j.hamcrest.iassert.impl.BooleanAssert;
-import org.test4j.hamcrest.iassert.impl.ByteAssert;
-import org.test4j.hamcrest.iassert.impl.CharacterAssert;
-import org.test4j.hamcrest.iassert.impl.CollectionAssert;
-import org.test4j.hamcrest.iassert.impl.DateAssert;
-import org.test4j.hamcrest.iassert.impl.DoubleAssert;
-import org.test4j.hamcrest.iassert.impl.FileAssert;
-import org.test4j.hamcrest.iassert.impl.FloatAssert;
-import org.test4j.hamcrest.iassert.impl.IntegerAssert;
-import org.test4j.hamcrest.iassert.impl.LongAssert;
-import org.test4j.hamcrest.iassert.impl.MapAssert;
-import org.test4j.hamcrest.iassert.impl.NumberAssert;
-import org.test4j.hamcrest.iassert.impl.ObjectAssert;
-import org.test4j.hamcrest.iassert.impl.ShortAssert;
-import org.test4j.hamcrest.iassert.impl.StringAssert;
-import org.test4j.hamcrest.iassert.intf.IArrayAssert;
-import org.test4j.hamcrest.iassert.intf.IBooleanAssert;
-import org.test4j.hamcrest.iassert.intf.IByteAssert;
-import org.test4j.hamcrest.iassert.intf.ICharacterAssert;
-import org.test4j.hamcrest.iassert.intf.ICollectionAssert;
-import org.test4j.hamcrest.iassert.intf.IDateAssert;
-import org.test4j.hamcrest.iassert.intf.IDoubleAssert;
-import org.test4j.hamcrest.iassert.intf.IFileAssert;
-import org.test4j.hamcrest.iassert.intf.IFloatAssert;
-import org.test4j.hamcrest.iassert.intf.IIntegerAssert;
-import org.test4j.hamcrest.iassert.intf.ILongAssert;
-import org.test4j.hamcrest.iassert.intf.IMapAssert;
-import org.test4j.hamcrest.iassert.intf.INumberAssert;
-import org.test4j.hamcrest.iassert.intf.IObjectAssert;
-import org.test4j.hamcrest.iassert.intf.IShortAssert;
-import org.test4j.hamcrest.iassert.intf.IStringAssert;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class TheStyleAssertion {

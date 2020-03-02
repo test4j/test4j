@@ -2,7 +2,6 @@ package org.test4j.module.core;
 
 import org.test4j.module.core.internal.Test4JContext;
 import org.test4j.module.core.internal.TestListener;
-import org.test4j.module.core.utility.ClazzAroundObject.ClazzAfterObject;
 import org.test4j.module.core.utility.*;
 import org.test4j.module.spec.internal.SpecContext;
 import org.test4j.tools.commons.ConfigHelper;

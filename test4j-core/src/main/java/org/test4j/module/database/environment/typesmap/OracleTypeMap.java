@@ -1,5 +1,11 @@
 package org.test4j.module.database.environment.typesmap;
 
+import oracle.jdbc.driver.OracleTypes;
+import oracle.sql.BLOB;
+import oracle.sql.TIMESTAMP;
+import org.test4j.module.database.environment.typesmap.TypeMap.JavaSQLType;
+import org.test4j.tools.commons.DateHelper;
+
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.sql.ResultSet;
@@ -7,13 +13,6 @@ import java.sql.Timestamp;
 import java.sql.Types;
 import java.util.HashMap;
 import java.util.Map;
-
-import oracle.jdbc.driver.OracleTypes;
-import oracle.sql.BLOB;
-import oracle.sql.TIMESTAMP;
-
-import org.test4j.module.database.environment.typesmap.TypeMap.JavaSQLType;
-import org.test4j.tools.commons.DateHelper;
 
 @SuppressWarnings({ "rawtypes", "serial" })
 public class OracleTypeMap extends AbstractTypeMap {

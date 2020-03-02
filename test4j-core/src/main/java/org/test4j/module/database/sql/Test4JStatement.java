@@ -2,7 +2,6 @@ package org.test4j.module.database.sql;
 
 import org.test4j.module.database.sql.db.H2Statement;
 import org.test4j.tools.commons.MethodHelper;
-import org.test4j.tools.commons.StringHelper;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

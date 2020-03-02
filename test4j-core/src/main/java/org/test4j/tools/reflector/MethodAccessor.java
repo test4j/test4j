@@ -1,15 +1,15 @@
 package org.test4j.tools.reflector;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.util.Arrays;
-
+import org.test4j.exception.NoSuchMethodRuntimeException;
 import org.test4j.exception.Test4JException;
 import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.commons.ExceptionWrapper;
 import org.test4j.tools.commons.MethodHelper;
-import org.test4j.exception.NoSuchMethodRuntimeException;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
+import java.util.Arrays;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class MethodAccessor<T> {

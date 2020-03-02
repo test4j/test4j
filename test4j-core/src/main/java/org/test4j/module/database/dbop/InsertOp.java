@@ -1,15 +1,15 @@
 package org.test4j.module.database.dbop;
 
-import java.io.InputStream;
-import java.sql.PreparedStatement;
-import java.util.List;
-import java.util.Map;
-
 import org.test4j.module.database.environment.DBEnvironment;
 import org.test4j.module.database.environment.DBEnvironmentFactory;
 import org.test4j.module.database.environment.TableMeta;
 import org.test4j.tools.commons.ExceptionWrapper;
 import org.test4j.tools.datagen.IDataMap;
+
+import java.io.InputStream;
+import java.sql.PreparedStatement;
+import java.util.List;
+import java.util.Map;
 
 public class InsertOp implements IInsertOp {
     private String table;

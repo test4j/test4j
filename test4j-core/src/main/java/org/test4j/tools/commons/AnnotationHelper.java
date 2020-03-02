@@ -1,5 +1,7 @@
 package org.test4j.tools.commons;
 
+import org.test4j.exception.Test4JException;
+
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Field;
 import java.lang.reflect.InvocationTargetException;
@@ -7,8 +9,6 @@ import java.lang.reflect.Method;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Set;
-
-import org.test4j.exception.Test4JException;
 
 /**
  * Annotation工具类

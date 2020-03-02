@@ -1,12 +1,5 @@
 package org.test4j.hamcrest.matcher.property;
 
-import static org.test4j.hamcrest.matcher.property.reflection.ReflectionComparatorFactory.createRefectionComparator;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.StringDescription;
@@ -15,10 +8,12 @@ import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.hamcrest.matcher.property.reflection.ReflectionComparator;
 import org.test4j.hamcrest.matcher.property.report.DefaultDifferenceReport;
 import org.test4j.hamcrest.matcher.property.report.DifferenceReport;
-import org.test4j.module.ICore.DataMap;
-import org.test4j.tools.commons.ArrayHelper;
-import org.test4j.tools.commons.ListHelper;
 import org.test4j.tools.reflector.PropertyAccessor;
+
+import java.util.HashMap;
+import java.util.Map;
+
+import static org.test4j.hamcrest.matcher.property.reflection.ReflectionComparatorFactory.createRefectionComparator;
 
 
 /**

@@ -1,8 +1,8 @@
 package org.test4j.hamcrest.iassert.intf;
 
-import java.io.File;
-
 import org.test4j.hamcrest.iassert.interal.IBaseAssert;
+
+import java.io.File;
 
 /**
  * 文件类型对象断言接口

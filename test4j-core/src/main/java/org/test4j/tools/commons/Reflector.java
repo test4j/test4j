@@ -1,12 +1,12 @@
 package org.test4j.tools.commons;
 
-import java.lang.reflect.Field;
-
 import org.test4j.json.JSON;
 import org.test4j.tools.datagen.ConstructorArgsGenerator;
 import org.test4j.tools.reflector.FieldAccessor;
 import org.test4j.tools.reflector.MethodAccessor;
 import org.test4j.tools.reflector.imposteriser.Test4JProxy;
+
+import java.lang.reflect.Field;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class Reflector {

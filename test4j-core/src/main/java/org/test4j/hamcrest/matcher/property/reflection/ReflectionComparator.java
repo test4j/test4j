@@ -1,12 +1,12 @@
 package org.test4j.hamcrest.matcher.property.reflection;
 
+import org.test4j.exception.Test4JException;
+import org.test4j.hamcrest.matcher.property.comparator.Comparator;
+import org.test4j.hamcrest.matcher.property.difference.Difference;
+
 import java.util.IdentityHashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.test4j.hamcrest.matcher.property.comparator.Comparator;
-import org.test4j.hamcrest.matcher.property.difference.Difference;
-import org.test4j.exception.Test4JException;
 
 /**
  * A comparator for comparing two values by reflection.

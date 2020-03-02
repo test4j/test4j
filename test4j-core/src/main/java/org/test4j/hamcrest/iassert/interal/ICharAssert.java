@@ -3,7 +3,6 @@ package org.test4j.hamcrest.iassert.interal;
 import org.hamcrest.Matcher;
 import org.hamcrest.core.AnyOf;
 import org.hamcrest.core.IsNot;
-import org.test4j.hamcrest.iassert.intf.IStringAssert;
 import org.test4j.hamcrest.matcher.string.*;
 
 import java.util.ArrayList;

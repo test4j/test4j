@@ -3,9 +3,6 @@ package org.test4j.example.stub;
 import org.test4j.example.spring.ServiceA;
 import org.test4j.exception.Test4JException;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;

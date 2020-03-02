@@ -1,16 +1,16 @@
 package org.test4j.module.core.utility;
 
-import static ext.test4j.apache.commons.lang.ClassUtils.getShortClassName;
+import org.test4j.exception.Test4JException;
+import org.test4j.module.core.Module;
+import org.test4j.tools.commons.ClazzHelper;
+import org.test4j.tools.commons.ConfigHelper;
 
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.test4j.exception.Test4JException;
-import org.test4j.module.core.Module;
-import org.test4j.tools.commons.ClazzHelper;
-import org.test4j.tools.commons.ConfigHelper;
+import static ext.test4j.apache.commons.lang.ClassUtils.getShortClassName;
 
 @SuppressWarnings("rawtypes")
 public class ModuleHelper {

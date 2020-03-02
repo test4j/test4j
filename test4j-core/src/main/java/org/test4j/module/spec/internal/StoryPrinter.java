@@ -2,7 +2,6 @@ package org.test4j.module.spec.internal;
 
 import lombok.Getter;
 import org.test4j.module.core.utility.MessageHelper;
-import org.test4j.tools.commons.ResourceHelper;
 
 import java.io.File;
 import java.io.FileWriter;

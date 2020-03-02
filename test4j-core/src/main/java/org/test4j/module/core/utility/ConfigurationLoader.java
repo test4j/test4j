@@ -1,12 +1,11 @@
 package org.test4j.module.core.utility;
 
-import java.util.Properties;
-
+import ext.test4j.apache.commons.lang.text.StrSubstitutor;
 import org.test4j.exception.Test4JException;
 import org.test4j.tools.commons.ConfigHelper;
 import org.test4j.tools.commons.PropertiesReader;
 
-import ext.test4j.apache.commons.lang.text.StrSubstitutor;
+import java.util.Properties;
 
 /**
  * test4j配置文件加载器<br>

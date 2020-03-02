@@ -1,12 +1,5 @@
 package org.test4j.module.spring.interal;
 
-import java.lang.ref.WeakReference;
-import java.lang.reflect.Method;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Optional;
-
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.ApplicationContext;
@@ -24,6 +17,12 @@ import org.test4j.tools.commons.StringHelper;
 import org.test4j.tools.reflector.MethodAccessor;
 
 import javax.sql.DataSource;
+import java.lang.ref.WeakReference;
+import java.lang.reflect.Method;
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Optional;
 
 
 @SuppressWarnings("rawtypes")

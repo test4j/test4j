@@ -1,16 +1,16 @@
 package org.test4j.hamcrest.matcher.property.report;
 
-import static ext.test4j.apache.commons.lang.ClassUtils.getShortClassName;
-import static java.lang.reflect.Modifier.isStatic;
-import static java.lang.reflect.Modifier.isTransient;
-import static org.test4j.hamcrest.matcher.property.reflection.HibernateUtil.getUnproxiedValue;
-
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
+
+import static ext.test4j.apache.commons.lang.ClassUtils.getShortClassName;
+import static java.lang.reflect.Modifier.isStatic;
+import static java.lang.reflect.Modifier.isTransient;
+import static org.test4j.hamcrest.matcher.property.reflection.HibernateUtil.getUnproxiedValue;
 
 /**
  * A class for generating a string representation of any object, array or

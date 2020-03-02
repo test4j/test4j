@@ -1,12 +1,12 @@
 package org.test4j.hamcrest.matcher.array;
 
-import java.util.Collection;
-
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.test4j.hamcrest.matcher.modes.ItemsMode;
 import org.test4j.tools.commons.ListHelper;
+
+import java.util.Collection;
 
 
 @SuppressWarnings("rawtypes")

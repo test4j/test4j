@@ -1,14 +1,5 @@
 package org.test4j.module.inject;
 
-import static org.test4j.tools.commons.AnnotationHelper.getFieldsAnnotatedWith;
-
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-
 import org.test4j.module.core.Module;
 import org.test4j.module.core.internal.TestListener;
 import org.test4j.tools.commons.AnnotationHelper;
@@ -17,6 +8,15 @@ import org.test4j.tools.commons.StringHelper;
 import org.test4j.tools.reflector.FieldAccessor;
 import org.test4j.tools.reflector.PropertyAccessor;
 import org.test4j.tools.reflector.imposteriser.Test4JProxy;
+
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
+
+import static org.test4j.tools.commons.AnnotationHelper.getFieldsAnnotatedWith;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class InjectModule implements Module {

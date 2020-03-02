@@ -1,15 +1,9 @@
 package org.test4j.hamcrest.matcher.property.reflection;
 
-import java.util.Map;
-
-import org.test4j.hamcrest.matcher.property.difference.ClassDifference;
-import org.test4j.hamcrest.matcher.property.difference.CollectionDifference;
-import org.test4j.hamcrest.matcher.property.difference.Difference;
-import org.test4j.hamcrest.matcher.property.difference.DifferenceVisitor;
-import org.test4j.hamcrest.matcher.property.difference.MapDifference;
-import org.test4j.hamcrest.matcher.property.difference.ObjectDifference;
-import org.test4j.hamcrest.matcher.property.difference.UnorderedCollectionDifference;
+import org.test4j.hamcrest.matcher.property.difference.*;
 import org.test4j.hamcrest.matcher.property.report.ObjectFormatter;
+
+import java.util.Map;
 
 /**
  * A utility class to get the difference at the given element/field/key.

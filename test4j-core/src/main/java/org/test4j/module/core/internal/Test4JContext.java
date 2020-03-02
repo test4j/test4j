@@ -1,13 +1,13 @@
 package org.test4j.module.core.internal;
 
+import lombok.Setter;
+import org.test4j.exception.MultipleException;
+import org.test4j.module.core.utility.ClazzAroundObject;
+import org.test4j.tools.commons.ExceptionWrapper;
+
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
-
-import lombok.Setter;
-import org.test4j.module.core.utility.ClazzAroundObject;
-import org.test4j.tools.commons.ExceptionWrapper;
-import org.test4j.exception.MultipleException;
 
 /**
  * 测试类（对象）上下文

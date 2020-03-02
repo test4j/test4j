@@ -1,12 +1,12 @@
 package org.test4j.tools.datagen;
 
+import org.test4j.tools.commons.ArrayHelper;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
-
-import org.test4j.tools.commons.ArrayHelper;
 
 public class DataProvider<T> implements Iterator<T[]> {
     private List<T[]> datas = new ArrayList<T[]>();

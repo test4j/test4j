@@ -1,10 +1,5 @@
 package org.test4j.module.database.dbop;
 
-import java.io.File;
-import java.io.FileInputStream;
-import java.util.List;
-import java.util.Map;
-
 import org.test4j.hamcrest.iassert.impl.CollectionAssert;
 import org.test4j.hamcrest.iassert.impl.MapAssert;
 import org.test4j.hamcrest.iassert.impl.ObjectAssert;
@@ -18,6 +13,11 @@ import org.test4j.module.database.sql.Test4JSqlContext;
 import org.test4j.module.database.utility.SqlRunner;
 import org.test4j.tools.commons.ConfigHelper;
 import org.test4j.tools.commons.ExceptionWrapper;
+
+import java.io.File;
+import java.io.FileInputStream;
+import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class DBOperator implements IDBOperator {

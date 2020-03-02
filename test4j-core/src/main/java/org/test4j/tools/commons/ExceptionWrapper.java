@@ -1,11 +1,11 @@
 package org.test4j.tools.commons;
 
+import org.test4j.tools.reflector.MethodAccessor;
+
 import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.UndeclaredThrowableException;
-
-import org.test4j.tools.reflector.MethodAccessor;
 
 /**
  * 异常包装器

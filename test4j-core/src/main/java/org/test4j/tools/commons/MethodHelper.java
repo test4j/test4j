@@ -1,19 +1,15 @@
 package org.test4j.tools.commons;
 
-import static java.lang.reflect.Modifier.isStatic;
+import org.test4j.exception.NoSuchMethodRuntimeException;
+import org.test4j.exception.ReflectionException;
+import org.test4j.tools.reflector.MethodAccessor;
 
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
-import org.test4j.exception.NoSuchMethodRuntimeException;
-import org.test4j.tools.reflector.MethodAccessor;
-import org.test4j.exception.ReflectionException;
+import static java.lang.reflect.Modifier.isStatic;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public final class MethodHelper {

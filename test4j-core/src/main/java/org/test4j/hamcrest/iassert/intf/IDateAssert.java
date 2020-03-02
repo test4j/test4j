@@ -1,9 +1,9 @@
 package org.test4j.hamcrest.iassert.intf;
 
-import java.util.Calendar;
-
 import org.test4j.hamcrest.iassert.interal.IBaseAssert;
 import org.test4j.hamcrest.iassert.interal.IComparableAssert;
+
+import java.util.Calendar;
 
 /**
  * 日历类型对象断言接口

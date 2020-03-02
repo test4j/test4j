@@ -1,8 +1,8 @@
 package org.test4j.hamcrest.iassert.intf;
 
-import java.util.Collection;
-
 import org.test4j.hamcrest.iassert.interal.*;
+
+import java.util.Collection;
 
 /**
  * 集合类型对象断言接口

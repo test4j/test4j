@@ -1,9 +1,9 @@
 package org.test4j.hamcrest.iassert.impl;
 
-import java.util.Collection;
-
 import org.test4j.hamcrest.iassert.interal.Assert;
 import org.test4j.hamcrest.iassert.intf.ICollectionAssert;
+
+import java.util.Collection;
 
 @SuppressWarnings("rawtypes")
 public class CollectionAssert extends Assert<Collection, ICollectionAssert> implements ICollectionAssert {

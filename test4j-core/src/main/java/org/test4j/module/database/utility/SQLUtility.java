@@ -1,7 +1,5 @@
 package org.test4j.module.database.utility;
 
-import org.test4j.tools.commons.StringHelper;
-
 import java.util.Arrays;
 import java.util.List;
 import java.util.StringTokenizer;

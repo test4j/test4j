@@ -1,25 +1,12 @@
 package org.test4j.hamcrest.matcher.property.reflection;
 
-import static org.test4j.hamcrest.matcher.property.reflection.EqMode.EQ_STRING;
-import static org.test4j.hamcrest.matcher.property.reflection.EqMode.IGNORE_DATES;
-import static org.test4j.hamcrest.matcher.property.reflection.EqMode.IGNORE_DEFAULTS;
-import static org.test4j.hamcrest.matcher.property.reflection.EqMode.IGNORE_ORDER;
+import org.test4j.hamcrest.matcher.property.comparator.*;
+import org.test4j.tools.commons.ListHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import org.test4j.hamcrest.matcher.property.comparator.Comparator;
-import org.test4j.hamcrest.matcher.property.comparator.EqStringComparator;
-import org.test4j.hamcrest.matcher.property.comparator.HibernateProxyComparator;
-import org.test4j.hamcrest.matcher.property.comparator.IgnoreDatesComparator;
-import org.test4j.hamcrest.matcher.property.comparator.IgnoreDefaultsComparator;
-import org.test4j.hamcrest.matcher.property.comparator.IgnoreNumberComparator;
-import org.test4j.hamcrest.matcher.property.comparator.IgnoreOrderComparator;
-import org.test4j.hamcrest.matcher.property.comparator.ListComparator;
-import org.test4j.hamcrest.matcher.property.comparator.MapComparator;
-import org.test4j.hamcrest.matcher.property.comparator.ObjectComparator;
-import org.test4j.hamcrest.matcher.property.comparator.SimpleCasesComparator;
-import org.test4j.tools.commons.ListHelper;
+import static org.test4j.hamcrest.matcher.property.reflection.EqMode.*;
 
 /**
  * A factory for creating a reflection comparator. This will assemble the

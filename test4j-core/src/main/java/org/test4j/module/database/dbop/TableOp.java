@@ -1,9 +1,5 @@
 package org.test4j.module.database.dbop;
 
-import static org.test4j.module.database.dbop.DBOperator.IN_DB_OPERATOR;
-
-import java.util.List;
-
 import org.test4j.hamcrest.iassert.impl.CollectionAssert;
 import org.test4j.hamcrest.iassert.impl.LongAssert;
 import org.test4j.hamcrest.iassert.impl.ObjectAssert;
@@ -18,6 +14,10 @@ import org.test4j.module.database.utility.DBHelper;
 import org.test4j.module.database.utility.SqlRunner;
 import org.test4j.tools.commons.StringHelper;
 import org.test4j.tools.datagen.IDataMap;
+
+import java.util.List;
+
+import static org.test4j.module.database.dbop.DBOperator.IN_DB_OPERATOR;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class TableOp implements ITableOp {

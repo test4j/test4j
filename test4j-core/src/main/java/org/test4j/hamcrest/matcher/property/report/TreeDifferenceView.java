@@ -1,18 +1,12 @@
 package org.test4j.hamcrest.matcher.property.report;
 
-import static ext.test4j.apache.commons.lang.ClassUtils.getShortClassName;
-import static org.test4j.hamcrest.matcher.property.report.DefaultDifferenceReport.MatchType.NO_MATCH;
+import org.test4j.hamcrest.matcher.property.difference.*;
 
 import java.util.List;
 import java.util.Map;
 
-import org.test4j.hamcrest.matcher.property.difference.ClassDifference;
-import org.test4j.hamcrest.matcher.property.difference.CollectionDifference;
-import org.test4j.hamcrest.matcher.property.difference.Difference;
-import org.test4j.hamcrest.matcher.property.difference.DifferenceVisitor;
-import org.test4j.hamcrest.matcher.property.difference.MapDifference;
-import org.test4j.hamcrest.matcher.property.difference.ObjectDifference;
-import org.test4j.hamcrest.matcher.property.difference.UnorderedCollectionDifference;
+import static ext.test4j.apache.commons.lang.ClassUtils.getShortClassName;
+import static org.test4j.hamcrest.matcher.property.report.DefaultDifferenceReport.MatchType.NO_MATCH;
 
 /**
  * Formatter that will output all objects in the difference tree. For an

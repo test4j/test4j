@@ -1,9 +1,5 @@
 package org.test4j.hamcrest.iassert.impl;
 
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
-import java.util.Date;
-
 import org.test4j.hamcrest.iassert.interal.Assert;
 import org.test4j.hamcrest.iassert.intf.IDateAssert;
 import org.test4j.hamcrest.matcher.LinkMatcher;
@@ -11,6 +7,10 @@ import org.test4j.hamcrest.matcher.calendar.DateFormatMatcher;
 import org.test4j.hamcrest.matcher.calendar.DateParterMatcher;
 import org.test4j.hamcrest.matcher.calendar.DateParterMatcher.DateFieldType;
 import org.test4j.tools.commons.DateHelper;
+
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 public class DateAssert<T> extends Assert<T, IDateAssert<T>> implements IDateAssert<T> {
 

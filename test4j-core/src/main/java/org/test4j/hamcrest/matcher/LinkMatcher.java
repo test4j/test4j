@@ -1,13 +1,12 @@
 package org.test4j.hamcrest.matcher;
 
-import java.util.ArrayList;
-import java.util.List;
-
-
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.test4j.tools.commons.StringHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @SuppressWarnings("rawtypes")
 public class LinkMatcher<T> extends BaseMatcher<T> {

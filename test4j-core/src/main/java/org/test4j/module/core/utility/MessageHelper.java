@@ -1,6 +1,6 @@
 package org.test4j.module.core.utility;
 
-import static org.test4j.module.core.internal.IPropItem.LOG4J_XML_FILE;
+import org.test4j.tools.commons.*;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -8,11 +8,7 @@ import java.io.IOException;
 import java.io.Writer;
 import java.net.URL;
 
-import org.test4j.tools.commons.ClazzHelper;
-import org.test4j.tools.commons.ConfigHelper;
-import org.test4j.tools.commons.MethodHelper;
-import org.test4j.tools.commons.ResourceHelper;
-import org.test4j.tools.commons.StringHelper;
+import static org.test4j.module.core.internal.IPropItem.LOG4J_XML_FILE;
 
 public class MessageHelper {
     public static final int DEBUG   = 0;

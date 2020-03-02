@@ -1,11 +1,11 @@
 package org.test4j.hamcrest.matcher.property.comparator;
 
-import java.text.SimpleDateFormat;
-import java.util.Date;
-
 import org.test4j.hamcrest.matcher.property.difference.Difference;
 import org.test4j.hamcrest.matcher.property.reflection.ReflectionComparator;
 import org.test4j.tools.commons.DateHelper;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 @SuppressWarnings("rawtypes")
 public class EqStringComparator implements Comparator {

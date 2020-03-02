@@ -1,13 +1,5 @@
 package org.test4j.module.database.environment;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.util.HashMap;
-import java.util.Map;
-
-import javax.sql.DataSource;
-
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.test4j.function.EConsumer;
 import org.test4j.function.EFunction;
@@ -16,6 +8,13 @@ import org.test4j.module.database.environment.typesmap.AbstractTypeMap;
 import org.test4j.module.database.sql.DataSourceCreatorFactory;
 import org.test4j.module.database.utility.DataSourceType;
 import org.test4j.tools.commons.ExceptionWrapper;
+
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.util.HashMap;
+import java.util.Map;
 
 public abstract class BaseEnvironment implements DBEnvironment {
     protected final String dataSourceName;

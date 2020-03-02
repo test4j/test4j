@@ -1,10 +1,10 @@
 package org.test4j.module.spring.annotations;
 
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
+
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * 用于指定spring bean的初始化方法<br>

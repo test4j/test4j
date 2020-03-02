@@ -1,13 +1,13 @@
 package org.test4j.hamcrest.matcher.property;
 
-import java.util.List;
-
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.Matcher;
 import org.test4j.tools.commons.ArrayHelper;
 import org.test4j.tools.commons.ListHelper;
 import org.test4j.tools.reflector.PropertyAccessor;
+
+import java.util.List;
 
 
 /**

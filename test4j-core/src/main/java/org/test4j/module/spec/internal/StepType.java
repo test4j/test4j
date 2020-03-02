@@ -1,8 +1,8 @@
 package org.test4j.module.spec.internal;
 
-import java.lang.annotation.Annotation;
-
 import org.test4j.tools.commons.StringHelper;
+
+import java.lang.annotation.Annotation;
 
 public enum StepType {
     Step {

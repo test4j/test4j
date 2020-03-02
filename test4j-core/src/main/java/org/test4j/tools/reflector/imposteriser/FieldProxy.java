@@ -1,10 +1,10 @@
 package org.test4j.tools.reflector.imposteriser;
 
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-
 import org.test4j.module.core.internal.Test4JContext;
 import org.test4j.tools.reflector.FieldAccessor;
+
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 
 /**
  * 目标对象字段的代理<br>

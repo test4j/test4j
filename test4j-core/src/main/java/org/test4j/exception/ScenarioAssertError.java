@@ -1,9 +1,9 @@
 package org.test4j.exception;
 
-import java.util.List;
-
 import org.test4j.module.spec.internal.IScenario;
 import org.test4j.tools.commons.StringHelper;
+
+import java.util.List;
 
 public class ScenarioAssertError extends AssertionError {
 

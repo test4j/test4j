@@ -1,12 +1,12 @@
 package org.test4j.module.database.environment.typesmap;
 
+import org.test4j.module.database.environment.typesmap.TypeMap.JavaSQLType;
+
 import java.io.InputStream;
 import java.math.BigDecimal;
 import java.sql.Types;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.test4j.module.database.environment.typesmap.TypeMap.JavaSQLType;
 
 @SuppressWarnings({ "rawtypes", "serial" })
 public class MySQLTypeMap extends AbstractTypeMap {

@@ -7,6 +7,7 @@ import org.test4j.hamcrest.matcher.property.reflection.ReflectionComparator;
 
 import java.lang.reflect.AccessibleObject;
 import java.lang.reflect.Field;
+
 import static java.lang.reflect.Modifier.isStatic;
 import static java.lang.reflect.Modifier.isTransient;
 

@@ -3,8 +3,6 @@ package org.test4j.tools.commons;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-import org.test4j.tools.commons.StringHelper;
-
 public class DateHelper {
 	/**
 	 * 返回当前日期的默认格式("yyyy-MM-dd")字符串

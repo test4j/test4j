@@ -1,6 +1,7 @@
 package org.test4j.tools.commons;
 
-import static java.util.Arrays.asList;
+import org.test4j.exception.NoSuchFieldRuntimeException;
+import org.test4j.tools.reflector.FieldAccessor;
 
 import java.lang.reflect.Field;
 import java.lang.reflect.Type;
@@ -9,8 +10,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
-import org.test4j.exception.NoSuchFieldRuntimeException;
-import org.test4j.tools.reflector.FieldAccessor;
+import static java.util.Arrays.asList;
 
 @SuppressWarnings({ "rawtypes" })
 public final class FieldHelper {

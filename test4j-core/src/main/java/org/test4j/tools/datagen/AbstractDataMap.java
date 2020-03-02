@@ -1,11 +1,11 @@
 package org.test4j.tools.datagen;
 
-import java.util.*;
-
 import lombok.Getter;
 import org.test4j.json.JSON;
 import org.test4j.module.ICore;
 import org.test4j.tools.commons.ArrayHelper;
+
+import java.util.*;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 public abstract class AbstractDataMap<DM extends ICore.DataMap>

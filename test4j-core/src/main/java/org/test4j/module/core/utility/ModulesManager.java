@@ -1,15 +1,11 @@
 package org.test4j.module.core.utility;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.test4j.exception.Test4JException;
 import org.test4j.module.core.Module;
 import org.test4j.module.core.internal.TestListener;
 import org.test4j.tools.commons.ClazzHelper;
+
+import java.util.*;
 
 /**
  * test4j模块管理器<br>

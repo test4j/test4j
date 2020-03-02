@@ -1,13 +1,13 @@
 package org.test4j.module.database.dbop;
 
-import java.io.File;
-import java.util.List;
-import java.util.Map;
-
 import org.test4j.hamcrest.iassert.intf.ICollectionAssert;
 import org.test4j.hamcrest.iassert.intf.IMapAssert;
 import org.test4j.hamcrest.iassert.intf.IObjectAssert;
 import org.test4j.module.database.sql.SqlList;
+
+import java.io.File;
+import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("rawtypes")
 public interface IDBOperator {

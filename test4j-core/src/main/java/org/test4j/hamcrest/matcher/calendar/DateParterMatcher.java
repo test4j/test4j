@@ -1,12 +1,11 @@
 package org.test4j.hamcrest.matcher.calendar;
 
-import java.util.Calendar;
-import java.util.Date;
-
-
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.test4j.exception.Test4JException;
+
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * 日期类型部分内容(年，月，日，小时，分钟，秒)断言

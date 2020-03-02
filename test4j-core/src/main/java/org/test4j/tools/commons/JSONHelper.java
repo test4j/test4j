@@ -1,14 +1,9 @@
 package org.test4j.tools.commons;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
-
-import org.test4j.json.JSON;
 import org.test4j.exception.Test4JException;
+import org.test4j.json.JSON;
+
+import java.io.*;
 
 /**
  * POJO对象序列化和反序列化工具类

@@ -1,34 +1,18 @@
 package org.test4j.tools.commons;
 
-import static java.lang.reflect.Modifier.isStatic;
-
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.Field;
-import java.lang.reflect.Method;
-import java.lang.reflect.Modifier;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Proxy;
-import java.lang.reflect.Type;
-import java.lang.reflect.WildcardType;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import ext.test4j.apache.commons.io.IOUtils;
 import org.objenesis.ObjenesisHelper;
+import org.test4j.exception.NewInstanceException;
 import org.test4j.exception.Test4JException;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.spring.interal.SpringModuleHelper;
 import org.test4j.tools.datagen.ConstructorArgsGenerator;
-import org.test4j.exception.NewInstanceException;
 
-import ext.test4j.apache.commons.io.IOUtils;
+import java.io.*;
+import java.lang.reflect.*;
+import java.util.*;
+
+import static java.lang.reflect.Modifier.isStatic;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class ClazzHelper {

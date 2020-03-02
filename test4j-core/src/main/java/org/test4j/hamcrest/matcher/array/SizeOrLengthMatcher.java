@@ -1,11 +1,10 @@
 package org.test4j.hamcrest.matcher.array;
 
-import java.util.Collection;
-
-
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.test4j.tools.commons.ArrayHelper;
+
+import java.util.Collection;
 
 public class SizeOrLengthMatcher extends BaseMatcher<Collection<?>> {
     private int size;

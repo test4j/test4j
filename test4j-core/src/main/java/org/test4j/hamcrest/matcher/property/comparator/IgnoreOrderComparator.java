@@ -1,15 +1,15 @@
 package org.test4j.hamcrest.matcher.property.comparator;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Iterator;
-import java.util.Map;
-
 import org.test4j.hamcrest.matcher.property.difference.Difference;
 import org.test4j.hamcrest.matcher.property.difference.UnorderedCollectionDifference;
 import org.test4j.hamcrest.matcher.property.reflection.MatchingScoreCalculator;
 import org.test4j.hamcrest.matcher.property.reflection.ReflectionComparator;
 import org.test4j.tools.commons.ListHelper;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * A comparator for collections and arrays that ignores the order of both
