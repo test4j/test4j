@@ -23,9 +23,9 @@
         </dependency>
         <dependency>
             <groupId>org.test4j</groupId>
-            <artifactId>test4j-db-dep</artifactId>
+            <artifactId>test4j-btest</artifactId>
             <version>${project.version}</version>
-            <type>pom</type>
+            <scope>test</scope>
         </dependency>
         <dependency>
             <groupId>org.junit.jupiter</groupId>
@@ -42,12 +42,6 @@
                     <groupId>junit</groupId>
                 </exclusion>
             </exclusions>
-        </dependency>
-        <dependency>
-            <groupId>org.test4j</groupId>
-            <artifactId>test4j-btest</artifactId>
-            <version>${project.version}</version>
-            <scope>test</scope>
         </dependency>
     </dependencies>
 </project>
