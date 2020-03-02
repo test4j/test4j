@@ -24,7 +24,6 @@
             <groupId>org.test4j</groupId>
             <artifactId>test4j-db-dep</artifactId>
             <version>${project.version}</version>
-            <type>pom</type>
             <scope>provided</scope>
         </dependency>
         <dependency>

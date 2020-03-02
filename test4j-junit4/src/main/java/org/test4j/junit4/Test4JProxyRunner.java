@@ -12,9 +12,13 @@ import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestClass;
 import org.test4j.module.spring.interal.SpringEnv;
+import org.test4j.tools.reflector.FieldAccessor;
+import org.test4j.tools.reflector.MethodAccessor;
 
 import java.lang.annotation.Annotation;
-import java.util.List;
+import java.util.*;
+
+import static org.test4j.tools.reflector.MethodAccessor.invokeMethodUnThrow;
 
 public class Test4JProxyRunner extends BlockJUnit4ClassRunner {
     private ITest4Runner proxy;
@@ -66,15 +70,41 @@ public class Test4JProxyRunner extends BlockJUnit4ClassRunner {
     @Override
     public void filter(Filter filter) throws NoTestsRemainException {
         new MockUp<ParentRunner>() {
+            private final Object childrenLock = new Object();
+
             @Mock
-            private boolean shouldRun(Invocation it, Filter filter, Object each) {
+            public void filter(Invocation it, Filter filter) throws NoTestsRemainException {
+                ParentRunner runner = it.getInvokedInstance();
+                synchronized (childrenLock) {
+                    List children = new ArrayList((Collection) invokeMethodUnThrow(runner, "getFilteredChildren"));
+                    for (Iterator iter = children.iterator(); iter.hasNext(); ) {
+                        Object each = iter.next();
+                        if (this.shouldRun(runner, filter, each)) {
+                            try {
+                                filter.apply(each);
+                            } catch (NoTestsRemainException e) {
+                                iter.remove();
+                            }
+                        } else {
+                            iter.remove();
+                        }
+                    }
+                    Collection filteredChildren = Collections.unmodifiableCollection(children);
+                    FieldAccessor.setFieldValue(runner, "filteredChildren", filteredChildren);
+                    if (filteredChildren.isEmpty()) {
+                        throw new NoTestsRemainException();
+                    }
+                }
+            }
+
+            private boolean shouldRun(ParentRunner runner, Filter filter, Object each) {
                 String desc = filter.describe();
                 if (each instanceof FrameworkMethodWithParameters) {
                     int index = each.toString().indexOf("[");
                     String name = each.toString().substring(0, index);
                     return desc.contains(name + "(");
                 } else {
-                    return it.proceed(filter, each);
+                    return invokeMethodUnThrow(runner, "shouldRun", filter, each);
                 }
             }
         };
