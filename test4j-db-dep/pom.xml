@@ -13,6 +13,7 @@
     <artifactId>test4j-db-dep</artifactId>
     <properties>
         <fluent-mybatis.version>1.0.4</fluent-mybatis.version>
+        <skipTests>true</skipTests>
     </properties>
     <dependencies>
         <!-- mariadb4j -->
