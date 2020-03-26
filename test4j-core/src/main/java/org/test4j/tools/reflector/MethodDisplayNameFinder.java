@@ -28,7 +28,7 @@ public class MethodDisplayNameFinder {
             KlassMethod klassMethod = map.get(DISPLAY_NAME);
             Object o = method.getDeclaredAnnotation(klassMethod.klass);
             if (o != null) {
-                return MethodAccessor.invokeMethodUnThrow(o, klassMethod.method);
+                return MethodAccessor.method(method).invoke(o);
             }
         }
         return method.getName();

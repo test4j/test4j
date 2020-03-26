@@ -1,6 +1,6 @@
 package org.test4j.tools.reflector.imposteriser;
 
-import org.test4j.tools.commons.FieldHelper;
+import org.test4j.tools.commons.Reflector;
 
 import java.lang.reflect.Field;
 
@@ -34,7 +34,7 @@ public final class Test4JProxy {
      */
     public static <T> T proxy(final Class testClazz, final String fieldName) {
         FieldProxy handler = new FieldProxy(testClazz, fieldName);
-        Field field = FieldHelper.getField(testClazz, fieldName);
+        Field field = Reflector.getField(testClazz, fieldName);
         Class type = field.getType();
         return (T) imposteriser.imposterise(handler, type);
     }

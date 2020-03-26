@@ -4,8 +4,8 @@ import org.junit.runners.model.FrameworkMethod;
 import org.test4j.exception.NewInstanceException;
 import org.test4j.exception.NoSuchMethodRuntimeException;
 import org.test4j.module.core.utility.MessageHelper;
-import org.test4j.tools.commons.MethodHelper;
 import org.test4j.tools.commons.Reflector;
+import org.test4j.tools.reflector.MethodAccessor;
 
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -62,16 +62,16 @@ public class ParameterDataFromHelper {
         try {
             if (dataFromClaz.isAssignableFrom(testClazz)) {
                 Object from = Reflector.instance.newInstance(testClazz);
-                Object data = MethodHelper.invokeUnThrow(from, dataFromMethod);
+                Object data = MethodAccessor.invoke(from, dataFromMethod);
                 return data;
             } else {
                 Object from = Reflector.instance.newInstance(dataFromClaz);
-                Object data = MethodHelper.invokeUnThrow(from, dataFromMethod);
+                Object data = MethodAccessor.invoke(from, dataFromMethod);
                 return data;
             }
         } catch (NewInstanceException e1) {
             try {
-                Object data = MethodHelper.invokeStatic(dataFromClaz, dataFromMethod);
+                Object data = MethodAccessor.invokeStatic(dataFromClaz, dataFromMethod);
                 return data;
             } catch (NoSuchMethodRuntimeException e2) {
                 String err = "The @DataFrom method isn't a static method or isn't declared in a concrete class.";

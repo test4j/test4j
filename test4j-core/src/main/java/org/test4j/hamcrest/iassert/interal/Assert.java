@@ -94,7 +94,7 @@ public abstract class Assert<T, E extends IAssert> extends BaseMatcher<T> implem
 
     public boolean matches(Object item) {
         if (this.assertObject.getType() == AssertType.MatcherStyle && this.assertObject.getValue() instanceof String) {
-            String value = MethodAccessor.invokeMethodUnThrow(item, (String) item);
+            String value = MethodAccessor.invoke(item, (String) item);
             return this.assertObject.getLink().matches(value);
         } else {
             return this.assertObject.getLink().matches(item);

@@ -94,7 +94,7 @@ public final class DBHelper {
         T pojo = count < 2 ? null : ClazzHelper.newInstance(clazz);
         Object firstField = buildObject(rs, true, rsmd, (key, value) -> {
             if (pojo != null) {
-                new FieldAccessor(clazz, key).set(pojo, value);
+                FieldAccessor.field(clazz, key).set(pojo, value);
             }
         });
         return pojo == null ? (T) firstField : pojo;

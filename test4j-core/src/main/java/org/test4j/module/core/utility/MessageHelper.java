@@ -1,6 +1,7 @@
 package org.test4j.module.core.utility;
 
 import org.test4j.tools.commons.*;
+import org.test4j.tools.reflector.MethodAccessor;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -11,15 +12,15 @@ import java.net.URL;
 import static org.test4j.module.core.internal.IPropItem.LOG4J_XML_FILE;
 
 public class MessageHelper {
-    public static final int DEBUG   = 0;
+    public static final int DEBUG = 0;
 
-    public static final int INFO    = 1;
+    public static final int INFO = 1;
 
     public static final int WARNING = 2;
 
-    public static final int ERROR   = 3;
+    public static final int ERROR = 3;
 
-    public static int       level   = DEBUG;
+    public static int level = DEBUG;
 
     private static void mark(int level, String marker) {
         switch (level) {
@@ -72,7 +73,7 @@ public class MessageHelper {
         try {
             URL url = ResourceHelper.getResourceUrl(log4jxml);
             Class domConfigurator = ClazzHelper.getClazz("org.apache.log4j.xml.DOMConfigurator");
-            MethodHelper.invokeStatic(domConfigurator, "configure", url);
+            MethodAccessor.invokeStatic(domConfigurator, "configure", url);
         } catch (Throwable e) {
             mark(ERROR, "reset log4j leve error, " + e == null ? "null" : e.getMessage());
         }
@@ -83,7 +84,7 @@ public class MessageHelper {
     /**
      * 用于记录test4j运行时的信息，方便定位复杂的问题<br>
      * 正式发布版本中所有方法都改为protected，禁止其它类引用
-     * 
+     *
      * @author darui.wudr
      */
     protected static void writerDebugInfo(String info) {

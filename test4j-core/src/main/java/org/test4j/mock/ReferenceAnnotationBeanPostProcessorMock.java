@@ -28,7 +28,7 @@ public class ReferenceAnnotationBeanPostProcessorMock extends MockUp<ReferenceAn
     public Object doGetInjectedBean(Invocation it, Reference reference, Object bean, String beanName, Class<?> injectedType,
                                     InjectionMetadata.InjectedElement injectedElement) throws Exception {
         ReferenceAnnotationBeanPostProcessor processor = it.getInvokedInstance();
-        ConfigurableListableBeanFactory factory = MethodAccessor.invokeMethod(processor, "getBeanFactory");
+        ConfigurableListableBeanFactory factory = MethodAccessor.invoke(processor, "getBeanFactory");
         Object injected = factory.getBean(injectedType);
         return injected;
     }

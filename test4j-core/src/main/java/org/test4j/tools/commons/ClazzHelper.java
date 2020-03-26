@@ -466,7 +466,7 @@ public class ClazzHelper {
                                                  boolean includeFinal, boolean includeTransient) {
         List<Field> jsonFields = new ArrayList<Field>();
 
-        List<Field> fields = FieldHelper.getAllFields(clazz);
+        List<Field> fields = Reflector.getAllFields(clazz);
         for (Field field : fields) {
             String fieldname = field.getName();
             if (filters != null && filters.contains(fieldname)) {

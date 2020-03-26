@@ -27,8 +27,8 @@ public class H2Statement {
 
     public static void addSql(Statement statement) {
         JdbcPreparedStatement h2statment = (JdbcPreparedStatement) statement;
-        Command command = (Command) FieldAccessor.getFieldValue(h2statment, "command");
-        String sql = (String) FieldAccessor.getFieldValue(command, "sql");
+        Command command = (Command) FieldAccessor.getValue(h2statment, "command");
+        String sql = (String) FieldAccessor.getValue(command, "sql");
         String str = command.toString();
         if (str.contains(sql)) {
             int index = str.indexOf(sql);

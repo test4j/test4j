@@ -75,13 +75,11 @@ public class InjectModule implements Module {
     private void injectIntoByTestedObject(Class testedClazz, Object testedObject) {
         Set<Field> targets = AnnotationHelper.getFieldsAnnotatedWith(testedClazz, Injected.class);
         Map<String, Object> propertyValues = this.findValuesForInejctInto(testedClazz, testedObject);
-        for (Field target : targets) {
-            Object targetObject = new FieldAccessor(testedClazz, target).get(testedObject);
+        for (Field field : targets) {
+            Object targetObject = FieldAccessor.field(field).get(testedObject);
             targetObject = ClazzHelper.getProxiedObject(targetObject);
             for (Entry<String, Object> entry : propertyValues.entrySet()) {
-                FieldAccessor accessor = new FieldAccessor(target.getType(), entry.getKey());
-                Object value = entry.getValue();
-                accessor.set(targetObject, value);
+                FieldAccessor.field(field.getType(), entry.getKey()).set(targetObject, entry.getValue());
             }
         }
     }
@@ -103,7 +101,7 @@ public class InjectModule implements Module {
                 Object injectedObject = Test4JProxy.proxy(testedObject.getClass(), injectField);
                 injectedInto(testedObject, injectedObject, injectedClazz, inject.targets(), inject.properties());
             } catch (IllegalArgumentException e) {
-                Object injectedObject = new FieldAccessor(testedObject.getClass(), injectField).get(testedObject);
+                Object injectedObject = FieldAccessor.field(injectField).get(testedObject);
                 injectedInto(testedObject, injectedObject, injectedClazz, inject.targets(), inject.properties());
             }
         }
@@ -126,7 +124,7 @@ public class InjectModule implements Module {
                     Object value = Test4JProxy.proxy(testedClazz, field);
                     values.put(field.getName(), value);
                 } catch (IllegalArgumentException ie) {
-                    Object value = new FieldAccessor(testedClazz, field).get(testedObject);
+                    Object value = FieldAccessor.field(field).get(testedObject);
                     values.put(field.getName(), value);
                 }
             }

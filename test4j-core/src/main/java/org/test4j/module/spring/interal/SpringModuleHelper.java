@@ -1,5 +1,6 @@
 package org.test4j.module.spring.interal;
 
+import org.springframework.aop.framework.Advised;
 import org.springframework.beans.factory.ListableBeanFactory;
 import org.springframework.beans.factory.config.AutowireCapableBeanFactory;
 import org.springframework.context.ApplicationContext;
@@ -161,9 +162,9 @@ public class SpringModuleHelper {
         if (!ClazzHelper.isClassAvailable("org.springframework.aop.framework.Advised")) {
             return target;
         }
-        if (target instanceof org.springframework.aop.framework.Advised) {
+        if (target instanceof Advised) {
             try {
-                return ((org.springframework.aop.framework.Advised) target).getTargetSource().getTarget();
+                return ((Advised) target).getTargetSource().getTarget();
             } catch (Exception e) {
                 throw new Test4JException(e);
             }
@@ -181,7 +182,7 @@ public class SpringModuleHelper {
     public static ApplicationContext getApplicationContext(TestContextManager contextManager) {
         //return contextManager.getTestContext().getApplicationContext();
         try {
-            TestContext testContext = MethodAccessor.invokeMethod(contextManager, "getTestContext");
+            TestContext testContext = MethodAccessor.invoke(contextManager, "getTestContext");
             return testContext.getApplicationContext();
         } catch (Exception e) {
             throw new RuntimeException("get Spring Application Context error: " + e.getMessage(), e);

@@ -68,7 +68,7 @@ public class MixProxy<T> implements MethodInterceptor {
         }
         fields.forEach(field -> {
             Object mix = MixProxy.proxy(field.getType());
-            new FieldAccessor(field).set(injectedObject, mix);
+            FieldAccessor.field(field).set(injectedObject, mix);
         });
     }
 
@@ -80,7 +80,7 @@ public class MixProxy<T> implements MethodInterceptor {
         fields.forEach(field -> {
             Object mixes = ClazzHelper.newInstance(field.getType());
             mix(mixes, field.getType());
-            new FieldAccessor(field).set(testedObject, mixes);
+            FieldAccessor.field(field).set(testedObject, mixes);
         });
     }
 

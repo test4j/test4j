@@ -13,12 +13,12 @@ import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestClass;
 import org.test4j.module.spring.interal.SpringEnv;
 import org.test4j.tools.reflector.FieldAccessor;
-import org.test4j.tools.reflector.MethodAccessor;
 
 import java.lang.annotation.Annotation;
 import java.util.*;
 
-import static org.test4j.tools.reflector.MethodAccessor.invokeMethodUnThrow;
+import static org.test4j.tools.reflector.MethodAccessor.invoke;
+
 
 public class Test4JProxyRunner extends BlockJUnit4ClassRunner {
     private ITest4Runner proxy;
@@ -76,7 +76,7 @@ public class Test4JProxyRunner extends BlockJUnit4ClassRunner {
             public void filter(Invocation it, Filter filter) throws NoTestsRemainException {
                 ParentRunner runner = it.getInvokedInstance();
                 synchronized (childrenLock) {
-                    List children = new ArrayList((Collection) invokeMethodUnThrow(runner, "getFilteredChildren"));
+                    List children = new ArrayList((Collection) invoke(runner, "getFilteredChildren"));
                     for (Iterator iter = children.iterator(); iter.hasNext(); ) {
                         Object each = iter.next();
                         if (this.shouldRun(runner, filter, each)) {
@@ -90,7 +90,7 @@ public class Test4JProxyRunner extends BlockJUnit4ClassRunner {
                         }
                     }
                     Collection filteredChildren = Collections.unmodifiableCollection(children);
-                    FieldAccessor.setFieldValue(runner, "filteredChildren", filteredChildren);
+                    FieldAccessor.setValue(runner, "filteredChildren", filteredChildren);
                     if (filteredChildren.isEmpty()) {
                         throw new NoTestsRemainException();
                     }
@@ -104,7 +104,7 @@ public class Test4JProxyRunner extends BlockJUnit4ClassRunner {
                     String name = each.toString().substring(0, index);
                     return desc.contains(name + "(");
                 } else {
-                    return invokeMethodUnThrow(runner, "shouldRun", filter, each);
+                    return invoke(runner, "shouldRun", filter, each);
                 }
             }
         };

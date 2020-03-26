@@ -1,7 +1,7 @@
 package org.test4j.module.database.sql;
 
 import org.test4j.module.database.sql.db.H2Statement;
-import org.test4j.tools.commons.MethodHelper;
+import org.test4j.tools.commons.Reflector;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
@@ -91,7 +91,7 @@ public class Test4JStatement implements InvocationHandler {
             return Statement_Methods.get(key);
         } else {
             try {
-                Method method = MethodHelper.getMethod(klass, methodName);
+                Method method = Reflector.getMethod(klass, methodName);
                 Statement_Methods.put(key, method);
                 return method;
             } catch (Exception e) {

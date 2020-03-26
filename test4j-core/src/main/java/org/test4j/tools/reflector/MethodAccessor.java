@@ -1,168 +1,183 @@
 package org.test4j.tools.reflector;
 
+import lombok.Getter;
 import org.test4j.exception.NoSuchMethodRuntimeException;
-import org.test4j.exception.Test4JException;
+import org.test4j.exception.ReflectionException;
 import org.test4j.tools.commons.ClazzHelper;
-import org.test4j.tools.commons.ExceptionWrapper;
-import org.test4j.tools.commons.MethodHelper;
+import org.test4j.tools.commons.Reflector;
 
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
+import java.util.List;
 
-@SuppressWarnings({ "rawtypes", "unchecked" })
-public class MethodAccessor<T> {
-	private final Method method;
-	private final Class targetClaz;
+/**
+ * 方法访问器
+ *
+ * @author wudarui
+ */
+@SuppressWarnings({"rawtypes", "unchecked"})
+public class MethodAccessor {
+    @Getter
+    private final Method method;
+    @Getter
+    private final Class declaringClass;
 
-	public MethodAccessor(Class targetClaz, String methodName, Class... parametersType) {
-		this.targetClaz = targetClaz;
-		this.method = MethodHelper.getMethod(targetClaz, methodName, parametersType);
-	}
+    private MethodAccessor(Class declaringClass, String methodName, Class... parametersType) {
+        this.declaringClass = declaringClass;
+        this.method = Reflector.getMethod(declaringClass, methodName, parametersType);
+    }
 
-	/**
-	 * 
-	 * @param targetObj
-	 * @param targetClazz
-	 * @param methodName
-	 * @param parametersType
-	 */
-	public MethodAccessor(Object target, String methodName, Class... parametersType) {
-		this.targetClaz = target.getClass();
-		this.method = MethodHelper.getMethod(targetClaz, methodName, parametersType);
-	}
+    private MethodAccessor(Object target, String methodName, Class... parametersType) {
+        Object _target = ClazzHelper.getProxiedObject(target);
+        this.declaringClass = _target.getClass();
+        this.method = Reflector.getMethod(declaringClass, methodName, parametersType);
+    }
 
-	public MethodAccessor(Method method) {
-		this.method = method;
-		this.targetClaz = method.getDeclaringClass();
-	}
+    private MethodAccessor(Method method) {
+        this.method = method;
+        this.declaringClass = method.getDeclaringClass();
+    }
 
-	public Method getMethod() {
-		return this.method;
-	}
+    /**
+     * 执行方法
+     *
+     * @param target
+     * @param args   方法参数
+     * @return
+     */
+    public <T> T invoke(Object target, Object... args) {
+        boolean isAccessible = this.method.isAccessible();
+        try {
+            this.method.setAccessible(true);
+            Object _target = ClazzHelper.getProxiedObject(target);
+            return (T) method.invoke(_target, args);
+        } catch (InvocationTargetException e) {
+            Throwable te = e.getTargetException();
+            if (te instanceof RuntimeException) {
+                throw (RuntimeException) te;
+            } else {
+                throw new RuntimeException(te);
+            }
+        } catch (IllegalAccessException ie) {
+            throw new RuntimeException(ie);
+        } finally {
+            this.method.setAccessible(isAccessible);
+        }
+    }
 
-	public T invoke(Object target, Object[] args) throws Exception {
-		boolean isAccessible = this.method.isAccessible();
-		try {
-			this.method.setAccessible(true);
-			return (T) method.invoke(target, args);
-		} catch (InvocationTargetException e) {
-			Throwable te = e.getTargetException();
-			if (te instanceof Exception) {
-				throw (Exception) te;
-			} else {
-				throw e;
-			}
-		} finally {
-			this.method.setAccessible(isAccessible);
-		}
-	}
 
-	/**
-	 * 调用方法，不显式抛出异常<br>
-	 * 原方法如果有显式异常，将被封装
-	 * 
-	 * @param target
-	 * @param args
-	 * @return
-	 */
-	public T invokeUnThrow(Object target, Object[] args) {
-		try {
-			return invoke(target, args);
-		} catch (InvocationTargetException e) {
-			Throwable targetException = e.getTargetException();
-			throw ExceptionWrapper.wrapWithRuntimeException(targetException);
-		} catch (Throwable e) {
-			throw ExceptionWrapper.wrapWithRuntimeException(e);
-		}
-	}
+    /**
+     * 执行静态方法
+     *
+     * @param args 方法参数
+     * @return
+     */
+    public <T> T invokeStatic(Object... args) {
+        if (Modifier.isStatic(method.getModifiers()) == false) {
+            String methodDesc = method.getName() + "(" + Arrays.toString(method.getParameterTypes()) + ")";
+            throw new NoSuchMethodRuntimeException("No such static method: " + methodDesc + " in class["
+                    + this.declaringClass + "]");
+        } else {
+            return (T) invoke(null, args);
+        }
+    }
 
-	public T invokeStatic(Object[] args) throws Exception {
-		if (Modifier.isStatic(method.getModifiers()) == false) {
-			String methodDesc = method.getName() + "(" + Arrays.toString(method.getParameterTypes()) + ")";
-			throw new NoSuchMethodRuntimeException("No such static method: " + methodDesc + " in class["
-					+ this.targetClaz + "]");
-		} else {
-			return (T) invoke(null, args);
-		}
-	}
+    /**
+     * 构造方法访问器
+     *
+     * @param declaringClass
+     * @param methodName
+     * @param parametersType
+     * @return
+     */
+    public static MethodAccessor method(Class declaringClass, String methodName, Class... parametersType) {
+        return new MethodAccessor(declaringClass, methodName, parametersType);
+    }
 
-	public T invokeStaticUnThrow(Object[] args) {
-		try {
-			return (T) invokeStatic(args);
-		} catch (InvocationTargetException e) {
-			Throwable targetException = e.getTargetException();
-			throw ExceptionWrapper.wrapWithRuntimeException(targetException);
-		} catch (Throwable e) {
-			throw ExceptionWrapper.wrapWithRuntimeException(e);
-		}
-	}
+    /**
+     * 构造方法访问器
+     *
+     * @param target
+     * @param methodName
+     * @param parametersType
+     * @return
+     */
+    public static MethodAccessor method(Object target, String methodName, Class... parametersType) {
+        return new MethodAccessor(target, methodName, parametersType);
+    }
 
-	/**
-	 * Invokes the given method with the given parameters on the given target
-	 * object
-	 * 
-	 * @param target
-	 *            The object containing the method, not null
-	 * @param method
-	 *            The method, not null
-	 * @param arguments
-	 *            The method arguments
-	 * @return The result of the invocation, null if void
-	 * @throws Test4JException
-	 *             if the method could not be invoked
-	 */
-	public static <T> T invokeMethod(Object target, Method method, Object... arguments) throws Exception {
-		boolean isAccessible = method.isAccessible();
-		try {
-			method.setAccessible(true);
-			return (T) method.invoke(target, arguments);
-		} finally {
-			method.setAccessible(isAccessible);
-		}
-	}
+    /**
+     * 构造方法访问器
+     *
+     * @param method
+     * @return
+     */
+    public static MethodAccessor method(Method method) {
+        return new MethodAccessor(method);
+    }
 
-	public static <T> T invokeMethodUnThrow(Object target, Method method, Object... arguments) {
-		if (method == null) {
-			throw new RuntimeException("reflector invoke ,the argument[method] can't be null.");
-		}
-		try {
-			return (T) invokeMethod(target, method, arguments);
-		} catch (Exception e) {
-			throw new Test4JException("Unable to invoke method[" + method.getName() + "].", e);
-		}
-	}
+    /**
+     * 根据方法的名称和参数个数查找方法访问器，如果有多于1个同名且参数个数一样的方法，那么抛出异常
+     *
+     * @param targetClazz
+     * @param methodName
+     * @param args
+     * @return
+     */
+    public static MethodAccessor method(Class targetClazz, String methodName, int args) {
+        List<Method> methods = Reflector.getMethod(targetClazz, methodName, args);
+        if (methods.size() == 0) {
+            throw new ReflectionException("No such method: " + methodName + ",parameter count:" + args);
+        }
+        if (methods.size() > 1) {
+            throw new ReflectionException("More then one method: " + methodName + ",parameter count:" + args);
+        }
+        Method method = methods.get(0);
+        return MethodAccessor.method(method);
+    }
 
-	public static <T> T invokeMethod(Object target, String methodNmae, Object... paras) throws Exception {
-		if (target == null) {
-			throw new RuntimeException("the target object can't be null!");
-		}
 
-		Object _target = ClazzHelper.getProxiedObject(target);
+    /**
+     * 根据方法的名称和参数个数查找方法访问器，如果有多于1个同名且参数个数一样的方法，那么抛出异常
+     *
+     * @param target
+     * @param methodName
+     * @param args
+     * @return
+     */
+    public static MethodAccessor method(Object target, String methodName, int args) {
+        Object _target = ClazzHelper.getProxiedObject(target);
+        return method(_target.getClass(), methodName, args);
+    }
 
-		Class[] paraClazes = MethodHelper.getParameterClazz(paras);
-		Method method = MethodHelper.getMethod(_target.getClass(), methodNmae, paraClazes);
+    /**
+     * 执行方法
+     *
+     * @param target
+     * @param methodName
+     * @param args
+     * @param <T>
+     * @return
+     */
+    public static <T> T invoke(Object target, String methodName, Object... args) {
+        Object _target = ClazzHelper.getProxiedObject(target);
+        Class[] types = Reflector.getTypes(args);
+        return method(_target, methodName, types).invoke(_target, args);
+    }
 
-		Object result = invokeMethod(_target, method, paras);
-		return (T) result;
-	}
-
-	/**
-	 * 反射调用方法，不显式的抛出受检异常<br>
-	 * 原生的受检异常会被包装成运行时异常
-	 * 
-	 * @param <T>
-	 * @param target
-	 * @param methodName
-	 * @param paras
-	 * @return
-	 */
-	public static <T> T invokeMethodUnThrow(Object target, String methodName, Object... paras) {
-		try {
-			return (T) invokeMethod(target, methodName, paras);
-		} catch (Exception e) {
-			throw new Test4JException("Unable to invoke method[" + methodName + "].", e);
-		}
-	}
+    /**
+     * 执行方法
+     *
+     * @param klass
+     * @param methodName
+     * @param args
+     * @param <T>
+     * @return
+     */
+    public static <T> T invokeStatic(Class klass, String methodName, Object... args) {
+        Class[] types = Reflector.getTypes(args);
+        return method(klass, methodName, types).invokeStatic(args);
+    }
 }
