@@ -31,8 +31,10 @@ public class AssertHelper {
         String expected = wanted.stream().map(Class::getName).collect(Collectors.joining(","));
         try {
             executor.doIt();
-            throw new AssertionError("Expected exception: [" + expected + "], but no exception was thrown.");
-        } catch (Exception e) {
+            throw new UnExpectedAssertionError("Expected exception: [" + expected + "], but no exception was thrown.");
+        } catch (UnExpectedAssertionError ue) {
+            throw ue;
+        } catch (Throwable e) {
             boolean matched = false;
             for (Class expectedType : eTypes) {
                 if (e.getClass().isAssignableFrom(expectedType)) {
@@ -45,6 +47,12 @@ public class AssertHelper {
             } else {
                 throw new AssertionError("Expected exception: [" + expected + "], but actual exception is: " + e.getClass());
             }
+        }
+    }
+
+    private static class UnExpectedAssertionError extends AssertionError {
+        public UnExpectedAssertionError(String error) {
+            super(error);
         }
     }
 }
