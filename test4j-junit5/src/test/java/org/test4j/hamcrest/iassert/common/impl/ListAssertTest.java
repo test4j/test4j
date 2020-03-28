@@ -25,7 +25,7 @@ public class ListAssertTest extends Test4J {
     @Test
     public void testPropertyCollectionLenientEq() {
         String[][] expecteds = new String[][]{{"first2", "last2"}, {"first1", "last1"}};
-        want.collection(users).propertyEq(new String[]{"first", "last"}, expecteds, EqMode.IGNORE_ORDER);
+        want.collection(users).eqByProperties(new String[]{"first", "last"}, expecteds, EqMode.IGNORE_ORDER);
     }
 
     @Test

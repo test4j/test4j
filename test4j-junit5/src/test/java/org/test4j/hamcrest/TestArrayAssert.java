@@ -28,14 +28,14 @@ public class TestArrayAssert implements ICore {
     @Test
     public void testPropertyMatch() {
         User user = User.mock();
-        want.object(user).propertyMatch("addresses", the.collection().propertyEq("id", new int[]{2, 3}));
+        want.object(user).propertyMatch("addresses", the.collection().eqByProperties("id", new int[]{2, 3}));
     }
 
     @Test
     public void testPropertyMatcher2() {
         User user = User.mock();
 
-        want.object(user).propertyMatch("addresses", the.collection().propertyEq("id", new int[]{2, 3}));
+        want.object(user).propertyMatch("addresses", the.collection().eqByProperties("id", new int[]{2, 3}));
     }
 
     protected static List<User> getUsers() {

@@ -78,6 +78,6 @@ public class MapAssertTest extends Test4J {
             }
         };
         want.exception(() ->
-                want.map(actual).propertyEq("key2", new HashMap()), AssertionError.class);
+                want.map(actual).eqByProperties("key2", new HashMap()), AssertionError.class);
     }
 }

@@ -29,8 +29,8 @@ public class MapAssertTest_ReflectProperty extends Test4J {
     public void testMapReflet() {
         Map<String, String> maps = mockMap();
 
-        want.map(maps).propertyEq("one", "my first value");
-        want.map(maps).propertyEq("three", "my third value");
+        want.map(maps).eqByProperties("one", "my first value");
+        want.map(maps).eqByProperties("three", "my third value");
     }
 
     @Test
@@ -41,7 +41,7 @@ public class MapAssertTest_ReflectProperty extends Test4J {
 
     @Test
     public void testMapRefletList() {
-        want.collection(list).propertyEq("one", new String[]{"my first value", "ddd"});
+        want.collection(list).eqByProperties("one", new String[]{"my first value", "ddd"});
     }
 
     @Test
@@ -71,7 +71,7 @@ public class MapAssertTest_ReflectProperty extends Test4J {
     @Test
     public void propertyCollectionRefEq() {
         String[][] expecteds = new String[][]{{"my first value", "my third value"}, {"ddd", "my third value"}};
-        want.collection(list).propertyEq(new String[]{"one", "three"}, expecteds, EqMode.IGNORE_ORDER);
+        want.collection(list).eqByProperties(new String[]{"one", "three"}, expecteds, EqMode.IGNORE_ORDER);
     }
 
     Map<String, String> mockMap() {

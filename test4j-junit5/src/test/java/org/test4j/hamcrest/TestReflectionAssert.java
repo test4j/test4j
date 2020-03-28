@@ -87,8 +87,8 @@ public class TestReflectionAssert extends Test4J {
         User user1 = new User(1, "John", "Doe");
         User user2 = new User("John", "Doe", new Address("First street", "", ""));
 
-        want.object(user1).propertyEq("id", 1);
-        want.object(user2).propertyEq("address.street", "First street");
+        want.object(user1).eqByProperties("id", 1);
+        want.object(user2).eqByProperties("address.street", "First street");
 
         want.object(new User[]{new User("Jane"), new User("John")}).eqReflect(
                 Arrays.asList(new User("John"), new User("Jane")), EqMode.IGNORE_ORDER);
@@ -108,7 +108,7 @@ public class TestReflectionAssert extends Test4J {
     public void test8() {
         User user = new User(1, "John", "Doe");
         want.exception(() ->
-                        want.object(user).propertyEq("id", 2)
+                        want.object(user).eqByProperties("id", 2)
                 , AssertionError.class);
     }
 
@@ -116,13 +116,13 @@ public class TestReflectionAssert extends Test4J {
     public void test9() {
         User user = new User("John", "Doe", new Address("First street", "", ""));
         want.exception(() ->
-                        want.object(user).propertyEq("address.street", "First street1")
+                        want.object(user).eqByProperties("address.street", "First street1")
                 , AssertionError.class);
     }
 
     @Test
     public void test10() {
-        want.array(new User[]{new User("Jane", "Doe"), new User("John", "Doe")}).propertyEq("first",
+        want.array(new User[]{new User("Jane", "Doe"), new User("John", "Doe")}).eqByProperties("first",
                 Arrays.asList("Jane", "John"));
     }
 }

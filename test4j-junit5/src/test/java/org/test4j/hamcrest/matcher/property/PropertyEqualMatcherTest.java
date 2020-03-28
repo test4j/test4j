@@ -29,7 +29,7 @@ public class PropertyEqualMatcherTest extends Test4J {
                 this.put("key1", new String[]{"value1", "value2"});
             }
         };
-        want.object(actual).propertyEq("key1", new String[]{"value1", "value2"});
+        want.object(actual).eqByProperties("key1", new String[]{"value1", "value2"});
     }
 
     @Test
@@ -40,23 +40,23 @@ public class PropertyEqualMatcherTest extends Test4J {
             }
         };
         want.exception(() ->
-                        want.object(actual).propertyEq("key1", "value1"),
+                        want.object(actual).eqByProperties("key1", "value1"),
                 AssertionError.class);
     }
 
     @Test
     public void testPropertyActualIsArray() {
         List list = toList(User.mock(124, ""), User.mock(125, ""));
-        want.object(list).propertyEq("id", toList(124, 125));
+        want.object(list).eqByProperties("id", toList(124, 125));
 
-        want.object(list).propertyEq("id", toList(User.mock(124, ""), User.mock(125, "")));
+        want.object(list).eqByProperties("id", toList(User.mock(124, ""), User.mock(125, "")));
     }
 
     @Test
     public void testPropertyActualIsArray_Failure() {
         List list = toList(User.mock(124, ""));
         want.exception(() ->
-                        want.object(list).propertyEq("id", User.mock(124, ""))
+                        want.object(list).eqByProperties("id", User.mock(124, ""))
                 , AssertionError.class);
     }
 
@@ -67,13 +67,13 @@ public class PropertyEqualMatcherTest extends Test4J {
                 this.put("key1", "value1");
             }
         };
-        want.object(actual).propertyEq("key1", "value1");
+        want.object(actual).eqByProperties("key1", "value1");
     }
 
     @Test
     public void testProper_NormalPoJo() {
         User user = User.mock(125, "darui.wu");
-        want.object(user).propertyEq("name", "darui.wu").propertyEq("id", new HashMap() {
+        want.object(user).eqByProperties("name", "darui.wu").eqByProperties("id", new HashMap() {
             {
                 put("id", 125);
             }

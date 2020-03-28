@@ -1,6 +1,5 @@
 package org.test4j.hamcrest.iassert.object.impl;
 
-import java.rmi.UnexpectedException;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -9,10 +8,8 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import mockit.Expectations;
 import mockit.Mocked;
 
-import mockit.internal.expectations.invocation.UnexpectedInvocation;
 import org.junit.jupiter.api.Test;
 import org.test4j.junit5.Test4J;
 import org.test4j.module.inject.Inject;
@@ -136,6 +133,6 @@ public class DateAssertTest extends Test4J {
                 this.put("myDate", date);
             }
         };
-        want.object(map).propertyEq("myDate", "2010-06-18").propertyEq("myDate", "2010-06-18 15:26:34");
+        want.object(map).eqByProperties("myDate", "2010-06-18").eqByProperties("myDate", "2010-06-18 15:26:34");
     }
 }

@@ -40,9 +40,9 @@ public class ReflectionAssertTest extends Test4J {
     @Test
     public void propertyEq() {
         Employee employee = new Employee();
-        want.object(employee).propertyEq("name", null);
+        want.object(employee).eqByProperties("name", null);
         employee.setName("my name");
-        want.object(employee).propertyEq("name", "my name");
+        want.object(employee).eqByProperties("name", "my name");
     }
 
     @Test
@@ -51,7 +51,7 @@ public class ReflectionAssertTest extends Test4J {
         want.object(employee).propertyMatch("name", the.string().isNull());
         employee.setName("my name");
         want.object(employee).propertyMatch("name", the.string().isEqualTo("my name"));
-        want.object(employee).propertyEq("name", "my name");
+        want.object(employee).eqByProperties("name", "my name");
     }
 
     @Test
@@ -71,14 +71,14 @@ public class ReflectionAssertTest extends Test4J {
     @Test
     public void propertyMatch_formap() {
         Map<String, String> map = createStringMap();
-        want.map(map).propertyEq("key1", "test1").propertyEq("key2", "test2");
+        want.map(map).eqByProperties("key1", "test1").eqByProperties("key2", "test2");
     }
 
     @Test
     public void propertyMatch_formap_NoKey() {
         Map<String, String> map = createStringMap();
         try {
-            want.map(map).propertyEq("key3", null);
+            want.map(map).eqByProperties("key3", null);
             want.fail();
         } catch (Exception e) {
             want.object(e).eqToString(the.string().contains("can't find property"));
@@ -163,7 +163,7 @@ public class ReflectionAssertTest extends Test4J {
                 put("age", "34");
             }
         };
-        want.object(map).propertyEq(new String[]{"wikiName", "age"}, new String[]{"my name", "34"});
+        want.object(map).eqByProperties(new String[]{"wikiName", "age"}, new String[]{"my name", "34"});
     }
 
     @Test
@@ -177,7 +177,7 @@ public class ReflectionAssertTest extends Test4J {
             }
         };
         want.exception(() ->
-                        want.object(map).propertyEq(new String[]{"wikiName", "age"}, new String[]{"my name", "35"})
+                        want.object(map).eqByProperties(new String[]{"wikiName", "age"}, new String[]{"my name", "35"})
                 , AssertionError.class);
     }
 
@@ -192,7 +192,7 @@ public class ReflectionAssertTest extends Test4J {
             }
         };
         want.exception(() ->
-                        want.object(map).propertyEq(new String[]{"wikiName", "age"}, new String[]{"my name"})
+                        want.object(map).eqByProperties(new String[]{"wikiName", "age"}, new String[]{"my name"})
                 , AssertionError.class);
     }
 
@@ -206,19 +206,19 @@ public class ReflectionAssertTest extends Test4J {
     public void testPropertiesMatch() {
         List<User> users = Arrays.asList(new User("dfa123sdf", "abc"), new User("firs123tname", "abc"));
         want.collection(users).propertyMatch(ItemsMode.AllItems, "first", the.string().contains("123"))
-                .propertyEq("last", new String[]{"abc", "abc"});
+                .eqByProperties("last", new String[]{"abc", "abc"});
     }
 
     @Test
     public void testPropertiesMatch_singlevalue() {
         User user = new User("df123asdf", "abc");
-        want.object(user).propertyMatch("first", the.string().contains("123")).propertyEq("last", "abc");
+        want.object(user).propertyMatch("first", the.string().contains("123")).eqByProperties("last", "abc");
     }
 
     @Test
     public void testPropertiesMatch_simplevalue() {
         User user = new User("df123asdf", "abc");
-        want.object(user).propertyMatch("first", the.string().contains("123")).propertyEq("last", "abc");
+        want.object(user).propertyMatch("first", the.string().contains("123")).eqByProperties("last", "abc");
     }
 
     /**
@@ -227,7 +227,7 @@ public class ReflectionAssertTest extends Test4J {
     @Test
     public void testPropertyEq_StringMode() {
         User user = new User("df123 asdf", "abc");
-        want.object(user).propertyEq("first", "df123asdf", StringMode.IgnoreSpace);
+        want.object(user).eqByProperties("first", "df123asdf", StringMode.IgnoreSpace);
     }
 
     /**
@@ -236,6 +236,6 @@ public class ReflectionAssertTest extends Test4J {
     @Test
     public void testPropertyEq_StringModes() {
         User user = new User("df123 ASDF", "abc");
-        want.object(user).propertyEq("first", "df123asdf", StringMode.IgnoreSpace, StringMode.IgnoreCase);
+        want.object(user).eqByProperties("first", "df123asdf", StringMode.IgnoreSpace, StringMode.IgnoreCase);
     }
 }

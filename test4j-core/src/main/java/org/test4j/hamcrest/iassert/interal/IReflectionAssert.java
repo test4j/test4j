@@ -28,7 +28,7 @@ public interface IReflectionAssert<T, E extends IAssert> extends IAssert<T, E> {
      * @param modes
      * @return 断言自身
      */
-    default E propertyEq(String property, Object expected, EqMode... modes) {
+    default E eqByProperties(String property, Object expected, EqMode... modes) {
         if (expected instanceof Matcher) {
             throw new AssertionError("please use method[propertyMatch(String, Matcher)]");
         } else {
@@ -46,7 +46,7 @@ public interface IReflectionAssert<T, E extends IAssert> extends IAssert<T, E> {
      * @param more
      * @return 断言自身
      */
-    default E propertyEq(String property, String expected, StringMode mode, StringMode... more) {
+    default E eqByProperties(String property, String expected, StringMode mode, StringMode... more) {
         StringMode[] modes = new StringMode[more.length + 1];
         int index = 0;
         modes[index++] = mode;
@@ -59,14 +59,13 @@ public interface IReflectionAssert<T, E extends IAssert> extends IAssert<T, E> {
 
     /**
      * 断言对象的多个属性相等<br>
-     * same as "eqByProperties(String[],Object)"
      *
      * @param properties
      * @param expected
      * @param modes
      * @return 断言自身
      */
-    default E propertyEq(String[] properties, Object expected, EqMode... modes) {
+    default E eqByProperties(String[] properties, Object expected, EqMode... modes) {
         if (expected instanceof Matcher) {
             throw new AssertionError("please use method[propertyMatch(String, Matcher)]");
         }
@@ -176,6 +175,9 @@ public interface IReflectionAssert<T, E extends IAssert> extends IAssert<T, E> {
      * @return 断言自身
      */
     default E eqHashMap(Map expected, EqMode... modes) {
+        if (expected instanceof IDataMap) {
+            throw new RuntimeException("please use method: eqDataMap or eqMap");
+        }
         MapPropertyEqaulMatcher matcher = new MapPropertyEqaulMatcher(expected, modes);
         return this.assertThat(matcher);
     }

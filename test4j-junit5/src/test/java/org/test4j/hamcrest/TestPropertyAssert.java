@@ -15,10 +15,10 @@ public class TestPropertyAssert extends Test4J {
 
         User actualUser = yourApi();
         want.object(actualUser).eqReflect(user);
-        want.object(actualUser).propertyEq("first", "wu").propertyEq("address.postcode", "310012")
+        want.object(actualUser).eqByProperties("first", "wu").eqByProperties("address.postcode", "310012")
                 .propertyMatch("last", the.string().isEqualTo("darui"));
 
-        want.object(actualUser).propertyEq(new String[]{"first", "last", "address.postcode"},
+        want.object(actualUser).eqByProperties(new String[]{"first", "last", "address.postcode"},
                 new String[]{"wu", "darui", "310012"});
     }
 

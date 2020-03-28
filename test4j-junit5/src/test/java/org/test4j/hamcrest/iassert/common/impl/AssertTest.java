@@ -19,7 +19,7 @@ public class AssertTest extends Test4J {
     @ParameterizedTest
     @MethodSource("assertClass")
     public void wanted(IAssert<?, ?> as, Class claz) {
-        want.object(as).propertyEq("assertObject.targetClass", claz);
+        want.object(as).eqByProperties("assertObject.targetClass", claz);
     }
 
     public static DataProvider assertClass() {
@@ -48,6 +48,6 @@ public class AssertTest extends Test4J {
     @Test
     public void wantedMap() {
         Object a = the.map();
-        want.object(a).propertyEq("assertObject.targetClass", Map.class);
+        want.object(a).eqByProperties("assertObject.targetClass", Map.class);
     }
 }
