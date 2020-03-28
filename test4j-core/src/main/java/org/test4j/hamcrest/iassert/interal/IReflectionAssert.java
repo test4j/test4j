@@ -189,7 +189,7 @@ public interface IReflectionAssert<T, E extends IAssert> extends IAssert<T, E> {
             Matcher matcher = MatcherBuilder.listEqMapMatcher(expected, modes);
             return this.assertThat(matcher);
         } else {
-            MapPropertyEqaulMatcher matcher = new MapPropertyEqaulMatcher(expected.map(0), modes);
+            MapPropertyEqaulMatcher matcher = new MapPropertyEqaulMatcher(expected.row(0), modes);
             return this.assertThat(matcher);
         }
     }

@@ -1,6 +1,7 @@
 package org.test4j.model;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -10,6 +11,7 @@ import java.util.Date;
  * @author wudarui
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 @Accessors(chain = true)
 public class Manager extends Employee {
     private static final long serialVersionUID = 843725563822394654L;

@@ -3,6 +3,11 @@ package org.test4j.tools.datagen;
 import java.util.Map;
 import java.util.function.Function;
 
+/**
+ * 数据生成器
+ *
+ * @author wudarui
+ */
 public abstract class AbstractDataGenerator {
     private Map<String, Object> dataMap;
 
@@ -26,13 +31,9 @@ public abstract class AbstractDataGenerator {
             throw new RuntimeException("the data map can't be null.");
         }
         if (this.dataMap.containsKey(field) == false) {
-            throw new RuntimeException("unexist the key[" + field + "] of data map.");
+            throw new RuntimeException("not existed the key[" + field + "] of data map.");
         }
         return this.dataMap.get(field);
-    }
-
-    public void setDataMap(Map<String, Object> dataMap) {
-        this.dataMap = dataMap;
     }
 
     /**

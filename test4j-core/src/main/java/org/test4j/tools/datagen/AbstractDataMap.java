@@ -2,49 +2,67 @@ package org.test4j.tools.datagen;
 
 import lombok.Getter;
 import org.test4j.json.JSON;
-import org.test4j.module.ICore;
-import org.test4j.tools.commons.ArrayHelper;
+import org.test4j.module.ICore.DataMap;
+import org.test4j.tools.datagen.IColData.OneRowValue;
+import org.test4j.tools.datagen.IColData.MulRowValue;
 
 import java.util.*;
+import java.util.stream.Stream;
 
+/**
+ * @param <DM>
+ * @author wudarui
+ */
 @SuppressWarnings({"unchecked", "rawtypes"})
-public abstract class AbstractDataMap<DM extends ICore.DataMap>
-        extends LinkedHashMap<String, Object>
+public abstract class AbstractDataMap<DM extends DataMap>
+        extends LinkedHashMap<String, IColData>
         implements IDataMap<DM> {
 
     private static final long serialVersionUID = 1L;
 
-    private transient boolean isArray;
-
+    /**
+     * 是否为一个行列式对象
+     */
     @Getter
-    private int valueSize;
+    private final boolean isRowMap;
+    /**
+     * 记录集大小
+     */
+    @Getter
+    private final int rowSize;
 
+    /**
+     * 表示value值非列对象
+     */
     public AbstractDataMap() {
-        this.valueSize = 1;
-        this.isArray = false;
+        this.rowSize = 1;
+        this.isRowMap = false;
     }
 
-    public AbstractDataMap(int valueSize) {
-        this.valueSize = valueSize;
-        this.isArray = valueSize > 1;
+    /**
+     * 表示value值时一个列对象, 并且设置行数 rowSize
+     *
+     * @param rowSize
+     */
+    public AbstractDataMap(int rowSize) {
+        this.rowSize = rowSize;
+        this.isRowMap = true;
     }
 
     @Override
-    public Map<String, Object> map(int index) {
-        if (index < 0 || index >= valueSize) {
-            throw new RuntimeException("the index must between 0 and " + (this.valueSize - 1));
+    public Map<String, Object> row(int row) {
+        if (row < 0 || row >= rowSize) {
+            throw new RuntimeException("the index must between 0 and " + (this.rowSize - 1));
         }
         Map<String, Object> data = new HashMap<>();
-        for (Map.Entry<String, Object> entry : this.entrySet()) {
-            String key = entry.getKey();
-            Object value = entry.getValue();
-            data.put(key, this.getIndexValue(value, index));
+        for (Map.Entry<String, IColData> entry : this.entrySet()) {
+            data.put(entry.getKey(), entry.getValue().col(row));
         }
         return data;
     }
 
     @Override
-    public DM putMap(Map map) {
+    public DM init(Map map) {
         if (map != null) {
             map.forEach((k, v) -> this.put(String.valueOf(k), v));
         }
@@ -52,47 +70,8 @@ public abstract class AbstractDataMap<DM extends ICore.DataMap>
     }
 
     @Override
-    public Object get(String key) {
+    public IColData get(String key) {
         return super.get(key);
-    }
-
-    @Override
-    public long getLong(String key) {
-        return Long.parseLong(getString(key));
-    }
-
-    @Override
-    public boolean getBoolean(String key) {
-        return Boolean.parseBoolean(getString(key));
-    }
-
-    @Override
-    public String getString(String key) {
-        return String.valueOf(get(key));
-    }
-
-    @Override
-    public List listValues(String key) {
-        Object value = get(key);
-        List list = new ArrayList();
-        for (int loop = 0; loop < valueSize; loop++) {
-            list.add(this.getIndexValue(value, loop));
-        }
-        return list;
-    }
-
-    @Override
-    public DM valueSize(int size) {
-        this.valueSize = size;
-        if (size > 1) {
-            this.isArray = true;
-        }
-        return (DM) this;
-    }
-
-    @Override
-    public void setValueSize(int valueSize) {
-        this.valueSize(valueSize);
     }
 
     @Override
@@ -101,64 +80,40 @@ public abstract class AbstractDataMap<DM extends ICore.DataMap>
     }
 
     @Override
+    public List cols(String key) {
+        List list = new ArrayList(rowSize);
+        for (int row = 0; row < rowSize; row++) {
+            list.add(this.get(key).col(row));
+        }
+        return list;
+    }
+
+    @Override
     public DM kv(String key, Object value, Object... values) {
-        if (values != null && values.length == 0) {
-            this.put(key, value);
+        if (isRowMap) {
+            MulRowValue row = new MulRowValue();
+            row.add(value);
+            Stream.of(values).forEach(row::add);
         } else {
-            this.isArray = true;
-            this.put(key, ArrayHelper.arr(value, values));
+            if (values != null && values.length != 0) {
+                throw new RuntimeException("this DataMap isn't a RowMap");
+            }
+            this.put(key, new OneRowValue(value));
         }
         return (DM) this;
     }
 
     @Override
-    public void put(String key, Object value, Object... values) {
-        this.kv(key, value, values);
-    }
-
-    @Override
-    public String json() {
-        return JSON.toJSON(this, false);
-    }
-
-    @Override
-    public <R> R toObject(Class<R> klass) {
-        return (R) JSON.toObject(json(), klass);
-    }
-
-    @Override
-    public <R> List<R> toList(Class<R> klass) {
-        return (List<R>) JSON.toList(json(), klass);
-    }
-
-    @Override
-    public List<Map<String, ? extends Object>> toList() {
-        List<Map<String, ? extends Object>> list = new ArrayList<>();
-        for (int loop = 0; loop < valueSize; loop++) {
-            list.add(this.map(loop));
+    public List<Map<String, ?>> rows() {
+        List<Map<String, ?>> list = new ArrayList<>(rowSize);
+        for (int row = 0; row < rowSize; row++) {
+            list.add(this.row(row));
         }
         return list;
     }
 
-    private Object getIndexValue(Object value, int index) {
-        if (value == null) {
-            return null;
-        } else if (this.isArray && value instanceof List) {
-            List list = (List) value;
-            if (list.size() == 0) {
-                return null;
-            } else {
-                return index < list.size() ? list.get(index) : list.get(list.size() - 1);
-            }
-        } else if (value instanceof AbstractDataGenerator) {
-            return ((AbstractDataGenerator) value).generate(index);
-        } else {
-            return value;
-        }
-    }
-
     @Override
-    public boolean doesArray() {
-        return this.isArray;
+    public <R> List<R> rows(Class<R> klass) {
+        return JSON.toList(JSON.toJSON(rows(), false), klass);
     }
 }

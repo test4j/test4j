@@ -50,7 +50,7 @@ public class InsertOp implements IInsertOp {
         this.table = table;
         this.tableMeta = env.getTableMetaData(table);
         tableMeta.fillData(data, env);
-        List<Map<String, ? extends Object>> datas = data.toList();
+        List<Map<String, ? extends Object>> datas = data.rows();
         for (Map<String, ? extends Object> map : datas) {
             env.execute(connection -> {
                 PreparedStatement st = connection.prepareStatement(getInsertCommandText(map));

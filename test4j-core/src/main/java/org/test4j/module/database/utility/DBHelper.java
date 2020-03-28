@@ -272,7 +272,7 @@ public final class DBHelper {
      * @return
      */
     public static String getWhereCondiction(IDataMap map) {
-        if (map == null || map.getValueSize() == 0) {
+        if (map == null || map.getRowSize() == 0) {
             return "";
         }
         StringBuilder where = new StringBuilder();

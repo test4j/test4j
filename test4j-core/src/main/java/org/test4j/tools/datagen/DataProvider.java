@@ -8,10 +8,22 @@ import java.util.List;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * 数据迭代器
+ *
+ * @param <T>
+ * @author wudarui
+ */
 public class DataProvider<T> implements Iterator<T[]> {
     private List<T[]> datas = new ArrayList<T[]>();
     private Iterator<T[]> it = null;
 
+    /**
+     * 增加一行数据
+     *
+     * @param data
+     * @return
+     */
     public DataProvider data(T... data) {
         this.checkDataLength(data);
         this.datas.add(data);
@@ -52,7 +64,7 @@ public class DataProvider<T> implements Iterator<T[]> {
     private int index = 1;
     private int prev = 0;
 
-    private String ERROR_MSG = "DataProvider error, the previous data length is %d, but current data(data index %d) %s length is %d." ;
+    private String ERROR_MSG = "DataProvider error, the previous data length is %d, but current data(data index %d) %s length is %d.";
 
     /**
      * 检查数据长度是否一致

@@ -19,7 +19,7 @@ public interface ICore {
     Reflector reflector = Reflector.instance;
 
     /**
-     * 构造一个DataMap
+     * 构造一个非行列式DataMap
      *
      * @return
      */
@@ -28,13 +28,13 @@ public interface ICore {
     }
 
     /**
-     * 构造一个DataMap
+     * 构造一个行列式DataMap
      *
-     * @param size
+     * @param colSize
      * @return
      */
-    default DataMap map(int size) {
-        return DataMap.create(size);
+    default DataMap map(int colSize) {
+        return DataMap.create(colSize);
     }
 
     /**
@@ -66,21 +66,45 @@ public interface ICore {
     abstract class DataGenerator extends AbstractDataGenerator {
     }
 
+    /**
+     * 行列式对象
+     *
+     * @param <DM>
+     */
     class DataMap<DM extends DataMap> extends AbstractDataMap<DM> {
+        /**
+         * 创建一个普通的Map对象
+         */
         public DataMap() {
             super();
         }
 
-        public DataMap(int dataSize) {
-            super(dataSize);
+        /**
+         * 创建一个colSize行的行列式对象
+         *
+         * @param colSize
+         */
+        public DataMap(int colSize) {
+            super(colSize);
         }
 
-        public static DataMap create(int dataSize) {
-            return new DataMap<>(dataSize);
-        }
-
+        /**
+         * 创建一个普通的Map对象
+         *
+         * @return
+         */
         public static DataMap create() {
             return new DataMap();
+        }
+
+        /**
+         * 创建一个colSize行的行列式对象
+         *
+         * @param colSize
+         * @return
+         */
+        public static DataMap create(int colSize) {
+            return new DataMap<>(colSize);
         }
     }
 }

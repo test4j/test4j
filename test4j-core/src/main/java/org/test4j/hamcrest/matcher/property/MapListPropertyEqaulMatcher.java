@@ -37,7 +37,7 @@ public class MapListPropertyEqaulMatcher extends BaseMatcher {
         if (expected == null) {
             throw new AssertionError("MapPropertyEqaulMatcher, the expected map can't be null.");
         }
-        this.expected = expected.toList();
+        this.expected = expected.rows();
         this.keySet.addAll(expected.keySet());
         this.modes = modes;
     }
