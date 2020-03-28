@@ -13,24 +13,55 @@ import org.test4j.tools.commons.DateHelper;
 
 
 @SuppressWarnings({"unchecked", "serial", "rawtypes"})
-public class MapListPropertyEqaulMatcherTest extends Test4J {
+public class MapListPropertyEqualMatcherTest extends Test4J {
     @Test
-    public void testMapListPropertyEqaulMatcher() {
-        List<Map<String, ? extends Object>> expected = new ArrayList() {
+    public void testMapListPropertyEqualMatcher() {
+        List<Map<String, ?>> expected = new ArrayList() {
             {
-                this.add(new DataMap() {
+                this.add(new HashMap() {
                     {
                         this.put("id", 123);
                     }
                 });
-                this.add(new DataMap() {
+                this.add(new HashMap() {
                     {
                         this.put("name", "jobs.he");
                     }
                 });
             }
         };
-        MapListPropertyEqaulMatcher matcher = new MapListPropertyEqaulMatcher(expected,
+        MapListPropertyEqualMatcher matcher = new MapListPropertyEqualMatcher(expected,
+                new EqMode[]{EqMode.IGNORE_DEFAULTS});
+
+        List<Map<String, ?>> actual = new ArrayList<Map<String, ?>>() {
+            {
+                this.add(new HashMap() {
+                    {
+                        this.put("id", 123);
+                        this.put("name", "darui.wu");
+                    }
+                });
+                this.add(new HashMap() {
+                    {
+                        this.put("id", 124);
+                        this.put("name", "jobs.he");
+                    }
+                });
+            }
+        };
+        MatcherAssert.assertThat(actual, matcher);
+    }
+
+    @Test
+    public void testMapListPropertyEqualMatcher2() {
+        DataMap expected = new DataMap(2) {
+            {
+                this.put("id", 123, 124);
+                this.put("name", null, "jobs.he");
+            }
+        };
+
+        MapListPropertyEqualMatcher matcher = new MapListPropertyEqualMatcher(expected,
                 new EqMode[]{EqMode.IGNORE_DEFAULTS});
 
         List<Map<String, ?>> actual = new ArrayList<Map<String, ?>>() {

@@ -9,6 +9,6 @@ public class ObjectAssert extends Assert<Object, IObjectAssert> implements IObje
     }
 
     public ObjectAssert(Object bean) {
-        super(bean, Object.class, IObjectAssert.class);
+        super(bean, bean == null ? Object.class : bean.getClass(), IObjectAssert.class);
     }
 }

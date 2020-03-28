@@ -102,8 +102,8 @@ public interface IAssert<T, E extends IAssert> extends Matcher<T> {
 
         protected LinkMatcher<?> link;
 
-        public AssertObject(AssertType type, Object value, Class targetClass) {
-            this.targetClass = targetClass;
+        public AssertObject(AssertType type, Object value, Class expectedClass) {
+            this.expectedClass = expectedClass;
             this.value = value;
             this.type = type;
         }
@@ -133,7 +133,7 @@ public interface IAssert<T, E extends IAssert> extends Matcher<T> {
         }
 
         public void assertTargetClassNotNull() {
-            assert this.targetClass != null : "the value asserted must not be null." ;
+            assert this.targetClass != null : "the value asserted must not be null.";
         }
 
         public boolean valueIsDouble() {
@@ -166,7 +166,7 @@ public interface IAssert<T, E extends IAssert> extends Matcher<T> {
         }
 
         public boolean valueIsList() {
-            return this.targetClass != null && this.targetClass.isAssignableFrom(Collection.class);
+            return this.targetClass != null && Collection.class.isAssignableFrom(this.targetClass);
         }
 
         public boolean assertTypeIs(AssertType assertType) {

@@ -90,7 +90,7 @@ public interface IColData {
 
         @Override
         public String toString() {
-            return JSON.toJSON(this.value, true);
+            return JSON.toJSON(this.value, false);
         }
     }
 
@@ -146,7 +146,7 @@ public interface IColData {
 
         @Override
         public String toString() {
-            return JSON.toJSON(this.cols(), true);
+            return JSON.toJSON(this.cols(), false);
         }
     }
 }

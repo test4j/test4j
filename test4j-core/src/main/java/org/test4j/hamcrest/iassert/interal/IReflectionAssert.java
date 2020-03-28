@@ -1,5 +1,6 @@
 package org.test4j.hamcrest.iassert.interal;
 
+import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.hamcrest.Matcher;
 import org.test4j.hamcrest.matcher.property.*;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
@@ -96,6 +97,8 @@ public interface IReflectionAssert<T, E extends IAssert> extends IAssert<T, E> {
     default E eqReflect(Object expected, EqMode... modes) {
         if (expected instanceof Matcher) {
             throw new AssertionError("please use method[propertyMatch(String, Matcher)]");
+        } else if (expected instanceof IDataMap) {
+            return this.eqDataMap((IDataMap) expected, modes);
         } else {
             ReflectionEqualMatcher matcher = new ReflectionEqualMatcher(expected, modes);
             return this.assertThat(matcher);

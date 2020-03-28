@@ -106,5 +106,10 @@ public interface ICore {
         public static DataMap create(int colSize) {
             return new DataMap<>(colSize);
         }
+
+        @Override
+        public String toString() {
+            return super.toString();
+        }
     }
 }

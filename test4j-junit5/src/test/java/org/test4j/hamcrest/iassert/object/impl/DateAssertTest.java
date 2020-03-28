@@ -43,13 +43,6 @@ public class DateAssertTest extends Test4J {
     @Test
     public void yearIs() {
         want.calendar(cal).isYear(2009).isYear("2009");
-        new Expectations() {
-            {
-                idate.setDate(the.date().isYear(2009).isYear("2009").wanted());
-                idate.setCalendar(the.calendar().isYear(2009).isYear("2009").wanted());
-            }
-        };
-        testApp.setTime(date, cal);
     }
 
     @Test
@@ -60,93 +53,34 @@ public class DateAssertTest extends Test4J {
     }
 
     @Test
-    public void yearIs_failure2() {
-        new Expectations() {
-            {
-                idate.setDate(the.date().isYear(2009).isYear("2008").wanted());
-                idate.setCalendar(the.calendar().isYear(2009).isYear("2009").wanted());
-            }
-        };
-        want.exception(() -> testApp.setTime(date, cal),
-                UnexpectedInvocation.class);
-    }
-
-    @Test
-    public void yearIs_failure3() {
-        new Expectations() {
-            {
-                idate.setDate(the.date().isYear(2009).isYear("2009").wanted());
-                idate.setCalendar(the.calendar().isYear(2008).wanted());
-            }
-        };
-        want.exception(() -> testApp.setTime(date, cal),
-                UnexpectedInvocation.class);
-    }
-
-    @Test
     public void monthIs() {
         want.calendar(cal).isMonth(4).isMonth("04");
-        new Expectations() {
-            {
-                idate.setDate(the.date().isMonth(4).isMonth("04").wanted());
-                idate.setCalendar(the.calendar().isMonth(4).isMonth("4").wanted());
-            }
-        };
-        testApp.setTime(date, cal);
     }
 
     @Test
     public void dayIs() {
         want.calendar(cal).isDay(12).isDay("12");
-        new Expectations() {
-            {
-                idate.setDate(the.date().isDay(12).isDay("12").wanted());
-                idate.setCalendar(the.calendar().isDay(12).isDay("12").wanted());
-            }
-        };
-        testApp.setTime(date, cal);
     }
 
     @Test
     public void hourIs() {
         want.calendar(cal).isHour(15).isHour("15");
-        new Expectations() {
-            {
-                idate.setDate(the.date().isHour(15).isHour("15").wanted());
-                idate.setCalendar(the.calendar().isHour(15).isHour("15").wanted());
-            }
-        };
-        testApp.setTime(date, cal);
     }
 
     @Test
     public void minuteIs() {
         want.calendar(cal).isMinute(36).isMinute("36");
-        new Expectations() {
-            {
-                idate.setDate(the.date().isMinute(36).isMinute("36").wanted());
-                idate.setCalendar(the.calendar().isMinute(36).isMinute("36").wanted());
-            }
-        };
-        testApp.setTime(date, cal);
     }
 
     @Test
     public void secondIs() {
         want.calendar(cal).isSecond(24).isSecond("24");
-        new Expectations() {
-            {
-                idate.setDate(the.date().isSecond(24).isSecond("24").wanted());
-                idate.setCalendar(the.calendar().isSecond(24).isSecond("24").wanted());
-            }
-        };
-        testApp.setTime(date, cal);
     }
 
-    private static interface IDateTest {
-        public void setDate(Date date);
+    private interface IDateTest {
+        void setDate(Date date);
 
-        public void setCalendar(Calendar cal);
+        void setCalendar(Calendar cal);
     }
 
     protected static class TestAppClaz {

@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.Collection;
 import java.util.Date;
 import java.util.Map;
+import java.util.function.Consumer;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class WantStyleAssertion {

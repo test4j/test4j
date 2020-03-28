@@ -13,7 +13,7 @@ import org.test4j.model.User;
 import org.test4j.tools.commons.ListHelper;
 
 @SuppressWarnings({"rawtypes", "serial", "unchecked"})
-public class MapPropertyEqaulMatcherTest extends Test4J {
+public class MapPropertyEqualMatcherTest extends Test4J {
 
     @Test
     public void testMatches() {
@@ -132,20 +132,42 @@ public class MapPropertyEqaulMatcherTest extends Test4J {
         List<Map<String, String>> list = new ArrayList<Map<String, String>>();
         list.add(new HashMap() {
             {
-                this.put("id", null);
+                this.put("id", 123);
             }
         });
         list.add(new HashMap() {
             {
-                this.put("id", 124);
+                this.put("id", null);
             }
         });
         want.exception(() ->
-                        want.list(list).eqReflect(new DataMap() {
+                        want.list(list).eqReflect(new DataMap(2) {
                             {
                                 this.put("id", null, 124);
                             }
                         })
+                , AssertionError.class);
+    }
+
+    @Test
+    public void testReflectEqMap3() {
+        List<Map<String, String>> list = new ArrayList<Map<String, String>>();
+        list.add(new HashMap() {
+            {
+                this.put("id", 123);
+            }
+        });
+        list.add(new HashMap() {
+            {
+                this.put("id", null);
+            }
+        });
+        want.exception(() ->
+                        want.list(list).eqReflect(new DataMap(2) {
+                            {
+                                this.put("id", null, 124);
+                            }
+                        }, EqMode.IGNORE_ORDER)
                 , AssertionError.class);
     }
 }

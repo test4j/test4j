@@ -30,8 +30,8 @@ public abstract class Assert<T, E extends IAssert> extends BaseMatcher<T> implem
     }
 
     public Assert(Class<T> targetClass, Class<? extends IAssert> expectedClass) {
-        this.assertObject = new AssertObject(AssertType.MatcherStyle, null, targetClass)
-                .setExpectedClass(expectedClass)
+        this.assertObject = new AssertObject(AssertType.MatcherStyle, null, expectedClass)
+                .setTargetClass(targetClass)
                 .setLink(new LinkMatcher<>());
     }
 
@@ -39,7 +39,7 @@ public abstract class Assert<T, E extends IAssert> extends BaseMatcher<T> implem
         this.assertObject = new AssertObject(AssertType.AssertStyle, value, expectedClass);
     }
 
-    public Assert(T value, Class<T> targetClass, Class<? extends IAssert> expectedClass) {
+    public Assert(T value, Class targetClass, Class<? extends IAssert> expectedClass) {
         this.assertObject = new AssertObject(AssertType.AssertStyle, value, expectedClass)
                 .setTargetClass(targetClass);
     }

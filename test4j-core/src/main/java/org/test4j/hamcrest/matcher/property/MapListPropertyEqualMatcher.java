@@ -17,6 +17,8 @@ import org.test4j.tools.reflector.PropertyAccessor;
 import java.util.*;
 
 import static org.test4j.hamcrest.matcher.property.reflection.ReflectionComparatorFactory.createRefectionComparator;
+import static org.test4j.tools.commons.ListHelper.getProperties;
+import static org.test4j.tools.commons.ListHelper.toList;
 
 
 /**
@@ -25,7 +27,7 @@ import static org.test4j.hamcrest.matcher.property.reflection.ReflectionComparat
  * @author darui.wudr
  */
 @SuppressWarnings({"rawtypes", "unchecked"})
-public class MapListPropertyEqaulMatcher extends BaseMatcher {
+public class MapListPropertyEqualMatcher extends BaseMatcher {
 
     private final List<Map<String, ? extends Object>> expected;
 
@@ -33,7 +35,7 @@ public class MapListPropertyEqaulMatcher extends BaseMatcher {
 
     private EqMode[] modes;
 
-    public MapListPropertyEqaulMatcher(IDataMap expected, EqMode[] modes) {
+    public MapListPropertyEqualMatcher(IDataMap expected, EqMode[] modes) {
         if (expected == null) {
             throw new AssertionError("MapPropertyEqaulMatcher, the expected map can't be null.");
         }
@@ -42,7 +44,7 @@ public class MapListPropertyEqaulMatcher extends BaseMatcher {
         this.modes = modes;
     }
 
-    public MapListPropertyEqaulMatcher(List<Map<String, ? extends Object>> expected, EqMode[] modes) {
+    public MapListPropertyEqualMatcher(List<Map<String, ? extends Object>> expected, EqMode[] modes) {
         if (expected == null) {
             throw new AssertionError("MapPropertyEqaulMatcher, the expected map can't be null.");
         }
@@ -53,49 +55,27 @@ public class MapListPropertyEqaulMatcher extends BaseMatcher {
 
     public boolean matches(Object actual) {
         if (actual == null) {
-            this.self.appendText("MapPropertyEqaulMatcher, the actual object can't be null or list/array.");
+            this.self.appendText("MapPropertyEqualMatcher, the actual object can't be null or list/array.");
             return false;
         }
         if (ArrayHelper.isCollOrArray(actual) == false) {
-            this.self.appendText("MapPropertyEqaulMatcher, the actual object must be an array or a list.");
-            return false;
-        }
-        List list = ListHelper.toList(actual);
-
-        if (this.expected.size() != list.size()) {
-            this.self.appendText("MapPropertyEqaulMatcher, the size ofexpeced object is " + this.expected.size()
-                    + ", but the size of actual list is " + list.size() + ".");
+            this.self.appendText("MapPropertyEqualMatcher, the actual object must be an array or a list.");
             return false;
         }
         Set<String> keys = this.getAllKeys();
-
-        List<Map<String, ?>> actuals = getObjectArrayFromList(list, keys, false);
+        List<Map<String, ?>> _actual = getProperties(toList(actual), keys, false);
+        List<Map<String, ?>> _expected = getProperties(expected, keys, false);
+        if (_expected.size() != _actual.size()) {
+            this.self.appendText("MapPropertyEqualMatcher, the size of expected object is " + _expected.size()
+                    + ", but the size of actual list is " + _actual.size() + ".");
+            return false;
+        }
 
         ReflectionComparator reflectionComparator = createRefectionComparator(modes);
-        this.difference = reflectionComparator.getDifference(expected, actuals);
+        this.difference = reflectionComparator.getDifference(_expected, _actual);
         return difference == null;
     }
 
-    private List<Map<String, ?>> getObjectArrayFromList(List list, Set<String> keys, boolean isExpected) {
-        List<Map<String, ?>> result = new ArrayList<Map<String, ?>>();
-        for (Object o : list) {
-            Map<String, Object> map = new HashMap<String, Object>();
-            for (String key : keys) {
-                try {
-                    Object value = PropertyAccessor.getPropertyByOgnl(o, key, true);
-                    map.put(key, value);
-                } catch (NoSuchFieldRuntimeException e) {
-                    if (isExpected) {
-                        map.put(key, null);
-                    } else {
-                        throw e;
-                    }
-                }
-            }
-            result.add(map);
-        }
-        return result;
-    }
 
     private Set<String> getAllKeys() {
         Set<String> keys = new HashSet<String>();

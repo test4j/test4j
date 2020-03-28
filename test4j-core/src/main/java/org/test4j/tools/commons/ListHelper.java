@@ -1,9 +1,9 @@
 package org.test4j.tools.commons;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import org.test4j.exception.NoSuchFieldRuntimeException;
+import org.test4j.tools.reflector.PropertyAccessor;
+
+import java.util.*;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class ListHelper {
@@ -154,5 +154,34 @@ public class ListHelper {
         }
         buff.append("]");
         return buff.toString();
+    }
+
+    /**
+     * 对list对象逐一获取指定的properties属性值
+     *
+     * @param list       对象列表
+     * @param keys       属性值列表
+     * @param isExpected 属性不存在时，是否抛异常
+     * @return 对象属性值列表
+     */
+    public static List<Map<String, ?>> getProperties(List list, Set<String> keys, boolean isExpected) {
+        List<Map<String, ?>> result = new ArrayList<>();
+        for (Object o : list) {
+            Map<String, Object> map = new HashMap<>();
+            for (String key : keys) {
+                try {
+                    Object value = PropertyAccessor.getPropertyByOgnl(o, key, true);
+                    map.put(key, value);
+                } catch (NoSuchFieldRuntimeException e) {
+                    if (isExpected) {
+                        throw e;
+                    } else {
+                        map.put(key, null);
+                    }
+                }
+            }
+            result.add(map);
+        }
+        return result;
     }
 }

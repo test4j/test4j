@@ -3,6 +3,7 @@ package org.test4j.tools.datagen;
 import lombok.Getter;
 import org.test4j.json.JSON;
 import org.test4j.module.ICore.DataMap;
+import org.test4j.tools.commons.ArrayHelper;
 import org.test4j.tools.datagen.IColData.OneRowValue;
 import org.test4j.tools.datagen.IColData.MulRowValue;
 
@@ -91,16 +92,46 @@ public abstract class AbstractDataMap<DM extends DataMap>
     @Override
     public DM kv(String key, Object value, Object... values) {
         if (isRowMap) {
-            MulRowValue row = new MulRowValue();
-            row.add(value);
-            Stream.of(values).forEach(row::add);
+            this.putMulRowValue(key, value, values);
         } else {
-            if (values != null && values.length != 0) {
-                throw new RuntimeException("this DataMap isn't a RowMap");
-            }
-            this.put(key, new OneRowValue(value));
+            this.putOneRowValue(key, value, values);
         }
         return (DM) this;
+    }
+
+    private void putMulRowValue(String key, Object value, Object[] values) {
+        MulRowValue row = new MulRowValue();
+        row.add(value);
+        /**
+         * 收割对象是否为数组
+         */
+        boolean isFirstArray = ArrayHelper.isArray(value);
+        /**
+         * 是否2维数组
+         */
+        boolean is2dArray = false;
+        for (Object item : values) {
+            if (ArrayHelper.isArray(item)) {
+                is2dArray = true;
+            }
+        }
+        if (isFirstArray && !is2dArray) {
+            row.add(values);
+        } else {
+            Stream.of(values).forEach(row::add);
+        }
+        this.put(key, row);
+    }
+
+    private void putOneRowValue(String key, Object value, Object[] values) {
+        if (values != null && values.length != 0) {
+            throw new RuntimeException("this DataMap isn't a RowMap, please use parametrical constructor：new DataMap(size)");
+        }
+        this.put(key, new OneRowValue(value));
+    }
+
+    public void put(String key, Object value) {
+        this.kv(key, value, new Object[0]);
     }
 
     @Override
@@ -115,5 +146,14 @@ public abstract class AbstractDataMap<DM extends DataMap>
     @Override
     public <R> List<R> rows(Class<R> klass) {
         return JSON.toList(JSON.toJSON(rows(), false), klass);
+    }
+
+    @Override
+    public String toString() {
+        if (isRowMap) {
+            return JSON.toJSON(this.rows(), false);
+        } else {
+            return JSON.toJSON(this.row(1), false);
+        }
     }
 }

@@ -88,7 +88,7 @@ public class CollectionAssertTest_HasItem extends Test4J {
 
     @Test
     public void hasItems_short() {
-        want.array(new short[]{1, 2}).hasItems(1);
+        want.array(new int[]{1, 2}).hasItems(1);
     }
 
     @Test

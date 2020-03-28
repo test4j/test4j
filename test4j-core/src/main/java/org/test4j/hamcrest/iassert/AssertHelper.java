@@ -37,7 +37,7 @@ public class AssertHelper {
         } catch (Throwable e) {
             boolean matched = false;
             for (Class expectedType : eTypes) {
-                if (e.getClass().isAssignableFrom(expectedType)) {
+                if (expectedType.isAssignableFrom(e.getClass())) {
                     matched = true;
                     break;
                 }

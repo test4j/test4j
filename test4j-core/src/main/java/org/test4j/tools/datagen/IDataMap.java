@@ -126,14 +126,15 @@ public interface IDataMap<DM> {
     }
 
     /**
-     * 将Map对象转换为klass对象
+     * 将第row行对象转换为klass对象
      *
+     * @param row
      * @param klass
      * @param <R>
      * @return
      */
-    default <R> R toObject(Class<R> klass) {
-        return (R) JSON.toObject(json(0), klass);
+    default <R> R toObject(int row, Class<R> klass) {
+        return (R) JSON.toObject(json(row), klass);
     }
 
     /**
