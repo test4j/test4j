@@ -201,7 +201,7 @@ public class FieldAccessor {
      * @param field
      * @return
      */
-    public static Object getStaticValue(Class clazz, String field) {
+    public static Object getValue(Class clazz, String field) {
         return new FieldAccessor(clazz, field).getStatic();
     }
 
@@ -212,7 +212,7 @@ public class FieldAccessor {
      * @param field
      * @param value
      */
-    public static void setStaticValue(Class clazz, String field, Object value) {
+    public static void setValue(Class clazz, String field, Object value) {
         new FieldAccessor(clazz, field).setStatic(value);
     }
 }

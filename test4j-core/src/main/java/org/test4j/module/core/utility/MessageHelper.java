@@ -73,7 +73,7 @@ public class MessageHelper {
         try {
             URL url = ResourceHelper.getResourceUrl(log4jxml);
             Class domConfigurator = ClazzHelper.getClazz("org.apache.log4j.xml.DOMConfigurator");
-            MethodAccessor.invokeStatic(domConfigurator, "configure", url);
+            MethodAccessor.invoke(domConfigurator, "configure", url);
         } catch (Throwable e) {
             mark(ERROR, "reset log4j leve error, " + e == null ? "null" : e.getMessage());
         }

@@ -71,7 +71,7 @@ public class ParameterDataFromHelper {
             }
         } catch (NewInstanceException e1) {
             try {
-                Object data = MethodAccessor.invokeStatic(dataFromClaz, dataFromMethod);
+                Object data = MethodAccessor.invoke(dataFromClaz, dataFromMethod);
                 return data;
             } catch (NoSuchMethodRuntimeException e2) {
                 String err = "The @DataFrom method isn't a static method or isn't declared in a concrete class.";

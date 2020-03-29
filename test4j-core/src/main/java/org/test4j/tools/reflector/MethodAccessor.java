@@ -3,6 +3,7 @@ package org.test4j.tools.reflector;
 import lombok.Getter;
 import org.test4j.exception.NoSuchMethodRuntimeException;
 import org.test4j.exception.ReflectionException;
+import org.test4j.exception.Test4JException;
 import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.commons.Reflector;
 
@@ -58,10 +59,10 @@ public class MethodAccessor {
             if (te instanceof RuntimeException) {
                 throw (RuntimeException) te;
             } else {
-                throw new RuntimeException(te);
+                throw new Test4JException(te);
             }
         } catch (IllegalAccessException ie) {
-            throw new RuntimeException(ie);
+            throw new Test4JException(ie);
         } finally {
             this.method.setAccessible(isAccessible);
         }
@@ -176,7 +177,7 @@ public class MethodAccessor {
      * @param <T>
      * @return
      */
-    public static <T> T invokeStatic(Class klass, String methodName, Object... args) {
+    public static <T> T invoke(Class klass, String methodName, Object... args) {
         Class[] types = Reflector.getTypes(args);
         return method(klass, methodName, types).invokeStatic(args);
     }

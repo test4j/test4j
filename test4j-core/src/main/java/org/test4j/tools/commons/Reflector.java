@@ -109,6 +109,22 @@ public class Reflector {
         return fields;
     }
 
+    public static void setFieldValue(Object target, String fieldName, Object fieldValue) {
+        FieldAccessor.field(target, fieldName).set(target, fieldValue);
+    }
+
+    public static void setFieldValue(Class klass, String fieldName, Object fieldValue) {
+        FieldAccessor.field(klass, fieldName).setStatic(fieldValue);
+    }
+
+    public static Object getFieldValue(Object target, String fieldName) {
+        return FieldAccessor.field(target, fieldName).get(target);
+    }
+
+    public static Object getFieldValue(Class klass, String fieldName) {
+        return FieldAccessor.field(klass, fieldName).getStatic();
+    }
+
 
     /**
      * 创建target对象field字段的代理实例<br>
@@ -116,14 +132,14 @@ public class Reflector {
      *
      * @param <T>
      * @param klass
-     * @param fieldname
+     * @param fieldName
      * @return
      */
-    public <T> T newProxy(Class klass, String fieldname) {
+    public <T> T newProxy(Class klass, String fieldName) {
         if (klass == null) {
             throw new RuntimeException("can't get a field from null object.");
         }
-        Field field = Reflector.getField(klass, fieldname);
+        Field field = Reflector.getField(klass, fieldName);
         Object proxy = Test4JProxy.proxy(klass, field);
         return (T) proxy;
     }
@@ -414,5 +430,13 @@ public class Reflector {
     public static boolean isPublicStaticVoid(Method method) {
         return method.getReturnType() == void.class && method.getParameterTypes().length == 0
                 && (method.getModifiers() & Modifier.STATIC) != 0 && (method.getModifiers() & Modifier.PUBLIC) != 0;
+    }
+
+    public Object invoke(Object target, String method, Object... args) {
+        return MethodAccessor.invoke(target, method, args);
+    }
+
+    public Object invoke(Class klass, String method, Object... args) {
+        return MethodAccessor.invoke(klass, method, args);
     }
 }
