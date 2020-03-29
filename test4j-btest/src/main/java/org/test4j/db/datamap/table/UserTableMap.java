@@ -54,6 +54,26 @@ public class UserTableMap extends DataMap<UserTableMap> {
     @ColumnDef(type = "varchar(45)")
     public transient final KeyValue<UserTableMap> user_name = new KeyValue(this, Column.user_name);
     /**
+     * 设置t_user对象first_name字段值
+     */
+    @ColumnDef(type = "varchar(45)")
+    public transient final KeyValue<UserTableMap> first_name = new KeyValue(this, Column.first_name);
+    /**
+     * 设置t_user对象last_name字段值
+     */
+    @ColumnDef(type = "varchar(45)")
+    public transient final KeyValue<UserTableMap> last_name = new KeyValue(this, Column.last_name);
+    /**
+     * 设置t_user对象post_code字段值
+     */
+    @ColumnDef(type = "varchar(45)")
+    public transient final KeyValue<UserTableMap> post_code = new KeyValue(this, Column.post_code);
+    /**
+     * 设置t_user对象user_name字段值
+     */
+    @ColumnDef(type = "varchar(45)")
+    public transient final KeyValue<UserTableMap> e_mail = new KeyValue(this, Column.e_mail);
+    /**
      * 设置t_user对象version字段值
      */
     @ColumnDef(type = "varchar(45)")

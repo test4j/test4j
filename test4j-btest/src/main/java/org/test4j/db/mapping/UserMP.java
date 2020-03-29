@@ -4,16 +4,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
+ * @author generate code
  * @ClassName UserMP
  * @Description UserMP
- *
- * @author generate code
  */
 public interface UserMP {
     /**
      * 实例属性和数据库字段对应表
      */
-    Map<String, String> Property2Column = new HashMap<String,String>(){
+    Map<String, String> Property2Column = new HashMap<String, String>() {
         {
             this.put(Property.id, Column.id);
             this.put(Property.gmtCreated, Column.gmt_created);
@@ -22,6 +21,10 @@ public interface UserMP {
             this.put(Property.addressId, Column.address_id);
             this.put(Property.age, Column.age);
             this.put(Property.userName, Column.user_name);
+            this.put(Property.firstName, Column.first_name);
+            this.put(Property.lastName, Column.last_name);
+            this.put(Property.postCode, Column.post_code);
+            this.put(Property.eMail, Column.e_mail);
             this.put(Property.version, Column.version);
         }
     };
@@ -31,44 +34,54 @@ public interface UserMP {
      */
     String Table_Name = "t_user";
     /**
-    * 实体名称
-    */
+     * 实体名称
+     */
     String Entity_NAME = "UserEntity";
 
     /**
      * 表t_user字段定义
      */
-    interface Column{
+    interface Column {
         /**
-         * 
+         *
          */
         String id = "id";
         /**
-         * 
+         *
          */
         String gmt_created = "gmt_created";
         /**
-         * 
+         *
          */
         String gmt_modified = "gmt_modified";
         /**
-         * 
+         *
          */
         String is_deleted = "is_deleted";
         /**
-         * 
+         *
          */
         String address_id = "address_id";
         /**
-         * 
+         *
          */
         String age = "age";
         /**
-         * 
+         *
          */
         String user_name = "user_name";
+
+        String first_name = "first_name";
+
+        String last_name = "last_name";
+
+        String post_code = "post_code";
         /**
-         * 
+         * e_mail
+         */
+        String e_mail = "e_mail";
+        /**
+         *
          */
         String version = "version";
     }
@@ -76,37 +89,47 @@ public interface UserMP {
     /**
      * 对象UserEntity属性字段
      */
-    interface Property{
+    interface Property {
         /**
-         * 
+         *
          */
         String id = "id";
         /**
-         * 
+         *
          */
         String gmtCreated = "gmtCreated";
         /**
-         * 
+         *
          */
         String gmtModified = "gmtModified";
         /**
-         * 
+         *
          */
         String isDeleted = "isDeleted";
         /**
-         * 
+         *
          */
         String addressId = "addressId";
         /**
-         * 
+         *
          */
         String age = "age";
         /**
-         * 
+         *
          */
         String userName = "userName";
+
+        String firstName = "firstName";
+
+        String lastName = "lastName";
+
+        String postCode = "postCode";
         /**
-         * 
+         *
+         */
+        String eMail = "eMail";
+        /**
+         *
          */
         String version = "version";
     }

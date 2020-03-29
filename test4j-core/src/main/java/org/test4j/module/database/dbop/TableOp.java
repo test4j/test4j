@@ -1,6 +1,7 @@
 package org.test4j.module.database.dbop;
 
 import org.test4j.hamcrest.iassert.impl.CollectionAssert;
+import org.test4j.hamcrest.iassert.impl.IntegerAssert;
 import org.test4j.hamcrest.iassert.impl.LongAssert;
 import org.test4j.hamcrest.iassert.impl.ObjectAssert;
 import org.test4j.hamcrest.iassert.intf.ICollectionAssert;
@@ -9,6 +10,7 @@ import org.test4j.hamcrest.iassert.intf.IObjectAssert;
 import org.test4j.json.JSON;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.database.environment.DBEnvironment;
+import org.test4j.module.database.environment.DBEnvironmentFactory;
 import org.test4j.module.database.sql.Test4JSqlContext;
 import org.test4j.module.database.utility.DBHelper;
 import org.test4j.module.database.utility.SqlRunner;
@@ -24,6 +26,10 @@ public class TableOp implements ITableOp {
     private final DBEnvironment env;
 
     private String table;
+
+    public TableOp(String table) {
+        this(DBEnvironmentFactory.getDefaultDBEnvironment(), table);
+    }
 
     public TableOp(DBEnvironment env, String table) {
         this.env = env;
@@ -111,7 +117,7 @@ public class TableOp implements ITableOp {
         try {
             String query = "select count(*) from " + table;
             Number number = (Number) SqlRunner.query(env, query, Object.class);
-            return new LongAssert(number.longValue());
+            return new IntegerAssert(number.intValue());
         } finally {
             this.setDbOperator(false);
         }

@@ -89,8 +89,8 @@ public class ClazzHelperTest extends Test4J {
                 });
         want.object(result).eqDataMap(new DataMap() {
             {
-                this.put("i", 1);
-                this.put("str", "xxx");
+                this.kv("i", 1);
+                this.kv("str", "xxx");
             }
         });
     }

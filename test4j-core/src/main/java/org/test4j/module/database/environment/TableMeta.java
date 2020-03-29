@@ -60,7 +60,7 @@ public class TableMeta {
      * @param column
      * @return
      */
-    public int getCloumnSize(String column) {
+    public int getColumnSize(String column) {
         ColumnMeta meta = this.getColumns().get(column);
         if (meta == null) {
             throw new RuntimeException("can't find column[" + column + "] field in table[" + tableName + "].");
@@ -80,7 +80,7 @@ public class TableMeta {
         if (input == null) {
             return null;
         }
-        int size = this.getCloumnSize(column);
+        int size = this.getColumnSize(column);
         if (size > input.length()) {
             return input;
         } else {

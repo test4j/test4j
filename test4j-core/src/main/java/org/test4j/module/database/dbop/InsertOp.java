@@ -44,14 +44,13 @@ public class InsertOp implements IInsertOp {
      *
      * @param table
      * @param data
-     * @throws Exception
      */
-    public void insert(String table, IDataMap data) throws Exception {
+    public void insert(String table, IDataMap data) {
         this.table = table;
         this.tableMeta = env.getTableMetaData(table);
         tableMeta.fillData(data, env);
-        List<Map<String, ? extends Object>> datas = data.rows();
-        for (Map<String, ? extends Object> map : datas) {
+        List<Map<String, ?>> datas = data.rows();
+        for (Map<String, ?> map : datas) {
             env.execute(connection -> {
                 PreparedStatement st = connection.prepareStatement(getInsertCommandText(map));
                 return this.setParametersByMap(st, map);

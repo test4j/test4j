@@ -48,8 +48,8 @@ public class ListAssertTest extends Test4J {
         };
         want.list(list).eqDataMap(new DataMap(2) {
             {
-                this.put("id", 1, 2);
-                this.put("name", "darui.wu", "jobs.he");
+                this.kv("id", 1, 2);
+                this.kv("name", "darui.wu", "jobs.he");
             }
         });
     }

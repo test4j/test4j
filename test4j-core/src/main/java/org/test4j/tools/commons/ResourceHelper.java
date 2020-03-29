@@ -379,6 +379,22 @@ public class ResourceHelper {
     }
 
     /**
+     * 从文本文件中读取内容 <br>
+     * <br>
+     * o file:开头读取文件系统 <br>
+     * o classpath:开头读取classpath下的文件<br>
+     * o 否则读取跟 classpath下filePath文件
+     *
+     * @param file
+     * @return
+     * @throws FileNotFoundException
+     */
+    public static String readFromFile(String file) throws FileNotFoundException {
+        InputStream stream = getResourceAsStream(ResourceHelper.class.getClassLoader(), file);
+        return readFromStream(stream);
+    }
+
+    /**
      * 从文本文件中读取内容
      *
      * @param file

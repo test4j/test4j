@@ -24,15 +24,13 @@ public interface IDataMap<DM> {
     DM kv(String key, Object value, Object... values);
 
     /**
-     * 往DataMap中赋值, 同 kv 方法
+     * 往DataMap中赋值
      *
-     * @param key    键值
-     * @param value  第一个值
-     * @param values 后续值
+     * @param key
+     * @param arr
+     * @return
      */
-    default void put(String key, Object value, Object... values) {
-        this.kv(key, value, values);
-    }
+    DM arr(String key, Object... arr);
 
     /**
      * 使用普通map对象初始化
@@ -77,7 +75,7 @@ public interface IDataMap<DM> {
      * @return
      */
     default String getString(String key) {
-        return String.valueOf(get(key).col(1));
+        return String.valueOf(get(key).row(1));
     }
 
 
@@ -145,6 +143,13 @@ public interface IDataMap<DM> {
     int getRowSize();
 
     /**
+     * 返回记录列数量
+     *
+     * @return
+     */
+    int getColSize();
+
+    /**
      * DataMap是否为行列式对象
      *
      * @return
@@ -157,4 +162,12 @@ public interface IDataMap<DM> {
      * @return
      */
     Set<String> keySet();
+
+    /**
+     * 是否包含键值
+     *
+     * @param key
+     * @return
+     */
+    boolean containsKey(String key);
 }

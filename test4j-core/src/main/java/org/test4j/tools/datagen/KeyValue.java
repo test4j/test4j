@@ -24,7 +24,7 @@ public class KeyValue<M extends IDataMap> {
     }
 
     public M values(Object value, Object... values) {
-        this.map.put(this.column, value, values);
+        this.map.kv(this.column, value, values);
         return this.map;
     }
 
@@ -38,8 +38,10 @@ public class KeyValue<M extends IDataMap> {
      * @return
      */
     public M values(Function<Integer, Integer> changeIndex, Object... values) {
+        // 多态重载时，第一个参数为null时，兼容处理
         if (changeIndex == null) {
-            throw new RuntimeException("changeIndex function can't be null. if first argument is object, please use values((Object)null)");
+            this.map.kv(this.column, null, values);
+            return this.map;
         }
         if (values == null || values.length == 0) {
             throw new RuntimeException("the values should be specified.");
@@ -57,7 +59,7 @@ public class KeyValue<M extends IDataMap> {
                 return values[_index];
             }
         };
-        this.map.put(this.column, generator);
+        this.map.kv(this.column, generator);
         return this.map;
     }
 
@@ -69,7 +71,7 @@ public class KeyValue<M extends IDataMap> {
      * @return
      */
     public M increase(Number start, Number step) {
-        this.map.put(this.column, DataGenerator.increase(start, step));
+        this.map.kv(this.column, DataGenerator.increase(start, step));
         return this.map;
     }
 
@@ -79,7 +81,7 @@ public class KeyValue<M extends IDataMap> {
      * @return
      */
     public M autoIncrease() {
-        this.map.put(this.column, DataGenerator.increase(1, 1));
+        this.map.kv(this.column, DataGenerator.increase(1, 1));
         return this.map;
     }
 
@@ -92,7 +94,7 @@ public class KeyValue<M extends IDataMap> {
      * @return
      */
     public M formatIncrease(String format, Number start, Number step) {
-        this.map.put(this.column, DataGenerator.increase(format, start, step));
+        this.map.kv(this.column, DataGenerator.increase(format, start, step));
         return this.map;
     }
 
@@ -103,7 +105,7 @@ public class KeyValue<M extends IDataMap> {
      * @return
      */
     public M formatAutoIncrease(String format) {
-        this.map.put(this.column, DataGenerator.increase(format, 1, 1));
+        this.map.kv(this.column, DataGenerator.increase(format, 1, 1));
         return this.map;
     }
 
@@ -116,7 +118,7 @@ public class KeyValue<M extends IDataMap> {
      * @return
      */
     public M functionIncrease(Function<Integer, Object> function, Number start, Number step) {
-        this.map.put(this.column, DataGenerator.increase(start, step, function));
+        this.map.kv(this.column, DataGenerator.increase(start, step, function));
         return this.map;
     }
 
@@ -127,7 +129,7 @@ public class KeyValue<M extends IDataMap> {
      * @return
      */
     public M functionAutoIncrease(Function<Integer, Object> function) {
-        this.map.put(this.column, DataGenerator.increase(1, 1, function));
+        this.map.kv(this.column, DataGenerator.increase(1, 1, function));
         return this.map;
     }
 
@@ -144,7 +146,7 @@ public class KeyValue<M extends IDataMap> {
                 .map(function::apply)
                 .collect(toList())
                 .toArray(new Object[0]);
-        this.map.put(this.column, function.apply(value), items);
+        this.map.kv(this.column, function.apply(value), items);
         return this.map;
     }
 
@@ -155,7 +157,7 @@ public class KeyValue<M extends IDataMap> {
      * @return
      */
     public M loop(Object... loops) {
-        this.map.put(this.column, DataGenerator.repeat(loops));
+        this.map.kv(this.column, DataGenerator.repeat(loops));
         return this.map;
     }
 
@@ -178,7 +180,7 @@ public class KeyValue<M extends IDataMap> {
                 return generator.apply(index, values);
             }
         };
-        this.map.put(this.column, _generator);
+        this.map.kv(this.column, _generator);
         return this.map;
     }
 
@@ -195,7 +197,7 @@ public class KeyValue<M extends IDataMap> {
                 return generator.apply(index);
             }
         };
-        this.map.put(this.column, _generator);
+        this.map.kv(this.column, _generator);
         return this.map;
     }
 
@@ -205,7 +207,7 @@ public class KeyValue<M extends IDataMap> {
      * @return
      */
     public M random() {
-        this.map.put(this.column, DataGenerator.random(this.column.getClass()));
+        this.map.kv(this.column, DataGenerator.random(this.column.getClass()));
         return this.map;
     }
 
@@ -229,7 +231,7 @@ public class KeyValue<M extends IDataMap> {
             }
         };
 
-        this.map.put(this.column, generator);
+        this.map.kv(this.column, generator);
         return this.map;
     }
 }

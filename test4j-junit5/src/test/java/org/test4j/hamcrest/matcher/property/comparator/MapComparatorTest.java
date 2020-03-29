@@ -28,8 +28,8 @@ public class MapComparatorTest extends Test4J {
     public void testMap2() {
         want.object(User.mock(123, "darui.wu")).eqReflect(new DataMap() {
             {
-                this.put("id", 123);
-                this.put("name", null);
+                this.kv("id", 123);
+                this.kv("name", null);
             }
         }, EqMode.IGNORE_DEFAULTS);
     }

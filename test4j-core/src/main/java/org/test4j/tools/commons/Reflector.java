@@ -117,15 +117,15 @@ public class Reflector {
         FieldAccessor.field(klass, fieldName).setStatic(fieldValue);
     }
 
-    public static Object getFieldValue(Object target, String fieldName) {
+    public static <T> T getFieldValue(Object target, String fieldName) {
         return FieldAccessor.field(target, fieldName).get(target);
     }
 
-    public static Object getFieldValue(Class klass, String fieldName) {
+    public static <T> T getFieldValue(Class klass, String fieldName) {
         return FieldAccessor.field(klass, fieldName).getStatic();
     }
 
-    public static Object getFieldValue(Object target, Field field) {
+    public static <T> T getFieldValue(Object target, Field field) {
         return FieldAccessor.field(field).get(target);
     }
 
@@ -436,11 +436,11 @@ public class Reflector {
                 && (method.getModifiers() & Modifier.STATIC) != 0 && (method.getModifiers() & Modifier.PUBLIC) != 0;
     }
 
-    public Object invoke(Object target, String method, Object... args) {
+    public <T> T invoke(Object target, String method, Object... args) {
         return MethodAccessor.invoke(target, method, args);
     }
 
-    public Object invoke(Class klass, String method, Object... args) {
+    public <T> T invoke(Class klass, String method, Object... args) {
         return MethodAccessor.invoke(klass, method, args);
     }
 }

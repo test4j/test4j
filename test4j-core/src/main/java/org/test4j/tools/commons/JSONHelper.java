@@ -73,7 +73,7 @@ public class JSONHelper {
      */
     public static <T> T fromJsonFile(Class claz, String filename) {
         try {
-            String json = ResourceHelper.readFromFile(JSONHelper.class.getClassLoader(), filename);
+            String json = ResourceHelper.readFromFile(filename);
             Object o = JSON.toObject(json, claz);
             return (T) o;
         } catch (FileNotFoundException e) {

@@ -39,7 +39,7 @@ public class SqlRunner {
      * @throws Exception
      */
     public static void executeFromFile(DBEnvironment env, String fileName) throws Exception {
-        String[] statements = DBHelper.parseSQL(ResourceHelper.readFromFile(SqlRunner.class.getClassLoader(), fileName));
+        String[] statements = DBHelper.parseSQL(ResourceHelper.readFromFile(fileName));
         for (String statement : statements) {
             execute(env, statement);
         }
@@ -117,7 +117,7 @@ public class SqlRunner {
     public static <T> List<T> queryMapList(DBEnvironment env, String sql, IDataMap where) {
         return env.query(connection -> {
             PreparedStatement st = connection.prepareStatement(sql);
-            return setParameterByMap(st, where);
+            return setParameterByMap(st, where.row(0));
         }, resultSet -> (List<T>) DBHelper.getListMapFromResult(resultSet, false));
     }
 
@@ -134,9 +134,9 @@ public class SqlRunner {
     }
 
 
-    private static PreparedStatement setParameterByMap(PreparedStatement st, IDataMap where) {
+    private static PreparedStatement setParameterByMap(PreparedStatement st, Map<String, Object> where) {
         int index = 1;
-        for (String key : (Set<String>) where.keySet()) {
+        for (String key : where.keySet()) {
             try {
                 Object value = where.get(key);
                 if (value instanceof InputStream) {

@@ -20,7 +20,7 @@ public interface IColData {
      * @param row
      * @return
      */
-    Object col(int row);
+    Object row(int row);
 
     /**
      * 返回 rows 行列对象
@@ -28,14 +28,14 @@ public interface IColData {
      * @param rows 行数
      * @return
      */
-    List cols(int rows);
+    List rows(int rows);
 
     /**
      * 返回默认行列对象
      *
      * @return
      */
-    List cols();
+    List rows();
 
     /**
      * 设置普通值或增加列对象
@@ -67,7 +67,7 @@ public interface IColData {
         }
 
         @Override
-        public Object col(int row) {
+        public Object row(int row) {
             if (row == 0) {
                 return value;
             }
@@ -75,7 +75,7 @@ public interface IColData {
         }
 
         @Override
-        public List cols(int size) {
+        public List rows(int size) {
             List list = new ArrayList(size);
             for (int index = 0; index < size; index++) {
                 list.add(this.value);
@@ -84,8 +84,8 @@ public interface IColData {
         }
 
         @Override
-        public List cols() {
-            return this.cols(1);
+        public List rows() {
+            return this.rows(1);
         }
 
         @Override
@@ -116,7 +116,7 @@ public interface IColData {
         }
 
         @Override
-        public Object col(int row) {
+        public Object row(int row) {
             if (row < 0) {
                 throw new RuntimeException("index can't less than zero.");
             }
@@ -131,22 +131,22 @@ public interface IColData {
         }
 
         @Override
-        public List cols(int size) {
+        public List rows(int size) {
             List list = new ArrayList(size);
             for (int index = 0; index < size; index++) {
-                list.add(this.col(index));
+                list.add(this.row(index));
             }
             return list;
         }
 
         @Override
-        public List cols() {
-            return this.cols(this.list.isEmpty() ? 1 : this.list.size());
+        public List rows() {
+            return this.rows(this.list.isEmpty() ? 1 : this.list.size());
         }
 
         @Override
         public String toString() {
-            return JSON.toJSON(this.cols(), false);
+            return JSON.toJSON(this.rows(), false);
         }
     }
 }

@@ -4,9 +4,11 @@ import lombok.Getter;
 import org.test4j.json.JSON;
 import org.test4j.module.ICore.DataMap;
 import org.test4j.tools.commons.ArrayHelper;
+import org.test4j.tools.commons.ListHelper;
 import org.test4j.tools.datagen.IColData.OneRowValue;
 import org.test4j.tools.datagen.IColData.MulRowValue;
 
+import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -57,7 +59,7 @@ public abstract class AbstractDataMap<DM extends DataMap>
         }
         Map<String, Object> data = new HashMap<>();
         for (Map.Entry<String, IColData> entry : this.entrySet()) {
-            data.put(entry.getKey(), entry.getValue().col(row));
+            data.put(entry.getKey(), entry.getValue().row(row));
         }
         return data;
     }
@@ -65,7 +67,7 @@ public abstract class AbstractDataMap<DM extends DataMap>
     @Override
     public DM init(Map map) {
         if (map != null) {
-            map.forEach((k, v) -> this.put(String.valueOf(k), v));
+            map.forEach((k, v) -> this.kv(String.valueOf(k), v));
         }
         return (DM) this;
     }
@@ -84,9 +86,23 @@ public abstract class AbstractDataMap<DM extends DataMap>
     public List cols(String key) {
         List list = new ArrayList(rowSize);
         for (int row = 0; row < rowSize; row++) {
-            list.add(this.get(key).col(row));
+            list.add(this.get(key).row(row));
         }
         return list;
+    }
+
+    @Override
+    public DM arr(String key, Object... arr) {
+        if (isRowMap) {
+            if (arr == null || arr.length == 0) {
+                this.putMulRowValue(key, null, new Object[0]);
+            } else {
+                this.putMulRowValue(key, arr[0], Arrays.copyOfRange(arr, 1, arr.length));
+            }
+        } else {
+            this.putOneRowValue(key, arr, new Object[0]);
+        }
+        return (DM) this;
     }
 
     @Override
@@ -101,9 +117,16 @@ public abstract class AbstractDataMap<DM extends DataMap>
 
     private void putMulRowValue(String key, Object value, Object[] values) {
         MulRowValue row = new MulRowValue();
+        if (value instanceof AbstractDataGenerator) {
+            ((AbstractDataGenerator) value).setDataMap(this);
+        }
         row.add(value);
+        if (values == null) {
+            row.add(null);
+            return;
+        }
         /**
-         * 收割对象是否为数组
+         * 第一个对象是否为数组
          */
         boolean isFirstArray = ArrayHelper.isArray(value);
         /**
@@ -131,7 +154,8 @@ public abstract class AbstractDataMap<DM extends DataMap>
     }
 
     public void put(String key, Object value) {
-        this.kv(key, value, new Object[0]);
+        throw new RuntimeException("please use .kv(String, Object, Object ...)");
+//        this.kv(key, value, new Object[0]);
     }
 
     @Override
@@ -146,6 +170,17 @@ public abstract class AbstractDataMap<DM extends DataMap>
     @Override
     public <R> List<R> rows(Class<R> klass) {
         return JSON.toList(JSON.toJSON(rows(), false), klass);
+    }
+
+    @Override
+    public int getColSize() {
+        return this.size();
+    }
+
+
+    @Override
+    public boolean containsKey(String key) {
+        return super.containsKey(key);
     }
 
     @Override

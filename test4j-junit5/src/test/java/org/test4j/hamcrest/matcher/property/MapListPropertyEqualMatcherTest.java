@@ -56,8 +56,8 @@ public class MapListPropertyEqualMatcherTest extends Test4J {
     public void testMapListPropertyEqualMatcher2() {
         DataMap expected = new DataMap(2) {
             {
-                this.put("id", 123, 124);
-                this.put("name", null, "jobs.he");
+                this.kv("id", 123, 124);
+                this.kv("name", null, "jobs.he");
             }
         };
 
@@ -90,10 +90,10 @@ public class MapListPropertyEqualMatcherTest extends Test4J {
         list.add(mockMap());
         want.list(list).eqReflect(new DataMap(2) {
             {
-                this.put("integer", "20");
-                this.put("boolean", "true");
-                this.put("double", "20.0");
-                this.put("date", "2011-11-12");
+                this.kv("integer", "20");
+                this.kv("boolean", "true");
+                this.kv("double", "20.0");
+                this.kv("date", "2011-11-12");
             }
         }, EqMode.EQ_STRING);
     }

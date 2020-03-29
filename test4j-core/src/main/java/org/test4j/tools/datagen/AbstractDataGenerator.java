@@ -1,5 +1,7 @@
 package org.test4j.tools.datagen;
 
+import lombok.Setter;
+
 import java.util.Map;
 import java.util.function.Function;
 
@@ -9,7 +11,8 @@ import java.util.function.Function;
  * @author wudarui
  */
 public abstract class AbstractDataGenerator {
-    private Map<String, Object> dataMap;
+    @Setter
+    private IDataMap dataMap;
 
     /**
      * 生成第n个数据<br>
@@ -26,14 +29,14 @@ public abstract class AbstractDataGenerator {
      * @param field
      * @return
      */
-    public Object value(String field) {
+    public Object value(String field, int row) {
         if (this.dataMap == null) {
             throw new RuntimeException("the data map can't be null.");
         }
         if (this.dataMap.containsKey(field) == false) {
             throw new RuntimeException("not existed the key[" + field + "] of data map.");
         }
-        return this.dataMap.get(field);
+        return this.dataMap.get(field).row(row);
     }
 
     /**

@@ -20,7 +20,7 @@ public class MapPropertyEqualMatcherTest extends Test4J {
         User user = User.mock(123, "darui.wu");
         want.object(user).eqReflect(new DataMap() {
             {
-                this.put("name", "darui.wu");
+                this.kv("name", "darui.wu");
             }
         });
     }
@@ -30,8 +30,8 @@ public class MapPropertyEqualMatcherTest extends Test4J {
         User user = User.mock(123, "darui.wu");
         want.object(user).eqReflect(new DataMap() {
             {
-                this.put("name", "darui.wu");
-                this.put("id", null);
+                this.kv("name", "darui.wu");
+                this.kv("id", null);
             }
         }, EqMode.IGNORE_DEFAULTS);
     }
@@ -42,7 +42,7 @@ public class MapPropertyEqualMatcherTest extends Test4J {
         want.object(bean).eqReflect(new DataMap() {
             {
                 // this.put("name", "bean1");
-                this.put("refObject", new String[]{"value1", "value2"});
+                this.kv("refObject", new String[]{"value1", "value2"});
             }
         });
     }
@@ -53,7 +53,7 @@ public class MapPropertyEqualMatcherTest extends Test4J {
         want.object(bean).eqReflect(new DataMap() {
             {
                 // this.put("name", "bean1");
-                this.put("refObject", new String[]{null, "value1"});
+                this.kv("refObject", new String[]{null, "value1"});
             }
         }, EqMode.IGNORE_DEFAULTS, EqMode.IGNORE_ORDER);
     }
@@ -65,7 +65,7 @@ public class MapPropertyEqualMatcherTest extends Test4J {
                         want.object(bean).eqReflect(new DataMap() {
                             {
                                 // this.put("name", "bean1");
-                                this.put("refObject", new String[]{null, "value1"});
+                                this.kv("refObject", new String[]{null, "value1"});
                             }
                         }, EqMode.IGNORE_ORDER)
                 , AssertionError.class);
@@ -78,7 +78,7 @@ public class MapPropertyEqualMatcherTest extends Test4J {
                         want.object(bean).eqReflect(new DataMap() {
                             {
                                 // this.put("name", "bean1");
-                                this.put("refObject", new String[]{null, "value1"});
+                                this.kv("refObject", new String[]{null, "value1"});
                             }
                         }, EqMode.IGNORE_DEFAULTS)
                 , AssertionError.class);
@@ -89,8 +89,8 @@ public class MapPropertyEqualMatcherTest extends Test4J {
         want.list(new User[]{User.mock(123, "darui.wu"), User.mock(124, "darui.wu")}).eqReflect(
                 new DataMap(2) {
                     {
-                        this.put("name", "darui.wu");
-                        this.put("id", 123, 124);
+                        this.kv("name", "darui.wu");
+                        this.kv("id", 123, 124);
                     }
                 }, EqMode.IGNORE_ORDER);
     }
@@ -109,8 +109,8 @@ public class MapPropertyEqualMatcherTest extends Test4J {
             }
         })).eqReflect(new DataMap(2) {
             {
-                this.put("name", "darui.wu");
-                this.put("id", 123, 124);
+                this.kv("name", "darui.wu");
+                this.kv("id", 123, 124);
             }
         }, EqMode.IGNORE_ORDER);
     }
@@ -119,11 +119,9 @@ public class MapPropertyEqualMatcherTest extends Test4J {
     public void testReflectEqMap() {
         List<Map<String, String>> list = new ArrayList<Map<String, String>>();
         want.exception(() ->
-                        want.list(list).eqReflect(new DataMap() {
-                            {
-                                this.put("id", 124);
-                            }
-                        })
+                        want.list(list).eqReflect(new DataMap()
+                                .kv("id", 124)
+                        )
                 , AssertionError.class);
     }
 
@@ -143,7 +141,7 @@ public class MapPropertyEqualMatcherTest extends Test4J {
         want.exception(() ->
                         want.list(list).eqReflect(new DataMap(2) {
                             {
-                                this.put("id", null, 124);
+                                this.kv("id", null, 124);
                             }
                         })
                 , AssertionError.class);
@@ -165,7 +163,7 @@ public class MapPropertyEqualMatcherTest extends Test4J {
         want.exception(() ->
                         want.list(list).eqReflect(new DataMap(2) {
                             {
-                                this.put("id", null, 124);
+                                this.kv("id", null, 124);
                             }
                         }, EqMode.IGNORE_ORDER)
                 , AssertionError.class);

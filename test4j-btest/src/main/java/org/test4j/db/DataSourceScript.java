@@ -23,8 +23,4 @@ public class DataSourceScript implements IDataSourceScript {
     public IndexList getIndexList() {
         return new IndexList();
     }
-
-    static {
-        SPEC_TYPES.put("json", "text");
-    }
 }
