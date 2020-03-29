@@ -46,7 +46,7 @@ public class JSONHelper {
      * @return
      */
     public static <T> T fromDatFile(Class claz, String filename) {
-        try (InputStream inputStream = ResourceHelper.getResourceAsStream(claz.getClassLoader(), filename);
+        try (InputStream inputStream = ResourceHelper.getResourceAsStream(JSONHelper.class.getClassLoader(), filename);
              ObjectInputStream in = new ObjectInputStream(inputStream)) {
             return (T) in.readObject();
         } catch (Throwable e) {
@@ -73,7 +73,7 @@ public class JSONHelper {
      */
     public static <T> T fromJsonFile(Class claz, String filename) {
         try {
-            String json = ResourceHelper.readFromFile(claz.getClassLoader(), filename);
+            String json = ResourceHelper.readFromFile(JSONHelper.class.getClassLoader(), filename);
             Object o = JSON.toObject(json, claz);
             return (T) o;
         } catch (FileNotFoundException e) {
