@@ -125,6 +125,10 @@ public class Reflector {
         return FieldAccessor.field(klass, fieldName).getStatic();
     }
 
+    public static Object getFieldValue(Object target, Field field) {
+        return FieldAccessor.field(field).get(target);
+    }
+
 
     /**
      * 创建target对象field字段的代理实例<br>
