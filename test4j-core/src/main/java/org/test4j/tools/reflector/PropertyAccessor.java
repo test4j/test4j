@@ -1,7 +1,10 @@
 package org.test4j.tools.reflector;
 
 import org.test4j.exception.NoSuchFieldRuntimeException;
-import org.test4j.tools.commons.*;
+import org.test4j.tools.commons.ArrayHelper;
+import org.test4j.tools.commons.ClazzHelper;
+import org.test4j.tools.commons.ListHelper;
+import org.test4j.tools.commons.StringHelper;
 
 import java.util.ArrayList;
 import java.util.Collection;

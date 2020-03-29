@@ -2,7 +2,6 @@ package org.test4j.tools.datagen;
 
 import lombok.Setter;
 
-import java.util.Map;
 import java.util.function.Function;
 
 /**

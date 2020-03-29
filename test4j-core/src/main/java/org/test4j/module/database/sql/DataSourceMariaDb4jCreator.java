@@ -4,7 +4,6 @@ import ch.vorburger.exec.ManagedProcessException;
 import ch.vorburger.mariadb4j.DB;
 import ch.vorburger.mariadb4j.DBConfigurationBuilder;
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.tools.commons.ConfigHelper;
 import org.test4j.tools.commons.DateHelper;
 

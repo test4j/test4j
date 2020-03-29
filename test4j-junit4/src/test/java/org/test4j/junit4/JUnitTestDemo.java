@@ -1,8 +1,6 @@
 package org.test4j.junit4;
 
 import org.junit.Test;
-import org.test4j.junit4.DataFrom;
-import org.test4j.junit4.Test4J;
 import org.test4j.module.ICore;
 import org.test4j.tools.datagen.DataProvider;
 

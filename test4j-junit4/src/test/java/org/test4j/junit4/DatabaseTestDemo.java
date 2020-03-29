@@ -2,7 +2,6 @@ package org.test4j.junit4;
 
 import org.junit.Test;
 import org.test4j.db.datamap.table.UserTableMap;
-import org.test4j.junit4.Test4J;
 
 public class DatabaseTestDemo extends Test4J {
     @Test

@@ -1,7 +1,5 @@
 package org.test4j.model;
 
-import org.test4j.model.User;
-
 import java.util.ArrayList;
 import java.util.List;
 

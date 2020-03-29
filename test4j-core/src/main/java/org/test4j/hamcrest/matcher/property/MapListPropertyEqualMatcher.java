@@ -3,18 +3,18 @@ package org.test4j.hamcrest.matcher.property;
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.hamcrest.StringDescription;
-import org.test4j.exception.NoSuchFieldRuntimeException;
 import org.test4j.hamcrest.matcher.property.difference.Difference;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.hamcrest.matcher.property.reflection.ReflectionComparator;
 import org.test4j.hamcrest.matcher.property.report.DefaultDifferenceReport;
 import org.test4j.hamcrest.matcher.property.report.DifferenceReport;
 import org.test4j.tools.commons.ArrayHelper;
-import org.test4j.tools.commons.ListHelper;
 import org.test4j.tools.datagen.IDataMap;
-import org.test4j.tools.reflector.PropertyAccessor;
 
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import static org.test4j.hamcrest.matcher.property.reflection.ReflectionComparatorFactory.createRefectionComparator;
 import static org.test4j.tools.commons.ListHelper.getProperties;

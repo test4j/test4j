@@ -4,11 +4,9 @@ import lombok.Getter;
 import org.test4j.json.JSON;
 import org.test4j.module.ICore.DataMap;
 import org.test4j.tools.commons.ArrayHelper;
-import org.test4j.tools.commons.ListHelper;
-import org.test4j.tools.datagen.IColData.OneRowValue;
 import org.test4j.tools.datagen.IColData.MulRowValue;
+import org.test4j.tools.datagen.IColData.OneRowValue;
 
-import java.lang.reflect.Array;
 import java.util.*;
 import java.util.stream.Stream;
 

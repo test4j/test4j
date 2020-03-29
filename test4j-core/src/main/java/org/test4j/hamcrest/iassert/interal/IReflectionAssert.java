@@ -1,6 +1,5 @@
 package org.test4j.hamcrest.iassert.interal;
 
-import com.sun.xml.internal.bind.v2.model.core.ID;
 import org.hamcrest.Matcher;
 import org.test4j.hamcrest.matcher.property.*;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;

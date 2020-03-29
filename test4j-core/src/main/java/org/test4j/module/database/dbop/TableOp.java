@@ -2,7 +2,6 @@ package org.test4j.module.database.dbop;
 
 import org.test4j.hamcrest.iassert.impl.CollectionAssert;
 import org.test4j.hamcrest.iassert.impl.IntegerAssert;
-import org.test4j.hamcrest.iassert.impl.LongAssert;
 import org.test4j.hamcrest.iassert.impl.ObjectAssert;
 import org.test4j.hamcrest.iassert.intf.ICollectionAssert;
 import org.test4j.hamcrest.iassert.intf.INumberAssert;

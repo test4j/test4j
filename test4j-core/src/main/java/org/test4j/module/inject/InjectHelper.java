@@ -3,8 +3,6 @@ package org.test4j.module.inject;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.tools.commons.AnnotationHelper;
 import org.test4j.tools.commons.Reflector;
-import org.test4j.tools.reflector.FieldAccessor;
-import org.test4j.tools.reflector.imposteriser.FieldProxy;
 import org.test4j.tools.reflector.imposteriser.Test4JProxy;
 
 import java.lang.reflect.Field;
