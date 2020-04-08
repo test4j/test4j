@@ -1,5 +1,7 @@
 package org.test4j.tools.reflector;
 
+import lombok.Setter;
+import lombok.experimental.Accessors;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.tools.commons.ClazzHelper;
 
@@ -17,18 +19,17 @@ public class MethodDisplayNameFinder {
 
     static String DISPLAY_NAME = "org.junit.jupiter.api.DisplayName";
 
-    static Map<String, KlassMethod> map = new HashMap<>();
+    static DisplayNameMethod displayNameMethod = null;
 
     static {
         displayName();
     }
 
     public static String displayName(Method method) {
-        if (map.containsKey(DISPLAY_NAME)) {
-            KlassMethod klassMethod = map.get(DISPLAY_NAME);
-            Object o = method.getDeclaredAnnotation(klassMethod.klass);
+        if (displayNameMethod != null) {
+            Object o = method.getDeclaredAnnotation(displayNameMethod.klass);
             if (o != null) {
-                return MethodAccessor.method(method).invoke(o);
+                return MethodAccessor.method(displayNameMethod.method).invoke(o);
             }
         }
         return method.getName();
@@ -37,21 +38,24 @@ public class MethodDisplayNameFinder {
 
     private static void displayName() {
         try {
-            if (!ClazzHelper.isClassAvailable(DISPLAY_NAME)) {
-                return;
+            if (ClazzHelper.isClassAvailable(DISPLAY_NAME)) {
+                Class klass = ClazzHelper.getClazz(DISPLAY_NAME);
+                displayNameMethod = new DisplayNameMethod(klass);
             }
-            KlassMethod klassMethod = new KlassMethod();
-            klassMethod.klass = ClazzHelper.getClazz(DISPLAY_NAME);
-            klassMethod.method = klassMethod.klass.getMethod("value");
-            map.put(DISPLAY_NAME, klassMethod);
         } catch (Exception e) {
             MessageHelper.warn(e.getMessage());
         }
     }
 
-    static class KlassMethod {
+    @Accessors(chain = true)
+    static class DisplayNameMethod {
         Class klass;
 
         Method method;
+
+        public DisplayNameMethod(Class klass) throws Exception {
+            this.klass = klass;
+            this.method = this.klass.getMethod("value");
+        }
     }
 }

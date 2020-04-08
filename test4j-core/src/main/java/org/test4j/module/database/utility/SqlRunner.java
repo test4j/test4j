@@ -113,10 +113,10 @@ public class SqlRunner {
         );
     }
 
-    public static <T> List<T> queryMapList(DBEnvironment env, String sql, IDataMap where) {
+    public static <T> List<T> queryMapList(DBEnvironment env, String sql, Map<String,Object> where) {
         return env.query(connection -> {
             PreparedStatement st = connection.prepareStatement(sql);
-            return setParameterByMap(st, where.row(0));
+            return setParameterByMap(st, where);
         }, resultSet -> (List<T>) DBHelper.getListMapFromResult(resultSet, false));
     }
 
@@ -132,12 +132,17 @@ public class SqlRunner {
         }
     }
 
-
+    /**
+     * 这里map取值顺序必须和 DBHelper.getWhereCondition 保持一致
+     * @param st
+     * @param where
+     * @return
+     */
     private static PreparedStatement setParameterByMap(PreparedStatement st, Map<String, Object> where) {
         int index = 1;
-        for (String key : where.keySet()) {
+        for (Map.Entry<String,Object> entry : where.entrySet()) {
             try {
-                Object value = where.get(key);
+                Object value = entry.getValue();
                 if (value instanceof InputStream) {
                     InputStream is = (InputStream) value;
                     st.setBinaryStream(index, is, is.available());
@@ -146,7 +151,7 @@ public class SqlRunner {
                 }
                 index++;
             } catch (Throwable e) {
-                throw new RuntimeException("set column[" + key + "] value error:" + e.getMessage(), e);
+                throw new RuntimeException("set column[" + entry.getKey() + "] value error:" + e.getMessage(), e);
             }
         }
         return st;

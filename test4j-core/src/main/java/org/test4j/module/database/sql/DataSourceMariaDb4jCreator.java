@@ -6,6 +6,7 @@ import ch.vorburger.mariadb4j.DBConfigurationBuilder;
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.test4j.tools.commons.ConfigHelper;
 import org.test4j.tools.commons.DateHelper;
+import org.test4j.tools.commons.StringHelper;
 
 import javax.sql.DataSource;
 
@@ -44,9 +45,10 @@ public class DataSourceMariaDb4jCreator {
         String password = DataSourceDefaultCreator.password(dataSourceName);
         String driver = ConfigHelper.getString("dataSource.mariaDB4j.driver");
         warn("begin to start MariaDB4j: " + DateHelper.currDateTimeStr());
-        int port = ConfigHelper.getInteger("dataSource.mariaDB4j.port",0);
+        int port = ConfigHelper.getInteger("dataSource.mariaDB4j.port", 0);
 
         DBConfigurationBuilder config = newBuilder().setPort(port);
+        addArgs(config);
         DB mariaDB = newEmbeddedDB(config.build());
         mariaDB.start();
         String url = config.getURL(schema);
@@ -60,5 +62,19 @@ public class DataSourceMariaDb4jCreator {
             dataSource.setPassword(password);
         }
         return dataSource;
+    }
+
+    private static void addArgs(DBConfigurationBuilder config) {
+        String args = ConfigHelper.getString("dataSource.mariaDB4j.args");
+        if (StringHelper.isBlankOrNull(args)) {
+            return;
+        }
+        String[] items = args.split(";");
+        for (String item : items) {
+            if (StringHelper.isBlankOrNull(item)) {
+                continue;
+            }
+            config.addArg(item);
+        }
     }
 }

@@ -56,13 +56,13 @@ public class DBHelperTest extends Test4J {
     }
 
     @ParameterizedTest
-    @MethodSource("dataGetWhereCondiction")
-    public void testGetWhereCondiction(DataMap map, String where) {
-        String result = DBHelper.getWhereCondiction(map);
+    @MethodSource("dataGetWhereCondition")
+    public void testGetWhereCondition(DataMap map, String where) {
+        String result = DBHelper.getWhereCondition(map);
         want.string(result).eq(where, StringMode.SameAsSpace);
     }
 
-    public static Iterator dataGetWhereCondiction() {
+    public static Iterator dataGetWhereCondition() {
         return new DataProvider()
                 .data(null, "")
                 .data(new DataMap(), "")

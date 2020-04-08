@@ -4,7 +4,6 @@ import org.test4j.module.database.environment.normalise.TypeNormaliser;
 import org.test4j.module.database.environment.normalise.TypeNormaliserFactory;
 import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.commons.StringHelper;
-import org.test4j.tools.datagen.IDataMap;
 import org.test4j.tools.reflector.FieldAccessor;
 
 import java.sql.ResultSet;
@@ -271,20 +270,20 @@ public final class DBHelper {
      * @param map
      * @return
      */
-    public static String getWhereCondiction(IDataMap map) {
-        if (map == null || map.getColSize() == 0) {
+    public static String getWhereCondition(Map<String, Object> map) {
+        if (map == null || map.size() == 0) {
             return "";
         }
         StringBuilder where = new StringBuilder();
         where.append(" where ");
         boolean isFirst = true;
-        for (String key : (Set<String>) map.keySet()) {
+        for (Map.Entry<String, Object> entry : map.entrySet()) {
             if (isFirst) {
                 isFirst = false;
             } else {
                 where.append(" and ");
             }
-            where.append(key).append("=?");
+            where.append(entry.getKey()).append("=?");
         }
         return where.toString();
     }

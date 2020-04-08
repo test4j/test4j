@@ -17,6 +17,7 @@ import org.test4j.tools.commons.StringHelper;
 import org.test4j.tools.datagen.IDataMap;
 
 import java.util.List;
+import java.util.Map;
 
 import static org.test4j.module.database.dbop.DBOperator.IN_DB_OPERATOR;
 
@@ -177,11 +178,12 @@ public class TableOp implements ITableOp {
     public ICollectionAssert queryWhere(IDataMap dataMap) {
         this.setDbOperator(true);
         try {
+            Map<String,Object> param = dataMap.row(0);
             StringBuilder query = new StringBuilder("select * from ");
             query.append(table).append(" ");
-            String where = DBHelper.getWhereCondiction(dataMap);
+            String where = DBHelper.getWhereCondition(param);
             query.append(where);
-            List list = SqlRunner.queryMapList(env, query.toString(), dataMap);
+            List list = SqlRunner.queryMapList(env, query.toString(), param);
             return new CollectionAssert(list);
         } finally {
             this.setDbOperator(false);
