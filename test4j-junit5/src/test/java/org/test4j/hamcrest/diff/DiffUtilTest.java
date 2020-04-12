@@ -11,7 +11,7 @@ class DiffUtilTest extends Test4J {
 
     @Test
     void diff_as_string_true() {
-        DiffMap diff = DiffUtil.diff(
+        DiffMap diff = new DiffUtil(false, true, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", 100)
@@ -19,9 +19,7 @@ class DiffUtilTest extends Test4J {
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", "100")
-                        .map(),
-                false,
-                true
+                        .map()
         );
         MessageHelper.info(diff.message());
         want.number(diff.diff).isEqualTo(0);
@@ -29,7 +27,7 @@ class DiffUtilTest extends Test4J {
 
     @Test
     void diff_as_string_false() {
-        DiffMap diff = DiffUtil.diff(
+        DiffMap diff = new DiffUtil(false, false, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", 100)
@@ -37,9 +35,7 @@ class DiffUtilTest extends Test4J {
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", "100")
-                        .map(),
-                false,
-                false
+                        .map()
         );
         MessageHelper.info(diff.message());
         want.number(diff.diff).isEqualTo(1);
@@ -48,7 +44,7 @@ class DiffUtilTest extends Test4J {
 
     @Test
     void diff_ignoreNull_false() {
-        DiffMap diff = DiffUtil.diff(
+        DiffMap diff = new DiffUtil(false, true, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", 100)
@@ -56,9 +52,7 @@ class DiffUtilTest extends Test4J {
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", null)
-                        .map(),
-                false,
-                true
+                        .map()
         );
         MessageHelper.info(diff.message());
         want.number(diff.diff).isEqualTo(1);
@@ -67,7 +61,7 @@ class DiffUtilTest extends Test4J {
 
     @Test
     void diff_ignoreNull_true() {
-        DiffMap diff = DiffUtil.diff(
+        DiffMap diff = new DiffUtil(true, true, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", 100)
@@ -75,9 +69,7 @@ class DiffUtilTest extends Test4J {
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", null)
-                        .map(),
-                true,
-                true
+                        .map()
         );
         MessageHelper.info(diff.message());
         want.number(diff.diff).isEqualTo(0);
@@ -85,7 +77,7 @@ class DiffUtilTest extends Test4J {
 
     @Test
     void diff_date_as_string() {
-        DiffMap diff = DiffUtil.diff(
+        DiffMap diff = new DiffUtil(false, true, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("date", DateHelper.parse("2020-04-19 23:10:01"))
@@ -93,9 +85,7 @@ class DiffUtilTest extends Test4J {
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("date", "2020-04-19 23:10:01")
-                        .map(),
-                false,
-                true
+                        .map()
         );
         MessageHelper.info(diff.message());
         want.number(diff.diff).isEqualTo(0);
@@ -103,16 +93,14 @@ class DiffUtilTest extends Test4J {
 
     @Test
     void diff_date_as_string_false() {
-        DiffMap diff = DiffUtil.diff(
+        DiffMap diff = new DiffUtil(false, false, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("date", DateHelper.parse("2020-04-19 23:10:01"))
                         .map(),
                 DataMap.create()
                         .kv("key1", "value1")
-                        .kv("date", "2020-04-19 23:10:01"),
-                false,
-                false
+                        .kv("date", "2020-04-19 23:10:01")
         );
         MessageHelper.info(diff.message());
         want.number(diff.diff).isEqualTo(1);
@@ -121,7 +109,7 @@ class DiffUtilTest extends Test4J {
 
     @Test
     void diff_nested_map_as_string() {
-        DiffMap diff = DiffUtil.diff(
+        DiffMap diff = new DiffUtil(false, true, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", DataMap.create()
@@ -134,9 +122,7 @@ class DiffUtilTest extends Test4J {
                         .kv("key2", DataMap.create()
                                 .kv("key3", "value3")
                                 .kv("date", "2020-04-19 23:10:01")
-                        ),
-                false,
-                true
+                        )
         );
         MessageHelper.info(diff.message());
         want.number(diff.diff).isEqualTo(0);
@@ -144,7 +130,7 @@ class DiffUtilTest extends Test4J {
 
     @Test
     void diff_nested_map_not_string() {
-        DiffMap diff = DiffUtil.diff(
+        DiffMap diff = new DiffUtil(false, false, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", DataMap.create()
@@ -157,9 +143,7 @@ class DiffUtilTest extends Test4J {
                         .kv("key2", DataMap.create()
                                 .kv("key3", "value3")
                                 .kv("date", "2020-04-19 23:10:01")
-                        ),
-                false,
-                false
+                        )
         );
         MessageHelper.info(diff.message());
         want.number(diff.diff).isEqualTo(1);
@@ -168,7 +152,7 @@ class DiffUtilTest extends Test4J {
 
     @Test
     void diff_nested_map_not_property() {
-        DiffMap diff = DiffUtil.diff(
+        DiffMap diff = new DiffUtil(false, false, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", DataMap.create()
@@ -180,9 +164,7 @@ class DiffUtilTest extends Test4J {
                         .kv("key2", DataMap.create()
                                 .kv("key3", "value3")
                                 .kv("date", "2020-04-19 23:10:01")
-                        ),
-                false,
-                false
+                        )
         );
         MessageHelper.info(diff.message());
         want.number(diff.diff).isEqualTo(1);
@@ -191,7 +173,7 @@ class DiffUtilTest extends Test4J {
 
     @Test
     void diff_user() {
-        DiffMap diff = DiffUtil.diff(
+        DiffMap diff = new DiffUtil(false, true, false).diff(
                 new User()
                         .setName("name1")
                         .setAge(45)
@@ -205,8 +187,6 @@ class DiffUtilTest extends Test4J {
                         .kv("address", DataMap.create()
                                 .kv("name", "address1")
                                 .kv("postcode", "23231"))
-                , false
-                , true
         );
         MessageHelper.info(diff.message());
         want.number(diff.diff).isEqualTo(1);

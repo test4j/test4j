@@ -1,12 +1,13 @@
 package org.test4j.hamcrest.diff;
 
 import org.test4j.exception.NoSuchFieldRuntimeException;
+import org.test4j.tools.commons.ArrayHelper;
+import org.test4j.tools.commons.ListHelper;
 import org.test4j.tools.datagen.IDataMap;
 import org.test4j.tools.reflector.FieldAccessor;
 
 import java.util.*;
 
-import static java.util.stream.Collectors.toMap;
 import static org.test4j.hamcrest.diff.DiffItem.withoutQuotaJSON;
 
 /**
@@ -15,23 +16,41 @@ import static org.test4j.hamcrest.diff.DiffItem.withoutQuotaJSON;
  * @author wudarui
  */
 public class DiffUtil {
+    private final boolean ignoreNull;
 
-    public static DiffMap diff(Object actual, Map expect, boolean ignoreNull, boolean asString) {
+    private final boolean asString;
+
+    private final boolean ignoreOrder;
+
+    public DiffUtil(boolean ignoreNull, boolean asString, boolean ignoreOrder) {
+        this.ignoreNull = ignoreNull;
+        this.asString = asString;
+        this.ignoreOrder = ignoreOrder;
+    }
+
+    public DiffMap diff(Object actual, Object expect) {
         if (expect == null) {
             return actual == null ? new DiffMap() : new DiffMap().add("root", actual, null);
         }
-        return compare("root", actual, expect, ignoreNull, asString);
-    }
-
-    public static DiffMap diff(List actual, List<Map> expect, boolean ignoreNull, boolean asString, boolean ignoreOrder) {
-        if (expect == null) {
-            return actual == null ? new DiffMap() : new DiffMap().add("root", actual, null);
+        if (ArrayHelper.isCollOrArray(actual)) {
+            if (ArrayHelper.isCollOrArray(expect)) {
+                List _actual = ListHelper.toList(actual, false);
+                List _expect = ListHelper.toList(expect, false);
+                return compareList("root", _actual, _expect);
+            } else {
+                return new DiffMap().add("root", "actual is a List", "expect should be a Map List");
+            }
+        } else {
+            if (expect instanceof Map) {
+                return compareObject("root", actual, (Map) expect);
+            } else {
+                return new DiffMap().add("root", "actual is an object", "expect should be a Map");
+            }
         }
-        return compareList("root", actual, expect, ignoreNull, asString, ignoreOrder);
     }
 
-    private static DiffMap compareList(Object parentKey, List actualList, List<Map> expectList, boolean ignoreNull, boolean asString, boolean ignoreOrder) {
-        DiffMap diff = validateNull(parentKey, actualList, expectList, ignoreNull);
+    private DiffMap compareList(Object parentKey, List actualList, List<Map> expectList) {
+        DiffMap diff = validateNull(parentKey, actualList, expectList);
         if (diff != null) {
             return diff;
         }
@@ -42,10 +61,10 @@ public class DiffUtil {
             return diff;
         }
         if (ignoreOrder) {
-            DiffMap listDiff = compareListIgnoreOrder(parentKey, actualList, expectList, ignoreNull, asString);
+            DiffMap listDiff = compareListIgnoreOrder(parentKey, actualList, expectList);
             diff.add(parentKey, listDiff);
         } else {
-            DiffMap listDiff = compareListOrder(parentKey, actualList, expectList, ignoreNull, asString);
+            DiffMap listDiff = compareListWithOrder(parentKey, actualList, expectList);
             diff.add(parentKey, listDiff);
         }
         return diff;
@@ -57,11 +76,9 @@ public class DiffUtil {
      * @param parentKey
      * @param actualList
      * @param expectList
-     * @param ignoreNull
-     * @param asString
      * @return
      */
-    private static DiffMap compareListIgnoreOrder(Object parentKey, List actualList, List<Map> expectList, boolean ignoreNull, boolean asString) {
+    private DiffMap compareListIgnoreOrder(Object parentKey, List actualList, List<Map> expectList) {
         DiffMap diff = new DiffMap();
         Map<Integer, MatchItem> all = new HashMap<>();
         int size = expectList.size();
@@ -76,7 +93,7 @@ public class DiffUtil {
                     continue;
                 }
                 String key = "[" + loop + ":" + index + "]";
-                DiffMap itemDiff = compare(key, actual, expectList.get(loop), ignoreNull, asString);
+                DiffMap itemDiff = compareObject(key, actual, expectList.get(loop));
                 child.add(loop, itemDiff);
                 if (itemDiff.diff == 0) {
                     matchedExpected.add(loop);
@@ -93,9 +110,9 @@ public class DiffUtil {
             item.remove(matchedExpected);
             DiffMap nest = new DiffMap();
             for (Map.Entry<Integer, DiffMap> child : item.getDiffItem().entrySet()) {
-                nest.add("[" + child.getKey() + "]", child.getValue());
+                nest.add("expect [" + child.getKey() + "]", child.getValue());
             }
-            diff.add("[" + entry.getKey() + "]", nest);
+            diff.add("actual [" + entry.getKey() + "]", nest);
         }
         return diff;
     }
@@ -106,39 +123,37 @@ public class DiffUtil {
      * @param parentKey
      * @param actualList
      * @param expectList
-     * @param ignoreNull
-     * @param asString
      * @return
      */
-    private static DiffMap compareListOrder(Object parentKey, List actualList, List<Map> expectList, boolean ignoreNull, boolean asString) {
+    private DiffMap compareListWithOrder(Object parentKey, List actualList, List<Map> expectList) {
         DiffMap diff = new DiffMap();
         for (int index = 0; index < expectList.size(); index++) {
             Object actual = actualList.get(index);
             Map expect = expectList.get(index);
             String key = "[" + index + "]";
-            DiffMap itemDiff = compare(key, actual, expect, ignoreNull, asString);
+            DiffMap itemDiff = compareObject(key, actual, expect);
             diff.add(key, itemDiff);
         }
         return diff;
     }
 
-    private static DiffMap compare(Object parentKey, Object actual, Map expect, boolean ignoreNull, boolean asString) {
-        DiffMap diff = validateNull(parentKey, actual, expect, ignoreNull);
+    private DiffMap compareObject(Object parentKey, Object actual, Map expect) {
+        DiffMap diff = validateNull(parentKey, actual, expect);
         if (diff != null) {
             return diff;
         }
         diff = new DiffMap();
-        Map<String, Object> _expect = filterMap(expect, ignoreNull, asString);
+        Map<String, Object> _expect = filterMap(expect);
         Map _actual = asMap(actual, _expect.keySet());
         for (Map.Entry entry : _expect.entrySet()) {
             Object key = entry.getKey();
             Object lvalue = _actual.get(entry.getKey());
             Object rvalue = entry.getValue();
             if (rvalue instanceof Map || rvalue == null) {
-                DiffMap nested = compare(key, lvalue, (Map) rvalue, ignoreNull, asString);
+                DiffMap nested = compareObject(key, lvalue, (Map) rvalue);
                 diff.add(key, nested);
             } else {
-                Object _lvalue = asObject(lvalue, false, asString);
+                Object _lvalue = asObject(lvalue);
                 if (!rvalue.equals(_lvalue)) {
                     diff.add(key, lvalue, rvalue);
                 }
@@ -147,7 +162,7 @@ public class DiffUtil {
         return diff;
     }
 
-    private static Map asMap(Object target, Set<String> properties) {
+    private Map asMap(Object target, Set<String> properties) {
         if (target == null || target instanceof Map) {
             return (Map) target;
         }
@@ -167,11 +182,9 @@ public class DiffUtil {
      * 过滤处理Map
      *
      * @param map
-     * @param ignoreNull
-     * @param asString
      * @return
      */
-    private static Map filterMap(Map map, boolean ignoreNull, boolean asString) {
+    private Map filterMap(Map map) {
         Map filter = new HashMap<>(map.size());
         Map real = map;
         if (map instanceof IDataMap) {
@@ -182,16 +195,16 @@ public class DiffUtil {
             if (value == null && ignoreNull) {
                 continue;
             }
-            filter.put(entry.getKey(), asObject(value, ignoreNull, asString));
+            filter.put(entry.getKey(), asObject(value));
         }
         return filter;
     }
 
-    private static Object asObject(Object value, boolean ignoreNull, boolean asString) {
+    private Object asObject(Object value) {
         if (value == null || value instanceof String) {
             return value;
         } else if (value instanceof Map) {
-            return filterMap((Map) value, ignoreNull, asString);
+            return filterMap((Map) value);
         } else if (value.getClass().isPrimitive()) {
             return String.valueOf(value);
         } else if (asString) {
@@ -201,7 +214,7 @@ public class DiffUtil {
         }
     }
 
-    private static DiffMap validateNull(Object parentKey, Object actual, Object expect, boolean ignoreNull) {
+    private DiffMap validateNull(Object parentKey, Object actual, Object expect) {
         if (expect == null) {
             return actual == null || ignoreNull ? new DiffMap() : new DiffMap().add(parentKey, actual, null);
         } else if (actual == null) {

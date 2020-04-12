@@ -7,7 +7,6 @@ import java.util.*;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class ListHelper {
-
     /**
      * 将对象转换为列表
      *
