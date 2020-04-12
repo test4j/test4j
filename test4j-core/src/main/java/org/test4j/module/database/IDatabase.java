@@ -3,6 +3,7 @@ package org.test4j.module.database;
 import org.test4j.module.core.internal.ICoreInitial;
 import org.test4j.module.database.dbop.DBOperator;
 import org.test4j.module.database.dbop.IDBOperator;
+import org.test4j.tools.datagen.TableData;
 
 public interface IDatabase {
     IDBOperator db = ICoreInitial.initDBOperator();

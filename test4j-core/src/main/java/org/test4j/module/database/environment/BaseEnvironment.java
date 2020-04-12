@@ -87,6 +87,8 @@ public abstract class BaseEnvironment implements DBEnvironment {
             try (PreparedStatement st = connection.prepareStatement(sql)) {
                 ResultSet rs = st.executeQuery();
                 return rsFunction.apply(rs);
+            } catch (Throwable e) {
+                throw new RuntimeException("sql:" + sql, e);
             }
         });
     }

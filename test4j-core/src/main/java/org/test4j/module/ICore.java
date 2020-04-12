@@ -9,6 +9,7 @@ import org.test4j.tools.datagen.AbstractDataMap;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings("serial")
 public interface ICore {
@@ -79,6 +80,13 @@ public interface ICore {
             super();
         }
 
+        public DataMap(Map<String, Object> map) {
+            super();
+            for (Map.Entry<String, Object> entry : map.entrySet()) {
+                this.kv(entry.getKey(), entry.getValue());
+            }
+        }
+
         /**
          * 创建一个colSize行的行列式对象
          *
@@ -105,6 +113,15 @@ public interface ICore {
          */
         public static DataMap create(int colSize) {
             return new DataMap<>(colSize);
+        }
+
+        /**
+         * @param text
+         * @return
+         */
+        public static DataMap create(String text) {
+
+            return null;
         }
 
         @Override

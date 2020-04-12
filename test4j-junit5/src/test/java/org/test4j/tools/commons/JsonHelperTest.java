@@ -24,25 +24,6 @@ public class JsonHelperTest extends Test4J {
     }
 
     @Test
-    public void fromDat() {
-        String filename = "file:" + System.getProperty("user.dir")
-                + "/../test4j-btest/src/main/resources/org/test4j/tools/commons/manager.dat";
-        want.file(filename).isExists();
-
-        Manager manager = JSONHelper.fromDatFile(Manager.class, filename);
-        want.object(manager).eqByProperties("name", "Tony Tester");
-    }
-
-    @Test
-    public void fromDat_Classpath() {
-        String filename = "org/test4j/tools/commons/manager.dat";
-        Manager manager = JSONHelper.fromDatFile(Manager.class, filename);
-        want.object(manager).eqByProperties("name", "Tony Tester")
-                .eqByProperties("phoneNumber.number", "0571-88886666");
-        want.date(manager.getDate()).isYear(2009).isMonth("08").isHour(16);
-    }
-
-    @Test
     public void toDat_List() {
         String filename = tempDir + "/managers.dat";
         List<?> list = Arrays.asList(Manager.mock(), Manager.mock());

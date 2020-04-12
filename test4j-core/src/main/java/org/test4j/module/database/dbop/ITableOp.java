@@ -88,4 +88,20 @@ public interface ITableOp {
      * @return
      */
     ITableOp deleteWhere(String where);
+    /**
+     * 打印成dataMap形式
+     *
+     * @param where
+     * @param mapName DataMap名称
+     */
+    String printAsDataMap(String where, String mapName);
+
+    /**
+     * 打印成多行dataMap形式
+     *
+     * @param where
+     * @param mapName DataMap名称
+     * @return
+     */
+    String printAsMulMap(String where, String mapName);
 }

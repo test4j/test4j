@@ -45,7 +45,7 @@ public final class JSON {
      * @param <T>
      * @return
      */
-    public static <T> List<T> toList(String json, Type... klass) {
+    public static <T> List<T> toList(String json, Class<T> klass) {
         return JSONFactory.instance().toList(json, klass);
     }
 

@@ -48,7 +48,7 @@ public class FastJSONImpl implements JSONInterface {
     }
 
     @Override
-    public <T> List<T> toList(String json, Type[] klass) {
+    public <T> List<T> toList(String json, Class<T> klass) {
         return (List<T>) JSON.parseArray(json, klass);
     }
 

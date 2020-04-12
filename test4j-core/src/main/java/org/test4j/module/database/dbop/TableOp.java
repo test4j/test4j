@@ -6,20 +6,22 @@ import org.test4j.hamcrest.iassert.impl.ObjectAssert;
 import org.test4j.hamcrest.iassert.intf.ICollectionAssert;
 import org.test4j.hamcrest.iassert.intf.INumberAssert;
 import org.test4j.hamcrest.iassert.intf.IObjectAssert;
-import org.test4j.json.JSON;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.database.environment.DBEnvironment;
 import org.test4j.module.database.environment.DBEnvironmentFactory;
 import org.test4j.module.database.sql.Test4JSqlContext;
 import org.test4j.module.database.utility.DBHelper;
 import org.test4j.module.database.utility.SqlRunner;
-import org.test4j.tools.commons.StringHelper;
 import org.test4j.tools.datagen.IDataMap;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
 
 import static org.test4j.module.database.dbop.DBOperator.IN_DB_OPERATOR;
+import static org.test4j.tools.commons.StringHelper.isBlankOrNull;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class TableOp implements ITableOp {
@@ -34,7 +36,7 @@ public class TableOp implements ITableOp {
     public TableOp(DBEnvironment env, String table) {
         this.env = env;
         this.table = table;
-        if (StringHelper.isBlankOrNull(this.table)) {
+        if (isBlankOrNull(this.table)) {
             throw new RuntimeException("the table name can't be null.");
         }
     }
@@ -91,8 +93,7 @@ public class TableOp implements ITableOp {
     public ICollectionAssert query() {
         this.setDbOperator(true);
         try {
-            String query = "select * from " + table;
-            List list = SqlRunner.queryMapList(env, query);
+            List<Map<String, Object>> list = selectData(null);
             return new CollectionAssert(list);
         } finally {
             this.setDbOperator(false);
@@ -151,9 +152,7 @@ public class TableOp implements ITableOp {
     public ICollectionAssert queryWhere(String where) {
         this.setDbOperator(true);
         try {
-            String _where = StringHelper.isBlankOrNull(where) ? "" : " where " + where;
-            String query = "select * from " + table + _where;
-            List list = SqlRunner.queryMapList(env, query);
+            List<Map<String, Object>> list = selectData(where);
             return new CollectionAssert(list);
         } finally {
             this.setDbOperator(false);
@@ -164,10 +163,7 @@ public class TableOp implements ITableOp {
     public ICollectionAssert printAndAssert(String where) {
         this.setDbOperator(true);
         try {
-            String _where = StringHelper.isBlankOrNull(where) ? "" : " where " + where;
-            String query = "select * from " + table + _where;
-            List list = SqlRunner.queryMapList(env, query);
-            MessageHelper.info(query + "\n\t" + JSON.toJSON(list, true));
+            List<Map<String, Object>> list = selectData(where);
             return new CollectionAssert(list);
         } finally {
             this.setDbOperator(false);
@@ -193,5 +189,79 @@ public class TableOp implements ITableOp {
     private void setDbOperator(boolean bool) {
         IN_DB_OPERATOR.set(bool);
         Test4JSqlContext.setTestOpStatus(bool);
+    }
+
+    @Override
+    public String printAsDataMap(String where, String mapName) {
+        this.setDbOperator(true);
+        try {
+            List<Map<String, Object>> list = selectData(where);
+            boolean isDefault = isBlankOrNull(mapName);
+            StringBuilder buff = new StringBuilder("\n").append(isDefault ? "DataMap" : mapName).append(".create(").append(list.size()).append(")");
+            Map<String, List<String>> data = new HashMap<>(20);
+            for (Map<String, Object> map : list) {
+                for (Map.Entry<String, Object> entry : map.entrySet()) {
+                    String key = entry.getKey();
+                    String value = entry.getValue() == null ? "null" : quota + entry.getValue() + quota;
+                    if (!data.containsKey(key)) {
+                        data.put(key, new ArrayList());
+                    }
+                    data.get(key).add(value);
+                }
+            }
+            for (Map.Entry<String, List<String>> entry : data.entrySet()) {
+                String value = entry.getValue().stream().collect(Collectors.joining(", "));
+                if (!value.contains(quota)) {
+                    continue;
+                }
+                if (isDefault) {
+                    buff.append("\n\t.kv(").append(quota).append(entry.getKey()).append(quota).append(", ").append(value).append(")");
+                } else {
+                    buff.append("\n\t.").append(entry.getKey()).append(".values(").append(value).append(")");
+                }
+            }
+            String text = buff.toString();
+            MessageHelper.info(text);
+            return text;
+        } finally {
+            this.setDbOperator(false);
+        }
+    }
+
+    @Override
+    public String printAsMulMap(String where, String mapName) {
+        this.setDbOperator(true);
+        try {
+            List<Map<String, Object>> list = selectData(where);
+            boolean isDefault = isBlankOrNull(mapName);
+            String text = "";
+            for (Map<String, Object> map : list) {
+                StringBuilder buff = new StringBuilder("\n").append(isDefault ? "DataMap" : mapName).append(".create(").append(1).append(")");
+                for (Map.Entry<String, Object> entry : map.entrySet()) {
+                    if (entry.getValue() == null) {
+                        continue;
+                    }
+                    String value = entry.getValue() == null ? "null" : quota + entry.getValue() + quota;
+                    if (isDefault) {
+                        buff.append("\n\t.kv(").append(quota).append(entry.getKey()).append(quota).append(", ").append(value).append(")");
+                    } else {
+                        buff.append("\n\t.").append(entry.getKey()).append(".values(").append(value).append(")");
+                    }
+                }
+                text += ("".equals(text) ? "" : ",") + buff.toString();
+            }
+            MessageHelper.info(text);
+            return text;
+        } finally {
+            this.setDbOperator(false);
+        }
+    }
+
+    static String quota = "\"";
+
+    private List<Map<String, Object>> selectData(String where) {
+        String _where = isBlankOrNull(where) ? "" : " where " + where.trim();
+        String query = "select * from " + table + _where;
+        return SqlRunner.queryMapList(env, query);
     }
 }

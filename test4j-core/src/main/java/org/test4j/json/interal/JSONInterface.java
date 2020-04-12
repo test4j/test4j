@@ -40,7 +40,7 @@ public interface JSONInterface {
      * @param <T>
      * @return
      */
-    <T> List<T> toList(String json, Type[] klass);
+    <T> List<T> toList(String json, Class<T> klass);
 
     /**
      * 反序列化json串

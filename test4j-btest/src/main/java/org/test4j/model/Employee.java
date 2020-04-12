@@ -15,7 +15,7 @@ public class Employee implements java.io.Serializable {
 
     private String name;
 
-    private transient double sarary;
+    private transient double salary;
 
     private Date date;
 
@@ -23,8 +23,8 @@ public class Employee implements java.io.Serializable {
         super();
     }
 
-    public Employee(String name, double sarary) {
+    public Employee(String name, double salary) {
         this.name = name;
-        this.sarary = sarary;
+        this.salary = salary;
     }
 }

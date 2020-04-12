@@ -19,6 +19,9 @@ public class Address implements java.io.Serializable {
 
     private String name;
 
+    public Address() {
+    }
+
     public Address(String street) {
         this.street = street;
     }

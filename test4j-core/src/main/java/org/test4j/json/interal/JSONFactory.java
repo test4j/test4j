@@ -1,6 +1,7 @@
 package org.test4j.json.interal;
 
 import org.test4j.json.impl.FastJSONImpl;
+import org.test4j.json.impl.GsonImpl;
 import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.commons.ConfigHelper;
 import org.test4j.tools.commons.StringHelper;
@@ -28,9 +29,9 @@ public class JSONFactory {
     }
 
     private static JSONInterface createJsonInterface() {
-        String klassName = ConfigHelper.getString("test4j.json.interface.impl");
+        String klassName = ConfigHelper.getString("test4j.json");
         if (StringHelper.isBlankOrNull(klassName)) {
-            klassName = FastJSONImpl.class.getName();
+            klassName = GsonImpl.class.getName();
         }
         return ClazzHelper.createInstanceOfType(klassName);
     }

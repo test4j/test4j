@@ -69,24 +69,32 @@ public interface IDataMap<DM> {
     }
 
     /**
-     * 返回单个value值时String的场景
+     * 返回单个value值是String的场景
      *
      * @param key
      * @return
      */
     default String getString(String key) {
-        return String.valueOf(get(key).row(1));
+        return String.valueOf(get(key).row(0));
     }
 
 
     /**
-     * 获取第 row 行所有的对象值
+     * 获取第 row 行对象值
      *
      * @param row
      * @return
      */
     Map<String, ?> row(int row);
 
+    /**
+     * same as row(0)
+     *
+     * @return
+     */
+    default Map<String, ?> map() {
+        return row(0);
+    }
 
     /**
      * 返回记录集列表

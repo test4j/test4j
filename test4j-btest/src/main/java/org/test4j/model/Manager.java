@@ -17,14 +17,14 @@ public class Manager extends Employee {
     private static final long serialVersionUID = 843725563822394654L;
     private Employee secretary;
 
-    private Serializable phoneNumber;
+    private PhoneNumber phoneNumber;
 
     public Manager() {
         super();
     }
 
-    public Manager(String name, double sarary) {
-        super(name, sarary);
+    public Manager(String name, double salary) {
+        super(name, salary);
     }
 
     public static Manager mock() {

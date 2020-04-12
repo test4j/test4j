@@ -1,0 +1,27 @@
+{
+  "select * from t_user": [
+    {
+      "user_name": "nam1",
+      "address_id": "22",
+      "age": 34,
+      "version": "2222"
+    },
+    {
+      "user_name": "nam2",
+      "address_id": "22",
+      "age": 34,
+      "version": "2222"
+    }
+  ],
+  "address": [
+    {
+      "address": "address1"
+    },
+    {
+      "address": "address2"
+    },
+    {
+      "address": "address3"
+    }
+  ]
+}

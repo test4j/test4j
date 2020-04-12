@@ -6,6 +6,8 @@ import org.test4j.hamcrest.iassert.impl.ObjectAssert;
 import org.test4j.hamcrest.iassert.intf.ICollectionAssert;
 import org.test4j.hamcrest.iassert.intf.IMapAssert;
 import org.test4j.hamcrest.iassert.intf.IObjectAssert;
+import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.module.ICore;
 import org.test4j.module.database.environment.DBEnvironment;
 import org.test4j.module.database.environment.DBEnvironmentFactory;
 import org.test4j.module.database.sql.SqlList;
@@ -13,6 +15,8 @@ import org.test4j.module.database.sql.Test4JSqlContext;
 import org.test4j.module.database.utility.SqlRunner;
 import org.test4j.tools.commons.ConfigHelper;
 import org.test4j.tools.commons.ExceptionWrapper;
+import org.test4j.tools.commons.StringHelper;
+import org.test4j.tools.datagen.TableData;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -112,43 +116,10 @@ public class DBOperator implements IDBOperator {
     }
 
     @Override
-    public IMapAssert queryAsMap(String query) {
-        IN_DB_OPERATOR.set(true);
-        try {
-            Map<String, Object> map = SqlRunner.queryMap(env(), query);
-            return new MapAssert(map);
-        } finally {
-            IN_DB_OPERATOR.set(false);
-        }
-    }
-
-    @Override
-    public IObjectAssert queryAsPoJo(String query, Class objClazz) {
-        IN_DB_OPERATOR.set(true);
-        try {
-            Object o = SqlRunner.query(env(), query, objClazz);
-            return new ObjectAssert(o);
-        } finally {
-            IN_DB_OPERATOR.set(false);
-        }
-    }
-
-    @Override
     public ICollectionAssert query(String sql) {
         IN_DB_OPERATOR.set(true);
         try {
             List list = SqlRunner.queryMapList(env(), sql);
-            return new CollectionAssert(list);
-        } finally {
-            IN_DB_OPERATOR.set(false);
-        }
-    }
-
-    @Override
-    public ICollectionAssert queryList(String query, Class pojo) {
-        IN_DB_OPERATOR.set(true);
-        try {
-            List list = SqlRunner.queryList(env(), query, pojo);
             return new CollectionAssert(list);
         } finally {
             IN_DB_OPERATOR.set(false);
@@ -181,71 +152,65 @@ public class DBOperator implements IDBOperator {
     }
 
     @Override
-    public List<Map<String, Object>> returnList(String table) {
+    public List<Object> returnList(String query, Class pojoClazz) {
         IN_DB_OPERATOR.set(true);
         try {
-            String query = "select * from " + table;
-            List list = SqlRunner.queryMapList(env(), query);
-            return list;
+            String _query = query.trim();
+            if (!_query.toLowerCase().startsWith("select")) {
+                _query = "select * from " + query;
+            }
+            if (pojoClazz == null) {
+                return SqlRunner.queryMapList(env(), query);
+            } else {
+                return SqlRunner.queryList(env(), _query, pojoClazz);
+            }
         } finally {
             IN_DB_OPERATOR.set(false);
         }
     }
 
-    @Override
-    public List<Object> returnList(String table, Class pojoClazz) {
+    private void deleteWhere(String table, String where) {
         IN_DB_OPERATOR.set(true);
         try {
-            String query = "select * from " + table;
-            List list = SqlRunner.queryList(env(), query, pojoClazz);
-            return list;
-        } finally {
-            IN_DB_OPERATOR.set(false);
-        }
-    }
-
-    @Override
-    public List<Map<String, Object>> returnQuery(String query) {
-        IN_DB_OPERATOR.set(true);
-        try {
-            List list = SqlRunner.queryMapList(env(), query);
-            return list;
-        } finally {
-            IN_DB_OPERATOR.set(false);
-        }
-    }
-
-    @Override
-    public IDBOperator deleteWhere(String table, String where) {
-        IN_DB_OPERATOR.set(true);
-        try {
-            String sql = String.format("delete from %s where %s", table, where);
+            String sql = "delete from " + table;
+            if (!StringHelper.isBlankOrNull(where)) {
+                sql += " where " + where;
+            }
             SqlRunner.execute(env(), sql);
-            return this;
         } finally {
             IN_DB_OPERATOR.set(false);
         }
-    }
-
-    @Override
-    public List<Object> returnQuery(String query, Class pojoClazz) {
-        IN_DB_OPERATOR.set(true);
-        try {
-            List list = SqlRunner.queryList(env(), query, pojoClazz);
-            return list;
-        } finally {
-            IN_DB_OPERATOR.set(false);
-        }
-    }
-
-    @Override
-    public IDBOperator cleanSqlContext() {
-        Test4JSqlContext.clean();
-        return this;
     }
 
     @Override
     public SqlList sqlList() {
         return Test4JSqlContext.getSqlContext();
+    }
+
+    @Override
+    public IDBOperator insert(TableData data, boolean clean) {
+        for (Map.Entry<String, List<Map<String, String>>> entry : data.entrySet()) {
+            String table = entry.getKey();
+            List<Map<String, String>> records = entry.getValue();
+            if (clean) {
+                this.deleteWhere(table, null);
+            }
+            for (Map<String, String> record : records) {
+                this.table(table).insert(new ICore.DataMap(record));
+            }
+        }
+        return this;
+    }
+
+    @Override
+    public void queryEq(TableData data) {
+        for (Map.Entry<String, List<Map<String, String>>> entry : data.entrySet()) {
+            String query = entry.getKey();
+            if (!query.trim().toLowerCase().startsWith("select")) {
+                query = "select * from " + query;
+            }
+            List<Map<String, String>> records = entry.getValue();
+            this.query(query).eqReflect(records, EqMode.IGNORE_DEFAULTS, EqMode.IGNORE_ORDER);
+        }
     }
 }
