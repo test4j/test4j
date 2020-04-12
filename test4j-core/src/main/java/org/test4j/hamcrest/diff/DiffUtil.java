@@ -1,6 +1,7 @@
 package org.test4j.hamcrest.diff;
 
 import org.test4j.exception.NoSuchFieldRuntimeException;
+import org.test4j.hamcrest.iassert.interal.IAssert;
 import org.test4j.tools.commons.ArrayHelper;
 import org.test4j.tools.commons.ListHelper;
 import org.test4j.tools.datagen.IDataMap;
@@ -47,7 +48,10 @@ public class DiffUtil {
             return this.diff;
         }
         if (ArrayHelper.isCollOrArray(actual)) {
-            if (expect instanceof IDataMap) {
+            if (expect instanceof IAssert) {
+                // TODO
+                throw new RuntimeException("TODO");
+            } else if (expect instanceof IDataMap) {
                 List _actual = ListHelper.toList(actual, false);
                 List _expect = ((IDataMap) expect).rows();
                 this.compareList(parentKey, _actual, _expect);
@@ -59,7 +63,10 @@ public class DiffUtil {
                 this.diff.add(parentKey, "actual is a List", "expect should be a Map List");
             }
         } else {
-            if (expect instanceof Map) {
+            if (expect instanceof IAssert) {
+                // TODO
+                throw new RuntimeException("TODO");
+            } else if (expect instanceof Map) {
                 this.compareObject(parentKey, actual, (Map) expect);
             } else {
                 this.diff.add(parentKey, "actual is an object", "expect should be a Map");
