@@ -4,10 +4,10 @@ import org.junit.jupiter.api.Test;
 import org.test4j.junit5.Test4J;
 import org.test4j.module.core.utility.MessageHelper;
 
-public class DiffUtilTest_List extends Test4J {
+public class DiffTest_List extends Test4J {
     @Test
     void test_list() {
-        DiffMap diff = new DiffUtil(false, true, true).diff(
+        DiffMap diff = new Diff(false, true, true).diff(
                 DataMap.create(4)
                         .kv("key1", "value11", "value12", "value13", "value14")
                         .kv("key2", "value21", "value22", "value23", "value24")
@@ -26,7 +26,7 @@ public class DiffUtilTest_List extends Test4J {
 
     @Test
     void test_ignore_null() {
-        DiffMap diff = new DiffUtil(true, true, true).diff(
+        DiffMap diff = new Diff(true, true, true).diff(
                 DataMap.create(4)
                         .kv("key1", "value11", "value12", "value13", "value14")
                         .kv("key2", "value21", "value22", "value23", "value24")
@@ -43,7 +43,7 @@ public class DiffUtilTest_List extends Test4J {
 
     @Test
     void test_nest_map() {
-        DiffMap diff = new DiffUtil(true, true, true).diff(
+        DiffMap diff = new Diff(true, true, true).diff(
                 DataMap.create(2)
                         .kv("key1", "value11",
                                 DataMap.create(2)

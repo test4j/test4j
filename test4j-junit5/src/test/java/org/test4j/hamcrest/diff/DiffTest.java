@@ -7,11 +7,11 @@ import org.test4j.model.User;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.tools.commons.DateHelper;
 
-class DiffUtilTest extends Test4J {
+class DiffTest extends Test4J {
 
     @Test
     void diff_as_string_true() {
-        DiffMap diff = new DiffUtil(false, true, false).diff(
+        DiffMap diff = new Diff(false, true, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", 100)
@@ -27,7 +27,7 @@ class DiffUtilTest extends Test4J {
 
     @Test
     void diff_as_string_false() {
-        DiffMap diff = new DiffUtil(false, false, false).diff(
+        DiffMap diff = new Diff(false, false, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", 100)
@@ -44,7 +44,7 @@ class DiffUtilTest extends Test4J {
 
     @Test
     void diff_ignoreNull_false() {
-        DiffMap diff = new DiffUtil(false, true, false).diff(
+        DiffMap diff = new Diff(false, true, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", 100)
@@ -60,7 +60,7 @@ class DiffUtilTest extends Test4J {
 
     @Test
     void diff_ignoreNull_true() {
-        DiffMap diff = new DiffUtil(true, true, false).diff(
+        DiffMap diff = new Diff(true, true, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", 100)
@@ -76,7 +76,7 @@ class DiffUtilTest extends Test4J {
 
     @Test
     void diff_date_as_string() {
-        DiffMap diff = new DiffUtil(false, true, false).diff(
+        DiffMap diff = new Diff(false, true, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("date", DateHelper.parse("2020-04-19 23:10:01"))
@@ -92,7 +92,7 @@ class DiffUtilTest extends Test4J {
 
     @Test
     void diff_date_as_string_false() {
-        DiffMap diff = new DiffUtil(false, false, false).diff(
+        DiffMap diff = new Diff(false, false, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("date", DateHelper.parse("2020-04-19 23:10:01"))
@@ -108,7 +108,7 @@ class DiffUtilTest extends Test4J {
 
     @Test
     void diff_nested_map_as_string() {
-        DiffMap diff = new DiffUtil(false, true, false).diff(
+        DiffMap diff = new Diff(false, true, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", DataMap.create()
@@ -129,7 +129,7 @@ class DiffUtilTest extends Test4J {
 
     @Test
     void diff_nested_map_not_string() {
-        DiffMap diff = new DiffUtil(false, false, false).diff(
+        DiffMap diff = new Diff(false, false, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", DataMap.create()
@@ -151,7 +151,7 @@ class DiffUtilTest extends Test4J {
 
     @Test
     void diff_nested_map_not_property() {
-        DiffMap diff = new DiffUtil(false, false, false).diff(
+        DiffMap diff = new Diff(false, false, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", DataMap.create()
@@ -172,7 +172,7 @@ class DiffUtilTest extends Test4J {
 
     @Test
     void diff_user() {
-        DiffMap diff = new DiffUtil(false, true, false).diff(
+        DiffMap diff = new Diff(false, true, false).diff(
                 new User()
                         .setName("name1")
                         .setAge(45)

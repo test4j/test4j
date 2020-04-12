@@ -16,7 +16,7 @@ import static org.test4j.hamcrest.diff.DiffItem.withoutQuotaJSON;
  *
  * @author wudarui
  */
-public class DiffUtil {
+public class Diff {
     private final boolean ignoreNull;
 
     private final boolean asString;
@@ -25,14 +25,14 @@ public class DiffUtil {
 
     private DiffMap diff = new DiffMap();
 
-    public DiffUtil(boolean ignoreNull, boolean asString, boolean ignoreOrder) {
+    public Diff(boolean ignoreNull, boolean asString, boolean ignoreOrder) {
         this.ignoreNull = ignoreNull;
         this.asString = asString;
         this.ignoreOrder = ignoreOrder;
     }
 
-    public DiffUtil copy() {
-        return new DiffUtil(this.ignoreNull, this.asString, this.ignoreOrder);
+    public Diff copy() {
+        return new Diff(this.ignoreNull, this.asString, this.ignoreOrder);
     }
 
     public DiffMap diff(Object actual, Object expect) {
