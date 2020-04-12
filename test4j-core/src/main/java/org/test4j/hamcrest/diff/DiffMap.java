@@ -6,6 +6,8 @@ import org.test4j.json.JSON;
 
 import java.util.*;
 
+import static org.test4j.tools.commons.ListHelper.toList;
+
 /**
  * 差异项列表
  *
@@ -15,30 +17,28 @@ import java.util.*;
 @Accessors(chain = true)
 public class DiffMap {
     int diff = 0;
-    Map<String, Object> message = new TreeMap<>();
+    /**
+     * value: String List
+     */
+    Map<String, String> message = new TreeMap<>();
 
     public DiffMap add(Object key, Object actual, Object expect) {
-        this.message.put(String.valueOf(key), new DiffItem(actual, expect));
+        this.message.put(String.valueOf(key), new DiffItem(actual, expect).toString());
         this.diff++;
         return this;
     }
 
-    public DiffMap add(Object key, DiffMap nested) {
+    public DiffMap add(DiffMap nested) {
         if (nested.diff == 0) {
             return this;
         }
-        String _key = String.valueOf(key);
-        Object value = message.get(_key);
-        if (value == null) {
-            this.message.put(_key, nested.message);
-        } else {
-            if (!(value instanceof Collection)) {
-                List list = new ArrayList();
-                list.add(value);
-                this.message.put(_key, list);
-                value = list;
+        for (Map.Entry<String, String> entry : nested.message.entrySet()) {
+            String key = entry.getKey();
+            if (this.message.containsKey(key)) {
+                this.message.put(key, this.message.get(key) + "; " + entry.getValue());
+            } else {
+                this.message.put(key, entry.getValue());
             }
-            ((Collection) value).add(nested.message);
         }
         this.diff += nested.diff;
         return this;
@@ -50,6 +50,10 @@ public class DiffMap {
      * @return
      */
     public String message() {
-        return JSON.toJSON(this.message, true);
+        StringBuffer buff = new StringBuffer("\n");
+        for (Map.Entry<String, String> entry : this.message.entrySet()) {
+            buff.append(entry.getKey()).append(":").append(entry.getValue()).append("\n");
+        }
+        return buff.toString();
     }
 }

@@ -32,15 +32,6 @@ public class MatchItem {
     }
 
     /**
-     * 未匹配列表
-     *
-     * @return
-     */
-    public Collection<DiffMap> getDiffMap() {
-        return this.diffItem.values();
-    }
-
-    /**
      * 移除已经被匹配的项
      *
      * @param matchedSet

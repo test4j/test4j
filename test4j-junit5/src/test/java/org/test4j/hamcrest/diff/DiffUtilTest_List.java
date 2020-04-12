@@ -18,7 +18,10 @@ public class DiffUtilTest_List extends Test4J {
                         .rows());
         MessageHelper.info(diff.message());
         want.number(diff.diff).isGt(0);
-        want.string(diff.message()).contains(new String[]{"actual [1]", "actual [3]", "expect [2]", "expect [3]"});
+        want.string(diff.message()).contains(new String[]{
+                "$[3]~[2].key1", "$[3]~[2].key2", "$[3]~[4].key1", "$[3]~[4].key2",
+                "$[4]~[2].key1", "$[4]~[2].key2", "$[4]~[4].key1"
+        });
     }
 
     @Test
@@ -35,6 +38,31 @@ public class DiffUtilTest_List extends Test4J {
         );
         MessageHelper.info(diff.message());
         want.number(diff.diff).isGt(0);
-        want.string(diff.message()).contains(new String[]{"actual [3]", "expect [3]"});
+        want.string(diff.message()).contains(new String[]{"$[4]~[4].key1", "(String) value14", "(String) value13"});
+    }
+
+    @Test
+    void test_nest_map() {
+        DiffMap diff = new DiffUtil(true, true, true).diff(
+                DataMap.create(2)
+                        .kv("key1", "value11",
+                                DataMap.create(2)
+                                        .kv("nest_key1", "nest1", "nest2")
+                                        .kv("nest_key2", "nest3", "nest4")
+                                        .rows()
+                        )
+                        .rows(),
+                DataMap.create(2)
+                        .kv("key1", "value11",
+                                DataMap.create(2)
+                                        .kv("nest_key1", "nest1", "nest2")
+                                        .kv("nest_key2", "nest3", "nest5")
+                                        .rows()
+                        )
+                        .rows()
+        );
+        MessageHelper.info(diff.message());
+        want.number(diff.diff).isGt(0);
+        want.string(diff.message()).contains(new String[]{"$[2]~[2].key1[2]~[2].nest_key2", "(String) nest4", "(String) nest5"});
     }
 }

@@ -39,7 +39,7 @@ class DiffUtilTest extends Test4J {
         );
         MessageHelper.info(diff.message());
         want.number(diff.diff).isEqualTo(1);
-        want.string(diff.message()).contains(new String[]{"key2", "(Integer) 100", "(String) 100"});
+        want.string(diff.message()).contains(new String[]{"$.key2", "(Integer) 100", "(String) 100"});
     }
 
     @Test
@@ -52,11 +52,10 @@ class DiffUtilTest extends Test4J {
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", null)
-                        .map()
         );
         MessageHelper.info(diff.message());
         want.number(diff.diff).isEqualTo(1);
-        want.string(diff.message()).contains(new String[]{"key2", "(Integer) 100", "<null>"});
+        want.string(diff.message()).contains(new String[]{"$.key2", "(Integer) 100", "<null>"});
     }
 
     @Test
@@ -104,7 +103,7 @@ class DiffUtilTest extends Test4J {
         );
         MessageHelper.info(diff.message());
         want.number(diff.diff).isEqualTo(1);
-        want.string(diff.message()).contains(new String[]{"date", "(Date) 2020-04-19 23:10:01", "(String) 2020-04-19 23:10:01"});
+        want.string(diff.message()).contains(new String[]{"$.date", "(Date) 2020-04-19 23:10:01", "(String) 2020-04-19 23:10:01"});
     }
 
     @Test
@@ -147,7 +146,7 @@ class DiffUtilTest extends Test4J {
         );
         MessageHelper.info(diff.message());
         want.number(diff.diff).isEqualTo(1);
-        want.string(diff.message()).contains(new String[]{"key2", "date", "(Date) 2020-04-19 23:10:01", "(String) 2020-04-19 23:10:01"});
+        want.string(diff.message()).contains(new String[]{"$.key2.date", "(Date) 2020-04-19 23:10:01", "(String) 2020-04-19 23:10:01"});
     }
 
     @Test
@@ -168,7 +167,7 @@ class DiffUtilTest extends Test4J {
         );
         MessageHelper.info(diff.message());
         want.number(diff.diff).isEqualTo(1);
-        want.string(diff.message()).contains(new String[]{"key2", "date", "<null>", "(String) 2020-04-19 23:10:01"});
+        want.string(diff.message()).contains(new String[]{"$.key2.date", "<null>", "(String) 2020-04-19 23:10:01"});
     }
 
     @Test
@@ -190,6 +189,6 @@ class DiffUtilTest extends Test4J {
         );
         MessageHelper.info(diff.message());
         want.number(diff.diff).isEqualTo(1);
-        want.string(diff.message()).contains(new String[]{"address", "postcode", "(String) 23232", "(String) 23231"});
+        want.string(diff.message()).contains(new String[]{"$.address.postcode", "expect=(String) 23231", "actual=(String) 23232"});
     }
 }

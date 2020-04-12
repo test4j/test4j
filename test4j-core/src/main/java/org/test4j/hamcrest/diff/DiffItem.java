@@ -1,6 +1,8 @@
 package org.test4j.hamcrest.diff;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.test4j.json.JSON;
 
@@ -9,21 +11,27 @@ import org.test4j.json.JSON;
  *
  * @author wudarui
  */
-@Data
+@Getter
+@Setter
 @Accessors(chain = true)
 public class DiffItem {
-    /**
-     * 实际值
-     */
-    private String actual;
     /**
      * 期望值
      */
     private String expect;
+    /**
+     * 实际值
+     */
+    private String actual;
 
     public DiffItem(Object actual, Object expect) {
         this.actual = asString(actual);
         this.expect = asString(expect);
+    }
+
+    @Override
+    public String toString() {
+        return "\n\texpect=" + expect + "\n\tactual=" + actual + "";
     }
 
     private String asString(Object value) {
