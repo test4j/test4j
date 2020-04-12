@@ -47,11 +47,12 @@ public class Diff {
             }
             return this.diff;
         }
+        if (expect instanceof IAssert) {
+            // TODO
+            throw new RuntimeException("TODO");
+        }
         if (ArrayHelper.isCollOrArray(actual)) {
-            if (expect instanceof IAssert) {
-                // TODO
-                throw new RuntimeException("TODO");
-            } else if (expect instanceof IDataMap) {
+            if (expect instanceof IDataMap) {
                 List _actual = ListHelper.toList(actual, false);
                 List _expect = ((IDataMap) expect).rows();
                 this.compareList(parentKey, _actual, _expect);
@@ -63,10 +64,7 @@ public class Diff {
                 this.diff.add(parentKey, "actual is a List", "expect should be a Map List");
             }
         } else {
-            if (expect instanceof IAssert) {
-                // TODO
-                throw new RuntimeException("TODO");
-            } else if (expect instanceof Map) {
+            if (expect instanceof Map) {
                 this.compareObject(parentKey, actual, (Map) expect);
             } else {
                 this.diff.add(parentKey, "actual is an object", "expect should be a Map");
@@ -75,6 +73,13 @@ public class Diff {
         return this.diff;
     }
 
+    /**
+     * 队列比较
+     *
+     * @param parentKey
+     * @param actualList
+     * @param expectList
+     */
     private void compareList(Object parentKey, List actualList, List<Map> expectList) {
         if (validateNull(parentKey, actualList, expectList)) {
             return;
@@ -138,25 +143,32 @@ public class Diff {
         }
     }
 
-
+    /**
+     * 对象比较
+     *
+     * @param parentKey
+     * @param actual
+     * @param expect
+     */
     private void compareObject(Object parentKey, Object actual, Map expect) {
-        if (validateNull(parentKey, actual, expect)) {
+        if (this.validateNull(parentKey, actual, expect)) {
             return;
         }
         Map<String, Object> _expect = filterMap(expect);
         Map _actual = asMap(actual, _expect.keySet());
         for (Map.Entry entry : _expect.entrySet()) {
-            Object key = entry.getKey();
-            Object lvalue = _actual.get(key);
+            String key = parentKey + "." + entry.getKey();
+            Object lvalue = _actual.get(entry.getKey());
             Object rvalue = entry.getValue();
-            if (rvalue instanceof Map || rvalue == null) {
-                this.compareObject(parentKey + "." + key, lvalue, (Map) rvalue);
-            } else if (ArrayHelper.isCollOrArray(rvalue)) {
-                this.compare(parentKey + "." + key, lvalue, rvalue);
+            if (this.validateNull(key, lvalue, rvalue)) {
+                continue;
+            }
+            if (ArrayHelper.isCollOrArray(lvalue) || rvalue instanceof Map) {
+                this.compare(key, lvalue, rvalue);
             } else {
                 Object _lvalue = asObject(lvalue);
                 if (!rvalue.equals(_lvalue)) {
-                    diff.add(parentKey + "." + key, lvalue, rvalue);
+                    diff.add(key, lvalue, rvalue);
                 }
             }
         }
@@ -231,7 +243,8 @@ public class Diff {
         } else if (actual == null) {
             this.diff.add(parentKey, null, expect);
             return true;
+        } else {
+            return actual.equals(expect);
         }
-        return actual.equals(expect);
     }
 }
