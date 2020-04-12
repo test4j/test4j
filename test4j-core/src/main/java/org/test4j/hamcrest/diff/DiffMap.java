@@ -4,8 +4,7 @@ import lombok.Data;
 import lombok.experimental.Accessors;
 import org.test4j.json.JSON;
 
-import java.util.HashMap;
-import java.util.Map;
+import java.util.*;
 
 /**
  * 差异项列表
@@ -16,7 +15,7 @@ import java.util.Map;
 @Accessors(chain = true)
 public class DiffMap {
     int diff = 0;
-    Map<String, Object> message = new HashMap<>();
+    Map<String, Object> message = new TreeMap<>();
 
     public DiffMap add(Object key, Object actual, Object expect) {
         this.message.put(String.valueOf(key), new DiffItem(actual, expect));
@@ -28,7 +27,19 @@ public class DiffMap {
         if (nested.diff == 0) {
             return this;
         }
-        this.message.put(String.valueOf(key), nested.message);
+        String _key = String.valueOf(key);
+        Object value = message.get(_key);
+        if (value == null) {
+            this.message.put(_key, nested.message);
+        } else {
+            if (!(value instanceof Collection)) {
+                List list = new ArrayList();
+                list.add(value);
+                this.message.put(_key, list);
+                value = list;
+            }
+            ((Collection) value).add(nested.message);
+        }
         this.diff += nested.diff;
         return this;
     }

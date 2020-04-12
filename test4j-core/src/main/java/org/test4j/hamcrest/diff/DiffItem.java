@@ -13,13 +13,13 @@ import org.test4j.json.JSON;
 @Accessors(chain = true)
 public class DiffItem {
     /**
-     * 期望值
-     */
-    private String expect;
-    /**
      * 实际值
      */
     private String actual;
+    /**
+     * 期望值
+     */
+    private String expect;
 
     public DiffItem(Object actual, Object expect) {
         this.actual = asString(actual);

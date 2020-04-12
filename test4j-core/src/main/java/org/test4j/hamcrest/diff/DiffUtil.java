@@ -68,7 +68,6 @@ public class DiffUtil {
         // 已经被匹配的比较对象
         Set<Integer> matchedExpected = new HashSet<>(size);
         for (int index = 0; index < size; index++) {
-            String key1 = "[" + index + "]";
             Object actual = actualList.get(index);
             MatchItem child = new MatchItem(index);
             for (int loop = 0; loop < size; loop++) {
@@ -76,8 +75,8 @@ public class DiffUtil {
                 if (matchedExpected.contains(loop)) {
                     continue;
                 }
-                String key2 = "[" + loop + "]";
-                DiffMap itemDiff = compare(key1 + key2, actual, expectList.get(loop), ignoreNull, asString);
+                String key = "[" + loop + ":" + index + "]";
+                DiffMap itemDiff = compare(key, actual, expectList.get(loop), ignoreNull, asString);
                 child.add(loop, itemDiff);
                 if (itemDiff.diff == 0) {
                     matchedExpected.add(loop);
@@ -87,15 +86,16 @@ public class DiffUtil {
             all.put(index, child);
         }
         for (Map.Entry<Integer, MatchItem> entry : all.entrySet()) {
-            int key = entry.getKey();
             MatchItem item = entry.getValue();
             if (item.getExpected() != null) {
                 continue;
             }
             item.remove(matchedExpected);
-            for (DiffMap child : item.getDiffMap()) {
-                diff.add(parentKey, child);
+            DiffMap nest = new DiffMap();
+            for (Map.Entry<Integer, DiffMap> child : item.getDiffItem().entrySet()) {
+                nest.add("[" + child.getKey() + "]", child.getValue());
             }
+            diff.add("[" + entry.getKey() + "]", nest);
         }
         return diff;
     }
@@ -132,7 +132,7 @@ public class DiffUtil {
         Map _actual = asMap(actual, _expect.keySet());
         for (Map.Entry entry : _expect.entrySet()) {
             Object key = entry.getKey();
-            Object lvalue = _actual.get(key);
+            Object lvalue = _actual.get(entry.getKey());
             Object rvalue = entry.getValue();
             if (rvalue instanceof Map || rvalue == null) {
                 DiffMap nested = compare(key, lvalue, (Map) rvalue, ignoreNull, asString);
