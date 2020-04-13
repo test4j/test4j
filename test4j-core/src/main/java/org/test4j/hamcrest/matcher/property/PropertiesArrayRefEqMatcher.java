@@ -3,7 +3,7 @@ package org.test4j.hamcrest.matcher.property;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
-import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.hamcrest.matcher.modes.EqMode;
 import org.test4j.tools.commons.StringHelper;
 import org.test4j.tools.reflector.PropertyAccessor;
 

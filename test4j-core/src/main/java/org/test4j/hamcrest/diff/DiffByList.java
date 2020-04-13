@@ -1,7 +1,7 @@
 package org.test4j.hamcrest.diff;
 
 import lombok.Getter;
-import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.hamcrest.matcher.modes.EqMode;
 import org.test4j.tools.commons.ArrayHelper;
 import org.test4j.tools.commons.ListHelper;
 import org.test4j.tools.datagen.IDataMap;

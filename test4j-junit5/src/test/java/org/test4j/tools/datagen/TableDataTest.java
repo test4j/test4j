@@ -1,15 +1,13 @@
 package org.test4j.tools.datagen;
 
 import org.junit.jupiter.api.Test;
-import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.hamcrest.matcher.modes.EqMode;
 import org.test4j.json.JSON;
 import org.test4j.junit5.Test4J;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.tools.commons.ResourceHelper;
 
 import java.io.FileNotFoundException;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class TableDataTest extends Test4J {
 

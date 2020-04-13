@@ -4,17 +4,10 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.test4j.hamcrest.diff.DiffFactory;
 import org.test4j.hamcrest.diff.DiffMap;
-import org.test4j.hamcrest.matcher.property.difference.Difference;
-import org.test4j.hamcrest.matcher.property.reflection.EqMode;
-import org.test4j.hamcrest.matcher.property.reflection.ReflectionComparator;
-import org.test4j.hamcrest.matcher.property.report.DefaultDifferenceReport;
-import org.test4j.hamcrest.matcher.property.report.DifferenceReport;
+import org.test4j.hamcrest.matcher.modes.EqMode;
 
 import java.util.Collection;
 import java.util.List;
-
-import static org.test4j.hamcrest.matcher.property.reflection.ReflectionComparatorFactory.createRefectionComparator;
-
 /**
  * 以反射的方式验证2个对象是否相等
  *
@@ -54,6 +47,7 @@ public class ReflectionEqualMatcher extends BaseMatcher {
         return !difference.hasDiff();
     }
 
+    @Override
     public void describeTo(Description description) {
         if (difference.hasDiff()) {
             description.appendText(difference.message());

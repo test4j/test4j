@@ -2,7 +2,7 @@ package org.test4j.hamcrest.diff;
 
 import lombok.Getter;
 import org.test4j.exception.NoSuchFieldRuntimeException;
-import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.hamcrest.matcher.modes.EqMode;
 import org.test4j.tools.datagen.IDataMap;
 import org.test4j.tools.reflector.PropertyAccessor;
 

@@ -4,19 +4,12 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.test4j.hamcrest.diff.DiffFactory;
 import org.test4j.hamcrest.diff.DiffMap;
-import org.test4j.hamcrest.matcher.property.difference.Difference;
-import org.test4j.hamcrest.matcher.property.reflection.EqMode;
-import org.test4j.hamcrest.matcher.property.reflection.ReflectionComparator;
-import org.test4j.hamcrest.matcher.property.report.DefaultDifferenceReport;
-import org.test4j.hamcrest.matcher.property.report.DifferenceReport;
+import org.test4j.hamcrest.matcher.modes.EqMode;
 import org.test4j.tools.commons.ArrayHelper;
 import org.test4j.tools.commons.ListHelper;
 import org.test4j.tools.reflector.PropertyAccessor;
 
 import java.util.List;
-
-import static org.test4j.hamcrest.matcher.property.reflection.ReflectionComparatorFactory.createRefectionComparator;
-
 
 @SuppressWarnings("rawtypes")
 public class PropertyEqualMatcher extends BaseMatcher {
@@ -43,6 +36,7 @@ public class PropertyEqualMatcher extends BaseMatcher {
         this(expected, property, null);
     }
 
+    @Override
     public boolean matches(Object actual) {
         if (actual == null) {
             buff.append("properties equals matcher, the actual value can't be null.");
@@ -71,6 +65,7 @@ public class PropertyEqualMatcher extends BaseMatcher {
         return !difference.hasDiff();
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText(buff.toString());
         if (difference.hasDiff()) {

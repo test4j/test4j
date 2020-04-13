@@ -28,6 +28,7 @@ public class PropertyAllItemsMatcher extends BaseMatcher {
         }
     }
 
+    @Override
     public boolean matches(Object actual) {
         if (ArrayHelper.isCollOrArray(actual) == false) {
             buff.append("PropertyItemsMatcher, the actual value must be a array or collection.");
@@ -47,6 +48,7 @@ public class PropertyAllItemsMatcher extends BaseMatcher {
     private final StringBuilder buff = new StringBuilder();
     private List actualItems;
 
+    @Override
     public void describeTo(Description description) {
         description.appendText("the propery" + this.property + " values of object is:\n");
         description.appendText(ListHelper.toString(actualItems)).appendText("\n");

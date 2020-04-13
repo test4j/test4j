@@ -1,7 +1,7 @@
 package org.test4j.hamcrest.iassert.intf;
 
 import org.test4j.hamcrest.iassert.interal.*;
-import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.hamcrest.matcher.modes.EqMode;
 import org.test4j.tools.datagen.IDataMap;
 
 /**

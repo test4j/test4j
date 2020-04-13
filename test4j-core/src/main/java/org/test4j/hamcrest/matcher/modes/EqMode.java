@@ -1,4 +1,4 @@
-package org.test4j.hamcrest.matcher.property.reflection;
+package org.test4j.hamcrest.matcher.modes;
 
 /**
  * Modes defining how to compare two values. No mode means strict comparison.

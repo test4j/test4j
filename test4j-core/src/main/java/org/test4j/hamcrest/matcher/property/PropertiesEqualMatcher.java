@@ -4,7 +4,7 @@ import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
 import org.test4j.hamcrest.diff.DiffFactory;
 import org.test4j.hamcrest.diff.DiffMap;
-import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.hamcrest.matcher.modes.EqMode;
 import org.test4j.tools.commons.ArrayHelper;
 import org.test4j.tools.commons.ListHelper;
 import org.test4j.tools.reflector.PropertyAccessor;
@@ -34,6 +34,7 @@ public class PropertiesEqualMatcher extends BaseMatcher {
         this(expected, properties, null);
     }
 
+    @Override
     public boolean matches(Object actual) {
         if (actual == null) {
             buff.append("properties equals matcher, the actual value can't be null.");
@@ -78,6 +79,7 @@ public class PropertiesEqualMatcher extends BaseMatcher {
 
     private final StringBuilder buff = new StringBuilder();
 
+    @Override
     public void describeTo(Description description) {
         description.appendText(buff.toString());
         if (difference.hasDiff()) {

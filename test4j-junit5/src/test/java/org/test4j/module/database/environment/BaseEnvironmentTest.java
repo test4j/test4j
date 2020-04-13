@@ -4,7 +4,7 @@ package org.test4j.module.database.environment;
 import org.junit.jupiter.api.Test;
 import org.test4j.db.ITable;
 import org.test4j.db.datamap.table.UserTableMap;
-import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.hamcrest.matcher.modes.EqMode;
 import org.test4j.module.database.IDatabase;
 
 import static org.test4j.db.mapping.UserMP.*;

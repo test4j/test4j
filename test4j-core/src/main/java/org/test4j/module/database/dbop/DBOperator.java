@@ -1,12 +1,8 @@
 package org.test4j.module.database.dbop;
 
 import org.test4j.hamcrest.iassert.impl.CollectionAssert;
-import org.test4j.hamcrest.iassert.impl.MapAssert;
-import org.test4j.hamcrest.iassert.impl.ObjectAssert;
 import org.test4j.hamcrest.iassert.intf.ICollectionAssert;
-import org.test4j.hamcrest.iassert.intf.IMapAssert;
-import org.test4j.hamcrest.iassert.intf.IObjectAssert;
-import org.test4j.hamcrest.matcher.property.reflection.EqMode;
+import org.test4j.hamcrest.matcher.modes.EqMode;
 import org.test4j.module.ICore;
 import org.test4j.module.database.environment.DBEnvironment;
 import org.test4j.module.database.environment.DBEnvironmentFactory;

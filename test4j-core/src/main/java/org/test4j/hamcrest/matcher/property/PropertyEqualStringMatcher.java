@@ -28,6 +28,7 @@ public class PropertyEqualStringMatcher extends BaseMatcher {
         this(expected, property, null);
     }
 
+    @Override
     public boolean matches(Object actual) {
         if (actual == null) {
             buff.append("properties equals matcher, the actual value can't be null.");
@@ -59,6 +60,7 @@ public class PropertyEqualStringMatcher extends BaseMatcher {
 
     private final StringBuilder buff = new StringBuilder();
 
+    @Override
     public void describeTo(Description description) {
         description.appendText(buff.toString());
     }
