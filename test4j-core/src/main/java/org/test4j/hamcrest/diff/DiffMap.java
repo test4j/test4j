@@ -2,11 +2,11 @@ package org.test4j.hamcrest.diff;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.test4j.json.JSON;
 
-import java.util.*;
+import java.util.Map;
+import java.util.TreeMap;
 
-import static org.test4j.tools.commons.ListHelper.toList;
+import static org.test4j.hamcrest.diff.BaseDiff.asString;
 
 /**
  * 差异项列表
@@ -18,12 +18,16 @@ import static org.test4j.tools.commons.ListHelper.toList;
 public class DiffMap {
     int diff = 0;
     /**
+     * 忽略元素次数
+     */
+    int ignoreCount = 0;
+    /**
      * value: String List
      */
     Map<String, String> message = new TreeMap<>();
 
     public DiffMap add(Object key, Object actual, Object expect) {
-        this.message.put(String.valueOf(key), new DiffItem(actual, expect).toString());
+        this.message.put(String.valueOf(key), diffString(actual, expect));
         this.diff++;
         return this;
     }
@@ -44,6 +48,14 @@ public class DiffMap {
         return this;
     }
 
+    public void addIgnore() {
+        this.ignoreCount++;
+    }
+
+    public String diffString(Object actual, Object expect) {
+        return "\n\texpect=" + asString(expect) + "\n\tactual=" + asString(actual) + "";
+    }
+
     /**
      * 返回差异信息
      *
@@ -55,5 +67,9 @@ public class DiffMap {
             buff.append(entry.getKey()).append(":").append(entry.getValue()).append("\n");
         }
         return buff.toString();
+    }
+
+    public boolean hasDiff() {
+        return this.diff > 0;
     }
 }

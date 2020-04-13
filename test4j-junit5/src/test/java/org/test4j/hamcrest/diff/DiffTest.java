@@ -11,7 +11,7 @@ class DiffTest extends Test4J {
 
     @Test
     void diff_as_string_true() {
-        DiffMap diff = new Diff(false, true, false).diff(
+        DiffMap diff = new DiffFactory(false, true, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", 100)
@@ -27,7 +27,7 @@ class DiffTest extends Test4J {
 
     @Test
     void diff_as_string_false() {
-        DiffMap diff = new Diff(false, false, false).diff(
+        DiffMap diff = new DiffFactory(false, false, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", 100)
@@ -44,7 +44,7 @@ class DiffTest extends Test4J {
 
     @Test
     void diff_ignoreNull_false() {
-        DiffMap diff = new Diff(false, true, false).diff(
+        DiffMap diff = new DiffFactory(false, true, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", 100)
@@ -60,7 +60,7 @@ class DiffTest extends Test4J {
 
     @Test
     void diff_ignoreNull_true() {
-        DiffMap diff = new Diff(true, true, false).diff(
+        DiffMap diff = new DiffFactory(true, true, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", 100)
@@ -76,7 +76,7 @@ class DiffTest extends Test4J {
 
     @Test
     void diff_date_as_string() {
-        DiffMap diff = new Diff(false, true, false).diff(
+        DiffMap diff = new DiffFactory(false, true, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("date", DateHelper.parse("2020-04-19 23:10:01"))
@@ -92,10 +92,10 @@ class DiffTest extends Test4J {
 
     @Test
     void diff_date_as_string_false() {
-        DiffMap diff = new Diff(false, false, false).diff(
+        DiffMap diff = new DiffFactory(false, false, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
-                        .kv("date", DateHelper.parse("2020-04-19 23:10:01"))
+                        .kv("date", DateHelper.parse("2020-04-19 23:10:02"))
                         .map(),
                 DataMap.create()
                         .kv("key1", "value1")
@@ -103,12 +103,12 @@ class DiffTest extends Test4J {
         );
         MessageHelper.info(diff.message());
         want.number(diff.diff).isEqualTo(1);
-        want.string(diff.message()).contains(new String[]{"$.date", "(Date) 2020-04-19 23:10:01", "(String) 2020-04-19 23:10:01"});
+        want.string(diff.message()).contains(new String[]{"$.date", "(Date) 2020-04-19 23:10:02", "(String) 2020-04-19 23:10:01"});
     }
 
     @Test
     void diff_nested_map_as_string() {
-        DiffMap diff = new Diff(false, true, false).diff(
+        DiffMap diff = new DiffFactory(false, true, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", DataMap.create()
@@ -129,12 +129,12 @@ class DiffTest extends Test4J {
 
     @Test
     void diff_nested_map_not_string() {
-        DiffMap diff = new Diff(false, false, false).diff(
+        DiffMap diff = new DiffFactory(false, false, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", DataMap.create()
                                 .kv("key3", "value3")
-                                .kv("date", DateHelper.parse("2020-04-19 23:10:01"))
+                                .kv("date", DateHelper.parse("2020-04-19 23:10:02"))
                                 .map())
                         .map(),
                 DataMap.create()
@@ -146,12 +146,12 @@ class DiffTest extends Test4J {
         );
         MessageHelper.info(diff.message());
         want.number(diff.diff).isEqualTo(1);
-        want.string(diff.message()).contains(new String[]{"$.key2.date", "(Date) 2020-04-19 23:10:01", "(String) 2020-04-19 23:10:01"});
+        want.string(diff.message()).contains(new String[]{"$.key2.date", "(Date) 2020-04-19 23:10:02", "(String) 2020-04-19 23:10:01"});
     }
 
     @Test
     void diff_nested_map_not_property() {
-        DiffMap diff = new Diff(false, false, false).diff(
+        DiffMap diff = new DiffFactory(false, false, false).diff(
                 DataMap.create()
                         .kv("key1", "value1")
                         .kv("key2", DataMap.create()
@@ -172,7 +172,7 @@ class DiffTest extends Test4J {
 
     @Test
     void diff_user() {
-        DiffMap diff = new Diff(false, true, false).diff(
+        DiffMap diff = new DiffFactory(false, true, false).diff(
                 new User()
                         .setName("name1")
                         .setAge(45)

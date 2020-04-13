@@ -13,6 +13,7 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
 import java.util.*;
+import java.util.stream.Collectors;
 
 import static java.lang.reflect.Modifier.isStatic;
 import static java.util.Arrays.asList;
@@ -413,6 +414,39 @@ public class Reflector {
         }
     }
 
+    /**
+     * 返回所有getter方法
+     *
+     * @param klass
+     * @return
+     */
+    public static Set<Method> getAllGetterMethod(Class klass) {
+        return getAllMethods(klass)
+                .stream().filter(Reflector::isGetterMethod)
+                .collect(Collectors.toSet());
+    }
+
+    /**
+     * 是否 getter 方法
+     *
+     * @param method
+     * @return
+     */
+    public static boolean isGetterMethod(Method method) {
+        Class klass = method.getReturnType();
+        if (klass == null || klass.equals(Void.class)) {
+            return false;
+        }
+        if (method.getParameterCount() != 0) {
+            return false;
+        }
+        if (isStaticMethod(method)) {
+            return false;
+        }
+        String name = method.getName();
+        return name.startsWith("get") || name.startsWith("is");
+    }
+
     public static Class[] getTypes(Object... args) {
         if (args == null) {
             return new Class[0];
@@ -423,6 +457,16 @@ public class Reflector {
             clazes.add(para == null ? null : para.getClass());
         }
         return clazes.toArray(new Class[0]);
+    }
+
+    /**
+     * 是否静态方法
+     *
+     * @param method
+     * @return
+     */
+    public static boolean isStaticMethod(Method method) {
+        return (method.getModifiers() & Modifier.STATIC) != 0;
     }
 
     /**
