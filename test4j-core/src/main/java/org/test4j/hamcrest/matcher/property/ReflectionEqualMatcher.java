@@ -50,7 +50,7 @@ public class ReflectionEqualMatcher extends BaseMatcher {
 
     @Override
     public boolean matches(Object actual) {
-        this.difference = DiffFactory.diffBy(expected, actual);
+        this.difference = DiffFactory.diffBy(actual, expected, modes);
         return !difference.hasDiff();
     }
 

@@ -58,7 +58,10 @@ public class MapAssertTest_ReflectProperty extends Test4J {
             want.fail();
         } catch (Throwable e) {
             String msg = e.getMessage();
-            want.string(msg).contains("Expected: [\"ddd\", \"my first value\"], actual: [\"my first value\", \"ddd\"]");
+            want.string(msg).contains(new String[]{
+                    "$[0]", "expect=(String) ddd", "actual=(String) my first value",
+                    "$[1]", "expect=(String) my first value", "actual=(String) ddd"
+            });
         }
     }
 

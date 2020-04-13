@@ -210,7 +210,7 @@ public class DBOperator implements IDBOperator {
                 query = "select * from " + query;
             }
             List<Map<String, String>> records = entry.getValue();
-            this.query(query).eqReflect(records, EqMode.IGNORE_DEFAULTS, EqMode.IGNORE_ORDER);
+            this.query(query).eqReflect(records, EqMode.IGNORE_DEFAULTS, EqMode.IGNORE_ORDER, EqMode.EQ_STRING);
         }
     }
 }

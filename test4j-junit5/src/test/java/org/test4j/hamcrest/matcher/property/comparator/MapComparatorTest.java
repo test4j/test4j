@@ -36,18 +36,16 @@ public class MapComparatorTest extends Test4J {
 
     @Test
     public void testMap3() {
-        want.exception(() ->
-                        want.object(new HashMap() {
-                            {
-                                this.put("id", 123);
-                                this.put("name", "darui.wu");
-                            }
-                        }).eqReflect(new HashMap() {
-                            {
-                                this.put("id", 123);
-                            }
-                        }, EqMode.IGNORE_DEFAULTS)
-                , AssertionError.class);
+        want.object(new HashMap() {
+            {
+                this.put("id", 123);
+                this.put("name", "darui.wu");
+            }
+        }).eqReflect(new HashMap() {
+            {
+                this.put("id", 123L);
+                this.put("name", "darui.wu");
+            }
+        }, EqMode.IGNORE_DEFAULTS);
     }
-
 }

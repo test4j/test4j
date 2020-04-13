@@ -55,7 +55,9 @@ class TableDataTest extends Test4J {
         );
         String text2 = ResourceHelper.readFromFile("org/test4j/datamap/user_address_query.json");
         TableData data2 = TableData.map(text2);
-
-        db.queryEq(data2);
+        want.exception(() -> db.queryEq(data2), AssertionError.class)
+                .contains(new String[]{
+                        "$[1]~[1].age", "(String) 34", "(Integer) 45"
+                });
     }
 }
