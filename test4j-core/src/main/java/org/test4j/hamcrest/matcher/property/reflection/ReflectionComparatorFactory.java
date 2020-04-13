@@ -70,11 +70,6 @@ public class ReflectionComparatorFactory {
 	protected static final Comparator MAP_COMPARATOR = new MapComparator();
 
 	/**
-	 * The HibernateProxyComparator singleton insance
-	 */
-	protected static final Comparator HIBERNATE_PROXY_COMPARATOR = new HibernateProxyComparator();
-
-	/**
 	 * The ObjectComparator singleton insance
 	 */
 	protected static final Comparator OBJECT_COMPARATOR = new ObjectComparator();
@@ -121,7 +116,6 @@ public class ReflectionComparatorFactory {
 			comparatorChain.add(COLLECTION_COMPARATOR);
 		}
 		comparatorChain.add(MAP_COMPARATOR);
-		comparatorChain.add(HIBERNATE_PROXY_COMPARATOR);
 		comparatorChain.add(OBJECT_COMPARATOR);
 		return comparatorChain;
 	}
