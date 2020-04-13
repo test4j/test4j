@@ -53,6 +53,14 @@ public class DiffByReflect extends BaseDiff {
             if (!_expect.equals(_actual)) {
                 this.diffMap.add(parentKey, actual, expect);
             }
+        } else if (expect instanceof String) {
+            if (asString) {
+                if (!asObject(actual, asString).equals(expect)) {
+                    this.diffMap.add(parentKey, actual, expect);
+                }
+            } else {
+                this.diffMap.add(parentKey, actual, expect);
+            }
         } else {
             Set<Method> list = Reflector.getAllGetterMethod(expect.getClass());
             for (Method method : list) {

@@ -2,19 +2,14 @@ package org.test4j.hamcrest.matcher.property;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
-import org.test4j.hamcrest.matcher.property.difference.Difference;
+import org.test4j.hamcrest.diff.DiffFactory;
+import org.test4j.hamcrest.diff.DiffMap;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
-import org.test4j.hamcrest.matcher.property.reflection.ReflectionComparator;
-import org.test4j.hamcrest.matcher.property.report.DefaultDifferenceReport;
-import org.test4j.hamcrest.matcher.property.report.DifferenceReport;
 import org.test4j.tools.commons.ArrayHelper;
 import org.test4j.tools.commons.ListHelper;
 import org.test4j.tools.reflector.PropertyAccessor;
 
 import java.util.List;
-
-import static org.test4j.hamcrest.matcher.property.reflection.ReflectionComparatorFactory.createRefectionComparator;
-
 
 @SuppressWarnings("rawtypes")
 public class PropertiesEqualMatcher extends BaseMatcher {
@@ -24,7 +19,7 @@ public class PropertiesEqualMatcher extends BaseMatcher {
 
     private final EqMode[] modes;
 
-    private Difference difference;
+    private DiffMap difference;
 
     public PropertiesEqualMatcher(Object expected, String[] properties, EqMode[] modes) {
         this.expected = expected;
@@ -65,11 +60,8 @@ public class PropertiesEqualMatcher extends BaseMatcher {
         }
         List<List> actuals = PropertyAccessor.getPropertiesOfList(array, properties, true);
         List<List> expects = PropertyAccessor.getPropertiesOfList(expected, properties, false);
-
-        ReflectionComparator reflectionComparator = createRefectionComparator(modes);
-        this.difference = reflectionComparator.getDifference(expects, actuals);
-
-        return difference == null;
+        this.difference = DiffFactory.diffBy(actuals, expects, modes);
+        return !this.difference.hasDiff();
     }
 
     private boolean matchPoJo(Object pojo) {
@@ -80,22 +72,18 @@ public class PropertiesEqualMatcher extends BaseMatcher {
         } else {
             expects = PropertyAccessor.getPropertiesOfPoJo(this.expected, properties, false);
         }
-        ReflectionComparator reflectionComparator = createRefectionComparator(modes);
-        this.difference = reflectionComparator.getDifference(expects, actuals);
-
-        return difference == null;
+        this.difference = DiffFactory.diffBy(actuals, expects, modes);
+        return !this.difference.hasDiff();
     }
 
     private final StringBuilder buff = new StringBuilder();
 
-
     public void describeTo(Description description) {
         description.appendText(buff.toString());
-        if (difference != null) {
+        if (difference.hasDiff()) {
             String message = "Incorrect value for properties: " + ArrayHelper.toString(this.properties);
             description.appendText(message);
-            DifferenceReport differenceReport = new DefaultDifferenceReport();
-            description.appendText(differenceReport.createReport(difference));
+            description.appendText(difference.message());
         }
     }
 }
