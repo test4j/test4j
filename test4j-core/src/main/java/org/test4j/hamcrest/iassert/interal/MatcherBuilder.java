@@ -1,7 +1,7 @@
 package org.test4j.hamcrest.iassert.interal;
 
 import org.hamcrest.BaseMatcher;
-import org.test4j.hamcrest.matcher.property.MapListPropertyEqualMatcher;
+import org.test4j.hamcrest.matcher.property.ReflectionEqualMatcher;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.tools.commons.ListHelper;
 import org.test4j.tools.datagen.IDataMap;
@@ -15,6 +15,6 @@ public class MatcherBuilder {
             _modes.add(EqMode.IGNORE_DEFAULTS);
         }
         EqMode[] arr = (EqMode[]) _modes.toArray(new EqMode[0]);
-        return new MapListPropertyEqualMatcher(expected, arr);
+        return new ReflectionEqualMatcher(expected, arr);
     }
 }

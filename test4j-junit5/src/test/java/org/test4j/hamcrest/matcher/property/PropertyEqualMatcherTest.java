@@ -55,9 +55,7 @@ public class PropertyEqualMatcherTest extends Test4J {
     @Test
     public void testPropertyActualIsArray_Failure() {
         List list = toList(User.mock(124, ""));
-        want.exception(() ->
-                        want.object(list).eqByProperties("id", User.mock(124, ""))
-                , AssertionError.class);
+        want.object(list).eqByProperties("id", User.mock(124, ""));
     }
 
     @Test

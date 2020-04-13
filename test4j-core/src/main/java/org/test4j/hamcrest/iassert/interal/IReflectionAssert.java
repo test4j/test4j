@@ -177,7 +177,7 @@ public interface IReflectionAssert<T, E extends IAssert> extends IAssert<T, E> {
         if (expected instanceof IDataMap) {
             throw new RuntimeException("please use method: eqDataMap or eqMap");
         }
-        MapPropertyEqaulMatcher matcher = new MapPropertyEqaulMatcher(expected, modes);
+        ReflectionEqualMatcher matcher = new ReflectionEqualMatcher(expected, modes);
         return this.assertThat(matcher);
     }
 
@@ -193,7 +193,7 @@ public interface IReflectionAssert<T, E extends IAssert> extends IAssert<T, E> {
             Matcher matcher = MatcherBuilder.listEqMapMatcher(expected, modes);
             return this.assertThat(matcher);
         } else {
-            MapPropertyEqaulMatcher matcher = new MapPropertyEqaulMatcher(expected.row(0), modes);
+            ReflectionEqualMatcher matcher = new ReflectionEqualMatcher(expected.row(0), modes);
             return this.assertThat(matcher);
         }
     }

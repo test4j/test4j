@@ -30,7 +30,7 @@ public class MapListPropertyEqualMatcherTest extends Test4J {
                 });
             }
         };
-        MapListPropertyEqualMatcher matcher = new MapListPropertyEqualMatcher(expected,
+        ReflectionEqualMatcher matcher = new ReflectionEqualMatcher(expected,
                 new EqMode[]{EqMode.IGNORE_DEFAULTS});
 
         List<Map<String, ?>> actual = new ArrayList<Map<String, ?>>() {
@@ -61,7 +61,7 @@ public class MapListPropertyEqualMatcherTest extends Test4J {
             }
         };
 
-        MapListPropertyEqualMatcher matcher = new MapListPropertyEqualMatcher(expected,
+        ReflectionEqualMatcher matcher = new ReflectionEqualMatcher(expected,
                 new EqMode[]{EqMode.IGNORE_DEFAULTS});
 
         List<Map<String, ?>> actual = new ArrayList<Map<String, ?>>() {

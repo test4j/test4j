@@ -27,6 +27,7 @@ public class PropertiesArrayRefEqMatcher extends BaseMatcher<Object> {
         this.matcher = new ReflectionEqualMatcher(expected, modes);
     }
 
+    @Override
     public boolean matches(Object actual) {
         this.propertyValues = PropertyAccessor.getArrayItemProperties(actual, this.properties);
 
@@ -35,6 +36,7 @@ public class PropertiesArrayRefEqMatcher extends BaseMatcher<Object> {
 
     private Object[][] propertyValues = null;
 
+    @Override
     public void describeTo(Description description) {
         description.appendText("the propery[" + StringHelper.toString(this.properties) + "] of object must match");
 

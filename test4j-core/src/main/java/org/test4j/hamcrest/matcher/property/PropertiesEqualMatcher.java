@@ -24,6 +24,8 @@ public class PropertiesEqualMatcher extends BaseMatcher {
 
     private final EqMode[] modes;
 
+    private Difference difference;
+
     public PropertiesEqualMatcher(Object expected, String[] properties, EqMode[] modes) {
         this.expected = expected;
         this.properties = properties;
@@ -86,7 +88,6 @@ public class PropertiesEqualMatcher extends BaseMatcher {
 
     private final StringBuilder buff = new StringBuilder();
 
-    private Difference difference;
 
     public void describeTo(Description description) {
         description.appendText(buff.toString());
