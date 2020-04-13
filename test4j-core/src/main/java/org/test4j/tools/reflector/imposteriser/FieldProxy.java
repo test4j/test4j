@@ -29,6 +29,7 @@ public class FieldProxy implements Invokable {
         this.accessor = FieldAccessor.field(field);
     }
 
+    @Override
     public Object invoke(Invocation invocation) throws Throwable {
         Object fieldValue = accessor.get(Test4JContext.currTestedObject());
         if (fieldValue == null) {

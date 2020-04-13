@@ -16,10 +16,12 @@ public class BooleanAssert extends Assert<Boolean, IBooleanAssert> implements IB
         super(value, Boolean.class, IBooleanAssert.class);
     }
 
+    @Override
     public IBooleanAssert is(boolean bl) {
         return this.isEqualTo(bl);
     }
 
+    @Override
     public IBooleanAssert is(String message, boolean bl) {
         Matcher<?> matcher = IsEqual.equalTo(bl);
         return this.assertThat(message, matcher);

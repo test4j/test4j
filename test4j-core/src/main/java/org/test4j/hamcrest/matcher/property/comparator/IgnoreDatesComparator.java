@@ -21,6 +21,7 @@ public class IgnoreDatesComparator implements Comparator {
      * @param right The right object
      * @return True if null or dates
      */
+    @Override
     public boolean canCompare(Object left, Object right) {
         if (right == null && left == null) {
             return true;
@@ -44,6 +45,7 @@ public class IgnoreDatesComparator implements Comparator {
      * @param reflectionComparator The root comparator for inner comparisons, not null
      * @return A difference if one of the dates is null and the other one not, else null
      */
+    @Override
     public Difference compare(Object left, Object right, boolean onlyFirstDifference, ReflectionComparator reflectionComparator) {
         if ((right == null && left instanceof Date) || (left == null && right instanceof Date)) {
             return new Difference("Lenient dates, but not both instantiated or both null", left, right);

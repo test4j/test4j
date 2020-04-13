@@ -10,6 +10,7 @@ public class DB2Environment extends BaseEnvironment {
 		this.typeMap = null;
 	}
 
+	@Override
 	public String getFieldQuato() {
 		return "";
 	}

@@ -10,6 +10,7 @@ public class H2Script extends EntityScriptParser {
         super(typeConvert, klass);
     }
 
+    @Override
     public String script() {
         String tableName = this.getTableName();
         List<EntityScriptParser.ColumnDefine> columns = this.findColumns();
@@ -25,6 +26,7 @@ public class H2Script extends EntityScriptParser {
         return buff.append(");\n").toString();
     }
 
+    @Override
     protected String parseColumn(ColumnDefine column) {
         if (column.primaryType == ColumnDef.PrimaryType.AutoIncrease) {
             return String.format("%s %s NOT NULL AUTO_INCREMENT",

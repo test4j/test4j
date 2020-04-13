@@ -21,6 +21,7 @@ public class EqualsWithDelta extends ArgumentMatcher<Number> implements Serializ
         this.delta = delta;
     }
 
+    @Override
     public boolean matches(Object actual) {
         Number actualNumber = (Number) actual;
         return wanted.doubleValue() - delta.doubleValue() <= actualNumber.doubleValue()
@@ -28,6 +29,7 @@ public class EqualsWithDelta extends ArgumentMatcher<Number> implements Serializ
                 + delta.doubleValue();
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText("eq(" + wanted + ", " + delta + ")");
     }

@@ -32,6 +32,7 @@ public class ClassImposteriser implements Imposteriser {
     };
 
     private static final CallbackFilter IGNORE_BRIDGE_METHODS = new CallbackFilter() {
+        @Override
         public int accept(Method method) {
             return method.isBridge() ? 1 : 0;
         }
@@ -39,11 +40,13 @@ public class ClassImposteriser implements Imposteriser {
 
     private final Objenesis objenesis = new ObjenesisStd();
 
+    @Override
     public boolean canImposterise(Class type) {
         return !type.isPrimitive() && !Modifier.isFinal(type.getModifiers())
                 && (type.isInterface() || !toStringMethodIsFinal(type));
     }
 
+    @Override
     public <T> T imposterise(final Invokable mockObject, Class<T> mockedType, Class... ancilliaryTypes) {
         if (!mockedType.isInterface() && toStringMethodIsFinal(mockedType)) {
             throw new IllegalArgumentException(mockedType.getName() + " has a final toString method");
@@ -119,6 +122,7 @@ public class ClassImposteriser implements Imposteriser {
     private Object createProxy(Class proxyClass, final Invokable mockObject) {
         Factory proxy = (Factory) objenesis.newInstance(proxyClass);
         proxy.setCallbacks(new Callback[]{new InvocationHandler() {
+            @Override
             public Object invoke(Object receiver, Method method, Object[] args) throws Throwable {
                 return mockObject.invoke(new Invocation(receiver, method, args));
             }

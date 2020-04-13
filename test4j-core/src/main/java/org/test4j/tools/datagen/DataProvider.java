@@ -31,16 +31,19 @@ public class DataProvider<T> implements Iterator<T[]> {
         return this;
     }
 
+    @Override
     public boolean hasNext() {
         this.initIterator();
         return it.hasNext();
     }
 
+    @Override
     public T[] next() {
         this.initIterator();
         return it.next();
     }
 
+    @Override
     public void remove() {
         this.initIterator();
         it.remove();

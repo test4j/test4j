@@ -22,6 +22,7 @@ public class HibernateProxyComparator implements Comparator {
      * @param right The right object
      * @return True if one is a proxy
      */
+    @Override
     public boolean canCompare(Object left, Object right) {
         return isHibernateProxy(left) || isHibernateProxy(right);
     }
@@ -40,6 +41,7 @@ public class HibernateProxyComparator implements Comparator {
      * @param reflectionComparator The root comparator for inner comparisons, not null
      * @return A ObjectDifference or null if both maps are equal
      */
+    @Override
     public Difference compare(Object left, Object right, boolean onlyFirstDifference, ReflectionComparator reflectionComparator) {
         if (isUninitialized(left) && isUninitialized(right)) {
             String leftType = getEntitiyName(left);

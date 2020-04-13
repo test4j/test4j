@@ -591,68 +591,84 @@ public class CollectionUtils {
 			this.collection = collection;
 		}
 
+		@Override
 		public int size() {
 			return collection.size();
 		}
 
+		@Override
 		public boolean isEmpty() {
 			return collection.isEmpty();
 		}
 
+		@Override
 		public boolean contains(Object o) {
 			return collection.contains(o);
 		}
 
+		@Override
 		public Iterator iterator() {
 			return collection.iterator();
 		}
 
+		@Override
 		public Object[] toArray() {
 			return collection.toArray();
 		}
 
+		@Override
 		public Object[] toArray(Object[] o) {
 			return collection.toArray(o);
 		}
 
+		@Override
 		public boolean add(Object o) {
 			return collection.add(o);
 		}
 
+		@Override
 		public boolean remove(Object o) {
 			return collection.remove(o);
 		}
 
+		@Override
 		public boolean containsAll(Collection c2) {
 			return collection.containsAll(c2);
 		}
 
+		@Override
 		public boolean addAll(Collection c2) {
 			return collection.addAll(c2);
 		}
 
+		@Override
 		public boolean removeAll(Collection c2) {
 			return collection.removeAll(c2);
 		}
 
+		@Override
 		public boolean retainAll(Collection c2) {
 			return collection.retainAll(c2);
 		}
 
+		@Override
 		public void clear() {
 			collection.clear();
 		}
 
+		@Override
 		public boolean equals(Object o) {
 			if (o == this)
 				return true;
 			return collection.equals(o);
 		}
 
+		@Override
 		public int hashCode() {
 			return collection.hashCode();
 		}
 
+		@Override
 		public String toString() {
 			return collection.toString();
 		}
@@ -665,30 +681,37 @@ public class CollectionUtils {
 			super(c);
 		}
 
+		@Override
 		public boolean add(Object o) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public boolean addAll(Collection c) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public boolean remove(Object o) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public boolean removeAll(Collection c) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public boolean retainAll(Collection c) {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public void clear() {
 			throw new UnsupportedOperationException();
 		}
 
+		@Override
 		public Iterator iterator() {
 			return new UnmodifiableIterator(collection.iterator());
 		}
@@ -758,14 +781,17 @@ public class CollectionUtils {
 			collection.clear();
 		}
 
+		@Override
 		public synchronized boolean equals(Object o) {
 			return collection.equals(o);
 		}
 
+		@Override
 		public synchronized int hashCode() {
 			return collection.hashCode();
 		}
 
+		@Override
 		public synchronized String toString() {
 			return collection.toString();
 		}
@@ -783,14 +809,17 @@ public class CollectionUtils {
 			this.iterator = iterator;
 		}
 
+		@Override
 		public boolean hasNext() {
 			return iterator.hasNext();
 		}
 
+		@Override
 		public Object next() {
 			return iterator.next();
 		}
 
+		@Override
 		public void remove() {
 			throw new UnsupportedOperationException();
 		}

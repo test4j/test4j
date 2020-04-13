@@ -20,6 +20,7 @@ public class DefaultDifferenceReport implements DifferenceReport {
 	 *            The difference to output, null for a match
 	 * @return The report, not null
 	 */
+	@Override
 	public String createReport(Difference difference) {
 		StringBuilder result = new StringBuilder();
 		result.append(new SimpleDifferenceView().createView(difference)).append("\n\n");

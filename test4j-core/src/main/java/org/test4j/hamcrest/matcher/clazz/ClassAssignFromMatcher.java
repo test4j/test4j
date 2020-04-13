@@ -15,6 +15,7 @@ public class ClassAssignFromMatcher extends BaseMatcher {
     private Class actual = null;
 
     @SuppressWarnings("unchecked")
+    @Override
     public boolean matches(Object item) {
         if (item == null) {
             return true;
@@ -30,6 +31,7 @@ public class ClassAssignFromMatcher extends BaseMatcher {
         return wanted.isAssignableFrom(actual);
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText(String.format("the class[%s] isn't assignable from class[%s]", actual == null ? "<null>"
                 : actual.getName(), wanted == null ? "<null>" : wanted.getName()));

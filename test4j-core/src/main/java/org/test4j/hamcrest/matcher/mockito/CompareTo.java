@@ -15,6 +15,7 @@ public abstract class CompareTo<T extends Comparable<T>> extends ArgumentMatcher
         this.wanted = value;
     }
 
+    @Override
     public boolean matches(Object actual) {
 
         if (!(actual instanceof Comparable)) {
@@ -24,6 +25,7 @@ public abstract class CompareTo<T extends Comparable<T>> extends ArgumentMatcher
         return matchResult(((Comparable) actual).compareTo(wanted));
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText(getName() + "(" + wanted + ")");
     }

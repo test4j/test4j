@@ -24,6 +24,7 @@ public class CodepageDetectorProxy extends AbstractCodepageDetector {
 		return this.detectors.add(detector);
 	}
 
+	@Override
 	public Charset detectCodepage(URL url) throws IOException {
 		Charset ret = null;
 		Iterator<ICodepageDetector> detectorIt = this.detectors.iterator();
@@ -38,6 +39,7 @@ public class CodepageDetectorProxy extends AbstractCodepageDetector {
 		return ret;
 	}
 
+	@Override
 	public Charset detectCodepage(InputStream in, int length) throws IOException, IllegalArgumentException {
 		if (!(in.markSupported())) {
 			throw new IllegalArgumentException("The given input stream (" + in.getClass().getName()

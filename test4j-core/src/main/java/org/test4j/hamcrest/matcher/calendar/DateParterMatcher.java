@@ -22,6 +22,7 @@ public class DateParterMatcher extends BaseMatcher<Date> {
         this.type = type;
     }
 
+    @Override
     public boolean matches(Object actual) {
         if (actual == null) {
             throw new Test4JException("the actual value can't be null");
@@ -45,11 +46,12 @@ public class DateParterMatcher extends BaseMatcher<Date> {
         }
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText(String.format(type.description(), this.expected));
     }
 
-    public static enum DateFieldType {
+    public enum DateFieldType {
         YEAR {
             @Override
             public int calendarField() {

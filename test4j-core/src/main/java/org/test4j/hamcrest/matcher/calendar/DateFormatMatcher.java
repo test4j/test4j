@@ -46,6 +46,7 @@ public class DateFormatMatcher extends BaseMatcher {
 
     String actualDate = null;
 
+    @Override
     public boolean matches(Object actual) {
         if (actual == null) {
             throw new Test4JException("the actual value can't be null");
@@ -64,6 +65,7 @@ public class DateFormatMatcher extends BaseMatcher {
         return isEqual;
     }
 
+    @Override
     public void describeTo(Description description) {
         String message = String.format("expected value is %s by format[%s], but actual value is %s.", this.date,
                 this.format.toPattern(), this.actualDate);

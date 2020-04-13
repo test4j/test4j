@@ -447,6 +447,7 @@ class Entities {
         /**
          * {@inheritDoc}
          */
+        @Override
         public void add(String name, int value) {
             mapNameToValue.put(name, new Integer(value));
             mapValueToName.put(value, name);
@@ -455,6 +456,7 @@ class Entities {
         /**
          * {@inheritDoc}
          */
+        @Override
         public String name(int value) {
             return (String) mapValueToName.get(value);
         }
@@ -462,6 +464,7 @@ class Entities {
         /**
          * {@inheritDoc}
          */
+        @Override
         public int value(String name) {
             Object value = mapNameToValue.get(name);
             if (value == null) {
@@ -479,6 +482,7 @@ class Entities {
         /**
          * {@inheritDoc}
          */
+        @Override
         public void add(String name, int value) {
             mapNameToValue.put(name, new Integer(value));
             mapValueToName.put(new Integer(value), name);
@@ -487,6 +491,7 @@ class Entities {
         /**
          * {@inheritDoc}
          */
+        @Override
         public String name(int value) {
             return (String) mapValueToName.get(new Integer(value));
         }
@@ -494,6 +499,7 @@ class Entities {
         /**
          * {@inheritDoc}
          */
+        @Override
         public int value(String name) {
             Object value = mapNameToValue.get(name);
             if (value == null) {
@@ -531,6 +537,7 @@ class Entities {
         /**
          * {@inheritDoc}
          */
+        @Override
         public String name(int value) {
             if (value < LOOKUP_TABLE_SIZE) {
                 return lookupTable()[value];
@@ -598,6 +605,7 @@ class Entities {
         /**
          * {@inheritDoc}
          */
+        @Override
         public void add(String name, int value) {
             ensureCapacity(size + 1);
             names[size] = name;
@@ -626,6 +634,7 @@ class Entities {
         /**
          * {@inheritDoc}
          */
+        @Override
         public String name(int value) {
             for (int i = 0; i < size; ++i) {
                 if (values[i] == value) {
@@ -638,6 +647,7 @@ class Entities {
         /**
          * {@inheritDoc}
          */
+        @Override
         public int value(String name) {
             for (int i = 0; i < size; ++i) {
                 if (names[i].equals(name)) {
@@ -698,6 +708,7 @@ class Entities {
         /**
          * {@inheritDoc}
          */
+        @Override
         public void add(String name, int value) {
             ensureCapacity(size + 1);
             int insertAt = binarySearch(value);
@@ -715,6 +726,7 @@ class Entities {
         /**
          * {@inheritDoc}
          */
+        @Override
         public String name(int value) {
             int index = binarySearch(value);
             if (index < 0) {

@@ -19,6 +19,7 @@ public abstract class ArgumentMatcher<T> extends BaseMatcher<T> {
      * @param argument the argument
      * @return whether this matcher accepts the given argument.
      */
+    @Override
     public abstract boolean matches(Object argument);
 
     /*
@@ -33,6 +34,7 @@ public abstract class ArgumentMatcher<T> extends BaseMatcher<T> {
      * @param description the description to which the matcher description is
      * appended.
      */
+    @Override
     public void describeTo(Description description) {
         String className = getClass().getSimpleName();
         description.appendText(Decamelizer.decamelizeMatcher(className));

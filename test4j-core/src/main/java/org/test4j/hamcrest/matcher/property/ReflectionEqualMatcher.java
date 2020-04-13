@@ -2,6 +2,8 @@ package org.test4j.hamcrest.matcher.property;
 
 import org.hamcrest.BaseMatcher;
 import org.hamcrest.Description;
+import org.test4j.hamcrest.diff.DiffFactory;
+import org.test4j.hamcrest.diff.DiffMap;
 import org.test4j.hamcrest.matcher.property.difference.Difference;
 import org.test4j.hamcrest.matcher.property.reflection.EqMode;
 import org.test4j.hamcrest.matcher.property.reflection.ReflectionComparator;
@@ -44,18 +46,17 @@ public class ReflectionEqualMatcher extends BaseMatcher {
         this.modes = modes == null ? null : modes.clone();
     }
 
-    private Difference difference;
+    private DiffMap difference;
 
+    @Override
     public boolean matches(Object actual) {
-        ReflectionComparator reflectionComparator = createRefectionComparator(modes);
-        this.difference = reflectionComparator.getDifference(expected, actual);
-        return difference == null;
+        this.difference = DiffFactory.diffBy(expected, actual);
+        return !difference.hasDiff();
     }
 
     public void describeTo(Description description) {
-        if (difference != null) {
-            DifferenceReport differenceReport = new DefaultDifferenceReport();
-            description.appendText(differenceReport.createReport(difference));
+        if (difference.hasDiff()) {
+            description.appendText(difference.message());
         }
     }
 }

@@ -19,10 +19,12 @@ public class Find extends ArgumentMatcher<String> implements Serializable {
         this.regex = regex;
     }
 
+    @Override
     public boolean matches(Object actual) {
         return actual != null && Pattern.compile(regex).matcher((String) actual).find();
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText("find(\"" + regex.replaceAll("\\\\", "\\\\\\\\") + "\")");
     }

@@ -44,6 +44,7 @@ public abstract class Assert<T, E extends IAssert> extends BaseMatcher<T> implem
                 .setTargetClass(targetClass);
     }
 
+    @Override
     public T wanted() {
         if (this.assertObject.getType() == AssertType.AssertStyle) {
             throw new Test4JException("is not an Expectations");
@@ -51,6 +52,7 @@ public abstract class Assert<T, E extends IAssert> extends BaseMatcher<T> implem
         return (T) PrimitiveHelper.getPrimitiveDefaultValue(this.assertObject.getTargetClass());
     }
 
+    @Override
     public <F> F wanted(Class<F> claz) {
         if (this.assertObject.getType() == AssertType.AssertStyle) {
             throw new Test4JException("is not an Expectations");
@@ -61,6 +63,7 @@ public abstract class Assert<T, E extends IAssert> extends BaseMatcher<T> implem
         return (F) PrimitiveHelper.getPrimitiveDefaultValue(claz);
     }
 
+    @Override
     public void describeTo(Description description) {
         if (this.assertObject.getLink() != null && this.assertObject.assertTypeIs(AssertType.MatcherStyle)) {
             this.assertObject.getLink().describeTo(description);
@@ -69,6 +72,7 @@ public abstract class Assert<T, E extends IAssert> extends BaseMatcher<T> implem
         }
     }
 
+    @Override
     public E assertThat(Matcher matcher) {
         if (this.assertObject.getType() == AssertType.AssertStyle) {
             MatcherAssert.assertThat(this.assertObject.getValue(), matcher);
@@ -78,6 +82,7 @@ public abstract class Assert<T, E extends IAssert> extends BaseMatcher<T> implem
         return (E) this;
     }
 
+    @Override
     public E assertThat(String message, Matcher matcher) {
         if (this.assertObject.getType() == AssertType.AssertStyle) {
             MatcherAssert.assertThat(message, this.assertObject.getValue(), matcher);
@@ -92,6 +97,7 @@ public abstract class Assert<T, E extends IAssert> extends BaseMatcher<T> implem
         return this.getClass().getName();
     }
 
+    @Override
     public boolean matches(Object item) {
         if (this.assertObject.getType() == AssertType.MatcherStyle && this.assertObject.getValue() instanceof String) {
             String value = MethodAccessor.invoke(item, (String) item);

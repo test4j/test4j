@@ -15,11 +15,13 @@ public class FileMatchers {
         return new TypeSafeMatcher<File>() {
             File fileTested;
 
+            @Override
             public boolean matchesSafely(File item) {
                 fileTested = item;
                 return item.isDirectory();
             }
 
+            @Override
             public void describeTo(Description description) {
                 description.appendText(" that ");
                 description.appendValue(fileTested);
@@ -32,11 +34,13 @@ public class FileMatchers {
         return new TypeSafeMatcher<File>() {
             File fileTested;
 
+            @Override
             public boolean matchesSafely(File item) {
                 fileTested = item;
                 return item.exists();
             }
 
+            @Override
             public void describeTo(Description description) {
                 description.appendText(" that file ");
                 description.appendValue(fileTested);
@@ -49,11 +53,13 @@ public class FileMatchers {
         return new TypeSafeMatcher<File>() {
             File fileTested;
 
+            @Override
             public boolean matchesSafely(File item) {
                 fileTested = item;
                 return item.isFile();
             }
 
+            @Override
             public void describeTo(Description description) {
                 description.appendText(" that ");
                 description.appendValue(fileTested);
@@ -66,11 +72,13 @@ public class FileMatchers {
         return new TypeSafeMatcher<File>() {
             File fileTested;
 
+            @Override
             public boolean matchesSafely(File item) {
                 fileTested = item;
                 return item.canRead();
             }
 
+            @Override
             public void describeTo(Description description) {
                 description.appendText(" that file ");
                 description.appendValue(fileTested);
@@ -83,11 +91,13 @@ public class FileMatchers {
         return new TypeSafeMatcher<File>() {
             File fileTested;
 
+            @Override
             public boolean matchesSafely(File item) {
                 fileTested = item;
                 return item.canWrite();
             }
 
+            @Override
             public void describeTo(Description description) {
                 description.appendText(" that file ");
                 description.appendValue(fileTested);
@@ -106,12 +116,14 @@ public class FileMatchers {
             File fileTested;
             long length;
 
+            @Override
             public boolean matchesSafely(File item) {
                 fileTested = item;
                 length = item.length();
                 return matcher.matches(length);
             }
 
+            @Override
             public void describeTo(Description description) {
                 description.appendText(" that file ");
                 description.appendValue(fileTested);
@@ -126,12 +138,14 @@ public class FileMatchers {
         return new TypeSafeMatcher<File>() {
             File fileTested;
 
+            @Override
             public boolean matchesSafely(File item) {
                 fileTested = item;
                 String filename = item == null ? null : item.getName();
                 return name.equals(filename);
             }
 
+            @Override
             public void describeTo(Description description) {
                 description.appendText(" that file name of ");
                 description.appendValue(fileTested);
@@ -146,12 +160,14 @@ public class FileMatchers {
         return new TypeSafeMatcher<File>() {
             File fileTested;
 
+            @Override
             public boolean matchesSafely(File item) {
                 fileTested = item;
                 String filename = item == null ? null : item.getName();
                 return filename != null && filename.indexOf(name) != -1;
             }
 
+            @Override
             public void describeTo(Description description) {
                 description.appendText(" that file name of ");
                 description.appendValue(fileTested);
@@ -166,11 +182,13 @@ public class FileMatchers {
         return new TypeSafeMatcher<File>() {
             File fileTested;
 
+            @Override
             public boolean matchesSafely(File item) {
                 fileTested = item;
                 return name.matches(item.getName());
             }
 
+            @Override
             public void describeTo(Description description) {
                 description.appendText(" that file ");
                 description.appendValue(fileTested);
@@ -184,6 +202,7 @@ public class FileMatchers {
 
     public static Matcher<File> withCanonicalPath(final Matcher<String> path) {
         return new TypeSafeMatcher<File>() {
+            @Override
             public boolean matchesSafely(File item) {
                 try {
                     return path.matches(item.getCanonicalPath());
@@ -192,6 +211,7 @@ public class FileMatchers {
                 }
             }
 
+            @Override
             public void describeTo(Description description) {
                 description.appendText("with canonical path '");
                 description.appendDescriptionOf(path);
@@ -202,11 +222,13 @@ public class FileMatchers {
 
     public static Matcher<File> withAbsolutePath(final Matcher path) {
         return new TypeSafeMatcher<File>() {
+            @Override
             public boolean matchesSafely(File item) {
                 // fileTested = item;
                 return path.matches(item.getAbsolutePath());
             }
 
+            @Override
             public void describeTo(Description description) {
                 description.appendText("with absolute path '");
                 description.appendDescriptionOf(path);

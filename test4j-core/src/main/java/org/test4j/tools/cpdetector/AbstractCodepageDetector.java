@@ -9,6 +9,7 @@ import java.nio.charset.Charset;
 
 public abstract class AbstractCodepageDetector implements ICodepageDetector {
 
+	@Override
 	public Charset detectCodepage(URL url) throws IOException {
 		BufferedInputStream in = new BufferedInputStream(url.openStream());
 		Charset result = detectCodepage(in, 2147483647);
@@ -16,6 +17,7 @@ public abstract class AbstractCodepageDetector implements ICodepageDetector {
 		return result;
 	}
 
+	@Override
 	public final Reader open(URL url) throws IOException {
 		Reader ret = null;
 		Charset cs = detectCodepage(url);
@@ -25,6 +27,7 @@ public abstract class AbstractCodepageDetector implements ICodepageDetector {
 		return ret;
 	}
 
+	@Override
 	public int compareTo(ICodepageDetector o) {
 		String other = o.getClass().getName();
 		String mine = super.getClass().getName();

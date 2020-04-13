@@ -18,23 +18,27 @@ public class FileAssert extends Assert<File, IFileAssert> implements IFileAssert
         super(file, File.class, IFileAssert.class);
     }
 
+    @Override
     public IFileAssert isExists() {
         FileExistsMatcher matcher = new FileExistsMatcher((File) this.getAssertObject().getValue(),
                 FileExistsMatcherType.ISEXISTS);
         return this.assertThat(matcher);
     }
 
+    @Override
     public IFileAssert unExists() {
         FileExistsMatcher matcher = new FileExistsMatcher((File) this.getAssertObject().getValue(),
                 FileExistsMatcherType.UNEXISTS);
         return this.assertThat(matcher);
     }
 
+    @Override
     public IFileAssert nameContain(String expected) {
         Matcher<?> matcher = FileMatchers.nameContain(expected);
         return this.assertThat(matcher);
     }
 
+    @Override
     public IFileAssert nameEq(String expected) {
         Matcher<?> matcher = FileMatchers.nameEq(expected);
         return this.assertThat(matcher);

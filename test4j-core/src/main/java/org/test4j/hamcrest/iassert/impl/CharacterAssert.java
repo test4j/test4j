@@ -13,6 +13,7 @@ public class CharacterAssert extends Assert<Character, ICharacterAssert> impleme
         super(value, Character.class, ICharacterAssert.class);
     }
 
+    @Override
     public ICharacterAssert is(char ch) {
         return this.isEqualTo(ch);
     }

@@ -10,10 +10,12 @@ import java.util.Date;
 @SuppressWarnings("rawtypes")
 public class EqStringComparator implements Comparator {
 
+    @Override
     public boolean canCompare(Object left, Object right) {
         return left instanceof String || left == null;
     }
 
+    @Override
     public Difference compare(Object left, Object right, boolean onlyFirstDifference,
                               ReflectionComparator reflectionComparator) {
         if (left == right) {// check if the same instance is referenced

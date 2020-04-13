@@ -16,6 +16,7 @@ public class FileExistsMatcher extends BaseMatcher<File> {
         this.type = type;
     }
 
+    @Override
     public boolean matches(Object actual) {
         if (this.type == FileExistsMatcherType.ISEXISTS) {
             return this.expected.exists();
@@ -24,11 +25,12 @@ public class FileExistsMatcher extends BaseMatcher<File> {
         }
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText(String.format(type.description(), this.expected.getAbsolutePath()));
     }
 
-    public static enum FileExistsMatcherType {
+    public enum FileExistsMatcherType {
         ISEXISTS {
             @Override
             public String description() {
