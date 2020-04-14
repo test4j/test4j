@@ -15,7 +15,7 @@ public class DerbyEnvironment extends BaseEnvironment {
 	}
 
 	@Override
-	public String getFieldQuato() {
+	public String getFieldQuota() {
 		return "";
 	}
 }

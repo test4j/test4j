@@ -10,7 +10,7 @@ public class SqlServerEnvironment extends BaseEnvironment {
 		this.typeMap = null;// TODO
 	}
 
-	public String getFieldQuato() {
+	public String getFieldQuota() {
 		return "";
 	}
 }

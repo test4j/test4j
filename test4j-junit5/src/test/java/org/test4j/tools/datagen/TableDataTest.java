@@ -1,6 +1,7 @@
 package org.test4j.tools.datagen;
 
 import org.junit.jupiter.api.Test;
+import org.test4j.exception.ExtraMessageError;
 import org.test4j.hamcrest.matcher.modes.EqMode;
 import org.test4j.json.JSON;
 import org.test4j.junit5.Test4J;
@@ -13,8 +14,8 @@ class TableDataTest extends Test4J {
 
     @Test
     void test_map_list() throws FileNotFoundException {
-        String text = ResourceHelper.readFromFile("org/test4j/datamap/datamap_list.json");
-        TableData data = TableData.map(text);
+        String text = ResourceHelper.readFromFile("org/test4j/tools/datagen/datamap_list.json");
+        TableData data = TableData.fromText(text);
         MessageHelper.info(JSON.toJSON(data, true));
         want.list(data.keySet()).eqReflect(new String[]{"t_user", "t_user2"});
         want.list(data.get("t_user")).eqDataMap(DataMap.create(2)
@@ -25,8 +26,8 @@ class TableDataTest extends Test4J {
 
     @Test
     void test_map() throws FileNotFoundException {
-        String text = ResourceHelper.readFromFile("org/test4j/datamap/datamap1.json");
-        TableData data = TableData.map(text);
+        String text = ResourceHelper.readFromFile("org/test4j/tools/datagen/datamap1.json");
+        TableData data = TableData.fromText(text);
         MessageHelper.info(JSON.toJSON(data, true));
         want.list(data.keySet()).eqReflect(new String[]{"t_user"});
         want.list(data.get("t_user")).eqDataMap(DataMap.create(2)
@@ -37,8 +38,8 @@ class TableDataTest extends Test4J {
 
     @Test
     void test_map_insert() throws FileNotFoundException {
-        String text = ResourceHelper.readFromFile("org/test4j/datamap/user_address.json");
-        TableData data = TableData.map(text)
+        String text = ResourceHelper.readFromFile("org/test4j/tools/datagen/user_address.json");
+        TableData data = TableData.fromText(text)
                 .with("t_user", DataMap.create(2)
                         .kv("age", 45, 34)
                 );
@@ -51,9 +52,9 @@ class TableDataTest extends Test4J {
         db.table("address").query().eqDataMap(DataMap.create(3)
                 .kv("address", "address1", "address2", "address3")
         );
-        String text2 = ResourceHelper.readFromFile("org/test4j/datamap/user_address_query.json");
-        TableData data2 = TableData.map(text2);
-        want.exception(() -> db.queryEq(data2), AssertionError.class)
+        String text2 = ResourceHelper.readFromFile("org/test4j/tools/datagen/user_address_query.json");
+        TableData data2 = TableData.fromText(text2);
+        want.exception(() -> db.queryEq(data2), ExtraMessageError.class)
                 .contains(new String[]{
                         "$[1]~[1].age", "(String) 34", "(Integer) 45"
                 });

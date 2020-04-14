@@ -4,6 +4,7 @@ import org.test4j.hamcrest.matcher.modes.EqMode;
 import org.test4j.json.JSON;
 import org.test4j.tools.commons.ArrayHelper;
 import org.test4j.tools.commons.ListHelper;
+import org.test4j.tools.commons.StringHelper;
 
 import java.util.List;
 import java.util.Map;
@@ -123,7 +124,7 @@ public abstract class BaseDiff<T> {
         } else if (value.getClass().isPrimitive()) {
             return String.valueOf(value);
         } else if (asString) {
-            return withoutQuotaJSON(value);
+            return StringHelper.toString(value);
         } else {
             return value;
         }
@@ -135,22 +136,7 @@ public abstract class BaseDiff<T> {
         } else if (value.getClass().isPrimitive() || value instanceof String) {
             return "(" + value.getClass().getSimpleName() + ") " + value;
         } else {
-            return "(" + value.getClass().getSimpleName() + ") " + withoutQuotaJSON(value);
-        }
-    }
-
-    /**
-     * json化处理，同时去掉双引号
-     *
-     * @param value
-     * @return
-     */
-    public static String withoutQuotaJSON(Object value) {
-        String text = JSON.toJSON(value, true);
-        if (text.length() > 2 && text.startsWith("\"") && text.endsWith("\"")) {
-            return text.substring(1, text.length() - 1);
-        } else {
-            return text;
+            return "(" + value.getClass().getSimpleName() + ") " + StringHelper.toString(value);
         }
     }
 }

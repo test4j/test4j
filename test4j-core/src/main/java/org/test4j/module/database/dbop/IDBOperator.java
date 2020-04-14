@@ -98,12 +98,12 @@ public interface IDBOperator {
      * @param clean 是否清空插入
      * @return
      */
-    IDBOperator insert(TableData data, boolean clean);
+    String insert(TableData data, boolean clean);
 
     /**
      * 断言数据
      *
      * @param data
      */
-    void queryEq(TableData data);
+    String queryEq(TableData data);
 }

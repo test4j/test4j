@@ -6,6 +6,13 @@ import org.hamcrest.Factory;
 import org.hamcrest.Matcher;
 import org.hamcrest.TypeSafeMatcher;
 
+import static org.test4j.tools.commons.StringHelper.DOUBLE_QUOTATION;
+
+/**
+ * StringContainsInOrder
+ *
+ * @author wudarui
+ */
 public class StringContainsInOrder extends TypeSafeMatcher<String> {
     private final Iterable<String> substrings;
 
@@ -52,9 +59,10 @@ public class StringContainsInOrder extends TypeSafeMatcher<String> {
 
     @Override
     public void describeMismatchSafely(String item, Description mismatchDescription) {
-        mismatchDescription.appendText("was \"").appendText(item).appendText("\"");
+        mismatchDescription.appendText("was ").appendText(DOUBLE_QUOTATION).appendText(item).appendText(DOUBLE_QUOTATION);
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText("a string containing ").appendValueList("", ", ", "", substrings);
         if (modes != null && modes.length > 0) {

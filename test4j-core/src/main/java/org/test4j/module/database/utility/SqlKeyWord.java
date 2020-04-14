@@ -25,6 +25,10 @@ public class SqlKeyWord {
     public static List<ItemBetweenKey> Select_Between = toList(
             new ItemBetweenKey("select", "from")
     );
+    /**
+     * id字段
+     */
+    public static final String COLUMN_ID = "id";
 
     /**
      * 是否匹配开始符

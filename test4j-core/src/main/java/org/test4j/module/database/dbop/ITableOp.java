@@ -23,16 +23,6 @@ public interface ITableOp {
     ITableOp insert(IDataMap... datas);
 
     /**
-     * 提交数据
-     */
-    void commit();
-
-    /**
-     * 回滚数据
-     */
-    void rollback();
-
-    /**
      * 查询表数据，做数据断言
      *
      * @return
@@ -46,8 +36,6 @@ public interface ITableOp {
      * @return
      */
     ICollectionAssert queryWhere(String where);
-
-    ICollectionAssert printAndAssert(String where);
 
     /**
      * 根据条件查询数据，并返回数据断言器
@@ -88,11 +76,21 @@ public interface ITableOp {
      * @return
      */
     ITableOp deleteWhere(String where);
+
+    /**
+     * 打印数据库数据
+     *
+     * @param where
+     * @return
+     */
+    ICollectionAssert printAndAssert(String where);
+
     /**
      * 打印成dataMap形式
      *
      * @param where
      * @param mapName DataMap名称
+     * @return
      */
     String printAsDataMap(String where, String mapName);
 
@@ -104,4 +102,13 @@ public interface ITableOp {
      * @return
      */
     String printAsMulMap(String where, String mapName);
+
+    /**
+     * 打印成json格式
+     *
+     * @param where
+     * @param orderColumns
+     * @return
+     */
+    String printAsJson(String where, String... orderColumns);
 }

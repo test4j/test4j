@@ -68,10 +68,7 @@ public interface IColData {
 
         @Override
         public Object row(int row) {
-            if (row == 0) {
-                return value;
-            }
-            throw new RuntimeException("ItemValue only contain one value");
+            return value;
         }
 
         @Override

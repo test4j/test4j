@@ -17,6 +17,7 @@ public class StepResult {
     private String message;
     private boolean success = true;
     private Throwable exception;
+    private List<String> extras = new ArrayList<>();
 
     public StepResult(ScenarioResult scenarioResult, StepType type, String description) {
         this.storyResult = scenarioResult;
@@ -37,10 +38,17 @@ public class StepResult {
         this.success = false;
     }
 
+    public void extraMessage(String message) {
+        this.extras.add(message);
+    }
+
     @Override
     public String toString() {
         StringBuilder buff = new StringBuilder();
         buff.append(type).append(": ").append(description == null ? "" : description).append("\n");
+        for (String extra : this.extras) {
+            buff.append("\t").append(extra.trim()).append("\n");
+        }
         if (success) {
             buff.append("\tsuccess: ").append(message);
         } else {

@@ -2,7 +2,7 @@ package org.test4j.module.spec.internal;
 
 import org.test4j.function.SExecutor;
 
-public interface IGiven {
+public interface IGiven extends IAround, IWhen {
     /**
      * 前置条件
      *
@@ -23,42 +23,20 @@ public interface IGiven {
     IGiven given(SExecutor lambda) throws RuntimeException;
 
     /**
-     * 执行测试动作
+     * 执行 前置数据准备 和 后置数据检查
+     * 文件名形式为 testClassName.testMethodName.json
      *
-     * @param description
-     * @param lambda
      * @return
      * @throws RuntimeException
      */
-    IThen when(String description, SExecutor lambda) throws RuntimeException;
+    IAround aroundDb() throws RuntimeException;
 
     /**
-     * 执行测试动作
+     * 执行 前置数据准备 和 后置数据检查
      *
-     * @param lambda
+     * @param file json文件
      * @return
      * @throws RuntimeException
      */
-    IThen when(SExecutor lambda) throws RuntimeException;
-
-    /**
-     * 执行测试方法，并预计执行会出错
-     *
-     * @param description
-     * @param lambda
-     * @param eKlass      期望抛出的异常类型
-     * @return
-     * @throws RuntimeException
-     */
-    IThen when(String description, SExecutor lambda, Class<? extends Throwable> eKlass) throws RuntimeException;
-
-    /**
-     * 执行测试方法，并预计执行会出错
-     *
-     * @param lambda
-     * @param eKlass 期望抛出的异常类型
-     * @return
-     * @throws RuntimeException
-     */
-    IThen when(SExecutor lambda, Class<? extends Throwable> eKlass) throws RuntimeException;
+    IAround aroundDb(String file) throws RuntimeException;
 }

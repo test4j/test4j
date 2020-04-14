@@ -4,6 +4,8 @@ package org.test4j.hamcrest.matcher.string;
 import org.hamcrest.Description;
 import org.hamcrest.TypeSafeMatcher;
 
+import static org.test4j.tools.commons.StringHelper.DOUBLE_QUOTATION;
+
 /**
  * 经过模式处理后，判断一个字符串是否包含另外一个字符串
  *
@@ -22,9 +24,10 @@ public class StringContainMatcher extends TypeSafeMatcher<String> {
 
     @Override
     public void describeMismatchSafely(String item, Description mismatchDescription) {
-        mismatchDescription.appendText("was \"").appendText(item).appendText("\"");
+        mismatchDescription.appendText("was ").appendText(DOUBLE_QUOTATION).appendText(item).appendText(DOUBLE_QUOTATION);
     }
 
+    @Override
     public void describeTo(Description description) {
         description.appendText("a string containing ").appendValueList("", ", ", "", expecteds);
         if (modes != null && modes.length > 0) {

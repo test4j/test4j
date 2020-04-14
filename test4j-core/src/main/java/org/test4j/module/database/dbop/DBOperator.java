@@ -1,5 +1,6 @@
 package org.test4j.module.database.dbop;
 
+import org.test4j.exception.ExtraMessageError;
 import org.test4j.hamcrest.iassert.impl.CollectionAssert;
 import org.test4j.hamcrest.iassert.intf.ICollectionAssert;
 import org.test4j.hamcrest.matcher.modes.EqMode;
@@ -184,29 +185,48 @@ public class DBOperator implements IDBOperator {
     }
 
     @Override
-    public IDBOperator insert(TableData data, boolean clean) {
-        for (Map.Entry<String, List<Map<String, String>>> entry : data.entrySet()) {
-            String table = entry.getKey();
-            List<Map<String, String>> records = entry.getValue();
-            if (clean) {
-                this.deleteWhere(table, null);
+    public String insert(TableData data, boolean clean) {
+        StringBuffer buff = new StringBuffer();
+        try {
+            for (Map.Entry<String, List<Map<String, Object>>> entry : data.entrySet()) {
+                String table = entry.getKey();
+                List<Map<String, Object>> records = entry.getValue();
+                if (clean) {
+                    this.deleteWhere(table, null);
+                    buff.append("\t清空表[").append(table).append("]数据\n");
+                }
+                buff.append("\t准备[" + records.size() + "]条[").append(table).append("]表数据\n");
+                for (Map<String, Object> record : records) {
+                    this.table(table).insert(new ICore.DataMap(record));
+                }
             }
-            for (Map<String, String> record : records) {
-                this.table(table).insert(new ICore.DataMap(record));
-            }
+            return buff.toString();
+        } catch (Throwable e) {
+            throw new ExtraMessageError(buff.toString(), e);
         }
-        return this;
     }
 
     @Override
-    public void queryEq(TableData data) {
-        for (Map.Entry<String, List<Map<String, String>>> entry : data.entrySet()) {
-            String query = entry.getKey();
-            if (!query.trim().toLowerCase().startsWith("select")) {
-                query = "select * from " + query;
+    public String queryEq(TableData data) {
+        StringBuffer buff = new StringBuffer();
+        try {
+            for (Map.Entry<String, List<Map<String, Object>>> entry : data.entrySet()) {
+                String query = entry.getKey();
+                if (!query.trim().toLowerCase().startsWith("select")) {
+                    query = "select * from " + query;
+                }
+                List<Map<String, Object>> records = entry.getValue();
+                try {
+                    buff.append("\t检查[").append(query).append("]数据\n");
+                    this.query(query).eqReflect(records, EqMode.IGNORE_DEFAULTS, EqMode.IGNORE_ORDER, EqMode.EQ_STRING);
+                } catch (AssertionError error) {
+                    String message = error.getMessage();
+                    throw new AssertionError("[" + query + "] data assert fail: " + message);
+                }
             }
-            List<Map<String, String>> records = entry.getValue();
-            this.query(query).eqReflect(records, EqMode.IGNORE_DEFAULTS, EqMode.IGNORE_ORDER, EqMode.EQ_STRING);
+            return buff.toString();
+        } catch (Throwable e) {
+            throw new ExtraMessageError(buff.toString(), e);
         }
     }
 }

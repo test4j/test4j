@@ -6,21 +6,23 @@ import org.test4j.hamcrest.iassert.impl.ObjectAssert;
 import org.test4j.hamcrest.iassert.intf.ICollectionAssert;
 import org.test4j.hamcrest.iassert.intf.INumberAssert;
 import org.test4j.hamcrest.iassert.intf.IObjectAssert;
+import org.test4j.json.JSON;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.database.environment.DBEnvironment;
 import org.test4j.module.database.environment.DBEnvironmentFactory;
 import org.test4j.module.database.sql.Test4JSqlContext;
 import org.test4j.module.database.utility.DBHelper;
 import org.test4j.module.database.utility.SqlRunner;
+import org.test4j.tools.commons.StringHelper;
 import org.test4j.tools.datagen.IDataMap;
+import org.test4j.tools.datagen.TableData;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.test4j.module.database.dbop.DBOperator.IN_DB_OPERATOR;
+import static org.test4j.module.database.utility.SqlKeyWord.COLUMN_ID;
+import static org.test4j.tools.commons.StringHelper.DOUBLE_QUOTATION;
 import static org.test4j.tools.commons.StringHelper.isBlankOrNull;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
@@ -48,26 +50,6 @@ public class TableOp implements ITableOp {
             String sql = "delete from " + table;
             SqlRunner.execute(env, sql);
             return this;
-        } finally {
-            this.setDbOperator(false);
-        }
-    }
-
-    @Override
-    public void commit() {
-        this.setDbOperator(true);
-        try {
-            env.commit();
-        } finally {
-            this.setDbOperator(false);
-        }
-    }
-
-    @Override
-    public void rollback() {
-        this.setDbOperator(true);
-        try {
-            env.rollback();
         } finally {
             this.setDbOperator(false);
         }
@@ -164,6 +146,7 @@ public class TableOp implements ITableOp {
         this.setDbOperator(true);
         try {
             List<Map<String, Object>> list = selectData(where);
+            MessageHelper.info(JSON.toJSON(list, true));
             return new CollectionAssert(list);
         } finally {
             this.setDbOperator(false);
@@ -174,7 +157,7 @@ public class TableOp implements ITableOp {
     public ICollectionAssert queryWhere(IDataMap dataMap) {
         this.setDbOperator(true);
         try {
-            Map<String,Object> param = dataMap.row(0);
+            Map<String, Object> param = dataMap.row(0);
             StringBuilder query = new StringBuilder("select * from ");
             query.append(table).append(" ");
             String where = DBHelper.getWhereCondition(param);
@@ -202,7 +185,7 @@ public class TableOp implements ITableOp {
             for (Map<String, Object> map : list) {
                 for (Map.Entry<String, Object> entry : map.entrySet()) {
                     String key = entry.getKey();
-                    String value = entry.getValue() == null ? "null" : quota + entry.getValue() + quota;
+                    String value = entry.getValue() == null ? "null" : DOUBLE_QUOTATION + entry.getValue() + DOUBLE_QUOTATION;
                     if (!data.containsKey(key)) {
                         data.put(key, new ArrayList());
                     }
@@ -211,11 +194,11 @@ public class TableOp implements ITableOp {
             }
             for (Map.Entry<String, List<String>> entry : data.entrySet()) {
                 String value = entry.getValue().stream().collect(Collectors.joining(", "));
-                if (!value.contains(quota)) {
+                if (!value.contains(DOUBLE_QUOTATION)) {
                     continue;
                 }
                 if (isDefault) {
-                    buff.append("\n\t.kv(").append(quota).append(entry.getKey()).append(quota).append(", ").append(value).append(")");
+                    buff.append("\n\t.kv(").append(DOUBLE_QUOTATION).append(entry.getKey()).append(DOUBLE_QUOTATION).append(", ").append(value).append(")");
                 } else {
                     buff.append("\n\t.").append(entry.getKey()).append(".values(").append(value).append(")");
                 }
@@ -241,9 +224,9 @@ public class TableOp implements ITableOp {
                     if (entry.getValue() == null) {
                         continue;
                     }
-                    String value = entry.getValue() == null ? "null" : quota + entry.getValue() + quota;
+                    String value = entry.getValue() == null ? "null" : DOUBLE_QUOTATION + entry.getValue() + DOUBLE_QUOTATION;
                     if (isDefault) {
-                        buff.append("\n\t.kv(").append(quota).append(entry.getKey()).append(quota).append(", ").append(value).append(")");
+                        buff.append("\n\t.kv(").append(DOUBLE_QUOTATION).append(entry.getKey()).append(DOUBLE_QUOTATION).append(", ").append(value).append(")");
                     } else {
                         buff.append("\n\t.").append(entry.getKey()).append(".values(").append(value).append(")");
                     }
@@ -257,7 +240,39 @@ public class TableOp implements ITableOp {
         }
     }
 
-    static String quota = "\"";
+    @Override
+    public String printAsJson(String where, String... orderColumns) {
+        this.setDbOperator(true);
+        try {
+            List<Map<String, Object>> list = selectData(where);
+            List<Map<String, Object>> orders = new ArrayList<>(list.size());
+            for (Map<String, Object> data : list) {
+                Map<String, Object> map = new LinkedHashMap<>(data.size());
+                if (data.containsKey(COLUMN_ID)) {
+                    map.put(COLUMN_ID, StringHelper.toString(data.get(COLUMN_ID)));
+                }
+                for (String column : orderColumns) {
+                    if (data.containsKey(column) && !map.containsKey(column)) {
+                        map.put(column, StringHelper.toString(data.get(column)));
+                    }
+                }
+                for (Map.Entry<String, Object> entry : data.entrySet()) {
+                    if (!map.containsKey(entry.getKey())) {
+                        map.put(entry.getKey(), StringHelper.toString(entry.getValue()));
+                    }
+                }
+                orders.add(map);
+            }
+
+            TableData tableData = new TableData();
+            tableData.put(table, orders);
+            String text = JSON.toJSON(tableData, true);
+            MessageHelper.info("\n\n" + text);
+            return text;
+        } finally {
+            this.setDbOperator(false);
+        }
+    }
 
     private List<Map<String, Object>> selectData(String where) {
         String _where = isBlankOrNull(where) ? "" : " where " + where.trim();

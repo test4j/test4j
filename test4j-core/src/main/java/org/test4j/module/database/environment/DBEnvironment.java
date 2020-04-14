@@ -76,7 +76,7 @@ public interface DBEnvironment {
 
     void rollback();
 
-    String getFieldQuato();
+    String getFieldQuota();
 
     Object convertToSqlValue(Object value);
 }

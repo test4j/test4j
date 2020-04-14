@@ -1,5 +1,7 @@
 package org.test4j.tools.commons;
 
+import org.test4j.json.JSON;
+
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 import java.io.PrintWriter;
@@ -10,8 +12,17 @@ import java.util.*;
 
 import static java.util.stream.Collectors.joining;
 
+/**
+ * 字符串处理工具类
+ *
+ * @author wudarui
+ */
 public class StringHelper {
     public static final String EMPTY = "";
+    /**
+     * 双引号
+     */
+    public static final String DOUBLE_QUOTATION = "\"";
 
     /**
      * 判断string是否为null或空字符串
@@ -232,46 +243,6 @@ public class StringHelper {
         result = result.replaceAll("&", "&amp;");
         result = result.replaceAll("\n", "<br/>");
         return result;
-    }
-
-    /**
-     * 将对象转化为字符串{ddd,ddd}
-     *
-     * @param o
-     * @return
-     */
-    public static String toString(Object o) {
-        StringBuilder buff = new StringBuilder("{");
-        boolean first = true;
-        if (o == null) {
-            return null;
-        } else if (o instanceof Collection<?>) {
-            Collection<?> oc = (Collection<?>) o;
-            for (Object o1 : oc) {
-                if (first == false) {
-                    buff.append(",");
-                } else {
-                    first = false;
-                }
-                buff.append(toString(o1));
-            }
-            buff.append("}");
-            return buff.toString();
-        } else if (o instanceof Object[]) {
-            Object[] oa = (Object[]) o;
-            for (Object o2 : oa) {
-                if (first == false) {
-                    buff.append(",");
-                } else {
-                    first = false;
-                }
-                buff.append(toString(o2));
-            }
-            buff.append("}");
-            return buff.toString();
-        } else {
-            return o.toString();
-        }
     }
 
     /**
@@ -682,5 +653,23 @@ public class StringHelper {
                 .append(Arrays.stream(strings).collect(joining(split)))
                 .append(end)
                 .toString();
+    }
+
+    /**
+     * json化处理，同时去掉双引号
+     *
+     * @param value
+     * @return
+     */
+    public static String toString(Object value) {
+        if (value == null) {
+            return null;
+        }
+        String text = JSON.toJSON(value, true);
+        if (text.length() > 2 && text.startsWith(DOUBLE_QUOTATION) && text.endsWith(DOUBLE_QUOTATION)) {
+            return text.substring(1, text.length() - 1);
+        } else {
+            return text;
+        }
     }
 }

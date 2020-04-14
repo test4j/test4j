@@ -10,7 +10,7 @@ public class MySqlEnvironment extends BaseEnvironment {
 		typeMap = new MySQLTypeMap();
 	}
 
-	public String getFieldQuato() {
+	public String getFieldQuota() {
 		return "`";
 	}
 }

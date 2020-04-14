@@ -52,8 +52,8 @@ public abstract class AbstractDataMap<DM extends DataMap>
 
     @Override
     public Map<String, Object> row(int row) {
-        if (row < 0 || row >= rowSize) {
-            throw new RuntimeException("the index must between 0 and " + (this.rowSize - 1));
+        if (row < 0) {
+            throw new RuntimeException("the index can't less than zero.");
         }
         Map<String, Object> data = new HashMap<>();
         for (Map.Entry<String, IColData> entry : this.entrySet()) {

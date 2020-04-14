@@ -1,6 +1,8 @@
 package org.test4j.module.spec.internal;
 
 import org.test4j.function.SExecutor;
+import org.test4j.module.core.internal.Test4JContext;
+import org.test4j.tools.datagen.TableDataAround;
 
 public class ScenarioGiven implements IGiven {
     private final ScenarioResult scenario;
@@ -67,5 +69,21 @@ public class ScenarioGiven implements IGiven {
         } catch (Throwable e) {
             throw new RuntimeException("步骤 - 执行错误：" + e.getMessage(), e);
         }
+    }
+
+    @Override
+    public IAround aroundDb() throws RuntimeException {
+        try {
+            String file = TableDataAround.findFile(Test4JContext.currTestedClazz(), Test4JContext.currTestedMethod().getName());
+            return this.aroundDb(file);
+        } catch (Throwable e) {
+            throw new RuntimeException("步骤 - 数据库初始化数据和检查数据准备失败：" + e.getMessage(), e);
+        }
+    }
+
+    @Override
+    public IAround aroundDb(String file) throws RuntimeException {
+        TableDataAround.around(file);
+        return this;
     }
 }

@@ -6,6 +6,7 @@ import lombok.Setter;
 import org.test4j.function.SExecutor;
 import org.test4j.module.ICore;
 import org.test4j.tools.commons.StringHelper;
+import org.test4j.tools.datagen.TableDataAround;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -57,12 +58,18 @@ public class ScenarioResult implements Serializable {
      * @param eKlass
      * @throws Exception
      */
-    public void doStep(StepType type, String description, SExecutor lambda, Class<? extends Throwable> eKlass) throws Exception {
+    public void doStep(StepType type, String description, SExecutor lambda, Class<? extends Throwable> eKlass) throws Throwable {
         StepResult result = this.addResult(type, description);
         try {
+            if (type == StepType.When) {
+                TableDataAround.ready(result);
+            }
             lambda.doIt();
             if (eKlass != null) {
                 ICore.want.fail("expected exception: " + eKlass.getName());
+            }
+            if (type == StepType.When) {
+                TableDataAround.check(result);
             }
         } catch (Throwable e) {
             if (eKlass != null) {
@@ -82,7 +89,7 @@ public class ScenarioResult implements Serializable {
      * @param eKlass
      * @throws Exception
      */
-    public void doStep(StepType type, SExecutor lambda, Class<? extends Throwable> eKlass) throws Exception {
+    public void doStep(StepType type, SExecutor lambda, Class<? extends Throwable> eKlass) throws Throwable {
         this.doStep(type, null, lambda, eKlass);
     }
 

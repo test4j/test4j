@@ -22,12 +22,12 @@ public class InsertOp implements IInsertOp {
 
     public InsertOp() {
         this.env = DBEnvironmentFactory.getDefaultDBEnvironment();
-        this.quato = this.env.getFieldQuato();
+        this.quato = this.env.getFieldQuota();
     }
 
     public InsertOp(DBEnvironment environment) {
         this.env = environment;
-        this.quato = environment.getFieldQuato();
+        this.quato = environment.getFieldQuota();
     }
 
     public static void insertNoException(DBEnvironment env, String table, IDataMap data) {
@@ -45,6 +45,7 @@ public class InsertOp implements IInsertOp {
      * @param table
      * @param data
      */
+    @Override
     public void insert(String table, IDataMap data) {
         this.table = table;
         this.tableMeta = env.getTableMetaData(table);
