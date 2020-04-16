@@ -1,15 +1,15 @@
 package org.test4j.hamcrest.matcher.array;
 
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.Map;
-
 import org.hamcrest.Matcher;
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.test4j.hamcrest.matcher.mockito.Matches;
 import org.test4j.hamcrest.matcher.modes.ItemsMode;
 import org.test4j.junit5.Test4J;
+
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 @SuppressWarnings({"unchecked", "rawtypes"})
 public class ListEveryItemMatcherTest extends Test4J {

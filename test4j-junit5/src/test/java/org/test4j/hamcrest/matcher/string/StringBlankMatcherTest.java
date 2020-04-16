@@ -1,13 +1,12 @@
 package org.test4j.hamcrest.matcher.string;
 
-import java.util.Iterator;
-
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.test4j.junit5.Test4J;
-
 import org.test4j.tools.datagen.DataProvider;
+
+import java.util.Iterator;
 
 @SuppressWarnings("rawtypes")
 public class StringBlankMatcherTest extends Test4J {

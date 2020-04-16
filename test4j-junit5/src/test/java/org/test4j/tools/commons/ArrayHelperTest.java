@@ -1,12 +1,12 @@
 package org.test4j.tools.commons;
 
-import java.util.Arrays;
-import java.util.HashMap;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.test4j.junit5.Test4J;
+
+import java.util.Arrays;
+import java.util.HashMap;
 
 public class ArrayHelperTest extends Test4J {
     @Test

@@ -2,7 +2,6 @@ package org.test4j.hamcrest;
 
 import org.junit.jupiter.api.Test;
 import org.test4j.hamcrest.iassert.intf.*;
-
 import org.test4j.junit5.Test4J;
 
 public class TheStyleAssertionTest extends Test4J {

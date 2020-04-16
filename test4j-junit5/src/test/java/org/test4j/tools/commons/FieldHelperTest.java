@@ -1,14 +1,14 @@
 package org.test4j.tools.commons;
 
-import java.lang.reflect.Field;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.test4j.exception.NoSuchFieldRuntimeException;
 import org.test4j.junit5.Test4J;
 import org.test4j.model.Manager;
+
+import java.lang.reflect.Field;
+import java.util.List;
 
 public class FieldHelperTest extends Test4J {
 

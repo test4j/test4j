@@ -1,16 +1,16 @@
 package org.test4j.hamcrest;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Date;
-import java.util.List;
-
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.test4j.hamcrest.matcher.modes.EqMode;
 import org.test4j.junit5.Test4J;
 import org.test4j.model.Address;
 import org.test4j.model.User;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
 public class TestReflectionAssert extends Test4J {
     @Test

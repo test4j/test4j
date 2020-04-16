@@ -9,7 +9,10 @@ import org.test4j.tools.reflector.FieldAccessor;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 import java.util.function.BiConsumer;
 
 import static org.test4j.tools.commons.StringHelper.join;
@@ -195,7 +198,7 @@ public final class DBHelper {
         char[] chars = content.toCharArray();
         List<String> statements = new ArrayList<String>();
 
-        StamentStatus status = StamentStatus.NORMAL;
+        StatementStatus status = StatementStatus.NORMAL;
         StringBuffer buff = new StringBuffer();
         for (int index = 0; index < chars.length; index++) {
             char ch = chars[index];
@@ -204,42 +207,42 @@ public final class DBHelper {
                 case SINGLE_NOTE:
                     if (ch == '\n' || ch == '\r') {
                         buff.append(' ');
-                        status = StamentStatus.NORMAL;
+                        status = StatementStatus.NORMAL;
                     }
                     break;
                 case MULTI_NOTE:
                     next = (index == chars.length - 1) ? '/' : chars[index + 1];
                     if (ch == '*' && next == '/') {
                         index++;
-                        status = StamentStatus.NORMAL;
+                        status = StatementStatus.NORMAL;
                     }
                     break;
                 case SINGLE_QUOTATION:
                     buff.append(ch);
                     if (ch == '\'') {
-                        status = StamentStatus.NORMAL;
+                        status = StatementStatus.NORMAL;
                     }
                     break;
                 case DOUBLE_QUOTATION:
                     buff.append(ch);
                     if (ch == '"') {
-                        status = StamentStatus.NORMAL;
+                        status = StatementStatus.NORMAL;
                     }
                     break;
                 case NORMAL:
                     next = (index == chars.length - 1) ? ';' : chars[index + 1];
                     if (ch == '-' && next == '-') {
                         index++;
-                        status = StamentStatus.SINGLE_NOTE;
+                        status = StatementStatus.SINGLE_NOTE;
                     } else if (ch == '/' && next == '*') {
                         index++;
-                        status = StamentStatus.MULTI_NOTE;
+                        status = StatementStatus.MULTI_NOTE;
                     } else if (ch == '\'') {
                         buff.append(ch);
-                        status = StamentStatus.SINGLE_QUOTATION;
+                        status = StatementStatus.SINGLE_QUOTATION;
                     } else if (ch == '"') {
                         buff.append(ch);
-                        status = StamentStatus.DOUBLE_QUOTATION;
+                        status = StatementStatus.DOUBLE_QUOTATION;
                     } else if (ch == ';') {
                         String statement = buff.toString().trim();
                         if ("".equals(statement) == false) {

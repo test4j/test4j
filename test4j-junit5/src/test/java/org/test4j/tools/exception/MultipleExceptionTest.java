@@ -1,13 +1,13 @@
 package org.test4j.tools.exception;
 
-import java.util.Iterator;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.test4j.exception.MultipleException;
 import org.test4j.junit5.Test4J;
 import org.test4j.tools.datagen.DataProvider;
+
+import java.util.Iterator;
 
 @SuppressWarnings("rawtypes")
 public class MultipleExceptionTest extends Test4J {

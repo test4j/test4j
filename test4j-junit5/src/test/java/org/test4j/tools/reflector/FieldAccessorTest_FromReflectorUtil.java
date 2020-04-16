@@ -1,14 +1,6 @@
 package org.test4j.tools.reflector;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.jupiter.api.Test;
-
 import org.test4j.exception.NoSuchFieldRuntimeException;
 import org.test4j.junit5.Test4J;
 import org.test4j.model.Address;
@@ -16,6 +8,8 @@ import org.test4j.model.Employee;
 import org.test4j.model.User;
 import org.test4j.reflector.ForReflectUtil;
 import org.test4j.tools.commons.Reflector;
+
+import java.util.*;
 
 
 @SuppressWarnings({"unchecked", "rawtypes"})

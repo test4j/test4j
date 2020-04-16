@@ -1,9 +1,5 @@
 package org.test4j.module.database;
 
-import java.io.FileNotFoundException;
-import java.util.Iterator;
-
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
@@ -12,6 +8,9 @@ import org.test4j.junit5.Test4J;
 import org.test4j.module.database.utility.DBHelper;
 import org.test4j.tools.commons.ResourceHelper;
 import org.test4j.tools.datagen.DataProvider;
+
+import java.io.FileNotFoundException;
+import java.util.Iterator;
 
 @SuppressWarnings({"rawtypes", "serial"})
 public class DBHelperTest extends Test4J {

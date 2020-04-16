@@ -5,12 +5,9 @@ import org.test4j.exception.ExtraMessageError;
 import org.test4j.json.JSON;
 import org.test4j.module.database.IDatabase;
 import org.test4j.module.spec.internal.StepResult;
-import org.test4j.tools.commons.ArrayHelper;
 import org.test4j.tools.commons.ResourceHelper;
 
-import java.util.List;
-import java.util.Map;
-import java.util.function.Supplier;
+import java.util.function.Consumer;
 
 /**
  * 准备和校验数据库数据
@@ -23,32 +20,11 @@ public class TableDataAround {
     /**
      * 初始化数据
      */
-    private TableData ready;
+    private TableMap ready;
     /**
      * 检查数据
      */
-    private TableData check;
-
-    /**
-     * 将data中的json字段重新序列化为string
-     *
-     * @param data
-     */
-    public static void reset(TableData data) {
-        if (data == null) {
-            return;
-        }
-        for (List<Map<String, Object>> list : data.values()) {
-            for (Map<String, Object> map : list) {
-                for (Map.Entry<String, Object> entry : map.entrySet()) {
-                    Object value = entry.getValue();
-                    if (value instanceof Map || ArrayHelper.isCollOrArray(value)) {
-                        entry.setValue(JSON.toJSON(value, false));
-                    }
-                }
-            }
-        }
-    }
+    private TableMap check;
 
     static ThreadLocal<TableDataAround> THREAD_LOCAL_AROUND = new ThreadLocal<>();
 
@@ -62,8 +38,6 @@ public class TableDataAround {
         if (around.getCheck() == null) {
             throw new RuntimeException("not found check data in file:" + file);
         }
-        reset(around.getReady());
-        reset(around.getCheck());
         THREAD_LOCAL_AROUND.set(around);
         return around;
     }
@@ -73,8 +47,8 @@ public class TableDataAround {
             return;
         }
         try {
-            TableData tableData = THREAD_LOCAL_AROUND.get().getReady();
-            String extra = IDatabase.db.insert(tableData, false);
+            TableMap tableMap = THREAD_LOCAL_AROUND.get().getReady();
+            String extra = IDatabase.db.insert(tableMap, false);
             result.extraMessage(extra);
         } catch (ExtraMessageError e) {
             result.extraMessage(e.getExtra());
@@ -88,8 +62,8 @@ public class TableDataAround {
             return;
         }
         try {
-            TableData tableData = THREAD_LOCAL_AROUND.get().getCheck();
-            String extra = IDatabase.db.queryEq(tableData);
+            TableMap tableMap = THREAD_LOCAL_AROUND.get().getCheck();
+            String extra = IDatabase.db.queryEq(tableMap);
             result.extraMessage(extra);
         } catch (ExtraMessageError e) {
             result.extraMessage(e.getExtra());
@@ -103,37 +77,32 @@ public class TableDataAround {
         THREAD_LOCAL_AROUND.remove();
     }
 
-    public static void initReady(IDataMap data, String... tables) {
-        if (THREAD_LOCAL_AROUND.get() == null || THREAD_LOCAL_AROUND.get().getReady() == null) {
+    public static void initReady(Consumer<TableMap> handler) {
+        if (THREAD_LOCAL_AROUND.get() == null || handler == null) {
             return;
         }
-        initCheck(() -> THREAD_LOCAL_AROUND.get().getReady(), data, tables);
+        handler.accept(THREAD_LOCAL_AROUND.get().getReady());
+    }
+
+    public static void initCheck(Consumer<TableMap> handler) {
+        if (THREAD_LOCAL_AROUND.get() == null || handler == null) {
+            return;
+        }
+        handler.accept(THREAD_LOCAL_AROUND.get().getCheck());
+    }
+
+    public static void initReady(IDataMap data, String... tables) {
+        if (THREAD_LOCAL_AROUND.get() == null || data == null) {
+            return;
+        }
+        THREAD_LOCAL_AROUND.get().getReady().initWith(data, false, tables);
     }
 
     public static void initCheck(IDataMap data, String... tables) {
-        if (THREAD_LOCAL_AROUND.get() == null) {
+        if (THREAD_LOCAL_AROUND.get() == null || data == null) {
             return;
         }
-        initCheck(() -> THREAD_LOCAL_AROUND.get().getCheck(), data, tables);
-    }
-
-    static void initCheck(Supplier<TableData> supplier, IDataMap data, String... tables) {
-        if (THREAD_LOCAL_AROUND.get() == null) {
-            return;
-        }
-        TableData tableData = supplier.get();
-        if (tableData == null) {
-            return;
-        }
-        if (tables == null || tables.length == 0) {
-            for (String table : tableData.keySet()) {
-                tableData.with(table, data);
-            }
-        } else {
-            for (String table : tables) {
-                tableData.with(table, data);
-            }
-        }
+        THREAD_LOCAL_AROUND.get().getCheck().initWith(data, true, tables);
     }
 
     /**
@@ -146,11 +115,11 @@ public class TableDataAround {
      */
     public static String findFile(Class klass, String method) {
         String path = klass.getName().replace('.', '/');
-        String file1 = path + "." + method + ".json";
+        String file1 = path + "/" + method + ".json";
         if (ClassLoader.getSystemResource(file1) != null) {
             return file1;
         }
-        String file2 = path + "/" + method + ".json";
+        String file2 = path + "." + method + ".json";
         if (ClassLoader.getSystemResource(file2) != null) {
             return file2;
         }

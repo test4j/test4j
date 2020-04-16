@@ -1,11 +1,11 @@
 package org.test4j.hamcrest.iassert.interal;
 
 import org.hamcrest.Matcher;
+import org.test4j.hamcrest.matcher.modes.EqMode;
 import org.test4j.hamcrest.matcher.modes.ItemsMode;
 import org.test4j.hamcrest.matcher.property.PropertyAllItemsMatcher;
 import org.test4j.hamcrest.matcher.property.PropertyAnyItemMatcher;
 import org.test4j.hamcrest.matcher.property.ReflectionEqualMatcher;
-import org.test4j.hamcrest.matcher.modes.EqMode;
 
 
 /**

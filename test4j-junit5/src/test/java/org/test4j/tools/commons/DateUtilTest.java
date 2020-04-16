@@ -1,16 +1,15 @@
 package org.test4j.tools.commons;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import mockit.Mock;
 import mockit.MockUp;
-
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.test4j.junit5.Test4J;
 import org.test4j.tools.datagen.DataProvider;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class DateUtilTest extends Test4J {
 

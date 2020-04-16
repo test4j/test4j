@@ -1,15 +1,15 @@
 package org.test4j.hamcrest.iassert.common.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.test4j.hamcrest.matcher.modes.EqMode;
 import org.test4j.junit5.Test4J;
 import org.test4j.model.User;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings({"serial", "rawtypes", "unchecked"})
 public class ListAssertTest extends Test4J {

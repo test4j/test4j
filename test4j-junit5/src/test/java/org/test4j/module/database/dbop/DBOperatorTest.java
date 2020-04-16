@@ -1,15 +1,14 @@
 package org.test4j.module.database.dbop;
 
-import java.io.File;
-
-
 import org.junit.jupiter.api.Test;
 import org.test4j.db.ITable;
 import org.test4j.db.datamap.table.UserTableMap;
 import org.test4j.hamcrest.matcher.modes.EqMode;
 import org.test4j.junit5.Test4J;
 
-import static org.test4j.db.mapping.UserMP.*;
+import java.io.File;
+
+import static org.test4j.db.mapping.UserMP.Column;
 
 
 @SuppressWarnings("serial")

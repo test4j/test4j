@@ -1,9 +1,9 @@
 package org.test4j.hamcrest.iassert.object.impl;
 
-import java.util.Arrays;
-
 import org.junit.jupiter.api.Test;
 import org.test4j.junit5.Test4J;
+
+import java.util.Arrays;
 
 public class CollectionAssertTest_SizeMatch extends Test4J {
 

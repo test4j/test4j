@@ -1,14 +1,11 @@
 package org.test4j.module.database.dbop;
 
 import org.test4j.hamcrest.iassert.intf.ICollectionAssert;
-import org.test4j.hamcrest.iassert.intf.IMapAssert;
-import org.test4j.hamcrest.iassert.intf.IObjectAssert;
 import org.test4j.module.database.sql.SqlList;
-import org.test4j.tools.datagen.TableData;
+import org.test4j.tools.datagen.TableMap;
 
 import java.io.File;
 import java.util.List;
-import java.util.Map;
 
 @SuppressWarnings("rawtypes")
 public interface IDBOperator {
@@ -92,18 +89,44 @@ public interface IDBOperator {
     SqlList sqlList();
 
     /**
+     * 打印成dataMap形式
+     *
+     * @param tableAndWhere "tableName" or "tableName where ..."
+     * @param mapName       DataMap名称
+     * @return
+     */
+    String printAsDataMap(String tableAndWhere, String mapName);
+
+    /**
+     * 打印成JSON格式
+     *
+     * @param tables
+     */
+    void printAsJson(String... tables);
+
+    /**
+     * 打印成JSON格式
+     *
+     * @param tables
+     * @param orderColumns
+     * @param excludes
+     */
+    String printAsJson(String[] tables, String[] orderColumns, String... excludes);
+
+    /**
      * 插入数据
      *
      * @param data  具体数据
      * @param clean 是否清空插入
      * @return
      */
-    String insert(TableData data, boolean clean);
+    String insert(TableMap data, boolean clean);
 
     /**
      * 断言数据
      *
      * @param data
+     * @return
      */
-    String queryEq(TableData data);
+    String queryEq(TableMap data);
 }

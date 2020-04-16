@@ -1,16 +1,16 @@
 package org.test4j.hamcrest.matcher.property;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 import org.test4j.hamcrest.matcher.modes.EqMode;
 import org.test4j.junit5.Test4J;
 import org.test4j.model.GenicBean;
 import org.test4j.model.User;
 import org.test4j.tools.commons.ListHelper;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @SuppressWarnings({"rawtypes", "serial", "unchecked"})
 public class MapPropertyEqualMatcherTest extends Test4J {

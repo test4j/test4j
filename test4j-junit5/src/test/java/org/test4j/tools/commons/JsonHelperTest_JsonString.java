@@ -1,13 +1,13 @@
 package org.test4j.tools.commons;
 
-import java.util.LinkedHashMap;
-import java.util.Map;
-
 import lombok.Data;
 import org.junit.jupiter.api.Test;
 import org.test4j.json.JSON;
 import org.test4j.junit5.Test4J;
 import org.test4j.model.Manager;
+
+import java.util.LinkedHashMap;
+import java.util.Map;
 
 public class JsonHelperTest_JsonString extends Test4J {
     @Test

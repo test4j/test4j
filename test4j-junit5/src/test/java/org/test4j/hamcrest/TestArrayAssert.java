@@ -1,12 +1,12 @@
 package org.test4j.hamcrest;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.test4j.model.User;
 import org.test4j.module.ICore;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class TestArrayAssert implements ICore {
     @Test

@@ -1,13 +1,12 @@
 package org.test4j.tools.commons;
 
-import java.util.Calendar;
-import java.util.Date;
-
 import mockit.Mock;
-
 import mockit.MockUp;
 import org.junit.jupiter.api.Test;
 import org.test4j.junit5.Test4J;
+
+import java.util.Calendar;
+import java.util.Date;
 
 public class DateUtilTest_InlineMockClass extends Test4J {
     @Test

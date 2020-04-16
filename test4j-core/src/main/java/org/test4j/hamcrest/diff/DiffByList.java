@@ -97,16 +97,45 @@ public class DiffByList extends BaseDiff {
             this.compareWithExpect(parentKey, actual, expectList, child);
             all.put(index, child);
         }
+        Set<Integer> existedDiffIndex = new HashSet<>(size);
         for (Map.Entry<Integer, ListMatchItem> entry : all.entrySet()) {
             ListMatchItem item = entry.getValue();
             if (item.getExpectIndex() != null) {
                 continue;
             }
             item.remove(matchedExpected);
-            for (Map.Entry<Integer, DiffMap> child : item.getDiffItem().entrySet()) {
-                diffMap.add(child.getValue());
+            DiffMap minDiff = this.findMinDiff(existedDiffIndex, item);
+            diffMap.add(minDiff);
+        }
+    }
+
+    /**
+     * 查找最小差异项
+     *
+     * @param existedDiffIndex
+     * @param item
+     * @return
+     */
+    private DiffMap findMinDiff(Set<Integer> existedDiffIndex, ListMatchItem item) {
+        Map.Entry<Integer, DiffMap> minDiff = null;
+        Map.Entry<Integer, DiffMap> _default = null;
+        for (Map.Entry<Integer, DiffMap> child : item.getDiffItem().entrySet()) {
+            if (_default == null) {
+                _default = child;
+            }
+            if (existedDiffIndex.contains(child.getKey())) {
+                // 已经被比较的跳过
+                continue;
+            }
+            if (minDiff == null || minDiff.getValue().diffCount() > child.getValue().diffCount()) {
+                minDiff = child;
             }
         }
+        if (minDiff == null) {
+            minDiff = _default;
+        }
+        existedDiffIndex.add(minDiff.getKey());
+        return minDiff.getValue();
     }
 
     private ListMatchItem compareWithExpect(Object parentKey, Object actual, List<Map> expectList, ListMatchItem child) {

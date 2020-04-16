@@ -1,7 +1,6 @@
 package org.test4j.module.database.environment;
 
 import mockit.Mock;
-
 import mockit.MockUp;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;

@@ -2,7 +2,6 @@ package org.test4j.module.database;
 
 
 import org.junit.jupiter.api.Test;
-
 import org.test4j.db.ITable;
 import org.test4j.db.datamap.table.UserTableMap;
 import org.test4j.junit5.Test4J;

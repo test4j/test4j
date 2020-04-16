@@ -1,14 +1,5 @@
 package org.test4j.hamcrest.matcher.property;
 
-import static org.test4j.tools.commons.ArrayHelper.toArray;
-import static org.test4j.tools.commons.ListHelper.toList;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -19,8 +10,12 @@ import org.test4j.model.GenicBean;
 import org.test4j.model.User;
 import org.test4j.tools.commons.ArrayHelper;
 import org.test4j.tools.commons.ListHelper;
-
 import org.test4j.tools.datagen.DataProvider;
+
+import java.util.*;
+
+import static org.test4j.tools.commons.ArrayHelper.toArray;
+import static org.test4j.tools.commons.ListHelper.toList;
 
 @SuppressWarnings({"rawtypes", "serial", "unchecked"})
 public class PropertiesEqualMatcherTest extends Test4J {

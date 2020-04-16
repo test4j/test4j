@@ -1,11 +1,11 @@
 package org.test4j.hamcrest.matcher.calendar;
 
-import java.util.Calendar;
-
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.test4j.exception.Test4JException;
 import org.test4j.junit5.Test4J;
+
+import java.util.Calendar;
 
 
 @SuppressWarnings("unchecked")

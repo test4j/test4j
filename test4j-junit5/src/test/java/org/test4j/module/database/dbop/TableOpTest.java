@@ -1,14 +1,14 @@
 package org.test4j.module.database.dbop;
 
-import java.sql.SQLException;
-import java.util.Date;
-
 import org.junit.jupiter.api.Test;
 import org.test4j.db.ITable;
 import org.test4j.db.datamap.table.UserTableMap;
 import org.test4j.junit5.Test4J;
 
-import static org.test4j.db.mapping.UserMP.*;
+import java.sql.SQLException;
+import java.util.Date;
+
+import static org.test4j.db.mapping.UserMP.Column;
 
 @SuppressWarnings({"serial", "unchecked"})
 public class TableOpTest extends Test4J {

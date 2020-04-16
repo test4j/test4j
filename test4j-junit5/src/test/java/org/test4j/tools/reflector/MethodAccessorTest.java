@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.test4j.exception.NoSuchFieldRuntimeException;
 import org.test4j.exception.NoSuchMethodRuntimeException;
 import org.test4j.junit5.Test4J;
 import org.test4j.reflector.TestObject;

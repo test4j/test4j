@@ -19,19 +19,14 @@ package org.test4j.tools.commons;
  * limitations under the License.
  */
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.test4j.module.ICore;
 import org.test4j.tools.commons.TextDiffMatchPatch.Diff;
 import org.test4j.tools.commons.TextDiffMatchPatch.LinesToCharsResult;
 import org.test4j.tools.commons.TextDiffMatchPatch.Patch;
+
+import java.util.*;
 
 public class TextDiffMatchPatchTest implements ICore {
     private TextDiffMatchPatch dmp;

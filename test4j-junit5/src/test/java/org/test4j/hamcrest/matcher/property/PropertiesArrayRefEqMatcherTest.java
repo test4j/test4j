@@ -1,16 +1,11 @@
 package org.test4j.hamcrest.matcher.property;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import org.hamcrest.MatcherAssert;
 import org.junit.jupiter.api.Test;
 import org.test4j.junit5.Test4J;
-
 import org.test4j.model.User;
+
+import java.util.*;
 
 public class PropertiesArrayRefEqMatcherTest extends Test4J {
     PropertiesArrayRefEqMatcher matcher = new PropertiesArrayRefEqMatcher(new String[]{"first", "last"},

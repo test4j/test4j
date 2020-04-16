@@ -1,11 +1,11 @@
 package org.test4j.tools.commons;
 
-import java.util.LinkedList;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.test4j.junit5.Test4J;
 import org.test4j.tools.commons.TextDiffMatchPatch.Diff;
+
+import java.util.LinkedList;
 
 public class TextDiffMatchPatchTest_Mime extends Test4J {
     private TextDiffMatchPatch textdiff;

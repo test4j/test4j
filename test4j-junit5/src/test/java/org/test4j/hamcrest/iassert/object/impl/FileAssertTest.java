@@ -1,10 +1,10 @@
 package org.test4j.hamcrest.iassert.object.impl;
 
-import java.io.File;
-import java.util.UUID;
-
 import org.junit.jupiter.api.Test;
 import org.test4j.junit5.Test4J;
+
+import java.io.File;
+import java.util.UUID;
 
 public class FileAssertTest extends Test4J {
     @Test

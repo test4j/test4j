@@ -72,4 +72,13 @@ public class DiffMap {
     public boolean hasDiff() {
         return this.diff > 0;
     }
+
+    /**
+     * 差异项数量
+     *
+     * @return
+     */
+    public int diffCount() {
+        return this.message.size();
+    }
 }

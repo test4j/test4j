@@ -1,11 +1,11 @@
 package org.test4j.hamcrest.iassert.object.impl;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.test4j.junit5.Test4J;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ObjectContainerAssertTest_ItemMatch extends Test4J {
     private final List<String> list = new ArrayList<String>();

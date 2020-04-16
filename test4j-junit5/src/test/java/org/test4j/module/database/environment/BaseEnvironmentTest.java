@@ -7,7 +7,7 @@ import org.test4j.db.datamap.table.UserTableMap;
 import org.test4j.hamcrest.matcher.modes.EqMode;
 import org.test4j.module.database.IDatabase;
 
-import static org.test4j.db.mapping.UserMP.*;
+import static org.test4j.db.mapping.UserMP.Column;
 
 /**
  * 类BaseEnvironmentTest.java的实现描述：

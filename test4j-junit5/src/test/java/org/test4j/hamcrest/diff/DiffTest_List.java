@@ -19,8 +19,7 @@ public class DiffTest_List extends Test4J {
         MessageHelper.info(diff.message());
         want.number(diff.diff).isGt(0);
         want.string(diff.message()).contains(new String[]{
-                "$[3]~[2].key1", "$[3]~[2].key2", "$[3]~[4].key1", "$[3]~[4].key2",
-                "$[4]~[2].key1", "$[4]~[2].key2", "$[4]~[4].key1"
+                "$[3]~[2].key1", "$[3]~[2].key2", "$[4]~[4].key1"
         });
     }
 

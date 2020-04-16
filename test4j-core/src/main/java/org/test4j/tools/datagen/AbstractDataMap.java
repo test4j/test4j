@@ -152,8 +152,15 @@ public abstract class AbstractDataMap<DM extends DataMap>
     }
 
     public void put(String key, Object value) {
-        throw new RuntimeException("please use .kv(String, Object, Object ...)");
-//        this.kv(key, value, new Object[0]);
+        if (value instanceof IColData) {
+            if (!isRowMap || value instanceof OneRowValue) {
+                this.kv(key, ((IColData) value).row(0));
+            } else {
+                this.put(key, (IColData) value);
+            }
+        } else {
+            throw new RuntimeException("please use .kv(String, Object, Object ...)");
+        }
     }
 
     @Override

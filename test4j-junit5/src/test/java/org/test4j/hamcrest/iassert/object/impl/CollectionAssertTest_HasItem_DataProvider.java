@@ -1,11 +1,11 @@
 package org.test4j.hamcrest.iassert.object.impl;
 
-import java.util.Iterator;
-
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.test4j.junit5.Test4J;
 import org.test4j.tools.datagen.DataProvider;
+
+import java.util.Iterator;
 
 public class CollectionAssertTest_HasItem_DataProvider extends Test4J {
 

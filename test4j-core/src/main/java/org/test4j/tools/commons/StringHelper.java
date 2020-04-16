@@ -8,7 +8,10 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.StringTokenizer;
 
 import static java.util.stream.Collectors.joining;
 
@@ -665,7 +668,10 @@ public class StringHelper {
         if (value == null) {
             return null;
         }
-        String text = JSON.toJSON(value, true);
+        if (value instanceof Number || value instanceof String) {
+            return String.valueOf(value);
+        }
+        String text = JSON.toJSON(value, false);
         if (text.length() > 2 && text.startsWith(DOUBLE_QUOTATION) && text.endsWith(DOUBLE_QUOTATION)) {
             return text.substring(1, text.length() - 1);
         } else {

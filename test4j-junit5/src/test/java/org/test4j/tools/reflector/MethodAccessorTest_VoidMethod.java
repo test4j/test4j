@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.test4j.exception.Test4JException;
 import org.test4j.junit5.Test4J;
-import org.test4j.reflector.TestException;
 import org.test4j.reflector.TestObject;
 
 public class MethodAccessorTest_VoidMethod extends Test4J {

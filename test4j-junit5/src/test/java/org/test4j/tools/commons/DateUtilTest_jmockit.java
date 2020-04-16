@@ -1,16 +1,15 @@
 package org.test4j.tools.commons;
 
-import static org.test4j.tools.commons.DateUtilTest.mockCalendar;
+import mockit.Mock;
+import mockit.MockUp;
+import org.junit.jupiter.api.Test;
+import org.test4j.junit5.Test4J;
+import org.test4j.tools.commons.DateUtilTest.MockDateUtil;
 
 import java.util.Calendar;
 import java.util.Date;
 
-import mockit.Mock;
-import mockit.MockUp;
-
-import org.junit.jupiter.api.Test;
-import org.test4j.junit5.Test4J;
-import org.test4j.tools.commons.DateUtilTest.MockDateUtil;
+import static org.test4j.tools.commons.DateUtilTest.mockCalendar;
 
 @SuppressWarnings({"unused", "rawtypes"})
 public class DateUtilTest_jmockit extends Test4J {

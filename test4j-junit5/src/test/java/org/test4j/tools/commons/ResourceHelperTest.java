@@ -1,11 +1,11 @@
 package org.test4j.tools.commons;
 
-import java.io.File;
-import java.net.URL;
-
 import org.junit.jupiter.api.Test;
 import org.test4j.hamcrest.matcher.string.StringMode;
 import org.test4j.module.ICore;
+
+import java.io.File;
+import java.net.URL;
 
 public class ResourceHelperTest implements ICore {
 

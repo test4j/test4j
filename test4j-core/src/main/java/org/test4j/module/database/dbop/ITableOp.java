@@ -5,6 +5,11 @@ import org.test4j.hamcrest.iassert.intf.INumberAssert;
 import org.test4j.hamcrest.iassert.intf.IObjectAssert;
 import org.test4j.tools.datagen.IDataMap;
 
+/**
+ * ITableOp
+ *
+ * @author wudarui
+ */
 @SuppressWarnings("rawtypes")
 public interface ITableOp {
     /**
@@ -84,31 +89,4 @@ public interface ITableOp {
      * @return
      */
     ICollectionAssert printAndAssert(String where);
-
-    /**
-     * 打印成dataMap形式
-     *
-     * @param where
-     * @param mapName DataMap名称
-     * @return
-     */
-    String printAsDataMap(String where, String mapName);
-
-    /**
-     * 打印成多行dataMap形式
-     *
-     * @param where
-     * @param mapName DataMap名称
-     * @return
-     */
-    String printAsMulMap(String where, String mapName);
-
-    /**
-     * 打印成json格式
-     *
-     * @param where
-     * @param orderColumns
-     * @return
-     */
-    String printAsJson(String where, String... orderColumns);
 }

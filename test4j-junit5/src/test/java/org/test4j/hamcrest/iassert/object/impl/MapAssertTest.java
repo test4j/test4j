@@ -1,12 +1,12 @@
 package org.test4j.hamcrest.iassert.object.impl;
 
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.test4j.junit5.Test4J;
+
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 @SuppressWarnings({"rawtypes", "serial", "unchecked"})
 public class MapAssertTest extends Test4J {

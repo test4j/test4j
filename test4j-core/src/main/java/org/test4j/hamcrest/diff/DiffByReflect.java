@@ -45,7 +45,7 @@ public class DiffByReflect extends BaseDiff {
             return this.diffMap;
         }
         if (actual instanceof Number) {
-            this.compareNumber(parentKey, actual, expect);
+            this.compareNumber(parentKey, (Number)actual, expect);
         } else if (actual.getClass().getName().startsWith(JAVA_INTERNAL_TYPE)) {
             // 跳过java内部类的反射比较
             Object _expect = super.asObject(expect, asString);
@@ -84,9 +84,13 @@ public class DiffByReflect extends BaseDiff {
      * @param actual
      * @param expect
      */
-    private void compareNumber(Object parentKey, Object actual, Object expect) {
+    private void compareNumber(Object parentKey, Number actual, Object expect) {
         if (!asString && expect instanceof String) {
             this.diffMap.add(parentKey, actual, expect);
+        } else if (expect instanceof Boolean) {
+            if (!((Boolean) expect & actual.intValue() != 0)) {
+                this.diffMap.add(parentKey, actual, expect);
+            }
         } else {
             BigDecimal _actual = new BigDecimal(String.valueOf(actual));
             BigDecimal _expect = new BigDecimal(String.valueOf(expect));

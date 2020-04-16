@@ -1,12 +1,12 @@
 package org.test4j.hamcrest;
 
-import java.io.File;
-import java.math.BigDecimal;
-import java.math.BigInteger;
-
 import org.junit.jupiter.api.Test;
 import org.test4j.hamcrest.iassert.intf.*;
 import org.test4j.junit5.Test4J;
+
+import java.io.File;
+import java.math.BigDecimal;
+import java.math.BigInteger;
 
 public class WantStyleAssertionTest extends Test4J {
     @Test

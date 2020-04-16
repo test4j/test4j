@@ -1,17 +1,14 @@
 package org.test4j.tools.commons;
 
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectOutputStream;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.test4j.exception.Test4JException;
 import org.test4j.junit5.Test4J;
 import org.test4j.model.Manager;
+
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class JsonHelperTest extends Test4J {
     private static String tempDir = System.getProperty("java.io.tmpdir");

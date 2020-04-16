@@ -1,12 +1,12 @@
 package org.test4j.tools.generic;
 
+import org.junit.jupiter.api.Test;
+import org.test4j.junit5.Test4J;
+
 import java.lang.reflect.Type;
 import java.util.AbstractMap;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.junit.jupiter.api.Test;
-import org.test4j.junit5.Test4J;
 
 /**
  * @author darui.wudr 2013-10-29 下午8:29:49

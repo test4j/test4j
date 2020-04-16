@@ -9,9 +9,6 @@ import java.util.Set;
 import java.util.function.Function;
 
 /**
- * @Descriotion:
- * @param:
- * @return:
  * @author:darui.wu Created by darui.wu on 2019/11/15.
  */
 public interface StubInterface1 {

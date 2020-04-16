@@ -1,8 +1,8 @@
 package org.test4j.hamcrest.iassert.interal;
 
 import org.hamcrest.BaseMatcher;
-import org.test4j.hamcrest.matcher.property.ReflectionEqualMatcher;
 import org.test4j.hamcrest.matcher.modes.EqMode;
+import org.test4j.hamcrest.matcher.property.ReflectionEqualMatcher;
 import org.test4j.tools.commons.ListHelper;
 import org.test4j.tools.datagen.IDataMap;
 

@@ -6,8 +6,6 @@ import org.test4j.junit5.Test4J;
 import java.util.HashMap;
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
-
 class AbstractDataMapTest extends Test4J {
 
     @Test

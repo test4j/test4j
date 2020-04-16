@@ -1,13 +1,13 @@
 package org.test4j.hamcrest.matcher.property;
 
+import org.junit.jupiter.api.Test;
+import org.test4j.junit5.Test4J;
+import org.test4j.model.User;
+
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.junit.jupiter.api.Test;
-import org.test4j.junit5.Test4J;
-import org.test4j.model.User;
 
 public class PropertiesArrayMatcherTest extends Test4J {
 

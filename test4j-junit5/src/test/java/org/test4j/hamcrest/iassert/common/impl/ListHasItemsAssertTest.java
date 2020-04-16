@@ -1,14 +1,12 @@
 package org.test4j.hamcrest.iassert.common.impl;
 
-import java.util.Arrays;
-import java.util.List;
-
 import org.junit.jupiter.api.Test;
 import org.test4j.hamcrest.matcher.modes.ItemsMode;
 import org.test4j.hamcrest.matcher.modes.MatchMode;
 import org.test4j.junit5.Test4J;
 
-import static org.test4j.module.ICore.want;
+import java.util.Arrays;
+import java.util.List;
 
 @SuppressWarnings("rawtypes")
 public class ListHasItemsAssertTest extends Test4J {

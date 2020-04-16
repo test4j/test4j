@@ -2,7 +2,6 @@ package org.test4j.module.database.utility;
 
 import org.test4j.module.database.environment.DBEnvironment;
 import org.test4j.tools.commons.ResourceHelper;
-import org.test4j.tools.datagen.IDataMap;
 
 import java.io.FileNotFoundException;
 import java.io.InputStream;
