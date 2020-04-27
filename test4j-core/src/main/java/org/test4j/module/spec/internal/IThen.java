@@ -27,9 +27,44 @@ public interface IThen {
     /**
      * 对测试中抛出的异常进行验证
      *
-     * @param consumer
+     * @param consumer 对异常进行断言
      * @return
      * @throws RuntimeException
      */
-    IThen want(Consumer<Throwable> consumer) throws RuntimeException;
+    default <E extends Throwable> IThen want(Consumer<E> consumer) throws RuntimeException {
+        return this.want("异常验证", consumer);
+    }
+
+    /**
+     * 对测试中抛出的异常进行验证
+     *
+     * @param description 描述
+     * @param consumer    对异常进行断言
+     * @param <E>
+     * @return
+     * @throws RuntimeException
+     */
+    <E extends Throwable> IThen want(String description, Consumer<E> consumer) throws RuntimeException;
+
+    /**
+     * 对执行结果进行断言
+     *
+     * @param consumer 对执行结果进行断言
+     * @return
+     * @throws RuntimeException
+     */
+    default <T> IThen wantResult(Consumer<T> consumer) throws RuntimeException {
+        return this.wantResult("对执行结果进行验证", consumer);
+    }
+
+    /**
+     * 对执行结果进行断言
+     *
+     * @param description 描述
+     * @param consumer    对执行结果进行断言
+     * @param <T>
+     * @return
+     * @throws RuntimeException
+     */
+    <T> IThen wantResult(String description, Consumer<T> consumer) throws RuntimeException;
 }

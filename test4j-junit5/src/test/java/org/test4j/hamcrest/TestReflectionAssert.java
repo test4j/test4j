@@ -45,11 +45,7 @@ public class TestReflectionAssert extends Test4J {
         List<Double> myList = new ArrayList<Double>();
         myList.add(1.0);
         myList.add(2.0);
-        want.exception(() -> want.object(myList).eqReflect(Arrays.asList(1, 2))
-                , AssertionError.class).contains(new String[]{
-                "expect=(Integer)", "actual=(Double)"
-        });
-
+        want.object(myList).eqReflect(Arrays.asList(1, 2));
     }
 
     @Test

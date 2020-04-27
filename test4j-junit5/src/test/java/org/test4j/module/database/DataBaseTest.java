@@ -34,7 +34,7 @@ public class DataBaseTest extends Test4J {
         db.query("select id,first_name,last_name from t_user")
                 .eqReflect(new UserTableMap(2)
                         .id.values(1, 2)
-                        .first_name.values("darui", null)
+                        .first_name.values("darui", (Object) null)
                         .last_name.values(null, "he")
                 );
     }

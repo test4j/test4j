@@ -13,6 +13,7 @@ public class MysqlScript extends EntityScriptParser {
         super(typeConvert, klass);
     }
 
+    @Override
     public String script() {
         List<ColumnDefine> columns = this.findColumns();
         String table = this.getTableName();
@@ -23,6 +24,7 @@ public class MysqlScript extends EntityScriptParser {
         return buff.append(");\n").toString();
     }
 
+    @Override
     protected String parseColumn(ColumnDefine column) {
         if (column.primaryType == ColumnDef.PrimaryType.AutoIncrease) {
             return String.format("%s %s not null auto_increment primary key",

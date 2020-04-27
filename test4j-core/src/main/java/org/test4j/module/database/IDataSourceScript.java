@@ -27,7 +27,7 @@ public interface IDataSourceScript {
      *
      * @return
      */
-    Class[] getTableKlass();
+    List<Class> getTableKlass();
 
     /**
      * 返回索引定义对象
@@ -61,6 +61,21 @@ public interface IDataSourceScript {
                 return SPEC_TYPES.containsKey(_type) ? SPEC_TYPES.get(_type) : _type;
             };
         }
+    }
+
+    /**
+     * 构造列表
+     *
+     * @param objs
+     * @param <T>
+     * @return
+     */
+    default <T> List<T> list(T... objs) {
+        List<T> list = new ArrayList<>(objs.length);
+        for (T obj : objs) {
+            list.add(obj);
+        }
+        return list;
     }
 
     @Data

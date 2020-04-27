@@ -34,8 +34,8 @@ public class PropertyEqMapTest extends Test4J {
                         want.list(users).eqReflect(new DataMap(2) {
                             {
                                 this.kv("assistor.phones",// <br>
-                                        new String[]{"133xxx", "131xxx"},// <br>
-                                        new String[]{"130xxx", "0571xx"});
+                                        (Object) new String[]{"133xxx", "131xxx"},// <br>
+                                        (Object) new String[]{"130xxx", "0571xx"});
                             }
                         })
                 , AssertionError.class);
@@ -55,8 +55,8 @@ public class PropertyEqMapTest extends Test4J {
         want.list(users).eqDataMap(new DataMap(2) {
             {
                 this.kv("assistor.phones",// <br>
-                        new String[]{"139xxx", "159xxx"},// <br>
-                        new String[]{"130xxx", "0571xx"});
+                        (Object) new String[]{"139xxx", "159xxx"},// <br>
+                        (Object) new String[]{"130xxx", "0571xx"});
             }
         });
     }

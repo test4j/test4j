@@ -33,8 +33,8 @@ public abstract class EntityScriptParser {
      * @param klasses
      * @return
      */
-    public static String script(DataSourceType type, DbTypeConvert typeConvert, Class... klasses) {
-        return Arrays.stream(klasses)
+    public static String script(DataSourceType type, DbTypeConvert typeConvert, List<Class> klasses) {
+        return klasses.stream()
                 .map(klass -> EntityScriptParser.newScriptParser(type, typeConvert, klass))
                 .map(EntityScriptParser::script)
                 .collect(joining("\n\n"));

@@ -4,6 +4,8 @@ import org.test4j.db.datamap.table.AddressTableMap;
 import org.test4j.db.datamap.table.UserTableMap;
 import org.test4j.module.database.IDataSourceScript;
 
+import java.util.List;
+
 /**
  * 生成内存数据库（h2)脚本
  *
@@ -12,11 +14,11 @@ import org.test4j.module.database.IDataSourceScript;
  */
 public class DataSourceScript implements IDataSourceScript {
     @Override
-    public Class[] getTableKlass() {
-        return new Class[]{
+    public List<Class> getTableKlass() {
+        return list(
                 AddressTableMap.class,
                 UserTableMap.class
-        };
+        );
     }
 
     @Override

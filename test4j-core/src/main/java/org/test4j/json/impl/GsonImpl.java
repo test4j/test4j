@@ -28,6 +28,11 @@ public class GsonImpl implements JSONInterface {
             .setDateFormat("yyyy-MM-dd HH:mm:ss")
             .create();
 
+    static {
+        Test4JObjectTypeAdapter.replace(gson);
+        Test4JObjectTypeAdapter.replace(gson_pretty);
+    }
+
     @Override
     public String toJSON(Object object, boolean isFormat) {
         if (isFormat) {

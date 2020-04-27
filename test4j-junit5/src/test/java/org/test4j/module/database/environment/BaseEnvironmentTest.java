@@ -19,7 +19,7 @@ public class BaseEnvironmentTest implements IDatabase, ITable {
     @Test
     public void testConvertToSqlValue_ValueIsEnum() throws Exception {
         db.table(t_user).clean().insert(new UserTableMap(2)
-                .arr(Column.e_mail, EmailEnum.values())
+                .arr(Column.e_mail, (Object[]) EmailEnum.values())
         );
         db.table(t_user).query().eqMap(new UserTableMap(2)
                         .kv(Column.e_mail, "darui_wu", "davey_wu")

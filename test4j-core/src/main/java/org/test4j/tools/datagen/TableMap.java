@@ -1,6 +1,7 @@
 package org.test4j.tools.datagen;
 
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.test4j.json.JSON;
 import org.test4j.tools.commons.ResourceHelper;
 
@@ -19,6 +20,7 @@ import static org.test4j.module.ICore.DataMap;
  * @author wudarui
  */
 @Data
+@EqualsAndHashCode(callSuper = false)
 public class TableMap extends LinkedHashMap<String, TableData> {
     /**
      * json转换为TableMap

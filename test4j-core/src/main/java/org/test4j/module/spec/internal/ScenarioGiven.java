@@ -1,5 +1,6 @@
 package org.test4j.module.spec.internal;
 
+import org.test4j.function.ReturnExecutor;
 import org.test4j.function.SExecutor;
 
 /**
@@ -35,7 +36,7 @@ public class ScenarioGiven implements IGiven {
     }
 
     @Override
-    public IThen when(String description, SExecutor lambda) throws RuntimeException {
+    public IThen when(String description, ReturnExecutor lambda) throws RuntimeException {
         try {
             this.scenario.doStep(StepType.When, description, lambda, null);
             return new ScenarioThen(this.scenario);
@@ -45,7 +46,7 @@ public class ScenarioGiven implements IGiven {
     }
 
     @Override
-    public IThen when(SExecutor lambda) throws RuntimeException {
+    public IThen when(ReturnExecutor lambda) throws RuntimeException {
         try {
             this.scenario.doStep(StepType.When, lambda, null);
             return new ScenarioThen(this.scenario);
@@ -55,7 +56,7 @@ public class ScenarioGiven implements IGiven {
     }
 
     @Override
-    public IThen when(String description, SExecutor lambda, Class<? extends Throwable> eKlass) throws RuntimeException {
+    public IThen when(String description, ReturnExecutor lambda, Class<? extends Throwable> eKlass) throws RuntimeException {
         try {
             this.scenario.doStep(StepType.When, description, lambda, eKlass);
             return new ScenarioThen(this.scenario);
@@ -65,7 +66,7 @@ public class ScenarioGiven implements IGiven {
     }
 
     @Override
-    public IThen when(SExecutor lambda, Class<? extends Throwable> eKlass) throws RuntimeException {
+    public IThen when(ReturnExecutor lambda, Class<? extends Throwable> eKlass) throws RuntimeException {
         try {
             this.scenario.doStep(StepType.When, lambda, eKlass);
             return new ScenarioThen(this.scenario);

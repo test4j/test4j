@@ -7,8 +7,17 @@ package org.test4j.module.spec.internal;
  * @create 2019-10-15
  */
 public class SpecContext {
+    /**
+     * 测试各步骤中的共享数据
+     */
     private static ThreadLocal<Object> sharedData = new ThreadLocal<>();
-
+    /**
+     * when步骤执行返回值
+     */
+    private static ThreadLocal<Object> whenResult = new ThreadLocal<>();
+    /**
+     * when步骤中的异常
+     */
     private static ThreadLocal<Throwable> expectedException = new ThreadLocal<>();
 
     /**
@@ -47,8 +56,17 @@ public class SpecContext {
         return expectedException.get();
     }
 
+    public static void setWhenResult(Object result) {
+        whenResult.set(result);
+    }
+
+    public static Object getWhenResult() {
+        return whenResult.get();
+    }
+
     public static void clean() {
         expectedException.remove();
         sharedData.remove();
+        whenResult.remove();
     }
 }

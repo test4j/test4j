@@ -3,6 +3,7 @@ package org.test4j.module.spec.internal;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.test4j.function.ReturnExecutor;
 import org.test4j.function.SExecutor;
 import org.test4j.module.ICore;
 import org.test4j.tools.commons.StringHelper;
@@ -58,24 +59,25 @@ public class ScenarioResult implements Serializable {
      * @param eKlass
      * @throws Exception
      */
-    public void doStep(StepType type, String description, SExecutor lambda, Class<? extends Throwable> eKlass) throws Throwable {
-        StepResult result = this.addResult(type, description);
+    public void doStep(StepType type, String description, ReturnExecutor lambda, Class<? extends Throwable> eKlass) throws Throwable {
+        StepResult stepResult = this.addResult(type, description);
         try {
             if (type == StepType.When) {
-                TableDataAround.ready(result);
+                TableDataAround.ready(stepResult);
             }
-            lambda.doIt();
+            Object whenResult = lambda.doIt();
+            SpecContext.setWhenResult(whenResult);
             if (eKlass != null) {
                 ICore.want.fail("expected exception: " + eKlass.getName());
             }
             if (type == StepType.When) {
-                TableDataAround.check(result);
+                TableDataAround.check(stepResult);
             }
         } catch (Throwable e) {
             if (eKlass != null) {
                 SpecContext.setExpectedException(e);
             } else {
-                result.setError(e);
+                stepResult.setError(e);
                 throw e;
             }
         }
@@ -89,8 +91,16 @@ public class ScenarioResult implements Serializable {
      * @param eKlass
      * @throws Exception
      */
-    public void doStep(StepType type, SExecutor lambda, Class<? extends Throwable> eKlass) throws Throwable {
+    public void doStep(StepType type, ReturnExecutor lambda, Class<? extends Throwable> eKlass) throws Throwable {
         this.doStep(type, null, lambda, eKlass);
+    }
+
+    public void doStep(StepType type, String description, SExecutor lambda, Class<? extends Throwable> eKlass) throws Throwable {
+        this.doStep(type, description, ReturnExecutor.wrap(lambda), eKlass);
+    }
+
+    public void doStep(StepType type, SExecutor lambda, Class<? extends Throwable> eKlass) throws Throwable {
+        this.doStep(type, null, ReturnExecutor.wrap(lambda), eKlass);
     }
 
     private StepResult addResult(StepType type, String description) {
