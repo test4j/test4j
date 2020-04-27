@@ -9,9 +9,8 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * @Descriotion:比较基类
- * @param:
- * @return:
+ * BaseDiff:比较基类
+ *
  * @author:darui.wu Created by darui.wu on 2020/4/13.
  */
 public abstract class BaseDiff<T> {
@@ -81,7 +80,7 @@ public abstract class BaseDiff<T> {
      * @param parentKey
      * @param actual
      * @param expect
-     * @return
+     * @return 差异
      */
     public abstract DiffMap compare(Object parentKey, Object actual, T expect);
 

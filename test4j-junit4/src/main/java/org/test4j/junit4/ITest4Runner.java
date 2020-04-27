@@ -14,14 +14,14 @@ public interface ITest4Runner {
      * 封装测试类
      *
      * @param testClass
-     * @return
+     * @return 测试类
      */
     TestClass createTestClass(Class<?> testClass);
 
     /**
      * 创建测试对象实例
      *
-     * @return
+     * @return 测试对象
      * @throws Exception
      */
     Object createTest() throws Exception;
@@ -30,7 +30,7 @@ public interface ITest4Runner {
      * 调用测试方法
      *
      * @param notifier
-     * @return
+     * @return 测试方法
      */
     Statement childrenInvoker(final RunNotifier notifier);
 
@@ -39,14 +39,14 @@ public interface ITest4Runner {
      *
      * @param method
      * @param testedObject
-     * @return
+     * @return 测试方法
      */
     Statement methodInvoker(FrameworkMethod method, Object testedObject);
 
     /**
      * 计算（遍历）测试方法
      *
-     * @return
+     * @return 测试方法列表
      */
     List<FrameworkMethod> computeTestMethods();
 
@@ -77,7 +77,7 @@ public interface ITest4Runner {
     /**
      * 返回SpringJUnit4ClassRunner 中构造的TestClass
      *
-     * @return
+     * @return 测试类
      */
     TestClass getTestClass();
 }
