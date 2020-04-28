@@ -61,7 +61,7 @@ public final class DBHelper {
      * @throws SQLException
      */
     public static List<Map> getListMapFromResult(ResultSet rs, boolean isCamelName)
-            throws Exception {
+        throws Exception {
         List<Map> list = new ArrayList<>();
         ResultSetMetaData rsmd = rs.getMetaData();
         while (rs.next()) {
@@ -148,7 +148,7 @@ public final class DBHelper {
      * @throws SQLException
      */
     public static <T> List<T> getListPoJoFromResult(ResultSet rs, Class<T> clazz)
-            throws Exception {
+        throws Exception {
         List list = new ArrayList();
         while (rs.next()) {
             T o = getPoJoFromResult(rs, clazz);
@@ -230,6 +230,7 @@ public final class DBHelper {
                     }
                     break;
                 case NORMAL:
+                default:
                     next = (index == chars.length - 1) ? ';' : chars[index + 1];
                     if (ch == '-' && next == '-') {
                         index++;
@@ -311,9 +312,10 @@ public final class DBHelper {
             return "";
         }
         return new StringBuilder()
-                .append(join(String.format("ALTER TABLE %s ADD CONSTRAINT UNIQ_", table), "_", fields, " "))
-                .append(join("UNIQUE(", ",", fields, ");"))
-                .toString().toUpperCase();
+            .append(String.format("ALTER TABLE %s ADD CONSTRAINT UNIQ_", table))
+            .append(join(table + "_", "_", fields, " ").toUpperCase())
+            .append(join("UNIQUE(", ",", fields, "); "))
+            .toString();
     }
 
     /**
@@ -328,8 +330,8 @@ public final class DBHelper {
             return "";
         }
         return new StringBuilder()
-                .append(join(String.format("CREATE INDEX IDX_%s_", table), "_", fields, " "))
-                .append(join(table + "ON (", ",", fields, "); "))
-                .toString().toUpperCase();
+            .append(join(String.format("CREATE INDEX IDX_%s_", table), "_", fields, " ").toUpperCase())
+            .append(join("ON " + table + "(", ",", fields, "); "))
+            .toString();
     }
 }
