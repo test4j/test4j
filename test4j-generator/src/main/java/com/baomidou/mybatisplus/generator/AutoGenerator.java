@@ -1,11 +1,11 @@
 /*
- * Copyright (c) 2011-2020, baomidou (jobob@qq.com).
+ * Copyright (c) 2011-2020, hubin (jobob@qq.com).
  * <p>
  * Licensed under the Apache License, Version 2.0 (the "License"); you may not
  * use this file except in compliance with the License. You may obtain a copy of
  * the License at
  * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
+ * http://www.apache.org/licenses/LICENSE-2.0
  * <p>
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
@@ -15,26 +15,28 @@
  */
 package com.baomidou.mybatisplus.generator;
 
+import java.io.Serializable;
+import java.util.List;
+
+import lombok.Data;
+import lombok.experimental.Accessors;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.baomidou.mybatisplus.annotation.Version;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.baomidou.mybatisplus.extension.activerecord.Model;
-import com.baomidou.mybatisplus.generator.config.*;
+import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
+import com.baomidou.mybatisplus.generator.config.GlobalConfig;
+import com.baomidou.mybatisplus.generator.config.PackageConfig;
+import com.baomidou.mybatisplus.generator.config.StrategyConfig;
+import com.baomidou.mybatisplus.generator.config.TemplateConfig;
 import com.baomidou.mybatisplus.generator.config.builder.ConfigBuilder;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.engine.AbstractTemplateEngine;
 import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.Serializable;
-import java.util.List;
 
 /**
  * 生成文件
@@ -45,8 +47,8 @@ import java.util.List;
 @Data
 @Accessors(chain = true)
 public class AutoGenerator {
-    private static final Logger logger = LoggerFactory.getLogger(AutoGenerator.class);
 
+    private static final Logger logger = LoggerFactory.getLogger(AutoGenerator.class);
     /**
      * 配置信息
      */
@@ -54,8 +56,6 @@ public class AutoGenerator {
     /**
      * 注入配置
      */
-    @Getter(AccessLevel.NONE)
-    @Setter(AccessLevel.NONE)
     protected InjectionConfig injectionConfig;
     /**
      * 数据源配置
@@ -104,30 +104,34 @@ public class AutoGenerator {
     }
 
     /**
+     * <p>
      * 开放表信息、预留子类重写
+     * </p>
      *
      * @param config 配置信息
-     * @return ignore
+     * @return
      */
     protected List<TableInfo> getAllTableInfoList(ConfigBuilder config) {
         return config.getTableInfoList();
     }
 
     /**
+     * <p>
      * 预处理配置
+     * </p>
      *
      * @param config 总配置信息
      * @return 解析数据结果集
      */
     protected ConfigBuilder pretreatmentConfigBuilder(ConfigBuilder config) {
-        /*
+        /**
          * 注入自定义配置
          */
         if (null != injectionConfig) {
             injectionConfig.initMap();
             config.setInjectionConfig(injectionConfig);
         }
-        /*
+        /**
          * 表信息列表
          */
         List<TableInfo> tableList = this.getAllTableInfoList(config);
@@ -149,37 +153,20 @@ public class AutoGenerator {
                 // 乐观锁注解
                 tableInfo.setImportPackages(Version.class.getCanonicalName());
             }
-            boolean importSerializable = true;
             if (StringUtils.isNotEmpty(config.getSuperEntityClass())) {
                 // 父实体
                 tableInfo.setImportPackages(config.getSuperEntityClass());
-                importSerializable = false;
-            }
-            if (config.getGlobalConfig().isActiveRecord()) {
-                importSerializable = true;
-            }
-            if (importSerializable) {
+            } else {
                 tableInfo.setImportPackages(Serializable.class.getCanonicalName());
             }
             // Boolean类型is前缀处理
             if (config.getStrategyConfig().isEntityBooleanColumnRemoveIsPrefix()) {
                 tableInfo.getFields().stream().filter(field -> "boolean".equalsIgnoreCase(field.getPropertyType()))
                     .filter(field -> field.getPropertyName().startsWith("is"))
-                    .forEach(field -> {
-                        field.setConvert(true);
-                        field.setPropertyName(StringUtils.removePrefixAfterPrefixToLower(field.getPropertyName(), 2));
-                    });
+                    .forEach(field -> field.setPropertyName(config.getStrategyConfig(),
+                        StringUtils.removePrefixAfterPrefixToLower(field.getPropertyName(), 2)));
             }
         }
         return config.setTableInfoList(tableList);
-    }
-
-    public InjectionConfig getCfg() {
-        return injectionConfig;
-    }
-
-    public AutoGenerator setCfg(InjectionConfig injectionConfig) {
-        this.injectionConfig = injectionConfig;
-        return this;
     }
 }

@@ -21,9 +21,13 @@ import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.IColumnType;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.util.Map;
+
+import static cn.org.atool.fluent.mybatis.generator.MybatisGenerator.currTable;
 
 /**
  * 表字段信息
@@ -31,31 +35,41 @@ import java.util.Map;
  * @author YangHu
  * @since 2016-12-03
  */
-@Data
+@Getter
 @Accessors(chain = true)
 public class TableField {
-
+    @Setter
     private boolean convert;
+    @Setter
     private boolean keyFlag;
     /**
      * 主键是否为自增类型
      */
+    @Setter
     private boolean keyIdentityFlag;
+    @Setter
     private String name;
+    @Setter
     private String type;
+    @Setter
     private String propertyName;
+
     private IColumnType columnType;
+
+    public void setColumnType(IColumnType columnType) {
+        IColumnType specType = currTable().columnType(name);
+        this.columnType = specType == null ? columnType : specType;
+    }
+
+    @Setter
     private String comment;
+    @Setter
     private String fill;
     /**
      * 自定义查询字段列表
      */
+    @Setter
     private Map<String, Object> customMap;
-
-    public TableField setConvert(boolean convert) {
-        this.convert = convert;
-        return this;
-    }
 
     protected TableField setConvert(StrategyConfig strategyConfig) {
         if (strategyConfig.isEntityTableFieldAnnotationEnable()) {

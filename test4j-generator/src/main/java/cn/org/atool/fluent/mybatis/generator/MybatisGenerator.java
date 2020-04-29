@@ -1,10 +1,9 @@
 package cn.org.atool.fluent.mybatis.generator;
 
-import cn.org.atool.fluent.mybatis.generator.mock.CopyAutoGenerator;
-import cn.org.atool.fluent.mybatis.generator.mock.MockTableField;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
+import com.baomidou.mybatisplus.generator.AutoGenerator;
 import com.baomidou.mybatisplus.generator.InjectionConfig;
 import com.baomidou.mybatisplus.generator.config.*;
 import com.baomidou.mybatisplus.generator.config.rules.DateType;
@@ -78,7 +77,6 @@ public class MybatisGenerator {
 
     public void generate(TableConvertor... convertors) {
         List<GenerateObj> generateObjs = new ArrayList<>();
-        doMock();
         for (TableConvertor tableConvertor : convertors) {
             tableConvertor.setMybatisGenerator(this);
             List<Table> list = new ArrayList<>();
@@ -145,13 +143,13 @@ public class MybatisGenerator {
      * @param verField   乐观锁字段
      */
     private void generate(TableConvertor convertor, String[] tableNames, String verField) {
-        new CopyAutoGenerator()
+        new AutoGenerator()
                 .setGlobalConfig(this.initGlobalConfig(convertor.getEntitySuffix()))
                 .setDataSource(convertor.getDataSourceConfig())
                 .setPackageInfo(this.initPackageConfig())
                 .setTemplate(this.initTemplate())
                 .setStrategy(this.initStrategy(convertor.getPrefix(), tableNames, verField))
-                .setCfg(this.initInjectConfig(convertor))
+                .setInjectionConfig(this.initInjectConfig(convertor))
                 .execute();
     }
 
@@ -257,24 +255,5 @@ public class MybatisGenerator {
                 .setEntity("entity")
                 .setService("dao")
                 .setServiceImpl("dao.impl");
-    }
-
-    /**
-     * 如果相关类已经mock了，则不执行操作
-     * <p/>
-     * 这里设置为静态类，避免Generator被多次执行
-     */
-    private static void doMock() {
-        if (MockFlag.flag()) {
-            return;
-        }
-        new MockTableField();
-
-        new MockUp<MockFlag>() {
-            @Mock
-            public boolean flag() {
-                return true;
-            }
-        };
     }
 }
