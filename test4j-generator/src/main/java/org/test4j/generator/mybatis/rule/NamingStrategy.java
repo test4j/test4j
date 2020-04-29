@@ -1,25 +1,10 @@
-/*
- * Copyright (c) 2011-2020, baomidou (jobob@qq.com).
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
- */
 package org.test4j.generator.mybatis.rule;
 
 import java.util.Arrays;
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import org.test4j.generator.mybatis.config.ConstVal;
+import org.test4j.generator.mybatis.model.FmGeneratorConst;
 
 /**
  * 从数据库表到文件的命名策略
@@ -50,7 +35,7 @@ public enum NamingStrategy {
         }
         StringBuilder result = new StringBuilder();
         // 用下划线将原始字符串分割
-        String[] camels = tempName.split(ConstVal.UNDERLINE);
+        String[] camels = tempName.split(FmGeneratorConst.UNDERLINE);
         // 跳过原始字符串中开头、结尾的下换线或双重下划线
         // 处理真正的驼峰片段
         Arrays.stream(camels).filter(camel -> !StringUtils.isEmpty(camel)).forEach(camel -> {

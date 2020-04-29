@@ -1,23 +1,8 @@
-/*
- * Copyright (c) 2011-2020, baomidou (jobob@qq.com).
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
- */
 package org.test4j.generator.engine;
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import org.test4j.generator.mybatis.config.ConstVal;
+import org.test4j.generator.mybatis.model.FmGeneratorConst;
 import org.test4j.generator.mybatis.config.ConfigBuilder;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
@@ -46,10 +31,10 @@ public class VelocityTemplateEngine extends AbstractTemplateEngine {
         super.init(configBuilder);
         if (null == velocityEngine) {
             Properties p = new Properties();
-            p.setProperty(ConstVal.VM_LOAD_PATH_KEY, ConstVal.VM_LOAD_PATH_VALUE);
+            p.setProperty(FmGeneratorConst.VM_LOAD_PATH_KEY, FmGeneratorConst.VM_LOAD_PATH_VALUE);
             p.setProperty(Velocity.FILE_RESOURCE_LOADER_PATH, StringPool.EMPTY);
-            p.setProperty(Velocity.ENCODING_DEFAULT, ConstVal.UTF8);
-            p.setProperty(Velocity.INPUT_ENCODING, ConstVal.UTF8);
+            p.setProperty(Velocity.ENCODING_DEFAULT, FmGeneratorConst.UTF8);
+            p.setProperty(Velocity.INPUT_ENCODING, FmGeneratorConst.UTF8);
             p.setProperty("file.resource.loader.unicode", StringPool.TRUE);
             velocityEngine = new VelocityEngine(p);
         }
@@ -62,9 +47,9 @@ public class VelocityTemplateEngine extends AbstractTemplateEngine {
         if (StringUtils.isEmpty(templatePath)) {
             return;
         }
-        Template template = velocityEngine.getTemplate(templatePath, ConstVal.UTF8);
+        Template template = velocityEngine.getTemplate(templatePath, FmGeneratorConst.UTF8);
         try (FileOutputStream fos = new FileOutputStream(outputFile);
-             OutputStreamWriter ow = new OutputStreamWriter(fos, ConstVal.UTF8);
+             OutputStreamWriter ow = new OutputStreamWriter(fos, FmGeneratorConst.UTF8);
              BufferedWriter writer = new BufferedWriter(ow)) {
             template.merge(new VelocityContext(objectMap), writer);
         }

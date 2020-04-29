@@ -1,25 +1,10 @@
-/*
- * Copyright (c) 2011-2020, baomidou (jobob@qq.com).
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
- */
 package org.test4j.generator.engine;
 
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import org.test4j.generator.mybatis.config.InjectionConfig;
-import org.test4j.generator.mybatis.config.ConstVal;
+import org.test4j.generator.mybatis.model.FmGeneratorConst;
 import org.test4j.generator.mybatis.config.FileOutConfig;
 import org.test4j.generator.mybatis.config.GlobalConfig;
 import org.test4j.generator.mybatis.config.TemplateConfig;
@@ -85,43 +70,43 @@ public abstract class AbstractTemplateEngine {
                 }
                 // Mp.java
                 String entityName = tableInfo.getEntityName();
-                if (null != entityName && null != pathInfo.get(ConstVal.ENTITY_PATH)) {
-                    String entityFile = String.format((pathInfo.get(ConstVal.ENTITY_PATH) + File.separator + "%s" + suffixJavaOrKt()), entityName);
+                if (null != entityName && null != pathInfo.get(FmGeneratorConst.ENTITY_PATH)) {
+                    String entityFile = String.format((pathInfo.get(FmGeneratorConst.ENTITY_PATH) + File.separator + "%s" + suffixJavaOrKt()), entityName);
                     if (isCreate(FileType.ENTITY, entityFile)) {
                         writer(objectMap, templateFilePath(template.getEntity(getConfigBuilder().getGlobalConfig().isKotlin())), entityFile);
                     }
                 }
                 // MpMapper.java
-                if (null != tableInfo.getMapperName() && null != pathInfo.get(ConstVal.MAPPER_PATH)) {
-                    String mapperFile = String.format((pathInfo.get(ConstVal.MAPPER_PATH) + File.separator + tableInfo.getMapperName() + suffixJavaOrKt()), entityName);
+                if (null != tableInfo.getMapperName() && null != pathInfo.get(FmGeneratorConst.MAPPER_PATH)) {
+                    String mapperFile = String.format((pathInfo.get(FmGeneratorConst.MAPPER_PATH) + File.separator + tableInfo.getMapperName() + suffixJavaOrKt()), entityName);
                     if (isCreate(FileType.MAPPER, mapperFile)) {
                         writer(objectMap, templateFilePath(template.getMapper()), mapperFile);
                     }
                 }
                 // MpMapper.xml
-                if (null != tableInfo.getXmlName() && null != pathInfo.get(ConstVal.XML_PATH)) {
-                    String xmlFile = String.format((pathInfo.get(ConstVal.XML_PATH) + File.separator + tableInfo.getXmlName() + ConstVal.XML_SUFFIX), entityName);
+                if (null != tableInfo.getXmlName() && null != pathInfo.get(FmGeneratorConst.XML_PATH)) {
+                    String xmlFile = String.format((pathInfo.get(FmGeneratorConst.XML_PATH) + File.separator + tableInfo.getXmlName() + FmGeneratorConst.XML_SUFFIX), entityName);
                     if (isCreate(FileType.XML, xmlFile)) {
                         writer(objectMap, templateFilePath(template.getXml()), xmlFile);
                     }
                 }
                 // IMpService.java
-                if (null != tableInfo.getServiceName() && null != pathInfo.get(ConstVal.SERVICE_PATH)) {
-                    String serviceFile = String.format((pathInfo.get(ConstVal.SERVICE_PATH) + File.separator + tableInfo.getServiceName() + suffixJavaOrKt()), entityName);
+                if (null != tableInfo.getServiceName() && null != pathInfo.get(FmGeneratorConst.SERVICE_PATH)) {
+                    String serviceFile = String.format((pathInfo.get(FmGeneratorConst.SERVICE_PATH) + File.separator + tableInfo.getServiceName() + suffixJavaOrKt()), entityName);
                     if (isCreate(FileType.SERVICE, serviceFile)) {
                         writer(objectMap, templateFilePath(template.getService()), serviceFile);
                     }
                 }
                 // MpServiceImpl.java
-                if (null != tableInfo.getServiceImplName() && null != pathInfo.get(ConstVal.SERVICE_IMPL_PATH)) {
-                    String implFile = String.format((pathInfo.get(ConstVal.SERVICE_IMPL_PATH) + File.separator + tableInfo.getServiceImplName() + suffixJavaOrKt()), entityName);
+                if (null != tableInfo.getServiceImplName() && null != pathInfo.get(FmGeneratorConst.SERVICE_IMPL_PATH)) {
+                    String implFile = String.format((pathInfo.get(FmGeneratorConst.SERVICE_IMPL_PATH) + File.separator + tableInfo.getServiceImplName() + suffixJavaOrKt()), entityName);
                     if (isCreate(FileType.SERVICE_IMPL, implFile)) {
                         writer(objectMap, templateFilePath(template.getServiceImpl()), implFile);
                     }
                 }
                 // MpController.java
-                if (null != tableInfo.getControllerName() && null != pathInfo.get(ConstVal.CONTROLLER_PATH)) {
-                    String controllerFile = String.format((pathInfo.get(ConstVal.CONTROLLER_PATH) + File.separator + tableInfo.getControllerName() + suffixJavaOrKt()), entityName);
+                if (null != tableInfo.getControllerName() && null != pathInfo.get(FmGeneratorConst.CONTROLLER_PATH)) {
+                    String controllerFile = String.format((pathInfo.get(FmGeneratorConst.CONTROLLER_PATH) + File.separator + tableInfo.getControllerName() + suffixJavaOrKt()), entityName);
                     if (isCreate(FileType.CONTROLLER, controllerFile)) {
                         writer(objectMap, templateFilePath(template.getController()), controllerFile);
                     }
@@ -281,7 +266,7 @@ public abstract class AbstractTemplateEngine {
      * 文件后缀
      */
     protected String suffixJavaOrKt() {
-        return getConfigBuilder().getGlobalConfig().isKotlin() ? ConstVal.KT_SUFFIX : ConstVal.JAVA_SUFFIX;
+        return getConfigBuilder().getGlobalConfig().isKotlin() ? FmGeneratorConst.KT_SUFFIX : FmGeneratorConst.JAVA_SUFFIX;
     }
 
 

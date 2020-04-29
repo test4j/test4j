@@ -1,24 +1,10 @@
-/*
- * Copyright (c) 2011-2020, baomidou (jobob@qq.com).
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
- */
 package org.test4j.generator.mybatis.config;
 
 import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.baomidou.mybatisplus.core.toolkit.ClassUtils;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import org.test4j.generator.mybatis.model.FmGeneratorConst;
 import org.test4j.generator.mybatis.model.TableFill;
 import org.test4j.generator.mybatis.rule.NamingStrategy;
 import lombok.AccessLevel;
@@ -83,15 +69,15 @@ public class StrategyConfig {
     /**
      * 自定义继承的Mapper类全称，带包名
      */
-    private String superMapperClass = ConstVal.SUPER_MAPPER_CLASS;
+    private String superMapperClass = FmGeneratorConst.SUPER_MAPPER_CLASS;
     /**
      * 自定义继承的Service类全称，带包名
      */
-    private String superServiceClass = ConstVal.SUPER_SERVICE_CLASS;
+    private String superServiceClass = FmGeneratorConst.SUPER_SERVICE_CLASS;
     /**
      * 自定义继承的ServiceImpl类全称，带包名
      */
-    private String superServiceImplClass = ConstVal.SUPER_SERVICE_IMPL_CLASS;
+    private String superServiceImplClass = FmGeneratorConst.SUPER_SERVICE_IMPL_CLASS;
     /**
      * 自定义继承的Controller类全称，带包名
      */

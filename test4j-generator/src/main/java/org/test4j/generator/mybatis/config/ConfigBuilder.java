@@ -1,24 +1,10 @@
-/*
- * Copyright (c) 2011-2020, baomidou (jobob@qq.com).
- * <p>
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not
- * use this file except in compliance with the License. You may obtain a copy of
- * the License at
- * <p>
- * https://www.apache.org/licenses/LICENSE-2.0
- * <p>
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS, WITHOUT
- * WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied. See the
- * License for the specific language governing permissions and limitations under
- * the License.
- */
 package org.test4j.generator.mybatis.config;
 
 import cn.org.atool.fluent.mybatis.generator.TableColumn;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import org.test4j.generator.mybatis.model.FmGeneratorConst;
 import org.test4j.generator.mybatis.model.TableField;
 import org.test4j.generator.mybatis.model.TableFill;
 import org.test4j.generator.mybatis.model.TableInfo;
@@ -227,13 +213,13 @@ public class ConfigBuilder {
     private void handlerPackage(TemplateConfig template, String outputDir, PackageConfig config) {
         // 包信息
         packageInfo = new HashMap<>(8);
-        packageInfo.put(ConstVal.MODULE_NAME, config.getModuleName());
-        packageInfo.put(ConstVal.ENTITY, joinPackage(config.getParent(), config.getEntity()));
-        packageInfo.put(ConstVal.MAPPER, joinPackage(config.getParent(), config.getMapper()));
-        packageInfo.put(ConstVal.XML, joinPackage(config.getParent(), config.getXml()));
-        packageInfo.put(ConstVal.SERVICE, joinPackage(config.getParent(), config.getService()));
-        packageInfo.put(ConstVal.SERVICE_IMPL, joinPackage(config.getParent(), config.getServiceImpl()));
-        packageInfo.put(ConstVal.CONTROLLER, joinPackage(config.getParent(), config.getController()));
+        packageInfo.put(FmGeneratorConst.MODULE_NAME, config.getModuleName());
+        packageInfo.put(FmGeneratorConst.ENTITY, joinPackage(config.getParent(), config.getEntity()));
+        packageInfo.put(FmGeneratorConst.MAPPER, joinPackage(config.getParent(), config.getMapper()));
+        packageInfo.put(FmGeneratorConst.XML, joinPackage(config.getParent(), config.getXml()));
+        packageInfo.put(FmGeneratorConst.SERVICE, joinPackage(config.getParent(), config.getService()));
+        packageInfo.put(FmGeneratorConst.SERVICE_IMPL, joinPackage(config.getParent(), config.getServiceImpl()));
+        packageInfo.put(FmGeneratorConst.CONTROLLER, joinPackage(config.getParent(), config.getController()));
 
         // 自定义路径
         Map<String, String> configPathInfo = config.getPathInfo();
@@ -242,12 +228,12 @@ public class ConfigBuilder {
         } else {
             // 生成路径信息
             pathInfo = new HashMap<>(6);
-            setPathInfo(pathInfo, template.getEntity(getGlobalConfig().isKotlin()), outputDir, ConstVal.ENTITY_PATH, ConstVal.ENTITY);
-            setPathInfo(pathInfo, template.getMapper(), outputDir, ConstVal.MAPPER_PATH, ConstVal.MAPPER);
-            setPathInfo(pathInfo, template.getXml(), outputDir, ConstVal.XML_PATH, ConstVal.XML);
-            setPathInfo(pathInfo, template.getService(), outputDir, ConstVal.SERVICE_PATH, ConstVal.SERVICE);
-            setPathInfo(pathInfo, template.getServiceImpl(), outputDir, ConstVal.SERVICE_IMPL_PATH, ConstVal.SERVICE_IMPL);
-            setPathInfo(pathInfo, template.getController(), outputDir, ConstVal.CONTROLLER_PATH, ConstVal.CONTROLLER);
+            setPathInfo(pathInfo, template.getEntity(getGlobalConfig().isKotlin()), outputDir, FmGeneratorConst.ENTITY_PATH, FmGeneratorConst.ENTITY);
+            setPathInfo(pathInfo, template.getMapper(), outputDir, FmGeneratorConst.MAPPER_PATH, FmGeneratorConst.MAPPER);
+            setPathInfo(pathInfo, template.getXml(), outputDir, FmGeneratorConst.XML_PATH, FmGeneratorConst.XML);
+            setPathInfo(pathInfo, template.getService(), outputDir, FmGeneratorConst.SERVICE_PATH, FmGeneratorConst.SERVICE);
+            setPathInfo(pathInfo, template.getServiceImpl(), outputDir, FmGeneratorConst.SERVICE_IMPL_PATH, FmGeneratorConst.SERVICE_IMPL);
+            setPathInfo(pathInfo, template.getController(), outputDir, FmGeneratorConst.CONTROLLER_PATH, FmGeneratorConst.CONTROLLER);
         }
     }
 
@@ -286,17 +272,17 @@ public class ConfigBuilder {
      */
     private void processTypes(StrategyConfig config) {
         if (StringUtils.isEmpty(config.getSuperServiceClass())) {
-            superServiceClass = ConstVal.SUPER_SERVICE_CLASS;
+            superServiceClass = FmGeneratorConst.SUPER_SERVICE_CLASS;
         } else {
             superServiceClass = config.getSuperServiceClass();
         }
         if (StringUtils.isEmpty(config.getSuperServiceImplClass())) {
-            superServiceImplClass = ConstVal.SUPER_SERVICE_IMPL_CLASS;
+            superServiceImplClass = FmGeneratorConst.SUPER_SERVICE_IMPL_CLASS;
         } else {
             superServiceImplClass = config.getSuperServiceImplClass();
         }
         if (StringUtils.isEmpty(config.getSuperMapperClass())) {
-            superMapperClass = ConstVal.SUPER_MAPPER_CLASS;
+            superMapperClass = FmGeneratorConst.SUPER_MAPPER_CLASS;
         } else {
             superMapperClass = config.getSuperMapperClass();
         }
@@ -332,27 +318,27 @@ public class ConfigBuilder {
             if (StringUtils.isNotEmpty(globalConfig.getMapperName())) {
                 tableInfo.setMapperName(String.format(globalConfig.getMapperName(), entityName));
             } else {
-                tableInfo.setMapperName(entityName + ConstVal.MAPPER);
+                tableInfo.setMapperName(entityName + FmGeneratorConst.MAPPER);
             }
             if (StringUtils.isNotEmpty(globalConfig.getXmlName())) {
                 tableInfo.setXmlName(String.format(globalConfig.getXmlName(), entityName));
             } else {
-                tableInfo.setXmlName(entityName + ConstVal.MAPPER);
+                tableInfo.setXmlName(entityName + FmGeneratorConst.MAPPER);
             }
             if (StringUtils.isNotEmpty(globalConfig.getServiceName())) {
                 tableInfo.setServiceName(String.format(globalConfig.getServiceName(), entityName));
             } else {
-                tableInfo.setServiceName("I" + entityName + ConstVal.SERVICE);
+                tableInfo.setServiceName("I" + entityName + FmGeneratorConst.SERVICE);
             }
             if (StringUtils.isNotEmpty(globalConfig.getServiceImplName())) {
                 tableInfo.setServiceImplName(String.format(globalConfig.getServiceImplName(), entityName));
             } else {
-                tableInfo.setServiceImplName(entityName + ConstVal.SERVICE_IMPL);
+                tableInfo.setServiceImplName(entityName + FmGeneratorConst.SERVICE_IMPL);
             }
             if (StringUtils.isNotEmpty(globalConfig.getControllerName())) {
                 tableInfo.setControllerName(String.format(globalConfig.getControllerName(), entityName));
             } else {
-                tableInfo.setControllerName(entityName + ConstVal.CONTROLLER);
+                tableInfo.setControllerName(entityName + FmGeneratorConst.CONTROLLER);
             }
             // 检测导入包
             checkImportPackages(tableInfo);
@@ -662,7 +648,7 @@ public class ConfigBuilder {
      */
     private String joinPath(String parentDir, String packageName) {
         if (StringUtils.isEmpty(parentDir)) {
-            parentDir = System.getProperty(ConstVal.JAVA_TMPDIR);
+            parentDir = System.getProperty(FmGeneratorConst.JAVA_TMPDIR);
         }
         if (!StringUtils.endsWith(parentDir, File.separator)) {
             parentDir += File.separator;
