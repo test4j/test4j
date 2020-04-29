@@ -7,12 +7,10 @@
 /test4j/.classpath
 /test4j/.project
 /test4j/.settings
-/test4j.example/target
 test4j/target
-test4j.nodep/target
-test4j.example/target
 test4j-core/target
 test4j-btest/target
 test4j-junit4/target
 test4j-junit5/target
 test4j-db-dep/target
+test4j-generator/target
