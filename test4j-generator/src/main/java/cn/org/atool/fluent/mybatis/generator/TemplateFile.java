@@ -1,7 +1,7 @@
 package cn.org.atool.fluent.mybatis.generator;
 
-import com.baomidou.mybatisplus.generator.config.FileOutConfig;
-import com.baomidou.mybatisplus.generator.config.po.TableInfo;
+import org.test4j.generator.mybatis.config.FileOutConfig;
+import org.test4j.generator.mybatis.model.TableInfo;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 

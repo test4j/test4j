@@ -1,8 +1,8 @@
 package cn.org.atool.fluent.mybatis.generator;
 
 import com.baomidou.mybatisplus.annotation.DbType;
-import com.baomidou.mybatisplus.generator.config.DataSourceConfig;
-import com.baomidou.mybatisplus.generator.config.ITypeConvert;
+import org.test4j.generator.mybatis.config.DataSourceConfig;
+import org.test4j.generator.mybatis.config.ITypeConvert;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;

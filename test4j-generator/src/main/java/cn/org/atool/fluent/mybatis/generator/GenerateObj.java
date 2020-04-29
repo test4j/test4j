@@ -1,6 +1,6 @@
 package cn.org.atool.fluent.mybatis.generator;
 
-import com.baomidou.mybatisplus.generator.engine.VelocityTemplateEngine;
+import org.test4j.generator.engine.VelocityTemplateEngine;
 import lombok.Data;
 import lombok.experimental.Accessors;
 

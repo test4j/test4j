@@ -1,6 +1,6 @@
 package cn.org.atool.fluent.mybatis.generator;
 
-import com.baomidou.mybatisplus.generator.config.rules.IColumnType;
+import org.test4j.generator.mybatis.rule.IColumnType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;

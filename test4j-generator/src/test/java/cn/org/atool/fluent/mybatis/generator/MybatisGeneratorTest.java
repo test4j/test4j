@@ -1,6 +1,6 @@
 package cn.org.atool.fluent.mybatis.generator;
 
-import com.baomidou.mybatisplus.generator.config.rules.DbColumnType;
+import org.test4j.generator.mybatis.rule.DbColumnType;
 import org.junit.jupiter.api.Test;
 
 public class MybatisGeneratorTest {
