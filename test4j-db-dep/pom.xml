@@ -16,6 +16,19 @@
         <skipTests>true</skipTests>
     </properties>
     <dependencies>
+        <!-- database -->
+        <dependency>
+            <groupId>com.baomidou</groupId>
+            <artifactId>mybatis-plus-annotation</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.github.atool</groupId>
+            <artifactId>fluent-mybatis</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.mybatis</groupId>
+            <artifactId>mybatis</artifactId>
+        </dependency>
         <!-- mariadb4j -->
         <dependency>
             <groupId>org.apache.commons</groupId>

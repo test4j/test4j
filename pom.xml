@@ -105,6 +105,22 @@
                     </exclusion>
                 </exclusions>
             </dependency>
+            <!-- database -->
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-annotation</artifactId>
+                <version>3.2.0</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.atool</groupId>
+                <artifactId>fluent-mybatis</artifactId>
+                <version>${fluent-mybatis.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.mybatis</groupId>
+                <artifactId>mybatis</artifactId>
+                <version>3.5.2</version>
+            </dependency>
         </dependencies>
     </dependencyManagement>
     <dependencies>
@@ -144,25 +160,7 @@
             <version>2.2.2</version>
             <scope>provided</scope>
         </dependency>
-        <!-- database -->
-        <dependency>
-            <groupId>com.baomidou</groupId>
-            <artifactId>mybatis-plus-annotation</artifactId>
-            <version>3.2.0</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.github.atool</groupId>
-            <artifactId>fluent-mybatis</artifactId>
-            <version>${fluent-mybatis.version}</version>
-            <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>org.mybatis</groupId>
-            <artifactId>mybatis</artifactId>
-            <version>3.5.2</version>
-            <scope>provided</scope>
-        </dependency>
+
         <!-- spring -->
         <dependency>
             <groupId>org.springframework</groupId>
