@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import org.test4j.generator.mybatis.model.FmGeneratorConst;
 import org.test4j.generator.mybatis.model.TableFill;
-import org.test4j.generator.mybatis.rule.NamingStrategy;
+import org.test4j.generator.mybatis.rule.Naming;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
@@ -40,12 +40,12 @@ public class StrategyConfig {
     /**
      * 数据库表映射到实体的命名策略
      */
-    private NamingStrategy naming = NamingStrategy.no_change;
+    private Naming naming = Naming.no_change;
     /**
      * 数据库表字段映射到实体的命名策略
      * <p>未指定按照 naming 执行</p>
      */
-    private NamingStrategy columnNaming = null;
+    private Naming columnNaming = null;
     /**
      * 表前缀
      */
@@ -177,7 +177,7 @@ public class StrategyConfig {
         return false;
     }
 
-    public NamingStrategy getColumnNaming() {
+    public Naming getColumnNaming() {
         if (null == columnNaming) {
             // 未指定以 naming 策略为准
             return naming;
@@ -253,7 +253,7 @@ public class StrategyConfig {
      * @param columnNaming 字段命名策略
      * @return
      */
-    public StrategyConfig setSuperEntityClass(Class<?> clazz, NamingStrategy columnNaming) {
+    public StrategyConfig setSuperEntityClass(Class<?> clazz, Naming columnNaming) {
         if (null != columnNaming) {
             this.columnNaming = columnNaming;
         }
@@ -279,7 +279,7 @@ public class StrategyConfig {
         List<Field> fields = TableInfoHelper.getAllFields(clazz);
         if (CollectionUtils.isNotEmpty(fields)) {
             this.superEntityColumns = fields.stream().map(field -> {
-                if (null == columnNaming || columnNaming == NamingStrategy.no_change) {
+                if (null == columnNaming || columnNaming == Naming.no_change) {
                     return field.getName();
                 }
                 return StringUtils.camelToUnderline(field.getName());

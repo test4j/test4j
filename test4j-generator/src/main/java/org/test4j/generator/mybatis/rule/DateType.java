@@ -1,10 +1,7 @@
 package org.test4j.generator.mybatis.rule;
 
 /**
- * 数据库时间类型 到 实体类时间类型 对应策略
- *
- * @author miemie
- * @since 2018/5/22
+ * 数据库时间类型转换
  */
 public enum DateType {
     /**

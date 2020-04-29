@@ -3,7 +3,7 @@ package org.test4j.generator.mybatis.model;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import org.test4j.generator.mybatis.config.StrategyConfig;
 import org.test4j.generator.mybatis.rule.IColumnType;
-import org.test4j.generator.mybatis.rule.NamingStrategy;
+import org.test4j.generator.mybatis.rule.Naming;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -63,7 +63,7 @@ public class TableField {
             this.convert = false;
         } else {
             // 转换字段
-            if (NamingStrategy.underline_to_camel == strategyConfig.getColumnNaming()) {
+            if (Naming.underline_to_camel == strategyConfig.getColumnNaming()) {
                 // 包含大写处理
                 if (StringUtils.containsUpperCase(name)) {
                     this.convert = true;
@@ -83,7 +83,7 @@ public class TableField {
 
     public String getPropertyType() {
         if (null != columnType) {
-            return columnType.getType();
+            return columnType.getPropertyType();
         }
         return null;
     }

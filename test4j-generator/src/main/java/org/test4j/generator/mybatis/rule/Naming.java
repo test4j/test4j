@@ -7,12 +7,11 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import org.test4j.generator.mybatis.model.FmGeneratorConst;
 
 /**
- * 从数据库表到文件的命名策略
+ * 数据库表到文件命名转换策略
  *
- * @author YangHu, tangguo
- * @since 2016/8/30
+ * @author wudarui
  */
-public enum NamingStrategy {
+public enum Naming {
     /**
      * 不做任何改变，原样输出
      */
@@ -23,9 +22,7 @@ public enum NamingStrategy {
     underline_to_camel;
 
     public static String underlineToCamel(String name) {
-        // 快速检查
         if (StringUtils.isEmpty(name)) {
-            // 没必要转换
             return StringPool.EMPTY;
         }
         String tempName = name;
@@ -53,36 +50,24 @@ public enum NamingStrategy {
     /**
      * 去掉指定的前缀
      *
-     * @param name   ignore
-     * @param prefix ignore
-     * @return ignore
+     * @param name   字段名称
+     * @param prefix 前缀
+     * @return
      */
     public static String removePrefix(String name, String... prefix) {
         if (StringUtils.isEmpty(name)) {
             return StringPool.EMPTY;
         }
-        if (null != prefix) {
-            // 判断是否有匹配的前缀，然后截取前缀
-            // 删除前缀
-            return Arrays.stream(prefix).filter(pf -> name.toLowerCase()
-                .matches(StringPool.HAT + pf.toLowerCase() + ".*"))
-                .findFirst().map(pf -> name.substring(pf.length())).orElse(name);
+        if (prefix == null) {
+            return name;
+        }
+        String lowerCase = name.toLowerCase();
+        for (String pf : prefix) {
+            if (lowerCase.startsWith(pf.toLowerCase())) {
+                return name.substring(pf.length());
+            }
         }
         return name;
-    }
-
-    /**
-     * 判断是否包含prefix
-     *
-     * @param name   ignore
-     * @param prefix ignore
-     * @return ignore
-     */
-    public static boolean isPrefixContained(String name, String... prefix) {
-        if (null == prefix || StringUtils.isEmpty(name)) {
-            return false;
-        }
-        return Arrays.stream(prefix).anyMatch(pf -> name.toLowerCase().matches(StringPool.HAT + pf.toLowerCase() + ".*"));
     }
 
     /**
@@ -105,8 +90,8 @@ public enum NamingStrategy {
     public static String capitalFirst(String name) {
         if (StringUtils.isNotEmpty(name)) {
             return name.substring(0, 1).toUpperCase() + name.substring(1);
+        } else {
+            return StringPool.EMPTY;
         }
-        return StringPool.EMPTY;
     }
-
 }

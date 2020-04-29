@@ -9,7 +9,7 @@ import org.test4j.generator.mybatis.model.TableField;
 import org.test4j.generator.mybatis.model.TableFill;
 import org.test4j.generator.mybatis.model.TableInfo;
 import org.test4j.generator.mybatis.query.H2Query;
-import org.test4j.generator.mybatis.rule.NamingStrategy;
+import org.test4j.generator.mybatis.rule.Naming;
 
 import java.io.File;
 import java.sql.Connection;
@@ -298,7 +298,7 @@ public class ConfigBuilder {
      * @param config    策略配置项
      * @return 补充完整信息后的表
      */
-    private List<TableInfo> processTable(List<TableInfo> tableList, NamingStrategy strategy, StrategyConfig config) {
+    private List<TableInfo> processTable(List<TableInfo> tableList, Naming strategy, StrategyConfig config) {
         String[] tablePrefix = config.getTablePrefix();
         for (TableInfo tableInfo : tableList) {
             String entityName;
@@ -307,7 +307,7 @@ public class ConfigBuilder {
                 // 自定义处理实体名称
                 entityName = nameConvert.entityNameConvert(tableInfo);
             } else {
-                entityName = NamingStrategy.capitalFirst(processName(tableInfo.getName(), strategy, tablePrefix));
+                entityName = Naming.capitalFirst(processName(tableInfo.getName(), strategy, tablePrefix));
             }
             if (StringUtils.isNotEmpty(globalConfig.getEntityName())) {
                 tableInfo.setConvert(true);
@@ -678,7 +678,7 @@ public class ConfigBuilder {
      *
      * @return 根据策略返回处理后的名称
      */
-    private String processName(String name, NamingStrategy strategy) {
+    private String processName(String name, Naming strategy) {
         return processName(name, strategy, strategyConfig.getFieldPrefix());
     }
 
@@ -691,7 +691,7 @@ public class ConfigBuilder {
      * @param prefix   ignore
      * @return 根据策略返回处理后的名称
      */
-    private String processName(String name, NamingStrategy strategy, String[] prefix) {
+    private String processName(String name, Naming strategy, String[] prefix) {
         if (prefix == null) {
             String propertyName = currTable().getPropertyNameByColumn(name);
             if (org.apache.commons.lang3.StringUtils.isNotBlank(propertyName)) {
@@ -708,22 +708,22 @@ public class ConfigBuilder {
         }
         String propertyName;
         if (removePrefix) {
-            if (strategy == NamingStrategy.underline_to_camel) {
+            if (strategy == Naming.underline_to_camel) {
                 // 删除前缀、下划线转驼峰
-                propertyName = NamingStrategy.removePrefixAndCamel(name, prefix);
+                propertyName = Naming.removePrefixAndCamel(name, prefix);
             } else {
                 // 删除前缀
-                propertyName = NamingStrategy.removePrefix(name, prefix);
+                propertyName = Naming.removePrefix(name, prefix);
             }
-        } else if (strategy == NamingStrategy.underline_to_camel) {
+        } else if (strategy == Naming.underline_to_camel) {
             // 下划线转驼峰
-            propertyName = NamingStrategy.underlineToCamel(name);
+            propertyName = Naming.underlineToCamel(name);
         } else {
             // 不处理
             propertyName = name;
         }
         if (prefix != null) {
-            String withSuffix = NamingStrategy.capitalFirst(propertyName);
+            String withSuffix = Naming.capitalFirst(propertyName);
             currTable().setWithoutSuffixEntity(withSuffix);
         }
         return propertyName;

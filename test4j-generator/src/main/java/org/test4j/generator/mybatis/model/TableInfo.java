@@ -3,7 +3,7 @@ package org.test4j.generator.mybatis.model;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import org.test4j.generator.mybatis.config.StrategyConfig;
-import org.test4j.generator.mybatis.rule.NamingStrategy;
+import org.test4j.generator.mybatis.rule.Naming;
 import lombok.Data;
 import lombok.experimental.Accessors;
 
@@ -53,7 +53,7 @@ public class TableInfo {
             this.convert = false;
         } else {
             // 转换字段
-            if (NamingStrategy.underline_to_camel == strategyConfig.getColumnNaming()) {
+            if (Naming.underline_to_camel == strategyConfig.getColumnNaming()) {
                 // 包含大写处理
                 if (StringUtils.containsUpperCase(name)) {
                     this.convert = true;
@@ -80,8 +80,8 @@ public class TableInfo {
             this.fields = fields;
             // 收集导入包信息
             for (TableField field : fields) {
-                if (null != field.getColumnType() && null != field.getColumnType().getPkg()) {
-                    importPackages.add(field.getColumnType().getPkg());
+                if (null != field.getColumnType() && null != field.getColumnType().getImportPackage()) {
+                    importPackages.add(field.getColumnType().getImportPackage());
                 }
                 if (field.isKeyFlag()) {
                     // 主键

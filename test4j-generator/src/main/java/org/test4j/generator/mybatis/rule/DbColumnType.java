@@ -1,77 +1,77 @@
 package org.test4j.generator.mybatis.rule;
 
+import lombok.Getter;
+
 /**
  * 表字段类型
- *
- * @author hubin
- * @since 2017-01-11
  */
 public enum DbColumnType implements IColumnType {
     // 基本类型
-    BASE_BYTE("byte", null),
-    BASE_SHORT("short", null),
-    BASE_CHAR("char", null),
-    BASE_INT("int", null),
-    BASE_LONG("long", null),
-    BASE_FLOAT("float", null),
-    BASE_DOUBLE("double", null),
-    BASE_BOOLEAN("boolean", null),
+    BASE_BYTE("byte"),
+    BASE_SHORT("short"),
+    BASE_CHAR("char"),
+    BASE_INT("int"),
+    BASE_LONG("long"),
+    BASE_FLOAT("float"),
+    BASE_DOUBLE("double"),
+    BASE_BOOLEAN("boolean"),
 
     // 包装类型
-    BYTE("Byte", null),
-    SHORT("Short", null),
-    CHARACTER("Character", null),
-    INTEGER("Integer", null),
-    LONG("Long", null),
-    FLOAT("Float", null),
-    DOUBLE("Double", null),
-    BOOLEAN("Boolean", null),
-    STRING("String", null),
+    BYTE(Byte.class.getSimpleName()),
+    SHORT(Short.class.getSimpleName()),
+    CHARACTER(Character.class.getSimpleName()),
+    INTEGER(Integer.class.getSimpleName()),
+    LONG(Long.class.getSimpleName()),
+    FLOAT(Float.class.getSimpleName()),
+    DOUBLE(Double.class.getSimpleName()),
+    BOOLEAN(Boolean.class.getSimpleName()),
+    STRING(String.class.getSimpleName()),
 
     // sql 包下数据类型
-    DATE_SQL("Date", "java.sql.Date"),
-    TIME("Time", "java.sql.Time"),
-    TIMESTAMP("Timestamp", "java.sql.Timestamp"),
-    BLOB("Blob", "java.sql.Blob"),
-    CLOB("Clob", "java.sql.Clob"),
+    DATE_SQL(java.sql.Date.class),
+    TIME(java.sql.Time.class),
+    TIMESTAMP(java.sql.Timestamp.class),
+    BLOB(java.sql.Blob.class),
+    CLOB(java.sql.Clob.class),
 
     // java8 新时间类型
-    LOCAL_DATE("LocalDate", "java.time.LocalDate"),
-    LOCAL_TIME("LocalTime", "java.time.LocalTime"),
-    YEAR("Year", "java.time.Year"),
-    YEAR_MONTH("YearMonth", "java.time.YearMonth"),
-    LOCAL_DATE_TIME("LocalDateTime", "java.time.LocalDateTime"),
-    INSTANT("Instant", "java.time.Instant"),
+    LOCAL_DATE(java.time.LocalDate.class),
+    LOCAL_TIME(java.time.LocalTime.class),
+    YEAR(java.time.Year.class),
+    YEAR_MONTH(java.time.YearMonth.class),
+    LOCAL_DATE_TIME(java.time.LocalDateTime.class),
+    INSTANT(java.time.Instant.class),
 
     // 其他杂类
-    BYTE_ARRAY("byte[]", null),
-    OBJECT("Object", null),
-    DATE("Date", "java.util.Date"),
-    BIG_INTEGER("BigInteger", "java.math.BigInteger"),
-    BIG_DECIMAL("BigDecimal", "java.math.BigDecimal");
+    BYTE_ARRAY("byte[]"),
+    OBJECT(Object.class.getSimpleName()),
+    DATE(java.util.Date.class),
+    BIG_INTEGER(java.math.BigInteger.class),
+    BIG_DECIMAL(java.math.BigDecimal.class);
 
     /**
      * 类型
      */
-    private final String type;
+    @Getter
+    private final String propertyType;
 
     /**
      * 包路径
      */
-    private final String pkg;
+    @Getter
+    private final String importPackage;
+
+    DbColumnType(Class type) {
+        this.propertyType = type.getSimpleName();
+        this.importPackage = type.getName();
+    }
+
+    DbColumnType(String type) {
+        this(type, null);
+    }
 
     DbColumnType(final String type, final String pkg) {
-        this.type = type;
-        this.pkg = pkg;
-    }
-
-    @Override
-    public String getType() {
-        return type;
-    }
-
-    @Override
-    public String getPkg() {
-        return pkg;
+        this.propertyType = type;
+        this.importPackage = pkg;
     }
 }

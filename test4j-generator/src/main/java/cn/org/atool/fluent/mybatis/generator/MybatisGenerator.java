@@ -6,7 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import org.test4j.generator.mybatis.AutoGenerator;
 import org.test4j.generator.mybatis.config.InjectionConfig;
 import org.test4j.generator.mybatis.rule.DateType;
-import org.test4j.generator.mybatis.rule.NamingStrategy;
+import org.test4j.generator.mybatis.rule.Naming;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -212,7 +212,7 @@ public class MybatisGenerator {
     private StrategyConfig initStrategy(String[] tablePrefix, String[] tables, String verField) {
         StrategyConfig sc = new StrategyConfig();
         sc.setCapitalMode(true)
-                .setNaming(NamingStrategy.underline_to_camel)
+                .setNaming(Naming.underline_to_camel)
                 .setEntityLombokModel(true)
                 .setEntityTableFieldAnnotationEnable(true);
         if (StringUtils.isNotBlank(verField)) {
