@@ -15,6 +15,7 @@
  */
 package com.baomidou.mybatisplus.generator.config.builder;
 
+import cn.org.atool.fluent.mybatis.generator.TableColumn;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
@@ -25,19 +26,18 @@ import com.baomidou.mybatisplus.generator.config.po.TableFill;
 import com.baomidou.mybatisplus.generator.config.po.TableInfo;
 import com.baomidou.mybatisplus.generator.config.querys.H2Query;
 import com.baomidou.mybatisplus.generator.config.rules.NamingStrategy;
+import mockit.Invocation;
+import mockit.Mock;
 
 import java.io.File;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.stream.Collectors;
+
+import static cn.org.atool.fluent.mybatis.generator.MybatisGenerator.currTable;
 
 /**
  * 配置汇总 传递给文件生成工具
@@ -99,6 +99,7 @@ public class ConfigBuilder {
      * 是否支持注释
      */
     private boolean commentSupported;
+
     /**
      * 在构造器中处理配置
      *
@@ -306,7 +307,6 @@ public class ConfigBuilder {
         superEntityClass = config.getSuperEntityClass();
         superControllerClass = config.getSuperControllerClass();
     }
-
 
     /**
      * 处理表对应的类名称
@@ -559,8 +559,7 @@ public class ConfigBuilder {
             } else if (DbType.DM == dbType) {
                 tableName = tableName.toUpperCase();
                 tableFieldsSql = String.format(tableFieldsSql, tableName);
-            }
-            else if (DbType.H2 == dbType) {
+            } else if (DbType.H2 == dbType) {
                 tableName = tableName.toUpperCase();
                 try (PreparedStatement pkQueryStmt = connection.prepareStatement(String.format(H2Query.PK_QUERY_SQL, tableName));
                      ResultSet pkResults = pkQueryStmt.executeQuery()) {
@@ -597,7 +596,7 @@ public class ConfigBuilder {
                     // 处理ID
                     if (isId && !haveId) {
                         field.setKeyFlag(true);
-                        if (DbType.H2 == dbType || DbType.SQLITE == dbType|| dbQuery.isKeyIdentity(results)) {
+                        if (DbType.H2 == dbType || DbType.SQLITE == dbType || dbQuery.isKeyIdentity(results)) {
                             field.setKeyIdentityFlag(true);
                         }
                         haveId = true;
@@ -646,6 +645,14 @@ public class ConfigBuilder {
         }
         tableInfo.setFields(fieldList);
         tableInfo.setCommonFields(commonFieldList);
+
+        tableInfo.setFields(tableInfo.getFields().stream()
+            .filter(field -> !currTable().getColumn(field.getName())
+                .map(TableColumn::isExclude)
+                .orElse(false)
+            ).collect(Collectors.toList())
+        );
+        this.sortFields(tableInfo);
         return tableInfo;
     }
 
@@ -703,6 +710,16 @@ public class ConfigBuilder {
      * @return 根据策略返回处理后的名称
      */
     private String processName(String name, NamingStrategy strategy, String[] prefix) {
+        if (prefix == null) {
+            String propertyName = currTable().getPropertyNameByColumn(name);
+            if (org.apache.commons.lang3.StringUtils.isNotBlank(propertyName)) {
+                return propertyName;
+            }
+        } else {
+            if (org.apache.commons.lang3.StringUtils.isNotBlank(currTable().getWithoutSuffixEntity())) {
+                return currTable().getWithoutSuffixEntity();
+            }
+        }
         boolean removePrefix = false;
         if (prefix != null && prefix.length != 0) {
             removePrefix = true;
@@ -722,6 +739,10 @@ public class ConfigBuilder {
         } else {
             // 不处理
             propertyName = name;
+        }
+        if (prefix != null) {
+            String withSuffix = NamingStrategy.capitalFirst(propertyName);
+            currTable().setWithoutSuffixEntity(withSuffix);
         }
         return propertyName;
     }
@@ -757,5 +778,50 @@ public class ConfigBuilder {
     public ConfigBuilder setInjectionConfig(InjectionConfig injectionConfig) {
         this.injectionConfig = injectionConfig;
         return this;
+    }
+
+    /**
+     * 对表字段进行排序
+     * o 特殊字段
+     * o 其他字段字母序
+     *
+     * @param tableInfo
+     */
+    private void sortFields(TableInfo tableInfo) {
+        List<TableField> fields = tableInfo.getFields();
+        List<TableField> sorts = new ArrayList<>();
+        TableField pkField = null;
+        TableField gmtCreatedField = null;
+        TableField gmtModifiedField = null;
+        TableField isDeletedField = null;
+        for (TableField field : fields) {
+            if (field.isKeyIdentityFlag()) {
+                pkField = field;
+            } else if (field.getName().equals(currTable().getGmtCreateColumn())) {
+                gmtCreatedField = field;
+            } else if (field.getName().equals(currTable().getGmtModifiedColumn())) {
+                gmtModifiedField = field;
+            } else if (field.getName().equals(currTable().getLogicDeletedColumn())) {
+                isDeletedField = field;
+            } else {
+                sorts.add(field);
+            }
+        }
+        Collections.sort(sorts, (field1, field2) -> field1.getName().compareTo(field2.getName()));
+        fields.clear();
+        if (pkField != null) {
+            fields.add(pkField);
+        }
+        if (gmtCreatedField != null) {
+            fields.add(gmtCreatedField);
+        }
+        if (gmtModifiedField != null) {
+            fields.add(gmtModifiedField);
+        }
+        if (isDeletedField != null) {
+            fields.add(isDeletedField);
+        }
+        fields.addAll(sorts);
+        tableInfo.setFields(fields);
     }
 }

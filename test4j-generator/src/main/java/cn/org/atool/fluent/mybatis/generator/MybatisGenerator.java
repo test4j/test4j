@@ -1,7 +1,6 @@
 package cn.org.atool.fluent.mybatis.generator;
 
 import cn.org.atool.fluent.mybatis.generator.mock.CopyAutoGenerator;
-import cn.org.atool.fluent.mybatis.generator.mock.MockConfigBuilder;
 import cn.org.atool.fluent.mybatis.generator.mock.MockTableField;
 import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.IdType;
@@ -269,7 +268,6 @@ public class MybatisGenerator {
         if (MockFlag.flag()) {
             return;
         }
-        new MockConfigBuilder();
         new MockTableField();
 
         new MockUp<MockFlag>() {

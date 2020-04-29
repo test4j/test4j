@@ -86,7 +86,7 @@ public class CopyAutoGenerator {
         logger.debug("==========================准备生成文件...==========================");
         // 初始化配置
         if (null == config) {
-            config = new CopyConfigBuilder(packageInfo, dataSource, strategy, template, globalConfig);
+            config = new ConfigBuilder(packageInfo, dataSource, strategy, template, globalConfig);
             if (null != injectionConfig) {
                 injectionConfig.setConfig(config);
             }

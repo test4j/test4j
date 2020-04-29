@@ -9,7 +9,7 @@ public class MybatisGeneratorTest {
     @Test
     public void generate() {
         String outdir = System.getProperty("user.dir") + "/src/test/java";
-        new MybatisGenerator("cn.generate")
+        new MybatisGenerator("cn.org.atool.fluent.mybatis.generator.demo")
                 .setOutputDir(outdir, outdir, outdir)
                 .setEntitySetChain(true)
                 .setDataSource(url, "root", "password")
@@ -22,7 +22,7 @@ public class MybatisGeneratorTest {
                                             .setGmtModifiedColumn("gmt_modified")
                                             .setVersionColumn("version")
                                             .setLogicDeletedColumn("is_deleted")
-                                            .addBaseDaoInterface("MyCustomerInterface<${entity}, ${query}, ${update}>", "cn.org.atool.fluent.mybatis.demo.MyCustomerInterface")
+                                            .addBaseDaoInterface("MyCustomerInterface<${entity}, ${query}, ${update}>", "cn.org.atool.fluent.mybatis.generator.MyCustomerInterface")
                                     ;
                                 })
                         , new TableConvertor()
