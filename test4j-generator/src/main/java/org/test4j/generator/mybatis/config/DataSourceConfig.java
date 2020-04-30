@@ -95,17 +95,22 @@ public class DataSourceConfig {
         return this.dbType;
     }
 
+    private Connection connection;
+
     /**
      * 创建数据库连接对象
      *
      * @return Connection
      */
     public Connection getConn() {
-        try {
-            Class.forName(driverName);
-            return DriverManager.getConnection(url, username, password);
-        } catch (ClassNotFoundException | SQLException e) {
-            throw new RuntimeException("getConn error:" + e.getMessage(), e);
+        if (connection == null) {
+            try {
+                Class.forName(driverName);
+                return DriverManager.getConnection(url, username, password);
+            } catch (ClassNotFoundException | SQLException e) {
+                throw new RuntimeException("getConn error:" + e.getMessage(), e);
+            }
         }
+        return this.connection;
     }
 }

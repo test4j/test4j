@@ -37,14 +37,8 @@ public class ConfigBuilder {
      * 数据库配置
      */
     private final DataSourceConfig dataSourceConfig;
-    /**
-     * SQL连接
-     */
-    private Connection connection;
-    /**
-     * SQL语句类型
-     */
-    private IDbQuery dbQuery;
+
+
     private String superEntityClass;
     private String superMapperClass;
     /**
@@ -112,7 +106,6 @@ public class ConfigBuilder {
             handlerPackage(this.template, this.globalConfig.getOutputDir(), packageConfig);
         }
         this.dataSourceConfig = dataSourceConfig;
-        handlerDataSource(dataSourceConfig);
         // 策略配置
         if (null == strategyConfig) {
             this.strategyConfig = new StrategyConfig();
@@ -242,17 +235,6 @@ public class ConfigBuilder {
             pathInfo.put(path, joinPath(outputDir, packageInfo.get(module)));
         }
     }
-
-    /**
-     * 处理数据源配置
-     *
-     * @param config DataSourceConfig
-     */
-    private void handlerDataSource(DataSourceConfig config) {
-        connection = config.getConn();
-        dbQuery = config.getDbQuery();
-    }
-
 
     /**
      * 处理数据库表 加载数据库表、列、注释相关数据集
@@ -393,8 +375,8 @@ public class ConfigBuilder {
         //不存在的表名
         Set<String> notExistTables = new HashSet<>();
         try {
-            String tablesSql = dbQuery.tablesSql();
-            if (DbType.POSTGRE_SQL == dbQuery.dbType()) {
+            String tablesSql = dataSourceConfig.getDbQuery().tablesSql();
+            if (DbType.POSTGRE_SQL == dataSourceConfig.getDbQuery().dbType()) {
                 String schema = dataSourceConfig.getSchemaName();
                 if (schema == null) {
                     //pg 默认 schema=public
@@ -403,7 +385,7 @@ public class ConfigBuilder {
                 }
                 tablesSql = String.format(tablesSql, schema);
             }
-            if (DbType.DB2 == dbQuery.dbType()) {
+            if (DbType.DB2 == dataSourceConfig.getDbQuery().dbType()) {
                 String schema = dataSourceConfig.getSchemaName();
                 if (schema == null) {
                     //db2 默认 schema=current schema
@@ -413,7 +395,7 @@ public class ConfigBuilder {
                 tablesSql = String.format(tablesSql, schema);
             }
             //oracle数据库表太多，出现最大游标错误
-            else if (DbType.ORACLE == dbQuery.dbType()) {
+            else if (DbType.ORACLE == dataSourceConfig.getDbQuery().dbType()) {
                 String schema = dataSourceConfig.getSchemaName();
                 //oracle 默认 schema=username
                 if (schema == null) {
@@ -423,29 +405,29 @@ public class ConfigBuilder {
                 tablesSql = String.format(tablesSql, schema);
                 if (isInclude) {
                     StringBuilder sb = new StringBuilder(tablesSql);
-                    sb.append(" AND ").append(dbQuery.tableName()).append(" IN (");
+                    sb.append(" AND ").append(dataSourceConfig.getDbQuery().tableName()).append(" IN (");
                     Arrays.stream(config.getInclude()).forEach(tbname -> sb.append(StringPool.SINGLE_QUOTE).append(tbname.toUpperCase()).append("',"));
                     sb.replace(sb.length() - 1, sb.length(), StringPool.RIGHT_BRACKET);
                     tablesSql = sb.toString();
                 } else if (isExclude) {
                     StringBuilder sb = new StringBuilder(tablesSql);
-                    sb.append(" AND ").append(dbQuery.tableName()).append(" NOT IN (");
+                    sb.append(" AND ").append(dataSourceConfig.getDbQuery().tableName()).append(" NOT IN (");
                     Arrays.stream(config.getExclude()).forEach(tbname -> sb.append(StringPool.SINGLE_QUOTE).append(tbname.toUpperCase()).append("',"));
                     sb.replace(sb.length() - 1, sb.length(), StringPool.RIGHT_BRACKET);
                     tablesSql = sb.toString();
                 }
             }
             TableInfo tableInfo;
-            try (PreparedStatement preparedStatement = connection.prepareStatement(tablesSql);
+            try (PreparedStatement preparedStatement = dataSourceConfig.getConn().prepareStatement(tablesSql);
                  ResultSet results = preparedStatement.executeQuery()) {
                 while (results.next()) {
-                    String tableName = results.getString(dbQuery.tableName());
+                    String tableName = results.getString(dataSourceConfig.getDbQuery().tableName());
                     if (StringUtils.isNotEmpty(tableName)) {
                         tableInfo = new TableInfo();
                         tableInfo.setName(tableName);
 
                         if (commentSupported) {
-                            String tableComment = results.getString(dbQuery.tableComment());
+                            String tableComment = results.getString(dataSourceConfig.getDbQuery().tableComment());
                             if (config.isSkipView() && "VIEW".equals(tableComment)) {
                                 // 跳过视图
                                 continue;
@@ -526,10 +508,10 @@ public class ConfigBuilder {
         boolean haveId = false;
         List<TableField> fieldList = new ArrayList<>();
         List<TableField> commonFieldList = new ArrayList<>();
-        DbType dbType = dbQuery.dbType();
+        DbType dbType = dataSourceConfig.getDbQuery().dbType();
         String tableName = tableInfo.getName();
         try {
-            String tableFieldsSql = dbQuery.tableFieldsSql();
+            String tableFieldsSql = dataSourceConfig.getDbQuery().tableFieldsSql();
             Set<String> h2PkColumns = new HashSet<>();
             if (DbType.POSTGRE_SQL == dbType) {
                 tableFieldsSql = String.format(tableFieldsSql, dataSourceConfig.getSchemaName(), tableName);
@@ -543,12 +525,12 @@ public class ConfigBuilder {
                 tableFieldsSql = String.format(tableFieldsSql, tableName);
             } else if (DbType.H2 == dbType) {
                 tableName = tableName.toUpperCase();
-                try (PreparedStatement pkQueryStmt = connection.prepareStatement(String.format(H2Query.PK_QUERY_SQL, tableName));
+                try (PreparedStatement pkQueryStmt = dataSourceConfig.getConn().prepareStatement(String.format(H2Query.PK_QUERY_SQL, tableName));
                      ResultSet pkResults = pkQueryStmt.executeQuery()) {
                     while (pkResults.next()) {
-                        String primaryKey = pkResults.getString(dbQuery.fieldKey());
+                        String primaryKey = pkResults.getString(dataSourceConfig.getDbQuery().fieldKey());
                         if (Boolean.valueOf(primaryKey)) {
-                            h2PkColumns.add(pkResults.getString(dbQuery.fieldName()));
+                            h2PkColumns.add(pkResults.getString(dataSourceConfig.getDbQuery().fieldName()));
                         }
                     }
                 }
@@ -557,17 +539,17 @@ public class ConfigBuilder {
                 tableFieldsSql = String.format(tableFieldsSql, tableName);
             }
             try (
-                PreparedStatement preparedStatement = connection.prepareStatement(tableFieldsSql);
+                PreparedStatement preparedStatement = dataSourceConfig.getConn().prepareStatement(tableFieldsSql);
                 ResultSet results = preparedStatement.executeQuery()) {
                 while (results.next()) {
                     TableField field = new TableField();
-                    String columnName = results.getString(dbQuery.fieldName());
+                    String columnName = results.getString(dataSourceConfig.getDbQuery().fieldName());
                     // 避免多重主键设置，目前只取第一个找到ID，并放到list中的索引为0的位置
                     boolean isId;
                     if (DbType.H2 == dbType) {
                         isId = h2PkColumns.contains(columnName);
                     } else {
-                        String key = results.getString(dbQuery.fieldKey());
+                        String key = results.getString(dataSourceConfig.getDbQuery().fieldKey());
                         if (DbType.DB2 == dbType || DbType.SQLITE == dbType) {
                             isId = StringUtils.isNotEmpty(key) && "1".equals(key);
                         } else {
@@ -578,7 +560,7 @@ public class ConfigBuilder {
                     // 处理ID
                     if (isId && !haveId) {
                         field.setKeyFlag(true);
-                        if (DbType.H2 == dbType || DbType.SQLITE == dbType || dbQuery.isKeyIdentity(results)) {
+                        if (DbType.H2 == dbType || DbType.SQLITE == dbType || dataSourceConfig.getDbQuery().isKeyIdentity(results)) {
                             field.setKeyIdentityFlag(true);
                         }
                         haveId = true;
@@ -586,7 +568,7 @@ public class ConfigBuilder {
                         field.setKeyFlag(false);
                     }
                     // 自定义字段查询
-                    String[] fcs = dbQuery.fieldCustom();
+                    String[] fcs = dataSourceConfig.getDbQuery().fieldCustom();
                     if (null != fcs) {
                         Map<String, Object> customMap = new HashMap<>(fcs.length);
                         for (String fc : fcs) {
@@ -596,7 +578,7 @@ public class ConfigBuilder {
                     }
                     // 处理其它信息
                     field.setName(columnName);
-                    field.setType(results.getString(dbQuery.fieldType()));
+                    field.setType(results.getString(dataSourceConfig.getDbQuery().fieldType()));
                     INameConvert nameConvert = strategyConfig.getNameConvert();
                     if (null != nameConvert) {
                         field.setPropertyName(nameConvert.propertyNameConvert(field));
@@ -605,7 +587,7 @@ public class ConfigBuilder {
                     }
                     field.setColumnType(dataSourceConfig.getTypeConvert().processTypeConvert(globalConfig, field));
                     if (commentSupported) {
-                        field.setComment(results.getString(dbQuery.fieldComment()));
+                        field.setComment(results.getString(dataSourceConfig.getDbQuery().fieldComment()));
                     }
                     if (strategyConfig.includeSuperEntityColumns(field.getName())) {
                         // 跳过公共字段

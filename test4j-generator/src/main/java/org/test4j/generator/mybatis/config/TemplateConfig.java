@@ -6,11 +6,12 @@ import lombok.Getter;
 import lombok.experimental.Accessors;
 import org.test4j.generator.mybatis.model.FmGeneratorConst;
 
+import java.util.List;
+
 /**
- * 模板路径配置项
+ * 项
  *
- * @author tzg hubin
- * @since 2017-06-17
+ * @author darui.wu
  */
 @Data
 @Accessors(chain = true)
@@ -34,4 +35,21 @@ public class TemplateConfig {
     public String getEntity(boolean kotlin) {
         return kotlin ? entityKt : entity;
     }
+
+    /**
+     * 生成的文件路径
+     */
+    private String filePath;
+    /**
+     * 文件名称
+     */
+    private String fileName;
+    /**
+     * 模板内容
+     */
+    private String template;
+    /**
+     * 需要导入的行
+     */
+    private List<String> imports;
 }
