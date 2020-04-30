@@ -82,7 +82,7 @@ public class TableField {
 
     public String getPropertyType() {
         if (null != columnType) {
-            return columnType.getPropertyType();
+            return columnType.getFieldType();
         }
         return null;
     }

@@ -7,9 +7,6 @@ import com.baomidou.mybatisplus.annotation.DbType;
 
 /**
  * H2Database 表数据查询
- *
- * @author yuxiaobin
- * @since 2019-01-8
  */
 public class H2Query extends AbstractDbQuery {
 

@@ -4,9 +4,6 @@ import com.baomidou.mybatisplus.annotation.DbType;
 
 /**
  * PostgreSql 表数据查询
- *
- * @author hubin
- * @since 2018-01-16
  */
 public class PostgreSqlQuery extends AbstractDbQuery {
 

@@ -12,12 +12,12 @@ public interface IColumnType {
      *
      * @return 字段类型
      */
-    String getPropertyType();
+    String getFieldType();
 
     /**
      * 获取字段完整路径类型
      *
      * @return 字段类型完整名
      */
-    String getImportPackage();
+    String getImportName();
 }

@@ -4,9 +4,6 @@ import com.baomidou.mybatisplus.annotation.DbType;
 
 /**
  * Sqlite 表数据查询
- *
- * @author chen
- * @since 2019-05-08
  */
 public class SqliteQuery extends AbstractDbQuery {
 

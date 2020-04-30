@@ -2,7 +2,7 @@ package org.test4j.generator.mybatis.convert;
 
 import org.test4j.generator.mybatis.config.GlobalConfig;
 import org.test4j.generator.mybatis.config.ITypeConvert;
-import org.test4j.generator.mybatis.rule.DbColumnType;
+import org.test4j.generator.mybatis.rule.ColumnType;
 import org.test4j.generator.mybatis.rule.IColumnType;
 
 /**
@@ -17,35 +17,35 @@ public class OracleTypeConvert implements ITypeConvert {
     public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
         String t = fieldType.toLowerCase();
         if (t.contains("char")) {
-            return DbColumnType.STRING;
+            return ColumnType.STRING;
         } else if (t.contains("date") || t.contains("timestamp")) {
             switch (globalConfig.getDateType()) {
                 case ONLY_DATE:
-                    return DbColumnType.DATE;
+                    return ColumnType.DATE;
                 case SQL_PACK:
-                    return DbColumnType.TIMESTAMP;
+                    return ColumnType.TIMESTAMP;
                 case TIME_PACK:
-                    return DbColumnType.LOCAL_DATE_TIME;
+                    return ColumnType.LOCAL_DATE_TIME;
             }
         } else if (t.contains("number")) {
             if (t.matches("number\\(+\\d\\)")) {
-                return DbColumnType.INTEGER;
+                return ColumnType.INTEGER;
             } else if (t.matches("number\\(+\\d{2}+\\)")) {
-                return DbColumnType.LONG;
+                return ColumnType.LONG;
             }
-            return DbColumnType.BIG_DECIMAL;
+            return ColumnType.BIG_DECIMAL;
         } else if (t.contains("float")) {
-            return DbColumnType.FLOAT;
+            return ColumnType.FLOAT;
         } else if (t.contains("clob")) {
-            return DbColumnType.STRING;
+            return ColumnType.STRING;
         } else if (t.contains("blob")) {
-            return DbColumnType.BLOB;
+            return ColumnType.BLOB;
         } else if (t.contains("binary")) {
-            return DbColumnType.BYTE_ARRAY;
+            return ColumnType.BYTE_ARRAY;
         } else if (t.contains("raw")) {
-            return DbColumnType.BYTE_ARRAY;
+            return ColumnType.BYTE_ARRAY;
         }
-        return DbColumnType.STRING;
+        return ColumnType.STRING;
     }
 
 }

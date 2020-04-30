@@ -7,18 +7,12 @@ import com.baomidou.mybatisplus.annotation.DbType;
 
 /**
  * SqlServer 表数据查询
- *
- * @author hubin
- * @since 2018-01-16
  */
 public class SqlServerQuery extends AbstractDbQuery {
-
-
     @Override
     public DbType dbType() {
         return DbType.SQL_SERVER;
     }
-
 
     @Override
     public String tablesSql() {
@@ -27,7 +21,6 @@ public class SqlServerQuery extends AbstractDbQuery {
             "left JOIN sys.extended_properties sep on sep.major_id=so.id and sep.minor_id=0 " +
             "where (xtype='U' or xtype='v')";
     }
-
 
     @Override
     public String tableFieldsSql() {

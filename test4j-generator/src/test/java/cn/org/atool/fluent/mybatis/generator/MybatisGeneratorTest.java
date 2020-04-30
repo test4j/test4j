@@ -1,6 +1,6 @@
 package cn.org.atool.fluent.mybatis.generator;
 
-import org.test4j.generator.mybatis.rule.DbColumnType;
+import org.test4j.generator.mybatis.rule.ColumnType;
 import org.junit.jupiter.api.Test;
 
 public class MybatisGeneratorTest {
@@ -17,7 +17,7 @@ public class MybatisGeneratorTest {
                                 .addTable("address")
                                 .addTable("t_user", true)
                                 .allTable(table -> {
-                                    table.column("is_deleted", DbColumnType.BOOLEAN)
+                                    table.column("is_deleted", ColumnType.BOOLEAN)
                                             .setGmtCreateColumn("gmt_created")
                                             .setGmtModifiedColumn("gmt_modified")
                                             .setVersionColumn("version")

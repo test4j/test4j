@@ -1,11 +1,11 @@
 package org.test4j.generator.mybatis.config;
 
-import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.core.toolkit.ExceptionUtils;
 import lombok.Data;
 import lombok.experimental.Accessors;
 import org.test4j.generator.mybatis.convert.*;
 import org.test4j.generator.mybatis.query.*;
+import org.test4j.generator.mybatis.rule.DbType;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -78,9 +78,6 @@ public class DataSourceConfig {
                 case SQLITE:
                     dbQuery = new SqliteQuery();
                     break;
-                case DM:
-                    dbQuery = new DMQuery();
-                    break;
                 default:
                     // 默认 MYSQL
                     dbQuery = new MySqlQuery();
@@ -97,44 +94,15 @@ public class DataSourceConfig {
      */
     public DbType getDbType() {
         if (null == this.dbType) {
-            this.dbType = this.getDbType(this.driverName);
+            this.dbType = DbType.getDbType(this.driverName);
             if (null == this.dbType) {
-                this.dbType = this.getDbType(this.url.toLowerCase());
-                if (null == this.dbType) {
-                    throw ExceptionUtils.mpe("Unknown type of database!");
-                }
+                this.dbType = DbType.getDbType(this.url.toLowerCase());
+            }
+            if (null == this.dbType) {
+                throw ExceptionUtils.mpe("Unknown type of database!");
             }
         }
-
         return this.dbType;
-    }
-
-    /**
-     * 判断数据库类型
-     *
-     * @param str 用于寻找特征的字符串，可以是 driverName 或小写后的 url
-     * @return 类型枚举值，如果没找到，则返回 null
-     */
-    private DbType getDbType(String str) {
-        if (str.contains("mysql")) {
-            return DbType.MYSQL;
-        } else if (str.contains("oracle")) {
-            return DbType.ORACLE;
-        } else if (str.contains("postgresql")) {
-            return DbType.POSTGRE_SQL;
-        } else if (str.contains("sqlserver")) {
-            return DbType.SQL_SERVER;
-        } else if (str.contains("db2")) {
-            return DbType.DB2;
-        } else if (str.contains("mariadb")) {
-            return DbType.MARIADB;
-        } else if (str.contains("sqlite")) {
-            return DbType.MARIADB;
-        } else if (str.contains("h2")) {
-            return DbType.H2;
-        } else {
-            return null;
-        }
     }
 
     public ITypeConvert getTypeConvert() {
@@ -155,14 +123,8 @@ public class DataSourceConfig {
                 case SQLITE:
                     typeConvert = new SqliteTypeConvert();
                     break;
-                case DM:
-                    typeConvert = new DmTypeConvert();
-                    break;
                 case MARIADB:
-                    typeConvert = new MySqlTypeConvert();
-                    break;
                 default:
-                    // 默认 MYSQL
                     typeConvert = new MySqlTypeConvert();
                     break;
             }

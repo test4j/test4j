@@ -5,16 +5,16 @@ import lombok.Getter;
 /**
  * 表字段类型
  */
-public enum DbColumnType implements IColumnType {
+public enum ColumnType implements IColumnType {
     // 基本类型
-    BASE_BYTE("byte"),
-    BASE_SHORT("short"),
-    BASE_CHAR("char"),
-    BASE_INT("int"),
-    BASE_LONG("long"),
-    BASE_FLOAT("float"),
-    BASE_DOUBLE("double"),
-    BASE_BOOLEAN("boolean"),
+    BASE_BYTE(byte.class.getSimpleName()),
+    BASE_SHORT(short.class.getSimpleName()),
+    BASE_CHAR(char.class.getSimpleName()),
+    BASE_INT(int.class.getSimpleName()),
+    BASE_LONG(long.class.getSimpleName()),
+    BASE_FLOAT(float.class.getSimpleName()),
+    BASE_DOUBLE(double.class.getSimpleName()),
+    BASE_BOOLEAN(boolean.class.getSimpleName()),
 
     // 包装类型
     BYTE(Byte.class.getSimpleName()),
@@ -43,7 +43,7 @@ public enum DbColumnType implements IColumnType {
     INSTANT(java.time.Instant.class),
 
     // 其他杂类
-    BYTE_ARRAY("byte[]"),
+    BYTE_ARRAY(byte[].class.getSimpleName()),
     OBJECT(Object.class.getSimpleName()),
     DATE(java.util.Date.class),
     BIG_INTEGER(java.math.BigInteger.class),
@@ -53,25 +53,24 @@ public enum DbColumnType implements IColumnType {
      * 类型
      */
     @Getter
-    private final String propertyType;
+    private final String fieldType;
 
     /**
      * 包路径
      */
     @Getter
-    private final String importPackage;
+    private final String importName;
 
-    DbColumnType(Class type) {
-        this.propertyType = type.getSimpleName();
-        this.importPackage = type.getName();
+    ColumnType(Class type) {
+        this(type.getSimpleName(), type.getName());
     }
 
-    DbColumnType(String type) {
+    ColumnType(String type) {
         this(type, null);
     }
 
-    DbColumnType(final String type, final String pkg) {
-        this.propertyType = type;
-        this.importPackage = pkg;
+    ColumnType(final String type, final String fullName) {
+        this.fieldType = type;
+        this.importName = fullName;
     }
 }

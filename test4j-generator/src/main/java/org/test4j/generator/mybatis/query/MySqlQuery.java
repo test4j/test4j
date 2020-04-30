@@ -7,13 +7,8 @@ import com.baomidou.mybatisplus.annotation.DbType;
 
 /**
  * MySql 表数据查询
- *
- * @author hubin
- * @since 2018-01-16
  */
 public class MySqlQuery extends AbstractDbQuery {
-
-
     @Override
     public DbType dbType() {
         return DbType.MYSQL;

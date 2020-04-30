@@ -1,11 +1,11 @@
 package cn.org.atool.fluent.mybatis.generator;
 
-import com.baomidou.mybatisplus.annotation.DbType;
 import org.test4j.generator.mybatis.config.DataSourceConfig;
 import org.test4j.generator.mybatis.config.ITypeConvert;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.test4j.generator.mybatis.rule.DbType;
 
 import java.util.ArrayList;
 import java.util.HashMap;

@@ -2,7 +2,7 @@ package org.test4j.generator.mybatis.convert;
 
 import org.test4j.generator.mybatis.config.GlobalConfig;
 import org.test4j.generator.mybatis.config.ITypeConvert;
-import org.test4j.generator.mybatis.rule.DbColumnType;
+import org.test4j.generator.mybatis.rule.ColumnType;
 import org.test4j.generator.mybatis.rule.IColumnType;
 
 /**
@@ -17,50 +17,50 @@ public class SqlServerTypeConvert implements ITypeConvert {
     public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
         String t = fieldType.toLowerCase();
         if (t.contains("char") || t.contains("xml")) {
-            return DbColumnType.STRING;
+            return ColumnType.STRING;
         } else if (t.contains("bigint")) {
-            return DbColumnType.LONG;
+            return ColumnType.LONG;
         } else if (t.contains("int")) {
-            return DbColumnType.INTEGER;
+            return ColumnType.INTEGER;
         } else if (t.contains("date") || t.contains("time")) {
             switch (globalConfig.getDateType()) {
                 case ONLY_DATE:
-                    return DbColumnType.DATE;
+                    return ColumnType.DATE;
                 case SQL_PACK:
                     switch (t) {
                         case "date":
-                            return DbColumnType.DATE_SQL;
+                            return ColumnType.DATE_SQL;
                         case "time":
-                            return DbColumnType.TIME;
+                            return ColumnType.TIME;
                         default:
-                            return DbColumnType.TIMESTAMP;
+                            return ColumnType.TIMESTAMP;
                     }
                 case TIME_PACK:
                     switch (t) {
                         case "date":
-                            return DbColumnType.LOCAL_DATE;
+                            return ColumnType.LOCAL_DATE;
                         case "time":
-                            return DbColumnType.LOCAL_TIME;
+                            return ColumnType.LOCAL_TIME;
                         default:
-                            return DbColumnType.LOCAL_DATE_TIME;
+                            return ColumnType.LOCAL_DATE_TIME;
                     }
                 default:
-                    return DbColumnType.DATE;
+                    return ColumnType.DATE;
             }
         } else if (t.contains("text")) {
-            return DbColumnType.STRING;
+            return ColumnType.STRING;
         } else if (t.contains("bit")) {
-            return DbColumnType.BOOLEAN;
+            return ColumnType.BOOLEAN;
         } else if (t.contains("decimal") || t.contains("numeric")) {
-            return DbColumnType.DOUBLE;
+            return ColumnType.DOUBLE;
         } else if (t.contains("money")) {
-            return DbColumnType.BIG_DECIMAL;
+            return ColumnType.BIG_DECIMAL;
         } else if (t.contains("binary") || t.contains("image")) {
-            return DbColumnType.BYTE_ARRAY;
+            return ColumnType.BYTE_ARRAY;
         } else if (t.contains("float") || t.contains("real")) {
-            return DbColumnType.FLOAT;
+            return ColumnType.FLOAT;
         }
-        return DbColumnType.STRING;
+        return ColumnType.STRING;
     }
 
 }

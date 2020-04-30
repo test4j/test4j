@@ -1,11 +1,11 @@
 package cn.org.atool.fluent.mybatis.generator;
 
-import com.baomidou.mybatisplus.annotation.DbType;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import org.test4j.generator.mybatis.AutoGenerator;
 import org.test4j.generator.mybatis.config.InjectionConfig;
 import org.test4j.generator.mybatis.rule.DateType;
+import org.test4j.generator.mybatis.rule.DbType;
 import org.test4j.generator.mybatis.rule.Naming;
 import lombok.Getter;
 import lombok.Setter;

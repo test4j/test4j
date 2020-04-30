@@ -80,8 +80,8 @@ public class TableInfo {
             this.fields = fields;
             // 收集导入包信息
             for (TableField field : fields) {
-                if (null != field.getColumnType() && null != field.getColumnType().getImportPackage()) {
-                    importPackages.add(field.getColumnType().getImportPackage());
+                if (null != field.getColumnType() && null != field.getColumnType().getImportName()) {
+                    importPackages.add(field.getColumnType().getImportName());
                 }
                 if (field.isKeyFlag()) {
                     // 主键
