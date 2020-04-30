@@ -138,7 +138,7 @@ public class SpringModuleHelper {
             String managerName = AnnotationHelper.getMethodOrClassLevelAnnotationProperty(
                     Transactional.class, "value", "", testMethod, testedObject.getClass()
             );
-            if (StringHelper.isBlankOrNull(managerName)) {
+            if (StringHelper.isBlank(managerName)) {
                 throw new Test4JException(
                         "Found more than one bean of type " + TRANSACTION_MANAGER_CLASS +
                                 ", please use the @Transactional(\"transactionalName\") to select the correct one."

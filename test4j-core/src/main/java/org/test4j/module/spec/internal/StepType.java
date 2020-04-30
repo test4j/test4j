@@ -33,7 +33,7 @@ public enum StepType {
     public abstract Class<? extends Annotation> getAnnotationClass();
 
     public static StepType getStepType(String type) {
-        if (StringHelper.isBlankOrNull(type)) {
+        if (StringHelper.isBlank(type)) {
             return Step;
         }
         if ("given".equalsIgnoreCase(type)) {

@@ -21,7 +21,6 @@ import static cn.org.atool.fluent.mybatis.generator.MybatisGenerator.currTable;
 @Getter
 @Accessors(chain = true)
 public class TableField {
-    @Setter
     private boolean convert;
     @Setter
     private boolean keyFlag;

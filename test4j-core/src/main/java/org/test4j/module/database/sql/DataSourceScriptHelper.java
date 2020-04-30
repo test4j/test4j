@@ -45,7 +45,7 @@ public class DataSourceScriptHelper {
         } else {
             String factory = ConfigHelper.getDataSourceKey(beanName, "script.factory");
             boolean hasRun;
-            if (StringHelper.isBlankOrNull(factory)) {
+            if (StringHelper.isBlank(factory)) {
                 hasRun = runFromClasspathResource(dataSource, beanName);
             } else {
                 DataSourceType type = type(beanName);
@@ -120,7 +120,7 @@ public class DataSourceScriptHelper {
         String[] locations = ConfigHelper.getDataSourceKey(beanName, "script").split("[;,]");
         List<Resource> resources = new ArrayList<>();
         for (String location : locations) {
-            if (StringHelper.isBlankOrNull(location)) {
+            if (StringHelper.isBlank(location)) {
                 continue;
             }
             Resource resource = new ClassPathResource(location);

@@ -5,6 +5,7 @@ import java.util.Arrays;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import org.test4j.generator.mybatis.model.FmGeneratorConst;
+import org.test4j.tools.commons.StringConst;
 
 /**
  * 数据库表到文件命名转换策略
@@ -23,7 +24,7 @@ public enum Naming {
 
     public static String underlineToCamel(String name) {
         if (StringUtils.isEmpty(name)) {
-            return StringPool.EMPTY;
+            return StringConst.EMPTY;
         }
         String tempName = name;
         // 大写数字下划线组成转为小写 , 允许混合模式转为小写
@@ -31,8 +32,10 @@ public enum Naming {
             tempName = name.toLowerCase();
         }
         StringBuilder result = new StringBuilder();
-        // 用下划线将原始字符串分割
-        String[] camels = tempName.split(FmGeneratorConst.UNDERLINE);
+        String[] camels = tempName.split(StringConst.UNDERLINE);
+        for(String word:camels){
+
+        }
         // 跳过原始字符串中开头、结尾的下换线或双重下划线
         // 处理真正的驼峰片段
         Arrays.stream(camels).filter(camel -> !StringUtils.isEmpty(camel)).forEach(camel -> {

@@ -55,7 +55,7 @@ public class LinkMatcher<T> extends BaseMatcher<T> {
         }
 
         public void describeTo(Description description) {
-            if (StringHelper.isBlankOrNull(message)) {
+            if (StringHelper.isBlank(message)) {
                 this.matcher.describeTo(description);
             } else {
                 description.appendText(message) /** <br> */

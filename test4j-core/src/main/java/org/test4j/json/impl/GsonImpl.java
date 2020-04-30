@@ -49,7 +49,7 @@ public class GsonImpl implements JSONInterface {
 
     @Override
     public <T> T toObject(String json) {
-        if (StringHelper.isBlankOrNull(json)) {
+        if (StringHelper.isBlank(json)) {
             return null;
         }
         String text = json.trim();

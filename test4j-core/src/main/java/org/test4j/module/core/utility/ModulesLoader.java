@@ -111,7 +111,7 @@ public class ModulesLoader {
                 continue;
             }
             String moduleEnabledClazz = ConfigHelper.getString(PROPKEY_MODULE_PREFIX + module + PROPKEY_MODULE_ENABLED_CLASS);
-            if (StringHelper.isBlankOrNull(moduleEnabledClazz)) {
+            if (StringHelper.isBlank(moduleEnabledClazz)) {
                 enabledModules.add(module);
                 continue;
             }

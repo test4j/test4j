@@ -8,6 +8,11 @@ import org.test4j.tools.commons.StringHelper;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+/**
+ * JSONFactory
+ *
+ * @author wudarui
+ */
 public class JSONFactory {
     private static JSONInterface instance = null;
 
@@ -29,7 +34,7 @@ public class JSONFactory {
 
     private static JSONInterface createJsonInterface() {
         String klassName = ConfigHelper.getString("test4j.json");
-        if (StringHelper.isBlankOrNull(klassName)) {
+        if (StringHelper.isBlank(klassName)) {
             klassName = GsonImpl.class.getName();
         }
         return ClazzHelper.createInstanceOfType(klassName);

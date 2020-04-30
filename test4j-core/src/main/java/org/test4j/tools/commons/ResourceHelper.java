@@ -342,15 +342,15 @@ public class ResourceHelper {
      */
     public static InputStream getResourceAsStream(Class clazz, String fileName) throws FileNotFoundException {
         String packPath = ClazzHelper.getPathFromPath(clazz);
-        String url = StringHelper.isBlankOrNull(packPath) ? fileName : packPath + "/" + fileName;
+        String url = StringHelper.isBlank(packPath) ? fileName : packPath + "/" + fileName;
         InputStream is = ResourceHelper.class.getClassLoader().getResourceAsStream(url);
 
-        if (is == null && StringHelper.isBlankOrNull(packPath) == false) {
+        if (is == null && StringHelper.isBlank(packPath) == false) {
             is = clazz.getClassLoader().getResourceAsStream(fileName);
         }
 
         if (is == null) {
-            if (StringHelper.isBlankOrNull(packPath)) {
+            if (StringHelper.isBlank(packPath)) {
                 throw new FileNotFoundException(String.format("can't find class path resource in in classpath: [%s].",
                         fileName));
             } else {
@@ -426,7 +426,7 @@ public class ResourceHelper {
      * @throws FileNotFoundException
      */
     public static String readFromFile(Class clazz, String fileName) throws FileNotFoundException {
-        if (StringHelper.isBlankOrNull(fileName)) {
+        if (StringHelper.isBlank(fileName)) {
             throw new RuntimeException("file name can't be null.");
         }
         if (fileName.startsWith("file:") || fileName.startsWith("classpath:")) {
@@ -489,7 +489,7 @@ public class ResourceHelper {
      */
     public static boolean isResourceExists(Class claz, String file) {
         String pack = ClazzHelper.getPathFromPath(claz);
-        String path = StringHelper.isBlankOrNull(pack) ? file : pack + "/" + file;
+        String path = StringHelper.isBlank(pack) ? file : pack + "/" + file;
         try {
             URL url = ClassLoader.getSystemResource(path);
             return url != null;

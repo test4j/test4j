@@ -55,10 +55,10 @@ public enum DataSourceType {
      */
     public static DataSourceType databaseType(final String type) {
         String _type = type;
-        if (StringHelper.isBlankOrNull(type)) {
+        if (StringHelper.isBlank(type)) {
             _type = ConfigHelper.defaultDatabaseType();
         }
-        if (StringHelper.isBlankOrNull(_type)) {
+        if (StringHelper.isBlank(_type)) {
             throw new UnConfigDataBaseTypeException("please config 'db.dataSource.type' in file[test4j.properties]");
         }
         for (DataSourceType dbType : DataSourceType.values()) {

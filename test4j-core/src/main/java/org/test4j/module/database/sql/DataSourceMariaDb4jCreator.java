@@ -66,12 +66,12 @@ public class DataSourceMariaDb4jCreator {
 
     private static void addArgs(DBConfigurationBuilder config) {
         String args = ConfigHelper.getString("dataSource.mariaDB4j.args");
-        if (StringHelper.isBlankOrNull(args)) {
+        if (StringHelper.isBlank(args)) {
             return;
         }
         String[] items = args.split(";");
         for (String item : items) {
-            if (StringHelper.isBlankOrNull(item)) {
+            if (StringHelper.isBlank(item)) {
                 continue;
             }
             config.addArg(item);

@@ -195,7 +195,7 @@ public class MybatisGenerator {
             config.put("interfacePack", convertor.getInterfacePacks());
             config.put("interfaceName", convertor.getInterfaceNames());
         }
-        if (!StringHelper.isBlankOrNull(currTable().getMapperPrefix())) {
+        if (!StringHelper.isBlank(currTable().getMapperPrefix())) {
             config.put("mapperPrefix", currTable().getMapperPrefix().trim());
         }
         InjectionConfig cfg = new InjectionConfig() {

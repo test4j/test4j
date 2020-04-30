@@ -19,7 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.test4j.module.database.dbop.DBOperator.IN_DB_OPERATOR;
-import static org.test4j.tools.commons.StringHelper.isBlankOrNull;
+import static org.test4j.tools.commons.StringHelper.isBlank;
 
 /**
  * TableOp
@@ -39,7 +39,7 @@ public class TableOp implements ITableOp {
     public TableOp(DBEnvironment env, String table) {
         this.env = env;
         this.table = table;
-        if (isBlankOrNull(this.table)) {
+        if (isBlank(this.table)) {
             throw new RuntimeException("the table name can't be null.");
         }
     }
@@ -176,7 +176,7 @@ public class TableOp implements ITableOp {
     }
 
     private List<Map<String, Object>> selectData(String where) {
-        String _where = isBlankOrNull(where) ? "" : " where " + where.trim();
+        String _where = isBlank(where) ? "" : " where " + where.trim();
         String query = "select * from " + table + _where;
         return queryData(env, query);
     }

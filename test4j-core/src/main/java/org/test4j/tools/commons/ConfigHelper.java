@@ -56,7 +56,7 @@ public class ConfigHelper implements IPropItem {
      */
     public static String getString(String key, String defaultValue) {
         String value = properties.getProperty(key);
-        if (StringHelper.isBlankOrNull(value)) {
+        if (StringHelper.isBlank(value)) {
             return defaultValue;
         } else {
             return value.trim();
@@ -77,7 +77,7 @@ public class ConfigHelper implements IPropItem {
      */
     public static String getString(Properties properties, String key) {
         String value = getString(properties, key, "");
-        if (StringHelper.isBlankOrNull(value)) {
+        if (StringHelper.isBlank(value)) {
             throw new Test4JException("No value found for property " + key);
         } else {
             return value.trim();
@@ -100,11 +100,11 @@ public class ConfigHelper implements IPropItem {
             value = properties.getProperty(key);
         } else {
             value = properties.getProperty(key);
-            if (StringHelper.isBlankOrNull(value)) {
+            if (StringHelper.isBlank(value)) {
                 value = properties.getProperty(key);
             }
         }
-        if (StringHelper.isBlankOrNull(value)) {
+        if (StringHelper.isBlank(value)) {
             return defaultValue;
         } else {
             return value.trim();
@@ -164,7 +164,7 @@ public class ConfigHelper implements IPropItem {
 
     public static boolean getBoolean(String key, boolean defaultValue) {
         String value = properties.getProperty(key);
-        if (StringHelper.isBlankOrNull(value)) {
+        if (StringHelper.isBlank(value)) {
             return defaultValue;
         } else {
             return "true".equalsIgnoreCase(value);
@@ -237,7 +237,7 @@ public class ConfigHelper implements IPropItem {
     public static List<String> getDataSourceList() {
         String list = getString(DB_DATASOURCE_LIST);
         return Arrays.stream(list.split("[,;]"))
-                .filter(item -> !StringHelper.isBlankOrNull(item))
+                .filter(item -> !StringHelper.isBlank(item))
                 .map(String::trim)
                 .collect(Collectors.toList());
     }
@@ -249,7 +249,7 @@ public class ConfigHelper implements IPropItem {
      */
     public static String getDefaultDataSource() {
         String dataSource = getString(DB_DATASOURCE_DEFAULT_NAME);
-        return StringHelper.isBlankOrNull(dataSource) ? DB_DATASOURCE_DEFAULT : dataSource.trim();
+        return StringHelper.isBlank(dataSource) ? DB_DATASOURCE_DEFAULT : dataSource.trim();
     }
 
     /**

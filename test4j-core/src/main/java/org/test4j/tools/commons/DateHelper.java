@@ -73,7 +73,7 @@ public class DateHelper {
 	}
 
 	public static final Date parse(String str) {
-		if (StringHelper.isBlankOrNull(str)) {
+		if (StringHelper.isBlank(str)) {
 			throw new RuntimeException("parse date string can't be empty.");
 		}
 		Date date = null;

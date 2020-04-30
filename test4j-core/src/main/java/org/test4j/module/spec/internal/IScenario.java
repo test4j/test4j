@@ -21,7 +21,7 @@ public interface IScenario {
      */
     default IGiven scenario(String description) {
         ScenarioResult scenario = SpecModule.currScenario();
-        if (!StringHelper.isBlankOrNull(description)) {
+        if (!StringHelper.isBlank(description)) {
             scenario.setScenarioName(description);
         }
         return new ScenarioGiven(scenario);

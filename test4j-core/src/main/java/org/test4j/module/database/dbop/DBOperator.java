@@ -26,7 +26,7 @@ import java.util.stream.Collectors;
 
 import static org.test4j.module.database.utility.SqlKeyWord.COLUMN_ID;
 import static org.test4j.tools.commons.StringHelper.DOUBLE_QUOTATION;
-import static org.test4j.tools.commons.StringHelper.isBlankOrNull;
+import static org.test4j.tools.commons.StringHelper.isBlank;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class DBOperator implements IDBOperator {
@@ -178,7 +178,7 @@ public class DBOperator implements IDBOperator {
         IN_DB_OPERATOR.set(true);
         try {
             String sql = "delete from " + table;
-            if (!isBlankOrNull(where)) {
+            if (!isBlank(where)) {
                 sql += " where " + where;
             }
             SqlRunner.execute(env(), sql);
@@ -195,7 +195,7 @@ public class DBOperator implements IDBOperator {
     @Override
     public String printAsDataMap(String tableAndWhere, String mapName) {
         List<Map<String, Object>> list = TableOp.queryData(env(), tableAndWhere);
-        boolean isDefault = isBlankOrNull(mapName);
+        boolean isDefault = isBlank(mapName);
         StringBuilder buff = new StringBuilder("\n").append(isDefault ? "DataMap" : mapName).append(".create(").append(list.size()).append(")");
         Map<String, List<String>> data = new HashMap<>(20);
         for (Map<String, Object> map : list) {

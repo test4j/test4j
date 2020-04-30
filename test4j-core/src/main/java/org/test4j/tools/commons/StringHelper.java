@@ -33,13 +33,11 @@ public class StringHelper {
      * @param in
      * @return
      */
-    public static boolean isBlankOrNull(String in) {
+    public static boolean isBlank(String in) {
         if (in == null) {
             return true;
-        } else if (in.trim().equals("")) {
-            return true;
         } else {
-            return false;
+            return in.trim().equals(StringConst.EMPTY);
         }
     }
 
@@ -58,7 +56,7 @@ public class StringHelper {
      * @return
      */
     public static String camel(String name) {
-        if (StringHelper.isBlankOrNull(name)) {
+        if (StringHelper.isBlank(name)) {
             return "";
         }
         StringBuffer b = new StringBuffer(name.length());
@@ -173,14 +171,14 @@ public class StringHelper {
      * @return
      */
     public static String[] splits(String string, String splitStr) {
-        if (StringHelper.isBlankOrNull(string)) {
+        if (StringHelper.isBlank(string)) {
             return new String[0];
         }
         String temp = string.replaceAll("\\s", "");
         String[] splits = temp.split(splitStr);
         List<String> clazzes = new ArrayList<String>();
         for (String split : splits) {
-            if (StringHelper.isBlankOrNull(split)) {
+            if (StringHelper.isBlank(split)) {
                 continue;
             }
             clazzes.add(split);
@@ -495,16 +493,6 @@ public class StringHelper {
         return ch > 255 ? false : Space_Chars[ch];
     }
 
-    public static final boolean isBlank(String str) {
-        if (str == null) {
-            return true;
-        } else if ("".equals(str.trim())) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
     public static List<String> removeTheWhiteSpaces(List<String> original) {
         List<String> after = new ArrayList<String>();
         for (String key : original) {
@@ -653,9 +641,9 @@ public class StringHelper {
      */
     public static String join(String start, String split, String[] strings, String end) {
         return new StringBuilder(start)
-                .append(Arrays.stream(strings).collect(joining(split)))
-                .append(end)
-                .toString();
+            .append(Arrays.stream(strings).collect(joining(split)))
+            .append(end)
+            .toString();
     }
 
     /**

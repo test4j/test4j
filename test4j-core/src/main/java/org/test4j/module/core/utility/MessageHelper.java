@@ -70,7 +70,7 @@ public class MessageHelper {
         String log4jxml = ConfigHelper.getString(LOG4J_XML_FILE);
 
         boolean log4jAvailable = ClazzHelper.isClassAvailable("org.apache.log4j.xml.DOMConfigurator");
-        if (StringHelper.isBlankOrNull(log4jxml) || log4jAvailable == false) {
+        if (StringHelper.isBlank(log4jxml) || log4jAvailable == false) {
             return;
         }
         try {

@@ -62,10 +62,10 @@ public class StepResult {
 
     public void setDescription(String method, String description, Object[] args, Object result) {
         StringBuilder buff = new StringBuilder();
-        if (!StringHelper.isBlankOrNull(this.description)) {
+        if (!StringHelper.isBlank(this.description)) {
             buff.append(this.description).append("\n\t");
         }
-        if (StringHelper.isBlankOrNull(description)) {
+        if (StringHelper.isBlank(description)) {
             buff.append(method);
         } else {
             buff.append(buildMethodDesc(method, description, args, result));
