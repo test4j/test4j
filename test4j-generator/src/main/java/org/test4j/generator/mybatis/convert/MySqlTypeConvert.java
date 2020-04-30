@@ -8,10 +8,9 @@ import org.test4j.generator.mybatis.rule.IColumnType;
 /**
  * MYSQL 数据库字段类型转换
  *
- * @author hubin
- * @since 2017-01-20
+ * @author wudarui
  */
-public class MySqlTypeConvert implements ITypeConvert {
+public class MySqlTypeConvert extends BaseTypeConvert {
 
     @Override
     public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
@@ -43,32 +42,7 @@ public class MySqlTypeConvert implements ITypeConvert {
         } else if (t.contains("json") || t.contains("enum")) {
             return ColumnType.STRING;
         } else if (t.contains("date") || t.contains("time") || t.contains("year")) {
-            switch (globalConfig.getDateType()) {
-                case ONLY_DATE:
-                    return ColumnType.DATE;
-                case SQL_PACK:
-                    switch (t) {
-                        case "date":
-                            return ColumnType.DATE_SQL;
-                        case "time":
-                            return ColumnType.TIME;
-                        case "year":
-                            return ColumnType.DATE_SQL;
-                        default:
-                            return ColumnType.TIMESTAMP;
-                    }
-                case TIME_PACK:
-                    switch (t) {
-                        case "date":
-                            return ColumnType.LOCAL_DATE;
-                        case "time":
-                            return ColumnType.LOCAL_TIME;
-                        case "year":
-                            return ColumnType.YEAR;
-                        default:
-                            return ColumnType.LOCAL_DATE_TIME;
-                    }
-            }
+            return this.parseDateType(globalConfig.getDateType(), t);
         }
         return ColumnType.STRING;
     }

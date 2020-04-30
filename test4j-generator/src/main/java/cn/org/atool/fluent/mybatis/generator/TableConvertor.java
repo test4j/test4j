@@ -106,7 +106,8 @@ public class TableConvertor {
     }
 
     public TableConvertor setDataSource(String url, String username, String password, ITypeConvert typeConvert) {
-        this.dataSourceConfig = MybatisGenerator.buildDataSourceConfig(DbType.MYSQL, "com.mysql.jdbc.Driver", url, username, password, typeConvert);
+        this.dataSourceConfig = new DataSourceConfig(DbType.MYSQL, "com.mysql.jdbc.Driver", url, username, password)
+            .setTypeConvert(typeConvert);
         return this;
     }
 
@@ -121,14 +122,14 @@ public class TableConvertor {
 
     public String getInterfacePacks() {
         return modelInterface.stream()
-                .map(klass -> "import " + klass.getName() + ";")
-                .collect(joining("\n"));
+            .map(klass -> "import " + klass.getName() + ";")
+            .collect(joining("\n"));
     }
 
     public String getInterfaceNames() {
         return modelInterface.stream()
-                .map(Class::getSimpleName)
-                .collect(joining(", "));
+            .map(Class::getSimpleName)
+            .collect(joining(", "));
     }
 }
 

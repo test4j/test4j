@@ -8,10 +8,9 @@ import org.test4j.generator.mybatis.rule.IColumnType;
 /**
  * PostgreSQL 字段类型转换
  *
- * @author hubin
- * @since 2017-01-20
+ * @author wudarui
  */
-public class PostgreSqlTypeConvert implements ITypeConvert {
+public class PostgreSqlTypeConvert extends BaseTypeConvert {
 
     @Override
     public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
@@ -23,30 +22,7 @@ public class PostgreSqlTypeConvert implements ITypeConvert {
         } else if (t.contains("int")) {
             return ColumnType.INTEGER;
         } else if (t.contains("date") || t.contains("time")) {
-            switch (globalConfig.getDateType()) {
-                case ONLY_DATE:
-                    return ColumnType.DATE;
-                case SQL_PACK:
-                    switch (t) {
-                        case "date":
-                            return ColumnType.DATE_SQL;
-                        case "time":
-                            return ColumnType.TIME;
-                        default:
-                            return ColumnType.TIMESTAMP;
-                    }
-                case TIME_PACK:
-                    switch (t) {
-                        case "date":
-                            return ColumnType.LOCAL_DATE;
-                        case "time":
-                            return ColumnType.LOCAL_TIME;
-                        default:
-                            return ColumnType.LOCAL_DATE_TIME;
-                    }
-                default:
-                    return ColumnType.DATE;
-            }
+            return this.parseDateType(globalConfig.getDateType(), t);
         } else if (t.contains("text")) {
             return ColumnType.STRING;
         } else if (t.contains("bit")) {

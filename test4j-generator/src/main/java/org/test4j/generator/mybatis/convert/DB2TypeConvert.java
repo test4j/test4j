@@ -8,10 +8,9 @@ import org.test4j.generator.mybatis.rule.IColumnType;
 /**
  * DB2 字段类型转换
  *
- * @author zhanyao
- * @since 2018-05-16
+ * @author wudarui
  */
-public class  DB2TypeConvert implements ITypeConvert {
+public class DB2TypeConvert implements ITypeConvert {
 
     @Override
     public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
@@ -24,8 +23,7 @@ public class  DB2TypeConvert implements ITypeConvert {
             return ColumnType.BASE_SHORT;
         } else if (t.contains("int")) {
             return ColumnType.INTEGER;
-        } else if (t.contains("date") || t.contains("time")
-            || t.contains("year") || t.contains("timestamp")) {
+        } else if (t.contains("date") || t.contains("time") || t.contains("year") || t.contains("timestamp")) {
             return ColumnType.DATE;
         } else if (t.contains("text")) {
             return ColumnType.STRING;

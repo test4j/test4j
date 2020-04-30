@@ -8,8 +8,7 @@ import org.test4j.generator.mybatis.rule.IColumnType;
 /**
  * ORACLE 字段类型转换
  *
- * @author hubin
- * @since 2017-01-20
+ * @author wudarui
  */
 public class OracleTypeConvert implements ITypeConvert {
 

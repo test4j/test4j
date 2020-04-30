@@ -54,7 +54,6 @@ public class MybatisGenerator {
 
     private DataSourceConfig dataSourceConfig;
 
-
     private boolean isEntitySetChain = true;
 
     private IdType idType;
@@ -111,24 +110,9 @@ public class MybatisGenerator {
     }
 
     public MybatisGenerator setDataSource(String url, String username, String password, ITypeConvert typeConvert) {
-        this.dataSourceConfig = buildDataSourceConfig(DbType.MYSQL, "com.mysql.jdbc.Driver", url, username, password, typeConvert);
+        this.dataSourceConfig = new DataSourceConfig(DbType.MYSQL, "com.mysql.jdbc.Driver", url, username, password)
+            .setTypeConvert(typeConvert);
         return this;
-    }
-
-    public static DataSourceConfig buildDataSourceConfig(DbType type, String driver, String url, String username, String password, ITypeConvert typeConvert) {
-        if (url == null) {
-            throw new RuntimeException("请设置数据库链接信息 url");
-        }
-        DataSourceConfig config = new DataSourceConfig()
-                .setDbType(type)
-                .setUrl(url)
-                .setUsername(username)
-                .setPassword(password)
-                .setDriverName(driver);
-        if (typeConvert != null) {
-            config.setTypeConvert(typeConvert);
-        }
-        return config;
     }
 
     /**
@@ -142,13 +126,13 @@ public class MybatisGenerator {
      */
     private void generate(TableConvertor convertor, String[] tableNames, String verField) {
         new AutoGenerator()
-                .setGlobalConfig(this.initGlobalConfig(convertor.getEntitySuffix()))
-                .setDataSource(convertor.getDataSourceConfig())
-                .setPackageInfo(this.initPackageConfig())
-                .setTemplate(this.initTemplate())
-                .setStrategy(this.initStrategy(convertor.getPrefix(), tableNames, verField))
-                .setInjectionConfig(this.initInjectConfig(convertor))
-                .execute();
+            .setGlobalConfig(this.initGlobalConfig(convertor.getEntitySuffix()))
+            .setDataSource(convertor.getDataSourceConfig())
+            .setPackageInfo(this.initPackageConfig())
+            .setTemplate(this.initTemplate())
+            .setStrategy(this.initStrategy(convertor.getPrefix(), tableNames, verField))
+            .setInjectionConfig(this.initInjectConfig(convertor))
+            .execute();
     }
 
     public String getPackage(TemplateFile.TemplateType type) {
@@ -167,16 +151,16 @@ public class MybatisGenerator {
      */
     private GlobalConfig initGlobalConfig(String entitySuffix) {
         GlobalConfig config = new GlobalConfig()
-                .setAuthor(this.author)
-                .setOutputDir(this.outputDir)
-                .setFileOverride(true)
-                .setActiveRecord(false)
-                .setEnableCache(false)
-                .setBaseResultMap(true)
-                .setBaseColumnList(true)
-                .setDateType(DateType.ONLY_DATE)
-                .setOpen(false)
-                .setEntityName("%s" + entitySuffix);
+            .setAuthor(this.author)
+            .setOutputDir(this.outputDir)
+            .setFileOverride(true)
+            .setActiveRecord(false)
+            .setEnableCache(false)
+            .setBaseResultMap(true)
+            .setBaseColumnList(true)
+            .setDateType(DateType.ONLY_DATE)
+            .setOpen(false)
+            .setEntityName("%s" + entitySuffix);
         if (idType != null) {
             config.setIdType(idType);
         }
@@ -212,9 +196,9 @@ public class MybatisGenerator {
     private StrategyConfig initStrategy(String[] tablePrefix, String[] tables, String verField) {
         StrategyConfig sc = new StrategyConfig();
         sc.setCapitalMode(true)
-                .setNaming(Naming.underline_to_camel)
-                .setEntityLombokModel(true)
-                .setEntityTableFieldAnnotationEnable(true);
+            .setNaming(Naming.underline_to_camel)
+            .setEntityLombokModel(true)
+            .setEntityTableFieldAnnotationEnable(true);
         if (StringUtils.isNotBlank(verField)) {
             sc.setVersionFieldName(verField);
         }
@@ -249,9 +233,9 @@ public class MybatisGenerator {
 
     private PackageConfig initPackageConfig() {
         return new PackageConfig()
-                .setParent(this.basePackage)
-                .setEntity("entity")
-                .setService("dao")
-                .setServiceImpl("dao.impl");
+            .setParent(this.basePackage)
+            .setEntity("entity")
+            .setService("dao")
+            .setServiceImpl("dao.impl");
     }
 }

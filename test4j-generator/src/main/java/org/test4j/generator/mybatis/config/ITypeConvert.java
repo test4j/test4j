@@ -1,6 +1,8 @@
 package org.test4j.generator.mybatis.config;
 
 import org.test4j.generator.mybatis.model.TableField;
+import org.test4j.generator.mybatis.rule.ColumnType;
+import org.test4j.generator.mybatis.rule.DateType;
 import org.test4j.generator.mybatis.rule.IColumnType;
 
 /**

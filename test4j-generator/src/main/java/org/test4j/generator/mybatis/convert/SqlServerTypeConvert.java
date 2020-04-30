@@ -3,15 +3,15 @@ package org.test4j.generator.mybatis.convert;
 import org.test4j.generator.mybatis.config.GlobalConfig;
 import org.test4j.generator.mybatis.config.ITypeConvert;
 import org.test4j.generator.mybatis.rule.ColumnType;
+import org.test4j.generator.mybatis.rule.DateType;
 import org.test4j.generator.mybatis.rule.IColumnType;
 
 /**
  * SQLServer 字段类型转换
  *
- * @author hubin
- * @since 2017-01-20
+ * @author wudarui
  */
-public class SqlServerTypeConvert implements ITypeConvert {
+public class SqlServerTypeConvert extends BaseTypeConvert {
 
     @Override
     public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
@@ -23,30 +23,7 @@ public class SqlServerTypeConvert implements ITypeConvert {
         } else if (t.contains("int")) {
             return ColumnType.INTEGER;
         } else if (t.contains("date") || t.contains("time")) {
-            switch (globalConfig.getDateType()) {
-                case ONLY_DATE:
-                    return ColumnType.DATE;
-                case SQL_PACK:
-                    switch (t) {
-                        case "date":
-                            return ColumnType.DATE_SQL;
-                        case "time":
-                            return ColumnType.TIME;
-                        default:
-                            return ColumnType.TIMESTAMP;
-                    }
-                case TIME_PACK:
-                    switch (t) {
-                        case "date":
-                            return ColumnType.LOCAL_DATE;
-                        case "time":
-                            return ColumnType.LOCAL_TIME;
-                        default:
-                            return ColumnType.LOCAL_DATE_TIME;
-                    }
-                default:
-                    return ColumnType.DATE;
-            }
+            return this.parseDateType(globalConfig.getDateType(), t);
         } else if (t.contains("text")) {
             return ColumnType.STRING;
         } else if (t.contains("bit")) {
@@ -62,5 +39,4 @@ public class SqlServerTypeConvert implements ITypeConvert {
         }
         return ColumnType.STRING;
     }
-
 }
