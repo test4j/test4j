@@ -1,4 +1,4 @@
-package cn.org.atool.fluent.mybatis.generator;
+package org.test4j.generator.mybatis.model;
 
 import org.test4j.generator.engine.VelocityTemplateEngine;
 import lombok.Data;
@@ -37,7 +37,7 @@ public class GenerateObj {
     private String entityMap;
 
 
-    public static GenerateObj init(Table table) {
+    public static GenerateObj init(TableInfo table) {
         Map<String, String> config = GenerateObj.currConfig.get();
         currConfig.remove();
         GenerateObj obj = new GenerateObj()

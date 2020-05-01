@@ -3,6 +3,7 @@ package org.test4j.generator.mybatis.convert;
 import org.test4j.generator.mybatis.config.GlobalConfig;
 import org.test4j.generator.mybatis.config.ITypeConvert;
 import org.test4j.generator.mybatis.rule.ColumnType;
+import org.test4j.generator.mybatis.rule.DateType;
 import org.test4j.generator.mybatis.rule.IColumnType;
 
 /**
@@ -12,7 +13,7 @@ import org.test4j.generator.mybatis.rule.IColumnType;
  */
 public class SqliteTypeConvert extends BaseTypeConvert {
     @Override
-    public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
+    public IColumnType processTypeConvert(DateType dateType, String fieldType) {
         String t = fieldType.toLowerCase();
         if (t.contains("bigint")) {
             return ColumnType.LONG;
@@ -33,7 +34,7 @@ public class SqliteTypeConvert extends BaseTypeConvert {
         } else if (t.contains("double")) {
             return ColumnType.DOUBLE;
         } else if (t.contains("date") || t.contains("time") || t.contains("year")) {
-            return this.parseDateType(globalConfig.getDateType(), t);
+            return this.parseDateType(dateType, t);
         }
         return ColumnType.STRING;
     }

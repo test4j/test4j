@@ -3,7 +3,6 @@ package cn.org.atool.fluent.mybatis.generator.demo.helper;
 import cn.org.atool.fluent.mybatis.generator.demo.entity.NoAutoIdEntity;
 import cn.org.atool.fluent.mybatis.generator.demo.mapping.NoAutoIdMP;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 

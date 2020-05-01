@@ -14,7 +14,7 @@ import org.test4j.generator.mybatis.rule.IColumnType;
 public class SqlServerTypeConvert extends BaseTypeConvert {
 
     @Override
-    public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
+    public IColumnType processTypeConvert(DateType dateType, String fieldType) {
         String t = fieldType.toLowerCase();
         if (t.contains("char") || t.contains("xml")) {
             return ColumnType.STRING;
@@ -23,7 +23,7 @@ public class SqlServerTypeConvert extends BaseTypeConvert {
         } else if (t.contains("int")) {
             return ColumnType.INTEGER;
         } else if (t.contains("date") || t.contains("time")) {
-            return this.parseDateType(globalConfig.getDateType(), t);
+            return this.parseDateType(dateType, t);
         } else if (t.contains("text")) {
             return ColumnType.STRING;
         } else if (t.contains("bit")) {

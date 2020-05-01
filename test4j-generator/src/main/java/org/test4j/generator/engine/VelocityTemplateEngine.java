@@ -2,8 +2,9 @@ package org.test4j.generator.engine;
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import lombok.extern.slf4j.Slf4j;
+import org.test4j.generator.mybatis.model.BuildConfig;
 import org.test4j.generator.mybatis.model.FmGeneratorConst;
-import org.test4j.generator.mybatis.config.ConfigBuilder;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
@@ -18,17 +19,17 @@ import java.util.Properties;
 /**
  * Velocity 模板引擎实现文件输出
  *
- * @author hubin
- * @since 2018-01-10
+ * @author darui.wu
  */
+@Slf4j
 public class VelocityTemplateEngine extends AbstractTemplateEngine {
 
     private static final String DOT_VM = ".vm";
     private VelocityEngine velocityEngine;
 
     @Override
-    public VelocityTemplateEngine init(ConfigBuilder configBuilder) {
-        super.init(configBuilder);
+    public VelocityTemplateEngine init(BuildConfig config) {
+        super.init(config);
         if (null == velocityEngine) {
             Properties p = new Properties();
             p.setProperty(FmGeneratorConst.VM_LOAD_PATH_KEY, FmGeneratorConst.VM_LOAD_PATH_VALUE);
@@ -53,7 +54,7 @@ public class VelocityTemplateEngine extends AbstractTemplateEngine {
              BufferedWriter writer = new BufferedWriter(ow)) {
             template.merge(new VelocityContext(objectMap), writer);
         }
-        logger.debug("模板:" + templatePath + ";  文件:" + outputFile);
+        log.debug("模板:" + templatePath + ";  文件:" + outputFile);
     }
 
 

@@ -1,6 +1,7 @@
 package org.test4j.generator.mybatis.query;
 
-import com.baomidou.mybatisplus.annotation.DbType;
+
+import org.test4j.generator.mybatis.rule.DbType;
 
 /**
  * DB2 表数据查询

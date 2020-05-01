@@ -9,8 +9,6 @@ import cn.org.atool.fluent.mybatis.generator.demo.mapping.UserMP.Property;
 import cn.org.atool.fluent.mybatis.generator.demo.mapping.UserMP.Column;
 import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 
-import java.util.Date;
-import java.io.Serializable;
 
 /**
  * <p>

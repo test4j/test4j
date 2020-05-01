@@ -9,8 +9,6 @@ import cn.org.atool.fluent.mybatis.generator.demo.mapping.AddressMP.Property;
 import cn.org.atool.fluent.mybatis.generator.demo.mapping.AddressMP.Column;
 import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 
-import java.util.Date;
-import java.io.Serializable;
 
 /**
  * <p>

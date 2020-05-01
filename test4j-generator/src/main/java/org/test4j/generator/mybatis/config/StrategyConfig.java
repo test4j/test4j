@@ -4,8 +4,6 @@ import com.baomidou.mybatisplus.core.metadata.TableInfoHelper;
 import com.baomidou.mybatisplus.core.toolkit.ClassUtils;
 import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import org.test4j.generator.mybatis.model.FmGeneratorConst;
-import org.test4j.generator.mybatis.model.TableFill;
 import org.test4j.generator.mybatis.rule.Naming;
 import lombok.AccessLevel;
 import lombok.Data;
@@ -19,8 +17,7 @@ import java.util.stream.Collectors;
 /**
  * 策略配置项
  *
- * @author YangHu, tangguo, hubin
- * @since 2016/8/30
+ * @author darui.wu
  */
 @Data
 @Accessors(chain = true)
@@ -30,17 +27,13 @@ public class StrategyConfig {
      */
     private boolean isCapitalMode = false;
     /**
-     * 是否跳过视图
-     */
-    private boolean skipView = false;
-    /**
      * 名称转换
      */
     private INameConvert nameConvert;
     /**
      * 数据库表映射到实体的命名策略
      */
-    private Naming naming = Naming.no_change;
+    private Naming tableNaming = Naming.no_change;
     /**
      * 数据库表字段映射到实体的命名策略
      * <p>未指定按照 naming 执行</p>
@@ -66,32 +59,28 @@ public class StrategyConfig {
      */
     @Setter(AccessLevel.NONE)
     private String[] superEntityColumns;
-    /**
-     * 自定义继承的Mapper类全称，带包名
-     */
-    private String superMapperClass = FmGeneratorConst.SUPER_MAPPER_CLASS;
-    /**
-     * 自定义继承的Service类全称，带包名
-     */
-    private String superServiceClass = FmGeneratorConst.SUPER_SERVICE_CLASS;
-    /**
-     * 自定义继承的ServiceImpl类全称，带包名
-     */
-    private String superServiceImplClass = FmGeneratorConst.SUPER_SERVICE_IMPL_CLASS;
-    /**
-     * 自定义继承的Controller类全称，带包名
-     */
-    private String superControllerClass;
+//    /**
+//     * 自定义继承的Mapper类全称，带包名
+//     */
+//    private String superMapperClass = FmGeneratorConst.SUPER_MAPPER_CLASS;
+//    /**
+//     * 自定义继承的Service类全称，带包名
+//     */
+//    private String superServiceClass = FmGeneratorConst.SUPER_SERVICE_CLASS;
+//    /**
+//     * 自定义继承的ServiceImpl类全称，带包名
+//     */
+//    private String superServiceImplClass = FmGeneratorConst.SUPER_SERVICE_IMPL_CLASS;
+//    /**
+//     * 自定义继承的Controller类全称，带包名
+//     */
+//    private String superControllerClass;
     /**
      * 需要包含的表名，允许正则表达式（与exclude二选一配置）
      */
     @Setter(AccessLevel.NONE)
     private String[] include = null;
-    /**
-     * 需要排除的表名，允许正则表达式
-     */
-    @Setter(AccessLevel.NONE)
-    private String[] exclude = null;
+
     /**
      * 实体是否生成 serialVersionUID
      */
@@ -118,36 +107,11 @@ public class StrategyConfig {
      * 比如 : 数据库字段名称 : 'is_xxx',类型为 : tinyint. 在映射实体的时候则会去掉is,在实体类中映射最终结果为 xxx
      */
     private boolean entityBooleanColumnRemoveIsPrefix = false;
-    /**
-     * 生成 <code>@RestController</code> 控制器
-     * <pre>
-     *      <code>@Controller</code> -> <code>@RestController</code>
-     * </pre>
-     */
-    private boolean restControllerStyle = false;
-    /**
-     * 驼峰转连字符
-     * <pre>
-     *      <code>@RequestMapping("/managerUserActionHistory")</code> -> <code>@RequestMapping("/manager-user-action-history")</code>
-     * </pre>
-     */
-    private boolean controllerMappingHyphenStyle = false;
+
     /**
      * 是否生成实体时，生成字段注解
      */
     private boolean entityTableFieldAnnotationEnable = false;
-    /**
-     * 乐观锁属性名称
-     */
-    private String versionFieldName;
-    /**
-     * 逻辑删除属性名称
-     */
-    private String logicDeleteFieldName;
-    /**
-     * 表填充字段
-     */
-    private List<TableFill> tableFillList = null;
 
     /**
      * 大写命名、字段符合大写字母数字下划线命名
@@ -158,37 +122,15 @@ public class StrategyConfig {
         return isCapitalMode && StringUtils.isCapitalMode(word);
     }
 
-    /**
-     * 表名称包含指定前缀
-     *
-     * @param tableName 表名称
-     */
-    public boolean containsTablePrefix(String tableName) {
-        if (null != tableName) {
-            String[] tps = getTablePrefix();
-            if (null != tps) {
-                for (String tp : tps) {
-                    if (tableName.contains(tp)) {
-                        return true;
-                    }
-                }
-            }
-        }
-        return false;
-    }
 
     public Naming getColumnNaming() {
         if (null == columnNaming) {
             // 未指定以 naming 策略为准
-            return naming;
+            return tableNaming;
         }
         return columnNaming;
     }
 
-    public StrategyConfig setTablePrefix(String... tablePrefix) {
-        this.tablePrefix = tablePrefix;
-        return this;
-    }
 
     public boolean includeSuperEntityColumns(String fieldName) {
         if (null != superEntityColumns) {
@@ -208,11 +150,6 @@ public class StrategyConfig {
 
     public StrategyConfig setInclude(String... include) {
         this.include = include;
-        return this;
-    }
-
-    public StrategyConfig setExclude(String... exclude) {
-        this.exclude = exclude;
         return this;
     }
 

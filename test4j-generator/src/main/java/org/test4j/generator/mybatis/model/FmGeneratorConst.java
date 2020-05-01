@@ -12,7 +12,6 @@ public interface FmGeneratorConst {
 
     String MODULE_NAME = "ModuleName";
 
-    String ENTITY = "Entity";
 
     String SERVICE = "Service";
     String SERVICE_IMPL = "ServiceImpl";
@@ -36,13 +35,13 @@ public interface FmGeneratorConst {
     String KT_SUFFIX = ".kt";
     String XML_SUFFIX = ".xml";
 
-    String TEMPLATE_ENTITY_JAVA = "/templates/entity.java";
-    String TEMPLATE_ENTITY_KT = "/templates/entity.kt";
-    String TEMPLATE_MAPPER = "/templates/mapper.java";
-    String TEMPLATE_XML = "/templates/mapper.xml";
-    String TEMPLATE_SERVICE = "/templates/service.java";
-    String TEMPLATE_SERVICE_IMPL = "/templates/serviceImpl.java";
-    String TEMPLATE_CONTROLLER = "/templates/controller.java";
+//    String TEMPLATE_ENTITY_JAVA = "/templates/entity.java";
+//    String TEMPLATE_ENTITY_KT = "/templates/entity.kt";
+//    String TEMPLATE_MAPPER = "/templates/mapper.java";
+//    String TEMPLATE_XML = "/templates/mapper.xml";
+//    String TEMPLATE_SERVICE = "/templates/service.java";
+//    String TEMPLATE_SERVICE_IMPL = "/templates/serviceImpl.java";
+//    String TEMPLATE_CONTROLLER = "/templates/controller.java";
 
     String VM_LOAD_PATH_KEY = "file.resource.loader.class";
     String VM_LOAD_PATH_VALUE = "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader";

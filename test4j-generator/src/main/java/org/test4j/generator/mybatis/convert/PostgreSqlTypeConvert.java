@@ -3,6 +3,7 @@ package org.test4j.generator.mybatis.convert;
 import org.test4j.generator.mybatis.config.GlobalConfig;
 import org.test4j.generator.mybatis.config.ITypeConvert;
 import org.test4j.generator.mybatis.rule.ColumnType;
+import org.test4j.generator.mybatis.rule.DateType;
 import org.test4j.generator.mybatis.rule.IColumnType;
 
 /**
@@ -13,7 +14,7 @@ import org.test4j.generator.mybatis.rule.IColumnType;
 public class PostgreSqlTypeConvert extends BaseTypeConvert {
 
     @Override
-    public IColumnType processTypeConvert(GlobalConfig globalConfig, String fieldType) {
+    public IColumnType processTypeConvert(DateType dateType, String fieldType) {
         String t = fieldType.toLowerCase();
         if (t.contains("char")) {
             return ColumnType.STRING;
@@ -22,7 +23,7 @@ public class PostgreSqlTypeConvert extends BaseTypeConvert {
         } else if (t.contains("int")) {
             return ColumnType.INTEGER;
         } else if (t.contains("date") || t.contains("time")) {
-            return this.parseDateType(globalConfig.getDateType(), t);
+            return this.parseDateType(dateType, t);
         } else if (t.contains("text")) {
             return ColumnType.STRING;
         } else if (t.contains("bit")) {

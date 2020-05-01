@@ -1,5 +1,7 @@
 package cn.org.atool.fluent.mybatis.generator;
 
+import org.test4j.generator.mybatis.model.BuildConfig;
+import org.test4j.generator.mybatis.model.Generator;
 import org.test4j.generator.mybatis.rule.ColumnType;
 import org.junit.jupiter.api.Test;
 
@@ -8,27 +10,27 @@ public class MybatisGeneratorTest {
 
     @Test
     public void generate() {
-        String outdir = System.getProperty("user.dir") + "/src/test/java";
-        new MybatisGenerator("cn.org.atool.fluent.mybatis.generator.demo")
-                .setOutputDir(outdir, outdir, outdir)
-                .setEntitySetChain(true)
-                .setDataSource(url, "root", "password")
-                .generate(new TableConvertor("t_")
-                                .addTable("address")
-                                .addTable("t_user", true)
-                                .allTable(table -> {
-                                    table.column("is_deleted", ColumnType.BOOLEAN)
-                                            .setGmtCreateColumn("gmt_created")
-                                            .setGmtModifiedColumn("gmt_modified")
-                                            .setVersionColumn("version")
-                                            .setLogicDeletedColumn("is_deleted")
-                                            .addBaseDaoInterface("MyCustomerInterface<${entity}, ${query}, ${update}>", "cn.org.atool.fluent.mybatis.generator.MyCustomerInterface")
-                                    ;
-                                })
-                        , new TableConvertor()
-                                .addTable("no_auto_id")
-                                .addTable("no_primary")
-                                .allTable(table -> table.setMapperPrefix("new"))
-                );
+        String outputDir = System.getProperty("user.dir") + "/src/test/java";
+        new Generator(
+            new BuildConfig()
+                .setTablePrefix("t_")
+                .addTable("address")
+                .addTable("t_user", true)
+                .allTable(table -> {
+                    table.setColumn("gmt_created", "gmt_modified", "is_deleted")
+                        .column("is_deleted", ColumnType.BOOLEAN)
+                        .addBaseDaoInterface("MyCustomerInterface<${entity}, ${query}, ${update}>", "cn.org.atool.fluent.mybatis.generator.MyCustomerInterface")
+                    ;
+                })
+            ,
+            new BuildConfig()
+                .addTable("no_auto_id")
+                .addTable("no_primary")
+                .allTable(table -> table.setMapperPrefix("new"))
+        )
+            .setOutputDir(outputDir, outputDir, outputDir)
+            .setDataSource(url, "root", "password")
+            .setBasePackage("cn.org.atool.fluent.mybatis.generator.demo")
+            .execute();
     }
 }

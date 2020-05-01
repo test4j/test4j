@@ -3,7 +3,7 @@ package org.test4j.generator.mybatis.query;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import com.baomidou.mybatisplus.annotation.DbType;
+import org.test4j.generator.mybatis.rule.DbType;
 
 /**
  * SqlServer 表数据查询

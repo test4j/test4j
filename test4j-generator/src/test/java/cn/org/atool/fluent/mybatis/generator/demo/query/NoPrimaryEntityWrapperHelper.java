@@ -9,7 +9,6 @@ import cn.org.atool.fluent.mybatis.generator.demo.mapping.NoPrimaryMP.Property;
 import cn.org.atool.fluent.mybatis.generator.demo.mapping.NoPrimaryMP.Column;
 import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 
-import java.io.Serializable;
 
 /**
  * <p>

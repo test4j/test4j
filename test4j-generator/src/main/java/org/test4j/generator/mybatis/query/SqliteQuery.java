@@ -1,6 +1,6 @@
 package org.test4j.generator.mybatis.query;
 
-import com.baomidou.mybatisplus.annotation.DbType;
+import org.test4j.generator.mybatis.rule.DbType;
 
 /**
  * Sqlite 表数据查询

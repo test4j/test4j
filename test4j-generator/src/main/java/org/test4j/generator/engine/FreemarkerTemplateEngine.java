@@ -1,8 +1,9 @@
 package org.test4j.generator.engine;
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
+import lombok.extern.slf4j.Slf4j;
+import org.test4j.generator.mybatis.model.BuildConfig;
 import org.test4j.generator.mybatis.model.FmGeneratorConst;
-import org.test4j.generator.mybatis.config.ConfigBuilder;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
@@ -13,16 +14,16 @@ import java.util.Map;
 /**
  * Freemarker 模板引擎实现文件输出
  *
- * @author nieqiurong
- * @since 2018-01-11
+ * @author darui.wu
  */
+@Slf4j
 public class FreemarkerTemplateEngine extends AbstractTemplateEngine {
 
     private Configuration configuration;
 
     @Override
-    public FreemarkerTemplateEngine init(ConfigBuilder configBuilder) {
-        super.init(configBuilder);
+    public FreemarkerTemplateEngine init(BuildConfig config) {
+        super.init(config);
         configuration = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
         configuration.setDefaultEncoding(FmGeneratorConst.UTF8);
         configuration.setClassForTemplateLoading(FreemarkerTemplateEngine.class, StringPool.SLASH);
@@ -36,7 +37,7 @@ public class FreemarkerTemplateEngine extends AbstractTemplateEngine {
         try (FileOutputStream fileOutputStream = new FileOutputStream(outputFile)) {
             template.process(objectMap, new OutputStreamWriter(fileOutputStream, FmGeneratorConst.UTF8));
         }
-        logger.debug("模板:" + templatePath + ";  文件:" + outputFile);
+        log.debug("模板:" + templatePath + ";  文件:" + outputFile);
     }
 
 

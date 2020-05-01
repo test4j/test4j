@@ -1,4 +1,4 @@
-package cn.org.atool.fluent.mybatis.generator;
+package org.test4j.generator.mybatis.model;
 
 import org.test4j.generator.mybatis.rule.IColumnType;
 import lombok.Getter;

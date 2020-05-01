@@ -9,7 +9,6 @@ import cn.org.atool.fluent.mybatis.generator.demo.mapping.NoAutoIdMP.Property;
 import cn.org.atool.fluent.mybatis.generator.demo.mapping.NoAutoIdMP.Column;
 import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
 
-import java.io.Serializable;
 
 /**
  * <p>

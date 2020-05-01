@@ -21,25 +21,16 @@ public class GlobalConfig {
      */
     private String outputDir = "D://";
 
-    /**
-     * 是否覆盖已有文件
-     */
-    private boolean fileOverride = false;
 
-    /**
-     * 是否打开输出目录
-     */
-    private boolean open = true;
+
+
 
     /**
      * 是否在xml中添加二级缓存配置
      */
     private boolean enableCache = false;
 
-    /**
-     * 开发人员
-     */
-    private String author;
+
 
     /**
      * 开启 Kotlin 模式
@@ -61,15 +52,7 @@ public class GlobalConfig {
      */
     private boolean baseResultMap = false;
 
-    /**
-     * 时间类型对应策略
-     */
-    private DateType dateType = DateType.TIME_PACK;
 
-    /**
-     * 开启 baseColumnList
-     */
-    private boolean baseColumnList = false;
     /**
      * 各层文件名称方式，例如： %sAction 生成 UserAction
      * %s 为占位符
