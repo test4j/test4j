@@ -6,6 +6,7 @@ import org.test4j.generator.mybatis.model.TableInfo;
 import org.test4j.generator.mybatis.rule.Naming;
 import org.test4j.tools.commons.StringHelper;
 
+import java.util.HashMap;
 import java.util.Map;
 
 public class EntityTemplate extends AbstractTableTemplate {
@@ -16,7 +17,7 @@ public class EntityTemplate extends AbstractTableTemplate {
     private String entityFormat = "%sEntity";
 
     public EntityTemplate() {
-        super("entity/Entity.java.vm", "entity/*Entity.java");
+        super("templates/entity/Entity.java.vm", "entity/*Entity.java");
     }
 
     @Override
@@ -29,8 +30,10 @@ public class EntityTemplate extends AbstractTableTemplate {
 
     @Override
     public Map<String, Object> initWith(TableInfo table) {
-        return null;
+        String fileName = this.fileNameReg.replace("*", table.getEntityPrefix());
+        super.setFileName(fileName);
+        super.filePath = table.getOutputDir() + "/" + fileName;
+        Map<String, Object> config = new HashMap<>();
+        return config;
     }
-
-
 }

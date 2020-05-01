@@ -19,8 +19,7 @@ public abstract class AbstractTemplateEngine {
     /**
      * 配置信息
      */
-    private BuildConfig config;
-
+    protected BuildConfig config;
 
     /**
      * 模板引擎初始化
@@ -37,7 +36,7 @@ public abstract class AbstractTemplateEngine {
      */
     public void output(String template, Map<String, Object> config, String filePath) {
         try {
-            File dir = new File(filePath);
+            File dir = new File(filePath).getParentFile();
             if (!dir.exists()) {
                 dir.mkdirs();
             }

@@ -105,7 +105,7 @@ public class TableInfo {
     /**
      * 字段列表（除上面单列字段外）
      */
-    private List<TableField> fields;
+    private List<TableField> fields = new ArrayList<>();
     /**
      * 所有字段拼接串
      */
@@ -292,7 +292,8 @@ public class TableInfo {
     private void initFileName() {
         this.fileTypeName = new HashMap<>();
         for (Map.Entry<FileType, String> entry : this.buildConfig.getFileNameFormat().entrySet()) {
-            this.fileTypeName.put(entry.getKey(), String.format(entry.getValue(), this.entityPrefix));
+            String format = entry.getValue();
+            this.fileTypeName.put(entry.getKey(), String.format(format, this.entityPrefix));
         }
     }
 
@@ -454,5 +455,14 @@ public class TableInfo {
         this.buildConfig = buildConfig;
         this.generator = generator;
         return this;
+    }
+
+    String outputDir;
+
+    public String getOutputDir() {
+        if (outputDir == null) {
+            this.outputDir = this.generator.getOutputDir() + '/' + this.generator.getBasePackage().replace('.', '/');
+        }
+        return this.outputDir;
     }
 }

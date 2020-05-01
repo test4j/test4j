@@ -1,5 +1,6 @@
 package org.test4j.generator.mybatis.template;
 
+import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -31,9 +32,16 @@ public abstract class AbstractTableTemplate {
     /**
      * 文件名称(不包含路径和后缀)
      */
-    private String fileName;
+    @Setter(AccessLevel.NONE)
+    protected String fileName;
 
-    private String fileNameReg;
+    protected void setFileName(String fileName) {
+        int first = fileName.lastIndexOf('/');
+        int last = fileName.lastIndexOf('.');
+        this.fileName = fileName.substring(first == -1 ? 0 : first + 1, last == -1 ? fileName.length() - 1 : last);
+    }
+
+    protected String fileNameReg;
 
     private TemplateType templateType = TemplateType.Base;
     /**
@@ -64,6 +72,7 @@ public abstract class AbstractTableTemplate {
      * @return
      */
     public abstract Map<String, Object> initWith(TableInfo table);
+
 
     /**
      * 模板类型

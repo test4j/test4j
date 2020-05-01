@@ -66,7 +66,6 @@ public class BuildConfig {
     }
 
     public BuildConfig addTable(TableInfo table) {
-        table.setConfig(this, this.generator);
         this.tables.put(table.getTableName(), table);
         return this;
     }
@@ -129,7 +128,7 @@ public class BuildConfig {
 
     private Map<FileType, String> fileNameFormat = new HashMap<FileType, String>() {
         {
-            this.put(FileType.Entity, "%Entity");
+            this.put(FileType.Entity, "%sEntity");
         }
     };
 }

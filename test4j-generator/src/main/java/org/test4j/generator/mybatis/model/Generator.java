@@ -13,6 +13,7 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import org.test4j.generator.mybatis.config.DataSourceConfig;
 import org.test4j.generator.mybatis.template.AbstractTableTemplate;
 import org.test4j.generator.mybatis.template.EntityTemplate;
+import org.test4j.hamcrest.Assert;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -50,6 +51,7 @@ public class Generator {
     public void execute() {
         List<GenerateObj> generateObjs = new ArrayList<>();
         for (BuildConfig config : this.configs) {
+            templateEngine.init(config);
             info("==========================数据库元信息初始化...=====================");
             this.initTableInfos(config);
             info("==========================准备生成文件...==========================");
@@ -60,6 +62,7 @@ public class Generator {
                     Map<String, Object> variables = template.initWith(tableInfo);
                     String filePath = template.getFilePath();
                     info("==========================生成文件: " + template.getFileName());
+                    Assert.notNull(filePath, "文件路径不能为空,[table=%s,template=%s]", tableInfo.getTableName(), template.getTemplate());
                     templateEngine.output(template.getTemplate(), variables, filePath);
                 }
                 generateObjs.add(GenerateObj.init(tableInfo));
@@ -103,6 +106,7 @@ public class Generator {
                 }
             }
             for (Map.Entry<String, TableInfo> entry : config.getTables().entrySet()) {
+                entry.getValue().setConfig(config, this);
                 entry.getValue().initTable();
             }
         } catch (SQLException e) {
