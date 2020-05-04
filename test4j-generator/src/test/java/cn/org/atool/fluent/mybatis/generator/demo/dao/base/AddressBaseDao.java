@@ -4,8 +4,8 @@ import cn.org.atool.fluent.mybatis.base.BaseDaoImpl;
 import cn.org.atool.fluent.mybatis.generator.demo.entity.AddressEntity;
 import cn.org.atool.fluent.mybatis.generator.demo.mapper.AddressMapper;
 import cn.org.atool.fluent.mybatis.generator.demo.mapping.AddressMP;
-import ${cfg.packEntityQuery}.${cfg.fileEntityQuery};
-import ${cfg.packEntityUpdate}.${cfg.fileEntityUpdate};
+import cn.org.atool.fluent.mybatis.generator.demo.query.AddressEntityQuery;
+import cn.org.atool.fluent.mybatis.generator.demo.query.AddressEntityUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 
 /**
@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  *
  * @author ${author}
 */
-public abstract class AddressBaseDao extends BaseDaoImpl<AddressEntity, ${cfg.fileEntityQuery}, ${cfg.fileEntityUpdate}>
+public abstract class AddressBaseDao extends BaseDaoImpl<AddressEntity, AddressEntityQuery, AddressEntityUpdate>
         implements AddressMP {
 
     @Autowired
@@ -25,13 +25,13 @@ public abstract class AddressBaseDao extends BaseDaoImpl<AddressEntity, ${cfg.fi
     }
 
     @Override
-    public ${cfg.fileEntityQuery} query(){
-        return new ${cfg.fileEntityQuery}();
+    public AddressEntityQuery query(){
+        return new AddressEntityQuery();
     }
 
     @Override
-    public ${cfg.fileEntityUpdate} update(){
-        return new ${cfg.fileEntityUpdate}();
+    public AddressEntityUpdate update(){
+        return new AddressEntityUpdate();
     }
 
     @Override

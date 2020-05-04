@@ -1,4 +1,4 @@
-package ${cfg.packEntityUpdate};
+package cn.org.atool.fluent.mybatis.generator.demo.query;
 
 import cn.org.atool.fluent.mybatis.base.IEntityUpdate;
 import cn.org.atool.fluent.mybatis.base.IProperty2Column;
@@ -12,20 +12,20 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
 
-import ${package.Entity}.${entity};
-import ${cfg.packMP}.${cfg.fileMP};
-import ${cfg.packEntityUpdate}.${entity}WrapperHelper.And;
-import ${cfg.packEntityUpdate}.${entity}WrapperHelper.Set;
-import ${cfg.packEntityQuery}.${entity}WrapperHelper.UpdateOrder;
+import cn.org.atool.fluent.mybatis.generator.demo.entity.AddressEntity;
+import cn.org.atool.fluent.mybatis.generator.demo.mapping.AddressMP;
+import cn.org.atool.fluent.mybatis.generator.demo.query.AddressEntityWrapperHelper.And;
+import cn.org.atool.fluent.mybatis.generator.demo.query.AddressEntityWrapperHelper.Set;
+import cn.org.atool.fluent.mybatis.generator.demo.query.AddressEntityWrapperHelper.UpdateOrder;
 
 /**
- * @ClassName ${entity}Update
- * @Description ${entity}更新设置
+ * @ClassName AddressEntityUpdate
+ * @Description AddressEntity更新设置
  *
  * @author ${author}
  */
-public class ${cfg.fileEntityUpdate} extends AbstractWrapper<${entity}, String, ${cfg.fileEntityUpdate}>
-    implements IEntityUpdate<${cfg.fileEntityUpdate}>, IProperty2Column {
+public class AddressEntityUpdate extends AbstractWrapper<AddressEntity, String, AddressEntityUpdate>
+    implements IEntityUpdate<AddressEntityUpdate>, IProperty2Column {
     /**
     * SQL 更新字段内容，例如：name='1',age=2
     */
@@ -33,24 +33,24 @@ public class ${cfg.fileEntityUpdate} extends AbstractWrapper<${entity}, String, 
 
     private final Map<String, Object> updates = new HashMap<>();
 
-    public final And<${cfg.fileEntityUpdate}> and = new And<>(this);
+    public final And<AddressEntityUpdate> and = new And<>(this);
 
     public final Set set = new Set(this);
 
     public final UpdateOrder orderBy = new UpdateOrder(this);
 
-    public ${cfg.fileEntityUpdate}(){
+    public AddressEntityUpdate(){
         // 如果无参构造函数，请注意实体 NULL 情况 SET 必须有否则 SQL 异常
         this(null);
     }
 
-    public ${cfg.fileEntityUpdate}(${entity} entity) {
+    public AddressEntityUpdate(AddressEntity entity) {
         super.setEntity(entity);
         super.initNeed();
         this.sqlSet = new ArrayList<>();
     }
 
-    private ${cfg.fileEntityUpdate}(${entity} entity, List<String> sqlSet, AtomicInteger paramNameSeq,
+    private AddressEntityUpdate(AddressEntity entity, List<String> sqlSet, AtomicInteger paramNameSeq,
         Map<String, Object> paramNameValuePairs, MergeSegments mergeSegments) {
         super.setEntity(entity);
         this.sqlSet = sqlSet;
@@ -69,7 +69,7 @@ public class ${cfg.fileEntityUpdate} extends AbstractWrapper<${entity}, String, 
 
     @Override
     public Map<String, String> getProperty2Column() {
-        return ${cfg.fileMP}.Property2Column;
+        return AddressMP.Property2Column;
     }
 
     @Override
@@ -78,7 +78,7 @@ public class ${cfg.fileEntityUpdate} extends AbstractWrapper<${entity}, String, 
     }
 
     @Override
-    public ${cfg.fileEntityUpdate} set(boolean condition, String column, Object value){
+    public AddressEntityUpdate set(boolean condition, String column, Object value){
         if(condition){
             this.updates.put(column, value);
         }
@@ -86,31 +86,31 @@ public class ${cfg.fileEntityUpdate} extends AbstractWrapper<${entity}, String, 
     }
 
     @Override
-    public ${cfg.fileEntityUpdate} setSql(boolean condition, String sql) {
+    public AddressEntityUpdate setSql(boolean condition, String sql) {
         if (condition && StringUtils.isNotEmpty(sql)) {
             sqlSet.add(sql);
         }
         return this;
     }
 
-    public LambdaUpdateWrapper<${entity}> lambda() {
+    public LambdaUpdateWrapper<AddressEntity> lambda() {
         throw new RuntimeException("no support!");
     }
 
     @Override
-    protected ${cfg.fileEntityUpdate} instance() {
-        return new ${cfg.fileEntityUpdate}(entity, sqlSet, paramNameSeq, paramNameValuePairs, new MergeSegments());
+    protected AddressEntityUpdate instance() {
+        return new AddressEntityUpdate(entity, sqlSet, paramNameSeq, paramNameValuePairs, new MergeSegments());
     }
 
 
     @Override
-    public ${cfg.fileEntityUpdate} limit(int from, int limit){
+    public AddressEntityUpdate limit(int from, int limit){
         super.last(String.format("limit %d, %d", from, limit));
         return this;
     }
 
     @Override
-    public ${cfg.fileEntityUpdate} limit(int limit){
+    public AddressEntityUpdate limit(int limit){
         super.last(String.format("limit %d", limit));
         return this;
     }

@@ -1,6 +1,7 @@
-package org.test4j.generator.mybatis.template;
+package org.test4j.generator.mybatis.template.entity;
 
 import org.test4j.generator.mybatis.model.TableInfo;
+import org.test4j.generator.mybatis.template.BaseTemplate;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -10,7 +11,7 @@ import java.util.Map;
 
 import static java.util.stream.Collectors.joining;
 
-public class EntityTemplate extends AbstractTableTemplate {
+public class EntityTemplate extends BaseTemplate {
     /**
      * entity类继承的接口全称
      */
@@ -33,10 +34,6 @@ public class EntityTemplate extends AbstractTableTemplate {
     @Override
     protected Map<String, Object> templateConfigs(TableInfo table) {
         Map<String, Object> entity = new HashMap<>();
-        {
-            entity.put(KEY_NAME, super.getFileName(table));
-            entity.put(KEY_PACKAGE, super.getPackage(table));
-        }
         {
             List<String> types = table.getFieldTypes();
             types.add(Serializable.class.getName());

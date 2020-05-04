@@ -4,8 +4,8 @@ import cn.org.atool.fluent.mybatis.base.BaseDaoImpl;
 import ${entity.package}.${entity.name};
 import ${mapper.package}.${mapper.name};
 import ${mapping.package}.${mapping.name};
-import ${cfg.packEntityQuery}.${cfg.fileEntityQuery};
-import ${cfg.packEntityUpdate}.${cfg.fileEntityUpdate};
+import ${entityQuery.package}.${entityQuery.name};
+import ${entityUpdate.package}.${entityUpdate.name};
 import org.springframework.beans.factory.annotation.Autowired;
 #if(${cfg.baseDaoInterfaceImports})
 ${cfg.baseDaoInterfaceImports}
@@ -16,7 +16,7 @@ ${cfg.baseDaoInterfaceImports}
  *
  * @author ${author}
 */
-public abstract class ${baseDao.name} extends BaseDaoImpl<${entity.name}, ${cfg.fileEntityQuery}, ${cfg.fileEntityUpdate}>
+public abstract class ${baseDao.name} extends BaseDaoImpl<${entity.name}, ${entityQuery.name}, ${entityUpdate.name}>
         implements ${mapping.name}#if(${cfg.baseDaoInterfaceImplement}), ${cfg.baseDaoInterfaceImplement}#end {
 
     @Autowired
@@ -28,13 +28,13 @@ public abstract class ${baseDao.name} extends BaseDaoImpl<${entity.name}, ${cfg.
     }
 
     @Override
-    public ${cfg.fileEntityQuery} query(){
-        return new ${cfg.fileEntityQuery}();
+    public ${entityQuery.name} query(){
+        return new ${entityQuery.name}();
     }
 
     @Override
-    public ${cfg.fileEntityUpdate} update(){
-        return new ${cfg.fileEntityUpdate}();
+    public ${entityUpdate.name} update(){
+        return new ${entityUpdate.name}();
     }
 
     @Override

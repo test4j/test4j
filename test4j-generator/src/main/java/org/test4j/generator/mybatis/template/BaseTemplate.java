@@ -17,7 +17,7 @@ import java.util.Map;
  */
 @Data
 @Accessors(chain = true)
-public abstract class AbstractTableTemplate implements ConfigKey {
+public abstract class BaseTemplate implements ConfigKey {
     /**
      * 模板内容
      */
@@ -52,10 +52,10 @@ public abstract class AbstractTableTemplate implements ConfigKey {
     @Setter
     private boolean isPartition = false;
 
-    private AbstractTableTemplate() {
+    private BaseTemplate() {
     }
 
-    public AbstractTableTemplate(String template, String fileNameReg) {
+    public BaseTemplate(String template, String fileNameReg) {
         this.fileNameReg = fileNameReg;
         this.template = template;
     }

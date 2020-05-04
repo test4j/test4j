@@ -11,7 +11,8 @@ import org.test4j.generator.mybatis.config.StrategyConfig;
 import org.test4j.generator.mybatis.rule.DbType;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import org.test4j.generator.mybatis.config.DataSourceConfig;
-import org.test4j.generator.mybatis.template.AbstractTableTemplate;
+import org.test4j.generator.mybatis.template.BaseTemplate;
+import org.test4j.generator.mybatis.template.TemplateList;
 import org.test4j.hamcrest.Assert;
 
 import java.sql.PreparedStatement;
@@ -55,10 +56,10 @@ public class Generator {
                 TableInfo tableInfo = entry.getValue();
                 // 初始化各个模板需要的变量
                 Map<String, Object> context = tableInfo.initTemplateContext();
-                for (AbstractTableTemplate template : TemplateList.templates) {
+                for (BaseTemplate template : TemplateList.templates) {
                     template.initContext(tableInfo, context);
                 }
-                for (AbstractTableTemplate template : TemplateList.templates) {
+                for (BaseTemplate template : TemplateList.templates) {
                     if (template.isPartition() && !tableInfo.isPartition()) {
                         continue;
                     }
