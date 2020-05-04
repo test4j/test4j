@@ -12,8 +12,6 @@ import org.test4j.generator.mybatis.rule.DbType;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import org.test4j.generator.mybatis.config.DataSourceConfig;
 import org.test4j.generator.mybatis.template.AbstractTableTemplate;
-import org.test4j.generator.mybatis.template.EntityTemplate;
-import org.test4j.generator.mybatis.template.MappingTemplate;
 import org.test4j.hamcrest.Assert;
 
 import java.sql.PreparedStatement;
@@ -45,11 +43,6 @@ public class Generator {
         }
     }
 
-    public static List<AbstractTableTemplate> templateList = Arrays.asList(
-        new MappingTemplate()
-//        new EntityTemplate()
-    );
-
     public void execute() {
         List<GenerateObj> generateObjs = new ArrayList<>();
         for (BuildConfig config : this.configs) {
@@ -60,12 +53,16 @@ public class Generator {
             for (Map.Entry<String, TableInfo> entry : config.getTables().entrySet()) {
                 info("==========================处理表：" + entry.getKey());
                 TableInfo tableInfo = entry.getValue();
-                for (AbstractTableTemplate template : templateList) {
-                    Map<String, Object> variables = template.initWith(tableInfo);
+                // 初始化各个模板需要的变量
+                Map<String, Object> context = tableInfo.initTemplateContext();
+                for (AbstractTableTemplate template : TemplateList.templates) {
+                    template.initContext(tableInfo, context);
+                }
+                for (AbstractTableTemplate template : TemplateList.templates) {
                     String filePath = template.getFilePath();
                     info("==========================生成文件: " + template.getFileNameReg());
                     Assert.notNull(filePath, "文件路径不能为空,[table=%s,template=%s]", tableInfo.getTableName(), template.getTemplate());
-                    templateEngine.output(template.getTemplate(), variables, filePath);
+                    templateEngine.output(template.getTemplate(), context, filePath);
                 }
                 generateObjs.add(GenerateObj.init(tableInfo));
             }

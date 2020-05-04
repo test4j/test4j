@@ -33,12 +33,12 @@ public class StrategyConfig {
     /**
      * 数据库表映射到实体的命名策略
      */
-    private Naming tableNaming = Naming.no_change;
+    private Naming tableNaming = Naming.underline_to_camel;
     /**
      * 数据库表字段映射到实体的命名策略
      * <p>未指定按照 naming 执行</p>
      */
-    private Naming columnNaming = null;
+    private Naming columnNaming = Naming.underline_to_camel;
     /**
      * 表前缀
      */
@@ -122,13 +122,8 @@ public class StrategyConfig {
         return isCapitalMode && StringUtils.isCapitalMode(word);
     }
 
-
     public Naming getColumnNaming() {
-        if (null == columnNaming) {
-            // 未指定以 naming 策略为准
-            return tableNaming;
-        }
-        return columnNaming;
+        return columnNaming == null ? tableNaming : columnNaming;
     }
 
 

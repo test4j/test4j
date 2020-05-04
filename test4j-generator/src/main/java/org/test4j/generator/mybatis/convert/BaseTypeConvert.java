@@ -3,7 +3,7 @@ package org.test4j.generator.mybatis.convert;
 import org.test4j.generator.mybatis.config.ITypeConvert;
 import org.test4j.generator.mybatis.rule.ColumnType;
 import org.test4j.generator.mybatis.rule.DateType;
-import org.test4j.generator.mybatis.rule.IColumnType;
+import org.test4j.generator.mybatis.model.IJavaType;
 
 /**
  * BaseTypeConvert
@@ -12,7 +12,7 @@ import org.test4j.generator.mybatis.rule.IColumnType;
  */
 public abstract class BaseTypeConvert implements ITypeConvert {
 
-    protected IColumnType parseDateType(DateType dateType, String columnType) {
+    protected IJavaType parseDateType(DateType dateType, String columnType) {
         switch (dateType) {
             case SQL_PACK:
                 switch (columnType) {

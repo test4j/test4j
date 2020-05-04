@@ -1,10 +1,8 @@
 package org.test4j.generator.mybatis.convert;
 
-import org.test4j.generator.mybatis.config.GlobalConfig;
-import org.test4j.generator.mybatis.config.ITypeConvert;
 import org.test4j.generator.mybatis.rule.ColumnType;
 import org.test4j.generator.mybatis.rule.DateType;
-import org.test4j.generator.mybatis.rule.IColumnType;
+import org.test4j.generator.mybatis.model.IJavaType;
 
 /**
  * SQLite 字段类型转换
@@ -13,7 +11,7 @@ import org.test4j.generator.mybatis.rule.IColumnType;
  */
 public class SqliteTypeConvert extends BaseTypeConvert {
     @Override
-    public IColumnType processTypeConvert(DateType dateType, String fieldType) {
+    public IJavaType processTypeConvert(DateType dateType, String fieldType) {
         String t = fieldType.toLowerCase();
         if (t.contains("bigint")) {
             return ColumnType.LONG;

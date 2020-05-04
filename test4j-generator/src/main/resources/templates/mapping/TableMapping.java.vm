@@ -16,7 +16,7 @@ public interface ${mapping.name} {
     Map<String, String> Property2Column = new HashMap<String,String>(){
         {
         #foreach($field in ${fields})
-            this.put(Property.${field.fieldName}, Column.${field.columnName});
+            this.put(Property.${field.name}, Column.${field.columnName});
         #end
         }
     };
@@ -28,7 +28,7 @@ public interface ${mapping.name} {
     /**
     * 实体名称
     */
-    String Entity_NAME = "${entityName}";
+    String Entity_NAME = "${entity.name}";
 
     /**
      * 表${table}字段定义
@@ -43,14 +43,14 @@ public interface ${mapping.name} {
     }
 
     /**
-     * 对象${entityName}属性字段
+     * 对象${entity.name}属性字段
      */
     interface Property{
         #foreach($field in ${fields})
         /**
          * ${field.comment}
          */
-        String ${field.fieldName} = "${field.fieldName}";
+        String ${field.name} = "${field.name}";
         #end
     }
 }

@@ -4,7 +4,6 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.test4j.generator.mybatis.model.BuildConfig;
 import org.test4j.generator.mybatis.model.ConfigKey;
 import org.test4j.generator.mybatis.model.TableInfo;
 
@@ -65,35 +64,36 @@ public abstract class AbstractTableTemplate implements ConfigKey {
      * 使用表信息初始化模板变量
      *
      * @param table
+     * @param configs
      * @return
      */
-    public final Map<String, Object> initWith(TableInfo table) {
+    public final void initContext(TableInfo table, Map<String, Object> configs) {
         this.filePath = table.getOutputDir() + "/" + this.fileNameReg.replace("*", table.getEntityPrefix());
-
-        Map<String, Object> configs = new HashMap<>();
-        {
-            configs.put(KEY_TABLE, table.getTableName());
-            configs.put(KEY_ENTITY_PREFIX, table.getEntityPrefix());
-            configs.put(KEY_COMMENT, table.getComment());
-            configs.put(KEY_FIELD_NAMES, table.getFieldNames());
-            configs.put(KEY_FIELDS, table.getFields());
-            configs.put(KEY_PRIMARY, table.getPrimary());
-            configs.put(KEY_GMT_CREATE, table.getGmtCreateField());
-            configs.put(KEY_GMT_MODIFIED, table.getGmtModifiedField());
-            configs.put(KEY_IS_DELETED, table.getIsDeletedField());
+        Map<String, Object> context = this.templateConfigs(table);
+        if (context == null) {
+            context = new HashMap<>();
         }
-        this.templateConfigs(table, configs);
-        return configs;
+        if (!context.containsKey(KEY_NAME)) {
+            context.put(KEY_NAME, this.getFileName(table));
+        }
+        if (!context.containsKey(KEY_PACKAGE)) {
+            context.put(KEY_PACKAGE, this.getPackage(table));
+        }
+        if (KEY_ENTITY.equals(this.getTemplateId())) {
+            configs.put(KEY_ENTITY_NAME, context.get(KEY_NAME));
+        }
+        configs.put(this.getTemplateId(), context);
     }
+
+    protected abstract String getTemplateId();
 
     /**
      * 模板自身的配置项
      *
      * @param table
-     * @param configs 原有的配置项
      * @return
      */
-    protected abstract void templateConfigs(TableInfo table, Map<String, Object> configs);
+    protected abstract Map<String, Object> templateConfigs(TableInfo table);
 
     protected String getFileName(TableInfo table) {
         int start = this.fileNameReg.lastIndexOf('/');

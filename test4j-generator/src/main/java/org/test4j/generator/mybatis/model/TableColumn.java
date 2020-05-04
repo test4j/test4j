@@ -1,6 +1,5 @@
 package org.test4j.generator.mybatis.model;
 
-import org.test4j.generator.mybatis.rule.IColumnType;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -12,12 +11,12 @@ public class TableColumn {
 
     private String propertyName;
 
-    private IColumnType columnType;
+    private IJavaType columnType;
 
     @Setter
     private boolean exclude = false;
 
-    public TableColumn(String columnName, String propertyName, IColumnType columnType) {
+    public TableColumn(String columnName, String propertyName, IJavaType columnType) {
         this.columnName = columnName;
         this.propertyName = propertyName;
         this.columnType = columnType;

@@ -1,11 +1,11 @@
-package org.test4j.generator.mybatis.rule;
+package org.test4j.generator.mybatis.model;
 
 /**
  * 获取字段属性类型
  *
  * @author wudarui
  */
-public interface IColumnType {
+public interface IJavaType {
 
     /**
      * 获取字段类型

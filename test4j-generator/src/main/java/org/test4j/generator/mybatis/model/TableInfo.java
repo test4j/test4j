@@ -4,6 +4,7 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.test4j.generator.mybatis.config.DataSourceConfig;
@@ -12,7 +13,6 @@ import org.test4j.generator.mybatis.config.INameConvert;
 import org.test4j.generator.mybatis.config.StrategyConfig;
 import org.test4j.generator.mybatis.query.H2Query;
 import org.test4j.generator.mybatis.rule.DbType;
-import org.test4j.generator.mybatis.rule.IColumnType;
 import lombok.experimental.Accessors;
 import org.test4j.generator.mybatis.rule.Naming;
 import org.test4j.tools.commons.StringHelper;
@@ -22,6 +22,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
+
+import static org.test4j.generator.mybatis.model.ConfigKey.*;
 
 /**
  * 表信息，关联到当前字段信息
@@ -67,7 +69,7 @@ public class TableInfo {
     /**
      * 执行模板生成各个步骤产生的上下文信息，比如Mapper名称等，供其他模板生成时引用
      */
-    private Map<FileType, String> fileTypeName = new HashMap<>();
+    private Map<IFieldCategory, String> fileTypeName = new HashMap<>();
 
     /***********************************************/
     /****************以下是数据库信息******************/
@@ -156,7 +158,7 @@ public class TableInfo {
         return this;
     }
 
-    public TableInfo column(String columnName, IColumnType columnType) {
+    public TableInfo column(String columnName, IJavaType columnType) {
         this.columns.put(columnName, new TableColumn(columnName, null, columnType));
         return this;
     }
@@ -185,15 +187,18 @@ public class TableInfo {
             return false;
         }
         if (this.gmtCreate.equalsIgnoreCase(fieldName)) {
+            field.setCategory(IFieldCategory.GmtCreate);
             this.gmtCreateField = field;
         } else if (this.gmtModified.equalsIgnoreCase(fieldName)) {
+            field.setCategory(IFieldCategory.GmtModified);
             this.gmtModifiedField = field;
         } else if (this.logicDeleted.equalsIgnoreCase(fieldName)) {
             this.addImportTypes(TableLogic.class.getCanonicalName());
+            field.setCategory(IFieldCategory.IsDeleted);
             this.isDeletedField = field;
         } else if (field.isPrimary()) {
             this.addImportTypes(TableId.class.getCanonicalName());
-            if (field.isAutoIncrement()) {
+            if (field.getCategory() == IFieldCategory.PrimaryId) {
                 this.addImportTypes(IdType.class.getCanonicalName());
             }
             this.primary = field;
@@ -201,9 +206,9 @@ public class TableInfo {
             this.addImportTypes(com.baomidou.mybatisplus.annotation.TableField.class.getCanonicalName());
             this.fields.add(field);
         }
-        if (null != field.getColumnType().getImportName()) {
-            this.addImportTypes(field.getColumnType().getImportName());
-        }
+//        if (null != field.getFieldType().getImportName()) {
+//            this.addImportTypes(field.getFieldType().getImportName());
+//        }
         return true;
     }
 
@@ -266,46 +271,69 @@ public class TableInfo {
      * @return
      */
     private TableInfo initTableFields() {
-        DataSourceConfig dbConfig = this.generator.getDataSourceConfig();
-        DbType dbType = dbConfig.getDbType();
-        IDbQuery dbQuery = dbConfig.getDbQuery();
-
-        try {
-            Set<String> h2PkColumns = this.h2PkColumns();
-            String tableFieldsSql = this.buildTableFieldsSql();
-            try (PreparedStatement preparedStatement = dbConfig.getConn().prepareStatement(tableFieldsSql); ResultSet results = preparedStatement.executeQuery()) {
-                while (results.next()) {
-                    this.initTableField(dbType, dbQuery, h2PkColumns, results);
-                }
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException("SQL Exception：" + e.getMessage(), e);
+        List<TableField> commons = this.findAllFields();
+        this.fields = new ArrayList<>();
+        if (this.primary != null) {
+            this.fields.add(primary);
         }
-
-        this.fields.sort(Comparator.comparing(TableField::getColumnName));
+        if (this.gmtCreateField != null) {
+            this.fields.add(this.gmtCreateField);
+        }
+        if (this.gmtModified != null) {
+            this.fields.add(this.gmtModifiedField);
+        }
+        if (this.isDeletedField != null) {
+            this.fields.add(this.isDeletedField);
+        }
+        commons.sort(Comparator.comparing(TableField::getColumnName));
+        this.fields.addAll(commons);
         this.fieldNames = fields.stream().map(TableField::getColumnName).collect(Collectors.joining(", "));
 
         return this;
     }
 
-    private void initTableField(DbType dbType, IDbQuery dbQuery, Set<String> h2PkColumns, ResultSet results) throws SQLException {
+    private List<TableField> findAllFields() {
+        DataSourceConfig dbConfig = this.generator.getDataSourceConfig();
+        DbType dbType = dbConfig.getDbType();
+        IDbQuery dbQuery = dbConfig.getDbQuery();
+
+        this.fields = new ArrayList<>();
+        try {
+            Set<String> h2PkColumns = this.h2PkColumns();
+            String tableFieldsSql = this.buildTableFieldsSql();
+            try (PreparedStatement preparedStatement = dbConfig.getConn().prepareStatement(tableFieldsSql); ResultSet results = preparedStatement.executeQuery()) {
+                while (results.next()) {
+                    TableField field = this.initTableField(dbType, dbQuery, h2PkColumns, results);
+                    if (field != null) {
+                        this.addField(field);
+                    }
+                }
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException("SQL Exception：" + e.getMessage(), e);
+        }
+        return fields;
+    }
+
+    private TableField initTableField(DbType dbType, IDbQuery dbQuery, Set<String> h2PkColumns, ResultSet results) throws SQLException {
         String columnName = results.getString(dbQuery.fieldName());
         if (this.isExclude(columnName)) {
-            return;
+            return null;
         }
-        TableField field = new TableField(columnName);
+        TableField field = new TableField(this, columnName);
         boolean primary = this.isPrimary(columnName, results, h2PkColumns);
         // 处理ID, 避免多重主键设置，目前只取第一个找到ID，并放到list中的索引为0的位置
         if (primary && !haveId) {
-            field.setPrimary(true);
-            field.setAutoIncrement(DbType.H2 == dbType || DbType.SQLITE == dbType || dbQuery.isKeyIdentity(results));
+            if (DbType.H2 == dbType || DbType.SQLITE == dbType || dbQuery.isKeyIdentity(results)) {
+                field.setCategory(IFieldCategory.PrimaryId);
+            } else {
+                field.setCategory(IFieldCategory.PrimaryKey);
+            }
             haveId = true;
-        } else {
-            field.setPrimary(false);
         }
-        field.setFieldType(results.getString(dbQuery.fieldType()));
-        field.initNaming(this, results);
-        this.addField(field);
+        field.setColumnType(results.getString(dbQuery.fieldType()));
+        field.initNaming(results);
+        return field;
     }
 
     /**
@@ -426,5 +454,31 @@ public class TableInfo {
 
     public String getBasePackage() {
         return generator.getBasePackage();
+    }
+
+    /**
+     * 初始化模板的上下文变量
+     *
+     * @return
+     */
+    public Map<String, Object> initTemplateContext() {
+        Map<String, Object> configs = new HashMap<>();
+        configs.put(KEY_TABLE, this.getTableName());
+        configs.put(KEY_ENTITY_PREFIX, this.getEntityPrefix());
+        configs.put(KEY_COMMENT, this.getComment());
+        configs.put(KEY_FIELD_NAMES, this.getFieldNames());
+        configs.put(KEY_FIELDS, this.getFields());
+        configs.put(KEY_PRIMARY, this.getPrimary());
+        configs.put(KEY_GMT_CREATE, this.getGmtCreateField());
+        configs.put(KEY_GMT_MODIFIED, this.getGmtModifiedField());
+        configs.put(KEY_IS_DELETED, this.getIsDeletedField());
+        return configs;
+    }
+
+    public List<String> getFieldTypes() {
+        return new ArrayList<>(this.fields.stream()
+            .map(field -> field.getJavaType().getImportName())
+            .filter(type -> type != null)
+            .collect(Collectors.toSet()));
     }
 }

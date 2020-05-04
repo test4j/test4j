@@ -1,12 +1,10 @@
 package org.test4j.generator.mybatis.model;
 
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import lombok.AccessLevel;
 import org.test4j.generator.mybatis.config.IDbQuery;
 import org.test4j.generator.mybatis.config.INameConvert;
 import org.test4j.generator.mybatis.config.ITypeConvert;
 import org.test4j.generator.mybatis.config.StrategyConfig;
-import org.test4j.generator.mybatis.rule.IColumnType;
 import org.test4j.generator.mybatis.rule.Naming;
 import lombok.Getter;
 import lombok.Setter;
@@ -26,72 +24,54 @@ import java.sql.SQLException;
 @Accessors(chain = true)
 public class TableField {
     /**
-     * 是否主键
+     * 字段类别
      */
     @Setter
-    private boolean primary;
-    /**
-     * 主键是否为自增类型
-     */
-    @Setter
-    private boolean autoIncrement;
+    private IFieldCategory category = IFieldCategory.Common;
     /**
      * 数据库字段名称
      */
-    private String columnName;
+    private final String columnName;
     /**
      * 数据库字段类型
      */
-    @Setter(AccessLevel.NONE)
-    private IColumnType columnType;
+    @Setter
+    private String columnType;
     /**
      * java字段名称
      */
-    @Setter
-    private String fieldName;
+    private String name;
     /**
-     * java字段类型
+     * 字段java类型
      */
-    @Setter
-    private String fieldType;
-
-    @Setter
+    private IJavaType javaType;
+    /**
+     * 字段类型
+     */
+    private String capitalName;
+    /**
+     * 字段注释
+     */
     private String comment;
 
-    public TableField(String columnName) {
+    @Getter(AccessLevel.NONE)
+    private final TableInfo tableInfo;
+
+    public TableField(TableInfo tableInfo, String columnName) {
+        this.tableInfo = tableInfo;
         this.columnName = columnName;
     }
 
-    public String getPropertyType() {
-        if (null != columnType) {
-            return columnType.getFieldType();
-        }
-        return null;
+    public String getType() {
+        return javaType.getFieldType();
     }
 
-    /**
-     * 按JavaBean规则来生成get和set方法
-     */
-    public String getCapitalName() {
-        if (fieldName.length() <= 1) {
-            return fieldName.toUpperCase();
-        }
-        // 第一个字母小写， 第二个字母大写，特殊处理
-        String firstChar = fieldName.substring(0, 1);
-        if (Character.isLowerCase(firstChar.toCharArray()[0]) && Character.isUpperCase(fieldName.substring(1, 2).toCharArray()[0])) {
-            return firstChar.toLowerCase() + fieldName.substring(1);
-        } else {
-            return firstChar.toUpperCase() + fieldName.substring(1);
-        }
-    }
-
-    public void initNaming(TableInfo table, ResultSet results) throws SQLException {
-        this.setConfig(table.getGenerator(), table.getBuildConfig(), tableInfo);
+    public void initNaming(ResultSet results) throws SQLException {
         this.initFieldName();
-        ITypeConvert typeConvert = this.generator.getDataSourceConfig().getTypeConvert();
-        this.columnType = typeConvert.processTypeConvert(this.buildConfig.getDateType(), this);
-        if (this.generator.isCommentSupported()) {
-            IDbQuery dbQuery = this.generator.getDataSourceConfig().getDbQuery();
+        ITypeConvert typeConvert = this.tableInfo.getGenerator().getDataSourceConfig().getTypeConvert();
+        this.javaType = typeConvert.processTypeConvert(this.tableInfo.getBuildConfig().getDateType(), this);
+        if (this.tableInfo.getGenerator().isCommentSupported()) {
+            IDbQuery dbQuery = this.tableInfo.getGenerator().getDataSourceConfig().getDbQuery();
             this.comment = results.getString(dbQuery.fieldComment());
         }
     }
@@ -105,10 +85,10 @@ public class TableField {
     private boolean needRemoveIsPrefix(StrategyConfig strategyConfig) {
         if (!strategyConfig.isEntityBooleanColumnRemoveIsPrefix()) {
             return false;
-        } else if (!"boolean".equalsIgnoreCase(this.fieldType)) {
+        } else if (!boolean.class.getSimpleName().equalsIgnoreCase(this.getType())) {
             return false;
         } else {
-            return this.fieldName.startsWith("is");
+            return this.name.startsWith("is");
         }
     }
 
@@ -116,40 +96,43 @@ public class TableField {
      * 处理字段名称
      */
     private void initFieldName() {
-        if (!StringHelper.isBlank(this.fieldName)) {
+        if (!StringHelper.isBlank(this.name)) {
             return;
         }
-        StrategyConfig strategyConfig = this.generator.getStrategyConfig();
+        StrategyConfig strategyConfig = this.tableInfo.getGenerator().getStrategyConfig();
         INameConvert nameConvert = strategyConfig.getNameConvert();
         if (null != nameConvert) {
-            this.fieldName = nameConvert.propertyNameConvert(this);
+            this.name = nameConvert.propertyNameConvert(this);
         } else {
             Naming naming = strategyConfig.getColumnNaming();
             if (naming == Naming.underline_to_camel) {
-                this.fieldName = Naming.underlineToCamel(this.columnName);
+                this.name = Naming.underlineToCamel(this.columnName);
             } else {
-                this.fieldName = this.columnName;
+                this.name = this.columnName;
             }
         }
         // Boolean类型is前缀处理
         if (this.needRemoveIsPrefix(strategyConfig)) {
-            this.fieldName = this.fieldName.substring(2, 1).toLowerCase() + this.fieldName.substring(3);
+            this.capitalName = this.name.substring(2, 1).toLowerCase() + this.name.substring(3);
+        } else if (name.length() <= 1) {
+            this.capitalName = name.toUpperCase();
+        } else {
+            // 第一个字母小写， 第二个字母大写，特殊处理
+            String firstChar = name.substring(0, 1);
+            if (Character.isLowerCase(firstChar.toCharArray()[0]) && Character.isUpperCase(name.substring(1, 2).toCharArray()[0])) {
+                this.capitalName = firstChar.toLowerCase() + name.substring(1);
+            } else {
+                this.capitalName = firstChar.toUpperCase() + name.substring(1);
+            }
         }
     }
 
-    @Getter(AccessLevel.NONE)
-    private BuildConfig buildConfig;
-
-    @Getter(AccessLevel.NONE)
-    private Generator generator;
-
-    @Getter(AccessLevel.NONE)
-    private TableInfo tableInfo;
-
-    public TableField setConfig(Generator generator, BuildConfig buildConfig, TableInfo tableInfo) {
-        this.generator = generator;
-        this.buildConfig = buildConfig;
-        this.tableInfo = tableInfo;
-        return this;
+    /**
+     * 是否主键
+     *
+     * @return
+     */
+    public boolean isPrimary() {
+        return this.category == IFieldCategory.PrimaryKey || this.category == IFieldCategory.PrimaryId;
     }
 }

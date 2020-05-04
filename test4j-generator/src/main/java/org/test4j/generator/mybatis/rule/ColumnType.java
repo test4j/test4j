@@ -1,11 +1,12 @@
 package org.test4j.generator.mybatis.rule;
 
 import lombok.Getter;
+import org.test4j.generator.mybatis.model.IJavaType;
 
 /**
  * 表字段类型
  */
-public enum ColumnType implements IColumnType {
+public enum ColumnType implements IJavaType {
     // 基本类型
     BASE_BYTE(byte.class.getSimpleName()),
     BASE_SHORT(short.class.getSimpleName()),

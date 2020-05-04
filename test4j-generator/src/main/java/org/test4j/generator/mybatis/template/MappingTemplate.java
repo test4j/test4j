@@ -11,13 +11,18 @@ public class MappingTemplate extends AbstractTableTemplate {
     }
 
     @Override
-    protected void templateConfigs(TableInfo table, Map<String, Object> configs) {
+    protected String getTemplateId() {
+        return KEY_MAPPING;
+    }
+
+    @Override
+    protected Map<String, Object> templateConfigs(TableInfo table) {
         String mappingName = super.getFileName(table);
         Map<String, Object> mapping = new HashMap<>();
         {
             mapping.put(KEY_NAME, mappingName);
             mapping.put(KEY_PACKAGE, super.getPackage(table));
         }
-        configs.put(KEY_MAPPING, mapping);
+        return mapping;
     }
 }
