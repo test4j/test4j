@@ -21,7 +21,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
-import java.util.function.BiConsumer;
 import java.util.stream.Collectors;
 
 /**
@@ -32,8 +31,6 @@ import java.util.stream.Collectors;
 @Getter
 @Accessors(chain = true)
 public class TableInfo {
-
-
     /**
      * 所有字段类型列表
      */
@@ -48,11 +45,6 @@ public class TableInfo {
      */
     @Setter
     private String entityPrefix;
-    /**
-     * entity后缀部分
-     */
-    @Setter
-    private String entitySuffix;
     /**
      * 记录创建字段名称
      */
@@ -76,7 +68,6 @@ public class TableInfo {
      * 执行模板生成各个步骤产生的上下文信息，比如Mapper名称等，供其他模板生成时引用
      */
     private Map<FileType, String> fileTypeName = new HashMap<>();
-
 
     /***********************************************/
     /****************以下是数据库信息******************/
@@ -183,30 +174,6 @@ public class TableInfo {
     }
 
     /**
-     * 返回模板变量
-     *
-     * @param consumer
-     * @return
-     */
-    public Map<String, Object> variables(BiConsumer<Map<String, Object>, TableInfo> consumer) {
-        Map<String, Object> info = new HashMap<>();
-        info.put("tableName", this.tableName);
-        info.put("entityPrefix", this.entityPrefix);
-        info.put("entitySuffix", this.entitySuffix);
-        info.put("entityName", this.entityPrefix + this.entitySuffix);
-        info.put("comment", this.comment);
-        info.put("fieldNames", this.fieldNames);
-        info.put("primary", this.primary);
-        info.put("gmtCreate", this.gmtCreateField);
-        info.put("gmtModified", this.gmtModifiedField);
-        info.put("isDeleted", this.isDeletedField);
-        info.put("fields", this.fields);
-        consumer.accept(info, this);
-        return info;
-    }
-
-
-    /**
      * 增加数据库字段
      *
      * @param field
@@ -266,13 +233,12 @@ public class TableInfo {
      */
     public void initTable() {
         if (StringHelper.isBlank(this.entityPrefix)) {
-            this.entityPrefix = this.initEntityName();
+            this.entityPrefix = this.getEntityName();
         }
-        this.initFileName();
         this.initTableFields();
     }
 
-    private String initEntityName() {
+    private String getEntityName() {
         StrategyConfig strategy = this.generator.getStrategyConfig();
         String propertyName = this.tableName;
         if (this.buildConfig.needRemovePrefix()) {
@@ -286,14 +252,6 @@ public class TableInfo {
             return nameConvert.entityNameConvert(this);
         } else {
             return Naming.capitalFirst(propertyName);
-        }
-    }
-
-    private void initFileName() {
-        this.fileTypeName = new HashMap<>();
-        for (Map.Entry<FileType, String> entry : this.buildConfig.getFileNameFormat().entrySet()) {
-            String format = entry.getValue();
-            this.fileTypeName.put(entry.getKey(), String.format(format, this.entityPrefix));
         }
     }
 
@@ -464,5 +422,9 @@ public class TableInfo {
             this.outputDir = this.generator.getOutputDir() + '/' + this.generator.getBasePackage().replace('.', '/');
         }
         return this.outputDir;
+    }
+
+    public String getBasePackage() {
+        return generator.getBasePackage();
     }
 }

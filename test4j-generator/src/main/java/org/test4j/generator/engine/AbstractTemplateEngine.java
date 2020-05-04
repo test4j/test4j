@@ -56,53 +56,6 @@ public abstract class AbstractTemplateEngine {
     public abstract void writer(Map<String, Object> objectMap, String templatePath, String outputFile) throws Exception;
 
 
-    /**
-     * 输出 java xml 文件
-     */
-//    public AbstractTemplateEngine batchOutput() {
-//        try {
-//            List<TableInfo> tableInfoList = getConfigBuilder().getTableInfoList();
-//            for (TableInfo tableInfo : tableInfoList) {
-//                Map<String, Object> objectMap = getObjectMap(tableInfo);
-//                Map<String, String> pathInfo = getConfigBuilder().getPathInfo();
-//                AbstractTableTemplate template = getConfigBuilder().getTemplate();
-//                // 自定义内容
-//                InjectionConfig injectionConfig = getConfigBuilder().getInjectionConfig();
-//                if (null != injectionConfig) {
-//                    injectionConfig.initMap();
-//                    objectMap.put("cfg", injectionConfig.getMap());
-//                    List<FileOutConfig> focList = injectionConfig.getFileOutConfigList();
-//                    if (CollectionUtils.isNotEmpty(focList)) {
-//                        for (FileOutConfig foc : focList) {
-//                            if (isCreate(FileType.OTHER, foc.outputFile(tableInfo))) {
-//                                writer(objectMap, foc.getTemplatePath(), foc.outputFile(tableInfo));
-//                            }
-//                        }
-//                    }
-//                }
-//                // Mp.java
-//                String entityName = tableInfo.getEntityName();
-//                if (null != entityName && null != pathInfo.get(FmGeneratorConst.ENTITY_PATH)) {
-//                    String entityFile = String.format((pathInfo.get(FmGeneratorConst.ENTITY_PATH) + File.separator + "%s" + suffixJavaOrKt()), entityName);
-//                    if (isCreate(FileType.ENTITY, entityFile)) {
-//                        writer(objectMap, templateFilePath(template.getEntity(getConfigBuilder().getGlobalConfig().isKotlin())), entityFile);
-//                    }
-//                }
-//                // MpMapper.java
-//                if (null != tableInfo.getMapperName() && null != pathInfo.get(FmGeneratorConst.MAPPER_PATH)) {
-//                    String mapperFile = String.format((pathInfo.get(FmGeneratorConst.MAPPER_PATH) + File.separator + tableInfo.getMapperName() + suffixJavaOrKt()), entityName);
-//                    if (isCreate(FileType.MAPPER, mapperFile)) {
-//                        writer(objectMap, templateFilePath(template.getMapper()), mapperFile);
-//                    }
-//                }
-//
-//            }
-//        } catch (Exception e) {
-//            log.error("无法创建文件，请检查配置信息！", e);
-//        }
-//        return this;
-//    }
-
 
 //    /**
 //     * 渲染对象 MAP 信息

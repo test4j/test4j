@@ -1,4 +1,4 @@
-package ${package.Entity};
+package ${entity.package};
 
 import cn.org.atool.fluent.mybatis.base.IEntity;
 import ${cfg.packEntityHelper}.${cfg.fileEntityHelper};
@@ -30,7 +30,7 @@ $!{cfg.interfacePack}
 #if(${table.convert})
 @TableName(${cfg.fileMP}.Table_Name)
 #end
-public class ${entity} implements IEntity #if(${cfg.interface}), ${cfg.interfaceName}#end{
+public class ${entity.name} implements IEntity #if(${cfg.interface}), ${cfg.interfaceName}#end{
     private static final long serialVersionUID = 1L;
 
 ## ---------- for each 字段循环开始 -----------

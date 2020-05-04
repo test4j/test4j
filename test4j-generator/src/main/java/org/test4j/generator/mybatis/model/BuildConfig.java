@@ -100,24 +100,6 @@ public class BuildConfig {
     }
 
     /**
-     * 表名称包含指定前缀
-     *
-     * @param tableName 表名称
-     */
-    public boolean containsTablePrefix(String tableName) {
-        String[] tablePrefix = getTablePrefix();
-        if (null == tablePrefix) {
-            return false;
-        }
-        for (String prefix : tablePrefix) {
-            if (tableName.contains(prefix)) {
-                return true;
-            }
-        }
-        return false;
-    }
-
-    /**
      * 是否需要做移除前缀处理
      *
      * @return
@@ -125,10 +107,4 @@ public class BuildConfig {
     public boolean needRemovePrefix() {
         return this.tablePrefix != null && this.tablePrefix.length != 0;
     }
-
-    private Map<FileType, String> fileNameFormat = new HashMap<FileType, String>() {
-        {
-            this.put(FileType.Entity, "%sEntity");
-        }
-    };
 }

@@ -8,6 +8,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import static org.test4j.generator.mybatis.model.ConfigKey.KEY_ENTITY_PREFIX;
+
 /**
  * 生成的对象
  *
@@ -42,9 +44,9 @@ public class GenerateObj {
         currConfig.remove();
         GenerateObj obj = new GenerateObj()
                 .setTableName(table.getTableName())
-                .setWithoutSuffixEntity(config.get("withoutSuffixEntity"))
+                .setWithoutSuffixEntity(config.get(KEY_ENTITY_PREFIX))
                 .setMix(config.get("fileTableMix"))
-                .setMixCleanMethod(String.format("clean%sTable", config.get("withoutSuffixEntity")))
+                .setMixCleanMethod(String.format("clean%sTable", config.get(KEY_ENTITY_PREFIX)))
                 .setMp(config.get("fileMP"))
                 .setTableMap(config.get("fileTableMap"))
                 .setEntityMap(config.get("fileEntityMap"));

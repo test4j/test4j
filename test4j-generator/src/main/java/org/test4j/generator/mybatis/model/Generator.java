@@ -61,7 +61,7 @@ public class Generator {
                 for (AbstractTableTemplate template : templateList) {
                     Map<String, Object> variables = template.initWith(tableInfo);
                     String filePath = template.getFilePath();
-                    info("==========================生成文件: " + template.getFileName());
+                    info("==========================生成文件: " + template.getFileNameReg());
                     Assert.notNull(filePath, "文件路径不能为空,[table=%s,template=%s]", tableInfo.getTableName(), template.getTemplate());
                     templateEngine.output(template.getTemplate(), variables, filePath);
                 }

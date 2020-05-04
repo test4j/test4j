@@ -4,13 +4,11 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.test4j.generator.engine.AbstractTemplateEngine;
 import org.test4j.generator.mybatis.model.BuildConfig;
+import org.test4j.generator.mybatis.model.ConfigKey;
 import org.test4j.generator.mybatis.model.TableInfo;
 
-import java.io.File;
-import java.util.Arrays;
-import java.util.List;
+import java.util.HashMap;
 import java.util.Map;
 
 /**
@@ -20,7 +18,7 @@ import java.util.Map;
  */
 @Data
 @Accessors(chain = true)
-public abstract class AbstractTableTemplate {
+public abstract class AbstractTableTemplate implements ConfigKey {
     /**
      * 模板内容
      */
@@ -63,16 +61,54 @@ public abstract class AbstractTableTemplate {
         this.template = template;
     }
 
-    public abstract void generate(BuildConfig config, TableInfo tableInfo);
-
     /**
      * 使用表信息初始化模板变量
      *
      * @param table
      * @return
      */
-    public abstract Map<String, Object> initWith(TableInfo table);
+    public final Map<String, Object> initWith(TableInfo table) {
+        this.filePath = table.getOutputDir() + "/" + this.fileNameReg.replace("*", table.getEntityPrefix());
 
+        Map<String, Object> configs = new HashMap<>();
+        {
+            configs.put(KEY_TABLE, table.getTableName());
+            configs.put(KEY_ENTITY_PREFIX, table.getEntityPrefix());
+            configs.put(KEY_COMMENT, table.getComment());
+            configs.put(KEY_FIELD_NAMES, table.getFieldNames());
+            configs.put(KEY_FIELDS, table.getFields());
+            configs.put(KEY_PRIMARY, table.getPrimary());
+            configs.put(KEY_GMT_CREATE, table.getGmtCreateField());
+            configs.put(KEY_GMT_MODIFIED, table.getGmtModifiedField());
+            configs.put(KEY_IS_DELETED, table.getIsDeletedField());
+        }
+        this.templateConfigs(table, configs);
+        return configs;
+    }
+
+    /**
+     * 模板自身的配置项
+     *
+     * @param table
+     * @param configs 原有的配置项
+     * @return
+     */
+    protected abstract void templateConfigs(TableInfo table, Map<String, Object> configs);
+
+    protected String getFileName(TableInfo table) {
+        int start = this.fileNameReg.lastIndexOf('/');
+        int end = this.fileNameReg.lastIndexOf('.');
+        return this.fileNameReg.substring(start + 1, end).replace("*", table.getEntityPrefix());
+    }
+
+    protected String getPackage(TableInfo table) {
+        int index = this.fileNameReg.lastIndexOf('/');
+        String sub = "";
+        if (index > 0) {
+            sub = this.fileNameReg.substring(0, index).replace('/', '.');
+        }
+        return table.getBasePackage() + "." + sub;
+    }
 
     /**
      * 模板类型
