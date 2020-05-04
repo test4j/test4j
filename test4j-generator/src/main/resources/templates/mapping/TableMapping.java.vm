@@ -1,22 +1,22 @@
-package ${cfg.packMP};
+package ${mapping.package};
 
 import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @ClassName ${cfg.fileMP}
- * @Description ${cfg.fileMP}
+ * @ClassName ${mapping.name}
+ * @Description ${table}映射定义
  *
  * @author ${author}
  */
-public interface ${cfg.fileMP} {
+public interface ${mapping.name} {
     /**
      * 实例属性和数据库字段对应表
      */
     Map<String, String> Property2Column = new HashMap<String,String>(){
         {
-        #foreach($field in ${table.fields})
-            this.put(Property.${field.propertyName}, Column.${field.name});
+        #foreach($field in ${fields})
+            this.put(Property.${field.fieldName}, Column.${field.columnName});
         #end
         }
     };
@@ -24,33 +24,33 @@ public interface ${cfg.fileMP} {
     /**
      * 表名称
      */
-    String Table_Name = "${table.name}";
+    String Table_Name = "${table}";
     /**
     * 实体名称
     */
-    String Entity_NAME = "${entity}";
+    String Entity_NAME = "${entityName}";
 
     /**
-     * 表${table.name}字段定义
+     * 表${table}字段定义
      */
     interface Column{
-        #foreach($field in ${table.fields})
+        #foreach($field in ${fields})
         /**
          * ${field.comment}
          */
-        String ${field.name} = "${field.name}";
+        String ${field.columnName} = "${field.columnName}";
         #end
     }
 
     /**
-     * 对象${entity}属性字段
+     * 对象${entityName}属性字段
      */
     interface Property{
-        #foreach($field in ${table.fields})
+        #foreach($field in ${fields})
         /**
          * ${field.comment}
          */
-        String ${field.propertyName} = "${field.propertyName}";
+        String ${field.fieldName} = "${field.fieldName}";
         #end
     }
 }

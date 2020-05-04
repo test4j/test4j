@@ -13,6 +13,7 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import org.test4j.generator.mybatis.config.DataSourceConfig;
 import org.test4j.generator.mybatis.template.AbstractTableTemplate;
 import org.test4j.generator.mybatis.template.EntityTemplate;
+import org.test4j.generator.mybatis.template.MappingTemplate;
 import org.test4j.hamcrest.Assert;
 
 import java.sql.PreparedStatement;
@@ -45,7 +46,8 @@ public class Generator {
     }
 
     public static List<AbstractTableTemplate> templateList = Arrays.asList(
-        new EntityTemplate()
+        new MappingTemplate()
+//        new EntityTemplate()
     );
 
     public void execute() {

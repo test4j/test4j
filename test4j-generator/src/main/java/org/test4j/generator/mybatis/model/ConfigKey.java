@@ -7,8 +7,6 @@ public interface ConfigKey {
 
     String KEY_ENTITY_NAME = "entityName";
 
-    String KEY_ENTITY = "entity";
-
     String KEY_COMMENT = "comment";
 
     String KEY_FIELD_NAMES = "fieldNames";
@@ -26,4 +24,9 @@ public interface ConfigKey {
     String KEY_PACKAGE = "package";
 
     String KEY_NAME = "name";
+
+
+    String KEY_MAPPING = "mapping";
+
+    String KEY_ENTITY = "entity";
 }

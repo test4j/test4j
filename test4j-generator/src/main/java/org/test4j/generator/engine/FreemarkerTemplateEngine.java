@@ -39,10 +39,4 @@ public class FreemarkerTemplateEngine extends AbstractTemplateEngine {
         }
         log.debug("模板:" + templatePath + ";  文件:" + outputFile);
     }
-
-
-    @Override
-    public String templateFilePath(String filePath) {
-        return filePath + ".ftl";
-    }
 }

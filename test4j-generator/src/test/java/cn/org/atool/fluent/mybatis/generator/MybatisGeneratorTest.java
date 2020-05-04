@@ -30,7 +30,7 @@ public class MybatisGeneratorTest {
         )
             .setOutputDir(outputDir, outputDir, outputDir)
             .setDataSource(url, "root", "password")
-            .setBasePackage("cn.demo")
+            .setBasePackage("cn.org.atool.fluent.mybatis.generator")
             .execute();
     }
 }

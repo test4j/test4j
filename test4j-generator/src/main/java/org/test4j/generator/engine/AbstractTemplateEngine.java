@@ -1,7 +1,5 @@
 package org.test4j.generator.engine;
 
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.test4j.generator.mybatis.model.BuildConfig;
 
@@ -99,27 +97,4 @@ public abstract class AbstractTemplateEngine {
 //        objectMap.put("superControllerClass", getSuperClassName(config.getSuperControllerClass()));
 //        return Objects.isNull(config.getInjectionConfig()) ? objectMap : config.getInjectionConfig().prepareObjectMap(objectMap);
 //    }
-
-
-    /**
-     * 获取类名
-     *
-     * @param classPath ignore
-     * @return ignore
-     */
-    private String getSuperClassName(String classPath) {
-        if (StringUtils.isEmpty(classPath)) {
-            return null;
-        }
-        return classPath.substring(classPath.lastIndexOf(StringPool.DOT) + 1);
-    }
-
-
-    /**
-     * 模板真实文件路径
-     *
-     * @param filePath 文件路径
-     * @return ignore
-     */
-    public abstract String templateFilePath(String filePath);
 }

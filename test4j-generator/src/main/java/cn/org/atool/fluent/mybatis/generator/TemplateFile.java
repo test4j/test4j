@@ -16,7 +16,7 @@
 //public class TemplateFile {
 //    public static final List<TemplateFile> TEMPLATE_FILE_LIST = new ArrayList<TemplateFile>() {
 //        {
-//            this.add(new TemplateFile("mapping/TableMapping.java.vm", "mapping/*MP.java"));
+//            this.add(new TemplateFile("", ""));
 //            this.add(new TemplateFile("entity/EntityHelper.java.vm", "helper/*EntityHelper.java"));
 //            this.add(new TemplateFile("query/Query.java.vm", "query/*EntityQuery.java"));
 //            this.add(new TemplateFile("query/Update.java.vm", "query/*EntityUpdate.java"));
