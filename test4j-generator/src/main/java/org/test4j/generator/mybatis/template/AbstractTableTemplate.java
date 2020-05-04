@@ -112,6 +112,15 @@ public abstract class AbstractTableTemplate implements ConfigKey {
 
     /**
      * 模板类型
+     *
+     * @return
+     */
+    public TemplateType getTemplateType() {
+        return TemplateType.Base;
+    }
+
+    /**
+     * 模板类型
      */
     public enum TemplateType {
         Base,

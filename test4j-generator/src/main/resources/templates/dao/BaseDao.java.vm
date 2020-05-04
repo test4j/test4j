@@ -1,9 +1,9 @@
-package ${cfg.packBaseDao};
+package ${baseDao.package};
 
 import cn.org.atool.fluent.mybatis.base.BaseDaoImpl;
-import ${package.Entity}.${entity};
-import ${package.Mapper}.${table.mapperName};
-import ${cfg.packMP}.${cfg.fileMP};
+import ${entity.package}.${entity.name};
+import ${mapper.package}.${mapper.name};
+import ${mapping.package}.${mapping.name};
 import ${cfg.packEntityQuery}.${cfg.fileEntityQuery};
 import ${cfg.packEntityUpdate}.${cfg.fileEntityUpdate};
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,18 +12,18 @@ ${cfg.baseDaoInterfaceImports}
 #end
 
 /**
-* ${entity}数据库操作服务类
+* ${entity.name}数据库操作服务类
  *
  * @author ${author}
 */
-public abstract class ${cfg.fileBaseDao} extends BaseDaoImpl<${entity}, ${cfg.fileEntityQuery}, ${cfg.fileEntityUpdate}>
-        implements ${cfg.fileMP}#if(${cfg.baseDaoInterfaceImplement}), ${cfg.baseDaoInterfaceImplement}#end {
+public abstract class ${baseDao.name} extends BaseDaoImpl<${entity.name}, ${cfg.fileEntityQuery}, ${cfg.fileEntityUpdate}>
+        implements ${mapping.name}#if(${cfg.baseDaoInterfaceImplement}), ${cfg.baseDaoInterfaceImplement}#end {
 
     @Autowired
-    protected ${table.mapperName} mapper;
+    protected ${mapper.name} mapper;
 
     @Override
-    public ${table.mapperName} mapper() {
+    public ${mapper.name} mapper() {
         return mapper;
     }
 
@@ -39,13 +39,13 @@ public abstract class ${cfg.fileBaseDao} extends BaseDaoImpl<${entity}, ${cfg.fi
 
     @Override
     public String findPkColumn() {
-#foreach($field in ${table.fields})
-    #if(${field.keyFlag})
-        #set($keyPropertyName=${field.propertyName})
+#foreach($field in ${fields})
+    #if(${field.primary})
+        #set($primaryKey=${field.name})
     #end
 #end
-    #if(${keyPropertyName})
-        return ${cfg.fileMP}.Column.${keyPropertyName};
+    #if(${primaryKey})
+        return ${mapping.name}.Column.${primaryKey};
     #else
         throw new RuntimeException("undefine primary key");
     #end

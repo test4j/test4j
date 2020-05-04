@@ -1,6 +1,6 @@
-package ${package.Mapper};
+package ${mapper.package};
 
-import ${package.Entity}.${entity};
+import ${entity.package}.${entity.name};
 import cn.org.atool.fluent.mybatis.mapper.IEntityMapper;
 import org.apache.ibatis.annotations.Mapper;
 #if(${cfg.mapperPrefix})
@@ -18,9 +18,5 @@ import org.springframework.stereotype.Component;
 #if(${cfg.mapperPrefix})
 @Component("${cfg.mapperPrefix}${table.mapperName}")
 #end
-#if(${kotlin})
-interface ${table.mapperName} : IEntityMapper<${entity}>
-#else
-public interface ${table.mapperName} extends IEntityMapper<${entity}>{
+public interface ${mapper.name} extends IEntityMapper<${entity.name}>{
 }
-#end

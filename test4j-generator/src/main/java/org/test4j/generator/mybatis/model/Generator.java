@@ -59,6 +59,9 @@ public class Generator {
                     template.initContext(tableInfo, context);
                 }
                 for (AbstractTableTemplate template : TemplateList.templates) {
+                    if (template.isPartition() && !tableInfo.isPartition()) {
+                        continue;
+                    }
                     String filePath = template.getFilePath();
                     info("==========================生成文件: " + template.getFileNameReg());
                     Assert.notNull(filePath, "文件路径不能为空,[table=%s,template=%s]", tableInfo.getTableName(), template.getTemplate());
