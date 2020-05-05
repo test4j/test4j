@@ -1,9 +1,9 @@
-package org.test4j.generator.mybatis.convert;
+package org.test4j.generator.mybatis.db.convert;
 
-import org.test4j.generator.mybatis.config.ITypeConvert;
-import org.test4j.generator.mybatis.rule.ColumnType;
-import org.test4j.generator.mybatis.rule.DateType;
-import org.test4j.generator.mybatis.model.IJavaType;
+import org.test4j.generator.mybatis.db.ITypeConvert;
+import org.test4j.generator.mybatis.db.ColumnType;
+import org.test4j.generator.mybatis.db.DateType;
+import org.test4j.generator.mybatis.db.IJavaType;
 
 /**
  * ORACLE 字段类型转换

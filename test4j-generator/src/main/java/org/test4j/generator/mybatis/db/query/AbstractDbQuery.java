@@ -1,4 +1,6 @@
-package org.test4j.generator.mybatis.query;
+package org.test4j.generator.mybatis.db.query;
+
+import org.test4j.generator.mybatis.db.IDbQuery;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;

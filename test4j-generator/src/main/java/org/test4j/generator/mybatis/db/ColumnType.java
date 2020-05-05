@@ -1,7 +1,6 @@
-package org.test4j.generator.mybatis.rule;
+package org.test4j.generator.mybatis.db;
 
 import lombok.Getter;
-import org.test4j.generator.mybatis.model.IJavaType;
 
 /**
  * 表字段类型

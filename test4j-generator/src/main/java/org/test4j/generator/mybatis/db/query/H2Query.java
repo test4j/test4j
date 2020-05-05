@@ -1,10 +1,9 @@
-package org.test4j.generator.mybatis.query.impl;
+package org.test4j.generator.mybatis.db.query;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-import org.test4j.generator.mybatis.query.AbstractDbQuery;
-import org.test4j.generator.mybatis.rule.DbType;
+import org.test4j.generator.mybatis.db.DbType;
 
 /**
  * H2Database 表数据查询

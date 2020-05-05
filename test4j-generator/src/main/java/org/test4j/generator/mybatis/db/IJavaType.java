@@ -1,4 +1,4 @@
-package org.test4j.generator.mybatis.model;
+package org.test4j.generator.mybatis.db;
 
 /**
  * 获取字段属性类型

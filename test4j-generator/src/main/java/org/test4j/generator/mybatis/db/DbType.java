@@ -1,11 +1,9 @@
-package org.test4j.generator.mybatis.rule;
+package org.test4j.generator.mybatis.db;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
-import org.test4j.generator.mybatis.config.ITypeConvert;
-import org.test4j.generator.mybatis.convert.*;
-import org.test4j.generator.mybatis.query.*;
-import org.test4j.generator.mybatis.query.impl.*;
+import org.test4j.generator.mybatis.db.convert.*;
+import org.test4j.generator.mybatis.db.query.*;
 
 /**
  * 数据库类型

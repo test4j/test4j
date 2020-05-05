@@ -1,7 +1,6 @@
-package org.test4j.generator.mybatis.query.impl;
+package org.test4j.generator.mybatis.db.query;
 
-import org.test4j.generator.mybatis.query.AbstractDbQuery;
-import org.test4j.generator.mybatis.rule.DbType;
+import org.test4j.generator.mybatis.db.DbType;
 
 /**
  * Sqlite 表数据查询

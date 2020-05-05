@@ -1,7 +1,6 @@
 package org.test4j.generator.mybatis.config;
 
 import lombok.Getter;
-import org.test4j.generator.mybatis.rule.Naming;
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.experimental.Accessors;

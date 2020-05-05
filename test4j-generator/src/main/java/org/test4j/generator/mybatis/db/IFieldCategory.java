@@ -1,4 +1,4 @@
-package org.test4j.generator.mybatis.model;
+package org.test4j.generator.mybatis.db;
 
 /**
  * IFieldCategory

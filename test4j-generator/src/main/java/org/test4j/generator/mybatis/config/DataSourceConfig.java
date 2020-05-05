@@ -2,8 +2,9 @@ package org.test4j.generator.mybatis.config;
 
 import lombok.Data;
 import lombok.experimental.Accessors;
-import org.test4j.generator.mybatis.query.IDbQuery;
-import org.test4j.generator.mybatis.rule.DbType;
+import org.test4j.generator.mybatis.db.IDbQuery;
+import org.test4j.generator.mybatis.db.ITypeConvert;
+import org.test4j.generator.mybatis.db.DbType;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

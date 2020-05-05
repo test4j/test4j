@@ -1,4 +1,4 @@
-package org.test4j.generator.mybatis.rule;
+package org.test4j.generator.mybatis.config;
 
 import org.test4j.tools.commons.StringConst;
 import org.test4j.tools.commons.StringHelper;
@@ -85,7 +85,7 @@ public enum Naming {
         if (!StringHelper.isBlank(name)) {
             return name.substring(0, 1).toUpperCase() + name.substring(1);
         } else {
-            return StringPool.EMPTY;
+            return "";
         }
     }
 }

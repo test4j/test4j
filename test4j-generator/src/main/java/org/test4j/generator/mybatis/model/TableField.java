@@ -1,10 +1,12 @@
 package org.test4j.generator.mybatis.model;
 
 import lombok.AccessLevel;
-import org.test4j.generator.mybatis.query.IDbQuery;
-import org.test4j.generator.mybatis.config.ITypeConvert;
+import org.test4j.generator.mybatis.db.IDbQuery;
+import org.test4j.generator.mybatis.db.IFieldCategory;
+import org.test4j.generator.mybatis.db.IJavaType;
+import org.test4j.generator.mybatis.db.ITypeConvert;
 import org.test4j.generator.mybatis.config.StrategyConfig;
-import org.test4j.generator.mybatis.rule.Naming;
+import org.test4j.generator.mybatis.config.Naming;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;

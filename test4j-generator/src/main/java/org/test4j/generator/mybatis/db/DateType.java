@@ -1,4 +1,4 @@
-package org.test4j.generator.mybatis.rule;
+package org.test4j.generator.mybatis.db;
 
 /**
  * 数据库时间类型转换

@@ -3,11 +3,13 @@ package org.test4j.generator.mybatis.model;
 import lombok.Getter;
 import lombok.Setter;
 import org.test4j.generator.mybatis.config.*;
-import org.test4j.generator.mybatis.query.impl.H2Query;
-import org.test4j.generator.mybatis.query.IDbQuery;
-import org.test4j.generator.mybatis.rule.DbType;
+import org.test4j.generator.mybatis.db.IFieldCategory;
+import org.test4j.generator.mybatis.db.IJavaType;
+import org.test4j.generator.mybatis.db.query.H2Query;
+import org.test4j.generator.mybatis.db.IDbQuery;
+import org.test4j.generator.mybatis.db.DbType;
 import lombok.experimental.Accessors;
-import org.test4j.generator.mybatis.rule.Naming;
+import org.test4j.generator.mybatis.config.Naming;
 import org.test4j.tools.commons.StringHelper;
 
 import java.sql.PreparedStatement;

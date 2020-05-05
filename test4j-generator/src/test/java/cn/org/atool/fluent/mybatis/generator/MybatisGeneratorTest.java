@@ -2,7 +2,7 @@ package cn.org.atool.fluent.mybatis.generator;
 
 import org.test4j.generator.mybatis.config.BuildConfig;
 import org.test4j.generator.mybatis.model.Generator;
-import org.test4j.generator.mybatis.rule.ColumnType;
+import org.test4j.generator.mybatis.db.ColumnType;
 import org.junit.jupiter.api.Test;
 
 public class MybatisGeneratorTest {

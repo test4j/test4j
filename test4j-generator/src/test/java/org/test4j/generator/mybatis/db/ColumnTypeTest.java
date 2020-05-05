@@ -1,12 +1,10 @@
-package org.test4j.generator.mybatis.rule;
+package org.test4j.generator.mybatis.db;
 
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.test4j.generator.mybatis.db.ColumnType;
 import org.test4j.junit5.Test4J;
 import org.test4j.tools.datagen.DataProvider;
-
-import static org.junit.jupiter.api.Assertions.*;
 
 class ColumnTypeTest extends Test4J {
 
