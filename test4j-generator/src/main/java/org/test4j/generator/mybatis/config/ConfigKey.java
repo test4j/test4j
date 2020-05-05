@@ -14,6 +14,8 @@ public interface ConfigKey {
 
     String KEY_COMMENT = "comment";
 
+    String KEY_AUTHOR = "author";
+
     String KEY_FIELD_NAMES = "fieldNames";
 
     String KEY_FIELDS = "fields";

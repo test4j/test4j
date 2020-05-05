@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * @ClassName AddressDaoImpl
  * @Description AddressEntity数据操作实现类
  *
- * @author ${author}
+ * @author generate code
  */
 @Repository
 public class AddressDaoImpl extends AddressBaseDao implements AddressDao {

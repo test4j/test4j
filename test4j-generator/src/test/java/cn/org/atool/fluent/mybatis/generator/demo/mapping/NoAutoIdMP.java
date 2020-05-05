@@ -7,7 +7,7 @@ import java.util.Map;
  * @ClassName NoAutoIdMP
  * @Description no_auto_id映射定义
  *
- * @author ${author}
+ * @author generate code
  */
 public interface NoAutoIdMP {
     /**

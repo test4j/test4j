@@ -96,6 +96,15 @@ public enum DbType {
         public ITypeConvert newConvert() {
             return new SqliteTypeConvert();
         }
+
+        /**
+         * SQLITE 数据库不支持注释获取
+         * @return
+         */
+        @Override
+        public boolean isCommentSupported() {
+            return false;
+        }
     },
     /**
      * POSTGRE
@@ -138,6 +147,15 @@ public enum DbType {
     public abstract AbstractDbQuery newQuery();
 
     public abstract ITypeConvert newConvert();
+
+    /**
+     * 数据库是否支持获取注释
+     *
+     * @return
+     */
+    public boolean isCommentSupported() {
+        return true;
+    }
 
     /**
      * 判断数据库类型（默认 MySql）

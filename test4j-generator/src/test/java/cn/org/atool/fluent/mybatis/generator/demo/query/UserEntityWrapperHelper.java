@@ -16,7 +16,7 @@ import java.util.Date;
  * UserEntity 查询更新帮助类
  * </p>
  *
- * @author ${author}
+ * @author generate code
  */
 class UserEntityWrapperHelper {
     public static class And<Q extends AbstractWrapper & IProperty2Column> extends BaseQueryAnd<Q> {

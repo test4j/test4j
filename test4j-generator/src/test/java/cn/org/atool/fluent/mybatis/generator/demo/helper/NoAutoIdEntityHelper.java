@@ -12,7 +12,7 @@ import java.util.Map;
  * 
  * </p>
  *
- * @author ${author}
+ * @author generate code
  */
 public class NoAutoIdEntityHelper implements NoAutoIdMP{
 

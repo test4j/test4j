@@ -70,7 +70,7 @@ public class TableField {
         this.initFieldName();
         ITypeConvert typeConvert = this.tableInfo.getGenerator().getDataSourceConfig().getTypeConvert();
         this.javaType = typeConvert.processTypeConvert(this.tableInfo.getBuildConfig().getDateType(), this);
-        if (this.tableInfo.getGenerator().isCommentSupported()) {
+        if (this.tableInfo.getGenerator().getDataSourceConfig().getDbType().isCommentSupported()) {
             IDbQuery dbQuery = this.tableInfo.getGenerator().getDataSourceConfig().getDbQuery();
             this.comment = results.getString(dbQuery.fieldComment());
         }

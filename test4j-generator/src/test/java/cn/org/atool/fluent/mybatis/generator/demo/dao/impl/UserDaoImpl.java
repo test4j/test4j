@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * @ClassName UserDaoImpl
  * @Description UserEntity数据操作实现类
  *
- * @author ${author}
+ * @author generate code
  */
 @Repository
 public class UserDaoImpl extends UserBaseDao implements UserDao {

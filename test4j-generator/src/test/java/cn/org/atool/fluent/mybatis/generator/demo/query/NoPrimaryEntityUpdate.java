@@ -22,7 +22,7 @@ import cn.org.atool.fluent.mybatis.generator.demo.query.NoPrimaryEntityWrapperHe
  * @ClassName NoPrimaryEntityUpdate
  * @Description NoPrimaryEntity更新设置
  *
- * @author ${author}
+ * @author generate code
  */
 public class NoPrimaryEntityUpdate extends AbstractWrapper<NoPrimaryEntity, String, NoPrimaryEntityUpdate>
     implements IEntityUpdate<NoPrimaryEntityUpdate>, IProperty2Column {

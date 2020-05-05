@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  * @ClassName AddressDao
  * @Description AddressEntity数据操作接口
  *
- * @author ${author}
+ * @author generate code
  */
 @Repository
 public interface AddressDao extends IBaseDao<AddressEntity>  {

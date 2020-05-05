@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * @ClassName NoAutoIdDaoImpl
  * @Description NoAutoIdEntity数据操作实现类
  *
- * @author ${author}
+ * @author generate code
  */
 @Repository
 public class NoAutoIdDaoImpl extends NoAutoIdBaseDao implements NoAutoIdDao {

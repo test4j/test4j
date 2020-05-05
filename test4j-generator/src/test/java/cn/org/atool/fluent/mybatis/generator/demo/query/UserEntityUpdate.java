@@ -22,7 +22,7 @@ import cn.org.atool.fluent.mybatis.generator.demo.query.UserEntityWrapperHelper.
  * @ClassName UserEntityUpdate
  * @Description UserEntity更新设置
  *
- * @author ${author}
+ * @author generate code
  */
 public class UserEntityUpdate extends AbstractWrapper<UserEntity, String, UserEntityUpdate>
     implements IEntityUpdate<UserEntityUpdate>, IProperty2Column {

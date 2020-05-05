@@ -16,7 +16,7 @@ import cn.org.atool.fluent.mybatis.generator.demo.mapping.UserMP.Column;
  * @ClassName UserTableMap
  * @Description UserTableMap
  *
- * @author ${author}
+ * @author generate code
  */
 @TableName(UserMP.Table_Name)
 public class UserTableMap extends DataMap<UserTableMap> {

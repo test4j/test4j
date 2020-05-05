@@ -16,7 +16,7 @@ import cn.org.atool.fluent.mybatis.generator.demo.mapping.NoAutoIdMP.Column;
  * @ClassName NoAutoIdTableMap
  * @Description NoAutoIdTableMap
  *
- * @author ${author}
+ * @author generate code
  */
 @TableName(NoAutoIdMP.Table_Name)
 public class NoAutoIdTableMap extends DataMap<NoAutoIdTableMap> {

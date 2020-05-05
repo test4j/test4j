@@ -26,7 +26,7 @@ import cn.org.atool.fluent.mybatis.generator.demo.query.NoAutoIdEntityWrapperHel
  * @ClassName NoAutoIdEntityQuery
  * @Description NoAutoIdEntity查询（删除）条件
  *
- * @author ${author}
+ * @author generate code
  */
 public class NoAutoIdEntityQuery extends AbstractWrapper<NoAutoIdEntity, String, NoAutoIdEntityQuery>
     implements IEntityQuery<NoAutoIdEntityQuery, NoAutoIdEntity>, IProperty2Column {

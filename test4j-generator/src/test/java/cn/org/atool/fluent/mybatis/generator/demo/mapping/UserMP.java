@@ -7,7 +7,7 @@ import java.util.Map;
  * @ClassName UserMP
  * @Description t_user映射定义
  *
- * @author ${author}
+ * @author generate code
  */
 public interface UserMP {
     /**

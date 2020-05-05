@@ -10,7 +10,7 @@ import static cn.org.atool.fluent.mybatis.generator.demo.mapping.AddressMP.Table
 /**
  * 数据库address表数据准备和校验通用方法
  *
- * @author ${author}
+ * @author generate code
  */
 public class AddressTableMix implements IMix {
     @Step("清空表[" + Table_Name + "]数据")

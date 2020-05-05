@@ -7,7 +7,7 @@ import java.util.Map;
  * @ClassName NoPrimaryMP
  * @Description no_primary映射定义
  *
- * @author ${author}
+ * @author generate code
  */
 public interface NoPrimaryMP {
     /**

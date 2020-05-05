@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  * @ClassName UserDao
  * @Description UserEntity数据操作接口
  *
- * @author ${author}
+ * @author generate code
  */
 @Repository
 public interface UserDao extends IBaseDao<UserEntity>  {

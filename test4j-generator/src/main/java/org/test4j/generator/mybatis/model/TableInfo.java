@@ -416,9 +416,9 @@ public class TableInfo {
 
     private BuildConfig buildConfig;
 
-    private Generator generator;
+    private MyBatisGenerator generator;
 
-    public TableInfo setConfig(BuildConfig buildConfig, Generator generator) {
+    public TableInfo setConfig(BuildConfig buildConfig, MyBatisGenerator generator) {
         this.buildConfig = buildConfig;
         this.generator = generator;
         return this;
@@ -453,6 +453,7 @@ public class TableInfo {
             configs.put(KEY_COMMENT, this.getComment());
             configs.put(KEY_FIELD_NAMES, this.getFieldNames());
             configs.put(KEY_FIELDS, this.getFields());
+            configs.put(KEY_AUTHOR,this.buildConfig.getAuthor());
         }
         {
             String types = this.fields.stream()

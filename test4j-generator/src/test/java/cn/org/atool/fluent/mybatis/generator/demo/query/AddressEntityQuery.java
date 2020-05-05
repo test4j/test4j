@@ -26,7 +26,7 @@ import cn.org.atool.fluent.mybatis.generator.demo.query.AddressEntityWrapperHelp
  * @ClassName AddressEntityQuery
  * @Description AddressEntity查询（删除）条件
  *
- * @author ${author}
+ * @author generate code
  */
 public class AddressEntityQuery extends AbstractWrapper<AddressEntity, String, AddressEntityQuery>
     implements IEntityQuery<AddressEntityQuery, AddressEntity>, IProperty2Column {

@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
 * UserEntity数据库操作服务类
  *
- * @author ${author}
+ * @author generate code
 */
 public abstract class UserBaseDao extends BaseDaoImpl<UserEntity, UserEntityQuery, UserEntityUpdate>
         implements UserMP {

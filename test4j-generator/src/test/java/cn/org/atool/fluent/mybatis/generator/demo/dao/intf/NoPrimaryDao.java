@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  * @ClassName NoPrimaryDao
  * @Description NoPrimaryEntity数据操作接口
  *
- * @author ${author}
+ * @author generate code
  */
 @Repository
 public interface NoPrimaryDao extends IBaseDao<NoPrimaryEntity>  {

@@ -26,7 +26,7 @@ import cn.org.atool.fluent.mybatis.generator.demo.query.NoPrimaryEntityWrapperHe
  * @ClassName NoPrimaryEntityQuery
  * @Description NoPrimaryEntity查询（删除）条件
  *
- * @author ${author}
+ * @author generate code
  */
 public class NoPrimaryEntityQuery extends AbstractWrapper<NoPrimaryEntity, String, NoPrimaryEntityQuery>
     implements IEntityQuery<NoPrimaryEntityQuery, NoPrimaryEntity>, IProperty2Column {

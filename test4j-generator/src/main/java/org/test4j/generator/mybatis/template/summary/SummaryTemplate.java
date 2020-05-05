@@ -1,14 +1,11 @@
 package org.test4j.generator.mybatis.template.summary;
 
 import lombok.Data;
-import org.test4j.generator.mybatis.model.Generator;
-
-import java.util.ArrayList;
-import java.util.List;
+import org.test4j.generator.mybatis.model.MyBatisGenerator;
 
 @Data
 public class SummaryTemplate {
-    private Generator generator;
+    private MyBatisGenerator generator;
 
     private String templateId;
 

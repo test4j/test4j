@@ -33,13 +33,13 @@ import static org.test4j.module.core.utility.MessageHelper.info;
 @Slf4j
 @Setter
 @Getter
-public class Generator {
+public class MyBatisGenerator {
     private AbstractTemplateEngine templateEngine = new VelocityTemplateEngine();
 
     @Setter(AccessLevel.NONE)
     private List<BuildConfig> configs = new ArrayList<>();
 
-    public Generator(BuildConfig... configs) {
+    public MyBatisGenerator(BuildConfig... configs) {
         for (BuildConfig config : configs) {
             config.setGenerator(this);
             this.configs.add(config);
@@ -107,7 +107,7 @@ public class Generator {
                         continue;
                     }
                     existed.add(tableName);
-                    if (this.isCommentSupported()) {
+                    if (dataSourceConfig.getDbType().isCommentSupported()) {
                         String tableComment = results.getString(dataSourceConfig.getDbQuery().tableComment());
                         tableInfo.setComment(tableComment);
                     }
@@ -203,7 +203,7 @@ public class Generator {
     @Setter(AccessLevel.NONE)
     private String daoOutputDir = System.getProperty("user.dir") + "/target/generate/dao";
 
-    public Generator setOutputDir(String outputDir, String testOutputDir, String daoOutputDir) {
+    public MyBatisGenerator setOutputDir(String outputDir, String testOutputDir, String daoOutputDir) {
         this.outputDir = outputDir;
         this.testOutputDir = testOutputDir;
         this.daoOutputDir = daoOutputDir;
@@ -215,25 +215,14 @@ public class Generator {
      */
     private DataSourceConfig dataSourceConfig;
 
-    public Generator setDataSource(String url, String username, String password) {
+    public MyBatisGenerator setDataSource(String url, String username, String password) {
         return this.setDataSource(url, username, password, null);
     }
 
-    public Generator setDataSource(String url, String username, String password, ITypeConvert typeConvert) {
+    public MyBatisGenerator setDataSource(String url, String username, String password, ITypeConvert typeConvert) {
         this.dataSourceConfig = new DataSourceConfig(DbType.MYSQL, "com.mysql.jdbc.Driver", url, username, password)
             .setTypeConvert(typeConvert);
         return this;
-    }
-
-    /**
-     * 是否支持注释
-     */
-    @Getter(AccessLevel.NONE)
-    private boolean commentSupported = true;
-
-    public boolean isCommentSupported() {
-        //SQLITE 数据库不支持注释获取
-        return commentSupported && !dataSourceConfig.getDbType().equals(DbType.SQLITE);
     }
 
     /**
@@ -248,7 +237,7 @@ public class Generator {
     @Setter(AccessLevel.NONE)
     private String packageDir;
 
-    public Generator setBasePackage(String basePackage) {
+    public MyBatisGenerator setBasePackage(String basePackage) {
         this.basePackage = basePackage;
         this.packageDir = '/' + basePackage.replace('.', '/') + '/';
         return this;

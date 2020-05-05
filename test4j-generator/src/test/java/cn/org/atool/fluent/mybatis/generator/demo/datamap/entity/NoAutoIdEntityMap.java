@@ -8,7 +8,7 @@ import org.test4j.tools.datagen.KeyValue;
  * @ClassName NoAutoIdEntityMap
  * @Description NoAutoIdEntityMap
  *
- * @author ${author}
+ * @author generate code
  */
 public class NoAutoIdEntityMap extends DataMap<NoAutoIdEntityMap> {
     /**

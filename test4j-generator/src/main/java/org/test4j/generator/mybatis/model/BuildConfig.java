@@ -19,7 +19,7 @@ import java.util.function.Consumer;
 @Data
 @Accessors(chain = true)
 public class BuildConfig {
-    private Generator generator;
+    private MyBatisGenerator generator;
     /**
      * 开发人员
      */

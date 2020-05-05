@@ -18,7 +18,7 @@ import java.util.Date;
  * 
  * </p>
  *
- * @author ${author}
+ * @author generate code
  */
 @Getter
 @Setter

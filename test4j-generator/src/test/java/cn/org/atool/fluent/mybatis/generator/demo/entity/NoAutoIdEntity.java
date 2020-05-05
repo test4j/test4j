@@ -18,7 +18,7 @@ import java.io.Serializable;
  * 
  * </p>
  *
- * @author ${author}
+ * @author generate code
  */
 @Getter
 @Setter

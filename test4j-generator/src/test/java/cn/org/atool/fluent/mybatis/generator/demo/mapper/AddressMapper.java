@@ -9,7 +9,7 @@ import org.apache.ibatis.annotations.Mapper;
  *  Mapper接口
  * </p>
  *
- * @author ${author}
+ * @author generate code
  */
 @Mapper
 public interface AddressMapper extends IEntityMapper<AddressEntity>{

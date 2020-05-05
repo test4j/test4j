@@ -16,7 +16,7 @@ import cn.org.atool.fluent.mybatis.generator.demo.mapping.NoPrimaryMP.Column;
  * @ClassName NoPrimaryTableMap
  * @Description NoPrimaryTableMap
  *
- * @author ${author}
+ * @author generate code
  */
 @TableName(NoPrimaryMP.Table_Name)
 public class NoPrimaryTableMap extends DataMap<NoPrimaryTableMap> {

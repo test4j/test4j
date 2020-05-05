@@ -8,7 +8,7 @@ import org.test4j.tools.datagen.KeyValue;
  * @ClassName AddressEntityMap
  * @Description AddressEntityMap
  *
- * @author ${author}
+ * @author generate code
  */
 public class AddressEntityMap extends DataMap<AddressEntityMap> {
     /**

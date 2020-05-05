@@ -22,7 +22,7 @@ import cn.org.atool.fluent.mybatis.generator.demo.query.AddressEntityWrapperHelp
  * @ClassName AddressEntityUpdate
  * @Description AddressEntity更新设置
  *
- * @author ${author}
+ * @author generate code
  */
 public class AddressEntityUpdate extends AbstractWrapper<AddressEntity, String, AddressEntityUpdate>
     implements IEntityUpdate<AddressEntityUpdate>, IProperty2Column {

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
  * @ClassName NoPrimaryDaoImpl
  * @Description NoPrimaryEntity数据操作实现类
  *
- * @author ${author}
+ * @author generate code
  */
 @Repository
 public class NoPrimaryDaoImpl extends NoPrimaryBaseDao implements NoPrimaryDao {

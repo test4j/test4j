@@ -22,7 +22,7 @@ import cn.org.atool.fluent.mybatis.generator.demo.query.NoAutoIdEntityWrapperHel
  * @ClassName NoAutoIdEntityUpdate
  * @Description NoAutoIdEntity更新设置
  *
- * @author ${author}
+ * @author generate code
  */
 public class NoAutoIdEntityUpdate extends AbstractWrapper<NoAutoIdEntity, String, NoAutoIdEntityUpdate>
     implements IEntityUpdate<NoAutoIdEntityUpdate>, IProperty2Column {

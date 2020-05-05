@@ -11,7 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 /**
 * NoPrimaryEntity数据库操作服务类
  *
- * @author ${author}
+ * @author generate code
 */
 public abstract class NoPrimaryBaseDao extends BaseDaoImpl<NoPrimaryEntity, NoPrimaryEntityQuery, NoPrimaryEntityUpdate>
         implements NoPrimaryMP {

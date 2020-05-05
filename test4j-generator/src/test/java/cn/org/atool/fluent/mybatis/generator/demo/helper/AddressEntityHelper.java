@@ -12,7 +12,7 @@ import java.util.Date;
  * 
  * </p>
  *
- * @author ${author}
+ * @author generate code
  */
 public class AddressEntityHelper implements AddressMP{
 

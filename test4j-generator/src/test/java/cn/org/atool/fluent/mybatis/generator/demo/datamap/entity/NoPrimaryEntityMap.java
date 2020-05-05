@@ -8,7 +8,7 @@ import org.test4j.tools.datagen.KeyValue;
  * @ClassName NoPrimaryEntityMap
  * @Description NoPrimaryEntityMap
  *
- * @author ${author}
+ * @author generate code
  */
 public class NoPrimaryEntityMap extends DataMap<NoPrimaryEntityMap> {
     /**

@@ -8,7 +8,7 @@ import org.test4j.tools.datagen.KeyValue;
  * @ClassName UserEntityMap
  * @Description UserEntityMap
  *
- * @author ${author}
+ * @author generate code
  */
 public class UserEntityMap extends DataMap<UserEntityMap> {
     /**

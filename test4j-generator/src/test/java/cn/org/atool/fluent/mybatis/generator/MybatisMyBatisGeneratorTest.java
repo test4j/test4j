@@ -1,17 +1,17 @@
 package cn.org.atool.fluent.mybatis.generator;
 
 import org.test4j.generator.mybatis.model.BuildConfig;
-import org.test4j.generator.mybatis.model.Generator;
+import org.test4j.generator.mybatis.model.MyBatisGenerator;
 import org.test4j.generator.mybatis.db.ColumnType;
 import org.junit.jupiter.api.Test;
 
-public class MybatisGeneratorTest {
+public class MybatisMyBatisGeneratorTest {
     private static String url = "jdbc:mysql://localhost:3306/fluent_mybatis";
 
     @Test
     public void generate() {
         String outputDir = System.getProperty("user.dir") + "/src/test/java";
-        new Generator(
+        new MyBatisGenerator(
             new BuildConfig()
                 .setTablePrefix("t_")
                 .addTable("address")

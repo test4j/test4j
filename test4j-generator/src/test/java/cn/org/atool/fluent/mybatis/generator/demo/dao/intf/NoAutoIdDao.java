@@ -8,7 +8,7 @@ import org.springframework.stereotype.Repository;
  * @ClassName NoAutoIdDao
  * @Description NoAutoIdEntity数据操作接口
  *
- * @author ${author}
+ * @author generate code
  */
 @Repository
 public interface NoAutoIdDao extends IBaseDao<NoAutoIdEntity>  {

@@ -8,7 +8,7 @@ import cn.org.atool.fluent.mybatis.mapper.PartitionMapper;
  *  分库分表Mapper接口
  * </p>
  *
- * @author ${author}
+ * @author generate code
  */
 public interface UserPartitionMapper extends PartitionMapper<UserEntity>{
 }

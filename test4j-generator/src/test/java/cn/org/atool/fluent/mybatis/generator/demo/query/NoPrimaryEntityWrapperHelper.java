@@ -16,7 +16,7 @@ import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
  * NoPrimaryEntity 查询更新帮助类
  * </p>
  *
- * @author ${author}
+ * @author generate code
  */
 class NoPrimaryEntityWrapperHelper {
     public static class And<Q extends AbstractWrapper & IProperty2Column> extends BaseQueryAnd<Q> {

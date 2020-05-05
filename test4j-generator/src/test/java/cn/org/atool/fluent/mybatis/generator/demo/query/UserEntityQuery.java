@@ -26,7 +26,7 @@ import cn.org.atool.fluent.mybatis.generator.demo.query.UserEntityWrapperHelper.
  * @ClassName UserEntityQuery
  * @Description UserEntity查询（删除）条件
  *
- * @author ${author}
+ * @author generate code
  */
 public class UserEntityQuery extends AbstractWrapper<UserEntity, String, UserEntityQuery>
     implements IEntityQuery<UserEntityQuery, UserEntity>, IProperty2Column {
