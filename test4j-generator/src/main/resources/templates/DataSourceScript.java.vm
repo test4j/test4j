@@ -15,8 +15,8 @@ public class DataSourceScript implements IDataSourceScript {
     @Override
     public List<Class> getTableKlass() {
         return list(
-        #foreach(${obj} in ${objs})
-                ${obj.tableMap}.class#if($i<${objs.size()}),#end
+        #foreach(${config} in ${configs})
+                ${config.tableMap.name}.class#if($i<${configs.size()}),#end
             #set ($i=$i+1)
 
         #end

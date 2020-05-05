@@ -16,7 +16,6 @@ public class EntityUpdateTemplate extends BaseTemplate {
     }
 
     @Override
-    protected Map<String, Object> templateConfigs(TableInfo table) {
-        return null;
+    protected void templateConfigs(TableInfo table, Map<String, Object> context) {
     }
 }

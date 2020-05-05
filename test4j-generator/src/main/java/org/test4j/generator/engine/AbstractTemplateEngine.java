@@ -1,7 +1,6 @@
 package org.test4j.generator.engine;
 
 import lombok.extern.slf4j.Slf4j;
-import org.test4j.generator.mybatis.config.BuildConfig;
 
 import java.io.File;
 import java.nio.charset.StandardCharsets;
@@ -19,24 +18,19 @@ public abstract class AbstractTemplateEngine {
     public final static String VM_LOAD_PATH_KEY = "file.resource.loader.class";
     public final static String VM_LOAD_PATH_VALUE = "org.apache.velocity.runtime.resource.loader.ClasspathResourceLoader";
 
-
-    /**
-     * 配置信息
-     */
-    protected BuildConfig config;
-
-    /**
-     * 模板引擎初始化
-     */
-    public AbstractTemplateEngine init(BuildConfig config) {
-        this.config = config;
-        return this;
+    public AbstractTemplateEngine() {
+        this.init();
     }
 
+
+    public abstract AbstractTemplateEngine init();
+
     /**
-     * 输出模板
+     * 根据模板生成文件
      *
-     * @param template
+     * @param template 模板id
+     * @param config   模板上下文变量
+     * @param filePath 输出文件路径
      */
     public void output(String template, Map<String, Object> config, String filePath) {
         try {

@@ -33,19 +33,18 @@ public class EntityTemplate extends BaseTemplate {
     }
 
     @Override
-    protected Map<String, Object> templateConfigs(TableInfo table) {
-        Map<String, Object> entity = new HashMap<>();
-        if (!this.interfaces.isEmpty()) {
-            entity.put("interface",
-                this.interfaces.stream().map(i -> "import " + i).collect(joining(";\n"))
-            );
-            entity.put("interfaceName",
-                this.interfaces.stream().map(i -> {
-                    int last = i.lastIndexOf('.');
-                    return i.substring(last + 1);
-                }).collect(joining(" ,"))
-            );
+    protected void templateConfigs(TableInfo table, Map<String, Object> context) {
+        if (this.interfaces.isEmpty()) {
+            return;
         }
-        return entity;
+        context.put("interface",
+            this.interfaces.stream().map(i -> "import " + i + ";").collect(joining("\n"))
+        );
+        context.put("interfaceName",
+            this.interfaces.stream().map(i -> {
+                int last = i.lastIndexOf('.');
+                return i.substring(last + 1);
+            }).collect(joining(" ,"))
+        );
     }
 }

@@ -11,14 +11,14 @@ import org.test4j.module.spec.annotations.Mixes;
  */
 @Mixes
 public class TableMixes {
-    #foreach(${obj} in ${objs})
+    #foreach(${config} in ${configs})
     @Mix
-    public ${obj.tableMixName} ${obj.mixInstance};
+    public ${config.tableMix.name} ${config.tableMix.instance};
 
     #end
     public void cleanAllTable() {
-    #foreach(${obj} in ${objs})
-        this.${obj.mixInstance}.${obj.mixCleanMethod}();
+    #foreach(${config} in ${configs})
+        this.${config.tableMix.instance}.${config.tableMix.cleanMethod}();
     #end
     }
 }

@@ -20,9 +20,6 @@ public class EntityWrapperHelperTemplate extends BaseTemplate {
     }
 
     @Override
-    protected Map<String, Object> templateConfigs(TableInfo table) {
-        Map<String, Object> wrapper = new HashMap<>();
-
-        return wrapper;
+    protected void templateConfigs(TableInfo table, Map<String, Object> context) {
     }
 }

@@ -7,8 +7,8 @@ import ${basePackage}.mapping.*;
  * @author: generate code
  */
 public interface ITable {
-    #foreach(${obj} in ${objs})
+    #foreach(${config} in ${configs})
 
-    String t_${obj.tableName} = ${obj.mappingName}.Table_Name;
+    String t_${config.table} = ${config.mapping.name}.Table_Name;
     #end
 }

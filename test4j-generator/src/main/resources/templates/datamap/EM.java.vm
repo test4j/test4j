@@ -6,8 +6,8 @@ import ${basePackage}.datamap.entity.*;
  * Entity Data Map
  */
 public interface EM {
-#foreach(${obj} in ${objs})
+#foreach(${config} in ${configs})
 
-    ${obj.entityMap}.Factory ${obj.camelEntity} = new ${obj.entityMap}.Factory();
+    ${config.entityMap.name}.Factory ${config.entityMap.instance} = new ${config.entityMap.name}.Factory();
 #end
 }

@@ -6,8 +6,8 @@ import ${basePackage}.datamap.table.*;
  * Table Data Map
  */
 public interface TM {
-#foreach(${obj} in ${objs})
+#foreach(${config} in ${configs})
 
-    ${obj.tableMap}.Factory ${obj.tableName} = new ${obj.tableMap}.Factory();
+    ${config.tableMap.name}.Factory ${config.table} = new ${config.tableMap.name}.Factory();
 #end
 }

@@ -13,6 +13,7 @@ import org.test4j.generator.mybatis.db.DbType;
 import org.test4j.generator.mybatis.config.DataSourceConfig;
 import org.test4j.generator.mybatis.template.BaseTemplate;
 import org.test4j.generator.mybatis.template.TemplateList;
+import org.test4j.generator.mybatis.template.summary.SummaryTemplate;
 import org.test4j.hamcrest.Assert;
 import org.test4j.tools.commons.StringHelper;
 
@@ -47,9 +48,8 @@ public class Generator {
     }
 
     public void execute() {
-        List<GenerateObj> generateObjs = new ArrayList<>();
+        List<Map<String, Object>> allContext = new ArrayList<>();
         for (BuildConfig config : this.configs) {
-            templateEngine.init(config);
             info("===数据库元信息初始化...");
             this.initTableInfos(config);
             info("===准备生成文件...");
@@ -74,12 +74,20 @@ public class Generator {
                     Assert.notNull(filePath, "文件路径不能为空,[table=%s,template=%s]", tableInfo.getTableName(), template.getTemplate());
                     templateEngine.output(template.getTemplate(), context, filePath);
                 }
-                generateObjs.add(GenerateObj.init(tableInfo, context));
+                allContext.add(context);
             }
             info("===文件生成完成！！！");
             open(config);
         }
-        GenerateObj.generate(generateObjs, outputDir, testOutputDir, basePackage);
+        Map<String, Object> wrapper = new HashMap<>();
+        {
+            wrapper.put("configs", allContext);
+            wrapper.put("basePackage", this.basePackage);
+        }
+        for (SummaryTemplate summary : SummaryTemplate.summaries) {
+            summary.setGenerator(this);
+            templateEngine.output(summary.getTemplateId(), wrapper, summary.getFilePath());
+        }
     }
 
     /**
@@ -238,8 +246,12 @@ public class Generator {
      */
     private String basePackage;
 
+    @Setter(AccessLevel.NONE)
+    private String packageDir;
+
     public Generator setBasePackage(String basePackage) {
         this.basePackage = basePackage;
+        this.packageDir = '/' + basePackage.replace('.', '/') + '/';
         return this;
     }
 }

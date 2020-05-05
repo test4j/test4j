@@ -53,21 +53,16 @@ public abstract class BaseTemplate {
      * 使用表信息初始化模板变量
      *
      * @param table
-     * @param configs
      * @return
      */
     public final Map<String, Object> initContext(TableInfo table) {
         this.filePath = table.outputDir(this.outputDir) + this.fileNameReg.replace("*", table.getEntityPrefix());
-        Map<String, Object> context = this.templateConfigs(table);
-        if (context == null) {
-            context = new HashMap<>();
-        }
-        if (!context.containsKey(KEY_NAME)) {
+        Map<String, Object> context = new HashMap<>();
+        {
             context.put(KEY_NAME, this.getFileName(table));
-        }
-        if (!context.containsKey(KEY_PACKAGE)) {
             context.put(KEY_PACKAGE, this.getPackage(table));
         }
+        this.templateConfigs(table, context);
         return context;
     }
 
@@ -77,17 +72,18 @@ public abstract class BaseTemplate {
      * 模板自身的配置项
      *
      * @param table
+     * @param context
      * @return
      */
-    protected abstract Map<String, Object> templateConfigs(TableInfo table);
+    protected abstract void templateConfigs(TableInfo table, Map<String, Object> context);
 
-    private String getFileName(TableInfo table) {
+    protected String getFileName(TableInfo table) {
         int start = this.fileNameReg.lastIndexOf('/');
         int end = this.fileNameReg.lastIndexOf('.');
         return this.fileNameReg.substring(start + 1, end).replace("*", table.getEntityPrefix());
     }
 
-    private String getPackage(TableInfo table) {
+    protected String getPackage(TableInfo table) {
         int index = this.fileNameReg.lastIndexOf('/');
         String sub = "";
         if (index > 0) {

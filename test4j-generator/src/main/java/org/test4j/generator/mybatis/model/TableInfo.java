@@ -421,20 +421,15 @@ public class TableInfo {
         return this;
     }
 
-    String packDir;
-
     public String outputDir(OutputDir dirType) {
-        if (packDir == null) {
-            this.packDir = '/' + this.generator.getBasePackage().replace('.', '/') + "/";
-        }
         switch (dirType) {
             case Dao:
-                return this.getGenerator().getDaoOutputDir() + packDir;
+                return this.getGenerator().getDaoOutputDir() + this.getGenerator().getPackageDir();
             case Test:
-                return this.getGenerator().getTestOutputDir() + packDir;
+                return this.getGenerator().getTestOutputDir() + this.getGenerator().getPackageDir();
             case Base:
             default:
-                return this.getGenerator().getOutputDir() + packDir;
+                return this.getGenerator().getOutputDir() + this.getGenerator().getPackageDir();
         }
     }
 

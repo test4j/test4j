@@ -43,4 +43,7 @@ public interface TemplateList {
         new TableMapTemplate(),
         new TableMixTemplate()
     );
+
+
+
 }
