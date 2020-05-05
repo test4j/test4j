@@ -1,15 +1,15 @@
-package ${cfg.packDao};
+package ${daoIntf.package};
 
 import cn.org.atool.fluent.mybatis.base.IBaseDao;
-import ${package.Entity}.${entity};
+import ${entity.package}.${entity.name};
 import org.springframework.stereotype.Repository;
 
 /**
- * @ClassName ${cfg.fileDao}
- * @Description ${entity}数据操作接口
+ * @ClassName ${daoIntf.name}
+ * @Description ${entity.name}数据操作接口
  *
  * @author ${author}
  */
 @Repository
-public interface ${cfg.fileDao} extends IBaseDao<${entity}>  {
+public interface ${daoIntf.name} extends IBaseDao<${entity.name}>  {
 }

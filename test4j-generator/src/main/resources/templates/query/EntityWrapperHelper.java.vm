@@ -8,7 +8,7 @@ import cn.org.atool.fluent.mybatis.base.IProperty2Column;
 import ${mapping.package}.${mapping.name}.Property;
 import ${mapping.package}.${mapping.name}.Column;
 import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
-${wrapperHelper.importTypes}
+${importTypes}
 
 /**
  * <p>

@@ -4,10 +4,8 @@ import org.test4j.generator.mybatis.model.TableInfo;
 import org.test4j.generator.mybatis.template.BaseTemplate;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import static java.util.stream.Collectors.joining;
 
 public class EntityHelperTemplate extends BaseTemplate {
     public EntityHelperTemplate() {
@@ -23,14 +21,7 @@ public class EntityHelperTemplate extends BaseTemplate {
     protected Map<String, Object> templateConfigs(TableInfo table) {
         Map<String, Object> helper = new HashMap<>();
         {
-            helper.put(KEY_NAME, super.getFileName(table));
-            helper.put(KEY_PACKAGE, super.getPackage(table));
-        }
-        {
-            List<String> types = table.getFieldTypes();
-            helper.put("importTypes",
-                types.stream().map(type -> "import " + type + ";").sorted().collect(joining("\n"))
-            );
+
         }
         return helper;
     }

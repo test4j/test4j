@@ -5,7 +5,7 @@ import ${mapping.package}.${mapping.name};
 
 import java.util.HashMap;
 import java.util.Map;
-$!{entityHelper.importTypes}
+$!{importTypes}
 
 /**
  * <p>

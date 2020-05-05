@@ -10,7 +10,8 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.util.Map;
-$!{entity.importTypes}
+import java.io.Serializable;
+$!{importTypes}
 #if(${entity.interface})import ${entity.interfaceName};#end
 
 /**

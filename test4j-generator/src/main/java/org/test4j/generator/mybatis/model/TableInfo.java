@@ -463,22 +463,23 @@ public class TableInfo {
      */
     public Map<String, Object> initTemplateContext() {
         Map<String, Object> configs = new HashMap<>();
-        configs.put(KEY_TABLE, this.getTableName());
-        configs.put(KEY_ENTITY_PREFIX, this.getEntityPrefix());
-        configs.put(KEY_COMMENT, this.getComment());
-        configs.put(KEY_FIELD_NAMES, this.getFieldNames());
-        configs.put(KEY_FIELDS, this.getFields());
-        configs.put(KEY_PRIMARY, this.getPrimary());
-        configs.put(KEY_GMT_CREATE, this.getGmtCreateField());
-        configs.put(KEY_GMT_MODIFIED, this.getGmtModifiedField());
-        configs.put(KEY_IS_DELETED, this.getIsDeletedField());
+        {
+            configs.put(KEY_TABLE, this.getTableName());
+            configs.put(KEY_ENTITY_PREFIX, this.getEntityPrefix());
+            configs.put(KEY_COMMENT, this.getComment());
+            configs.put(KEY_FIELD_NAMES, this.getFieldNames());
+            configs.put(KEY_FIELDS, this.getFields());
+        }
+        {
+            String types = this.fields.stream()
+                .map(field -> field.getJavaType().getImportName())
+                .filter(type -> type != null)
+                .distinct()
+                .sorted()
+                .map(type -> "import " + type + ";")
+                .collect(Collectors.joining("\n"));
+            configs.put("importTypes", types);
+        }
         return configs;
-    }
-
-    public List<String> getFieldTypes() {
-        return new ArrayList<>(this.fields.stream()
-            .map(field -> field.getJavaType().getImportName())
-            .filter(type -> type != null)
-            .collect(Collectors.toSet()));
     }
 }

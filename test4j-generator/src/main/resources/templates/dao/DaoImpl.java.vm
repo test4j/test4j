@@ -1,16 +1,16 @@
-package ${cfg.packDaoImpl};
+package ${daoImpl.package};
 
-import ${cfg.packBaseDao}.${cfg.fileBaseDao};
-import ${cfg.packDao}.${cfg.fileDao};
+import ${baseDao.package}.${baseDao.name};
+import ${daoIntf.package}.${daoIntf.name};
 import org.springframework.stereotype.Repository;
 
 
 /**
- * @ClassName ${cfg.fileDaoImpl}
- * @Description ${entity}数据操作实现类
+ * @ClassName ${daoImpl.name}
+ * @Description ${entity.name}数据操作实现类
  *
  * @author ${author}
  */
 @Repository
-public class ${cfg.fileDaoImpl} extends ${cfg.fileBaseDao} implements ${cfg.fileDao} {
+public class ${daoImpl.name} extends ${baseDao.name} implements ${daoIntf.name} {
 }

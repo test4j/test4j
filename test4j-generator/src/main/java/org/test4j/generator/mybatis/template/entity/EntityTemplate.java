@@ -34,13 +34,6 @@ public class EntityTemplate extends BaseTemplate {
     @Override
     protected Map<String, Object> templateConfigs(TableInfo table) {
         Map<String, Object> entity = new HashMap<>();
-        {
-            List<String> types = table.getFieldTypes();
-            types.add(Serializable.class.getName());
-            entity.put("importTypes",
-                types.stream().map(type -> "import " + type + ";").sorted().collect(joining("\n"))
-            );
-        }
         if (!this.interfaces.isEmpty()) {
             entity.put("interface",
                 this.interfaces.stream().map(i -> "import " + i).collect(joining(";\n"))
