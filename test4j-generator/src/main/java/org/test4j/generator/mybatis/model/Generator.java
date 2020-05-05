@@ -6,7 +6,6 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.test4j.generator.engine.AbstractTemplateEngine;
 import org.test4j.generator.engine.VelocityTemplateEngine;
-import org.test4j.generator.mybatis.config.BuildConfig;
 import org.test4j.generator.mybatis.db.ITypeConvert;
 import org.test4j.generator.mybatis.config.StrategyConfig;
 import org.test4j.generator.mybatis.db.DbType;

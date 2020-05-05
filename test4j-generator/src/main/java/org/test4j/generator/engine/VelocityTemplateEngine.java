@@ -1,7 +1,6 @@
 package org.test4j.generator.engine;
 
 import lombok.extern.slf4j.Slf4j;
-import org.test4j.generator.mybatis.config.BuildConfig;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;

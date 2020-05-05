@@ -206,36 +206,39 @@ public class TableInfo {
         return column != null && column.isExclude();
     }
 
-
-    public TableInfo addImportTypes(String... types) {
-        for (String type : types) {
-            importTypes.add(type);
-        }
-        return this;
-    }
-
     /**
      * 处理表  名称
      *
      * @return 根据策略返回处理后的名称
      */
     public void initTable() {
-        if (StringHelper.isBlank(this.entityPrefix)) {
-            this.entityPrefix = this.getEntityName();
-        }
+        this.initEntityPrefix();
         this.initTableFields();
     }
 
-    private String getEntityName() {
+    private void initEntityPrefix() {
+        if (!StringHelper.isBlank(this.entityPrefix)) {
+            return;
+        }
         StrategyConfig strategy = this.generator.getStrategyConfig();
-        String propertyName = this.tableName;
-        if (this.buildConfig.needRemovePrefix()) {
-            propertyName = Naming.removePrefix(this.tableName, this.buildConfig.getTablePrefix());
-        }
+        String prefix = this.getNoPrefixTableName();
         if (strategy.getTableNaming() == Naming.underline_to_camel) {
-            propertyName = Naming.underlineToCamel(this.tableName);
+            prefix = Naming.underlineToCamel(prefix);
         }
-        return Naming.capitalFirst(propertyName);
+        this.entityPrefix = Naming.capitalFirst(prefix);
+    }
+
+    /**
+     * 返回
+     *
+     * @return
+     */
+    public String getNoPrefixTableName() {
+        if (this.buildConfig.needRemovePrefix()) {
+            return Naming.removePrefix(this.tableName, this.buildConfig.getTablePrefix());
+        } else {
+            return this.tableName;
+        }
     }
 
     /**

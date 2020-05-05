@@ -1,12 +1,10 @@
-package org.test4j.generator.mybatis.config;
+package org.test4j.generator.mybatis.model;
 
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.test4j.generator.mybatis.model.Generator;
-import org.test4j.generator.mybatis.model.TableInfo;
 import org.test4j.generator.mybatis.db.DateType;
 
 import java.util.HashMap;

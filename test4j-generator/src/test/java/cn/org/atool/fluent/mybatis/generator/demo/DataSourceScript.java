@@ -15,7 +15,7 @@ public class DataSourceScript implements IDataSourceScript {
     public List<Class> getTableKlass() {
         return list(
                 AddressTableMap.class,
-                TUserTableMap.class,
+                UserTableMap.class,
                 NoPrimaryTableMap.class,
                 NoAutoIdTableMap.class
         );

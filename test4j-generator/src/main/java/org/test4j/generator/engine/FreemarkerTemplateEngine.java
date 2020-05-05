@@ -1,7 +1,6 @@
 package org.test4j.generator.engine;
 
 import lombok.extern.slf4j.Slf4j;
-import org.test4j.generator.mybatis.config.BuildConfig;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 

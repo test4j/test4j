@@ -9,7 +9,7 @@ public interface TM {
 
     AddressTableMap.Factory address = new AddressTableMap.Factory();
 
-    TUserTableMap.Factory t_user = new TUserTableMap.Factory();
+    UserTableMap.Factory t_user = new UserTableMap.Factory();
 
     NoPrimaryTableMap.Factory no_primary = new NoPrimaryTableMap.Factory();
 

@@ -19,8 +19,8 @@ public class TableMixTemplate extends BaseTemplate {
 
     @Override
     protected void templateConfigs(TableInfo table, Map<String, Object> context) {
-        String name = (String) context.get("name");
-        context.put("instance", name.substring(0, 1).toLowerCase() + name.substring(1));
+        String name = table.getEntityPrefix();
+        context.put("instance", name.substring(0, 1).toLowerCase() + name.substring(1) + "TableMix");
         context.put("cleanMethod", String.format("clean%sTable", table.getEntityPrefix()));
     }
 }

@@ -9,7 +9,7 @@ public interface EM {
 
     AddressEntityMap.Factory address = new AddressEntityMap.Factory();
 
-    TUserEntityMap.Factory tUser = new TUserEntityMap.Factory();
+    UserEntityMap.Factory user = new UserEntityMap.Factory();
 
     NoPrimaryEntityMap.Factory noPrimary = new NoPrimaryEntityMap.Factory();
 
