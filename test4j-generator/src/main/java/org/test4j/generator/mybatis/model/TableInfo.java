@@ -178,13 +178,13 @@ public class TableInfo {
         if (this.isExclude(fieldName)) {
             return false;
         }
-        if (this.gmtCreate.equalsIgnoreCase(fieldName)) {
+        if (fieldName.equalsIgnoreCase(this.gmtCreate)) {
             field.setCategory(IFieldCategory.GmtCreate);
             this.gmtCreateField = field;
-        } else if (this.gmtModified.equalsIgnoreCase(fieldName)) {
+        } else if (fieldName.equalsIgnoreCase(this.gmtModified)) {
             field.setCategory(IFieldCategory.GmtModified);
             this.gmtModifiedField = field;
-        } else if (this.logicDeleted.equalsIgnoreCase(fieldName)) {
+        } else if (fieldName.equalsIgnoreCase(this.logicDeleted)) {
             field.setCategory(IFieldCategory.IsDeleted);
             this.isDeletedField = field;
         } else if (field.isPrimary()) {
