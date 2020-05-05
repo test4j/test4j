@@ -1,16 +1,13 @@
-package org.test4j.generator.mybatis.model;
+package org.test4j.generator.mybatis.config;
 
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.apache.commons.lang3.StringUtils;
-import org.test4j.generator.mybatis.config.DataSourceConfig;
-import org.test4j.generator.mybatis.config.ITypeConvert;
-import org.test4j.generator.mybatis.config.StrategyConfig;
+import org.test4j.generator.mybatis.model.Generator;
+import org.test4j.generator.mybatis.model.TableInfo;
 import org.test4j.generator.mybatis.rule.DateType;
-import org.test4j.generator.mybatis.rule.DbType;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -18,6 +15,8 @@ import java.util.function.Consumer;
 
 /**
  * 全局构建配置项
+ *
+ * @author wudarui
  */
 @Data
 @Accessors(chain = true)

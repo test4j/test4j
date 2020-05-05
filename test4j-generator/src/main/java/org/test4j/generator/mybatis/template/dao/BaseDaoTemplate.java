@@ -1,5 +1,6 @@
 package org.test4j.generator.mybatis.template.dao;
 
+import org.test4j.generator.mybatis.config.OutputDir;
 import org.test4j.generator.mybatis.model.TableInfo;
 import org.test4j.generator.mybatis.template.BaseTemplate;
 
@@ -8,7 +9,7 @@ import java.util.Map;
 public class BaseDaoTemplate extends BaseTemplate {
     public BaseDaoTemplate() {
         super("templates/dao/BaseDao.java.vm", "dao/base/*BaseDao.java");
-        super.setBaseDao(true);
+        this.outputDir = OutputDir.Base;
     }
 
     @Override

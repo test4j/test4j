@@ -8,7 +8,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.test4j.generator.mybatis.model.ConfigKey.KEY_ENTITY_PREFIX;
+import static org.test4j.generator.mybatis.config.ConfigKey.KEY_ENTITY_PREFIX;
 
 /**
  * 生成的对象

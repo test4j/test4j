@@ -1,5 +1,6 @@
-package org.test4j.generator.mybatis.query;
+package org.test4j.generator.mybatis.query.impl;
 
+import org.test4j.generator.mybatis.query.AbstractDbQuery;
 import org.test4j.generator.mybatis.rule.DbType;
 
 /**

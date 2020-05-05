@@ -5,9 +5,12 @@ import lombok.Getter;
 import org.test4j.generator.mybatis.config.ITypeConvert;
 import org.test4j.generator.mybatis.convert.*;
 import org.test4j.generator.mybatis.query.*;
+import org.test4j.generator.mybatis.query.impl.*;
 
 /**
  * 数据库类型
+ *
+ * @author wudarui
  */
 @Getter
 @AllArgsConstructor
@@ -113,7 +116,7 @@ public enum DbType {
     /**
      * SQLSERVER
      */
-    SQL_SERVER("sqlserver", "SQLServer数据库"){
+    SQL_SERVER("sqlserver", "SQLServer数据库") {
         @Override
         public AbstractDbQuery newQuery() {
             return new SqlServerQuery();

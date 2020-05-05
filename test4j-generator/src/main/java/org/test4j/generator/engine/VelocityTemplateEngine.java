@@ -3,8 +3,7 @@ package org.test4j.generator.engine;
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.test4j.generator.mybatis.model.BuildConfig;
-import org.test4j.generator.mybatis.model.FmGeneratorConst;
+import org.test4j.generator.mybatis.config.BuildConfig;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
@@ -24,7 +23,6 @@ import java.util.Properties;
 @Slf4j
 public class VelocityTemplateEngine extends AbstractTemplateEngine {
 
-    private static final String DOT_VM = ".vm";
     private VelocityEngine velocityEngine;
 
     @Override
@@ -32,10 +30,10 @@ public class VelocityTemplateEngine extends AbstractTemplateEngine {
         super.init(config);
         if (null == velocityEngine) {
             Properties p = new Properties();
-            p.setProperty(FmGeneratorConst.VM_LOAD_PATH_KEY, FmGeneratorConst.VM_LOAD_PATH_VALUE);
+            p.setProperty(VM_LOAD_PATH_KEY, VM_LOAD_PATH_VALUE);
             p.setProperty(Velocity.FILE_RESOURCE_LOADER_PATH, StringPool.EMPTY);
-            p.setProperty(Velocity.ENCODING_DEFAULT, FmGeneratorConst.UTF8);
-            p.setProperty(Velocity.INPUT_ENCODING, FmGeneratorConst.UTF8);
+            p.setProperty(Velocity.ENCODING_DEFAULT, UTF8);
+            p.setProperty(Velocity.INPUT_ENCODING, UTF8);
             p.setProperty("file.resource.loader.unicode", StringPool.TRUE);
             velocityEngine = new VelocityEngine(p);
         }
@@ -48,9 +46,9 @@ public class VelocityTemplateEngine extends AbstractTemplateEngine {
         if (StringUtils.isEmpty(templatePath)) {
             return;
         }
-        Template template = velocityEngine.getTemplate(templatePath, FmGeneratorConst.UTF8);
+        Template template = velocityEngine.getTemplate(templatePath, UTF8);
         try (FileOutputStream fos = new FileOutputStream(outputFile);
-             OutputStreamWriter ow = new OutputStreamWriter(fos, FmGeneratorConst.UTF8);
+             OutputStreamWriter ow = new OutputStreamWriter(fos, UTF8);
              BufferedWriter writer = new BufferedWriter(ow)) {
             template.merge(new VelocityContext(objectMap), writer);
         }

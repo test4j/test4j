@@ -1,5 +1,6 @@
 package org.test4j.generator.mybatis.template.mix;
 
+import org.test4j.generator.mybatis.config.OutputDir;
 import org.test4j.generator.mybatis.model.TableInfo;
 import org.test4j.generator.mybatis.template.BaseTemplate;
 

@@ -6,6 +6,7 @@ import lombok.Setter;
 import lombok.extern.slf4j.Slf4j;
 import org.test4j.generator.engine.AbstractTemplateEngine;
 import org.test4j.generator.engine.VelocityTemplateEngine;
+import org.test4j.generator.mybatis.config.BuildConfig;
 import org.test4j.generator.mybatis.config.ITypeConvert;
 import org.test4j.generator.mybatis.config.StrategyConfig;
 import org.test4j.generator.mybatis.rule.DbType;
@@ -56,10 +57,10 @@ public class Generator {
                 TableInfo tableInfo = entry.getValue();
                 // 初始化各个模板需要的变量
                 Map<String, Object> context = tableInfo.initTemplateContext();
-                for (BaseTemplate template : TemplateList.templates) {
+                for (BaseTemplate template : TemplateList.ALL_TEMPLATES) {
                     template.initContext(tableInfo, context);
                 }
-                for (BaseTemplate template : TemplateList.templates) {
+                for (BaseTemplate template : TemplateList.ALL_TEMPLATES) {
                     if (template.isPartition() && !tableInfo.isPartition()) {
                         continue;
                     }

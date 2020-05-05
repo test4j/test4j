@@ -6,6 +6,8 @@ import org.test4j.generator.mybatis.template.BaseTemplate;
 import java.util.HashMap;
 import java.util.Map;
 
+import static org.test4j.generator.mybatis.config.ConfigKey.KEY_MAPPING;
+
 public class MappingTemplate extends BaseTemplate {
     public MappingTemplate() {
         super("templates/mapping/TableMapping.java.vm", "mapping/*MP.java");
@@ -18,12 +20,6 @@ public class MappingTemplate extends BaseTemplate {
 
     @Override
     protected Map<String, Object> templateConfigs(TableInfo table) {
-        String mappingName = super.getFileName(table);
-        Map<String, Object> mapping = new HashMap<>();
-        {
-            mapping.put(KEY_NAME, mappingName);
-            mapping.put(KEY_PACKAGE, super.getPackage(table));
-        }
-        return mapping;
+        return null;
     }
 }

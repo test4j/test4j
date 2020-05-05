@@ -2,6 +2,8 @@ package org.test4j.generator.mybatis.rule;
 
 /**
  * 数据库时间类型转换
+ *
+ * @author wudarui
  */
 public enum DateType {
     /**

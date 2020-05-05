@@ -1,20 +1,14 @@
 package org.test4j.generator.mybatis.model;
 
-import com.baomidou.mybatisplus.annotation.IdType;
-import com.baomidou.mybatisplus.annotation.TableId;
-import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
 import lombok.Setter;
-import org.test4j.generator.mybatis.config.DataSourceConfig;
-import org.test4j.generator.mybatis.config.IDbQuery;
-import org.test4j.generator.mybatis.config.INameConvert;
-import org.test4j.generator.mybatis.config.StrategyConfig;
-import org.test4j.generator.mybatis.query.H2Query;
+import org.test4j.generator.mybatis.config.*;
+import org.test4j.generator.mybatis.query.impl.H2Query;
+import org.test4j.generator.mybatis.query.IDbQuery;
 import org.test4j.generator.mybatis.rule.DbType;
 import lombok.experimental.Accessors;
 import org.test4j.generator.mybatis.rule.Naming;
-import org.test4j.generator.mybatis.template.BaseTemplate;
 import org.test4j.tools.commons.StringHelper;
 
 import java.sql.PreparedStatement;
@@ -23,7 +17,7 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.test4j.generator.mybatis.model.ConfigKey.*;
+import static org.test4j.generator.mybatis.config.ConfigKey.*;
 
 /**
  * 表信息，关联到当前字段信息
@@ -115,7 +109,7 @@ public class TableInfo {
         this.addImportTypes(TableName.class.getCanonicalName());
     }
 
-    TableInfo(String tableName, BuildConfig buildConfig) {
+    public TableInfo(String tableName, BuildConfig buildConfig) {
         this.tableName = tableName;
         this.buildConfig = buildConfig;
         this.addImportTypes(TableName.class.getCanonicalName());
@@ -193,22 +187,13 @@ public class TableInfo {
             field.setCategory(IFieldCategory.GmtModified);
             this.gmtModifiedField = field;
         } else if (this.logicDeleted.equalsIgnoreCase(fieldName)) {
-            this.addImportTypes(TableLogic.class.getCanonicalName());
             field.setCategory(IFieldCategory.IsDeleted);
             this.isDeletedField = field;
         } else if (field.isPrimary()) {
-            this.addImportTypes(TableId.class.getCanonicalName());
-            if (field.getCategory() == IFieldCategory.PrimaryId) {
-                this.addImportTypes(IdType.class.getCanonicalName());
-            }
             this.primary = field;
         } else {
-            this.addImportTypes(com.baomidou.mybatisplus.annotation.TableField.class.getCanonicalName());
             this.fields.add(field);
         }
-//        if (null != field.getFieldType().getImportName()) {
-//            this.addImportTypes(field.getFieldType().getImportName());
-//        }
         return true;
     }
 
@@ -322,7 +307,7 @@ public class TableInfo {
         }
         TableField field = new TableField(this, columnName);
         boolean primary = this.isPrimary(columnName, results, h2PkColumns);
-        // 处理ID, 避免多重主键设置，目前只取第一个找到ID，并放到list中的索引为0的位置
+        // 处理ID, 只取第一个，并放到list中的索引为0的位置
         if (primary && !haveId) {
             if (DbType.H2 == dbType || DbType.SQLITE == dbType || dbQuery.isKeyIdentity(results)) {
                 field.setCategory(IFieldCategory.PrimaryId);
@@ -445,7 +430,7 @@ public class TableInfo {
 
     String packDir;
 
-    public String outputDir(BaseTemplate.OutputDir dirType) {
+    public String outputDir(OutputDir dirType) {
         if (packDir == null) {
             this.packDir = '/' + this.generator.getBasePackage().replace('.', '/') + "/";
         }

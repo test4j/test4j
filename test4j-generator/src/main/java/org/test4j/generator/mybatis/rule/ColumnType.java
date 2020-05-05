@@ -5,6 +5,8 @@ import org.test4j.generator.mybatis.model.IJavaType;
 
 /**
  * 表字段类型
+ *
+ * @author wudarui
  */
 public enum ColumnType implements IJavaType {
     // 基本类型

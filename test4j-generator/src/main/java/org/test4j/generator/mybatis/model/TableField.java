@@ -1,7 +1,7 @@
 package org.test4j.generator.mybatis.model;
 
 import lombok.AccessLevel;
-import org.test4j.generator.mybatis.config.IDbQuery;
+import org.test4j.generator.mybatis.query.IDbQuery;
 import org.test4j.generator.mybatis.config.INameConvert;
 import org.test4j.generator.mybatis.config.ITypeConvert;
 import org.test4j.generator.mybatis.config.StrategyConfig;
@@ -102,7 +102,7 @@ public class TableField {
         StrategyConfig strategyConfig = this.tableInfo.getGenerator().getStrategyConfig();
         INameConvert nameConvert = strategyConfig.getNameConvert();
         if (null != nameConvert) {
-            this.name = nameConvert.propertyNameConvert(this);
+            this.name = nameConvert.fieldNameConvert(this);
         } else {
             Naming naming = strategyConfig.getColumnNaming();
             if (naming == Naming.underline_to_camel) {

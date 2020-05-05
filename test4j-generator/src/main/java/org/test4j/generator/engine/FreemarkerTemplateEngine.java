@@ -2,8 +2,7 @@ package org.test4j.generator.engine;
 
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import lombok.extern.slf4j.Slf4j;
-import org.test4j.generator.mybatis.model.BuildConfig;
-import org.test4j.generator.mybatis.model.FmGeneratorConst;
+import org.test4j.generator.mybatis.config.BuildConfig;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 
@@ -25,7 +24,7 @@ public class FreemarkerTemplateEngine extends AbstractTemplateEngine {
     public FreemarkerTemplateEngine init(BuildConfig config) {
         super.init(config);
         configuration = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
-        configuration.setDefaultEncoding(FmGeneratorConst.UTF8);
+        configuration.setDefaultEncoding(UTF8);
         configuration.setClassForTemplateLoading(FreemarkerTemplateEngine.class, StringPool.SLASH);
         return this;
     }
@@ -35,7 +34,7 @@ public class FreemarkerTemplateEngine extends AbstractTemplateEngine {
     public void writer(Map<String, Object> objectMap, String templatePath, String outputFile) throws Exception {
         Template template = configuration.getTemplate(templatePath);
         try (FileOutputStream fileOutputStream = new FileOutputStream(outputFile)) {
-            template.process(objectMap, new OutputStreamWriter(fileOutputStream, FmGeneratorConst.UTF8));
+            template.process(objectMap, new OutputStreamWriter(fileOutputStream, UTF8));
         }
         log.debug("模板:" + templatePath + ";  文件:" + outputFile);
     }

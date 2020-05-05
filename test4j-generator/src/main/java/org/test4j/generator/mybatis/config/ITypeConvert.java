@@ -7,8 +7,7 @@ import org.test4j.generator.mybatis.model.IJavaType;
 /**
  * 数据库字段类型转换
  *
- * @author hubin
- * @since 2017-01-20
+ * @author darui.wu
  */
 public interface ITypeConvert {
 

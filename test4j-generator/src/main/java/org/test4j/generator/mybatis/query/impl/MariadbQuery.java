@@ -1,17 +1,18 @@
-package org.test4j.generator.mybatis.query;
+package org.test4j.generator.mybatis.query.impl;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import org.test4j.generator.mybatis.query.AbstractDbQuery;
 import org.test4j.generator.mybatis.rule.DbType;
 
 /**
  * MySql 表数据查询
  */
-public class MySqlQuery extends AbstractDbQuery {
+public class MariadbQuery extends AbstractDbQuery {
     @Override
     public DbType dbType() {
-        return DbType.MYSQL;
+        return DbType.MARIADB;
     }
 
     @Override
@@ -22,6 +23,11 @@ public class MySqlQuery extends AbstractDbQuery {
     @Override
     public String tableFieldsSql() {
         return "show full fields from `%s`";
+    }
+
+    @Override
+    public boolean isKeyIdentity(ResultSet results) throws SQLException {
+        return "auto_increment".equals(results.getString("Extra"));
     }
 
     @Override
@@ -52,10 +58,5 @@ public class MySqlQuery extends AbstractDbQuery {
     @Override
     public String fieldKey() {
         return "KEY";
-    }
-
-    @Override
-    public boolean isKeyIdentity(ResultSet results) throws SQLException {
-        return "auto_increment".equals(results.getString("Extra"));
     }
 }

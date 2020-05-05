@@ -6,8 +6,7 @@ import org.test4j.generator.mybatis.model.TableInfo;
 /**
  * 名称转换接口类
  *
- * @author hubin
- * @since 2017-01-20
+ * @author darui.wu
  */
 public interface INameConvert {
 
@@ -25,5 +24,5 @@ public interface INameConvert {
      * @param field 表字段对象，如果属性表字段命名不一致注意 convert 属性的设置
      * @return
      */
-    String propertyNameConvert(TableField field);
+    String fieldNameConvert(TableField field);
 }

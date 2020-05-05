@@ -1,5 +1,6 @@
 package org.test4j.generator.mybatis.template;
 
+import org.test4j.generator.mybatis.config.OutputDir;
 import org.test4j.generator.mybatis.template.dao.BaseDaoTemplate;
 import org.test4j.generator.mybatis.template.dao.DaoImplTemplate;
 import org.test4j.generator.mybatis.template.dao.DaoIntfTemplate;
@@ -19,7 +20,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public interface TemplateList {
-    List<BaseTemplate> templates = Arrays.asList(
+    List<BaseTemplate> ALL_TEMPLATES = Arrays.asList(
         new MappingTemplate(),
         new EntityTemplate(),
         new EntityHelperTemplate(),
@@ -31,6 +32,13 @@ public interface TemplateList {
         new BaseDaoTemplate(),
         new DaoIntfTemplate(),
         new DaoImplTemplate(),
+        new EntityMapTemplate(),
+        new TableMapTemplate(),
+        new TableMixTemplate()
+    );
+
+    List<BaseTemplate> ONLY_TEST = Arrays.asList(
+        new MappingTemplate().setOutputDir(OutputDir.Test),
         new EntityMapTemplate(),
         new TableMapTemplate(),
         new TableMixTemplate()

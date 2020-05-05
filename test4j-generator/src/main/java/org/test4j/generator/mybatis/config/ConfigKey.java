@@ -1,5 +1,10 @@
-package org.test4j.generator.mybatis.model;
+package org.test4j.generator.mybatis.config;
 
+/**
+ * 模板生成上下文常用Key
+ *
+ * @author wudarui
+ */
 public interface ConfigKey {
     String KEY_TABLE = "table";
 
@@ -13,18 +18,9 @@ public interface ConfigKey {
 
     String KEY_FIELDS = "fields";
 
-    String KEY_PRIMARY = "primary";
-
-    String KEY_GMT_CREATE = "gmtCreate";
-
-    String KEY_GMT_MODIFIED = "gmtModified";
-
-    String KEY_IS_DELETED = "isDeleted";
-
     String KEY_PACKAGE = "package";
 
     String KEY_NAME = "name";
-
 
     String KEY_MAPPING = "mapping";
 

@@ -5,11 +5,14 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.test4j.generator.mybatis.model.ConfigKey;
+import org.test4j.generator.mybatis.config.OutputDir;
 import org.test4j.generator.mybatis.model.TableInfo;
 
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
+
+import static org.test4j.generator.mybatis.config.ConfigKey.*;
 
 /**
  * 根据表信息生成文件
@@ -18,7 +21,7 @@ import java.util.Map;
  */
 @Data
 @Accessors(chain = true)
-public abstract class BaseTemplate implements ConfigKey {
+public abstract class BaseTemplate {
     /**
      * 模板内容
      */
@@ -27,21 +30,11 @@ public abstract class BaseTemplate implements ConfigKey {
      * 生成的文件路径
      */
     protected String filePath;
-    /**
-     * 文件名称(不包含路径和后缀)
-     */
-    @Setter(AccessLevel.NONE)
-    protected String fileName;
 
     protected String fileNameReg;
 
     @Getter(AccessLevel.NONE)
     protected OutputDir outputDir = OutputDir.Base;
-    /**
-     * 是否base dao
-     */
-    @Setter
-    private boolean isBaseDao = false;
     /**
      * 是否分库
      */
@@ -91,27 +84,18 @@ public abstract class BaseTemplate implements ConfigKey {
      */
     protected abstract Map<String, Object> templateConfigs(TableInfo table);
 
-    protected String getFileName(TableInfo table) {
+    private String getFileName(TableInfo table) {
         int start = this.fileNameReg.lastIndexOf('/');
         int end = this.fileNameReg.lastIndexOf('.');
         return this.fileNameReg.substring(start + 1, end).replace("*", table.getEntityPrefix());
     }
 
-    protected String getPackage(TableInfo table) {
+    private String getPackage(TableInfo table) {
         int index = this.fileNameReg.lastIndexOf('/');
         String sub = "";
         if (index > 0) {
             sub = this.fileNameReg.substring(0, index).replace('/', '.');
         }
         return table.getBasePackage() + "." + sub;
-    }
-
-    /**
-     * 模板生成路径分类
-     */
-    public enum OutputDir {
-        Base,
-        Test,
-        Dao;
     }
 }

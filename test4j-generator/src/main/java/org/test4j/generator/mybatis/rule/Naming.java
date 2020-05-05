@@ -1,10 +1,7 @@
 package org.test4j.generator.mybatis.rule;
 
-import java.util.Arrays;
-
 import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
-import org.test4j.generator.mybatis.model.FmGeneratorConst;
 import org.test4j.tools.commons.StringConst;
 import org.test4j.tools.commons.StringHelper;
 
