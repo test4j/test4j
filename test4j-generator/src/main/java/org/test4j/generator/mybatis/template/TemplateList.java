@@ -15,7 +15,9 @@ import org.test4j.generator.mybatis.template.mix.TableMixTemplate;
 import org.test4j.generator.mybatis.template.query.EntityQueryTemplate;
 import org.test4j.generator.mybatis.template.query.EntityUpdateTemplate;
 import org.test4j.generator.mybatis.template.query.EntityWrapperHelperTemplate;
+import org.test4j.generator.mybatis.template.summary.SummaryTemplate;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -45,5 +47,11 @@ public interface TemplateList {
     );
 
 
-
+    List<SummaryTemplate> summaries = Arrays.asList(
+        new SummaryTemplate("templates/mix/Mixes.java.vm", "TableMixes.java"),
+        new SummaryTemplate("templates/ITable.java.vm", "ITable.java"),
+        new SummaryTemplate("templates/DataSourceScript.java.vm", "DataSourceScript.java"),
+        new SummaryTemplate("templates/datamap/TM.java.vm", "datamap/TM.java"),
+        new SummaryTemplate("templates/datamap/EM.java.vm", "datamap/EM.java")
+    );
 }

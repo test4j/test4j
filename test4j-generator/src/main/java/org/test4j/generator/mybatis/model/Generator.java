@@ -84,7 +84,7 @@ public class Generator {
             wrapper.put("configs", allContext);
             wrapper.put("basePackage", this.basePackage);
         }
-        for (SummaryTemplate summary : SummaryTemplate.summaries) {
+        for (SummaryTemplate summary : TemplateList.summaries) {
             summary.setGenerator(this);
             templateEngine.output(summary.getTemplateId(), wrapper, summary.getFilePath());
         }

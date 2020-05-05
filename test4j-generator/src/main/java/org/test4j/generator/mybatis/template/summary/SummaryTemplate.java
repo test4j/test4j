@@ -26,13 +26,5 @@ public class SummaryTemplate {
             fileName);
     }
 
-    public static List<SummaryTemplate> summaries = new ArrayList<>();
 
-    static {
-        summaries.add(new SummaryTemplate("templates/mix/Mixes.java.vm", "TableMixes.java"));
-        summaries.add(new SummaryTemplate("templates/ITable.java.vm", "ITable.java"));
-        summaries.add(new SummaryTemplate("templates/DataSourceScript.java.vm", "DataSourceScript.java"));
-        summaries.add(new SummaryTemplate("templates/datamap/TM.java.vm", "datamap/TM.java"));
-        summaries.add(new SummaryTemplate("templates/datamap/EM.java.vm", "datamap/EM.java"));
-    }
 }
