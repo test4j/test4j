@@ -2,6 +2,7 @@ package org.test4j.generator.mybatis.template;
 
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.test4j.generator.mybatis.model.ConfigKey;
@@ -32,15 +33,10 @@ public abstract class BaseTemplate implements ConfigKey {
     @Setter(AccessLevel.NONE)
     protected String fileName;
 
-    protected void setFileName(String fileName) {
-        int first = fileName.lastIndexOf('/');
-        int last = fileName.lastIndexOf('.');
-        this.fileName = fileName.substring(first == -1 ? 0 : first + 1, last == -1 ? fileName.length() - 1 : last);
-    }
-
     protected String fileNameReg;
 
-    private TemplateType templateType = TemplateType.Base;
+    @Getter(AccessLevel.NONE)
+    protected OutputDir outputDir = OutputDir.Base;
     /**
      * 是否base dao
      */
@@ -68,7 +64,7 @@ public abstract class BaseTemplate implements ConfigKey {
      * @return
      */
     public final void initContext(TableInfo table, Map<String, Object> configs) {
-        this.filePath = table.outputDir(this.getTemplateType()) + this.fileNameReg.replace("*", table.getEntityPrefix());
+        this.filePath = table.outputDir(this.outputDir) + this.fileNameReg.replace("*", table.getEntityPrefix());
         Map<String, Object> context = this.templateConfigs(table);
         if (context == null) {
             context = new HashMap<>();
@@ -111,18 +107,9 @@ public abstract class BaseTemplate implements ConfigKey {
     }
 
     /**
-     * 模板类型
-     *
-     * @return
+     * 模板生成路径分类
      */
-    public TemplateType getTemplateType() {
-        return TemplateType.Base;
-    }
-
-    /**
-     * 模板类型
-     */
-    public enum TemplateType {
+    public enum OutputDir {
         Base,
         Test,
         Dao;

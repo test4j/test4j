@@ -8,6 +8,7 @@ import java.util.Map;
 public class DaoIntfTemplate extends BaseTemplate {
     public DaoIntfTemplate() {
         super("templates/dao/DaoIntf.java.vm", "dao/intf/*Dao.java");
+        super.outputDir = OutputDir.Dao;
     }
 
     @Override
@@ -18,10 +19,5 @@ public class DaoIntfTemplate extends BaseTemplate {
     @Override
     protected Map<String, Object> templateConfigs(TableInfo table) {
         return null;
-    }
-
-    @Override
-    public TemplateType getTemplateType() {
-        return TemplateType.Dao;
     }
 }

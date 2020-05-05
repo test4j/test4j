@@ -4,7 +4,6 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
-import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import org.test4j.generator.mybatis.config.DataSourceConfig;
@@ -446,11 +445,11 @@ public class TableInfo {
 
     String packDir;
 
-    public String outputDir(BaseTemplate.TemplateType type) {
+    public String outputDir(BaseTemplate.OutputDir dirType) {
         if (packDir == null) {
             this.packDir = '/' + this.generator.getBasePackage().replace('.', '/') + "/";
         }
-        switch (type) {
+        switch (dirType) {
             case Dao:
                 return this.getGenerator().getDaoOutputDir() + packDir;
             case Test:

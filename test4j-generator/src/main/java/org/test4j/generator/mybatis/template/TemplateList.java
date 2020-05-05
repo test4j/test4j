@@ -3,6 +3,8 @@ package org.test4j.generator.mybatis.template;
 import org.test4j.generator.mybatis.template.dao.BaseDaoTemplate;
 import org.test4j.generator.mybatis.template.dao.DaoImplTemplate;
 import org.test4j.generator.mybatis.template.dao.DaoIntfTemplate;
+import org.test4j.generator.mybatis.template.datamap.EntityMapTemplate;
+import org.test4j.generator.mybatis.template.datamap.TableMapTemplate;
 import org.test4j.generator.mybatis.template.entity.EntityHelperTemplate;
 import org.test4j.generator.mybatis.template.entity.EntityTemplate;
 import org.test4j.generator.mybatis.template.mapper.MapperTemplate;
@@ -27,6 +29,8 @@ public interface TemplateList {
         new EntityUpdateTemplate(),
         new BaseDaoTemplate(),
         new DaoIntfTemplate(),
-        new DaoImplTemplate()
+        new DaoImplTemplate(),
+        new EntityMapTemplate(),
+        new TableMapTemplate()
     );
 }

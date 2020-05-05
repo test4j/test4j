@@ -135,4 +135,31 @@ public class TableField {
     public boolean isPrimary() {
         return this.category == IFieldCategory.PrimaryKey || this.category == IFieldCategory.PrimaryId;
     }
+
+    /**
+     * 是否自增主键
+     *
+     * @return
+     */
+    public boolean isPrimaryId() {
+        return this.category == IFieldCategory.PrimaryId;
+    }
+
+    /**
+     * 是否gmt字段
+     *
+     * @return
+     */
+    public boolean isGmt() {
+        return this.category == IFieldCategory.GmtCreate || this.category == IFieldCategory.GmtModified;
+    }
+
+    /**
+     * 是否逻辑删除字段
+     *
+     * @return
+     */
+    public boolean isDeleted() {
+        return this.category == IFieldCategory.IsDeleted;
+    }
 }

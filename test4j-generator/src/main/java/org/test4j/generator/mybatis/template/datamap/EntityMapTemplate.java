@@ -1,19 +1,19 @@
-package org.test4j.generator.mybatis.template.dao;
+package org.test4j.generator.mybatis.template.datamap;
 
 import org.test4j.generator.mybatis.model.TableInfo;
 import org.test4j.generator.mybatis.template.BaseTemplate;
 
 import java.util.Map;
 
-public class DaoImplTemplate extends BaseTemplate {
-    public DaoImplTemplate() {
-        super("templates/dao/DaoImpl.java.vm", "dao/impl/*DaoImpl.java");
-        super.outputDir = OutputDir.Dao;
+public class EntityMapTemplate extends BaseTemplate {
+    public EntityMapTemplate() {
+        super("templates/datamap/EntityMap.java.vm", "datamap/entity/*EntityMap.java");
+        super.outputDir = OutputDir.Test;
     }
 
     @Override
     protected String getTemplateId() {
-        return "daoImpl";
+        return "entityMap";
     }
 
     @Override

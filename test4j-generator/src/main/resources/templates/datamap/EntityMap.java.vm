@@ -1,46 +1,46 @@
-package ${cfg.packEntityMap};
+package ${entityMap.package};
 
-import ${cfg.packMP}.${cfg.fileMP}.Property;
+import ${mapping.package}.${mapping.name}.Property;
 import org.test4j.module.ICore.DataMap;
 import org.test4j.tools.datagen.KeyValue;
 
 /**
- * @ClassName ${cfg.fileEntityMap}
- * @Description ${cfg.fileEntityMap}
+ * @ClassName ${entityMap.name}
+ * @Description ${entityMap.name}
  *
  * @author ${author}
  */
-public class ${cfg.fileEntityMap} extends DataMap<${cfg.fileEntityMap}> {
-#foreach($field in ${table.fields})
+public class ${entityMap.name} extends DataMap<${entityMap.name}> {
+#foreach($field in ${fields})
     /**
-     * 设置${entity}对象${field.propertyName}字段值
+     * 设置${entity.name}对象${field.name}字段值
      */
-    public transient final KeyValue<${cfg.fileEntityMap}> ${field.propertyName} = new KeyValue(this, Property.${field.propertyName});
+    public transient final KeyValue<${entityMap.name}> ${field.name} = new KeyValue(this, Property.${field.name});
 #end
 
-    public ${cfg.fileEntityMap}() {
+    public ${entityMap.name}() {
         super();
     }
 
-    public ${cfg.fileEntityMap}(int size) {
+    public ${entityMap.name}(int size) {
         super(size);
     }
 
-    public static ${cfg.fileEntityMap} create() {
-        return new ${cfg.fileEntityMap}();
+    public static ${entityMap.name} create() {
+        return new ${entityMap.name}();
     }
 
-    public static ${cfg.fileEntityMap} create(int size) {
-        return new ${cfg.fileEntityMap}(size);
+    public static ${entityMap.name} create(int size) {
+        return new ${entityMap.name}(size);
     }
 
     public static class Factory {
-        public ${cfg.fileEntityMap} create() {
-            return ${cfg.fileEntityMap}.create();
+        public ${entityMap.name} create() {
+            return ${entityMap.name}.create();
         }
 
-        public ${cfg.fileEntityMap} create(int size) {
-            return ${cfg.fileEntityMap}.create(size);
+        public ${entityMap.name} create(int size) {
+            return ${entityMap.name}.create(size);
         }
     }
 }
