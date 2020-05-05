@@ -13,7 +13,7 @@ import org.test4j.module.spec.annotations.Mixes;
 public class TableMixes {
     #foreach(${obj} in ${objs})
     @Mix
-    public ${obj.mix} ${obj.mixInstance};
+    public ${obj.tableMixName} ${obj.mixInstance};
 
     #end
     public void cleanAllTable() {

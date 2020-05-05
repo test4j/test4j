@@ -9,6 +9,6 @@ import ${basePackage}.mapping.*;
 public interface ITable {
     #foreach(${obj} in ${objs})
 
-    String t_${obj.tableName} = ${obj.mp}.Table_Name;
+    String t_${obj.tableName} = ${obj.mappingName}.Table_Name;
     #end
 }

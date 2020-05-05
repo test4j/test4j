@@ -8,11 +8,11 @@ import cn.org.atool.fluent.mybatis.generator.demo.mapping.*;
  */
 public interface ITable {
 
-    String t_address = ${obj.mp}.Table_Name;
+    String t_address = AddressMP.Table_Name;
 
-    String t_user = ${obj.mp}.Table_Name;
+    String t_user = TUserMP.Table_Name;
 
-    String t_no_primary = ${obj.mp}.Table_Name;
+    String t_no_primary = NoPrimaryMP.Table_Name;
 
-    String t_no_auto_id = ${obj.mp}.Table_Name;
+    String t_no_auto_id = NoAutoIdMP.Table_Name;
 }

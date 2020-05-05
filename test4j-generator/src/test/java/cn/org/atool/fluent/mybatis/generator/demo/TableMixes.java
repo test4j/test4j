@@ -12,16 +12,16 @@ import org.test4j.module.spec.annotations.Mixes;
 @Mixes
 public class TableMixes {
     @Mix
-    public ${obj.mix} addressTableMix;
+    public AddressTableMix addressTableMix;
 
     @Mix
-    public ${obj.mix} tUserTableMix;
+    public TUserTableMix tUserTableMix;
 
     @Mix
-    public ${obj.mix} noPrimaryTableMix;
+    public NoPrimaryTableMix noPrimaryTableMix;
 
     @Mix
-    public ${obj.mix} noAutoIdTableMix;
+    public NoAutoIdTableMix noAutoIdTableMix;
 
     public void cleanAllTable() {
         this.addressTableMix.cleanAddressTable();
