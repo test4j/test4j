@@ -8,7 +8,6 @@ import org.test4j.generator.mybatis.db.IJavaType;
 /**
  * ORACLE 字段类型转换
  *
- * @author wudarui
  */
 public class OracleTypeConvert implements ITypeConvert {
 

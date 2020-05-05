@@ -8,7 +8,6 @@ import org.test4j.generator.mybatis.db.IJavaType;
 /**
  * BaseTypeConvert
  *
- * @author wudarui
  */
 public abstract class BaseTypeConvert implements ITypeConvert {
 

@@ -7,7 +7,6 @@ import org.test4j.generator.mybatis.db.IJavaType;
 /**
  * MYSQL 数据库字段类型转换
  *
- * @author wudarui
  */
 public class MySqlTypeConvert extends BaseTypeConvert {
 

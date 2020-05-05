@@ -7,7 +7,6 @@ import org.test4j.generator.mybatis.db.IJavaType;
 /**
  * PostgreSQL 字段类型转换
  *
- * @author wudarui
  */
 public class PostgreSqlTypeConvert extends BaseTypeConvert {
 

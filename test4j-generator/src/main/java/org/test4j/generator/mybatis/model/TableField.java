@@ -18,8 +18,7 @@ import java.sql.SQLException;
 /**
  * 表字段信息
  *
- * @author YangHu
- * @since 2016-12-03
+ * @author darui.wu
  */
 @Getter
 @Accessors(chain = true)

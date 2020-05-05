@@ -7,7 +7,6 @@ import org.test4j.generator.mybatis.db.IJavaType;
 /**
  * SQLite 字段类型转换
  *
- * @author wudarui
  */
 public class SqliteTypeConvert extends BaseTypeConvert {
     @Override

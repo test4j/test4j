@@ -7,18 +7,15 @@ import org.test4j.generator.mybatis.db.DbType;
  */
 public class PostgreSqlQuery extends AbstractDbQuery {
 
-
     @Override
     public DbType dbType() {
         return DbType.POSTGRE_SQL;
     }
 
-
     @Override
     public String tablesSql() {
         return "SELECT A.tablename, obj_description(relfilenode, 'pg_class') AS comments FROM pg_tables A, pg_class B WHERE A.schemaname='%s' AND A.tablename = B.relname";
     }
-
 
     @Override
     public String tableFieldsSql() {
@@ -27,40 +24,33 @@ public class PostgreSqlQuery extends AbstractDbQuery {
             "WHERE  A.attrelid = '%s.%s'::regclass AND A.attnum > 0 AND NOT A.attisdropped ORDER  BY A.attnum";
     }
 
-
     @Override
     public String tableName() {
         return "tablename";
     }
-
 
     @Override
     public String tableComment() {
         return "comments";
     }
 
-
     @Override
     public String fieldName() {
         return "name";
     }
-
 
     @Override
     public String fieldType() {
         return "type";
     }
 
-
     @Override
     public String fieldComment() {
         return "comment";
     }
 
-
     @Override
     public String fieldKey() {
         return "key";
     }
-
 }
