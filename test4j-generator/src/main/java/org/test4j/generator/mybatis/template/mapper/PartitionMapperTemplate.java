@@ -7,12 +7,12 @@ import java.util.Map;
 
 public class PartitionMapperTemplate extends BaseTemplate {
     public PartitionMapperTemplate() {
-        super("mapper/Partition.java.vm", "mapper/*PartitionMapper.java");
+        super("templates/mapper/Partition.java.vm", "mapper/*PartitionMapper.java");
         super.setPartition(true);
     }
 
     @Override
-    protected String getTemplateId() {
+    public String getTemplateId() {
         return "partition";
     }
 

@@ -8,8 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.test4j.generator.mybatis.config.ConfigKey.KEY_ENTITY_PREFIX;
-
 /**
  * 生成的对象
  *
@@ -22,46 +20,56 @@ public class GenerateObj {
 
     private String tableName;
 
-    private String withoutSuffixEntity;
+    private String entityPrefix;
 
     private String camelEntity;
 
-    private String mix;
+    private String tableMixName;
 
     private String mixInstance;
 
     private String mixCleanMethod;
 
-    private String mp;
+    private String mappingName;
 
     private String tableMap;
 
     private String entityMap;
 
 
-    public static GenerateObj init(TableInfo table) {
-        Map<String, String> config = GenerateObj.currConfig.get();
-        currConfig.remove();
+    public static GenerateObj init(TableInfo table, Map<String, Object> context) {
         GenerateObj obj = new GenerateObj()
-                .setTableName(table.getTableName())
-                .setWithoutSuffixEntity(table.getEntityPrefix())
-                .setMix(config.get("fileTableMix"))
-                .setMixCleanMethod(String.format("clean%sTable", config.get(KEY_ENTITY_PREFIX)))
-                .setMp(config.get("fileMP"))
-                .setTableMap(config.get("fileTableMap"))
-                .setEntityMap(config.get("fileEntityMap"));
-        obj.setCamelEntity(obj.withoutSuffixEntity.substring(0, 1).toLowerCase() + obj.withoutSuffixEntity.substring(1));
-        obj.mixInstance = obj.mix.substring(0, 1).toLowerCase() + obj.mix.substring(1);
+            .setTableName(table.getTableName())
+            .setEntityPrefix(table.getEntityPrefix())
+            .setTableMixName(getConfig(context, "tableMix", "name"))
+            .setMixCleanMethod(String.format("clean%sTable", table.getEntityPrefix()))
+            .setMappingName(getConfig(context, "mapping", "name"))
+            .setTableMap(getConfig(context, "tableMap", "name"))
+            .setEntityMap(getConfig(context, "entityMap", "name"));
+        obj.setCamelEntity(obj.entityPrefix.substring(0, 1).toLowerCase() + obj.entityPrefix.substring(1));
+        obj.mixInstance = obj.tableMixName.substring(0, 1).toLowerCase() + obj.tableMixName.substring(1);
         if (obj.tableName.startsWith("t_")) {
             obj.tableName = obj.tableName.substring(2);
         }
         return obj;
     }
 
-    static ThreadLocal<Map<String, String>> currConfig = new ThreadLocal<>();
-
-    public static void setCurrConfig(Map currConfig) {
-        GenerateObj.currConfig.set(currConfig);
+    private static String getConfig(Map<String, Object> context, String... keys) {
+        Object item = context;
+        String keyJoining = "";
+        for (String key : keys) {
+            if (item instanceof Map) {
+                item = ((Map) item).get(key);
+            } else {
+                throw new RuntimeException("the property[" + keyJoining + "] is not a map.");
+            }
+            keyJoining = keyJoining + (keyJoining.isEmpty() ? "" : ".") + key;
+        }
+        if (item instanceof String) {
+            return (String) item;
+        } else {
+            throw new RuntimeException("the property[" + keyJoining + "] is not a string.");
+        }
     }
 
     public static void generate(List<GenerateObj> objs, String output, String testOutput, String basePackage) {

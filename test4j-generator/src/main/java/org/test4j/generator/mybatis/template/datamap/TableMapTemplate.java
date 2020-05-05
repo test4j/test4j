@@ -13,7 +13,7 @@ public class TableMapTemplate extends BaseTemplate {
     }
 
     @Override
-    protected String getTemplateId() {
+    public String getTemplateId() {
         return "tableMap";
     }
 

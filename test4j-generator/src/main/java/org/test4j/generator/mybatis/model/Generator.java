@@ -22,6 +22,7 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static org.test4j.generator.mybatis.config.ConfigKey.*;
 import static org.test4j.module.core.utility.MessageHelper.info;
 
 /**
@@ -49,29 +50,33 @@ public class Generator {
         List<GenerateObj> generateObjs = new ArrayList<>();
         for (BuildConfig config : this.configs) {
             templateEngine.init(config);
-            info("==========================数据库元信息初始化...=====================");
+            info("===数据库元信息初始化...");
             this.initTableInfos(config);
-            info("==========================准备生成文件...==========================");
+            info("===准备生成文件...");
             for (Map.Entry<String, TableInfo> entry : config.getTables().entrySet()) {
-                info("==========================处理表：" + entry.getKey());
+                info("======处理表：" + entry.getKey());
                 TableInfo tableInfo = entry.getValue();
                 // 初始化各个模板需要的变量
                 Map<String, Object> context = tableInfo.initTemplateContext();
                 for (BaseTemplate template : TemplateList.ALL_TEMPLATES) {
-                    template.initContext(tableInfo, context);
+                    Map<String, Object> templateContext = template.initContext(tableInfo);
+                    if (KEY_ENTITY.equals(template.getTemplateId())) {
+                        context.put(KEY_ENTITY_NAME, templateContext.get(KEY_NAME));
+                    }
+                    context.put(template.getTemplateId(), templateContext);
                 }
                 for (BaseTemplate template : TemplateList.ALL_TEMPLATES) {
                     if (template.isPartition() && !tableInfo.isPartition()) {
                         continue;
                     }
                     String filePath = template.getFilePath();
-                    info("==========================生成文件: " + template.getFileNameReg());
+                    info("=========生成文件: " + template.getFileNameReg());
                     Assert.notNull(filePath, "文件路径不能为空,[table=%s,template=%s]", tableInfo.getTableName(), template.getTemplate());
                     templateEngine.output(template.getTemplate(), context, filePath);
                 }
-                generateObjs.add(GenerateObj.init(tableInfo));
+                generateObjs.add(GenerateObj.init(tableInfo, context));
             }
-            info("==========================文件生成完成！！！==========================");
+            info("===文件生成完成！！！");
             open(config);
         }
         GenerateObj.generate(generateObjs, outputDir, testOutputDir, basePackage);

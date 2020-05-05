@@ -11,7 +11,7 @@ public class EntityUpdateTemplate extends BaseTemplate {
     }
 
     @Override
-    protected String getTemplateId() {
+    public String getTemplateId() {
         return "entityUpdate";
     }
 

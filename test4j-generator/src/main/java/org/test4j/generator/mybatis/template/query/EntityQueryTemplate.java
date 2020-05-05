@@ -11,7 +11,7 @@ public class EntityQueryTemplate extends BaseTemplate {
     }
 
     @Override
-    protected String getTemplateId() {
+    public String getTemplateId() {
         return "entityQuery";
     }
 

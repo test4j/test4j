@@ -23,7 +23,7 @@ public class EntityTemplate extends BaseTemplate {
     }
 
     @Override
-    protected String getTemplateId() {
+    public String getTemplateId() {
         return KEY_ENTITY;
     }
 

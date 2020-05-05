@@ -14,7 +14,7 @@ public class MappingTemplate extends BaseTemplate {
     }
 
     @Override
-    protected String getTemplateId() {
+    public String getTemplateId() {
         return KEY_MAPPING;
     }
 

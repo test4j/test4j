@@ -13,7 +13,7 @@ public class EntityMapTemplate extends BaseTemplate {
     }
 
     @Override
-    protected String getTemplateId() {
+    public String getTemplateId() {
         return "entityMap";
     }
 

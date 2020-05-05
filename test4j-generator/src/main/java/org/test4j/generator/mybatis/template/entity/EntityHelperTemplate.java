@@ -13,16 +13,12 @@ public class EntityHelperTemplate extends BaseTemplate {
     }
 
     @Override
-    protected String getTemplateId() {
+    public String getTemplateId() {
         return "entityHelper";
     }
 
     @Override
     protected Map<String, Object> templateConfigs(TableInfo table) {
-        Map<String, Object> helper = new HashMap<>();
-        {
-
-        }
-        return helper;
+        return null;
     }
 }

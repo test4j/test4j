@@ -56,7 +56,7 @@ public abstract class BaseTemplate {
      * @param configs
      * @return
      */
-    public final void initContext(TableInfo table, Map<String, Object> configs) {
+    public final Map<String, Object> initContext(TableInfo table) {
         this.filePath = table.outputDir(this.outputDir) + this.fileNameReg.replace("*", table.getEntityPrefix());
         Map<String, Object> context = this.templateConfigs(table);
         if (context == null) {
@@ -68,13 +68,10 @@ public abstract class BaseTemplate {
         if (!context.containsKey(KEY_PACKAGE)) {
             context.put(KEY_PACKAGE, this.getPackage(table));
         }
-        if (KEY_ENTITY.equals(this.getTemplateId())) {
-            configs.put(KEY_ENTITY_NAME, context.get(KEY_NAME));
-        }
-        configs.put(this.getTemplateId(), context);
+        return context;
     }
 
-    protected abstract String getTemplateId();
+    public abstract String getTemplateId();
 
     /**
      * 模板自身的配置项

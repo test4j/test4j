@@ -15,7 +15,7 @@ public class EntityWrapperHelperTemplate extends BaseTemplate {
     }
 
     @Override
-    protected String getTemplateId() {
+    public String getTemplateId() {
         return "wrapperHelper";
     }
 

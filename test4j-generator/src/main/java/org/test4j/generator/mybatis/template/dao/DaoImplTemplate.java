@@ -13,7 +13,7 @@ public class DaoImplTemplate extends BaseTemplate {
     }
 
     @Override
-    protected String getTemplateId() {
+    public String getTemplateId() {
         return "daoImpl";
     }
 

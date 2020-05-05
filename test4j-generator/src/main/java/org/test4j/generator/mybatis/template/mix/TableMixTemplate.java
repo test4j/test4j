@@ -13,7 +13,7 @@ public class TableMixTemplate extends BaseTemplate {
     }
 
     @Override
-    protected String getTemplateId() {
+    public String getTemplateId() {
         return "tableMix";
     }
 
