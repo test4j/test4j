@@ -78,6 +78,7 @@ public class UserTableMap extends DataMap<UserTableMap> {
         this.id.autoIncrease();
         this.gmtCreated.values(new Date());
         this.gmtModified.values(new Date());
+        this.isDeleted.values(false);
         return this;
     }
 

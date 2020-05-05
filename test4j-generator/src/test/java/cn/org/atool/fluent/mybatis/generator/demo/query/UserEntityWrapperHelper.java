@@ -23,7 +23,7 @@ class UserEntityWrapperHelper {
         public final AndObject<Long, Q> id;
         public final AndObject<Date, Q> gmtCreated;
         public final AndObject<Date, Q> gmtModified;
-        public final AndObject<Integer, Q> isDeleted;
+        public final AndBoolean<Q> isDeleted;
         public final AndObject<Long, Q> addressId;
         public final AndObject<Integer, Q> age;
         public final AndString<Q> userName;
@@ -34,7 +34,7 @@ class UserEntityWrapperHelper {
             this.id = new AndObject<>(query, Column.id, Property.id);
             this.gmtCreated = new AndObject<>(query, Column.gmt_created, Property.gmtCreated);
             this.gmtModified = new AndObject<>(query, Column.gmt_modified, Property.gmtModified);
-            this.isDeleted = new AndObject<>(query, Column.is_deleted, Property.isDeleted);
+            this.isDeleted = new AndBoolean<>(query, Column.is_deleted, Property.isDeleted);
             this.addressId = new AndObject<>(query, Column.address_id, Property.addressId);
             this.age = new AndObject<>(query, Column.age, Property.age);
             this.userName = new AndString<>(query, Column.user_name, Property.userName);
@@ -84,7 +84,7 @@ class UserEntityWrapperHelper {
         public final SetObject<Long, UserEntityUpdate> id;
         public final SetObject<Date, UserEntityUpdate> gmtCreated;
         public final SetObject<Date, UserEntityUpdate> gmtModified;
-        public final SetObject<Integer, UserEntityUpdate> isDeleted;
+        public final SetBoolean<UserEntityUpdate> isDeleted;
         public final SetObject<Long, UserEntityUpdate> addressId;
         public final SetObject<Integer, UserEntityUpdate> age;
         public final SetString<UserEntityUpdate> userName;
@@ -95,7 +95,7 @@ class UserEntityWrapperHelper {
             this.id = new SetObject<>(update, Column.id, Property.id);
             this.gmtCreated = new SetObject<>(update, Column.gmt_created, Property.gmtCreated);
             this.gmtModified = new SetObject<>(update, Column.gmt_modified, Property.gmtModified);
-            this.isDeleted = new SetObject<>(update, Column.is_deleted, Property.isDeleted);
+            this.isDeleted = new SetBoolean<>(update, Column.is_deleted, Property.isDeleted);
             this.addressId = new SetObject<>(update, Column.address_id, Property.addressId);
             this.age = new SetObject<>(update, Column.age, Property.age);
             this.userName = new SetString<>(update, Column.user_name, Property.userName);

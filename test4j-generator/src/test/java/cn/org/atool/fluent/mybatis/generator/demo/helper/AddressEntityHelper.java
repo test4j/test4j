@@ -34,7 +34,7 @@ public class AddressEntityHelper implements AddressMP{
             entity.setId((Long)map.get(Property.id));
             entity.setGmtCreated((Date)map.get(Property.gmtCreated));
             entity.setGmtModified((Date)map.get(Property.gmtModified));
-            entity.setIsDeleted((Integer)map.get(Property.isDeleted));
+            entity.setIsDeleted((Boolean)map.get(Property.isDeleted));
             entity.setAddress((String)map.get(Property.address));
         }
         return entity;

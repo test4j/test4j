@@ -23,7 +23,7 @@ class AddressEntityWrapperHelper {
         public final AndObject<Long, Q> id;
         public final AndObject<Date, Q> gmtCreated;
         public final AndObject<Date, Q> gmtModified;
-        public final AndObject<Integer, Q> isDeleted;
+        public final AndBoolean<Q> isDeleted;
         public final AndString<Q> address;
 
         And(Q query) {
@@ -31,7 +31,7 @@ class AddressEntityWrapperHelper {
             this.id = new AndObject<>(query, Column.id, Property.id);
             this.gmtCreated = new AndObject<>(query, Column.gmt_created, Property.gmtCreated);
             this.gmtModified = new AndObject<>(query, Column.gmt_modified, Property.gmtModified);
-            this.isDeleted = new AndObject<>(query, Column.is_deleted, Property.isDeleted);
+            this.isDeleted = new AndBoolean<>(query, Column.is_deleted, Property.isDeleted);
             this.address = new AndString<>(query, Column.address, Property.address);
         }
     }
@@ -72,7 +72,7 @@ class AddressEntityWrapperHelper {
         public final SetObject<Long, AddressEntityUpdate> id;
         public final SetObject<Date, AddressEntityUpdate> gmtCreated;
         public final SetObject<Date, AddressEntityUpdate> gmtModified;
-        public final SetObject<Integer, AddressEntityUpdate> isDeleted;
+        public final SetBoolean<AddressEntityUpdate> isDeleted;
         public final SetString<AddressEntityUpdate> address;
 
         public Set(AddressEntityUpdate update) {
@@ -80,7 +80,7 @@ class AddressEntityWrapperHelper {
             this.id = new SetObject<>(update, Column.id, Property.id);
             this.gmtCreated = new SetObject<>(update, Column.gmt_created, Property.gmtCreated);
             this.gmtModified = new SetObject<>(update, Column.gmt_modified, Property.gmtModified);
-            this.isDeleted = new SetObject<>(update, Column.is_deleted, Property.isDeleted);
+            this.isDeleted = new SetBoolean<>(update, Column.is_deleted, Property.isDeleted);
             this.address = new SetString<>(update, Column.address, Property.address);
         }
     }

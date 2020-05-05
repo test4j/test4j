@@ -46,7 +46,7 @@ public class UserEntity implements IEntity {
      * 
      */
     @TableField(value = Column.is_deleted, update = "0", fill = FieldFill.INSERT)
-    private Integer isDeleted;
+    private Boolean isDeleted;
     /**
      * 
      */

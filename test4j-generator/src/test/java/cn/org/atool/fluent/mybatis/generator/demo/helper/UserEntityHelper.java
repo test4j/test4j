@@ -37,7 +37,7 @@ public class UserEntityHelper implements UserMP{
             entity.setId((Long)map.get(Property.id));
             entity.setGmtCreated((Date)map.get(Property.gmtCreated));
             entity.setGmtModified((Date)map.get(Property.gmtModified));
-            entity.setIsDeleted((Integer)map.get(Property.isDeleted));
+            entity.setIsDeleted((Boolean)map.get(Property.isDeleted));
             entity.setAddressId((Long)map.get(Property.addressId));
             entity.setAge((Integer)map.get(Property.age));
             entity.setUserName((String)map.get(Property.userName));

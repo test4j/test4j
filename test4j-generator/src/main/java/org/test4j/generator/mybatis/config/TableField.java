@@ -67,8 +67,8 @@ public class TableField {
     }
 
     public void initNaming(ResultSet results) throws SQLException {
-        this.initFieldName();
         this.initFieldJavaType(results);
+        this.initFieldName();
         if (this.tableInfo.getGlobalConfig().getDataSourceConfig().getDbType().isCommentSupported()) {
             IDbQuery dbQuery = this.tableInfo.getGlobalConfig().getDataSourceConfig().getDbQuery();
             this.comment = results.getString(dbQuery.fieldComment());
