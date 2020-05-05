@@ -19,4 +19,9 @@ public class DaoImplTemplate extends BaseTemplate {
     protected Map<String, Object> templateConfigs(TableInfo table) {
         return null;
     }
+
+    @Override
+    public TemplateType getTemplateType() {
+        return TemplateType.Dao;
+    }
 }

@@ -15,6 +15,7 @@ import org.test4j.generator.mybatis.query.H2Query;
 import org.test4j.generator.mybatis.rule.DbType;
 import lombok.experimental.Accessors;
 import org.test4j.generator.mybatis.rule.Naming;
+import org.test4j.generator.mybatis.template.BaseTemplate;
 import org.test4j.tools.commons.StringHelper;
 
 import java.sql.PreparedStatement;
@@ -443,13 +444,21 @@ public class TableInfo {
         return this;
     }
 
-    String outputDir;
+    String packDir;
 
-    public String getOutputDir() {
-        if (outputDir == null) {
-            this.outputDir = this.generator.getOutputDir() + '/' + this.generator.getBasePackage().replace('.', '/');
+    public String outputDir(BaseTemplate.TemplateType type) {
+        if (packDir == null) {
+            this.packDir = '/' + this.generator.getBasePackage().replace('.', '/') + "/";
         }
-        return this.outputDir;
+        switch (type) {
+            case Dao:
+                return this.getGenerator().getDaoOutputDir() + packDir;
+            case Test:
+                return this.getGenerator().getTestOutputDir() + packDir;
+            case Base:
+            default:
+                return this.getGenerator().getOutputDir() + packDir;
+        }
     }
 
     public String getBasePackage() {

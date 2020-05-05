@@ -68,7 +68,7 @@ public abstract class BaseTemplate implements ConfigKey {
      * @return
      */
     public final void initContext(TableInfo table, Map<String, Object> configs) {
-        this.filePath = table.getOutputDir() + "/" + this.fileNameReg.replace("*", table.getEntityPrefix());
+        this.filePath = table.outputDir(this.getTemplateType()) + this.fileNameReg.replace("*", table.getEntityPrefix());
         Map<String, Object> context = this.templateConfigs(table);
         if (context == null) {
             context = new HashMap<>();

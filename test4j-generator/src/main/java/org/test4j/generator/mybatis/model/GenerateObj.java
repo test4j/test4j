@@ -44,7 +44,7 @@ public class GenerateObj {
         currConfig.remove();
         GenerateObj obj = new GenerateObj()
                 .setTableName(table.getTableName())
-                .setWithoutSuffixEntity(config.get(KEY_ENTITY_PREFIX))
+                .setWithoutSuffixEntity(table.getEntityPrefix())
                 .setMix(config.get("fileTableMix"))
                 .setMixCleanMethod(String.format("clean%sTable", config.get(KEY_ENTITY_PREFIX)))
                 .setMp(config.get("fileMP"))
