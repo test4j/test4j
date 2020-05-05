@@ -10,6 +10,7 @@ import org.test4j.generator.mybatis.template.entity.EntityTemplate;
 import org.test4j.generator.mybatis.template.mapper.MapperTemplate;
 import org.test4j.generator.mybatis.template.mapper.PartitionMapperTemplate;
 import org.test4j.generator.mybatis.template.mapping.MappingTemplate;
+import org.test4j.generator.mybatis.template.mix.TableMixTemplate;
 import org.test4j.generator.mybatis.template.query.EntityQueryTemplate;
 import org.test4j.generator.mybatis.template.query.EntityUpdateTemplate;
 import org.test4j.generator.mybatis.template.query.EntityWrapperHelperTemplate;
@@ -31,6 +32,7 @@ public interface TemplateList {
         new DaoIntfTemplate(),
         new DaoImplTemplate(),
         new EntityMapTemplate(),
-        new TableMapTemplate()
+        new TableMapTemplate(),
+        new TableMixTemplate()
     );
 }
