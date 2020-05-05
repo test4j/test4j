@@ -1,6 +1,7 @@
 package org.test4j.generator.mybatis.config;
 
 import lombok.AccessLevel;
+import org.test4j.generator.mybatis.config.constant.Naming;
 import org.test4j.generator.mybatis.db.IDbQuery;
 import org.test4j.generator.mybatis.db.IFieldCategory;
 import org.test4j.generator.mybatis.db.IJavaType;
@@ -69,15 +70,15 @@ public class TableField {
     public void initNaming(ResultSet results) throws SQLException {
         this.initFieldJavaType(results);
         this.initFieldName();
-        if (this.tableInfo.getGlobalConfig().getDataSourceConfig().getDbType().isCommentSupported()) {
-            IDbQuery dbQuery = this.tableInfo.getGlobalConfig().getDataSourceConfig().getDbQuery();
+        if (this.tableInfo.getGlobalConfig().getDbConfig().getDbType().isCommentSupported()) {
+            IDbQuery dbQuery = this.tableInfo.getGlobalConfig().getDbConfig().getDbQuery();
             this.comment = results.getString(dbQuery.fieldComment());
         }
     }
 
     private void initFieldJavaType(ResultSet results) throws SQLException {
         if (this.javaType == null) {
-            ITypeConvert typeConvert = this.tableInfo.getGlobalConfig().getDataSourceConfig().getTypeConvert();
+            ITypeConvert typeConvert = this.tableInfo.getGlobalConfig().getDbConfig().getTypeConvert();
             this.javaType = typeConvert.processTypeConvert(this.tableInfo.getTableConfig().getDateType(), this);
         }
     }

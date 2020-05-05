@@ -5,7 +5,7 @@ import org.test4j.generator.mybatis.template.BaseTemplate;
 
 import java.util.Map;
 
-import static org.test4j.generator.mybatis.config.ConfigKey.KEY_MAPPING;
+import static org.test4j.generator.mybatis.config.constant.ConfigKey.KEY_MAPPING;
 
 public class MappingTemplate extends BaseTemplate {
     public MappingTemplate() {

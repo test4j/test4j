@@ -1,6 +1,6 @@
 package org.test4j.generator.mybatis.template;
 
-import org.test4j.generator.mybatis.config.OutputDir;
+import org.test4j.generator.mybatis.config.constant.OutputDir;
 import org.test4j.generator.mybatis.template.dao.BaseDaoTemplate;
 import org.test4j.generator.mybatis.template.dao.DaoImplTemplate;
 import org.test4j.generator.mybatis.template.dao.DaoIntfTemplate;
@@ -17,7 +17,6 @@ import org.test4j.generator.mybatis.template.query.EntityUpdateTemplate;
 import org.test4j.generator.mybatis.template.query.EntityWrapperHelperTemplate;
 import org.test4j.generator.mybatis.template.summary.SummaryTemplate;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 

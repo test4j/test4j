@@ -2,6 +2,9 @@ package org.test4j.generator.mybatis.config;
 
 import lombok.Getter;
 import lombok.Setter;
+import org.test4j.generator.mybatis.config.constant.Naming;
+import org.test4j.generator.mybatis.config.constant.OutputDir;
+import org.test4j.generator.mybatis.config.constant.DefinedColumn;
 import org.test4j.generator.mybatis.db.IFieldCategory;
 import org.test4j.generator.mybatis.db.IJavaType;
 import org.test4j.generator.mybatis.db.query.H2Query;
@@ -16,7 +19,7 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.test4j.generator.mybatis.config.ConfigKey.*;
+import static org.test4j.generator.mybatis.config.constant.ConfigKey.*;
 
 /**
  * 表信息，关联到当前字段信息
@@ -61,7 +64,7 @@ public class TableInfo {
     @Setter
     private boolean isPartition = false;
 
-    private Map<String, TableColumn> columns = new HashMap<String, TableColumn>();
+    private Map<String, DefinedColumn> columns = new HashMap<String, DefinedColumn>();
     /**
      * 执行模板生成各个步骤产生的上下文信息，比如Mapper名称等，供其他模板生成时引用
      */
@@ -152,18 +155,18 @@ public class TableInfo {
     }
 
     public TableInfo column(String columnName, IJavaType columnType) {
-        this.columns.put(columnName, new TableColumn(columnName, null, columnType));
+        this.columns.put(columnName, new DefinedColumn(columnName, null, columnType));
         return this;
     }
 
     public TableInfo column(String columnName, String propertyName) {
-        this.columns.put(columnName, new TableColumn(columnName, propertyName, null));
+        this.columns.put(columnName, new DefinedColumn(columnName, propertyName, null));
         return this;
     }
 
     public TableInfo exclude(String... columnNames) {
         for (String column : columnNames) {
-            this.columns.put(column, new TableColumn(column).setExclude(true));
+            this.columns.put(column, new DefinedColumn(column).setExclude(true));
         }
         return this;
     }
@@ -203,7 +206,7 @@ public class TableInfo {
      * @return
      */
     private boolean isExclude(String field) {
-        TableColumn column = this.columns.get(field);
+        DefinedColumn column = this.columns.get(field);
         return column != null && column.isExclude();
     }
 
@@ -274,7 +277,7 @@ public class TableInfo {
     }
 
     private List<TableField> findAllFields() {
-        DataSourceConfig dbConfig = this.globalConfig.getDataSourceConfig();
+        DbConfig dbConfig = this.globalConfig.getDbConfig();
         DbType dbType = dbConfig.getDbType();
         IDbQuery dbQuery = dbConfig.getDbQuery();
 
@@ -302,7 +305,7 @@ public class TableInfo {
             return null;
         }
         TableField field = new TableField(this, columnName);
-        TableColumn defined = this.columns.get(columnName);
+        DefinedColumn defined = this.columns.get(columnName);
         if (defined != null && defined.getFieldName() != null) {
             field.setName(defined.getFieldName());
         }
@@ -334,7 +337,7 @@ public class TableInfo {
      * @throws SQLException
      */
     private boolean isPrimary(String columnName, ResultSet results, Set<String> h2PkColumns) throws SQLException {
-        DataSourceConfig dbConfig = this.globalConfig.getDataSourceConfig();
+        DbConfig dbConfig = this.globalConfig.getDbConfig();
         DbType dbType = dbConfig.getDbType();
 
         if (DbType.H2 == dbType) {
@@ -355,7 +358,7 @@ public class TableInfo {
      * @return 查询表字段信息语句
      */
     private String buildTableFieldsSql() {
-        DataSourceConfig dbConfig = this.globalConfig.getDataSourceConfig();
+        DbConfig dbConfig = this.globalConfig.getDbConfig();
         DbType dbType = dbConfig.getDbType();
         IDbQuery dbQuery = dbConfig.getDbQuery();
         String tableFieldsSql = dbQuery.tableFieldsSql();
@@ -378,7 +381,7 @@ public class TableInfo {
      * @throws SQLException
      */
     private Set<String> h2PkColumns() throws SQLException {
-        DataSourceConfig dbConfig = this.globalConfig.getDataSourceConfig();
+        DbConfig dbConfig = this.globalConfig.getDbConfig();
         Set<String> h2PkColumns = new HashSet<>();
         if (dbConfig.getDbType() != DbType.H2) {
             return h2PkColumns;

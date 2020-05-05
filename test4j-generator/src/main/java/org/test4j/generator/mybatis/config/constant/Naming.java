@@ -1,4 +1,4 @@
-package org.test4j.generator.mybatis.config;
+package org.test4j.generator.mybatis.config.constant;
 
 import org.test4j.tools.commons.StringConst;
 import org.test4j.tools.commons.StringHelper;

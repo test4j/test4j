@@ -17,7 +17,7 @@ import java.sql.SQLException;
  */
 @Data
 @Accessors(chain = true)
-public class DataSourceConfig {
+public class DbConfig {
     /**
      * 数据库类型
      */
@@ -51,10 +51,10 @@ public class DataSourceConfig {
      */
     private ITypeConvert typeConvert;
 
-    public DataSourceConfig() {
+    public DbConfig() {
     }
 
-    public DataSourceConfig(DbType dbType, String driverName, String url, String username, String password) {
+    public DbConfig(DbType dbType, String driverName, String url, String username, String password) {
         if (url == null) {
             throw new RuntimeException("请设置数据库链接信息 url");
         }

@@ -1,6 +1,6 @@
 package org.test4j.generator.mybatis.template.dao;
 
-import org.test4j.generator.mybatis.config.OutputDir;
+import org.test4j.generator.mybatis.config.constant.OutputDir;
 import org.test4j.generator.mybatis.config.TableInfo;
 import org.test4j.generator.mybatis.template.BaseTemplate;
 

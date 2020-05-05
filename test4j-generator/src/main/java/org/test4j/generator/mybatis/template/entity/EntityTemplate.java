@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.Map;
 
 import static java.util.stream.Collectors.joining;
-import static org.test4j.generator.mybatis.config.ConfigKey.KEY_ENTITY;
+import static org.test4j.generator.mybatis.config.constant.ConfigKey.KEY_ENTITY;
 
 public class EntityTemplate extends BaseTemplate {
     /**

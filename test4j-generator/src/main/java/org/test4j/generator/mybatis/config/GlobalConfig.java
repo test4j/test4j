@@ -5,6 +5,7 @@ import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.test4j.generator.mybatis.config.constant.Naming;
 import org.test4j.generator.mybatis.db.DbType;
 import org.test4j.generator.mybatis.db.ITypeConvert;
 import org.test4j.tools.commons.StringHelper;
@@ -91,20 +92,20 @@ public class GlobalConfig {
     /**
      * 数据源配置
      */
-    private DataSourceConfig dataSourceConfig;
+    private DbConfig dbConfig;
 
     public GlobalConfig setDataSource(String url, String username, String password) {
         return this.setDataSource(url, username, password, null);
     }
 
     public GlobalConfig setDataSource(String url, String username, String password, ITypeConvert typeConvert) {
-        this.dataSourceConfig = new DataSourceConfig(DbType.MYSQL, "com.mysql.jdbc.Driver", url, username, password)
+        this.dbConfig = new DbConfig(DbType.MYSQL, "com.mysql.jdbc.Driver", url, username, password)
             .setTypeConvert(typeConvert);
         return this;
     }
 
     public DbType getDbType() {
-        return this.dataSourceConfig.getDbType();
+        return this.dbConfig.getDbType();
     }
 
     /**

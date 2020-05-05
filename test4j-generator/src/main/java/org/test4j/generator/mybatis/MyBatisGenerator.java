@@ -9,7 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.test4j.generator.engine.AbstractTemplateEngine;
 import org.test4j.generator.engine.VelocityTemplateEngine;
 import org.test4j.generator.mybatis.config.TableConfig;
-import org.test4j.generator.mybatis.config.DataSourceConfig;
+import org.test4j.generator.mybatis.config.DbConfig;
 import org.test4j.generator.mybatis.config.GlobalConfig;
 import org.test4j.generator.mybatis.config.TableInfo;
 import org.test4j.generator.mybatis.db.DbType;
@@ -25,7 +25,7 @@ import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import static org.test4j.generator.mybatis.config.ConfigKey.*;
+import static org.test4j.generator.mybatis.config.constant.ConfigKey.*;
 import static org.test4j.module.core.utility.MessageHelper.info;
 
 /**
@@ -104,7 +104,7 @@ public class MyBatisGenerator {
      * @return
      */
     private void initTableInfos(TableConfig config) {
-        DataSourceConfig dbConfig = this.globalConfig.getDataSourceConfig();
+        DbConfig dbConfig = this.globalConfig.getDbConfig();
         try {
             String tablesSql = selectTableSql(config);
             Set<String> existed = new HashSet<>();
@@ -140,7 +140,7 @@ public class MyBatisGenerator {
     }
 
     private String selectTableSql(TableConfig config) {
-        DataSourceConfig dbConfig = this.globalConfig.getDataSourceConfig();
+        DbConfig dbConfig = this.globalConfig.getDbConfig();
         DbType dbType = this.globalConfig.getDbType();
         String tablesSql = dbConfig.getDbQuery().tablesSql();
         String schema = dbConfig.getSchemaName();
