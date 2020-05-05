@@ -41,22 +41,28 @@ public class MyBatisGenerator {
     private AbstractTemplateEngine templateEngine = new VelocityTemplateEngine();
 
     @Setter(AccessLevel.NONE)
-    private List<TableConfig> configs = new ArrayList<>();
+    private List<TableConfig> tableConfigs = new ArrayList<>();
     /**
      * 全局配置
      */
     private GlobalConfig globalConfig;
 
-    public MyBatisGenerator(TableConfig... configs) {
-        for (TableConfig config : configs) {
+    public MyBatisGenerator(TableConfig... tableConfigs) {
+        for (TableConfig config : tableConfigs) {
             config.setGlobalConfig(globalConfig);
-            this.configs.add(config);
+            this.tableConfigs.add(config);
         }
     }
 
     public void execute() {
+        if (globalConfig == null) {
+            throw new RuntimeException("the global config not set.");
+        }
+        if (tableConfigs == null || tableConfigs.isEmpty()) {
+            throw new RuntimeException("the table config not set.");
+        }
         List<Map<String, Object>> allContext = new ArrayList<>();
-        for (TableConfig config : this.configs) {
+        for (TableConfig config : this.tableConfigs) {
             info("===数据库元信息初始化...");
             this.initTableInfos(config);
             info("===准备生成文件...");

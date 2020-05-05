@@ -8,6 +8,7 @@ import cn.org.atool.fluent.mybatis.generator.demo.query.NoPrimaryEntityQuery;
 import cn.org.atool.fluent.mybatis.generator.demo.query.NoPrimaryEntityUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 /**
 * NoPrimaryEntity数据库操作服务类
  *

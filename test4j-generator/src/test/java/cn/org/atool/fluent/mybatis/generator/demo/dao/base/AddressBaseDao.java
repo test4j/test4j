@@ -7,6 +7,7 @@ import cn.org.atool.fluent.mybatis.generator.demo.mapping.AddressMP;
 import cn.org.atool.fluent.mybatis.generator.demo.query.AddressEntityQuery;
 import cn.org.atool.fluent.mybatis.generator.demo.query.AddressEntityUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
+import cn.org.atool.fluent.mybatis.generator.MyCustomerInterface;
 
 /**
 * AddressEntity数据库操作服务类
@@ -14,7 +15,7 @@ import org.springframework.beans.factory.annotation.Autowired;
  * @author generate code
 */
 public abstract class AddressBaseDao extends BaseDaoImpl<AddressEntity, AddressEntityQuery, AddressEntityUpdate>
-        implements AddressMP {
+        implements AddressMP, MyCustomerInterface<AddressEntity, AddressEntityQuery, AddressEntityUpdate> {
 
     @Autowired
     protected AddressMapper mapper;

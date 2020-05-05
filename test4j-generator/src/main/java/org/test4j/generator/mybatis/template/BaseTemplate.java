@@ -90,4 +90,21 @@ public abstract class BaseTemplate {
         }
         return table.getBasePackage() + "." + sub;
     }
+
+    protected String getConfig(Map<String, Object> context, String key) {
+        Object temp = context;
+        String[] keys = key.split("\\.");
+        for (String item : keys) {
+            if (temp instanceof Map) {
+                temp = ((Map) temp).get(item);
+            } else {
+                throw new RuntimeException("illegal operate");
+            }
+        }
+        if (temp instanceof String) {
+            return (String) temp;
+        } else {
+            throw new RuntimeException("illegal operate");
+        }
+    }
 }

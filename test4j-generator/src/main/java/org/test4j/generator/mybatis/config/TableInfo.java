@@ -446,20 +446,21 @@ public class TableInfo {
         return globalConfig.getBasePackage();
     }
 
+    private Map<String,Object> context;
     /**
      * 初始化模板的上下文变量
      *
      * @return
      */
     public Map<String, Object> initTemplateContext() {
-        Map<String, Object> configs = new HashMap<>();
+        this.context = new HashMap<>();
         {
-            configs.put(KEY_TABLE, this.getTableName());
-            configs.put(KEY_ENTITY_PREFIX, this.getEntityPrefix());
-            configs.put(KEY_COMMENT, this.getComment());
-            configs.put(KEY_FIELD_NAMES, this.getFieldNames());
-            configs.put(KEY_FIELDS, this.getFields());
-            configs.put(KEY_AUTHOR, this.globalConfig.getAuthor());
+            context.put(KEY_TABLE, this.getTableName());
+            context.put(KEY_ENTITY_PREFIX, this.getEntityPrefix());
+            context.put(KEY_COMMENT, this.getComment());
+            context.put(KEY_FIELD_NAMES, this.getFieldNames());
+            context.put(KEY_FIELDS, this.getFields());
+            context.put(KEY_AUTHOR, this.globalConfig.getAuthor());
         }
         {
             String types = this.fields.stream()
@@ -469,8 +470,8 @@ public class TableInfo {
                 .sorted()
                 .map(type -> "import " + type + ";")
                 .collect(Collectors.joining("\n"));
-            configs.put("importTypes", types);
+            context.put("importTypes", types);
         }
-        return configs;
+        return context;
     }
 }

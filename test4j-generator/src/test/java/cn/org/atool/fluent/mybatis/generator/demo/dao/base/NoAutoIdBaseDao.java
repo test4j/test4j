@@ -8,6 +8,7 @@ import cn.org.atool.fluent.mybatis.generator.demo.query.NoAutoIdEntityQuery;
 import cn.org.atool.fluent.mybatis.generator.demo.query.NoAutoIdEntityUpdate;
 import org.springframework.beans.factory.annotation.Autowired;
 
+
 /**
 * NoAutoIdEntity数据库操作服务类
  *

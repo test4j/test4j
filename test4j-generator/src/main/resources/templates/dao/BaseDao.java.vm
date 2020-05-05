@@ -7,9 +7,7 @@ import ${mapping.package}.${mapping.name};
 import ${entityQuery.package}.${entityQuery.name};
 import ${entityUpdate.package}.${entityUpdate.name};
 import org.springframework.beans.factory.annotation.Autowired;
-#if(${cfg.baseDaoInterfaceImports})
-${cfg.baseDaoInterfaceImports}
-#end
+$!{baseDao.interfaceImports}
 
 /**
 * ${entity.name}数据库操作服务类
@@ -17,7 +15,7 @@ ${cfg.baseDaoInterfaceImports}
  * @author ${author}
 */
 public abstract class ${baseDao.name} extends BaseDaoImpl<${entity.name}, ${entityQuery.name}, ${entityUpdate.name}>
-        implements ${mapping.name}#if(${cfg.baseDaoInterfaceImplement}), ${cfg.baseDaoInterfaceImplement}#end {
+        implements ${mapping.name}$!{baseDao.interface} {
 
     @Autowired
     protected ${mapper.name} mapper;

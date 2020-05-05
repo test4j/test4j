@@ -20,7 +20,7 @@ public class MybatisMyBatisGeneratorTest {
                 .allTable(table -> {
                     table.setColumn("gmt_created", "gmt_modified", "is_deleted")
                         .column("is_deleted", ColumnType.BOOLEAN)
-                        .addBaseDaoInterface("MyCustomerInterface<${entity}, ${query}, ${update}>", "cn.org.atool.fluent.mybatis.generator.MyCustomerInterface")
+                        .addBaseDaoInterface("MyCustomerInterface<${entity}, ${query}, ${update}>", MyCustomerInterface.class.getName())
                     ;
                 })
             ,
