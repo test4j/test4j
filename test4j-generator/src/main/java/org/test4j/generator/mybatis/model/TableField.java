@@ -2,7 +2,6 @@ package org.test4j.generator.mybatis.model;
 
 import lombok.AccessLevel;
 import org.test4j.generator.mybatis.query.IDbQuery;
-import org.test4j.generator.mybatis.config.INameConvert;
 import org.test4j.generator.mybatis.config.ITypeConvert;
 import org.test4j.generator.mybatis.config.StrategyConfig;
 import org.test4j.generator.mybatis.rule.Naming;
@@ -83,7 +82,7 @@ public class TableField {
      * @return
      */
     private boolean needRemoveIsPrefix(StrategyConfig strategyConfig) {
-        if (!strategyConfig.isEntityBooleanColumnRemoveIsPrefix()) {
+        if (!strategyConfig.isBooleanColumnRemoveIsPrefix()) {
             return false;
         } else if (!boolean.class.getSimpleName().equalsIgnoreCase(this.getType())) {
             return false;
@@ -100,17 +99,14 @@ public class TableField {
             return;
         }
         StrategyConfig strategyConfig = this.tableInfo.getGenerator().getStrategyConfig();
-        INameConvert nameConvert = strategyConfig.getNameConvert();
-        if (null != nameConvert) {
-            this.name = nameConvert.fieldNameConvert(this);
+
+        Naming naming = strategyConfig.getColumnNaming();
+        if (naming == Naming.underline_to_camel) {
+            this.name = Naming.underlineToCamel(this.columnName);
         } else {
-            Naming naming = strategyConfig.getColumnNaming();
-            if (naming == Naming.underline_to_camel) {
-                this.name = Naming.underlineToCamel(this.columnName);
-            } else {
-                this.name = this.columnName;
-            }
+            this.name = this.columnName;
         }
+
         // Boolean类型is前缀处理
         if (this.needRemoveIsPrefix(strategyConfig)) {
             this.capitalName = this.name.substring(2, 1).toLowerCase() + this.name.substring(3);

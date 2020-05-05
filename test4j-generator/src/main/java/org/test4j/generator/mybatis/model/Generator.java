@@ -10,11 +10,11 @@ import org.test4j.generator.mybatis.config.BuildConfig;
 import org.test4j.generator.mybatis.config.ITypeConvert;
 import org.test4j.generator.mybatis.config.StrategyConfig;
 import org.test4j.generator.mybatis.rule.DbType;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import org.test4j.generator.mybatis.config.DataSourceConfig;
 import org.test4j.generator.mybatis.template.BaseTemplate;
 import org.test4j.generator.mybatis.template.TemplateList;
 import org.test4j.hamcrest.Assert;
+import org.test4j.tools.commons.StringHelper;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -158,7 +158,7 @@ public class Generator {
      */
     private void open(BuildConfig config) {
         try {
-            if (config.isOpen() && StringUtils.isNotEmpty(this.outputDir)) {
+            if (config.isOpen() && !StringHelper.isBlank(this.outputDir)) {
                 String osName = System.getProperty("os.name");
                 if (osName != null) {
                     if (osName.contains("Mac")) {

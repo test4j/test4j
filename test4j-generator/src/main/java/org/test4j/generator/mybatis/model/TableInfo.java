@@ -1,6 +1,5 @@
 package org.test4j.generator.mybatis.model;
 
-import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.Getter;
 import lombok.Setter;
 import org.test4j.generator.mybatis.config.*;
@@ -100,19 +99,16 @@ public class TableInfo {
 
     public TableInfo(String tableName) {
         this.tableName = tableName;
-        this.addImportTypes(TableName.class.getCanonicalName());
     }
 
     public TableInfo(String tableName, String entityPrefix) {
         this.tableName = tableName;
         this.entityPrefix = entityPrefix;
-        this.addImportTypes(TableName.class.getCanonicalName());
     }
 
     public TableInfo(String tableName, BuildConfig buildConfig) {
         this.tableName = tableName;
         this.buildConfig = buildConfig;
-        this.addImportTypes(TableName.class.getCanonicalName());
     }
 
     /**
@@ -237,12 +233,7 @@ public class TableInfo {
         if (strategy.getTableNaming() == Naming.underline_to_camel) {
             propertyName = Naming.underlineToCamel(this.tableName);
         }
-        INameConvert nameConvert = this.generator.getStrategyConfig().getNameConvert();
-        if (null != nameConvert) {
-            return nameConvert.entityNameConvert(this);
-        } else {
-            return Naming.capitalFirst(propertyName);
-        }
+        return Naming.capitalFirst(propertyName);
     }
 
     /**

@@ -1,6 +1,5 @@
 package org.test4j.generator.engine;
 
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
 import lombok.extern.slf4j.Slf4j;
 import org.test4j.generator.mybatis.config.BuildConfig;
 import freemarker.template.Configuration;
@@ -25,7 +24,7 @@ public class FreemarkerTemplateEngine extends AbstractTemplateEngine {
         super.init(config);
         configuration = new Configuration(Configuration.DEFAULT_INCOMPATIBLE_IMPROVEMENTS);
         configuration.setDefaultEncoding(UTF8);
-        configuration.setClassForTemplateLoading(FreemarkerTemplateEngine.class, StringPool.SLASH);
+        configuration.setClassForTemplateLoading(FreemarkerTemplateEngine.class, "/");
         return this;
     }
 

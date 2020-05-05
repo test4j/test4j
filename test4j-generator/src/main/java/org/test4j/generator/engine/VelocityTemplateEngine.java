@@ -1,13 +1,12 @@
 package org.test4j.generator.engine;
 
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import lombok.extern.slf4j.Slf4j;
 import org.test4j.generator.mybatis.config.BuildConfig;
 import org.apache.velocity.Template;
 import org.apache.velocity.VelocityContext;
 import org.apache.velocity.app.Velocity;
 import org.apache.velocity.app.VelocityEngine;
+import org.test4j.tools.commons.StringHelper;
 
 import java.io.BufferedWriter;
 import java.io.FileOutputStream;
@@ -31,10 +30,10 @@ public class VelocityTemplateEngine extends AbstractTemplateEngine {
         if (null == velocityEngine) {
             Properties p = new Properties();
             p.setProperty(VM_LOAD_PATH_KEY, VM_LOAD_PATH_VALUE);
-            p.setProperty(Velocity.FILE_RESOURCE_LOADER_PATH, StringPool.EMPTY);
+            p.setProperty(Velocity.FILE_RESOURCE_LOADER_PATH, "");
             p.setProperty(Velocity.ENCODING_DEFAULT, UTF8);
             p.setProperty(Velocity.INPUT_ENCODING, UTF8);
-            p.setProperty("file.resource.loader.unicode", StringPool.TRUE);
+            p.setProperty("file.resource.loader.unicode", "true");
             velocityEngine = new VelocityEngine(p);
         }
         return this;
@@ -43,7 +42,7 @@ public class VelocityTemplateEngine extends AbstractTemplateEngine {
 
     @Override
     public void writer(Map<String, Object> objectMap, String templatePath, String outputFile) throws Exception {
-        if (StringUtils.isEmpty(templatePath)) {
+        if (StringHelper.isBlank(templatePath)) {
             return;
         }
         Template template = velocityEngine.getTemplate(templatePath, UTF8);

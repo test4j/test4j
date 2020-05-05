@@ -1,9 +1,9 @@
 package org.test4j.generator.mybatis.rule;
 
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import org.test4j.tools.commons.StringConst;
 import org.test4j.tools.commons.StringHelper;
+
+import java.util.regex.Pattern;
 
 /**
  * 数据库表到文件命名转换策略
@@ -21,11 +21,11 @@ public enum Naming {
     underline_to_camel;
 
     public static String underlineToCamel(String name) {
-        if (StringUtils.isEmpty(name)) {
-            return StringConst.EMPTY;
+        if (StringHelper.isBlank(name)) {
+            return "";
         }
         String tempName = name;
-        if (StringUtils.isCapitalMode(name) || StringUtils.isMixedMode(name)) {
+        if (isCapitalMode(name) || isMixedMode(name)) {
             tempName = name.toLowerCase();
         }
         String[] camels = tempName.split(StringConst.UNDERLINE);
@@ -38,6 +38,20 @@ public enum Naming {
         return result.toString();
     }
 
+    private static final Pattern CAPITAL_MODE = Pattern.compile("^[0-9A-Z/_]+$");
+
+    public static boolean isCapitalMode(String word) {
+        return null != word && CAPITAL_MODE.matcher(word).matches();
+    }
+
+    public static boolean isMixedMode(String word) {
+        return matches(".*[A-Z]+.*", word) && matches(".*[/_]+.*", word);
+    }
+
+    public static boolean matches(String regex, String input) {
+        return null != regex && null != input ? Pattern.matches(regex, input) : false;
+    }
+
     /**
      * 去掉指定的前缀
      *
@@ -46,8 +60,8 @@ public enum Naming {
      * @return
      */
     public static String removePrefix(String name, String... prefix) {
-        if (StringUtils.isEmpty(name)) {
-            return StringPool.EMPTY;
+        if (StringHelper.isBlank(name)) {
+            return "";
         }
         if (prefix == null) {
             return name;
@@ -62,24 +76,13 @@ public enum Naming {
     }
 
     /**
-     * 去掉下划线前缀且将后半部分转成驼峰格式
-     *
-     * @param name        ignore
-     * @param tablePrefix ignore
-     * @return ignore
-     */
-    public static String removePrefixAndCamel(String name, String[] tablePrefix) {
-        return underlineToCamel(removePrefix(name, tablePrefix));
-    }
-
-    /**
      * 实体首字母大写
      *
      * @param name 待转换的字符串
      * @return 转换后的字符串
      */
     public static String capitalFirst(String name) {
-        if (StringUtils.isNotEmpty(name)) {
+        if (!StringHelper.isBlank(name)) {
             return name.substring(0, 1).toUpperCase() + name.substring(1);
         } else {
             return StringPool.EMPTY;
