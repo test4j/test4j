@@ -1,7 +1,7 @@
 package org.test4j.generator.mybatis.template.datamap;
 
 import org.test4j.generator.mybatis.config.OutputDir;
-import org.test4j.generator.mybatis.model.TableInfo;
+import org.test4j.generator.mybatis.config.TableInfo;
 import org.test4j.generator.mybatis.template.BaseTemplate;
 
 import java.util.Map;

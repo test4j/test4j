@@ -6,9 +6,8 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.test4j.generator.mybatis.config.OutputDir;
-import org.test4j.generator.mybatis.model.TableInfo;
+import org.test4j.generator.mybatis.config.TableInfo;
 
-import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 

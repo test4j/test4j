@@ -1,15 +1,13 @@
-package org.test4j.generator.mybatis.model;
+package org.test4j.generator.mybatis.config;
 
 import lombok.Getter;
 import lombok.Setter;
-import org.test4j.generator.mybatis.config.*;
 import org.test4j.generator.mybatis.db.IFieldCategory;
 import org.test4j.generator.mybatis.db.IJavaType;
 import org.test4j.generator.mybatis.db.query.H2Query;
 import org.test4j.generator.mybatis.db.IDbQuery;
 import org.test4j.generator.mybatis.db.DbType;
 import lombok.experimental.Accessors;
-import org.test4j.generator.mybatis.config.Naming;
 import org.test4j.tools.commons.StringHelper;
 
 import java.sql.PreparedStatement;
@@ -28,6 +26,9 @@ import static org.test4j.generator.mybatis.config.ConfigKey.*;
 @Getter
 @Accessors(chain = true)
 public class TableInfo {
+    private GlobalConfig globalConfig;
+
+    private TableConfig tableConfig;
     /**
      * 所有字段类型列表
      */
@@ -108,9 +109,9 @@ public class TableInfo {
         this.entityPrefix = entityPrefix;
     }
 
-    public TableInfo(String tableName, BuildConfig buildConfig) {
+    public TableInfo(String tableName, TableConfig tableConfig) {
         this.tableName = tableName;
-        this.buildConfig = buildConfig;
+        this.tableConfig = tableConfig;
     }
 
     /**
@@ -220,9 +221,8 @@ public class TableInfo {
         if (!StringHelper.isBlank(this.entityPrefix)) {
             return;
         }
-        StrategyConfig strategy = this.generator.getStrategyConfig();
         String prefix = this.getNoPrefixTableName();
-        if (strategy.getTableNaming() == Naming.underline_to_camel) {
+        if (globalConfig.getTableNaming() == Naming.underline_to_camel) {
             prefix = Naming.underlineToCamel(prefix);
         }
         this.entityPrefix = Naming.capitalFirst(prefix);
@@ -234,8 +234,8 @@ public class TableInfo {
      * @return
      */
     public String getNoPrefixTableName() {
-        if (this.buildConfig.needRemovePrefix()) {
-            return Naming.removePrefix(this.tableName, this.buildConfig.getTablePrefix());
+        if (this.tableConfig.needRemovePrefix()) {
+            return Naming.removePrefix(this.tableName, this.tableConfig.getTablePrefix());
         } else {
             return this.tableName;
         }
@@ -274,7 +274,7 @@ public class TableInfo {
     }
 
     private List<TableField> findAllFields() {
-        DataSourceConfig dbConfig = this.generator.getDataSourceConfig();
+        DataSourceConfig dbConfig = this.globalConfig.getDataSourceConfig();
         DbType dbType = dbConfig.getDbType();
         IDbQuery dbQuery = dbConfig.getDbQuery();
 
@@ -302,6 +302,13 @@ public class TableInfo {
             return null;
         }
         TableField field = new TableField(this, columnName);
+        TableColumn defined = this.columns.get(columnName);
+        if (defined != null && defined.getFieldName() != null) {
+            field.setName(defined.getFieldName());
+        }
+        if (defined != null && defined.getJavaType() != null) {
+            field.setJavaType(defined.getJavaType());
+        }
         boolean primary = this.isPrimary(columnName, results, h2PkColumns);
         // 处理ID, 只取第一个，并放到list中的索引为0的位置
         if (primary && !haveId) {
@@ -327,7 +334,7 @@ public class TableInfo {
      * @throws SQLException
      */
     private boolean isPrimary(String columnName, ResultSet results, Set<String> h2PkColumns) throws SQLException {
-        DataSourceConfig dbConfig = this.generator.getDataSourceConfig();
+        DataSourceConfig dbConfig = this.globalConfig.getDataSourceConfig();
         DbType dbType = dbConfig.getDbType();
 
         if (DbType.H2 == dbType) {
@@ -348,7 +355,7 @@ public class TableInfo {
      * @return 查询表字段信息语句
      */
     private String buildTableFieldsSql() {
-        DataSourceConfig dbConfig = this.generator.getDataSourceConfig();
+        DataSourceConfig dbConfig = this.globalConfig.getDataSourceConfig();
         DbType dbType = dbConfig.getDbType();
         IDbQuery dbQuery = dbConfig.getDbQuery();
         String tableFieldsSql = dbQuery.tableFieldsSql();
@@ -371,7 +378,7 @@ public class TableInfo {
      * @throws SQLException
      */
     private Set<String> h2PkColumns() throws SQLException {
-        DataSourceConfig dbConfig = this.generator.getDataSourceConfig();
+        DataSourceConfig dbConfig = this.globalConfig.getDataSourceConfig();
         Set<String> h2PkColumns = new HashSet<>();
         if (dbConfig.getDbType() != DbType.H2) {
             return h2PkColumns;
@@ -414,30 +421,26 @@ public class TableInfo {
         return this;
     }
 
-    private BuildConfig buildConfig;
-
-    private MyBatisGenerator generator;
-
-    public TableInfo setConfig(BuildConfig buildConfig, MyBatisGenerator generator) {
-        this.buildConfig = buildConfig;
-        this.generator = generator;
+    public TableInfo setConfig(GlobalConfig globalConfig, TableConfig tableConfig) {
+        this.tableConfig = tableConfig;
+        this.globalConfig = globalConfig;
         return this;
     }
 
     public String outputDir(OutputDir dirType) {
         switch (dirType) {
             case Dao:
-                return this.getGenerator().getDaoOutputDir() + this.getGenerator().getPackageDir();
+                return this.globalConfig.getDaoOutputDir() + this.globalConfig.getPackageDir();
             case Test:
-                return this.getGenerator().getTestOutputDir() + this.getGenerator().getPackageDir();
+                return this.globalConfig.getTestOutputDir() + this.globalConfig.getPackageDir();
             case Base:
             default:
-                return this.getGenerator().getOutputDir() + this.getGenerator().getPackageDir();
+                return this.globalConfig.getOutputDir() + this.globalConfig.getPackageDir();
         }
     }
 
     public String getBasePackage() {
-        return generator.getBasePackage();
+        return globalConfig.getBasePackage();
     }
 
     /**
@@ -453,7 +456,7 @@ public class TableInfo {
             configs.put(KEY_COMMENT, this.getComment());
             configs.put(KEY_FIELD_NAMES, this.getFieldNames());
             configs.put(KEY_FIELDS, this.getFields());
-            configs.put(KEY_AUTHOR,this.buildConfig.getAuthor());
+            configs.put(KEY_AUTHOR, this.globalConfig.getAuthor());
         }
         {
             String types = this.fields.stream()

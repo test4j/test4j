@@ -1,6 +1,6 @@
 package org.test4j.generator.mybatis.db;
 
-import org.test4j.generator.mybatis.model.TableField;
+import org.test4j.generator.mybatis.config.TableField;
 
 /**
  * 数据库字段类型转换

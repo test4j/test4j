@@ -1,10 +1,8 @@
 package org.test4j.generator.mybatis.template.query;
 
-import org.test4j.generator.mybatis.model.TableInfo;
+import org.test4j.generator.mybatis.config.TableInfo;
 import org.test4j.generator.mybatis.template.BaseTemplate;
 
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import static java.util.stream.Collectors.joining;

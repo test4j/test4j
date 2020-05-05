@@ -1,11 +1,16 @@
 package org.test4j.generator.mybatis.template.summary;
 
 import lombok.Data;
-import org.test4j.generator.mybatis.model.MyBatisGenerator;
+import org.test4j.generator.mybatis.config.GlobalConfig;
 
+/**
+ * 汇总类模板生成
+ *
+ * @author wudarui
+ */
 @Data
 public class SummaryTemplate {
-    private MyBatisGenerator generator;
+    private GlobalConfig globalConfig;
 
     private String templateId;
 
@@ -18,10 +23,8 @@ public class SummaryTemplate {
 
     public String getFilePath() {
         return String.format("%s/%s/%s",
-            generator.getTestOutputDir(),
-            generator.getPackageDir(),
+            globalConfig.getTestOutputDir(),
+            globalConfig.getPackageDir(),
             fileName);
     }
-
-
 }

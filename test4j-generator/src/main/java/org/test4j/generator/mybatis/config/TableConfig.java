@@ -1,4 +1,4 @@
-package org.test4j.generator.mybatis.model;
+package org.test4j.generator.mybatis.config;
 
 import lombok.AccessLevel;
 import lombok.Data;
@@ -18,16 +18,9 @@ import java.util.function.Consumer;
  */
 @Data
 @Accessors(chain = true)
-public class BuildConfig {
-    private MyBatisGenerator generator;
-    /**
-     * 开发人员
-     */
-    private String author = "generate code";
-    /**
-     * 是否打开输出目录
-     */
-    private boolean open = true;
+public class TableConfig {
+    private GlobalConfig globalConfig;
+
     /**
      * 是否覆盖已有文件
      */
@@ -52,7 +45,7 @@ public class BuildConfig {
     @Getter
     private Map<String, TableInfo> tables = new HashMap<>();
 
-    public BuildConfig() {
+    public TableConfig() {
     }
 
 
@@ -62,18 +55,18 @@ public class BuildConfig {
         return table;
     }
 
-    public BuildConfig addTable(TableInfo table) {
+    public TableConfig addTable(TableInfo table) {
         this.tables.put(table.getTableName(), table);
         return this;
     }
 
-    public BuildConfig addTable(String tableName) {
+    public TableConfig addTable(String tableName) {
         TableInfo table = new TableInfo(tableName, this);
         this.tables.put(tableName, table);
         return this;
     }
 
-    public BuildConfig addTable(String tableName, boolean isPartition) {
+    public TableConfig addTable(String tableName, boolean isPartition) {
         TableInfo table = new TableInfo(tableName, this)
             .setPartition(isPartition);
         this.tables.put(tableName, table);
@@ -86,12 +79,12 @@ public class BuildConfig {
      * @param consumer
      * @return
      */
-    public BuildConfig allTable(Consumer<TableInfo> consumer) {
+    public TableConfig allTable(Consumer<TableInfo> consumer) {
         this.tables.values().stream().forEach(table -> consumer.accept(table));
         return this;
     }
 
-    public BuildConfig setTablePrefix(String... tablePrefix) {
+    public TableConfig setTablePrefix(String... tablePrefix) {
         this.tablePrefix = tablePrefix;
         return this;
     }

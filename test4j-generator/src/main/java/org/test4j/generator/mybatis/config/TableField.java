@@ -1,12 +1,10 @@
-package org.test4j.generator.mybatis.model;
+package org.test4j.generator.mybatis.config;
 
 import lombok.AccessLevel;
 import org.test4j.generator.mybatis.db.IDbQuery;
 import org.test4j.generator.mybatis.db.IFieldCategory;
 import org.test4j.generator.mybatis.db.IJavaType;
 import org.test4j.generator.mybatis.db.ITypeConvert;
-import org.test4j.generator.mybatis.config.StrategyConfig;
-import org.test4j.generator.mybatis.config.Naming;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -40,13 +38,15 @@ public class TableField {
     /**
      * java字段名称
      */
+    @Setter
     private String name;
     /**
      * 字段java类型
      */
+    @Setter
     private IJavaType javaType;
     /**
-     * 字段类型
+     * 字段名称（首字母大写）
      */
     private String capitalName;
     /**
@@ -68,48 +68,38 @@ public class TableField {
 
     public void initNaming(ResultSet results) throws SQLException {
         this.initFieldName();
-        ITypeConvert typeConvert = this.tableInfo.getGenerator().getDataSourceConfig().getTypeConvert();
-        this.javaType = typeConvert.processTypeConvert(this.tableInfo.getBuildConfig().getDateType(), this);
-        if (this.tableInfo.getGenerator().getDataSourceConfig().getDbType().isCommentSupported()) {
-            IDbQuery dbQuery = this.tableInfo.getGenerator().getDataSourceConfig().getDbQuery();
+        this.initFieldJavaType(results);
+        if (this.tableInfo.getGlobalConfig().getDataSourceConfig().getDbType().isCommentSupported()) {
+            IDbQuery dbQuery = this.tableInfo.getGlobalConfig().getDataSourceConfig().getDbQuery();
             this.comment = results.getString(dbQuery.fieldComment());
         }
     }
 
-    /**
-     * 是否需要去掉is前缀
-     *
-     * @param strategyConfig
-     * @return
-     */
-    private boolean needRemoveIsPrefix(StrategyConfig strategyConfig) {
-        if (!strategyConfig.isBooleanColumnRemoveIsPrefix()) {
-            return false;
-        } else if (!boolean.class.getSimpleName().equalsIgnoreCase(this.getType())) {
-            return false;
-        } else {
-            return this.name.startsWith("is");
+    private void initFieldJavaType(ResultSet results) throws SQLException {
+        if (this.javaType == null) {
+            ITypeConvert typeConvert = this.tableInfo.getGlobalConfig().getDataSourceConfig().getTypeConvert();
+            this.javaType = typeConvert.processTypeConvert(this.tableInfo.getTableConfig().getDateType(), this);
         }
     }
+
 
     /**
      * 处理字段名称
      */
     private void initFieldName() {
-        if (!StringHelper.isBlank(this.name)) {
-            return;
-        }
-        StrategyConfig strategyConfig = this.tableInfo.getGenerator().getStrategyConfig();
-
-        Naming naming = strategyConfig.getColumnNaming();
-        if (naming == Naming.underline_to_camel) {
-            this.name = Naming.underlineToCamel(this.columnName);
-        } else {
-            this.name = this.columnName;
+        GlobalConfig globalConfig = this.tableInfo.getGlobalConfig();
+        // 如果字段名称没有预设
+        if (StringHelper.isBlank(this.name)) {
+            Naming naming = globalConfig.getColumnNaming();
+            if (naming == Naming.underline_to_camel) {
+                this.name = Naming.underlineToCamel(this.columnName);
+            } else {
+                this.name = this.columnName;
+            }
         }
 
         // Boolean类型is前缀处理
-        if (this.needRemoveIsPrefix(strategyConfig)) {
+        if (globalConfig.needRemoveIsPrefix(name, this.getType())) {
             this.capitalName = this.name.substring(2, 1).toLowerCase() + this.name.substring(3);
         } else if (name.length() <= 1) {
             this.capitalName = name.toUpperCase();

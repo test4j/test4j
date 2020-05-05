@@ -10,17 +10,17 @@ import org.test4j.generator.mybatis.db.IJavaType;
 public class TableColumn {
     private String columnName;
 
-    private String propertyName;
+    private String fieldName;
 
-    private IJavaType columnType;
+    private IJavaType javaType;
 
     @Setter
     private boolean exclude = false;
 
-    public TableColumn(String columnName, String propertyName, IJavaType columnType) {
+    public TableColumn(String columnName, String fieldName, IJavaType javaType) {
         this.columnName = columnName;
-        this.propertyName = propertyName;
-        this.columnType = columnType;
+        this.fieldName = fieldName;
+        this.javaType = javaType;
     }
 
     public TableColumn(String columnName) {
