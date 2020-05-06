@@ -28,53 +28,15 @@ import static org.test4j.module.core.utility.MessageHelper.info;
  * @author wudarui
  */
 @Slf4j
-@Data
-@Accessors(chain = true)
-public class MyBatisGenerator {
-    @Getter(AccessLevel.NONE)
-    private AbstractTemplateEngine templateEngine = new VelocityTemplateEngine();
-
-    @Setter(AccessLevel.NONE)
-    private List<TableConfig> tableConfigs = new ArrayList<>();
-    /**
-     * 全局配置
-     */
-    private GlobalConfig globalConfig;
+public class MyBatisGenerator extends BaseGenerator {
 
     public MyBatisGenerator(TableConfig... tableConfigs) {
-        for (TableConfig config : tableConfigs) {
-            config.setGlobalConfig(globalConfig);
-            this.tableConfigs.add(config);
-        }
+        super(tableConfigs);
     }
 
+    @Override
     protected List<BaseTemplate> getAllTemplates() {
         return TemplateList.ALL_TEMPLATES;
-    }
-
-    public void execute() {
-        if (globalConfig == null) {
-            throw new RuntimeException("the global config not set.");
-        }
-        if (tableConfigs == null || tableConfigs.isEmpty()) {
-            throw new RuntimeException("the table config not set.");
-        }
-        List<Map<String, Object>> allContext = new ArrayList<>();
-        for (TableConfig config : this.tableConfigs) {
-            info("===数据库元信息初始化...");
-            config.setGlobalConfig(this.globalConfig).initTables();
-            info("===准备生成文件...");
-            for (Map.Entry<String, TableInfo> entry : config.getTables().entrySet()) {
-                info("======处理表：" + entry.getKey());
-                TableInfo table = entry.getValue();
-                Map<String, Object> context = this.getAllTemplateContext(table);
-                this.generateTemplates(table, context);
-                allContext.add(context);
-            }
-            info("===文件生成完成！！！");
-        }
-        this.generateSummary(allContext);
-        this.open();
     }
 
     /**
@@ -82,6 +44,7 @@ public class MyBatisGenerator {
      *
      * @param allContext
      */
+    @Override
     protected void generateSummary(List<Map<String, Object>> allContext) {
         Map<String, Object> wrapper = new HashMap<>();
         {
@@ -91,65 +54,6 @@ public class MyBatisGenerator {
         for (SummaryTemplate summary : TemplateList.summaries) {
             summary.setGlobalConfig(this.globalConfig);
             templateEngine.output(summary.getTemplateId(), wrapper, summary.getFilePath());
-        }
-    }
-
-    /**
-     * 生成模板文件
-     *
-     * @param table
-     * @param context
-     */
-    private void generateTemplates(TableInfo table, Map<String, Object> context) {
-        this.getAllTemplates().stream()
-            .filter(template -> !template.isPartition() || table.isPartition())
-            .forEach(template -> {
-                String filePath = template.getFilePath();
-                info("=========生成文件: " + template.getFileNameReg());
-                Assert.notNull(filePath, "文件路径不能为空,[table=%s,template=%s]", table.getTableName(), template.getTemplate());
-                templateEngine.output(template.getTemplate(), context, filePath);
-            });
-    }
-
-    /**
-     * 初始化所有模板的上下文变量
-     *
-     * @param table
-     * @return
-     */
-    private Map<String, Object> getAllTemplateContext(TableInfo table) {
-        final Map<String, Object> context = table.initTemplateContext();
-        this.getAllTemplates().forEach(template -> {
-                Map<String, Object> templateContext = template.initContext(table);
-                if (KEY_ENTITY.equals(template.getTemplateId())) {
-                    context.put(KEY_ENTITY_NAME, templateContext.get(KEY_NAME));
-                }
-                context.put(template.getTemplateId(), templateContext);
-            }
-        );
-        return context;
-    }
-
-
-    /**
-     * 打开输出目录
-     */
-    private void open() {
-        try {
-            if (globalConfig.isOpen() && !StringHelper.isBlank(globalConfig.getOutputDir())) {
-                String osName = System.getProperty("os.name");
-                if (osName != null) {
-                    if (osName.contains("Mac")) {
-                        Runtime.getRuntime().exec("open " + globalConfig.getOutputDir());
-                    } else if (osName.contains("Windows")) {
-                        Runtime.getRuntime().exec("cmd /c start " + globalConfig.getOutputDir());
-                    } else {
-                        log.debug("文件输出目录:" + globalConfig.getOutputDir());
-                    }
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }
