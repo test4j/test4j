@@ -6,10 +6,17 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.test4j.generator.mybatis.db.DateType;
+import org.test4j.generator.mybatis.db.DbType;
 
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
+import java.util.Set;
 import java.util.function.Consumer;
+import java.util.stream.Collectors;
 
 /**
  * 全局构建配置项
@@ -96,5 +103,82 @@ public class TableConfig {
      */
     public boolean needRemovePrefix() {
         return this.tablePrefix != null && this.tablePrefix.length != 0;
+    }
+
+    /**
+     * 获取所有的数据库表信息
+     *
+     * @return
+     */
+    public void initTables() {
+        DbConfig dbConfig = this.globalConfig.getDbConfig();
+        try {
+            String tablesSql = selectTableSql(this);
+            Set<String> existed = new HashSet<>();
+            try (PreparedStatement preparedStatement = dbConfig.getConn().prepareStatement(tablesSql); ResultSet results = preparedStatement.executeQuery()) {
+                while (results.next()) {
+                    String tableName = results.getString(dbConfig.getDbQuery().tableName());
+                    TableInfo tableInfo = this.getTables().get(tableName);
+                    if (tableInfo == null) {
+                        continue;
+                    }
+                    existed.add(tableName);
+                    if (dbConfig.getDbType().isCommentSupported()) {
+                        String tableComment = results.getString(dbConfig.getDbQuery().tableComment());
+                        tableInfo.setComment(tableComment);
+                    }
+                }
+            }
+
+            Set<String> all = this.getTables().keySet();
+            for (String table : all) {
+                if (!existed.contains(table)) {
+                    System.err.println("表 " + table + " 在数据库中不存在！！！");
+                    this.getTables().remove(table);
+                }
+            }
+            for (Map.Entry<String, TableInfo> entry : this.getTables().entrySet()) {
+                entry.getValue().setConfig(this.globalConfig, this);
+                entry.getValue().initTable();
+            }
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    private String selectTableSql(TableConfig config) {
+        DbConfig dbConfig = this.globalConfig.getDbConfig();
+        DbType dbType = this.globalConfig.getDbType();
+        String tablesSql = dbConfig.getDbQuery().tablesSql();
+        String schema = dbConfig.getSchemaName();
+
+        switch (dbType) {
+            case POSTGRE_SQL:
+                if (schema == null) {
+                    schema = "public";
+                    dbConfig.setSchemaName(schema);
+                }
+                return String.format(tablesSql, schema);
+            case DB2:
+                if (schema == null) {
+                    schema = "current schema";
+                    dbConfig.setSchemaName(schema);
+                }
+                return String.format(tablesSql, schema);
+            case ORACLE:
+                //oracle 默认 schema=username
+                if (schema == null) {
+                    schema = dbConfig.getUsername().toUpperCase();
+                    dbConfig.setSchemaName(schema);
+                }
+                String tables = config.getTables().keySet().stream().map(String::toUpperCase).map(table -> "'" + table + "'").collect(Collectors.joining(", "));
+                return new StringBuilder(String.format(tablesSql, schema))
+                    .append(" AND ").append(dbConfig.getDbQuery().tableName()).append(" IN (")
+                    .append(tables)
+                    .append(")")
+                    .toString();
+            default:
+                return tablesSql;
+        }
     }
 }

@@ -9,21 +9,15 @@ import lombok.extern.slf4j.Slf4j;
 import org.test4j.generator.engine.AbstractTemplateEngine;
 import org.test4j.generator.engine.VelocityTemplateEngine;
 import org.test4j.generator.mybatis.config.TableConfig;
-import org.test4j.generator.mybatis.config.DbConfig;
 import org.test4j.generator.mybatis.config.GlobalConfig;
 import org.test4j.generator.mybatis.config.TableInfo;
-import org.test4j.generator.mybatis.db.DbType;
 import org.test4j.generator.mybatis.template.BaseTemplate;
 import org.test4j.generator.mybatis.template.TemplateList;
 import org.test4j.generator.mybatis.template.summary.SummaryTemplate;
 import org.test4j.hamcrest.Assert;
 import org.test4j.tools.commons.StringHelper;
 
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.*;
-import java.util.stream.Collectors;
 
 import static org.test4j.generator.mybatis.config.constant.ConfigKey.*;
 import static org.test4j.module.core.utility.MessageHelper.info;
@@ -54,6 +48,10 @@ public class MyBatisGenerator {
         }
     }
 
+    protected List<BaseTemplate> getAllTemplates() {
+        return TemplateList.ALL_TEMPLATES;
+    }
+
     public void execute() {
         if (globalConfig == null) {
             throw new RuntimeException("the global config not set.");
@@ -64,34 +62,27 @@ public class MyBatisGenerator {
         List<Map<String, Object>> allContext = new ArrayList<>();
         for (TableConfig config : this.tableConfigs) {
             info("===数据库元信息初始化...");
-            this.initTableInfos(config);
+            config.setGlobalConfig(this.globalConfig).initTables();
             info("===准备生成文件...");
             for (Map.Entry<String, TableInfo> entry : config.getTables().entrySet()) {
                 info("======处理表：" + entry.getKey());
-                TableInfo tableInfo = entry.getValue();
-                // 初始化各个模板需要的变量
-                Map<String, Object> context = tableInfo.initTemplateContext();
-                for (BaseTemplate template : TemplateList.ALL_TEMPLATES) {
-                    Map<String, Object> templateContext = template.initContext(tableInfo);
-                    if (KEY_ENTITY.equals(template.getTemplateId())) {
-                        context.put(KEY_ENTITY_NAME, templateContext.get(KEY_NAME));
-                    }
-                    context.put(template.getTemplateId(), templateContext);
-                }
-                for (BaseTemplate template : TemplateList.ALL_TEMPLATES) {
-                    if (template.isPartition() && !tableInfo.isPartition()) {
-                        continue;
-                    }
-                    String filePath = template.getFilePath();
-                    info("=========生成文件: " + template.getFileNameReg());
-                    Assert.notNull(filePath, "文件路径不能为空,[table=%s,template=%s]", tableInfo.getTableName(), template.getTemplate());
-                    templateEngine.output(template.getTemplate(), context, filePath);
-                }
+                TableInfo table = entry.getValue();
+                Map<String, Object> context = this.getAllTemplateContext(table);
+                this.generateTemplates(table, context);
                 allContext.add(context);
             }
             info("===文件生成完成！！！");
-            this.open();
         }
+        this.generateSummary(allContext);
+        this.open();
+    }
+
+    /**
+     * 生成汇总文件
+     *
+     * @param allContext
+     */
+    protected void generateSummary(List<Map<String, Object>> allContext) {
         Map<String, Object> wrapper = new HashMap<>();
         {
             wrapper.put("configs", allContext);
@@ -104,82 +95,41 @@ public class MyBatisGenerator {
     }
 
     /**
-     * 获取所有的数据库表信息
+     * 生成模板文件
      *
-     * @param config
+     * @param table
+     * @param context
+     */
+    private void generateTemplates(TableInfo table, Map<String, Object> context) {
+        this.getAllTemplates().stream()
+            .filter(template -> !template.isPartition() || table.isPartition())
+            .forEach(template -> {
+                String filePath = template.getFilePath();
+                info("=========生成文件: " + template.getFileNameReg());
+                Assert.notNull(filePath, "文件路径不能为空,[table=%s,template=%s]", table.getTableName(), template.getTemplate());
+                templateEngine.output(template.getTemplate(), context, filePath);
+            });
+    }
+
+    /**
+     * 初始化所有模板的上下文变量
+     *
+     * @param table
      * @return
      */
-    private void initTableInfos(TableConfig config) {
-        DbConfig dbConfig = this.globalConfig.getDbConfig();
-        try {
-            String tablesSql = selectTableSql(config);
-            Set<String> existed = new HashSet<>();
-            try (PreparedStatement preparedStatement = dbConfig.getConn().prepareStatement(tablesSql); ResultSet results = preparedStatement.executeQuery()) {
-                while (results.next()) {
-                    String tableName = results.getString(dbConfig.getDbQuery().tableName());
-                    TableInfo tableInfo = config.getTables().get(tableName);
-                    if (tableInfo == null) {
-                        continue;
-                    }
-                    existed.add(tableName);
-                    if (dbConfig.getDbType().isCommentSupported()) {
-                        String tableComment = results.getString(dbConfig.getDbQuery().tableComment());
-                        tableInfo.setComment(tableComment);
-                    }
+    private Map<String, Object> getAllTemplateContext(TableInfo table) {
+        final Map<String, Object> context = table.initTemplateContext();
+        this.getAllTemplates().forEach(template -> {
+                Map<String, Object> templateContext = template.initContext(table);
+                if (KEY_ENTITY.equals(template.getTemplateId())) {
+                    context.put(KEY_ENTITY_NAME, templateContext.get(KEY_NAME));
                 }
+                context.put(template.getTemplateId(), templateContext);
             }
-
-            Set<String> all = config.getTables().keySet();
-            for (String table : all) {
-                if (!existed.contains(table)) {
-                    System.err.println("表 " + table + " 在数据库中不存在！！！");
-                    config.getTables().remove(table);
-                }
-            }
-            for (Map.Entry<String, TableInfo> entry : config.getTables().entrySet()) {
-                entry.getValue().setConfig(this.globalConfig, config);
-                entry.getValue().initTable();
-            }
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+        );
+        return context;
     }
 
-    private String selectTableSql(TableConfig config) {
-        DbConfig dbConfig = this.globalConfig.getDbConfig();
-        DbType dbType = this.globalConfig.getDbType();
-        String tablesSql = dbConfig.getDbQuery().tablesSql();
-        String schema = dbConfig.getSchemaName();
-
-        switch (dbType) {
-            case POSTGRE_SQL:
-                if (schema == null) {
-                    schema = "public";
-                    dbConfig.setSchemaName(schema);
-                }
-                return String.format(tablesSql, schema);
-            case DB2:
-                if (schema == null) {
-                    schema = "current schema";
-                    dbConfig.setSchemaName(schema);
-                }
-                return String.format(tablesSql, schema);
-            case ORACLE:
-                //oracle 默认 schema=username
-                if (schema == null) {
-                    schema = dbConfig.getUsername().toUpperCase();
-                    dbConfig.setSchemaName(schema);
-                }
-                String tables = config.getTables().keySet().stream().map(String::toUpperCase).map(table -> "'" + table + "'").collect(Collectors.joining(", "));
-                return new StringBuilder(String.format(tablesSql, schema))
-                    .append(" AND ").append(dbConfig.getDbQuery().tableName()).append(" IN (")
-                    .append(tables)
-                    .append(")")
-                    .toString();
-            default:
-                return tablesSql;
-        }
-    }
 
     /**
      * 打开输出目录
