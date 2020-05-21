@@ -27,7 +27,7 @@ import cn.org.atool.fluent.mybatis.generator.demo.mapping.NoPrimaryMP.Column;
 @Getter
 @Setter
 @Accessors(chain = true)
-@ScriptTable~(NoPrimaryMP.Table_Name)
+@ScriptTable(NoPrimaryMP.Table_Name)
 public class NoPrimaryEntity implements IEntity {
     private static final long serialVersionUID = 1L;
 

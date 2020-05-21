@@ -27,7 +27,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Accessors(chain = true)
-@ScriptTable~(UserMP.Table_Name)
+@ScriptTable(UserMP.Table_Name)
 public class UserEntity implements IEntity {
     private static final long serialVersionUID = 1L;
 

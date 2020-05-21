@@ -27,7 +27,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Accessors(chain = true)
-@ScriptTable~(AddressMP.Table_Name)
+@ScriptTable(AddressMP.Table_Name)
 public class AddressEntity implements IEntity {
     private static final long serialVersionUID = 1L;
 

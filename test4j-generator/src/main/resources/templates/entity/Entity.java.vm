@@ -28,7 +28,7 @@ $!{importTypes}
 @Getter
 @Setter
 @Accessors(chain = true)
-@ScriptTable~(${mapping.name}.Table_Name)
+@ScriptTable(${mapping.name}.Table_Name)
 public class ${entity.name} implements IEntity #if(${entity.interfaceName}), ${entity.interfaceName}#end{
     private static final long serialVersionUID = 1L;
 

@@ -27,7 +27,7 @@ import cn.org.atool.fluent.mybatis.generator.demo.mapping.NoAutoIdMP.Column;
 @Getter
 @Setter
 @Accessors(chain = true)
-@ScriptTable~(NoAutoIdMP.Table_Name)
+@ScriptTable(NoAutoIdMP.Table_Name)
 public class NoAutoIdEntity implements IEntity {
     private static final long serialVersionUID = 1L;
 
