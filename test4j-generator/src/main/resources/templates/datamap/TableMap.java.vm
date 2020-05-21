@@ -1,16 +1,12 @@
 package ${tableMap.package};
 
-import cn.org.atool.fluent.mybatis.annotation.ColumnDef;
-import cn.org.atool.fluent.mybatis.annotation.ColumnDef.PrimaryType;
-import com.baomidou.mybatisplus.annotation.TableName;
+import org.test4j.module.database.annotations.ColumnDef;
+import org.test4j.module.database.annotations.ScriptTable;
 import org.test4j.module.ICore.DataMap;
 import org.test4j.tools.datagen.KeyValue;
 
 import java.util.Date;
 import java.util.function.Consumer;
-
-import ${mapping.package}.${mapping.name};
-import ${mapping.package}.${mapping.name}.Column;
 
 /**
  * @ClassName ${tableMap.name}
@@ -18,11 +14,11 @@ import ${mapping.package}.${mapping.name}.Column;
  *
  * @author ${author}
  */
-@TableName(${mapping.name}.Table_Name)
+@ScriptTable("${table}")
 public class ${tableMap.name} extends DataMap<${tableMap.name}> {
 #foreach($field in ${fields})
     #if(${field.primary})
-        #if(${field.primaryId})#set($primary=", primary = PrimaryType.AutoIncrease")#else#set($primary=", primary = PrimaryType.Customized")#end
+        #if(${field.primaryId})#set($primary=", primary = true, autoIncrease = true")#else#set($primary=", primary = true")#end
     #else
         #set($primary="")
     #end
@@ -30,7 +26,7 @@ public class ${tableMap.name} extends DataMap<${tableMap.name}> {
      * 设置${table}对象${field.columnName}字段值
      */
     @ColumnDef(type = "${field.columnType}"${primary})
-    public transient final KeyValue<${tableMap.name}> ${field.name} = new KeyValue(this, Column.${field.columnName});
+    public transient final KeyValue<${tableMap.name}> ${field.name} = new KeyValue(this, "${field.columnName}");
 #end
 
     public ${tableMap.name}() {
