@@ -1,16 +1,12 @@
 package cn.org.atool.fluent.mybatis.generator.demo.datamap.table;
 
-import cn.org.atool.fluent.mybatis.annotation.ColumnDef;
-import cn.org.atool.fluent.mybatis.annotation.ColumnDef.PrimaryType;
-import com.baomidou.mybatisplus.annotation.TableName;
+import org.test4j.module.database.annotations.ColumnDef;
+import org.test4j.module.database.annotations.ScriptTable;
 import org.test4j.module.ICore.DataMap;
 import org.test4j.tools.datagen.KeyValue;
 
 import java.util.Date;
 import java.util.function.Consumer;
-
-import cn.org.atool.fluent.mybatis.generator.demo.mapping.AddressMP;
-import cn.org.atool.fluent.mybatis.generator.demo.mapping.AddressMP.Column;
 
 /**
  * @ClassName AddressTableMap
@@ -18,33 +14,33 @@ import cn.org.atool.fluent.mybatis.generator.demo.mapping.AddressMP.Column;
  *
  * @author generate code
  */
-@TableName(AddressMP.Table_Name)
+@ScriptTable("address")
 public class AddressTableMap extends DataMap<AddressTableMap> {
     /**
      * 设置address对象id字段值
      */
-    @ColumnDef(type = "bigint(21) unsigned", primary = PrimaryType.AutoIncrease)
-    public transient final KeyValue<AddressTableMap> id = new KeyValue(this, Column.id);
+    @ColumnDef(type = "bigint(21) unsigned", primary = true, autoIncrease = true)
+    public transient final KeyValue<AddressTableMap> id = new KeyValue(this, "id");
     /**
      * 设置address对象gmt_created字段值
      */
     @ColumnDef(type = "datetime")
-    public transient final KeyValue<AddressTableMap> gmtCreated = new KeyValue(this, Column.gmt_created);
+    public transient final KeyValue<AddressTableMap> gmtCreated = new KeyValue(this, "gmt_created");
     /**
      * 设置address对象gmt_modified字段值
      */
     @ColumnDef(type = "datetime")
-    public transient final KeyValue<AddressTableMap> gmtModified = new KeyValue(this, Column.gmt_modified);
+    public transient final KeyValue<AddressTableMap> gmtModified = new KeyValue(this, "gmt_modified");
     /**
      * 设置address对象is_deleted字段值
      */
     @ColumnDef(type = "tinyint(2)")
-    public transient final KeyValue<AddressTableMap> isDeleted = new KeyValue(this, Column.is_deleted);
+    public transient final KeyValue<AddressTableMap> isDeleted = new KeyValue(this, "is_deleted");
     /**
      * 设置address对象address字段值
      */
     @ColumnDef(type = "varchar(45)")
-    public transient final KeyValue<AddressTableMap> address = new KeyValue(this, Column.address);
+    public transient final KeyValue<AddressTableMap> address = new KeyValue(this, "address");
 
     public AddressTableMap() {
         super();

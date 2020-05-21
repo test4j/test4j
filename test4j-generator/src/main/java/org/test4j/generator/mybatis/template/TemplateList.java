@@ -38,11 +38,8 @@ public interface TemplateList {
         new TableMixTemplate()
     );
 
-    List<BaseTemplate> ONLY_TEST = Arrays.asList(
-        new MappingTemplate().setOutputDir(OutputDir.Test),
-        new EntityMapTemplate(),
-        new TableMapTemplate(),
-        new TableMixTemplate()
+    List<BaseTemplate> ONLY_TABLE_MAP = Arrays.asList(
+        new TableMapTemplate()
     );
 
 

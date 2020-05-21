@@ -52,7 +52,6 @@ public class TableDataAround {
             result.extraMessage(extra);
         } catch (ExtraMessageError e) {
             result.extraMessage(e.getExtra());
-            TableDataAround.remove();
             throw e.getCause();
         }
     }
@@ -68,13 +67,14 @@ public class TableDataAround {
         } catch (ExtraMessageError e) {
             result.extraMessage(e.getExtra());
             throw e.getCause();
-        } finally {
-            TableDataAround.remove();
         }
     }
 
-    private static void remove() {
-        THREAD_LOCAL_AROUND.remove();
+    public static void remove() {
+        try {
+            THREAD_LOCAL_AROUND.remove();
+        } catch (Throwable e) {
+        }
     }
 
     public static void initReady(Consumer<TableMap> handler) {

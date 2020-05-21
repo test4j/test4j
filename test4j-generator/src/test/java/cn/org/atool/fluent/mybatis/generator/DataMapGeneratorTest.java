@@ -1,18 +1,25 @@
 package cn.org.atool.fluent.mybatis.generator;
 
+import org.junit.jupiter.api.Test;
+import org.test4j.generator.mybatis.DataMapGenerator;
 import org.test4j.generator.mybatis.config.GlobalConfig;
 import org.test4j.generator.mybatis.config.TableConfig;
-import org.test4j.generator.mybatis.MyBatisGenerator;
 import org.test4j.generator.mybatis.db.ColumnType;
-import org.junit.jupiter.api.Test;
+import org.test4j.junit5.Test4J;
 
-public class MybatisMyBatisGeneratorTest {
-    private static String url = "jdbc:mysql://localhost:3306/fluent_mybatis";
+/**
+ * DataMapGeneratorTest
+ *
+ * @author darui.wu
+ * @create 2020/5/7 11:47 上午
+ */
+public class DataMapGeneratorTest extends Test4J {
+    private static String url = "jdbc:mysql://localhost:3306/fluent_mybatis?useUnicode=true&characterEncoding=utf8";
 
     @Test
     public void generate() {
         String outputDir = System.getProperty("user.dir") + "/src/test/java";
-        new MyBatisGenerator(
+        new DataMapGenerator(
             new TableConfig()
                 .setTablePrefix("t_")
                 .addTable("address")
@@ -20,7 +27,6 @@ public class MybatisMyBatisGeneratorTest {
                 .allTable(table -> {
                     table.setColumn("gmt_created", "gmt_modified", "is_deleted")
                         .column("is_deleted", ColumnType.BOOLEAN)
-                        .addBaseDaoInterface("MyCustomerInterface<${entity}, ${query}, ${update}>", MyCustomerInterface.class.getName())
                     ;
                 })
             ,
@@ -31,7 +37,7 @@ public class MybatisMyBatisGeneratorTest {
         ).setGlobalConfig(new GlobalConfig()
             .setOutputDir(outputDir, outputDir, outputDir)
             .setDataSource(url, "root", "password")
-            .setBasePackage("cn.org.atool.fluent.mybatis.generator.demo")
+            .setBasePackage("cn.org.atool.fluent.mybatis.generator.dmtest")
         ).execute();
     }
 }

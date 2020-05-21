@@ -1,26 +1,13 @@
 package org.test4j.generator.mybatis;
 
-import lombok.AccessLevel;
-import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
+
 import lombok.extern.slf4j.Slf4j;
-import org.test4j.generator.engine.AbstractTemplateEngine;
-import org.test4j.generator.engine.VelocityTemplateEngine;
 import org.test4j.generator.mybatis.config.TableConfig;
-import org.test4j.generator.mybatis.config.GlobalConfig;
-import org.test4j.generator.mybatis.config.TableInfo;
 import org.test4j.generator.mybatis.template.BaseTemplate;
 import org.test4j.generator.mybatis.template.TemplateList;
 import org.test4j.generator.mybatis.template.summary.SummaryTemplate;
-import org.test4j.hamcrest.Assert;
-import org.test4j.tools.commons.StringHelper;
 
 import java.util.*;
-
-import static org.test4j.generator.mybatis.config.constant.ConfigKey.*;
-import static org.test4j.module.core.utility.MessageHelper.info;
 
 /**
  * 数据库表列表

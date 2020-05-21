@@ -45,8 +45,8 @@ public class ScenarioResult implements Serializable {
 
     private static void addFilter(String filter) {
         Filter_List.add("\\s*at\\s+" +
-                filter.replaceAll("\\.", "\\\\.").replaceAll("\\*", "\\.\\*") +
-                "[^\\)]*\\)"
+            filter.replaceAll("\\.", "\\\\.").replaceAll("\\*", "\\.\\*") +
+            "[^\\)]*\\)"
         );
     }
 
@@ -80,6 +80,8 @@ public class ScenarioResult implements Serializable {
                 stepResult.setError(e);
                 throw e;
             }
+        } finally {
+            TableDataAround.remove();
         }
     }
 
@@ -119,7 +121,7 @@ public class ScenarioResult implements Serializable {
     public String scenarioResult() {
         StringBuilder buff = new StringBuilder();
         buff.append("\n\n")
-                .append("=========Scenario: ").append(this.scenarioName).append(" =============\n");
+            .append("=========Scenario: ").append(this.scenarioName).append(" =============\n");
         steps.forEach(stepResult -> {
             buff.append(stepResult.toString()).append("\n");
         });

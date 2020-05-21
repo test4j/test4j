@@ -1,16 +1,20 @@
 package cn.org.atool.fluent.mybatis.generator.demo.entity;
 
-import cn.org.atool.fluent.mybatis.base.IEntity;
-import cn.org.atool.fluent.mybatis.generator.demo.helper.NoPrimaryEntityHelper;
-import cn.org.atool.fluent.mybatis.generator.demo.mapping.NoPrimaryMP;
-import cn.org.atool.fluent.mybatis.generator.demo.mapping.NoPrimaryMP.Column;
-import com.baomidou.mybatisplus.annotation.*;
+import cn.org.atool.fluent.mybatis.annotation.IdType;
+import cn.org.atool.fluent.mybatis.annotation.TableField;
+import cn.org.atool.fluent.mybatis.annotation.TableId;
+import cn.org.atool.fluent.mybatis.condition.interfaces.IEntity;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-
+import org.test4j.module.database.annotations.ScriptTable;
 import java.util.Map;
 import java.io.Serializable;
+
+import cn.org.atool.fluent.mybatis.generator.demo.helper.NoPrimaryEntityHelper;
+import cn.org.atool.fluent.mybatis.generator.demo.mapping.NoPrimaryMP;
+import cn.org.atool.fluent.mybatis.generator.demo.mapping.NoPrimaryMP.Column;
+
 
 
 /**
@@ -23,7 +27,7 @@ import java.io.Serializable;
 @Getter
 @Setter
 @Accessors(chain = true)
-@TableName(NoPrimaryMP.Table_Name)
+@ScriptTable~(NoPrimaryMP.Table_Name)
 public class NoPrimaryEntity implements IEntity {
     private static final long serialVersionUID = 1L;
 

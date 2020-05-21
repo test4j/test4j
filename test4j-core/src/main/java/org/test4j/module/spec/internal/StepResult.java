@@ -2,7 +2,9 @@ package org.test4j.module.spec.internal;
 
 import lombok.Getter;
 import org.test4j.json.JSON;
+import org.test4j.module.spec.IMix;
 import org.test4j.tools.commons.StringHelper;
+import org.test4j.tools.datagen.IDataMap;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -53,9 +55,9 @@ public class StepResult {
             buff.append("\tsuccess: ").append(message);
         } else {
             buff.append("\tfailure: ")
-                    .append(exception == null ? "error message" : exception.getClass().getName())
-                    .append(this.message.startsWith("\n") ? "" : "\n")
-                    .append(this.message);
+                .append(exception == null ? "error message" : exception.getClass().getName())
+                .append(this.message.startsWith("\n") ? "" : "\n")
+                .append(this.message);
         }
         return buff.toString();
     }
@@ -110,9 +112,17 @@ public class StepResult {
 
     private void addPara(Map<Integer, String> paras, int index, Object arg) {
         try {
-            paras.put(index, JSON.toJSON(arg, true));
+            String text = null;
+            if (arg instanceof IMix) {
+                text = "mix";
+            } else if (arg instanceof IDataMap) {
+                text = JSON.toJSON(((IDataMap) arg).rows(), true);
+            } else {
+                text = JSON.toJSON(arg, true);
+            }
+            paras.put(index, text);
         } catch (Throwable e) {
-            // do nothing
+            paras.put(index, "序列化异常：" + e.getMessage());
         }
     }
 

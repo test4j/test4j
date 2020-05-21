@@ -1,13 +1,12 @@
 package cn.org.atool.fluent.mybatis.generator.demo.query;
 
-import cn.org.atool.fluent.mybatis.base.IEntityUpdate;
-import cn.org.atool.fluent.mybatis.base.IProperty2Column;
-import com.baomidou.mybatisplus.core.conditions.AbstractWrapper;
-import com.baomidou.mybatisplus.core.conditions.segments.MergeSegments;
-import com.baomidou.mybatisplus.core.conditions.update.LambdaUpdateWrapper;
-import com.baomidou.mybatisplus.core.toolkit.CollectionUtils;
-import com.baomidou.mybatisplus.core.toolkit.StringPool;
-import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import cn.org.atool.fluent.mybatis.condition.interfaces.IEntityUpdate;
+import cn.org.atool.fluent.mybatis.condition.interfaces.IProperty2Column;
+import cn.org.atool.fluent.mybatis.condition.AbstractWrapper;
+import cn.org.atool.fluent.mybatis.condition.segments.MergeSegments;
+import cn.org.atool.fluent.mybatis.util.ArrayUtils;
+import cn.org.atool.fluent.mybatis.util.Constants;
+import cn.org.atool.fluent.mybatis.util.StringUtils;
 
 import java.util.*;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -61,10 +60,10 @@ public class UserEntityUpdate extends AbstractWrapper<UserEntity, String, UserEn
 
     @Override
     public String getSqlSet() {
-        if (CollectionUtils.isEmpty(sqlSet)) {
+        if (ArrayUtils.isEmpty(sqlSet)) {
             return null;
         }
-        return String.join(StringPool.COMMA, sqlSet);
+        return String.join(Constants.COMMA, sqlSet);
     }
 
     @Override
@@ -93,15 +92,10 @@ public class UserEntityUpdate extends AbstractWrapper<UserEntity, String, UserEn
         return this;
     }
 
-    public LambdaUpdateWrapper<UserEntity> lambda() {
-        throw new RuntimeException("no support!");
-    }
-
     @Override
     protected UserEntityUpdate instance() {
         return new UserEntityUpdate(entity, sqlSet, paramNameSeq, paramNameValuePairs, new MergeSegments());
     }
-
 
     @Override
     public UserEntityUpdate limit(int from, int limit){

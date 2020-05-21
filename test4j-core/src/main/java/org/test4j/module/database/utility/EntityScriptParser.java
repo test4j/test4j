@@ -1,20 +1,26 @@
 package org.test4j.module.database.utility;
 
-import cn.org.atool.fluent.mybatis.annotation.ColumnDef;
-import cn.org.atool.fluent.mybatis.annotation.ColumnDef.PrimaryType;
-import com.baomidou.mybatisplus.annotation.TableName;
+import cn.org.atool.fluent.mybatis.annotation.TableNameCompatible;
+import lombok.Setter;
+import org.test4j.module.database.annotations.ColumnDef;
+import org.test4j.module.database.annotations.ScriptTable;
 import org.test4j.module.database.utility.script.H2Script;
 import org.test4j.module.database.utility.script.MysqlScript;
 import org.test4j.tools.commons.AnnotationHelper;
+import org.test4j.tools.commons.ClazzHelper;
 
 import java.lang.reflect.Field;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Set;
 
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
 
+/**
+ * 实体对应数据表脚本生成
+ *
+ * @author darui.wu
+ */
 public abstract class EntityScriptParser {
     protected static final String NEW_LINE_JOIN = ",\n\t";
 
@@ -35,9 +41,9 @@ public abstract class EntityScriptParser {
      */
     public static String script(DataSourceType type, DbTypeConvert typeConvert, List<Class> klasses) {
         return klasses.stream()
-                .map(klass -> EntityScriptParser.newScriptParser(type, typeConvert, klass))
-                .map(EntityScriptParser::script)
-                .collect(joining("\n\n"));
+            .map(klass -> EntityScriptParser.newScriptParser(type, typeConvert, klass))
+            .map(EntityScriptParser::script)
+            .collect(joining("\n\n"));
     }
 
     protected static EntityScriptParser newScriptParser(DataSourceType type, DbTypeConvert typeConvert, Class klass) {
@@ -59,23 +65,26 @@ public abstract class EntityScriptParser {
 
     protected String findPrimaryFieldNames(List<ColumnDefine> columns) {
         return columns.stream()
-                .filter(column -> column.primaryType != PrimaryType.None)
-                .map(column -> column.name)
-                .collect(joining(","));
+            .filter(column -> column.primary)
+            .map(column -> column.name)
+            .collect(joining(","));
     }
 
     protected List<ColumnDefine> findColumns() {
         Set<Field> annotations = AnnotationHelper.getFieldsAnnotatedWith(klass, ColumnDef.class);
-        if (annotations == null || annotations.isEmpty()) {
-            return null;
+        if (annotations != null && !annotations.isEmpty()) {
+            return annotations.stream().map(ColumnDefine::new).collect(toList());
+        } else if (ClazzHelper.isClassAvailable(TableNameCompatible.ColumnDef_Klass_Name)) {
+            return TableNameCompatible.findFields(klass);
+        } else {
+            throw new RuntimeException("the entity[" + klass.getName() + "] field should be defined by @ColumnDef");
         }
-        return annotations.stream().map(ColumnDefine::new).collect(toList());
     }
 
     protected String parseColumn(List<ColumnDefine> columns) {
         return columns.stream()
-                .map(this::parseColumn)
-                .collect(joining(NEW_LINE_JOIN));
+            .map(this::parseColumn)
+            .collect(joining(NEW_LINE_JOIN));
     }
 
     protected abstract String parseColumn(ColumnDefine column);
@@ -90,15 +99,19 @@ public abstract class EntityScriptParser {
     }
 
     protected String getTableName() {
-        TableName annotation = AnnotationHelper.getClassLevelAnnotation(TableName.class, klass);
+        ScriptTable annotation = AnnotationHelper.getClassLevelAnnotation(ScriptTable.class, klass);
         if (annotation == null) {
-            throw new RuntimeException("the entity class[" + klass.getName() + "] should be defined by @TableName");
+            if (ClazzHelper.isClassAvailable(TableNameCompatible.TableName_Klass_Name)) {
+                return TableNameCompatible.getTableName(klass);
+            }
+            throw new RuntimeException("the entity class[" + klass.getName() + "] should be defined by @ScriptTable");
         } else {
             return annotation.value();
         }
     }
 
-    protected static class ColumnDefine {
+    @Setter
+    public static class ColumnDefine {
         public String name;
 
         /**
@@ -113,23 +126,41 @@ public abstract class EntityScriptParser {
          *
          * @return
          */
-        public PrimaryType primaryType;
-
+        public boolean primary;
+        /**
+         * 自增
+         */
+        public boolean autoIncrease;
         /**
          * 允许字段为null
          *
          * @return
          */
         public boolean notNull;
+        /**
+         * 默认值
+         */
+        public String defaultValue;
+
+        public ColumnDefine() {
+        }
 
         public ColumnDefine(Field field) {
             this.name = field.getName();
             ColumnDef def = field.getAnnotation(ColumnDef.class);
             if (def != null) {
-                this.type = def.type();
-                this.primaryType = def.primary();
-                this.notNull = def.notNull();
+                this.init(def);
+            } else {
+                throw new RuntimeException("the field[" + field.getName() + "] should be defined by @ColumnDef");
             }
+        }
+
+        private void init(ColumnDef def) {
+            this.type = def.type();
+            this.primary = def.primary();
+            this.autoIncrease = def.autoIncrease();
+            this.notNull = def.notNull();
+            this.defaultValue = def.defaultValue();
         }
     }
 

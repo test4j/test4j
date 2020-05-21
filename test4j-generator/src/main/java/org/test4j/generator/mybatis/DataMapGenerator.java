@@ -15,6 +15,6 @@ public class DataMapGenerator extends BaseGenerator {
 
     @Override
     protected List<BaseTemplate> getAllTemplates() {
-        return TemplateList.ONLY_TEST;
+        return TemplateList.ONLY_TABLE_MAP;
     }
 }

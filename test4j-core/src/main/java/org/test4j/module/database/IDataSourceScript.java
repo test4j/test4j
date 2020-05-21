@@ -16,6 +16,11 @@ import java.util.stream.Collectors;
 import static org.test4j.module.database.utility.DBHelper.buildH2Index;
 import static org.test4j.module.database.utility.DBHelper.buildH2Unique;
 
+/**
+ * IDataSourceScript
+ *
+ * @author darui.wu
+ */
 public interface IDataSourceScript {
     /**
      * 指定的类型转换
@@ -39,12 +44,13 @@ public interface IDataSourceScript {
     /**
      * 生成数据库脚本
      *
+     * @param type 数据库类型
      * @return
      */
     default String script(DataSourceType type) {
-        return EntityScriptParser.script(type, this.dbTypeConvert(), this.getTableKlass()) +
-                "\n\n" +
-                IndexList.script(this.getIndexList());
+        String script = EntityScriptParser.script(type, this.dbTypeConvert(), this.getTableKlass());
+        String index = IndexList.script(this.getIndexList());
+        return script + "\n\n" + index;
     }
 
     /**
@@ -115,8 +121,8 @@ public interface IDataSourceScript {
                 return "";
             } else {
                 return indexList.indexList.stream()
-                        .map(Index::buildIndex)
-                        .collect(Collectors.joining("\n"));
+                    .map(Index::buildIndex)
+                    .collect(Collectors.joining("\n"));
             }
         }
     }

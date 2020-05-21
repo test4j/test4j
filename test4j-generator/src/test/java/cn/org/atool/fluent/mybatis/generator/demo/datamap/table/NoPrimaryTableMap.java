@@ -1,16 +1,12 @@
 package cn.org.atool.fluent.mybatis.generator.demo.datamap.table;
 
-import cn.org.atool.fluent.mybatis.annotation.ColumnDef;
-import cn.org.atool.fluent.mybatis.annotation.ColumnDef.PrimaryType;
-import com.baomidou.mybatisplus.annotation.TableName;
+import org.test4j.module.database.annotations.ColumnDef;
+import org.test4j.module.database.annotations.ScriptTable;
 import org.test4j.module.ICore.DataMap;
 import org.test4j.tools.datagen.KeyValue;
 
 import java.util.Date;
 import java.util.function.Consumer;
-
-import cn.org.atool.fluent.mybatis.generator.demo.mapping.NoPrimaryMP;
-import cn.org.atool.fluent.mybatis.generator.demo.mapping.NoPrimaryMP.Column;
 
 /**
  * @ClassName NoPrimaryTableMap
@@ -18,18 +14,18 @@ import cn.org.atool.fluent.mybatis.generator.demo.mapping.NoPrimaryMP.Column;
  *
  * @author generate code
  */
-@TableName(NoPrimaryMP.Table_Name)
+@ScriptTable("no_primary")
 public class NoPrimaryTableMap extends DataMap<NoPrimaryTableMap> {
     /**
      * 设置no_primary对象column_1字段值
      */
     @ColumnDef(type = "int(11)")
-    public transient final KeyValue<NoPrimaryTableMap> column1 = new KeyValue(this, Column.column_1);
+    public transient final KeyValue<NoPrimaryTableMap> column1 = new KeyValue(this, "column_1");
     /**
      * 设置no_primary对象column_2字段值
      */
     @ColumnDef(type = "varchar(100)")
-    public transient final KeyValue<NoPrimaryTableMap> column2 = new KeyValue(this, Column.column_2);
+    public transient final KeyValue<NoPrimaryTableMap> column2 = new KeyValue(this, "column_2");
 
     public NoPrimaryTableMap() {
         super();

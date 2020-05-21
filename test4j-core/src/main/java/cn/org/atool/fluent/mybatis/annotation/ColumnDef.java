@@ -1,4 +1,4 @@
-package org.test4j.module.database.annotations;
+package cn.org.atool.fluent.mybatis.annotation;
 
 import java.lang.annotation.ElementType;
 import java.lang.annotation.Retention;
@@ -6,10 +6,12 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
- * ColumnDef: 字段定义
+ * 兼容性处理
+ * 已废弃，在后续版本中去除
  *
  * @author darui.wu
  */
+@Deprecated
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ColumnDef {
@@ -25,14 +27,7 @@ public @interface ColumnDef {
      *
      * @return
      */
-    boolean primary() default false;
-
-    /**
-     * 是否自增
-     *
-     * @return
-     */
-    boolean autoIncrease() default false;
+    PrimaryType primary() default PrimaryType.None;
 
     /**
      * 允许字段为null
@@ -41,10 +36,18 @@ public @interface ColumnDef {
      */
     boolean notNull() default false;
 
-    /**
-     * 默认值
-     *
-     * @return
-     */
-    String defaultValue() default "";
+    enum PrimaryType {
+        /**
+         * 非主键
+         */
+        None,
+        /**
+         * 自增主键
+         */
+        AutoIncrease,
+        /**
+         * 自定义
+         */
+        Customized;
+    }
 }
