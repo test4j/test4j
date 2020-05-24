@@ -43,11 +43,6 @@
                 </exclusion>
             </exclusions>
         </dependency>
-        <dependency>
-            <groupId>com.alibaba</groupId>
-            <artifactId>fastjson</artifactId>
-            <scope>provided</scope>
-        </dependency>
     </dependencies>
     <build>
         <testResources>
