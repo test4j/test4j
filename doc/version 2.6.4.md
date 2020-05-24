@@ -1,1 +1,2 @@
 - fix bug：测试时生成数据库索引语法错误
+- 增加test4j-generator模块，用于生产数据库对应DataMap java对象，以及fluent-mybatis对应文件
