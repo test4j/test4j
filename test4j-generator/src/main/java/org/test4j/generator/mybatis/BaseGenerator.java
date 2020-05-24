@@ -1,7 +1,6 @@
 package org.test4j.generator.mybatis;
 
 import lombok.AccessLevel;
-import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -12,42 +11,68 @@ import org.test4j.generator.mybatis.config.GlobalConfig;
 import org.test4j.generator.mybatis.config.TableConfig;
 import org.test4j.generator.mybatis.config.TableInfo;
 import org.test4j.generator.mybatis.template.BaseTemplate;
-import org.test4j.generator.mybatis.template.TemplateList;
-import org.test4j.generator.mybatis.template.summary.SummaryTemplate;
 import org.test4j.hamcrest.Assert;
 import org.test4j.tools.commons.StringHelper;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import static org.test4j.generator.mybatis.config.constant.ConfigKey.*;
 import static org.test4j.module.core.utility.MessageHelper.info;
 
+/**
+ * @author darui.wu
+ */
 @Slf4j
-@Data
+@Getter
 @Accessors(chain = true)
-public abstract class BaseGenerator {
+public abstract class BaseGenerator<G extends BaseGenerator> implements Generator {
     @Getter(AccessLevel.NONE)
     protected AbstractTemplateEngine templateEngine = new VelocityTemplateEngine();
 
-    @Setter(AccessLevel.NONE)
     protected List<TableConfig> tableConfigs = new ArrayList<>();
     /**
      * 全局配置
      */
+    @Setter
     protected GlobalConfig globalConfig;
 
-    public BaseGenerator(TableConfig... tableConfigs) {
-        for (TableConfig config : tableConfigs) {
-            config.setGlobalConfig(globalConfig);
-            this.tableConfigs.add(config);
-        }
+    @Override
+    public Generator globalConfig(Consumer<GlobalConfig> consumer) {
+        this.globalConfig = new GlobalConfig();
+        consumer.accept(this.globalConfig);
+        return this;
     }
 
+    @Override
+    public Generator tables(Consumer<TableConfig> consumer) {
+        TableConfig tableConfig = new TableConfig();
+        consumer.accept(tableConfig);
+        tables(tableConfig);
+        return (G) this;
+    }
+
+    public Generator tables(TableConfig... tableConfigs) {
+        for (TableConfig tableConfig : tableConfigs) {
+            tableConfig.setGlobalConfig(globalConfig);
+            this.tableConfigs.add(tableConfig);
+        }
+        return (G) this;
+    }
+
+    /**
+     * 返回定义的模板列表
+     *
+     * @return
+     */
     protected abstract List<BaseTemplate> getAllTemplates();
 
+    /**
+     * 执行代码生成
+     */
+    @Override
     public void execute() {
         if (globalConfig == null) {
             throw new RuntimeException("the global config not set.");

@@ -7,7 +7,9 @@ import org.test4j.generator.mybatis.template.BaseTemplate;
 import org.test4j.generator.mybatis.template.TemplateList;
 import org.test4j.generator.mybatis.template.summary.SummaryTemplate;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * 数据库表列表
@@ -15,10 +17,10 @@ import java.util.*;
  * @author wudarui
  */
 @Slf4j
-public class MyBatisGenerator extends BaseGenerator {
+public class MyBatisGenerator extends BaseGenerator<MyBatisGenerator> {
 
-    public MyBatisGenerator(TableConfig... tableConfigs) {
-        super(tableConfigs);
+    public static MyBatisGenerator build() {
+        return new MyBatisGenerator();
     }
 
     @Override

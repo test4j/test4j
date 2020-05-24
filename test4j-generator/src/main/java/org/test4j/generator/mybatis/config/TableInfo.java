@@ -2,15 +2,15 @@ package org.test4j.generator.mybatis.config;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.experimental.Accessors;
+import org.test4j.generator.mybatis.config.constant.DefinedColumn;
 import org.test4j.generator.mybatis.config.constant.Naming;
 import org.test4j.generator.mybatis.config.constant.OutputDir;
-import org.test4j.generator.mybatis.config.constant.DefinedColumn;
+import org.test4j.generator.mybatis.db.DbType;
+import org.test4j.generator.mybatis.db.IDbQuery;
 import org.test4j.generator.mybatis.db.IFieldCategory;
 import org.test4j.generator.mybatis.db.IJavaType;
 import org.test4j.generator.mybatis.db.query.H2Query;
-import org.test4j.generator.mybatis.db.IDbQuery;
-import org.test4j.generator.mybatis.db.DbType;
-import lombok.experimental.Accessors;
 import org.test4j.tools.commons.StringHelper;
 
 import java.sql.PreparedStatement;
@@ -446,7 +446,8 @@ public class TableInfo {
         return globalConfig.getBasePackage();
     }
 
-    private Map<String,Object> context;
+    private Map<String, Object> context;
+
     /**
      * 初始化模板的上下文变量
      *
@@ -456,7 +457,12 @@ public class TableInfo {
         this.context = new HashMap<>();
         {
             context.put(KEY_TABLE, this.getTableName());
+            context.put(KEY_TABLE_NO_PREFIX, this.getNoPrefixTableName());
             context.put(KEY_ENTITY_PREFIX, this.getEntityPrefix());
+            if(this.primary != null){
+                context.put(KEY_PRIMARY_COLUMN_NAME, this.primary.getColumnName());
+                context.put(KEY_PRIMARY_FIELD_NAME, this.primary.getName());
+            }
             context.put(KEY_COMMENT, this.getComment());
             context.put(KEY_FIELD_NAMES, this.getFieldNames());
             context.put(KEY_FIELDS, this.getFields());

@@ -3,11 +3,12 @@ package ${entity.package};
 import cn.org.atool.fluent.mybatis.annotation.IdType;
 import cn.org.atool.fluent.mybatis.annotation.TableField;
 import cn.org.atool.fluent.mybatis.annotation.TableId;
+import cn.org.atool.fluent.mybatis.annotation.TableName;
 import cn.org.atool.fluent.mybatis.condition.interfaces.IEntity;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.test4j.module.database.annotations.ScriptTable;
 import java.util.Map;
 import java.io.Serializable;
 
@@ -28,7 +29,7 @@ $!{importTypes}
 @Getter
 @Setter
 @Accessors(chain = true)
-@ScriptTable(${mapping.name}.Table_Name)
+@TableName(${mapping.name}.Table_Name)
 public class ${entity.name} implements IEntity #if(${entity.interfaceName}), ${entity.interfaceName}#end{
     private static final long serialVersionUID = 1L;
 
@@ -50,7 +51,7 @@ public class ${entity.name} implements IEntity #if(${entity.interfaceName}), ${e
     #elseif(${field.category} == 'GmtCreate')
     @TableField(value = Column.${field.columnName}, insert = "now()")
     #elseif(${field.category} == 'IsDeleted')## 逻辑删除字段
-    @TableField(value = Column.${field.columnName}, update = "0", insert = "0")
+    @TableField(value = Column.${field.columnName}, insert = "0")
     #else
     @TableField(value = Column.${field.columnName})
     #end

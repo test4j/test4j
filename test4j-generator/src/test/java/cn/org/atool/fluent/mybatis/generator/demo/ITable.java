@@ -10,7 +10,7 @@ public interface ITable {
 
     String t_address = AddressMP.Table_Name;
 
-    String t_t_user = UserMP.Table_Name;
+    String t_user = UserMP.Table_Name;
 
     String t_no_primary = NoPrimaryMP.Table_Name;
 

@@ -9,6 +9,6 @@ import ${basePackage}.mapping.*;
 public interface ITable {
     #foreach(${config} in ${configs})
 
-    String t_${config.table} = ${config.mapping.name}.Table_Name;
+    String t_${config.table_no_prefix} = ${config.mapping.name}.Table_Name;
     #end
 }

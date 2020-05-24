@@ -3,11 +3,12 @@ package cn.org.atool.fluent.mybatis.generator.demo.entity;
 import cn.org.atool.fluent.mybatis.annotation.IdType;
 import cn.org.atool.fluent.mybatis.annotation.TableField;
 import cn.org.atool.fluent.mybatis.annotation.TableId;
+import cn.org.atool.fluent.mybatis.annotation.TableName;
 import cn.org.atool.fluent.mybatis.condition.interfaces.IEntity;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.test4j.module.database.annotations.ScriptTable;
 import java.util.Map;
 import java.io.Serializable;
 
@@ -27,7 +28,7 @@ import cn.org.atool.fluent.mybatis.generator.demo.mapping.NoAutoIdMP.Column;
 @Getter
 @Setter
 @Accessors(chain = true)
-@ScriptTable(NoAutoIdMP.Table_Name)
+@TableName(NoAutoIdMP.Table_Name)
 public class NoAutoIdEntity implements IEntity {
     private static final long serialVersionUID = 1L;
 

@@ -1,20 +1,15 @@
 package ${entityQuery.package};
-#foreach($field in ${table.fields})
-    #if(${field.keyFlag})
-        #set($keyColumnName=${field.name})
-    #end
-#end
 
 import cn.org.atool.fluent.mybatis.condition.interfaces.IEntityQuery;
 import cn.org.atool.fluent.mybatis.condition.interfaces.IProperty2Column;
-import cn.org.atool.fluent.mybatis.util.ArrayUtils;
-import cn.org.atool.fluent.mybatis.util.Constants;
-import cn.org.atool.fluent.mybatis.util.MybatisUtil;
 import cn.org.atool.fluent.mybatis.condition.AbstractWrapper;
 import cn.org.atool.fluent.mybatis.condition.SharedString;
 import cn.org.atool.fluent.mybatis.condition.segments.MergeSegments;
 import cn.org.atool.fluent.mybatis.metadata.FieldInfo;
 import cn.org.atool.fluent.mybatis.metadata.TableHelper;
+import cn.org.atool.fluent.mybatis.util.ArrayUtils;
+import cn.org.atool.fluent.mybatis.util.Constants;
+import cn.org.atool.fluent.mybatis.util.MybatisUtil;
 
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -96,8 +91,8 @@ public class ${entityQuery.name} extends AbstractWrapper<${entity.name}, String,
      * @return
      */
     public ${entityQuery.name} selectId(){
-        #if(${keyColumnName})
-        return this.select(Column.${keyColumnName});
+        #if(${primaryColumnName})
+        return this.select(Column.${primaryColumnName});
         #else
         throw new RuntimeException("table primary undefined!");
         #end

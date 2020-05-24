@@ -3,11 +3,12 @@ package cn.org.atool.fluent.mybatis.generator.demo.entity;
 import cn.org.atool.fluent.mybatis.annotation.IdType;
 import cn.org.atool.fluent.mybatis.annotation.TableField;
 import cn.org.atool.fluent.mybatis.annotation.TableId;
+import cn.org.atool.fluent.mybatis.annotation.TableName;
 import cn.org.atool.fluent.mybatis.condition.interfaces.IEntity;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.test4j.module.database.annotations.ScriptTable;
 import java.util.Map;
 import java.io.Serializable;
 
@@ -27,7 +28,7 @@ import java.util.Date;
 @Getter
 @Setter
 @Accessors(chain = true)
-@ScriptTable(UserMP.Table_Name)
+@TableName(UserMP.Table_Name)
 public class UserEntity implements IEntity {
     private static final long serialVersionUID = 1L;
 
@@ -49,7 +50,7 @@ public class UserEntity implements IEntity {
     /**
      * 
      */
-    @TableField(value = Column.is_deleted, update = "0", insert = "0")
+    @TableField(value = Column.is_deleted, insert = "0")
     private Boolean isDeleted;
     /**
      * 

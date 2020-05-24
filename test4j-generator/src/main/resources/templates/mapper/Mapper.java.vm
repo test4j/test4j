@@ -3,20 +3,20 @@ package ${mapper.package};
 import ${entity.package}.${entity.name};
 import cn.org.atool.fluent.mybatis.mapper.IEntityMapper;
 import org.apache.ibatis.annotations.Mapper;
-#if(${cfg.mapperPrefix})
+#if(${mapper.prefix})
 import org.springframework.stereotype.Component;
 #end
 
 /**
  * <p>
- * $!{table.comment} Mapper接口
+ * $!{table} Mapper接口
  * </p>
  *
  * @author ${author}
  */
 @Mapper
-#if(${cfg.mapperPrefix})
-@Component("${cfg.mapperPrefix}${table.mapperName}")
+#if(${mapper.prefix})
+@Component("${mapper.prefix}${mapper.name}")
 #end
 public interface ${mapper.name} extends IEntityMapper<${entity.name}>{
 }
