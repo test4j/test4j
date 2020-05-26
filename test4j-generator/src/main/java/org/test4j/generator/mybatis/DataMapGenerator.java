@@ -1,10 +1,8 @@
 package org.test4j.generator.mybatis;
 
-
 import lombok.extern.slf4j.Slf4j;
-import org.test4j.generator.mybatis.config.TableConfig;
 import org.test4j.generator.mybatis.template.BaseTemplate;
-import org.test4j.generator.mybatis.template.TemplateList;
+import org.test4j.generator.mybatis.template.DataMapTemplateList;
 import org.test4j.generator.mybatis.template.summary.SummaryTemplate;
 
 import java.util.HashMap;
@@ -12,20 +10,15 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 数据库表列表
+ * DataMapGenerator
  *
- * @author wudarui
+ * @author darui.wu
  */
 @Slf4j
-public class MyBatisGenerator extends BaseGenerator<MyBatisGenerator> {
+public class DataMapGenerator extends BaseTemplateGenerator<DataMapGenerator> {
 
-    public static MyBatisGenerator build() {
-        return new MyBatisGenerator();
-    }
-
-    @Override
-    protected List<BaseTemplate> getAllTemplates() {
-        return TemplateList.ALL_TEMPLATES;
+    public static TemplateGenerator build() {
+        return new DataMapGenerator();
     }
 
     /**
@@ -40,9 +33,14 @@ public class MyBatisGenerator extends BaseGenerator<MyBatisGenerator> {
             wrapper.put("configs", allContext);
             wrapper.put("basePackage", this.globalConfig.getBasePackage());
         }
-        for (SummaryTemplate summary : TemplateList.summaries) {
+        for (SummaryTemplate summary : DataMapTemplateList.summaries) {
             summary.setGlobalConfig(this.globalConfig);
             templateEngine.output(summary.getTemplateId(), wrapper, summary.getFilePath());
         }
+    }
+
+    @Override
+    protected List<BaseTemplate> getAllTemplates() {
+        return DataMapTemplateList.datamap_list;
     }
 }

@@ -16,7 +16,7 @@ public class DataSourceScript implements IDataSourceScript {
     public List<Class> getTableKlass() {
         return list(
         #foreach(${config} in ${configs})
-                ${config.tableMap.name}.class#if($i<${configs.size()}),#end
+            ${config.tableMap.name}.class#if($i<${configs.size()}),#end
             #set ($i=$i+1)
 
         #end

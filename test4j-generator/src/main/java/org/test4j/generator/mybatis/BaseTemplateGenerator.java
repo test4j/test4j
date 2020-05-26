@@ -28,7 +28,7 @@ import static org.test4j.module.core.utility.MessageHelper.info;
 @Slf4j
 @Getter
 @Accessors(chain = true)
-public abstract class BaseGenerator<G extends BaseGenerator> implements Generator {
+public abstract class BaseTemplateGenerator<G extends BaseTemplateGenerator> implements TemplateGenerator {
     @Getter(AccessLevel.NONE)
     protected AbstractTemplateEngine templateEngine = new VelocityTemplateEngine();
 
@@ -40,21 +40,21 @@ public abstract class BaseGenerator<G extends BaseGenerator> implements Generato
     protected GlobalConfig globalConfig;
 
     @Override
-    public Generator globalConfig(Consumer<GlobalConfig> consumer) {
+    public TemplateGenerator globalConfig(Consumer<GlobalConfig> consumer) {
         this.globalConfig = new GlobalConfig();
         consumer.accept(this.globalConfig);
         return this;
     }
 
     @Override
-    public Generator tables(Consumer<TableConfig> consumer) {
+    public TemplateGenerator tables(Consumer<TableConfig> consumer) {
         TableConfig tableConfig = new TableConfig();
         consumer.accept(tableConfig);
         tables(tableConfig);
         return (G) this;
     }
 
-    public Generator tables(TableConfig... tableConfigs) {
+    public TemplateGenerator tables(TableConfig... tableConfigs) {
         for (TableConfig tableConfig : tableConfigs) {
             tableConfig.setGlobalConfig(globalConfig);
             this.tableConfigs.add(tableConfig);

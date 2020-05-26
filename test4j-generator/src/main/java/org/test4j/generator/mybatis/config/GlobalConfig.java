@@ -82,6 +82,10 @@ public class GlobalConfig {
     @Setter(AccessLevel.NONE)
     private String daoOutputDir = System.getProperty("user.dir") + "/target/generate/dao";
 
+    public GlobalConfig setOutputDir(String outputDir) {
+        return this.setOutputDir(outputDir, outputDir, outputDir);
+    }
+
     public GlobalConfig setOutputDir(String outputDir, String testOutputDir, String daoOutputDir) {
         this.outputDir = outputDir;
         this.testOutputDir = testOutputDir;

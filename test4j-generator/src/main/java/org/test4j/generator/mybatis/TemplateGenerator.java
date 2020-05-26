@@ -10,32 +10,14 @@ import java.util.function.Consumer;
  *
  * @author:darui.wu Created by darui.wu on 2020/5/22.
  */
-public interface Generator {
-    /**
-     * 生成fluent mybatis文件
-     *
-     * @return
-     */
-    static Generator fluentMybatis() {
-        return MyBatisGenerator.build();
-    }
-
-    /**
-     * 仅仅生成table datamap文件
-     *
-     * @return
-     */
-    static Generator tableMap() {
-        return TableMapGenerator.build();
-    }
-
+public interface TemplateGenerator {
     /**
      * 设置生成的全局配置
      *
      * @param consumer
      * @return
      */
-    Generator globalConfig(Consumer<GlobalConfig> consumer);
+    TemplateGenerator globalConfig(Consumer<GlobalConfig> consumer);
 
     /**
      * 设置要生成的表
@@ -43,7 +25,7 @@ public interface Generator {
      * @param consumer
      * @return
      */
-    Generator tables(Consumer<TableConfig> consumer);
+    TemplateGenerator tables(Consumer<TableConfig> consumer);
 
 
     /**

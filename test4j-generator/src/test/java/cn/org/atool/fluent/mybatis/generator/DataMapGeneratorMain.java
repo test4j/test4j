@@ -1,18 +1,25 @@
 package cn.org.atool.fluent.mybatis.generator;
 
 import org.junit.jupiter.api.Test;
-import org.test4j.generator.mybatis.Generator;
+import org.test4j.generator.mybatis.DataMapGenerator;
+import org.test4j.generator.mybatis.TemplateGenerator;
 import org.test4j.generator.mybatis.db.ColumnType;
+import org.test4j.junit5.Test4J;
 
-public class FluentMyBatisGeneratorTest {
+/**
+ * DataMapGeneratorTest
+ *
+ * @author darui.wu
+ * @create 2020/5/7 11:47 上午
+ */
+public class DataMapGeneratorMain {
     private static String url = "jdbc:mysql://localhost:3306/fluent_mybatis?useUnicode=true&characterEncoding=utf8";
 
-    @Test
-    public void generate() {
-        String outputDir = System.getProperty("user.dir") + "/src/test/java";
-        Generator.fluentMybatis()
+    public static void main(String[] args) {
+        String outputDir = System.getProperty("user.dir") + "/test4j-generator/src/test/java";
+        DataMapGenerator.build()
             .globalConfig(config -> config
-                .setOutputDir(outputDir, outputDir, outputDir)
+                .setOutputDir(outputDir)
                 .setDataSource(url, "root", "password")
                 .setBasePackage("cn.org.atool.fluent.mybatis.generator.demo")
             )
@@ -23,12 +30,12 @@ public class FluentMyBatisGeneratorTest {
                 .allTable(table -> {
                     table.setColumn("gmt_created", "gmt_modified", "is_deleted")
                         .column("is_deleted", ColumnType.BOOLEAN)
-                        .addBaseDaoInterface("MyCustomerInterface<${entity}, ${query}, ${update}>", MyCustomerInterface.class.getName())
                     ;
-                }))
+                })
+            )
             .tables(config -> config
-                .addTable("no_primary")
                 .addTable("no_auto_id")
+                .addTable("no_primary")
                 .allTable(table -> table.setMapperPrefix("new"))
             )
             .execute();

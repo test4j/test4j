@@ -1,6 +1,5 @@
 package ${entityMap.package};
 
-import ${mapping.package}.${mapping.name}.Property;
 import org.test4j.module.ICore.DataMap;
 import org.test4j.tools.datagen.KeyValue;
 
@@ -15,7 +14,7 @@ public class ${entityMap.name} extends DataMap<${entityMap.name}> {
     /**
      * 设置${entity.name}对象${field.name}字段值
      */
-    public transient final KeyValue<${entityMap.name}> ${field.name} = new KeyValue(this, Property.${field.name});
+    public transient final KeyValue<${entityMap.name}> ${field.name} = new KeyValue(this, "${field.name}");
 #end
 
     public ${entityMap.name}() {

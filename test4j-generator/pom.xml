@@ -10,8 +10,6 @@
     <modelVersion>4.0.0</modelVersion>
 
     <artifactId>test4j-generator</artifactId>
-
-
     <dependencies>
         <!-- database -->
         <dependency>
@@ -19,10 +17,6 @@
             <artifactId>test4j-db-dep</artifactId>
             <version>${project.version}</version>
             <scope>provided</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.github.atool</groupId>
-            <artifactId>fluent-mybatis</artifactId>
         </dependency>
         <dependency>
             <groupId>org.test4j</groupId>
