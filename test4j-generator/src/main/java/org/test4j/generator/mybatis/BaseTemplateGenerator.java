@@ -28,7 +28,7 @@ import static org.test4j.module.core.utility.MessageHelper.info;
 @Slf4j
 @Getter
 @Accessors(chain = true)
-public abstract class BaseTemplateGenerator<G extends BaseTemplateGenerator> implements TemplateGenerator {
+public abstract class BaseTemplateGenerator implements TemplateGenerator {
     @Getter(AccessLevel.NONE)
     protected AbstractTemplateEngine templateEngine = new VelocityTemplateEngine();
 
@@ -51,7 +51,7 @@ public abstract class BaseTemplateGenerator<G extends BaseTemplateGenerator> imp
         TableConfig tableConfig = new TableConfig();
         consumer.accept(tableConfig);
         tables(tableConfig);
-        return (G) this;
+        return this;
     }
 
     public TemplateGenerator tables(TableConfig... tableConfigs) {
@@ -59,7 +59,7 @@ public abstract class BaseTemplateGenerator<G extends BaseTemplateGenerator> imp
             tableConfig.setGlobalConfig(globalConfig);
             this.tableConfigs.add(tableConfig);
         }
-        return (G) this;
+        return this;
     }
 
     /**

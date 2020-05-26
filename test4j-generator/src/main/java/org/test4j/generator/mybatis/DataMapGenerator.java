@@ -15,7 +15,7 @@ import java.util.Map;
  * @author darui.wu
  */
 @Slf4j
-public class DataMapGenerator extends BaseTemplateGenerator<DataMapGenerator> {
+public class DataMapGenerator extends BaseTemplateGenerator {
 
     public static TemplateGenerator build() {
         return new DataMapGenerator();
