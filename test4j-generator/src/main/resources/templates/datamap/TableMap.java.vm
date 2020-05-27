@@ -17,16 +17,18 @@ import java.util.function.Consumer;
 @ScriptTable("${table}")
 public class ${tableMap.name} extends DataMap<${tableMap.name}> {
 #foreach($field in ${fields})
+    #set($primary="")
     #if(${field.primary})
-        #if(${field.primaryId})#set($primary=", primary = true, autoIncrease = true")#else#set($primary=", primary = true")#end
-    #else
-        #set($primary="")
+        #set($primary=", primary = true")
+        #if(${field.primaryId})
+            #set($primary=", primary = true, autoIncrease = true")
+        #end
     #end
     /**
      * 设置${table}对象${field.columnName}字段值
      */
     @ColumnDef(type = "${field.columnType}"${primary})
-    public transient final KeyValue<${tableMap.name}> ${field.name} = new KeyValue(this, "${field.columnName}");
+    public transient final KeyValue<${tableMap.name}> ${field.columnName} = new KeyValue(this, "${field.columnName}");
 #end
 
     public ${tableMap.name}() {
@@ -45,11 +47,11 @@ public class ${tableMap.name} extends DataMap<${tableMap.name}> {
     public ${tableMap.name} init() {
 #foreach($field in ${fields})
     #if(${field.primaryId})
-        this.${field.name}.autoIncrease();
+        this.${field.columnName}.autoIncrease();
     #elseif(${field.gmt})
-        this.${field.name}.values(new Date());
+        this.${field.columnName}.values(new Date());
     #elseif(${field.deleted} && ${field.type} == 'Boolean')
-        this.${field.name}.values(false);
+        this.${field.columnName}.values(false);
     #end
 #end
         return this;

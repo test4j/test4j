@@ -18,7 +18,6 @@ import static org.test4j.tools.commons.ClazzHelper.createInstanceOfType;
  *
  * @author darui.wudr
  */
-@SuppressWarnings({"unchecked", "rawtypes"})
 public class ConfigHelper implements IPropItem {
 
     private static Properties properties = ConfigurationLoader.loading();
@@ -194,42 +193,6 @@ public class ConfigHelper implements IPropItem {
     }
 
     /**
-     * Gets an instance of the type specified by the property with the given
-     * name. If no such property is found, the value is empty or the instance
-     * cannot be created, an exception will be raised.
-     *
-     * @param clazNameProperty the property of class name, not null.
-     * @return The instance value, not null
-     */
-
-    public static <T> T getInstance(String clazNameProperty) {
-        String className = getString(clazNameProperty);
-        return (T) createInstanceOfType(className);
-    }
-
-    /**
-     * Retrieves the concrete instance of the class with the given type as
-     * configured by the given <code>Configuration</code>. Tries to retrieve a
-     * specific implementation first (propery key = fully qualified name of the
-     * interface type + '.impl.className.' + implementationDiscriminatorValue).
-     * If this key does not exist, the generally configured instance is
-     * retrieved (same property key without the
-     * implementationDiscriminatorValue).
-     *
-     * @param type                              The type of the instance
-     * @param implementationDiscriminatorValues The values that define which
-     *                                          specific implementation class should be used. This is
-     *                                          typically an environment specific property, like the DBMS that
-     *                                          is used.
-     * @return The configured instance
-     */
-    public static <T> T getInstanceOf(Class<? extends T> type, String... implementationDiscriminatorValues) {
-        String implClassName = getConfiguredClassName(type, implementationDiscriminatorValues);
-        MessageHelper.debug("Creating instance of " + type + ". Implementation class " + implClassName);
-        return (T) createInstanceOfType(implClassName);
-    }
-
-    /**
      * 返回数据库列表
      *
      * @return
@@ -284,44 +247,5 @@ public class ConfigHelper implements IPropItem {
     public static boolean doesOnlyTestDatabase() {
         String onlyTest = properties.getProperty(CONNECT_ONLY_TESTDB);
         return !"FALSE".equalsIgnoreCase(onlyTest);
-    }
-
-    /**
-     * Retrieves the class name of the concrete instance of the class with the
-     * given type as configured by the given <code>Configuration</code>. Tries
-     * to retrieve a specific implementation first (propery key = fully
-     * qualified name of the interface type + '.impl.className.' +
-     * implementationDiscriminatorValue). If this key does not exist, the
-     * generally configured instance is retrieved (same property key without the
-     * implementationDiscriminatorValue).
-     *
-     * @param type                              The type of the instance
-     * @param implementationDiscriminatorValues The values that define which
-     *                                          specific implementation class should be used. This is
-     *                                          typically an environment specific property, like the DBMS that
-     *                                          is used.
-     * @return The configured class name
-     */
-    public static String getConfiguredClassName(Class type, String... implementationDiscriminatorValues) {
-        String propKey = type.getName() + ".implClassName";
-
-        // first try specific instance using the given discriminators
-        if (implementationDiscriminatorValues != null) {
-            String implementationSpecificPropKey = propKey;
-            for (String implementationDiscriminatorValue : implementationDiscriminatorValues) {
-                implementationSpecificPropKey += '.' + implementationDiscriminatorValue;
-            }
-            if (ConfigHelper.hasProperty(implementationSpecificPropKey)) {
-                return getString(implementationSpecificPropKey);
-            }
-        }
-
-        // specifig not found, try general configured instance
-        if (ConfigHelper.hasProperty(propKey)) {
-            return getString(propKey);
-        }
-
-        // no configuration found
-        throw new Test4JException("Missing configuration for " + propKey);
     }
 }

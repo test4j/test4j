@@ -8,6 +8,6 @@ import ${basePackage}.datamap.table.*;
 public interface TM {
 #foreach(${config} in ${configs})
 
-    ${config.tableMap.name}.Factory ${config.table} = new ${config.tableMap.name}.Factory();
+    ${config.tableMap.name}.Factory ${config.table_no_prefix} = new ${config.tableMap.name}.Factory();
 #end
 }

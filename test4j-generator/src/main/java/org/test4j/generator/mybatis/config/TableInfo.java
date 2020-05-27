@@ -29,9 +29,9 @@ import static org.test4j.generator.mybatis.config.constant.ConfigKey.*;
 @Getter
 @Accessors(chain = true)
 public class TableInfo {
-    private GlobalConfig globalConfig;
+    private final GlobalConfig globalConfig;
 
-    private TableConfig tableConfig;
+    private final TableConfig tableConfig;
     /**
      * 所有字段类型列表
      */
@@ -103,17 +103,15 @@ public class TableInfo {
      */
     private String fieldNames;
 
-    public TableInfo(String tableName) {
-        this.tableName = tableName;
+    public TableInfo(String tableName, GlobalConfig globalConfig, TableConfig tableConfig) {
+        this(tableName, null, globalConfig, tableConfig);
     }
 
-    public TableInfo(String tableName, String entityPrefix) {
+
+    public TableInfo(String tableName, String entityPrefix, GlobalConfig globalConfig, TableConfig tableConfig) {
         this.tableName = tableName;
         this.entityPrefix = entityPrefix;
-    }
-
-    public TableInfo(String tableName, TableConfig tableConfig) {
-        this.tableName = tableName;
+        this.globalConfig = globalConfig;
         this.tableConfig = tableConfig;
     }
 
@@ -424,12 +422,6 @@ public class TableInfo {
         return this;
     }
 
-    public TableInfo setConfig(GlobalConfig globalConfig, TableConfig tableConfig) {
-        this.tableConfig = tableConfig;
-        this.globalConfig = globalConfig;
-        return this;
-    }
-
     public String outputDir(OutputDir dirType) {
         switch (dirType) {
             case Dao:
@@ -459,7 +451,7 @@ public class TableInfo {
             context.put(KEY_TABLE, this.getTableName());
             context.put(KEY_TABLE_NO_PREFIX, this.getNoPrefixTableName());
             context.put(KEY_ENTITY_PREFIX, this.getEntityPrefix());
-            if(this.primary != null){
+            if (this.primary != null) {
                 context.put(KEY_PRIMARY_COLUMN_NAME, this.primary.getColumnName());
                 context.put(KEY_PRIMARY_FIELD_NAME, this.primary.getName());
             }

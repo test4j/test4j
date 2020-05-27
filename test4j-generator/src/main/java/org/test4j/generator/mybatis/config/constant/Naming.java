@@ -1,6 +1,5 @@
 package org.test4j.generator.mybatis.config.constant;
 
-import org.test4j.tools.commons.StringConst;
 import org.test4j.tools.commons.StringHelper;
 
 import java.util.regex.Pattern;
@@ -28,7 +27,7 @@ public enum Naming {
         if (isCapitalMode(name) || isMixedMode(name)) {
             tempName = name.toLowerCase();
         }
-        String[] camels = tempName.split(StringConst.UNDERLINE);
+        String[] camels = tempName.split("_");
         StringBuilder result = new StringBuilder();
         for (String word : camels) {
             if (!StringHelper.isBlank(word)) {

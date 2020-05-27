@@ -1,10 +1,13 @@
 package org.test4j.generator.mybatis.config;
 
+import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.test4j.generator.mybatis.db.DbType;
 import org.test4j.generator.mybatis.db.IDbQuery;
 import org.test4j.generator.mybatis.db.ITypeConvert;
-import org.test4j.generator.mybatis.db.DbType;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
@@ -42,14 +45,7 @@ public class DbConfig {
      * schemaName
      */
     private String schemaName;
-    /**
-     * 数据库信息查询
-     */
-    private IDbQuery dbQuery;
-    /**
-     * 类型转换
-     */
-    private ITypeConvert typeConvert;
+
 
     public DbConfig() {
     }
@@ -65,12 +61,25 @@ public class DbConfig {
         this.password = password;
     }
 
+    /**
+     * 数据库信息查询
+     */
+    @Setter(AccessLevel.NONE)
+    @Getter(AccessLevel.NONE)
+    private IDbQuery dbQuery;
+
     public IDbQuery getDbQuery() {
         if (null == dbQuery) {
             this.dbQuery = this.dbType.newQuery();
         }
         return dbQuery;
     }
+
+    /**
+     * 类型转换
+     */
+    @Getter(AccessLevel.NONE)
+    private ITypeConvert typeConvert;
 
     public ITypeConvert getTypeConvert() {
         if (null == typeConvert) {
@@ -97,6 +106,8 @@ public class DbConfig {
         return this.dbType;
     }
 
+    @Setter(AccessLevel.NONE)
+    @Getter(AccessLevel.NONE)
     private Connection connection;
 
     /**

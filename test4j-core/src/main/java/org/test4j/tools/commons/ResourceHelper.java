@@ -215,13 +215,13 @@ public class ResourceHelper {
         detector.add(JChardetFacade.getInstance());
 
         try {
-            Charset charset = Charset.forName(ResourceHelper.defaultFileEncoding());
+            Charset charset;
             try {
                 charset = detector.detectCodepage(file.toURL());
             } catch (IllegalArgumentException e) {
                 charset = Charset.forName(ResourceHelper.defaultFileEncoding());
                 MessageHelper.warn("get file encoding error:" + e.getMessage() + ", use default encoding:"
-                        + ResourceHelper.defaultFileEncoding());
+                    + ResourceHelper.defaultFileEncoding());
             }
             String fileCharacterEnding = charset.name();
             return fileCharacterEnding;
@@ -250,7 +250,7 @@ public class ResourceHelper {
             } catch (IllegalArgumentException e) {
                 charset = Charset.forName(ResourceHelper.defaultFileEncoding());
                 MessageHelper.warn("get file encoding error:" + e.getMessage() + ", use default encoding:"
-                        + ResourceHelper.defaultFileEncoding());
+                    + ResourceHelper.defaultFileEncoding());
             }
             String fileCharacterEnding = charset.name();
             return fileCharacterEnding;
@@ -352,10 +352,10 @@ public class ResourceHelper {
         if (is == null) {
             if (StringHelper.isBlank(packPath)) {
                 throw new FileNotFoundException(String.format("can't find class path resource in in classpath: [%s].",
-                        fileName));
+                    fileName));
             } else {
                 throw new FileNotFoundException(String.format(
-                        "can't find class path resource in in classpaths: [%s] and [%s]", url, fileName));
+                    "can't find class path resource in in classpaths: [%s] and [%s]", url, fileName));
             }
         } else {
             return is;

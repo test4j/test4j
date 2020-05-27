@@ -55,29 +55,6 @@ public class ClazzHelper {
         }
     }
 
-    /**
-     * @param className The name of the class to check, not null
-     * @return True if the classfile exists in the classpath
-     */
-    public static boolean classFileExistsInClasspath(String className) {
-        String classFileName = className.replace('.', '/') + ".class";
-        return ClazzHelper.class.getClassLoader().getResource(classFileName) != null;
-    }
-
-    /**
-     * 类路径中是否有 org.hibernate.tool.hbm2ddl.SchemaExport class
-     *
-     * @return
-     */
-    public final static boolean doesImportSchemaExport() {
-        try {
-            Class.forName("org.hibernate.tool.hbm2ddl.SchemaExport");
-            return true;
-        } catch (ClassNotFoundException e) {
-            return false;
-        }
-    }
-
     public final static String getPackFromClassName(String clazzName) {
         int index = clazzName.lastIndexOf(".");
         String pack = "";
@@ -113,70 +90,6 @@ public class ClazzHelper {
         } else {
             return getPathFromPath(clazz.getName());
         }
-    }
-
-    public final static void generateClazz(String clazzName, byte[] r) throws IOException {
-        // debug，调试生成的字节码
-        FileOutputStream file = new FileOutputStream("d:/" + clazzName.substring(clazzName.lastIndexOf('.') + 1)
-                + ".class");
-        file.write(r);
-        file.flush();
-        file.close();
-    }
-
-    /**
-     * package名称有效字符表达式
-     */
-    public final static String VALID_PACK_REGULAR = "[^\\.]*";
-
-    /**
-     * 将带有星号的package名称转换为正则表达式
-     *
-     * @param regexPackage 带有星号的package名称，比如 com.**.service.*Impl
-     * @return
-     */
-    public static String getPackageRegex(String regexPackage) {
-        String _interfaceKey = regexPackage.replace('*', '#');// 先把*替换成不会被使用的字符#，避免后面的正则表达式替换错误
-        String regex = _interfaceKey.replace(".", "\\.");
-        regex = regex.replace("\\.##\\.", "(\\.|\\..*\\.)");
-        regex = regex.replace("##\\.", ".*\\.");
-        regex = regex.replace("#", VALID_PACK_REGULAR);
-        return regex;
-    }
-
-    /**
-     * 判断类型是否是接口或者抽象类
-     *
-     * @param type
-     * @return
-     */
-    public static boolean isInterfaceOrAbstract(Class type) {
-        if (type == null) {
-            throw new RuntimeException("type can't be null.");
-        }
-        if (type.isInterface()) {
-            return true;
-        } else if (Modifier.isAbstract(type.getModifiers())) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    /**
-     * 从void setBeanName(Type instance)方法中解析出beanName
-     *
-     * @param method
-     * @return
-     */
-    public static String exactBeanName(Method method) {
-        String methodname = method.getName();
-        if (methodname.equalsIgnoreCase("set") || methodname.startsWith("set") == false) {
-            return null;
-        }
-        String beanName = methodname.substring(3);
-        beanName = beanName.substring(0, 1).toLowerCase() + beanName.substring(1);
-        return beanName;
     }
 
     /**
@@ -319,44 +232,6 @@ public class ClazzHelper {
         }
         throw new Test4JException("Unable to find a enum value in enum: " + enumClass + ", with value name: "
                 + enumValueName);
-    }
-
-    /**
-     * 获得泛型字段的参数类类型<br>
-     * Gets the T from a Class<T> field declaration. An exception is raised if
-     * the field type is not generic or has more than 1 generic type
-     *
-     * @param field The field to get the type from, not null
-     * @return The declared generic type
-     */
-    public static Type getGenericType(Field field) {
-        Type type = field.getGenericType();
-        if (type instanceof ParameterizedType) {
-            Type[] argumentTypes = ((ParameterizedType) type).getActualTypeArguments();
-            if (argumentTypes.length == 1) {
-                return argumentTypes[0];
-            }
-            throw new Test4JException("Unable to determine unique generic type for field: " + field
-                    + ". The field type declares more than one generic type: " + type);
-        }
-        throw new Test4JException("Unable to determine unique generic type for field: " + field
-                + ". Field type is not a generic type: " + type);
-    }
-
-    /**
-     * Gets the class instance for the given type instance.
-     *
-     * @param type The type to get a class instance for, not null
-     * @return The class instance, not null
-     */
-    public static <T> Class<T> getClassForType(Type type) {
-        if (type instanceof Class) {
-            return (Class<T>) type;
-        }
-        if (type instanceof ParameterizedType) {
-            return (Class<T>) ((ParameterizedType) type).getRawType();
-        }
-        throw new Test4JException("Unable to convert Type instance " + type + " to a Class instance.");
     }
 
     /**
@@ -527,46 +402,6 @@ public class ClazzHelper {
         } catch (Exception e) {
             MessageHelper.warn("get proxy object error.", e);
             return target;
-        }
-    }
-
-    /**
-     * 是否是class文件
-     *
-     * @param classFileName
-     * @return
-     */
-    public static boolean isClassFile(String classFileName) {
-        return classFileName.endsWith(".class");
-    }
-
-    /**
-     * 是否是内部类
-     *
-     * @param className
-     * @return
-     */
-    public static boolean isInnerClass(String className) {
-        return className.contains("$");
-    }
-
-    /**
-     * 将class的全路径替换为带.的class名称<br>
-     * ex: convert /a/b.class to a.b
-     *
-     * @param clazzPath
-     * @return
-     */
-    public static String replaceFileSeparators(String clazzPath) {
-        String clazzName = clazzPath.replace(File.separatorChar, '.');
-        if (File.separatorChar != '/') {
-            // In Jar-Files it's always '/'
-            clazzName = clazzName.replace('/', '.');
-        }
-        if (clazzName.startsWith(".")) {
-            return clazzName.substring(1);
-        } else {
-            return clazzName;
         }
     }
 

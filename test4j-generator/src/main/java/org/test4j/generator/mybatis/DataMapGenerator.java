@@ -17,7 +17,7 @@ import java.util.Map;
 @Slf4j
 public class DataMapGenerator extends BaseTemplateGenerator {
 
-    public static TemplateGenerator build() {
+    public static IGlobalConfig build() {
         return new DataMapGenerator();
     }
 

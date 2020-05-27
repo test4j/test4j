@@ -37,7 +37,7 @@ public class StringHelper {
         if (in == null) {
             return true;
         } else {
-            return in.trim().equals(StringConst.EMPTY);
+            return in.trim().isEmpty();
         }
     }
 

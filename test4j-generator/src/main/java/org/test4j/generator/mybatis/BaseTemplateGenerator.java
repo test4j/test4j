@@ -28,7 +28,7 @@ import static org.test4j.module.core.utility.MessageHelper.info;
 @Slf4j
 @Getter
 @Accessors(chain = true)
-public abstract class BaseTemplateGenerator implements TemplateGenerator {
+public abstract class BaseTemplateGenerator implements IGlobalConfig, ITableConfig {
     @Getter(AccessLevel.NONE)
     protected AbstractTemplateEngine templateEngine = new VelocityTemplateEngine();
 
@@ -40,23 +40,22 @@ public abstract class BaseTemplateGenerator implements TemplateGenerator {
     protected GlobalConfig globalConfig;
 
     @Override
-    public TemplateGenerator globalConfig(Consumer<GlobalConfig> consumer) {
+    public ITableConfig globalConfig(Consumer<GlobalConfig> consumer) {
         this.globalConfig = new GlobalConfig();
         consumer.accept(this.globalConfig);
         return this;
     }
 
     @Override
-    public TemplateGenerator tables(Consumer<TableConfig> consumer) {
-        TableConfig tableConfig = new TableConfig();
+    public ITableConfig tables(Consumer<TableConfig> consumer) {
+        TableConfig tableConfig = new TableConfig(this.globalConfig);
         consumer.accept(tableConfig);
         tables(tableConfig);
         return this;
     }
 
-    public TemplateGenerator tables(TableConfig... tableConfigs) {
+    public ITableConfig tables(TableConfig... tableConfigs) {
         for (TableConfig tableConfig : tableConfigs) {
-            tableConfig.setGlobalConfig(globalConfig);
             this.tableConfigs.add(tableConfig);
         }
         return this;
@@ -83,7 +82,7 @@ public abstract class BaseTemplateGenerator implements TemplateGenerator {
         List<Map<String, Object>> allContext = new ArrayList<>();
         for (TableConfig config : this.tableConfigs) {
             info("===数据库元信息初始化...");
-            config.setGlobalConfig(this.globalConfig).initTables();
+            config.initTables();
             info("===准备生成文件...");
             for (Map.Entry<String, TableInfo> entry : config.getTables().entrySet()) {
                 info("======处理表：" + entry.getKey());

@@ -26,38 +26,29 @@ import java.util.stream.Collectors;
 @Data
 @Accessors(chain = true)
 public class TableConfig {
-    private GlobalConfig globalConfig;
-
-    /**
-     * 是否覆盖已有文件
-     */
-    private boolean fileOverride = false;
+    private final GlobalConfig globalConfig;
     /**
      * 时间类型对应策略
      */
     private DateType dateType = DateType.ONLY_DATE;
     /**
-     * 开启 baseColumnList
-     */
-    private boolean baseColumnList = false;
-    /**
      * 需要去掉的表前缀
      */
     @Setter(AccessLevel.NONE)
     private String[] tablePrefix;
-
     /**
      * 需要处理的表
      */
     @Getter
     private Map<String, TableInfo> tables = new HashMap<>();
 
-    public TableConfig() {
+
+    public TableConfig(GlobalConfig globalConfig) {
+        this.globalConfig = globalConfig;
     }
 
-
     public TableInfo table(String tableName) {
-        TableInfo table = new TableInfo(tableName, this);
+        TableInfo table = new TableInfo(tableName, this.globalConfig, this);
         this.tables.put(tableName, table);
         return table;
     }
@@ -68,13 +59,13 @@ public class TableConfig {
     }
 
     public TableConfig addTable(String tableName) {
-        TableInfo table = new TableInfo(tableName, this);
+        TableInfo table = new TableInfo(tableName, this.globalConfig, this);
         this.tables.put(tableName, table);
         return this;
     }
 
     public TableConfig addTable(String tableName, boolean isPartition) {
-        TableInfo table = new TableInfo(tableName, this)
+        TableInfo table = new TableInfo(tableName, this.globalConfig, this)
             .setPartition(isPartition);
         this.tables.put(tableName, table);
         return this;
@@ -138,7 +129,6 @@ public class TableConfig {
                 }
             }
             for (Map.Entry<String, TableInfo> entry : this.getTables().entrySet()) {
-                entry.getValue().setConfig(this.globalConfig, this);
                 entry.getValue().initTable();
             }
         } catch (SQLException e) {

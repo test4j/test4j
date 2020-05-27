@@ -1,14 +1,17 @@
 package org.test4j.generator.mybatis.config;
 
-import lombok.Getter;
 import lombok.AccessLevel;
 import lombok.Data;
+import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.test4j.generator.mybatis.config.constant.Naming;
 import org.test4j.generator.mybatis.db.DbType;
 import org.test4j.generator.mybatis.db.ITypeConvert;
 import org.test4j.tools.commons.StringHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * 策略配置项
@@ -28,22 +31,11 @@ public class GlobalConfig {
      */
     @Getter(AccessLevel.NONE)
     private Naming columnNaming;
-
-    /**
-     * 实体是否生成 serialVersionUID
-     */
-    private boolean entitySerialVersionUID = true;
-
     /**
      * Boolean类型字段是否移除is前缀（默认 false）<br>
      * 比如 : 数据库字段名称 : 'is_xxx',类型为 : tinyint. 在映射实体的时候则会去掉is,在实体类中映射最终结果为 xxx
      */
-    private boolean booleanColumnRemoveIsPrefix = false;
-
-    public Naming getColumnNaming() {
-        return columnNaming == null ? tableNaming : columnNaming;
-    }
-
+    private boolean removeIsPrefix = false;
     /**
      * 代码package前缀
      */
@@ -52,20 +44,6 @@ public class GlobalConfig {
 
     @Setter(AccessLevel.NONE)
     private String packageDir;
-
-    public GlobalConfig setBasePackage(String basePackage) {
-        this.basePackage = basePackage;
-        this.packageDir = '/' + basePackage.replace('.', '/') + '/';
-        return this;
-    }
-
-    public String getBasePackage() {
-        if (StringHelper.isBlank(basePackage)) {
-            throw new RuntimeException("the base package should be set.");
-        }
-        return basePackage;
-    }
-
     /**
      * 代码生成路径
      */
@@ -81,6 +59,31 @@ public class GlobalConfig {
      */
     @Setter(AccessLevel.NONE)
     private String daoOutputDir = System.getProperty("user.dir") + "/target/generate/dao";
+    /**
+     * 开发人员
+     */
+    private String author = "generate code";
+    /**
+     * 是否打开输出目录
+     */
+    private boolean open = true;
+
+    public Naming getColumnNaming() {
+        return columnNaming == null ? tableNaming : columnNaming;
+    }
+
+    public GlobalConfig setBasePackage(String basePackage) {
+        this.basePackage = basePackage;
+        this.packageDir = '/' + basePackage.replace('.', '/') + '/';
+        return this;
+    }
+
+    public String getBasePackage() {
+        if (StringHelper.isBlank(basePackage)) {
+            throw new RuntimeException("the base package should be set.");
+        }
+        return basePackage;
+    }
 
     public GlobalConfig setOutputDir(String outputDir) {
         return this.setOutputDir(outputDir, outputDir, outputDir);
@@ -120,7 +123,7 @@ public class GlobalConfig {
      * @return
      */
     public boolean needRemoveIsPrefix(String fieldName, String fieldType) {
-        if (!this.isBooleanColumnRemoveIsPrefix()) {
+        if (!this.isRemoveIsPrefix()) {
             return false;
         } else if (!boolean.class.getSimpleName().equalsIgnoreCase(fieldType)) {
             return false;
@@ -128,13 +131,4 @@ public class GlobalConfig {
             return fieldName.startsWith("is");
         }
     }
-
-    /**
-     * 开发人员
-     */
-    private String author = "generate code";
-    /**
-     * 是否打开输出目录
-     */
-    private boolean open = true;
 }
