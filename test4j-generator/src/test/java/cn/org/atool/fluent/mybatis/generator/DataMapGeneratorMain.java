@@ -1,10 +1,7 @@
 package cn.org.atool.fluent.mybatis.generator;
 
-import org.junit.jupiter.api.Test;
 import org.test4j.generator.mybatis.DataMapGenerator;
-import org.test4j.generator.mybatis.TemplateGenerator;
 import org.test4j.generator.mybatis.db.ColumnType;
-import org.test4j.junit5.Test4J;
 
 /**
  * DataMapGeneratorTest
