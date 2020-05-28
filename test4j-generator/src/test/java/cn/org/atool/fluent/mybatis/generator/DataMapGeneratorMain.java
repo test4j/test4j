@@ -23,12 +23,10 @@ public class DataMapGeneratorMain {
             .tables(config -> config
                 .setTablePrefix("t_")
                 .addTable("address")
-                .addTable("t_user", true)
-                .allTable(table -> {
-                    table.setColumn("gmt_created", "gmt_modified", "is_deleted")
-                        .column("is_deleted", ColumnType.BOOLEAN)
-                    ;
-                })
+                .addTable("t_user", t -> t.setPartition(true))
+                .allTable(t -> t
+                    .setColumn("gmt_created", "gmt_modified", "is_deleted")
+                    .column("is_deleted", ColumnType.BOOLEAN))
             )
             .tables(config -> config
                 .addTable("no_auto_id")

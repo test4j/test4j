@@ -53,20 +53,14 @@ public class TableConfig {
         return table;
     }
 
-    public TableConfig addTable(TableInfo table) {
-        this.tables.put(table.getTableName(), table);
-        return this;
-    }
-
     public TableConfig addTable(String tableName) {
-        TableInfo table = new TableInfo(tableName, this.globalConfig, this);
-        this.tables.put(tableName, table);
-        return this;
+        return this.addTable(tableName, (table) -> {
+        });
     }
 
-    public TableConfig addTable(String tableName, boolean isPartition) {
-        TableInfo table = new TableInfo(tableName, this.globalConfig, this)
-            .setPartition(isPartition);
+    public TableConfig addTable(String tableName, Consumer<TableInfo> consumer) {
+        TableInfo table = new TableInfo(tableName, this.globalConfig, this);
+        consumer.accept(table);
         this.tables.put(tableName, table);
         return this;
     }

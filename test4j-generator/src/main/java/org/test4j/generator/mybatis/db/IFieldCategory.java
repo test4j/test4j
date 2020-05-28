@@ -1,5 +1,7 @@
 package org.test4j.generator.mybatis.db;
 
+import lombok.Getter;
+
 /**
  * IFieldCategory
  *
@@ -9,25 +11,35 @@ public enum IFieldCategory {
     /**
      * 主键
      */
-    PrimaryKey,
+    PrimaryKey(0),
     /**
      * 自增主键
      */
-    PrimaryId,
+    PrimaryId(0),
     /**
      * gmt_create字段
      */
-    GmtCreate,
+    GmtCreate(1),
     /**
      * gmt_modified字段
      */
-    GmtModified,
+    GmtModified(2),
     /**
      * 逻辑删除字段
      */
-    IsDeleted,
+    IsDeleted(3),
     /**
      * 普通字段
      */
-    Common;
+    Common(4);
+
+    /**
+     * 字段排序
+     */
+    @Getter
+    private int order;
+
+    IFieldCategory(int order) {
+        this.order = order;
+    }
 }

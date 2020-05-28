@@ -1,14 +1,14 @@
 package org.test4j.generator.mybatis.config;
 
 import lombok.AccessLevel;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.experimental.Accessors;
 import org.test4j.generator.mybatis.config.constant.Naming;
 import org.test4j.generator.mybatis.db.IDbQuery;
 import org.test4j.generator.mybatis.db.IFieldCategory;
 import org.test4j.generator.mybatis.db.IJavaType;
 import org.test4j.generator.mybatis.db.ITypeConvert;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.experimental.Accessors;
 import org.test4j.tools.commons.StringHelper;
 
 import java.sql.ResultSet;
@@ -21,7 +21,7 @@ import java.sql.SQLException;
  */
 @Getter
 @Accessors(chain = true)
-public class TableField {
+public class TableField implements Comparable<TableField> {
     /**
      * 字段类别
      */
@@ -149,5 +149,17 @@ public class TableField {
      */
     public boolean isDeleted() {
         return this.category == IFieldCategory.IsDeleted;
+    }
+
+    @Override
+    public int compareTo(TableField field) {
+        if (field == null) {
+            return 1;
+        }
+        int order = this.category.compareTo(field.category);
+        if (order == 0) {
+            order = this.name.compareTo(field.name);
+        }
+        return order;
     }
 }

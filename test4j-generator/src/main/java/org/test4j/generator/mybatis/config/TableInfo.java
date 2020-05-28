@@ -1,5 +1,6 @@
 package org.test4j.generator.mybatis.config;
 
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
@@ -29,13 +30,9 @@ import static org.test4j.generator.mybatis.config.constant.ConfigKey.*;
 @Getter
 @Accessors(chain = true)
 public class TableInfo {
-    private final GlobalConfig globalConfig;
-
-    private final TableConfig tableConfig;
-    /**
-     * 所有字段类型列表
-     */
-    private final Set<String> importTypes = new HashSet<>();
+    /***********************************************/
+    /****************以下是配置信息******************/
+    /***********************************************/
     /**
      * 表名
      */
@@ -46,32 +43,24 @@ public class TableInfo {
      */
     @Setter
     private String entityPrefix;
-    /**
-     * 记录创建字段名称
-     */
-    private String gmtCreate;
-    /**
-     * 记录修改字段名称
-     */
-    private String gmtModified;
-    /**
-     * 逻辑删除字段名称
-     */
-    private String logicDeleted;
+
     /**
      * 是否作分库分表处理
      */
     @Setter
     private boolean isPartition = false;
-
-    private Map<String, DefinedColumn> columns = new HashMap<String, DefinedColumn>();
     /**
-     * 执行模板生成各个步骤产生的上下文信息，比如Mapper名称等，供其他模板生成时引用
+     * 主键的sequence name指定
      */
-    private Map<IFieldCategory, String> fileTypeName = new HashMap<>();
+    @Setter
+    private String seqName;
+    /**
+     * 特殊字段指定(排除，别名等)
+     */
+    private Map<String, DefinedColumn> columns = new HashMap<String, DefinedColumn>();
 
     /***********************************************/
-    /****************以下是数据库信息******************/
+    /****************以下是数据库信息*****************/
     /***********************************************/
     /**
      * 注释
@@ -79,29 +68,33 @@ public class TableInfo {
     @Setter
     private String comment;
     /**
-     * 主键字段
-     */
-    private TableField primary;
-    /**
-     * 记录创建字段
-     */
-    private TableField gmtCreateField;
-    /**
-     * 记录修改字段
-     */
-    private TableField gmtModifiedField;
-    /**
-     * 逻辑删除字段
-     */
-    private TableField isDeletedField;
-    /**
-     * 字段列表（除上面单列字段外）
+     * 字段列表
      */
     private List<TableField> fields = new ArrayList<>();
     /**
      * 所有字段拼接串
      */
     private String fieldNames;
+
+    /***********************************************/
+    /*************以下外部导入或内部初始化*************/
+    /***********************************************/
+    /**
+     * 全局配置
+     */
+    private final GlobalConfig globalConfig;
+    /**
+     * 表配置
+     */
+    private final TableConfig tableConfig;
+    /**
+     * 所有字段类型列表
+     */
+    private final Set<String> importTypes = new HashSet<>();
+    /**
+     * 执行模板生成各个步骤产生的上下文信息，比如Mapper名称等，供其他模板生成时引用
+     */
+    private Map<IFieldCategory, String> fileTypeName = new HashMap<>();
 
     public TableInfo(String tableName, GlobalConfig globalConfig, TableConfig tableConfig) {
         this(tableName, null, globalConfig, tableConfig);
@@ -130,6 +123,21 @@ public class TableInfo {
         return this;
     }
 
+    /**
+     * 记录创建字段名称
+     */
+    @Getter(AccessLevel.NONE)
+    private String gmtCreate;
+    /**
+     * 记录修改字段名称
+     */
+    @Getter(AccessLevel.NONE)
+    private String gmtModified;
+    /**
+     * 逻辑删除字段名称
+     */
+    @Getter(AccessLevel.NONE)
+    private String logicDeleted;
 
     public TableInfo setGmtCreate(String gmtCreate) {
         if (StringHelper.isBlank(this.gmtCreate)) {
@@ -153,12 +161,15 @@ public class TableInfo {
     }
 
     public TableInfo column(String columnName, IJavaType columnType) {
-        this.columns.put(columnName, new DefinedColumn(columnName, null, columnType));
-        return this;
+        return this.column(columnName, null, columnType);
     }
 
     public TableInfo column(String columnName, String propertyName) {
-        this.columns.put(columnName, new DefinedColumn(columnName, propertyName, null));
+        return this.column(columnName, propertyName, null);
+    }
+
+    public TableInfo column(String columnName, String propertyName, IJavaType columnType) {
+        this.columns.put(columnName, new DefinedColumn(columnName, propertyName, columnType));
         return this;
     }
 
@@ -167,34 +178,6 @@ public class TableInfo {
             this.columns.put(column, new DefinedColumn(column).setExclude(true));
         }
         return this;
-    }
-
-    /**
-     * 增加数据库字段
-     *
-     * @param field
-     * @return true：添加成功， false：被排除字段
-     */
-    private boolean addField(TableField field) {
-        String fieldName = field.getColumnName();
-        if (this.isExclude(fieldName)) {
-            return false;
-        }
-        if (fieldName.equalsIgnoreCase(this.gmtCreate)) {
-            field.setCategory(IFieldCategory.GmtCreate);
-            this.gmtCreateField = field;
-        } else if (fieldName.equalsIgnoreCase(this.gmtModified)) {
-            field.setCategory(IFieldCategory.GmtModified);
-            this.gmtModifiedField = field;
-        } else if (fieldName.equalsIgnoreCase(this.logicDeleted)) {
-            field.setCategory(IFieldCategory.IsDeleted);
-            this.isDeletedField = field;
-        } else if (field.isPrimary()) {
-            this.primary = field;
-        } else {
-            this.fields.add(field);
-        }
-        return true;
     }
 
     /**
@@ -245,56 +228,52 @@ public class TableInfo {
     /**
      * 是否已找到id字段
      */
+    @Getter(AccessLevel.NONE)
     private transient boolean haveId = false;
 
     /**
-     * 将字段信息与表信息关联
+     * 增加数据库字段
      *
-     * @return
+     * @return 所有未排除字段
      */
-    private TableInfo initTableFields() {
-        List<TableField> commons = this.findAllFields();
-        this.fields = new ArrayList<>();
-        if (this.primary != null) {
-            this.fields.add(primary);
-        }
-        if (this.gmtCreateField != null) {
-            this.fields.add(this.gmtCreateField);
-        }
-        if (this.gmtModified != null) {
-            this.fields.add(this.gmtModifiedField);
-        }
-        if (this.isDeletedField != null) {
-            this.fields.add(this.isDeletedField);
-        }
-        commons.sort(Comparator.comparing(TableField::getColumnName));
-        this.fields.addAll(commons);
-        this.fieldNames = fields.stream().map(TableField::getColumnName).collect(Collectors.joining(", "));
-
-        return this;
-    }
-
-    private List<TableField> findAllFields() {
+    private List<TableField> initTableFields() {
         DbConfig dbConfig = this.globalConfig.getDbConfig();
         DbType dbType = dbConfig.getDbType();
         IDbQuery dbQuery = dbConfig.getDbQuery();
 
         this.fields = new ArrayList<>();
-        try {
+        String tableFieldsSql = this.buildTableFieldsSql();
+        try (PreparedStatement preparedStatement = dbConfig.getConn().prepareStatement(tableFieldsSql); ResultSet results = preparedStatement.executeQuery()) {
             Set<String> h2PkColumns = this.h2PkColumns();
-            String tableFieldsSql = this.buildTableFieldsSql();
-            try (PreparedStatement preparedStatement = dbConfig.getConn().prepareStatement(tableFieldsSql); ResultSet results = preparedStatement.executeQuery()) {
-                while (results.next()) {
-                    TableField field = this.initTableField(dbType, dbQuery, h2PkColumns, results);
-                    if (field != null) {
-                        this.addField(field);
-                    }
+            while (results.next()) {
+                TableField field = this.initTableField(dbType, dbQuery, h2PkColumns, results);
+                String fieldName = Optional.ofNullable(field).map(TableField::getColumnName).orElse(null);
+                if (field == null || this.isExclude(fieldName)) {
+                    continue;
                 }
+                if (!field.isPrimary()) {
+                    field.setCategory(this.getFieldCategory(fieldName));
+                }
+                this.fields.add(field);
             }
         } catch (SQLException e) {
             throw new RuntimeException("SQL Exception：" + e.getMessage(), e);
         }
+        Collections.sort(this.fields);
+        this.fieldNames = fields.stream().map(TableField::getColumnName).collect(Collectors.joining(", "));
         return fields;
+    }
+
+    private IFieldCategory getFieldCategory(String fieldName) {
+        if (fieldName.equalsIgnoreCase(this.gmtCreate)) {
+            return IFieldCategory.GmtCreate;
+        } else if (fieldName.equalsIgnoreCase(this.gmtModified)) {
+            return IFieldCategory.GmtModified;
+        } else if (fieldName.equalsIgnoreCase(this.logicDeleted)) {
+            return IFieldCategory.IsDeleted;
+        } else {
+            return IFieldCategory.Common;
+        }
     }
 
     private TableField initTableField(DbType dbType, IDbQuery dbQuery, Set<String> h2PkColumns, ResultSet results) throws SQLException {
@@ -328,10 +307,10 @@ public class TableInfo {
     /**
      * 是否主键字段
      *
-     * @param columnName
+     * @param columnName  字段名
      * @param results
      * @param h2PkColumns
-     * @return
+     * @return 是否主键
      * @throws SQLException
      */
     private boolean isPrimary(String columnName, ResultSet results, Set<String> h2PkColumns) throws SQLException {
@@ -451,9 +430,13 @@ public class TableInfo {
             context.put(KEY_TABLE, this.getTableName());
             context.put(KEY_TABLE_NO_PREFIX, this.getNoPrefixTableName());
             context.put(KEY_ENTITY_PREFIX, this.getEntityPrefix());
-            if (this.primary != null) {
-                context.put(KEY_PRIMARY_COLUMN_NAME, this.primary.getColumnName());
-                context.put(KEY_PRIMARY_FIELD_NAME, this.primary.getName());
+            for (TableField field : this.fields) {
+                if (!field.isPrimary()) {
+                    continue;
+                }
+                context.put(KEY_PRIMARY_COLUMN_NAME, field.getColumnName());
+                context.put(KEY_PRIMARY_FIELD_NAME, field.getName());
+                break;
             }
             context.put(KEY_COMMENT, this.getComment());
             context.put(KEY_FIELD_NAMES, this.getFieldNames());
