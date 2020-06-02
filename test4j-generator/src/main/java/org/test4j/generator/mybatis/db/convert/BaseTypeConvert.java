@@ -1,9 +1,8 @@
 package org.test4j.generator.mybatis.db.convert;
 
-import org.test4j.generator.mybatis.db.ITypeConvert;
-import org.test4j.generator.mybatis.db.ColumnType;
+import org.test4j.generator.mybatis.db.ColumnJavaType;
 import org.test4j.generator.mybatis.db.DateType;
-import org.test4j.generator.mybatis.db.IJavaType;
+import org.test4j.generator.mybatis.db.ITypeConvert;
 
 /**
  * BaseTypeConvert
@@ -11,32 +10,32 @@ import org.test4j.generator.mybatis.db.IJavaType;
  */
 public abstract class BaseTypeConvert implements ITypeConvert {
 
-    protected IJavaType parseDateType(DateType dateType, String columnType) {
+    protected ColumnJavaType parseDateType(DateType dateType, String columnType) {
         switch (dateType) {
             case SQL_PACK:
                 switch (columnType) {
                     case "date":
                     case "year":
-                        return ColumnType.DATE_SQL;
+                        return ColumnJavaType.DATE_SQL;
                     case "time":
-                        return ColumnType.TIME;
+                        return ColumnJavaType.TIME;
                     default:
-                        return ColumnType.TIMESTAMP;
+                        return ColumnJavaType.TIMESTAMP;
                 }
             case TIME_PACK:
                 switch (columnType) {
                     case "date":
-                        return ColumnType.LOCAL_DATE;
+                        return ColumnJavaType.LOCAL_DATE;
                     case "time":
-                        return ColumnType.LOCAL_TIME;
+                        return ColumnJavaType.LOCAL_TIME;
                     case "year":
-                        return ColumnType.YEAR;
+                        return ColumnJavaType.YEAR;
                     default:
-                        return ColumnType.LOCAL_DATE_TIME;
+                        return ColumnJavaType.LOCAL_DATE_TIME;
                 }
             case ONLY_DATE:
             default:
-                return ColumnType.DATE;
+                return ColumnJavaType.DATE;
         }
     }
 }

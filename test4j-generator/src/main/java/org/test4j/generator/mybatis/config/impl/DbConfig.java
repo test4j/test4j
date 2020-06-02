@@ -1,4 +1,4 @@
-package org.test4j.generator.mybatis.config;
+package org.test4j.generator.mybatis.config.impl;
 
 import lombok.AccessLevel;
 import lombok.Data;

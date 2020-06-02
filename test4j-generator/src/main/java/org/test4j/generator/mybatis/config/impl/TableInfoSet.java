@@ -1,16 +1,14 @@
-package org.test4j.generator.mybatis.config;
+package org.test4j.generator.mybatis.config.impl;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.test4j.generator.mybatis.config.ITableInfoSet;
 import org.test4j.generator.mybatis.config.constant.DefinedColumn;
 import org.test4j.generator.mybatis.config.constant.Naming;
 import org.test4j.generator.mybatis.config.constant.OutputDir;
-import org.test4j.generator.mybatis.db.DbType;
-import org.test4j.generator.mybatis.db.IDbQuery;
-import org.test4j.generator.mybatis.db.IFieldCategory;
-import org.test4j.generator.mybatis.db.IJavaType;
+import org.test4j.generator.mybatis.db.*;
 import org.test4j.generator.mybatis.db.query.H2Query;
 import org.test4j.tools.commons.StringHelper;
 
@@ -19,6 +17,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import static org.test4j.generator.mybatis.config.constant.ConfigKey.*;
 
@@ -29,7 +28,7 @@ import static org.test4j.generator.mybatis.config.constant.ConfigKey.*;
  */
 @Getter
 @Accessors(chain = true)
-public class TableInfo {
+public class TableInfoSet implements ITableInfoSet {
     /***********************************************/
     /****************以下是配置信息******************/
     /***********************************************/
@@ -39,6 +38,16 @@ public class TableInfo {
     @Setter
     private String tableName;
     /**
+     * 时间类型对应策略
+     */
+    @Setter
+    private DateType dateType = DateType.ONLY_DATE;
+    /**
+     * 需要去掉的表前缀
+     */
+    @Setter(AccessLevel.NONE)
+    private String[] tablePrefix;
+    /**
      * entity前缀部分
      */
     @Setter
@@ -47,8 +56,14 @@ public class TableInfo {
     /**
      * 是否作分库分表处理
      */
-    @Setter
     private boolean isPartition = false;
+
+    @Override
+    public ITableInfoSet enablePartition() {
+        this.isPartition = true;
+        return this;
+    }
+
     /**
      * 主键的sequence name指定
      */
@@ -86,7 +101,7 @@ public class TableInfo {
     /**
      * 表配置
      */
-    private final TableConfig tableConfig;
+    private final TableConfigSet tableConfig;
     /**
      * 所有字段类型列表
      */
@@ -96,27 +111,29 @@ public class TableInfo {
      */
     private Map<IFieldCategory, String> fileTypeName = new HashMap<>();
 
-    public TableInfo(String tableName, GlobalConfig globalConfig, TableConfig tableConfig) {
+    public TableInfoSet(String tableName, GlobalConfig globalConfig, TableConfigSet tableConfig) {
         this(tableName, null, globalConfig, tableConfig);
     }
 
-
-    public TableInfo(String tableName, String entityPrefix, GlobalConfig globalConfig, TableConfig tableConfig) {
+    public TableInfoSet(String tableName, String entityPrefix, GlobalConfig globalConfig, TableConfigSet tableConfig) {
         this.tableName = tableName;
         this.entityPrefix = entityPrefix;
         this.globalConfig = globalConfig;
         this.tableConfig = tableConfig;
     }
 
-    /**
-     * 指定特殊字段
-     *
-     * @param gmtCreate    记录创建时间
-     * @param gmtModified  记录修改时间
-     * @param logicDeleted 记录逻辑删除字段
-     * @return
-     */
-    public TableInfo setColumn(String gmtCreate, String gmtModified, String logicDeleted) {
+
+    @Override
+    public ITableInfoSet setTablePrefix(String... tablePrefix) {
+        if (!this.hasPrefix()) {
+            this.tablePrefix = tablePrefix;
+        }
+        return this;
+    }
+
+
+    @Override
+    public ITableInfoSet setColumn(String gmtCreate, String gmtModified, String logicDeleted) {
         this.setGmtCreate(gmtCreate);
         this.setGmtModified(gmtModified);
         this.setLogicDeleted(logicDeleted);
@@ -139,41 +156,48 @@ public class TableInfo {
     @Getter(AccessLevel.NONE)
     private String logicDeleted;
 
-    public TableInfo setGmtCreate(String gmtCreate) {
+    @Override
+    public ITableInfoSet setGmtCreate(String gmtCreate) {
         if (StringHelper.isBlank(this.gmtCreate)) {
             this.gmtCreate = gmtCreate;
         }
         return this;
     }
 
-    public TableInfo setGmtModified(String gmtModified) {
+    @Override
+    public ITableInfoSet setGmtModified(String gmtModified) {
         if (StringHelper.isBlank(this.gmtModified)) {
             this.gmtModified = gmtModified;
         }
         return this;
     }
 
-    public TableInfo setLogicDeleted(String logicDeleted) {
+    @Override
+    public ITableInfoSet setLogicDeleted(String logicDeleted) {
         if (StringHelper.isBlank(this.logicDeleted)) {
             this.logicDeleted = logicDeleted;
         }
         return this;
     }
 
-    public TableInfo column(String columnName, IJavaType columnType) {
-        return this.column(columnName, null, columnType);
+    @Override
+    public ITableInfoSet setColumnType(String columnName, ColumnJavaType javaType) {
+        return this.setColumnType(columnName, null, javaType);
     }
 
-    public TableInfo column(String columnName, String propertyName) {
-        return this.column(columnName, propertyName, null);
+    @Override
+    public ITableInfoSet setColumn(String columnName, String propertyName) {
+        return this.setColumnType(columnName, propertyName, (ColumnJavaType) null);
     }
 
-    public TableInfo column(String columnName, String propertyName, IJavaType columnType) {
-        this.columns.put(columnName, new DefinedColumn(columnName, propertyName, columnType));
+    @Override
+    public ITableInfoSet setColumnType(String columnName, String propertyName, ColumnJavaType javaType) {
+        this.columns.put(columnName, new DefinedColumn(columnName, propertyName, javaType));
         return this;
     }
 
-    public TableInfo exclude(String... columnNames) {
+    @Override
+    public ITableInfoSet setExcludeColumn(String... columnNames) {
         for (String column : columnNames) {
             this.columns.put(column, new DefinedColumn(column).setExclude(true));
         }
@@ -218,12 +242,22 @@ public class TableInfo {
      * @return
      */
     public String getNoPrefixTableName() {
-        if (this.tableConfig.needRemovePrefix()) {
-            return Naming.removePrefix(this.tableName, this.tableConfig.getTablePrefix());
+        if (this.hasPrefix()) {
+            return Naming.removePrefix(this.tableName, this.tablePrefix);
         } else {
             return this.tableName;
         }
     }
+
+    /**
+     * shif dingy
+     *
+     * @return
+     */
+    private boolean hasPrefix() {
+        return this.tablePrefix != null && this.tablePrefix.length > 0;
+    }
+
 
     /**
      * 是否已找到id字段
@@ -381,13 +415,48 @@ public class TableInfo {
      * key: implements 接口完整定义，包含泛型
      * value: 接口import完整路径
      */
-    @Setter
     @Getter
     private Map<String, String> baseDaoInterfaces = new HashMap<>();
 
-    public TableInfo addBaseDaoInterface(String interfaceName, String interfacePackage) {
-        this.baseDaoInterfaces.put(interfaceName, interfacePackage);
+    @Override
+    public ITableInfoSet addBaseDaoInterface(Class interfaceType, String... parameterGenericTypes) {
+        return this.addBaseDaoInterface(interfaceType.getName(), parameterGenericTypes);
+    }
+
+    @Override
+    public ITableInfoSet addBaseDaoInterface(String interfaceFullName, String... parameterGenericTypes) {
+        String typeName = this.buildInterfaceName(interfaceFullName, parameterGenericTypes);
+        this.baseDaoInterfaces.put(typeName, interfaceFullName);
         return this;
+    }
+
+    private String buildInterfaceName(String interfaceFullName, String[] parameterGenericTypes) {
+        int index = interfaceFullName.lastIndexOf('.');
+        String typeName = interfaceFullName.substring(index + 1);
+        if (parameterGenericTypes != null && parameterGenericTypes.length > 0) {
+            typeName += Stream.of(parameterGenericTypes).collect(Collectors.joining(", ", "<", ">"));
+        }
+        return typeName;
+    }
+
+    /**
+     * Entity 导入的自定义接口
+     * key: implements 接口完整定义，包含泛型
+     * value: 接口import完整路径
+     */
+    @Getter
+    private Map<String, String> entityInterfaces = new HashMap<>();
+
+    @Override
+    public ITableInfoSet addEntityInterface(String interfaceType, String... parameterGenericTypes) {
+        String typeName = this.buildInterfaceName(interfaceType, parameterGenericTypes);
+        this.entityInterfaces.put(typeName, interfaceType);
+        return this;
+    }
+
+    @Override
+    public ITableInfoSet addEntityInterface(Class interfaceType, String... parameterGenericTypes) {
+        return this.addEntityInterface(interfaceType.getName(), parameterGenericTypes);
     }
 
     /**
@@ -396,7 +465,8 @@ public class TableInfo {
     @Setter
     private String mapperBeanPrefix = "";
 
-    public TableInfo setMapperPrefix(String mapperBeanPrefix) {
+    @Override
+    public ITableInfoSet setMapperPrefix(String mapperBeanPrefix) {
         this.mapperBeanPrefix = mapperBeanPrefix;
         return this;
     }

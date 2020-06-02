@@ -1,8 +1,7 @@
 package org.test4j.generator.mybatis.db.convert;
 
-import org.test4j.generator.mybatis.db.ColumnType;
+import org.test4j.generator.mybatis.db.ColumnJavaType;
 import org.test4j.generator.mybatis.db.DateType;
-import org.test4j.generator.mybatis.db.IJavaType;
 
 /**
  * SQLite 字段类型转换
@@ -10,29 +9,29 @@ import org.test4j.generator.mybatis.db.IJavaType;
  */
 public class SqliteTypeConvert extends BaseTypeConvert {
     @Override
-    public IJavaType processTypeConvert(DateType dateType, String fieldType) {
+    public ColumnJavaType processTypeConvert(DateType dateType, String fieldType) {
         String t = fieldType.toLowerCase();
         if (t.contains("bigint")) {
-            return ColumnType.LONG;
+            return ColumnJavaType.LONG;
         } else if (t.contains("tinyint(1)") || t.contains("boolean")) {
-            return ColumnType.BOOLEAN;
+            return ColumnJavaType.BOOLEAN;
         } else if (t.contains("int")) {
-            return ColumnType.INTEGER;
+            return ColumnJavaType.INTEGER;
         } else if (t.contains("text") || t.contains("char") || t.contains("enum")) {
-            return ColumnType.STRING;
+            return ColumnJavaType.STRING;
         } else if (t.contains("decimal") || t.contains("numeric")) {
-            return ColumnType.BIG_DECIMAL;
+            return ColumnJavaType.BIG_DECIMAL;
         } else if (t.contains("clob")) {
-            return ColumnType.CLOB;
+            return ColumnJavaType.CLOB;
         } else if (t.contains("blob")) {
-            return ColumnType.BLOB;
+            return ColumnJavaType.BLOB;
         } else if (t.contains("float")) {
-            return ColumnType.FLOAT;
+            return ColumnJavaType.FLOAT;
         } else if (t.contains("double")) {
-            return ColumnType.DOUBLE;
+            return ColumnJavaType.DOUBLE;
         } else if (t.contains("date") || t.contains("time") || t.contains("year")) {
             return this.parseDateType(dateType, t);
         }
-        return ColumnType.STRING;
+        return ColumnJavaType.STRING;
     }
 }

@@ -7,14 +7,19 @@ import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
 import org.test4j.generator.engine.AbstractTemplateEngine;
 import org.test4j.generator.engine.VelocityTemplateEngine;
-import org.test4j.generator.mybatis.config.GlobalConfig;
-import org.test4j.generator.mybatis.config.TableConfig;
-import org.test4j.generator.mybatis.config.TableInfo;
+import org.test4j.generator.mybatis.config.IGlobalConfig;
+import org.test4j.generator.mybatis.config.IGlobalConfigSet;
+import org.test4j.generator.mybatis.config.ITableConfig;
+import org.test4j.generator.mybatis.config.ITableConfigSet;
+import org.test4j.generator.mybatis.config.impl.GlobalConfig;
+import org.test4j.generator.mybatis.config.impl.TableConfigSet;
+import org.test4j.generator.mybatis.config.impl.TableInfoSet;
 import org.test4j.generator.mybatis.template.BaseTemplate;
 import org.test4j.hamcrest.Assert;
 import org.test4j.tools.commons.StringHelper;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.function.Consumer;
@@ -32,7 +37,7 @@ public abstract class BaseTemplateGenerator implements IGlobalConfig, ITableConf
     @Getter(AccessLevel.NONE)
     protected AbstractTemplateEngine templateEngine = new VelocityTemplateEngine();
 
-    protected List<TableConfig> tableConfigs = new ArrayList<>();
+    protected List<TableConfigSet> tableConfigs = new ArrayList<>();
     /**
      * 全局配置
      */
@@ -40,23 +45,23 @@ public abstract class BaseTemplateGenerator implements IGlobalConfig, ITableConf
     protected GlobalConfig globalConfig;
 
     @Override
-    public ITableConfig globalConfig(Consumer<GlobalConfig> consumer) {
+    public ITableConfig globalConfig(Consumer<IGlobalConfigSet> consumer) {
         this.globalConfig = new GlobalConfig();
         consumer.accept(this.globalConfig);
         return this;
     }
 
     @Override
-    public ITableConfig tables(Consumer<TableConfig> consumer) {
-        TableConfig tableConfig = new TableConfig(this.globalConfig);
+    public ITableConfig tables(Consumer<ITableConfigSet> consumer) {
+        TableConfigSet tableConfig = new TableConfigSet(this.globalConfig);
         consumer.accept(tableConfig);
         tables(tableConfig);
         return this;
     }
 
-    public ITableConfig tables(TableConfig... tableConfigs) {
-        for (TableConfig tableConfig : tableConfigs) {
-            this.tableConfigs.add(tableConfig);
+    public ITableConfig tables(ITableConfigSet... tableConfigs) {
+        for (ITableConfigSet tableConfig : tableConfigs) {
+            this.tableConfigs.add((TableConfigSet) tableConfig);
         }
         return this;
     }
@@ -80,13 +85,13 @@ public abstract class BaseTemplateGenerator implements IGlobalConfig, ITableConf
             throw new RuntimeException("the table config not set.");
         }
         List<Map<String, Object>> allContext = new ArrayList<>();
-        for (TableConfig config : this.tableConfigs) {
+        for (TableConfigSet config : this.tableConfigs) {
             info("===数据库元信息初始化...");
             config.initTables();
             info("===准备生成文件...");
-            for (Map.Entry<String, TableInfo> entry : config.getTables().entrySet()) {
+            for (Map.Entry<String, TableInfoSet> entry : config.getTables().entrySet()) {
                 info("======处理表：" + entry.getKey());
-                TableInfo table = entry.getValue();
+                TableInfoSet table = entry.getValue();
                 Map<String, Object> context = this.getAllTemplateContext(table);
                 this.generateTemplates(table, context);
                 allContext.add(context);
@@ -111,7 +116,7 @@ public abstract class BaseTemplateGenerator implements IGlobalConfig, ITableConf
      * @param table
      * @param context
      */
-    private void generateTemplates(TableInfo table, Map<String, Object> context) {
+    private void generateTemplates(TableInfoSet table, Map<String, Object> context) {
         this.getAllTemplates().stream()
             .filter(template -> !template.isPartition() || table.isPartition())
             .forEach(template -> {
@@ -128,14 +133,15 @@ public abstract class BaseTemplateGenerator implements IGlobalConfig, ITableConf
      * @param table
      * @return
      */
-    private Map<String, Object> getAllTemplateContext(TableInfo table) {
+    private Map<String, Object> getAllTemplateContext(TableInfoSet table) {
         final Map<String, Object> context = table.initTemplateContext();
         this.getAllTemplates().forEach(template -> {
-                Map<String, Object> templateContext = template.initContext(table);
+                Map<String, Object> templateContext = new HashMap<>();
+                context.put(template.getTemplateId(), templateContext);
+                template.initContext(table, templateContext);
                 if (KEY_ENTITY.equals(template.getTemplateId())) {
                     context.put(KEY_ENTITY_NAME, templateContext.get(KEY_NAME));
                 }
-                context.put(template.getTemplateId(), templateContext);
             }
         );
         return context;

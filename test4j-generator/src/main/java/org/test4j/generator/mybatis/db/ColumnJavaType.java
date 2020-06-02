@@ -7,7 +7,7 @@ import lombok.Getter;
  *
  * @author wudarui
  */
-public enum ColumnType implements IJavaType {
+public enum ColumnJavaType {
     // 基本类型
     BASE_BYTE(byte.class.getSimpleName()),
     BASE_SHORT(short.class.getSimpleName()),
@@ -52,26 +52,26 @@ public enum ColumnType implements IJavaType {
     BIG_DECIMAL(java.math.BigDecimal.class);
 
     /**
-     * 类型
+     * 获取字段类型
      */
     @Getter
     private final String fieldType;
 
     /**
-     * 包路径
+     * 获取字段类型完整路径类型
      */
     @Getter
     private final String importName;
 
-    ColumnType(Class type) {
+    ColumnJavaType(Class type) {
         this(type.getSimpleName(), type.getName());
     }
 
-    ColumnType(String type) {
+    ColumnJavaType(String type) {
         this(type, null);
     }
 
-    ColumnType(final String type, final String fullName) {
+    ColumnJavaType(final String type, final String fullName) {
         this.fieldType = type;
         this.importName = fullName;
     }

@@ -1,7 +1,7 @@
 package org.test4j.generator.mybatis.template.summary;
 
 import lombok.Data;
-import org.test4j.generator.mybatis.config.GlobalConfig;
+import org.test4j.generator.mybatis.config.impl.GlobalConfig;
 
 /**
  * 汇总类模板生成

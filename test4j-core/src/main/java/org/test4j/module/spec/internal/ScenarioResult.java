@@ -5,7 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import org.test4j.function.ReturnExecutor;
 import org.test4j.function.SExecutor;
-import org.test4j.module.ICore;
 import org.test4j.tools.commons.StringHelper;
 import org.test4j.tools.datagen.TableDataAround;
 
@@ -68,13 +67,13 @@ public class ScenarioResult implements Serializable {
             Object whenResult = lambda.doIt();
             SpecContext.setWhenResult(whenResult);
             if (eKlass != null) {
-                ICore.want.fail("expected exception: " + eKlass.getName());
+                throw new AssertionError("not found expected exception: " + eKlass.getName());
             }
             if (type == StepType.When) {
                 TableDataAround.check(stepResult);
             }
         } catch (Throwable e) {
-            if (eKlass != null) {
+            if (eKlass != null && !(e instanceof AssertionError)) {
                 SpecContext.setExpectedException(e);
             } else {
                 stepResult.setError(e);

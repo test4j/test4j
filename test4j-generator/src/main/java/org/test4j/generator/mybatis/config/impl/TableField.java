@@ -1,13 +1,13 @@
-package org.test4j.generator.mybatis.config;
+package org.test4j.generator.mybatis.config.impl;
 
 import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.test4j.generator.mybatis.config.constant.Naming;
+import org.test4j.generator.mybatis.db.ColumnJavaType;
 import org.test4j.generator.mybatis.db.IDbQuery;
 import org.test4j.generator.mybatis.db.IFieldCategory;
-import org.test4j.generator.mybatis.db.IJavaType;
 import org.test4j.generator.mybatis.db.ITypeConvert;
 import org.test4j.tools.commons.StringHelper;
 
@@ -45,7 +45,7 @@ public class TableField implements Comparable<TableField> {
      * 字段java类型
      */
     @Setter
-    private IJavaType javaType;
+    private ColumnJavaType javaType;
     /**
      * 字段名称（首字母大写）
      */
@@ -56,9 +56,9 @@ public class TableField implements Comparable<TableField> {
     private String comment;
 
     @Getter(AccessLevel.NONE)
-    private final TableInfo tableInfo;
+    private final TableInfoSet tableInfo;
 
-    public TableField(TableInfo tableInfo, String columnName) {
+    public TableField(TableInfoSet tableInfo, String columnName) {
         this.tableInfo = tableInfo;
         this.columnName = columnName;
     }
@@ -79,7 +79,7 @@ public class TableField implements Comparable<TableField> {
     private void initFieldJavaType(ResultSet results) throws SQLException {
         if (this.javaType == null) {
             ITypeConvert typeConvert = this.tableInfo.getGlobalConfig().getDbConfig().getTypeConvert();
-            this.javaType = typeConvert.processTypeConvert(this.tableInfo.getTableConfig().getDateType(), this);
+            this.javaType = typeConvert.processTypeConvert(this.tableInfo.getDateType(), this);
         }
     }
 

@@ -1,6 +1,6 @@
 package org.test4j.generator.mybatis.db;
 
-import org.test4j.generator.mybatis.config.TableField;
+import org.test4j.generator.mybatis.config.impl.TableField;
 
 /**
  * 数据库字段类型转换
@@ -17,7 +17,7 @@ public interface ITypeConvert {
      * @param tableField 字段列信息
      * @return 字段类型
      */
-    default IJavaType processTypeConvert(DateType dateType, TableField tableField) {
+    default ColumnJavaType processTypeConvert(DateType dateType, TableField tableField) {
         // 该方法提供重写
         return processTypeConvert(dateType, tableField.getColumnType());
     }
@@ -30,5 +30,5 @@ public interface ITypeConvert {
      * @param fieldType 字段类型
      * @return 字段类型
      */
-    IJavaType processTypeConvert(DateType dateType, String fieldType);
+    ColumnJavaType processTypeConvert(DateType dateType, String fieldType);
 }

@@ -3,7 +3,7 @@ package org.test4j.generator.mybatis.config.constant;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.test4j.generator.mybatis.db.IJavaType;
+import org.test4j.generator.mybatis.db.ColumnJavaType;
 
 /**
  * 预定义好的字段
@@ -17,12 +17,12 @@ public class DefinedColumn {
 
     private String fieldName;
 
-    private IJavaType javaType;
+    private ColumnJavaType javaType;
 
     @Setter
     private boolean exclude = false;
 
-    public DefinedColumn(String columnName, String fieldName, IJavaType javaType) {
+    public DefinedColumn(String columnName, String fieldName, ColumnJavaType javaType) {
         this.columnName = columnName;
         this.fieldName = fieldName;
         this.javaType = javaType;

@@ -1,9 +1,8 @@
 package org.test4j.generator.mybatis.db.convert;
 
-import org.test4j.generator.mybatis.db.ITypeConvert;
-import org.test4j.generator.mybatis.db.ColumnType;
+import org.test4j.generator.mybatis.db.ColumnJavaType;
 import org.test4j.generator.mybatis.db.DateType;
-import org.test4j.generator.mybatis.db.IJavaType;
+import org.test4j.generator.mybatis.db.ITypeConvert;
 
 /**
  * ORACLE 字段类型转换
@@ -12,38 +11,38 @@ import org.test4j.generator.mybatis.db.IJavaType;
 public class OracleTypeConvert implements ITypeConvert {
 
     @Override
-    public IJavaType processTypeConvert(DateType dateType, String fieldType) {
+    public ColumnJavaType processTypeConvert(DateType dateType, String fieldType) {
         String t = fieldType.toLowerCase();
         if (t.contains("char")) {
-            return ColumnType.STRING;
+            return ColumnJavaType.STRING;
         } else if (t.contains("date") || t.contains("timestamp")) {
             switch (dateType) {
                 case ONLY_DATE:
-                    return ColumnType.DATE;
+                    return ColumnJavaType.DATE;
                 case SQL_PACK:
-                    return ColumnType.TIMESTAMP;
+                    return ColumnJavaType.TIMESTAMP;
                 case TIME_PACK:
-                    return ColumnType.LOCAL_DATE_TIME;
+                    return ColumnJavaType.LOCAL_DATE_TIME;
             }
         } else if (t.contains("number")) {
             if (t.matches("number\\(+\\d\\)")) {
-                return ColumnType.INTEGER;
+                return ColumnJavaType.INTEGER;
             } else if (t.matches("number\\(+\\d{2}+\\)")) {
-                return ColumnType.LONG;
+                return ColumnJavaType.LONG;
             }
-            return ColumnType.BIG_DECIMAL;
+            return ColumnJavaType.BIG_DECIMAL;
         } else if (t.contains("float")) {
-            return ColumnType.FLOAT;
+            return ColumnJavaType.FLOAT;
         } else if (t.contains("clob")) {
-            return ColumnType.STRING;
+            return ColumnJavaType.STRING;
         } else if (t.contains("blob")) {
-            return ColumnType.BLOB;
+            return ColumnJavaType.BLOB;
         } else if (t.contains("binary")) {
-            return ColumnType.BYTE_ARRAY;
+            return ColumnJavaType.BYTE_ARRAY;
         } else if (t.contains("raw")) {
-            return ColumnType.BYTE_ARRAY;
+            return ColumnJavaType.BYTE_ARRAY;
         }
-        return ColumnType.STRING;
+        return ColumnJavaType.STRING;
     }
 
 }

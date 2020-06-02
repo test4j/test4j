@@ -1,6 +1,7 @@
 package org.test4j.generator.mybatis;
 
 import lombok.extern.slf4j.Slf4j;
+import org.test4j.generator.mybatis.config.IGlobalConfig;
 import org.test4j.generator.mybatis.template.BaseTemplate;
 import org.test4j.generator.mybatis.template.DataMapTemplateList;
 import org.test4j.generator.mybatis.template.summary.SummaryTemplate;

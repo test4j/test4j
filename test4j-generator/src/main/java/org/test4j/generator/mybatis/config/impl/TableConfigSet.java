@@ -1,11 +1,10 @@
-package org.test4j.generator.mybatis.config;
+package org.test4j.generator.mybatis.config.impl;
 
-import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
-import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.test4j.generator.mybatis.db.DateType;
+import org.test4j.generator.mybatis.config.ITableConfigSet;
+import org.test4j.generator.mybatis.config.ITableInfoSet;
 import org.test4j.generator.mybatis.db.DbType;
 
 import java.sql.PreparedStatement;
@@ -25,69 +24,36 @@ import java.util.stream.Collectors;
  */
 @Data
 @Accessors(chain = true)
-public class TableConfig {
+public class TableConfigSet implements ITableConfigSet {
     private final GlobalConfig globalConfig;
-    /**
-     * 时间类型对应策略
-     */
-    private DateType dateType = DateType.ONLY_DATE;
-    /**
-     * 需要去掉的表前缀
-     */
-    @Setter(AccessLevel.NONE)
-    private String[] tablePrefix;
     /**
      * 需要处理的表
      */
     @Getter
-    private Map<String, TableInfo> tables = new HashMap<>();
+    private Map<String, TableInfoSet> tables = new HashMap<>();
 
 
-    public TableConfig(GlobalConfig globalConfig) {
+    public TableConfigSet(GlobalConfig globalConfig) {
         this.globalConfig = globalConfig;
     }
 
-    public TableInfo table(String tableName) {
-        TableInfo table = new TableInfo(tableName, this.globalConfig, this);
-        this.tables.put(tableName, table);
-        return table;
-    }
-
-    public TableConfig addTable(String tableName) {
-        return this.addTable(tableName, (table) -> {
+    @Override
+    public ITableConfigSet table(String tableName) {
+        return this.table(tableName, (table) -> {
         });
     }
 
-    public TableConfig addTable(String tableName, Consumer<TableInfo> consumer) {
-        TableInfo table = new TableInfo(tableName, this.globalConfig, this);
+    @Override
+    public ITableConfigSet table(String tableName, Consumer<ITableInfoSet> consumer) {
+        TableInfoSet table = new TableInfoSet(tableName, this.globalConfig, this);
         consumer.accept(table);
         this.tables.put(tableName, table);
         return this;
     }
 
-    /**
-     * 对所有表统一处理
-     *
-     * @param consumer
-     * @return
-     */
-    public TableConfig allTable(Consumer<TableInfo> consumer) {
+    @Override
+    public void foreach(Consumer<ITableInfoSet> consumer) {
         this.tables.values().stream().forEach(table -> consumer.accept(table));
-        return this;
-    }
-
-    public TableConfig setTablePrefix(String... tablePrefix) {
-        this.tablePrefix = tablePrefix;
-        return this;
-    }
-
-    /**
-     * 是否需要做移除前缀处理
-     *
-     * @return
-     */
-    public boolean needRemovePrefix() {
-        return this.tablePrefix != null && this.tablePrefix.length != 0;
     }
 
     /**
@@ -103,7 +69,7 @@ public class TableConfig {
             try (PreparedStatement preparedStatement = dbConfig.getConn().prepareStatement(tablesSql); ResultSet results = preparedStatement.executeQuery()) {
                 while (results.next()) {
                     String tableName = results.getString(dbConfig.getDbQuery().tableName());
-                    TableInfo tableInfo = this.getTables().get(tableName);
+                    TableInfoSet tableInfo = this.getTables().get(tableName);
                     if (tableInfo == null) {
                         continue;
                     }
@@ -122,7 +88,7 @@ public class TableConfig {
                     this.getTables().remove(table);
                 }
             }
-            for (Map.Entry<String, TableInfo> entry : this.getTables().entrySet()) {
+            for (Map.Entry<String, TableInfoSet> entry : this.getTables().entrySet()) {
                 entry.getValue().initTable();
             }
         } catch (SQLException e) {
@@ -130,7 +96,7 @@ public class TableConfig {
         }
     }
 
-    private String selectTableSql(TableConfig config) {
+    private String selectTableSql(TableConfigSet config) {
         DbConfig dbConfig = this.globalConfig.getDbConfig();
         DbType dbType = this.globalConfig.getDbType();
         String tablesSql = dbConfig.getDbQuery().tablesSql();

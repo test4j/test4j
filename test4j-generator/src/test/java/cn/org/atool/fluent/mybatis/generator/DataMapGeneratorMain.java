@@ -1,7 +1,7 @@
 package cn.org.atool.fluent.mybatis.generator;
 
 import org.test4j.generator.mybatis.DataMapGenerator;
-import org.test4j.generator.mybatis.db.ColumnType;
+import org.test4j.generator.mybatis.db.ColumnJavaType;
 
 /**
  * DataMapGeneratorTest
@@ -21,17 +21,17 @@ public class DataMapGeneratorMain {
                 .setBasePackage("cn.org.atool.fluent.mybatis.generator.demo")
             )
             .tables(config -> config
-                .setTablePrefix("t_")
-                .addTable("address")
-                .addTable("t_user", t -> t.setPartition(true))
-                .allTable(t -> t
+                .table("address")
+                .table("t_user", t -> t.enablePartition())
+                .foreach(t -> t
                     .setColumn("gmt_created", "gmt_modified", "is_deleted")
-                    .column("is_deleted", ColumnType.BOOLEAN))
+                    .setColumnType("is_deleted", ColumnJavaType.BOOLEAN)
+                    .setTablePrefix("t_"))
             )
             .tables(config -> config
-                .addTable("no_auto_id")
-                .addTable("no_primary")
-                .allTable(table -> table.setMapperPrefix("new"))
+                .table("no_auto_id")
+                .table("no_primary")
+                .foreach(table -> table.setMapperPrefix("new"))
             )
             .execute();
     }

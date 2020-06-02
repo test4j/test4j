@@ -6,12 +6,13 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.test4j.generator.mybatis.config.constant.OutputDir;
-import org.test4j.generator.mybatis.config.TableInfo;
+import org.test4j.generator.mybatis.config.impl.TableInfoSet;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.test4j.generator.mybatis.config.constant.ConfigKey.*;
+import static org.test4j.generator.mybatis.config.constant.ConfigKey.KEY_NAME;
+import static org.test4j.generator.mybatis.config.constant.ConfigKey.KEY_PACKAGE;
 
 /**
  * 根据表信息生成文件
@@ -54,35 +55,38 @@ public abstract class BaseTemplate {
      * @param table
      * @return
      */
-    public final Map<String, Object> initContext(TableInfo table) {
+    public final void initContext(TableInfoSet table, Map<String, Object> templateContext) {
         this.filePath = table.outputDir(this.outputDir) + this.fileNameReg.replace("*", table.getEntityPrefix());
-        Map<String, Object> context = new HashMap<>();
-        {
-            context.put(KEY_NAME, this.getFileName(table));
-            context.put(KEY_PACKAGE, this.getPackage(table));
-        }
-        this.templateConfigs(table, context);
-        return context;
+
+        templateContext.put(KEY_NAME, this.getFileName(table));
+        templateContext.put(KEY_PACKAGE, this.getPackage(table));
+
+        this.templateConfigs(table, templateContext);
     }
 
+    /**
+     * 模板code
+     *
+     * @return
+     */
     public abstract String getTemplateId();
 
     /**
      * 模板自身的配置项
      *
      * @param table
-     * @param context
+     * @param templateContext 模板自身构建的上下文
      * @return
      */
-    protected abstract void templateConfigs(TableInfo table, Map<String, Object> context);
+    protected abstract void templateConfigs(TableInfoSet table, Map<String, Object> templateContext);
 
-    protected String getFileName(TableInfo table) {
+    protected String getFileName(TableInfoSet table) {
         int start = this.fileNameReg.lastIndexOf('/');
         int end = this.fileNameReg.lastIndexOf('.');
         return this.fileNameReg.substring(start + 1, end).replace("*", table.getEntityPrefix());
     }
 
-    protected String getPackage(TableInfo table) {
+    protected String getPackage(TableInfoSet table) {
         int index = this.fileNameReg.lastIndexOf('/');
         String sub = "";
         if (index > 0) {
@@ -98,7 +102,7 @@ public abstract class BaseTemplate {
             if (temp instanceof Map) {
                 temp = ((Map) temp).get(item);
             } else {
-                throw new RuntimeException("illegal operate");
+                throw new RuntimeException("illegal operate:" + key);
             }
         }
         if (temp instanceof String) {
@@ -106,5 +110,30 @@ public abstract class BaseTemplate {
         } else {
             throw new RuntimeException("illegal operate");
         }
+    }
+
+    /**
+     * 替换变量 ${entity}, ${query}, ${update}
+     *
+     * @param str
+     * @param context
+     * @return
+     */
+    protected String replace(String str, Map<String, Object> context, String... vars) {
+        String replaced = str;
+        for (String var : vars) {
+            if (VAR_MAPPING.containsKey(var)) {
+                replaced = replaced.replace(var, this.getConfig(context, VAR_MAPPING.get(var)));
+            }
+        }
+        return replaced;
+    }
+
+    static final Map<String, String> VAR_MAPPING = new HashMap<>();
+
+    static {
+        VAR_MAPPING.put("${entity}", "entity.name");
+        VAR_MAPPING.put("${query}", "entityQuery.name");
+        VAR_MAPPING.put("${update}", "entityUpdate.name");
     }
 }

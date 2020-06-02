@@ -1,6 +1,4 @@
-package org.test4j.generator.mybatis;
-
-import org.test4j.generator.mybatis.config.TableConfig;
+package org.test4j.generator.mybatis.config;
 
 import java.util.function.Consumer;
 
@@ -16,7 +14,7 @@ public interface ITableConfig {
      * @param consumer
      * @return
      */
-    ITableConfig tables(Consumer<TableConfig> consumer);
+    ITableConfig tables(Consumer<ITableConfigSet> consumer);
 
 
     /**

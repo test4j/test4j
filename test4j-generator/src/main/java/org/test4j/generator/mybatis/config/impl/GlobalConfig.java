@@ -1,17 +1,15 @@
-package org.test4j.generator.mybatis.config;
+package org.test4j.generator.mybatis.config.impl;
 
 import lombok.AccessLevel;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.test4j.generator.mybatis.config.IGlobalConfigSet;
 import org.test4j.generator.mybatis.config.constant.Naming;
 import org.test4j.generator.mybatis.db.DbType;
 import org.test4j.generator.mybatis.db.ITypeConvert;
 import org.test4j.tools.commons.StringHelper;
-
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * 策略配置项
@@ -20,7 +18,7 @@ import java.util.List;
  */
 @Data
 @Accessors(chain = true)
-public class GlobalConfig {
+public class GlobalConfig implements IGlobalConfigSet {
     /**
      * 数据库表映射到实体的命名策略
      */
@@ -72,7 +70,8 @@ public class GlobalConfig {
         return columnNaming == null ? tableNaming : columnNaming;
     }
 
-    public GlobalConfig setBasePackage(String basePackage) {
+    @Override
+    public IGlobalConfigSet setBasePackage(String basePackage) {
         this.basePackage = basePackage;
         this.packageDir = '/' + basePackage.replace('.', '/') + '/';
         return this;
@@ -85,11 +84,13 @@ public class GlobalConfig {
         return basePackage;
     }
 
-    public GlobalConfig setOutputDir(String outputDir) {
+    @Override
+    public IGlobalConfigSet setOutputDir(String outputDir) {
         return this.setOutputDir(outputDir, outputDir, outputDir);
     }
 
-    public GlobalConfig setOutputDir(String outputDir, String testOutputDir, String daoOutputDir) {
+    @Override
+    public IGlobalConfigSet setOutputDir(String outputDir, String testOutputDir, String daoOutputDir) {
         this.outputDir = outputDir;
         this.testOutputDir = testOutputDir;
         this.daoOutputDir = daoOutputDir;
@@ -101,11 +102,13 @@ public class GlobalConfig {
      */
     private DbConfig dbConfig;
 
-    public GlobalConfig setDataSource(String url, String username, String password) {
+    @Override
+    public IGlobalConfigSet setDataSource(String url, String username, String password) {
         return this.setDataSource(url, username, password, null);
     }
 
-    public GlobalConfig setDataSource(String url, String username, String password, ITypeConvert typeConvert) {
+    @Override
+    public IGlobalConfigSet setDataSource(String url, String username, String password, ITypeConvert typeConvert) {
         this.dbConfig = new DbConfig(DbType.MYSQL, "com.mysql.jdbc.Driver", url, username, password)
             .setTypeConvert(typeConvert);
         return this;

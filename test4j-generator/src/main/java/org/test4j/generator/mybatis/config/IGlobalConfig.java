@@ -1,6 +1,4 @@
-package org.test4j.generator.mybatis;
-
-import org.test4j.generator.mybatis.config.GlobalConfig;
+package org.test4j.generator.mybatis.config;
 
 import java.util.function.Consumer;
 
@@ -16,5 +14,5 @@ public interface IGlobalConfig {
      * @param consumer
      * @return
      */
-    ITableConfig globalConfig(Consumer<GlobalConfig> consumer);
+    ITableConfig globalConfig(Consumer<IGlobalConfigSet> consumer);
 }
