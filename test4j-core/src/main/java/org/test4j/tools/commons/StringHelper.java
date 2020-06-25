@@ -8,10 +8,7 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
-import java.util.StringTokenizer;
+import java.util.*;
 
 import static java.util.stream.Collectors.joining;
 
@@ -88,18 +85,6 @@ public class StringHelper {
     }
 
     /**
-     * 把exception的trace信息写到string中
-     *
-     * @param e
-     * @return 返回异常信息的序列化字符串
-     */
-    public static String exceptionTrace(Throwable e) {
-        StringWriter w = new StringWriter();
-        e.printStackTrace(new PrintWriter(w));
-        return w.toString();
-    }
-
-    /**
      * 把exception的trace信息写到string中,同时过滤掉filters中指定的信息
      *
      * @param e
@@ -134,117 +119,6 @@ public class StringHelper {
     private static SimpleDateFormat simpleDateTimeFormate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 
     private static SimpleDateFormat simpleTimeFormate = new SimpleDateFormat("mm:ss");
-
-    public static String simpleDateStr(Timestamp time) {
-        return simpleTimeFormate.format(time);
-    }
-
-    public static String simpleDateTimeStr(long time) {
-        if (time > 0) {
-            return simpleDateTimeFormate.format(new Timestamp(time));
-        } else {
-            return "--:--";
-        }
-    }
-
-    public static String simpleTimeStr(long time) {
-        if (time > 0) {
-            return simpleTimeFormate.format(new Timestamp(time));
-        } else {
-            return "--";
-        }
-    }
-
-    public static int parseInt(String str, int _default) {
-        try {
-            return Integer.parseInt(str);
-        } catch (Throwable e) {
-            return _default;
-        }
-    }
-
-    /**
-     * 根据splitStr分割字符串string，并且过滤掉空串
-     *
-     * @param string
-     * @param splitStr
-     * @return
-     */
-    public static String[] splits(String string, String splitStr) {
-        if (StringHelper.isBlank(string)) {
-            return new String[0];
-        }
-        String temp = string.replaceAll("\\s", "");
-        String[] splits = temp.split(splitStr);
-        List<String> clazzes = new ArrayList<String>();
-        for (String split : splits) {
-            if (StringHelper.isBlank(split)) {
-                continue;
-            }
-            clazzes.add(split);
-        }
-        return clazzes.toArray(new String[0]);
-    }
-
-    /**
-     * 合并字符串数组
-     *
-     * @param seperator
-     * @param strings
-     * @return
-     */
-    public static String join(String seperator, String[] strings) {
-
-        if (strings == null || strings.length == 0) {
-            return "";
-        }
-        boolean first = true;
-        StringBuffer buff = new StringBuffer();
-        for (String str : strings) {
-            if (first == false) {
-                buff.append(seperator);
-            } else {
-                first = false;
-            }
-            buff.append(str);
-        }
-        return buff.toString();
-    }
-
-    public static String join(char seperator, char[] chars) {
-        if (chars.length == 0 || chars == null) {
-            return "";
-        }
-        boolean first = true;
-        StringBuffer buff = new StringBuffer();
-        for (char c : chars) {
-            if (first == false) {
-                buff.append(seperator);
-            } else {
-                first = false;
-            }
-            buff.append(c);
-        }
-        return buff.toString();
-    }
-
-    /**
-     * 把文本转义成正确格式的Html 比如:"<"转换成"&lt"等等
-     *
-     * @param html
-     * @return format后的文本
-     */
-    public static String formatHtml(String html) {
-        String result = html;
-
-        result = result.replaceAll("\"", "&quot;");
-        result = result.replaceAll("<", "&lt;");
-        result = result.replaceAll(">", "&gt;");
-        result = result.replaceAll(" ", "&nbsp;");
-        result = result.replaceAll("&", "&amp;");
-        result = result.replaceAll("\n", "<br/>");
-        return result;
-    }
 
     /**
      * 将原始字符串转义为ascII字符串<br>
@@ -378,33 +252,6 @@ public class StringHelper {
 
     /**
      * <p>
-     * Compares two Strings, returning <code>true</code> if they are equal.
-     * </p>
-     * <p>
-     * <code>null</code>s are handled without exceptions. Two <code>null</code>
-     * references are considered to be equal. The comparison is case sensitive.
-     * </p>
-     *
-     * <pre>
-     * StringHelper.equals(null, null)   = true
-     * StringHelper.equals(null, "abc")  = false
-     * StringHelper.equals("abc", null)  = false
-     * StringHelper.equals("abc", "abc") = true
-     * StringHelper.equals("abc", "ABC") = false
-     * </pre>
-     *
-     * @param str1 the first String, may be null
-     * @param str2 the second String, may be null
-     * @return <code>true</code> if the Strings are equal, case sensitive, or
-     * both <code>null</code>
-     * @see java.lang.String#equals(Object)
-     */
-    public static boolean equals(String str1, String str2) {
-        return str1 == null ? str2 == null : str1.equals(str2);
-    }
-
-    /**
-     * <p>
      * Gets the substring after the last occurrence of a separator. The
      * separator is not returned.
      * </p>
@@ -493,65 +340,6 @@ public class StringHelper {
         return ch > 255 ? false : Space_Chars[ch];
     }
 
-    public static List<String> removeTheWhiteSpaces(List<String> original) {
-        List<String> after = new ArrayList<String>();
-        for (String key : original) {
-            after.add(key.trim());
-        }
-        return after;
-    }
-
-    public static String deCamelCase(String wikiWord) {
-        return wikiWord.replaceAll("([A-Z])", " $0").trim();
-    }
-
-    public static boolean isWhiteSpaceCharacter(char c) {
-        return c == ' ' || c == '\t' || c == '\n' || c == '\r';
-        // return ((c != ' ') && (c != '\t') && (c != '\n') && (c != '\r'));
-    }
-
-    public static int indexOfWhiteSpace(String text) {
-        if (text.length() == 0) {
-            return -1;
-        }
-        for (int i = 0; i < text.length(); ++i) {
-            if (Character.isWhitespace(text.charAt(i))) {
-                return i;
-            }
-        }
-        return -1;
-    }
-
-    /**
-     * 去除开头的空白符，包括回车，换行符
-     *
-     * @param source
-     * @return
-     */
-    public static String ltrim(String source) {
-        return source.replaceAll("^\\s+", "");
-    }
-
-    /**
-     * 去除末尾的空白符，包括回车，换行符
-     *
-     * @param source
-     * @return
-     */
-    public static String rtrim(String source) {
-        return source.replaceAll("\\s+$", "");
-    }
-
-    /**
-     * 去除末尾的空白符，只包括空格和tab符
-     *
-     * @param source
-     * @return
-     */
-    public static String rTrimSpace(String source) {
-        return source.replaceAll("[ \t]+$", "");
-    }
-
     /**
      * 将exception转为string输出
      *
@@ -566,54 +354,6 @@ public class StringHelper {
         PrintStream stream = new PrintStream(outStream);
         e.printStackTrace(stream);
         return e.toString() + "\n" + outStream.toString();
-    }
-
-    /**
-     * 比较2个wiki字符串是否相同(忽略换行)
-     *
-     * @param left
-     * @param right
-     * @return
-     */
-    public static boolean compareWikiIgnoreSpace(final String left, final String right) {
-        String _left = left.replaceAll("[\n\r]", "");
-        String _right = right.replaceAll("[\n\r]", "");
-        return _left.equals(_right);
-    }
-
-    /**
-     * 将list中字符串以ch分割串在一起
-     *
-     * @param items
-     * @param ch
-     * @return
-     */
-    public static String merger(Iterable<?> items, char ch) {
-        StringBuffer merger = new StringBuffer();
-        boolean first = true;
-        for (Object item : items) {
-            if (first) {
-                first = false;
-            } else {
-                merger.append(ch);
-            }
-            merger.append(String.valueOf(item));
-        }
-        return merger.toString();
-    }
-
-    public static String merger(String[] strs, char ch) {
-        StringBuffer merger = new StringBuffer();
-        boolean first = true;
-        for (String str : strs) {
-            if (first) {
-                first = false;
-            } else {
-                merger.append(ch);
-            }
-            merger.append(str);
-        }
-        return merger.toString();
     }
 
     /**

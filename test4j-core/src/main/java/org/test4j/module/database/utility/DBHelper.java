@@ -21,22 +21,6 @@ import static org.test4j.tools.commons.StringHelper.join;
 public final class DBHelper {
 
     /**
-     * 关闭数据库statement句柄
-     */
-    public static void close(AutoCloseable closeable) {
-        if (closeable == null) {
-            return;
-        }
-        try {
-            closeable.close();
-            closeable = null;
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-    }
-
-
-    /**
      * 将ResultSet的当前行转换为Map数据返回
      *
      * @param rs 数据库结果ResultSet
@@ -176,16 +160,6 @@ public final class DBHelper {
         } else {
             return columnName;
         }
-    }
-
-    /**
-     * 填充数据
-     *
-     * @param map
-     * @param table
-     */
-    public static void fillData(Map<String, Object> map, String table) {
-
     }
 
     /**

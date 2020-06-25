@@ -7,30 +7,6 @@ import org.test4j.junit5.Test4J;
 
 public class StringHelperTest extends Test4J {
 
-    @Test
-    public void testJoin_Null() {
-        String str = StringHelper.join(",", null);
-        want.string(str).isEqualTo("");
-    }
-
-    @Test
-    public void testJoin_Empty() {
-        String str = StringHelper.join(",", new String[]{});
-        want.string(str).isEqualTo("");
-    }
-
-    @Test
-    public void testJoin_OneItem() {
-        String str = StringHelper.join(",", new String[]{"one"});
-        want.string(str).isEqualTo("one");
-    }
-
-    @Test
-    public void testJoin_MultiItem() {
-        String str = StringHelper.join(",", new String[]{"one", null});
-        want.string(str).isEqualTo("one,null");
-    }
-
     @ParameterizedTest
     @MethodSource("testCamel_Data")
     public void testCamel(String name, String camel) {
