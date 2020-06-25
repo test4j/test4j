@@ -62,15 +62,6 @@ public class AnnotationHelper {
 		return getMethodsAnnotatedWith(clazz, annotation, true);
 	}
 
-	public static <T extends Annotation> Set<T> getMethodLevelAnnotations(Class clazz, Class<T> annotation) {
-		Set<T> result = new HashSet<T>();
-		Set<Method> annotatedMethods = getMethodsAnnotatedWith(clazz, annotation);
-		for (Method annotatedMethod : annotatedMethods) {
-			result.add(annotatedMethod.getAnnotation(annotation));
-		}
-		return result;
-	}
-
 	/**
 	 * Returns the given class's declared methods that are marked with the given
 	 * annotation

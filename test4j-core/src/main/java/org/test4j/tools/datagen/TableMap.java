@@ -51,21 +51,6 @@ public class TableMap extends LinkedHashMap<String, TableData> {
     }
 
     /**
-     * 从文件读取
-     *
-     * @param fileName
-     * @return
-     */
-    public static TableMap fromFile(String fileName) {
-        try {
-            String text = ResourceHelper.readFromFile(fileName);
-            return fromText(text);
-        } catch (Throwable e) {
-            throw new RuntimeException("read json text error:" + e.getMessage(), e);
-        }
-    }
-
-    /**
      * 初始化数据
      *
      * @param init   初始化数据
