@@ -70,46 +70,6 @@ public class Reflector {
         return result;
     }
 
-    /**
-     * Returns all declared fields of the given class that are assignable from
-     * the given type.
-     *
-     * @param clazz The class to get fields from, not null
-     * @param type  The type, not null
-     * @return A list of Fields, empty list if none found
-     */
-    public static Set<Field> getFieldsAssignableFrom(Class clazz, Type type) {
-        Set<Field> fieldsOfType = new HashSet<Field>();
-        List<Field> allFields = getAllFields(clazz);
-        for (Field field : allFields) {
-            boolean isAssignFrom = ClazzHelper.isAssignable(type, field.getGenericType());
-            if (isAssignFrom) {
-                fieldsOfType.add(field);
-            }
-        }
-        return fieldsOfType;
-    }
-
-    /**
-     * Returns the fields in the given class that have the exact given type. The
-     * class's superclasses are also investigated.
-     *
-     * @param clazz The class to get the field from, not null
-     * @param type  The type, not null
-     * @return The fields with the given type
-     */
-    public static Set<Field> getFieldsOfType(Class clazz, Type type) {
-        Set<Field> fields = new HashSet<Field>();
-        List<Field> allFields = getAllFields(clazz);
-        for (Field field : allFields) {
-            boolean isTypeEquals = field.getType().equals(type);
-            if (isTypeEquals) {
-                fields.add(field);
-            }
-        }
-        return fields;
-    }
-
     public static void setFieldValue(Object target, String fieldName, Object fieldValue) {
         FieldAccessor.field(target, fieldName).set(target, fieldValue);
     }
@@ -128,25 +88,6 @@ public class Reflector {
 
     public static <T> T getFieldValue(Object target, Field field) {
         return FieldAccessor.field(field).get(target);
-    }
-
-
-    /**
-     * 创建target对象field字段的代理实例<br>
-     * 用于运行时转移代理操作到字段对象上
-     *
-     * @param <T>
-     * @param klass
-     * @param fieldName
-     * @return
-     */
-    public <T> T newProxy(Class klass, String fieldName) {
-        if (klass == null) {
-            throw new RuntimeException("can't get a field from null object.");
-        }
-        Field field = Reflector.getField(klass, fieldName);
-        Object proxy = Test4JProxy.proxy(klass, field);
-        return (T) proxy;
     }
 
     /**

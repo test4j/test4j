@@ -9,6 +9,11 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.util.Properties;
 
+/**
+ * PropertiesReader
+ *
+ * @author wudarui
+ */
 public class PropertiesReader {
 
     /**
@@ -37,7 +42,7 @@ public class PropertiesReader {
             return null;
         } catch (Throwable e) {
             throw new Test4JException("Unable to load configuration file: " + propertiesFileName + " from user home",
-                    e);
+                e);
         }
     }
 

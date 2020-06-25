@@ -5,6 +5,11 @@ import org.test4j.tools.reflector.PropertyAccessor;
 
 import java.util.*;
 
+/**
+ * ListHelper
+ *
+ * @author wudarui
+ */
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class ListHelper {
     /**

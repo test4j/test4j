@@ -39,13 +39,4 @@ public class ExceptionWrapper {
             return new RuntimeException(e);
         }
     }
-
-    public static String toString(Throwable e) {
-        if (e == null) {
-            return null;
-        }
-        StringWriter writer = new StringWriter();
-        e.printStackTrace(new PrintWriter(writer));
-        return writer.toString();
-    }
 }

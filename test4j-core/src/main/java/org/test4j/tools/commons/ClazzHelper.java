@@ -404,16 +404,4 @@ public class ClazzHelper {
             return target;
         }
     }
-
-    /**
-     * 是否是抽象类且非primitive类型
-     *
-     * @param clazz
-     * @return
-     */
-    public static boolean isAbstract(Class clazz) {
-        boolean isAbstract = Modifier.isAbstract(clazz.getModifiers());
-        boolean isPrimitive = PrimitiveHelper.isPrimitiveType(clazz);
-        return isAbstract && !isPrimitive;
-    }
 }

@@ -71,15 +71,6 @@ public class AnnotationHelper {
 		return result;
 	}
 
-	public static <T extends Annotation> Set<T> getFieldLevelAnnotations(Class clazz, Class<T> annotation) {
-		Set<T> result = new HashSet<T>();
-		Set<Field> annotatedFields = getFieldsAnnotatedWith(clazz, annotation);
-		for (Field annotatedField : annotatedFields) {
-			result.add(annotatedField.getAnnotation(annotation));
-		}
-		return result;
-	}
-
 	/**
 	 * Returns the given class's declared methods that are marked with the given
 	 * annotation
@@ -112,15 +103,6 @@ public class AnnotationHelper {
 		return annotatedMethods;
 	}
 
-	public static <T extends Annotation> T getMethodOrClassLevelAnnotation(Class<T> annotationClass, Method method,
-			Class clazz) {
-		T annotation = method.getAnnotation(annotationClass);
-		if (annotation != null) {
-			return annotation;
-		}
-		return getClassLevelAnnotation(annotationClass, clazz);
-	}
-
 	public static <T extends Annotation> T getClassLevelAnnotation(Class<T> annotationClass, Class clazz) {
 		if (Object.class.equals(clazz)) {
 			return null;
@@ -131,17 +113,6 @@ public class AnnotationHelper {
 			return annotation;
 		}
 		return getClassLevelAnnotation(annotationClass, clazz.getSuperclass());
-	}
-
-	public static <T extends Annotation> Class getClassWithAnnotation(Class<T> annotationClass, Class clazz) {
-		if (Object.class.equals(clazz)) {
-			return null;
-		}
-		T annotation = (T) clazz.getAnnotation(annotationClass);
-		if (annotation != null) {
-			return clazz;
-		}
-		return getClassWithAnnotation(annotationClass, clazz.getSuperclass());
 	}
 
 	/**
@@ -230,11 +201,4 @@ public class AnnotationHelper {
 					+ " of annotation of type " + annotation.getClass().getSimpleName(), e);
 		}
 	}
-
-	public static boolean hasClassMethodOrFieldLevelAnnotation(Class clazz, Class<? extends Annotation> annotation) {
-		return getClassLevelAnnotation(annotation, clazz) != null
-				|| !getFieldsAnnotatedWith(clazz, annotation).isEmpty()
-				|| !getMethodsAnnotatedWith(clazz, annotation).isEmpty();
-	}
-
 }

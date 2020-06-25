@@ -12,10 +12,14 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Properties;
 
 import static ext.test4j.apache.commons.io.IOUtils.closeQuietly;
 
+/**
+ * ResourceHelper
+ *
+ * @author wudarui
+ */
 @SuppressWarnings("rawtypes")
 public class ResourceHelper {
 
@@ -142,58 +146,6 @@ public class ResourceHelper {
     }
 
     /**
-     * 将classpath下的文件拷贝到fileSystemDirectoryName目录下
-     *
-     * @param classPathResourceName   classpath下的资源文件
-     * @param fileSystemDirectoryName 拷贝目标的系统文件目录名
-     */
-    public static void copyClassPathResourceToDir(String classPathResourceName, String fileSystemDirectoryName) {
-        String fileName = StringHelper.substringAfterLast(classPathResourceName, "/");
-        String fileSystemResourceName = fileSystemDirectoryName + "/" + fileName;
-        copyClassPathResource(classPathResourceName, fileSystemResourceName);
-    }
-
-    /**
-     * Creates an URL that points to the given file.
-     *
-     * @param file The file, not null
-     * @return The URL to the file, not null
-     */
-    public static URL getUrl(File file) {
-        try {
-            return file.toURI().toURL();
-        } catch (MalformedURLException e) {
-            throw new Test4JException("Unable to create URL for file " + file.getName(), e);
-        }
-    }
-
-    /**
-     * 查找文件
-     *
-     * @param claz
-     * @param url
-     * @return
-     * @throws Exception
-     */
-    public static File findFile(final Class claz, final String url) throws Exception {
-        if (url.startsWith("file:")) {
-            return new File(url.replace("file:", ""));
-        } else {
-            URL file = ClassLoader.getSystemResource(url);
-            String newUrl = url;
-            if (file == null && claz != null) {
-                newUrl = ClazzHelper.getPathFromPath(claz) + File.separatorChar + url;
-                file = ClassLoader.getSystemResource(newUrl);
-            }
-            if (file == null) {
-                throw new RuntimeException(String.format("can't find resource in classpath:%s", newUrl));
-            } else {
-                return new File(file.toURI());
-            }
-        }
-    }
-
-    /**
      * 文件缺省的编码格式
      *
      * @return
@@ -244,7 +196,8 @@ public class ResourceHelper {
         detector.add(JChardetFacade.getInstance());
 
         try {
-            Charset charset = Charset.forName(ResourceHelper.defaultFileEncoding());
+            Charset.forName(ResourceHelper.defaultFileEncoding());
+            Charset charset;
             try {
                 charset = detector.detectCodepage(is, 2147483647);
             } catch (IllegalArgumentException e) {
@@ -460,27 +413,6 @@ public class ResourceHelper {
     }
 
     /**
-     * 从文件中价值配置项<br>
-     * <br>
-     * o file:开头读取文件系统 <br>
-     * o classpath:开头读取classpath下的文件<br>
-     * o 否则读取 classpath下文件
-     *
-     * @param file
-     * @return
-     * @throws FileNotFoundException
-     */
-    public static Properties loadPropertiesFrom(ClassLoader klassLoader, final String file) {
-        try (InputStream in = ResourceHelper.getResourceAsStream(klassLoader, file)) {
-            Properties props = new Properties();
-            props.load(in);
-            return props;
-        } catch (IOException e) {
-            throw new RuntimeException(String.format("load properties from file[%s] error.", file), e);
-        }
-    }
-
-    /**
      * 判断在claz对应的package下面是否存在名称为file的文件
      *
      * @param claz
@@ -495,29 +427,6 @@ public class ResourceHelper {
             return url != null;
         } catch (Throwable e) {
             return false;
-        }
-    }
-
-    /**
-     * 过滤file文件中的注释代码
-     *
-     * @param is
-     * @return
-     */
-    public static String convertStreamToSQL(InputStream is) {
-        String line = null;
-        try (BufferedReader reader = new BufferedReader(new InputStreamReader(is))) {
-            StringBuilder buffer = new StringBuilder();
-            while ((line = reader.readLine()) != null) {
-                if (!line.startsWith("#") && !line.startsWith("--")) {
-                    buffer.append(line + " ");
-                }
-            }
-            return buffer.toString();
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        } finally {
-            closeQuietly(is);
         }
     }
 
@@ -591,39 +500,10 @@ public class ResourceHelper {
      *
      * @param file
      */
-    public static void mkFileParentDir(String file) {
-        String _file = file.replaceAll("[\\/\\\\]+", "/");
-        File path = new File(_file).getParentFile();
-        if (path.exists() == false) {
-            path.mkdirs();
-        }
-    }
-
-    /**
-     * 创建文件file所在的父目录
-     *
-     * @param file
-     */
     public static void mkFileParentDir(File file) {
         File path = file.getParentFile();
         if (path.exists() == false) {
             path.mkdirs();
-        }
-    }
-
-    /**
-     * 是否是jar文件
-     *
-     * @param classRoot
-     * @return
-     */
-    public static boolean isJarFile(File classRoot) {
-        String fileName = classRoot.getName();
-        if (fileName.length() < 4) {
-            return false;
-        } else {
-            String surfix = fileName.substring(fileName.length() - 4);
-            return surfix.equalsIgnoreCase(".jar");
         }
     }
 }
