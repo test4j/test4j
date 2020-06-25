@@ -122,7 +122,7 @@ public abstract class BaseDiff<T> {
         } else if (value.getClass().isPrimitive()) {
             return String.valueOf(value);
         } else if (asString) {
-            return StringHelper.toString(value);
+            return StringHelper.toJsonString(value);
         } else {
             return value;
         }
@@ -134,7 +134,7 @@ public abstract class BaseDiff<T> {
         } else if (value.getClass().isPrimitive() || value instanceof String) {
             return "(" + value.getClass().getSimpleName() + ") " + value;
         } else {
-            return "(" + value.getClass().getSimpleName() + ") " + StringHelper.toString(value);
+            return "(" + value.getClass().getSimpleName() + ") " + StringHelper.toJsonString(value);
         }
     }
 }

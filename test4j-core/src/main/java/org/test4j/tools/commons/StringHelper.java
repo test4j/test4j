@@ -85,42 +85,6 @@ public class StringHelper {
     }
 
     /**
-     * 把exception的trace信息写到string中,同时过滤掉filters中指定的信息
-     *
-     * @param e
-     * @param filters
-     * @return 返回异常信息的序列化字符串
-     */
-    public static String exceptionTrace(Throwable e, List<String> filters) {
-        StringWriter w = new StringWriter();
-        e.printStackTrace(new PrintWriter(w));
-        String tracer = w.toString();
-        for (String regex : filters) {
-            tracer = tracer.replaceAll(regex, "");
-        }
-        return tracer;
-    }
-
-    /**
-     * 默认的Exception信息过滤规则
-     */
-    public final static List<String> DEFAULT_EXCEPTION_FILTER = new ArrayList<String>() {
-        private static final long serialVersionUID = -5015223773312948340L;
-
-        {
-            add("\\s*at\\s*org\\.test4j\\.fit\\.FitRunner\\.[^\\s]+");
-            add("\\s*at\\s*org\\.testng\\.[^\\s]+");
-            add("\\s*at\\s*sun\\.reflect\\.[^\\s]+");
-            add("\\s*at\\s*java\\.lang\\.reflect\\.[^\\s]+");
-            add("\\s*at\\s*fitlibrary\\.[^\\s]+");
-        }
-    };
-
-    private static SimpleDateFormat simpleDateTimeFormate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-
-    private static SimpleDateFormat simpleTimeFormate = new SimpleDateFormat("mm:ss");
-
-    /**
      * 将原始字符串转义为ascII字符串<br>
      * 例如，原始字符串为：我是中文 <br>
      * 转义后就是:\u6211\u662f\u4e2d\u6587
@@ -347,13 +311,29 @@ public class StringHelper {
      * @return
      */
     public static String toString(Throwable e) {
+        return toString(e, null);
+    }
+
+    /**
+     * 把exception的trace信息写到string中,同时过滤掉filters中指定的信息
+     *
+     * @param e
+     * @param filters
+     * @return 返回异常信息的序列化字符串
+     */
+    public static String toString(Throwable e, List<String> filters) {
         if (e == null) {
             return "<error is null>";
         }
-        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
-        PrintStream stream = new PrintStream(outStream);
-        e.printStackTrace(stream);
-        return e.toString() + "\n" + outStream.toString();
+        StringWriter w = new StringWriter();
+        e.printStackTrace(new PrintWriter(w));
+        String tracer = w.toString();
+        if (filters != null) {
+            for (String regex : filters) {
+                tracer = tracer.replaceAll(regex, "");
+            }
+        }
+        return tracer;
     }
 
     /**
@@ -392,7 +372,7 @@ public class StringHelper {
      * @param value
      * @return
      */
-    public static String toString(Object value) {
+    public static String toJsonString(Object value) {
         if (value == null) {
             return null;
         }

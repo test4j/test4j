@@ -125,7 +125,7 @@ public class ScenarioResult implements Serializable {
             buff.append(stepResult.toString()).append("\n");
         });
         if (exception != null) {
-            buff.append(StringHelper.exceptionTrace(this.exception, Filter_List));
+            buff.append(StringHelper.toString(this.exception, Filter_List));
         }
         return buff.toString();
     }

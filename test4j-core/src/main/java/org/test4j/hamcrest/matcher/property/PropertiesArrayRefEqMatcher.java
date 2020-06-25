@@ -38,9 +38,9 @@ public class PropertiesArrayRefEqMatcher extends BaseMatcher<Object> {
 
     @Override
     public void describeTo(Description description) {
-        description.appendText("the propery[" + StringHelper.toString(this.properties) + "] of object must match");
+        description.appendText("the propery[" + StringHelper.toJsonString(this.properties) + "] of object must match");
 
         description.appendText(String.format(",but actual value is:%s, not matched value[%s]", StringHelper
-                .toString(this.propertyValues), StringHelper.toString(this.expected)));
+                .toJsonString(this.propertyValues), StringHelper.toJsonString(this.expected)));
     }
 }

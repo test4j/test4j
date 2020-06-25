@@ -250,17 +250,17 @@ public class DBOperator implements IDBOperator {
         for (Map<String, Object> data : list) {
             Map<String, Object> map = new LinkedHashMap<>(data.size());
             if (data.containsKey(COLUMN_ID) && !_excludes.contains(COLUMN_ID)) {
-                map.put(COLUMN_ID, StringHelper.toString(data.get(COLUMN_ID)));
+                map.put(COLUMN_ID, StringHelper.toJsonString(data.get(COLUMN_ID)));
             }
             for (String column : _columns) {
                 if (data.containsKey(column) && !map.containsKey(column)) {
-                    map.put(column, StringHelper.toString(data.get(column)));
+                    map.put(column, StringHelper.toJsonString(data.get(column)));
                 }
             }
             for (Map.Entry<String, Object> entry : data.entrySet()) {
                 String key = entry.getKey();
                 if (!map.containsKey(key) && !_excludes.contains(key)) {
-                    map.put(key, StringHelper.toString(entry.getValue()));
+                    map.put(key, StringHelper.toJsonString(entry.getValue()));
                 }
             }
             records.add(map);
