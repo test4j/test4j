@@ -20,7 +20,7 @@ public class MysqlScript extends EntityScriptParser {
             .append(String.format("drop table IF exists `%s`;\n", table))
             .append(String.format("CREATE TABLE `%s` (\n\t", table))
             .append(this.parseColumn(columns));
-        return buff.append(");\n").toString();
+        return buff.append(") CHARACTER SET = utf8;\n").toString();
     }
 
     @Override

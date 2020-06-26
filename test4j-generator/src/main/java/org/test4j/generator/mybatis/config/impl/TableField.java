@@ -32,24 +32,24 @@ public class TableField implements Comparable<TableField> {
      */
     private final String columnName;
     /**
-     * 数据库字段类型
-     */
-    @Setter
-    private String columnType;
-    /**
      * java字段名称
      */
     @Setter
     private String name;
     /**
+     * 字段名称（首字母大写）
+     */
+    private String capitalName;
+    /**
+     * 数据库字段类型
+     */
+    @Setter
+    private String columnType;
+    /**
      * 字段java类型
      */
     @Setter
     private ColumnJavaType javaType;
-    /**
-     * 字段名称（首字母大写）
-     */
-    private String capitalName;
     /**
      * 字段注释
      */
@@ -99,19 +99,21 @@ public class TableField implements Comparable<TableField> {
             }
         }
 
-        // Boolean类型is前缀处理
-        if (globalConfig.needRemoveIsPrefix(name, this.getType())) {
-            this.capitalName = this.name.substring(2, 1).toLowerCase() + this.name.substring(3);
-        } else if (name.length() <= 1) {
-            this.capitalName = name.toUpperCase();
+        String capitalName = this.removeIsIfNeed(this.name, globalConfig);
+        this.capitalName = capitalName.substring(0, 1).toUpperCase() + capitalName.substring(1);
+    }
+
+    /**
+     * Boolean类型is前缀处理
+     * @param input
+     * @param globalConfig
+     * @return
+     */
+    private String removeIsIfNeed(String input, GlobalConfig globalConfig) {
+        if (globalConfig.needRemoveIsPrefix(input, this.getType())) {
+            return input.substring(2);
         } else {
-            // 第一个字母小写， 第二个字母大写，特殊处理
-            String firstChar = name.substring(0, 1);
-            if (Character.isLowerCase(firstChar.toCharArray()[0]) && Character.isUpperCase(name.substring(1, 2).toCharArray()[0])) {
-                this.capitalName = firstChar.toLowerCase() + name.substring(1);
-            } else {
-                this.capitalName = firstChar.toUpperCase() + name.substring(1);
-            }
+            return input;
         }
     }
 
