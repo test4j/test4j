@@ -158,7 +158,7 @@ public class TableInfoSet implements ITableInfoSet {
 
     @Override
     public ITableInfoSet setGmtCreate(String gmtCreate) {
-        if (StringHelper.isBlank(this.gmtCreate)) {
+        if (StringHelper.isBlank(this.gmtCreate) && !StringHelper.isBlank(gmtCreate)) {
             this.gmtCreate = gmtCreate;
         }
         return this;
@@ -166,7 +166,7 @@ public class TableInfoSet implements ITableInfoSet {
 
     @Override
     public ITableInfoSet setGmtModified(String gmtModified) {
-        if (StringHelper.isBlank(this.gmtModified)) {
+        if (StringHelper.isBlank(this.gmtModified) && !StringHelper.isBlank(gmtModified)) {
             this.gmtModified = gmtModified;
         }
         return this;
@@ -174,10 +174,12 @@ public class TableInfoSet implements ITableInfoSet {
 
     @Override
     public ITableInfoSet setLogicDeleted(String logicDeleted) {
-        if (StringHelper.isBlank(this.logicDeleted)) {
+        if (StringHelper.isBlank(this.logicDeleted) && !StringHelper.isBlank(logicDeleted)) {
             this.logicDeleted = logicDeleted;
         }
-        this.setColumnType(logicDeleted, ColumnJavaType.BOOLEAN);
+        if (!StringHelper.isBlank(logicDeleted)) {
+            this.setColumnType(logicDeleted, ColumnJavaType.BOOLEAN);
+        }
         return this;
     }
 
@@ -193,7 +195,9 @@ public class TableInfoSet implements ITableInfoSet {
 
     @Override
     public ITableInfoSet setColumnType(String columnName, String propertyName, ColumnJavaType javaType) {
-        this.columns.put(columnName, new DefinedColumn(columnName, propertyName, javaType));
+        if (!StringHelper.isBlank(columnName)) {
+            this.columns.put(columnName, new DefinedColumn(columnName, propertyName, javaType));
+        }
         return this;
     }
 
