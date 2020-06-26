@@ -1,5 +1,7 @@
 package org.test4j.generator.mybatis.config;
 
+import org.test4j.generator.mybatis.config.impl.DbConfig;
+import org.test4j.generator.mybatis.db.DbType;
 import org.test4j.generator.mybatis.db.ITypeConvert;
 
 /**
@@ -28,6 +30,7 @@ public interface IGlobalConfigSet {
 
     /**
      * 设置生成fluent mybatis文件的数据库链接信息
+     * 默认使用mysql数据库, driver="com.mysql.jdbc.Driver"
      *
      * @param url      数据库链接url
      * @param username 用户名
@@ -39,13 +42,27 @@ public interface IGlobalConfigSet {
     /**
      * 设置生成fluent mybatis文件的数据库链接信息
      *
+     * @param dbType   数据库类型
+     * @param driver   数据库驱动类
+     * @param url      数据库链接url
+     * @param username 用户名
+     * @param password 密码
+     * @return
+     */
+    IGlobalConfigSet setDataSource(DbType dbType, String driver, String url, String username, String password);
+
+    /**
+     * 设置生成fluent mybatis文件的数据库链接信息
+     *
+     * @param dbType      数据库类型
+     * @param driver      数据库驱动类
      * @param url         数据库链接url
      * @param username    用户名
      * @param password    密码
      * @param typeConvert 指定的类型转换
      * @return
      */
-    IGlobalConfigSet setDataSource(String url, String username, String password, ITypeConvert typeConvert);
+    IGlobalConfigSet setDataSource(DbType dbType, String driver, String url, String username, String password, ITypeConvert typeConvert);
 
     /**
      * 生成的fluent mybatis的基础包路径

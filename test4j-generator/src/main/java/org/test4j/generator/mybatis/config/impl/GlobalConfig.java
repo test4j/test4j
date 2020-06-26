@@ -104,12 +104,17 @@ public class GlobalConfig implements IGlobalConfigSet {
 
     @Override
     public IGlobalConfigSet setDataSource(String url, String username, String password) {
-        return this.setDataSource(url, username, password, null);
+        return this.setDataSource(DbType.MYSQL, "com.mysql.jdbc.Driver", url, username, password, null);
     }
 
     @Override
-    public IGlobalConfigSet setDataSource(String url, String username, String password, ITypeConvert typeConvert) {
-        this.dbConfig = new DbConfig(DbType.MYSQL, "com.mysql.jdbc.Driver", url, username, password)
+    public IGlobalConfigSet setDataSource(DbType dbType, String driver, String url, String username, String password) {
+        return this.setDataSource(dbType, driver, url, username, password, null);
+    }
+
+    @Override
+    public IGlobalConfigSet setDataSource(DbType dbType, String driver, String url, String username, String password, ITypeConvert typeConvert) {
+        this.dbConfig = new DbConfig(dbType, driver, url, username, password)
             .setTypeConvert(typeConvert);
         return this;
     }
