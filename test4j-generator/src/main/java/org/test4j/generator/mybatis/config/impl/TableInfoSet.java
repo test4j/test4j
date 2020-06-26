@@ -177,6 +177,7 @@ public class TableInfoSet implements ITableInfoSet {
         if (StringHelper.isBlank(this.logicDeleted)) {
             this.logicDeleted = logicDeleted;
         }
+        this.setColumnType(logicDeleted, ColumnJavaType.BOOLEAN);
         return this;
     }
 
