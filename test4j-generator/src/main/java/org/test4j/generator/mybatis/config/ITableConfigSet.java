@@ -23,7 +23,7 @@ public interface ITableConfigSet {
      * @param consumer
      * @return
      */
-    ITableConfigSet table(String tableName, Consumer<ITableInfoSet> consumer);
+    ITableConfigSet table(String tableName, Consumer<ITableSetter> consumer);
 
     /**
      * 对所有表统一处理
@@ -31,5 +31,5 @@ public interface ITableConfigSet {
      * @param consumer
      * @return
      */
-    void foreach(Consumer<ITableInfoSet> consumer);
+    void foreach(Consumer<ITableSetter> consumer);
 }

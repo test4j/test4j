@@ -13,7 +13,7 @@ import org.test4j.generator.mybatis.config.ITableConfig;
 import org.test4j.generator.mybatis.config.ITableConfigSet;
 import org.test4j.generator.mybatis.config.impl.GlobalConfig;
 import org.test4j.generator.mybatis.config.impl.TableConfigSet;
-import org.test4j.generator.mybatis.config.impl.TableInfoSet;
+import org.test4j.generator.mybatis.config.impl.TableSetter;
 import org.test4j.generator.mybatis.template.BaseTemplate;
 import org.test4j.hamcrest.Assert;
 import org.test4j.tools.commons.StringHelper;
@@ -89,9 +89,9 @@ public abstract class BaseTemplateGenerator implements IGlobalConfig, ITableConf
             info("===数据库元信息初始化...");
             config.initTables();
             info("===准备生成文件...");
-            for (Map.Entry<String, TableInfoSet> entry : config.getTables().entrySet()) {
+            for (Map.Entry<String, TableSetter> entry : config.getTables().entrySet()) {
                 info("======处理表：" + entry.getKey());
-                TableInfoSet table = entry.getValue();
+                TableSetter table = entry.getValue();
                 Map<String, Object> context = this.getAllTemplateContext(table);
                 this.generateTemplates(table, context);
                 allContext.add(context);
@@ -116,7 +116,7 @@ public abstract class BaseTemplateGenerator implements IGlobalConfig, ITableConf
      * @param table
      * @param context
      */
-    private void generateTemplates(TableInfoSet table, Map<String, Object> context) {
+    private void generateTemplates(TableSetter table, Map<String, Object> context) {
         this.getAllTemplates().stream()
             .filter(template -> !template.isPartition() || table.isPartition())
             .forEach(template -> {
@@ -133,7 +133,7 @@ public abstract class BaseTemplateGenerator implements IGlobalConfig, ITableConf
      * @param table
      * @return
      */
-    private Map<String, Object> getAllTemplateContext(TableInfoSet table) {
+    private Map<String, Object> getAllTemplateContext(TableSetter table) {
         final Map<String, Object> context = table.initTemplateContext();
         this.getAllTemplates().forEach(template -> {
                 Map<String, Object> templateContext = new HashMap<>();

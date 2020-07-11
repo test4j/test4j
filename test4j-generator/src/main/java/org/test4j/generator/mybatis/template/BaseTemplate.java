@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.test4j.generator.mybatis.config.constant.OutputDir;
-import org.test4j.generator.mybatis.config.impl.TableInfoSet;
+import org.test4j.generator.mybatis.config.impl.TableSetter;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -55,7 +55,7 @@ public abstract class BaseTemplate {
      * @param table
      * @return
      */
-    public final void initContext(TableInfoSet table, Map<String, Object> templateContext) {
+    public final void initContext(TableSetter table, Map<String, Object> templateContext) {
         this.filePath = table.outputDir(this.outputDir) + this.fileNameReg.replace("*", table.getEntityPrefix());
 
         templateContext.put(KEY_NAME, this.getFileName(table));
@@ -78,15 +78,15 @@ public abstract class BaseTemplate {
      * @param templateContext 模板自身构建的上下文
      * @return
      */
-    protected abstract void templateConfigs(TableInfoSet table, Map<String, Object> templateContext);
+    protected abstract void templateConfigs(TableSetter table, Map<String, Object> templateContext);
 
-    protected String getFileName(TableInfoSet table) {
+    protected String getFileName(TableSetter table) {
         int start = this.fileNameReg.lastIndexOf('/');
         int end = this.fileNameReg.lastIndexOf('.');
         return this.fileNameReg.substring(start + 1, end).replace("*", table.getEntityPrefix());
     }
 
-    protected String getPackage(TableInfoSet table) {
+    protected String getPackage(TableSetter table) {
         int index = this.fileNameReg.lastIndexOf('/');
         String sub = "";
         if (index > 0) {

@@ -4,7 +4,7 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
-import org.test4j.generator.mybatis.config.ITableInfoSet;
+import org.test4j.generator.mybatis.config.ITableSetter;
 import org.test4j.generator.mybatis.config.constant.DefinedColumn;
 import org.test4j.generator.mybatis.config.constant.Naming;
 import org.test4j.generator.mybatis.config.constant.OutputDir;
@@ -16,6 +16,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.*;
+import java.util.function.Consumer;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
@@ -28,7 +29,7 @@ import static org.test4j.generator.mybatis.config.constant.ConfigKey.*;
  */
 @Getter
 @Accessors(chain = true)
-public class TableInfoSet implements ITableInfoSet {
+public class TableSetter implements ITableSetter {
     /***********************************************/
     /****************以下是配置信息******************/
     /***********************************************/
@@ -59,7 +60,7 @@ public class TableInfoSet implements ITableInfoSet {
     private boolean isPartition = false;
 
     @Override
-    public ITableInfoSet enablePartition() {
+    public ITableSetter enablePartition() {
         this.isPartition = true;
         return this;
     }
@@ -111,11 +112,11 @@ public class TableInfoSet implements ITableInfoSet {
      */
     private Map<IFieldCategory, String> fileTypeName = new HashMap<>();
 
-    public TableInfoSet(String tableName, GlobalConfig globalConfig, TableConfigSet tableConfig) {
+    public TableSetter(String tableName, GlobalConfig globalConfig, TableConfigSet tableConfig) {
         this(tableName, null, globalConfig, tableConfig);
     }
 
-    public TableInfoSet(String tableName, String entityPrefix, GlobalConfig globalConfig, TableConfigSet tableConfig) {
+    public TableSetter(String tableName, String entityPrefix, GlobalConfig globalConfig, TableConfigSet tableConfig) {
         this.tableName = tableName;
         this.entityPrefix = entityPrefix;
         this.globalConfig = globalConfig;
@@ -124,7 +125,7 @@ public class TableInfoSet implements ITableInfoSet {
 
 
     @Override
-    public ITableInfoSet setTablePrefix(String... tablePrefix) {
+    public ITableSetter setTablePrefix(String... tablePrefix) {
         if (!this.hasPrefix()) {
             this.tablePrefix = tablePrefix;
         }
@@ -133,7 +134,7 @@ public class TableInfoSet implements ITableInfoSet {
 
 
     @Override
-    public ITableInfoSet setColumn(String gmtCreate, String gmtModified, String logicDeleted) {
+    public ITableSetter setColumn(String gmtCreate, String gmtModified, String logicDeleted) {
         this.setGmtCreate(gmtCreate);
         this.setGmtModified(gmtModified);
         this.setLogicDeleted(logicDeleted);
@@ -157,7 +158,7 @@ public class TableInfoSet implements ITableInfoSet {
     private String logicDeleted;
 
     @Override
-    public ITableInfoSet setGmtCreate(String gmtCreate) {
+    public ITableSetter setGmtCreate(String gmtCreate) {
         if (StringHelper.isBlank(this.gmtCreate) && !StringHelper.isBlank(gmtCreate)) {
             this.gmtCreate = gmtCreate;
         }
@@ -165,7 +166,7 @@ public class TableInfoSet implements ITableInfoSet {
     }
 
     @Override
-    public ITableInfoSet setGmtModified(String gmtModified) {
+    public ITableSetter setGmtModified(String gmtModified) {
         if (StringHelper.isBlank(this.gmtModified) && !StringHelper.isBlank(gmtModified)) {
             this.gmtModified = gmtModified;
         }
@@ -173,7 +174,7 @@ public class TableInfoSet implements ITableInfoSet {
     }
 
     @Override
-    public ITableInfoSet setLogicDeleted(String logicDeleted) {
+    public ITableSetter setLogicDeleted(String logicDeleted) {
         if (StringHelper.isBlank(this.logicDeleted) && !StringHelper.isBlank(logicDeleted)) {
             this.logicDeleted = logicDeleted;
         }
@@ -184,25 +185,41 @@ public class TableInfoSet implements ITableInfoSet {
     }
 
     @Override
-    public ITableInfoSet setColumnType(String columnName, ColumnJavaType javaType) {
+    public ITableSetter setColumnType(String columnName, ColumnJavaType javaType) {
         return this.setColumnType(columnName, null, javaType);
     }
 
     @Override
-    public ITableInfoSet setColumn(String columnName, String propertyName) {
+    public ITableSetter setColumn(String columnName, String propertyName) {
         return this.setColumnType(columnName, propertyName, (ColumnJavaType) null);
     }
 
     @Override
-    public ITableInfoSet setColumnType(String columnName, String propertyName, ColumnJavaType javaType) {
-        if (!StringHelper.isBlank(columnName)) {
-            this.columns.put(columnName, new DefinedColumn(columnName, propertyName, javaType));
-        }
+    public ITableSetter setColumnType(String columnName, String propertyName, ColumnJavaType javaType) {
+        DefinedColumn definedColumn = this.getDefinedColumn(columnName);
+        definedColumn.setFieldName(propertyName).setJavaType(javaType);
         return this;
     }
 
     @Override
-    public ITableInfoSet setExcludeColumn(String... columnNames) {
+    public ITableSetter setColumn(String column, Consumer<DefinedColumn> consumer) {
+        DefinedColumn definedColumn = this.getDefinedColumn(column);
+        consumer.accept(definedColumn);
+        return this;
+    }
+
+    private DefinedColumn getDefinedColumn(String column) {
+        if (StringHelper.isBlank(column)) {
+            throw new RuntimeException("the column can't be null.");
+        }
+        if (!this.columns.containsKey(column)) {
+            this.columns.put(column, new DefinedColumn(column));
+        }
+        return this.columns.get(column);
+    }
+
+    @Override
+    public ITableSetter setExcludes(String... columnNames) {
         for (String column : columnNames) {
             this.columns.put(column, new DefinedColumn(column).setExclude(true));
         }
@@ -424,12 +441,12 @@ public class TableInfoSet implements ITableInfoSet {
     private Map<String, String> baseDaoInterfaces = new HashMap<>();
 
     @Override
-    public ITableInfoSet addBaseDaoInterface(Class interfaceType, String... parameterGenericTypes) {
+    public ITableSetter addBaseDaoInterface(Class interfaceType, String... parameterGenericTypes) {
         return this.addBaseDaoInterface(interfaceType.getName(), parameterGenericTypes);
     }
 
     @Override
-    public ITableInfoSet addBaseDaoInterface(String interfaceFullName, String... parameterGenericTypes) {
+    public ITableSetter addBaseDaoInterface(String interfaceFullName, String... parameterGenericTypes) {
         String typeName = this.buildInterfaceName(interfaceFullName, parameterGenericTypes);
         this.baseDaoInterfaces.put(typeName, interfaceFullName);
         return this;
@@ -453,14 +470,14 @@ public class TableInfoSet implements ITableInfoSet {
     private Map<String, String> entityInterfaces = new HashMap<>();
 
     @Override
-    public ITableInfoSet addEntityInterface(String interfaceType, String... parameterGenericTypes) {
+    public ITableSetter addEntityInterface(String interfaceType, String... parameterGenericTypes) {
         String typeName = this.buildInterfaceName(interfaceType, parameterGenericTypes);
         this.entityInterfaces.put(typeName, interfaceType);
         return this;
     }
 
     @Override
-    public ITableInfoSet addEntityInterface(Class interfaceType, String... parameterGenericTypes) {
+    public ITableSetter addEntityInterface(Class interfaceType, String... parameterGenericTypes) {
         return this.addEntityInterface(interfaceType.getName(), parameterGenericTypes);
     }
 
@@ -471,7 +488,7 @@ public class TableInfoSet implements ITableInfoSet {
     private String mapperBeanPrefix = "";
 
     @Override
-    public ITableInfoSet setMapperPrefix(String mapperBeanPrefix) {
+    public ITableSetter setMapperPrefix(String mapperBeanPrefix) {
         this.mapperBeanPrefix = mapperBeanPrefix;
         return this;
     }

@@ -11,6 +11,7 @@ import org.test4j.generator.mybatis.db.ColumnJavaType;
  * @author wudarui
  */
 @Getter
+@Setter
 @Accessors(chain = true)
 public class DefinedColumn {
     private String columnName;
@@ -18,9 +19,26 @@ public class DefinedColumn {
     private String fieldName;
 
     private ColumnJavaType javaType;
-
-    @Setter
+    /**
+     * typeHandler
+     */
+    private String typeHandler;
+    /**
+     * 默认不是大字段
+     */
+    private boolean notLarge = true;
+    /**
+     * 不生成映射字段
+     */
     private boolean exclude = false;
+    /**
+     * update默认值
+     */
+    private String update;
+    /**
+     * insert默认值
+     */
+    private String insert;
 
     public DefinedColumn(String columnName, String fieldName, ColumnJavaType javaType) {
         this.columnName = columnName;

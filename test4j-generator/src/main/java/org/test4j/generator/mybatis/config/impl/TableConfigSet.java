@@ -4,7 +4,7 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.experimental.Accessors;
 import org.test4j.generator.mybatis.config.ITableConfigSet;
-import org.test4j.generator.mybatis.config.ITableInfoSet;
+import org.test4j.generator.mybatis.config.ITableSetter;
 import org.test4j.generator.mybatis.db.DbType;
 
 import java.sql.PreparedStatement;
@@ -30,7 +30,7 @@ public class TableConfigSet implements ITableConfigSet {
      * 需要处理的表
      */
     @Getter
-    private Map<String, TableInfoSet> tables = new HashMap<>();
+    private Map<String, TableSetter> tables = new HashMap<>();
 
 
     public TableConfigSet(GlobalConfig globalConfig) {
@@ -44,15 +44,15 @@ public class TableConfigSet implements ITableConfigSet {
     }
 
     @Override
-    public ITableConfigSet table(String tableName, Consumer<ITableInfoSet> consumer) {
-        TableInfoSet table = new TableInfoSet(tableName, this.globalConfig, this);
+    public ITableConfigSet table(String tableName, Consumer<ITableSetter> consumer) {
+        TableSetter table = new TableSetter(tableName, this.globalConfig, this);
         consumer.accept(table);
         this.tables.put(tableName, table);
         return this;
     }
 
     @Override
-    public void foreach(Consumer<ITableInfoSet> consumer) {
+    public void foreach(Consumer<ITableSetter> consumer) {
         this.tables.values().stream().forEach(table -> consumer.accept(table));
     }
 
@@ -69,7 +69,7 @@ public class TableConfigSet implements ITableConfigSet {
             try (PreparedStatement preparedStatement = dbConfig.getConn().prepareStatement(tablesSql); ResultSet results = preparedStatement.executeQuery()) {
                 while (results.next()) {
                     String tableName = results.getString(dbConfig.getDbQuery().tableName());
-                    TableInfoSet tableInfo = this.getTables().get(tableName);
+                    TableSetter tableInfo = this.getTables().get(tableName);
                     if (tableInfo == null) {
                         continue;
                     }
@@ -88,7 +88,7 @@ public class TableConfigSet implements ITableConfigSet {
                     this.getTables().remove(table);
                 }
             }
-            for (Map.Entry<String, TableInfoSet> entry : this.getTables().entrySet()) {
+            for (Map.Entry<String, TableSetter> entry : this.getTables().entrySet()) {
                 entry.getValue().initTable();
             }
         } catch (SQLException e) {

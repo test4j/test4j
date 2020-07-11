@@ -8,7 +8,7 @@
     </parent>
     <groupId>org.test4j</groupId>
     <artifactId>test4j.parent</artifactId>
-    <version>2.6.6</version>
+    <version>2.6.7</version>
     <packaging>pom</packaging>
     <name>test4j parent pom</name>
     <description>test4j</description>

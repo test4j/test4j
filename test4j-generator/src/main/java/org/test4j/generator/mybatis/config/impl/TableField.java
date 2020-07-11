@@ -56,9 +56,9 @@ public class TableField implements Comparable<TableField> {
     private String comment;
 
     @Getter(AccessLevel.NONE)
-    private final TableInfoSet tableInfo;
+    private final TableSetter tableInfo;
 
-    public TableField(TableInfoSet tableInfo, String columnName) {
+    public TableField(TableSetter tableInfo, String columnName) {
         this.tableInfo = tableInfo;
         this.columnName = columnName;
     }

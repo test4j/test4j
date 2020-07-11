@@ -1,7 +1,7 @@
 package org.test4j.generator.mybatis.template.datamap;
 
 import org.test4j.generator.mybatis.config.constant.OutputDir;
-import org.test4j.generator.mybatis.config.impl.TableInfoSet;
+import org.test4j.generator.mybatis.config.impl.TableSetter;
 import org.test4j.generator.mybatis.template.BaseTemplate;
 
 import java.util.Map;
@@ -18,6 +18,6 @@ public class TableMapTemplate extends BaseTemplate {
     }
 
     @Override
-    protected void templateConfigs(TableInfoSet table, Map<String, Object> templateContext) {
+    protected void templateConfigs(TableSetter table, Map<String, Object> templateContext) {
     }
 }
