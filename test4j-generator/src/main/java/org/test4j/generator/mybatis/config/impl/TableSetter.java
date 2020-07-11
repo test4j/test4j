@@ -21,6 +21,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.test4j.generator.mybatis.config.constant.ConfigKey.*;
+import static org.test4j.tools.commons.StringHelper.isBlank;
 
 /**
  * 表信息，关联到当前字段信息
@@ -157,30 +158,35 @@ public class TableSetter implements ITableSetter {
     @Getter(AccessLevel.NONE)
     private String logicDeleted;
 
+    private static final String NOW = "now()";
+
     @Override
     public ITableSetter setGmtCreate(String gmtCreate) {
-        if (StringHelper.isBlank(this.gmtCreate) && !StringHelper.isBlank(gmtCreate)) {
-            this.gmtCreate = gmtCreate;
+        if (isBlank(gmtCreate) || !isBlank(this.gmtCreate)) {
+            return this;
         }
+        this.gmtCreate = gmtCreate;
+        this.setColumn(this.gmtCreate, f -> f.setInsert(NOW));
         return this;
     }
 
     @Override
     public ITableSetter setGmtModified(String gmtModified) {
-        if (StringHelper.isBlank(this.gmtModified) && !StringHelper.isBlank(gmtModified)) {
-            this.gmtModified = gmtModified;
+        if (isBlank(gmtModified) || !isBlank(this.gmtModified)) {
+            return this;
         }
+        this.gmtModified = gmtModified;
+        this.setColumn(this.gmtModified, f -> f.setInsert(NOW).setUpdate(NOW));
         return this;
     }
 
     @Override
     public ITableSetter setLogicDeleted(String logicDeleted) {
-        if (StringHelper.isBlank(this.logicDeleted) && !StringHelper.isBlank(logicDeleted)) {
-            this.logicDeleted = logicDeleted;
+        if (isBlank(logicDeleted) || !isBlank(this.logicDeleted)) {
+            return this;
         }
-        if (!StringHelper.isBlank(logicDeleted)) {
-            this.setColumn(logicDeleted, f -> f.setJavaType(ColumnJavaType.BOOLEAN));
-        }
+        this.logicDeleted = logicDeleted;
+        this.setColumn(this.logicDeleted, f -> f.setJavaType(ColumnJavaType.BOOLEAN).setInsert("0"));
         return this;
     }
 
@@ -198,7 +204,7 @@ public class TableSetter implements ITableSetter {
     }
 
     private DefinedColumn getDefinedColumn(String column) {
-        if (StringHelper.isBlank(column)) {
+        if (isBlank(column)) {
             throw new RuntimeException("the column can't be null.");
         }
         if (!this.columns.containsKey(column)) {
@@ -237,7 +243,7 @@ public class TableSetter implements ITableSetter {
     }
 
     private void initEntityPrefix() {
-        if (!StringHelper.isBlank(this.entityPrefix)) {
+        if (!isBlank(this.entityPrefix)) {
             return;
         }
         String prefix = this.getNoPrefixTableName();
@@ -368,9 +374,9 @@ public class TableSetter implements ITableSetter {
         IDbQuery dbQuery = dbConfig.getDbQuery();
         String key = results.getString(dbQuery.fieldKey());
         if (DbType.DB2 == dbType || DbType.SQLITE == dbType) {
-            return !StringHelper.isBlank(key) && "1".equals(key);
+            return !isBlank(key) && "1".equals(key);
         } else {
-            return !StringHelper.isBlank(key) && "PRI".equals(key.toUpperCase());
+            return !isBlank(key) && "PRI".equals(key.toUpperCase());
         }
     }
 
