@@ -54,15 +54,6 @@ public interface ITableSetter {
     ITableSetter setLogicDeleted(String logicDeleted);
 
     /**
-     * 指定字段类型
-     *
-     * @param columnName 字段名
-     * @param javaType   Entity字段类型
-     * @return
-     */
-    ITableSetter setColumnType(String columnName, ColumnJavaType javaType);
-
-    /**
      * 指定字段对应的Entity属性名称
      *
      * @param columnName   字段名称
@@ -70,16 +61,6 @@ public interface ITableSetter {
      * @return
      */
     ITableSetter setColumn(String columnName, String propertyName);
-
-    /**
-     * 指定字段对应的Entity属性名称及类型
-     *
-     * @param columnName   字段名称
-     * @param propertyName Entity属性名称
-     * @param javaType     Entity字段类型
-     * @return
-     */
-    ITableSetter setColumnType(String columnName, String propertyName, ColumnJavaType javaType);
 
     /**
      * 设置大字段列表

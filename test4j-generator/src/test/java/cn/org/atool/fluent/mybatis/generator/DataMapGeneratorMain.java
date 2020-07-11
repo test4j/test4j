@@ -25,7 +25,7 @@ public class DataMapGeneratorMain {
                 .table("t_user", t -> t.enablePartition())
                 .foreach(t -> t
                     .setColumn("gmt_created", "gmt_modified", "is_deleted")
-                    .setColumnType("is_deleted", ColumnJavaType.BOOLEAN)
+                    .setColumn("is_deleted", f -> f.setJavaType(ColumnJavaType.BOOLEAN))
                     .setTablePrefix("t_"))
             )
             .tables(config -> config

@@ -179,25 +179,14 @@ public class TableSetter implements ITableSetter {
             this.logicDeleted = logicDeleted;
         }
         if (!StringHelper.isBlank(logicDeleted)) {
-            this.setColumnType(logicDeleted, ColumnJavaType.BOOLEAN);
+            this.setColumn(logicDeleted, f -> f.setJavaType(ColumnJavaType.BOOLEAN));
         }
         return this;
     }
 
     @Override
-    public ITableSetter setColumnType(String columnName, ColumnJavaType javaType) {
-        return this.setColumnType(columnName, null, javaType);
-    }
-
-    @Override
     public ITableSetter setColumn(String columnName, String propertyName) {
-        return this.setColumnType(columnName, propertyName, (ColumnJavaType) null);
-    }
-
-    @Override
-    public ITableSetter setColumnType(String columnName, String propertyName, ColumnJavaType javaType) {
-        DefinedColumn definedColumn = this.getDefinedColumn(columnName);
-        definedColumn.setFieldName(propertyName).setJavaType(javaType);
+        this.getDefinedColumn(columnName).setFieldName(propertyName);
         return this;
     }
 
@@ -221,7 +210,7 @@ public class TableSetter implements ITableSetter {
     @Override
     public ITableSetter setExcludes(String... columnNames) {
         for (String column : columnNames) {
-            this.columns.put(column, new DefinedColumn(column).setExclude(true));
+            this.columns.put(column, new DefinedColumn(column).setExclude());
         }
         return this;
     }
