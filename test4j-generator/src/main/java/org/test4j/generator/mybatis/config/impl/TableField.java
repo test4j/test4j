@@ -50,6 +50,18 @@ public class TableField implements Comparable<TableField> {
      */
     @Setter
     private ColumnJavaType javaType;
+
+    @Setter
+    private String typeHandler;
+
+    @Setter
+    private String insert;
+
+    @Setter
+    private String update;
+
+    @Setter
+    private Boolean isLarge;
     /**
      * 字段注释
      */
@@ -83,7 +95,6 @@ public class TableField implements Comparable<TableField> {
         }
     }
 
-
     /**
      * 处理字段名称
      */
@@ -105,6 +116,7 @@ public class TableField implements Comparable<TableField> {
 
     /**
      * Boolean类型is前缀处理
+     *
      * @param input
      * @param globalConfig
      * @return

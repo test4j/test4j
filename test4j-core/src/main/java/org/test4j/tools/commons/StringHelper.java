@@ -23,8 +23,8 @@ public class StringHelper {
     /**
      * 判断string是否为null或空字符串
      *
-     * @param in
-     * @return
+     * @param in 输入字符
+     * @return true: 空白串
      */
     public static boolean isBlank(String in) {
         if (in == null) {
@@ -32,6 +32,16 @@ public class StringHelper {
         } else {
             return in.trim().isEmpty();
         }
+    }
+
+    /**
+     * 非空白串判断
+     *
+     * @param in 输入字符
+     * @return true: 非空白串
+     */
+    public static boolean isNotBlank(String in) {
+        return !isBlank(in);
     }
 
     public static String trim(String source) {

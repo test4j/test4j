@@ -4,7 +4,10 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.test4j.generator.mybatis.config.impl.TableField;
 import org.test4j.generator.mybatis.db.ColumnJavaType;
+
+import static org.test4j.tools.commons.StringHelper.isNotBlank;
 
 /**
  * 预定义好的字段
@@ -72,5 +75,31 @@ public class DefinedColumn {
     public DefinedColumn setExclude() {
         this.exclude = true;
         return this;
+    }
+
+    /**
+     * 根据预设的字段设置初始化映射关系
+     *
+     * @param field 字段映射
+     */
+    public void initField(TableField field) {
+        if (isNotBlank(this.fieldName)) {
+            field.setName(this.fieldName);
+        }
+        if (this.javaType != null) {
+            field.setJavaType(this.javaType);
+        }
+        if (isNotBlank(this.typeHandler)) {
+            field.setTypeHandler(this.typeHandler);
+        }
+        if (this.notLarge == false) {
+            field.setIsLarge(false);
+        }
+        if (isNotBlank(this.insert)) {
+            field.setInsert(this.insert);
+        }
+        if (isNotBlank(this.update)) {
+            field.setUpdate(this.update);
+        }
     }
 }

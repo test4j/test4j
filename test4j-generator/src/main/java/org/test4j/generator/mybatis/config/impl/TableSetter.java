@@ -334,12 +334,10 @@ public class TableSetter implements ITableSetter {
         }
         TableField field = new TableField(this, columnName);
         DefinedColumn defined = this.columns.get(columnName);
-        if (defined != null && defined.getFieldName() != null) {
-            field.setName(defined.getFieldName());
+        if (defined != null) {
+            defined.initField(field);
         }
-        if (defined != null && defined.getJavaType() != null) {
-            field.setJavaType(defined.getJavaType());
-        }
+
         boolean primary = this.isPrimary(columnName, results, h2PkColumns);
         // 处理ID, 只取第一个，并放到list中的索引为0的位置
         if (primary && !haveId) {
