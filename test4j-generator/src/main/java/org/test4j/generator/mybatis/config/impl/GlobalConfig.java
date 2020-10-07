@@ -64,7 +64,7 @@ public class GlobalConfig implements IGlobalConfigSet {
     /**
      * 是否打开输出目录
      */
-    private boolean open = true;
+    private boolean open = false;
 
     public Naming getColumnNaming() {
         return columnNaming == null ? tableNaming : columnNaming;
