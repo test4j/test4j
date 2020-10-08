@@ -4,8 +4,8 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.apache.ibatis.type.TypeHandler;
 import org.test4j.generator.mybatis.config.constant.Naming;
-import org.test4j.generator.mybatis.db.ColumnJavaType;
 import org.test4j.generator.mybatis.db.IDbQuery;
 import org.test4j.generator.mybatis.db.IFieldCategory;
 import org.test4j.generator.mybatis.db.ITypeConvert;
@@ -44,15 +44,15 @@ public class TableField implements Comparable<TableField> {
      * 数据库字段类型
      */
     @Setter
-    private String columnType;
+    private String jdbcType;
     /**
      * 字段java类型
      */
     @Setter
-    private ColumnJavaType javaType;
+    private Class javaType;
 
     @Setter
-    private String typeHandler;
+    private Class<? extends TypeHandler> typeHandler;
 
     @Setter
     private String insert;
@@ -76,7 +76,7 @@ public class TableField implements Comparable<TableField> {
     }
 
     public String getType() {
-        return javaType.getFieldType();
+        return javaType.getSimpleName();
     }
 
     public void initNaming(ResultSet results) throws SQLException {
@@ -122,7 +122,7 @@ public class TableField implements Comparable<TableField> {
      * @return
      */
     private String removeIsIfNeed(String input, GlobalConfig globalConfig) {
-        if (globalConfig.needRemoveIsPrefix(input, this.getType())) {
+        if (globalConfig.needRemoveIsPrefix(input, this.getJavaType())) {
             return input.substring(2);
         } else {
             return input;

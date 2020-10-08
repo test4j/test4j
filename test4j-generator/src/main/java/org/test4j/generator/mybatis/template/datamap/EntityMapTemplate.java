@@ -18,8 +18,8 @@ public class EntityMapTemplate extends BaseTemplate {
     }
 
     @Override
-    protected void templateConfigs(TableSetter table, Map<String, Object> templateContext) {
+    protected void templateConfigs(TableSetter table, Map<String, Object> parent, Map<String, Object> ctx) {
         String name = table.getEntityPrefix();
-        templateContext.put("instance", name.substring(0, 1).toLowerCase() + name.substring(1));
+        ctx.put("instance", name.substring(0, 1).toLowerCase() + name.substring(1));
     }
 }

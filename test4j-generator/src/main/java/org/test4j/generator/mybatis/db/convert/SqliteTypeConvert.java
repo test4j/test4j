@@ -1,37 +1,35 @@
 package org.test4j.generator.mybatis.db.convert;
 
-import org.test4j.generator.mybatis.db.ColumnJavaType;
 import org.test4j.generator.mybatis.db.DateType;
 
 /**
  * SQLite 字段类型转换
- *
  */
 public class SqliteTypeConvert extends BaseTypeConvert {
     @Override
-    public ColumnJavaType processTypeConvert(DateType dateType, String fieldType) {
+    public Class processTypeConvert(DateType dateType, String fieldType) {
         String t = fieldType.toLowerCase();
         if (t.contains("bigint")) {
-            return ColumnJavaType.LONG;
+            return Long.class;
         } else if (t.contains("tinyint(1)") || t.contains("boolean")) {
-            return ColumnJavaType.BOOLEAN;
+            return Boolean.class;
         } else if (t.contains("int")) {
-            return ColumnJavaType.INTEGER;
+            return Integer.class;
         } else if (t.contains("text") || t.contains("char") || t.contains("enum")) {
-            return ColumnJavaType.STRING;
+            return String.class;
         } else if (t.contains("decimal") || t.contains("numeric")) {
-            return ColumnJavaType.BIG_DECIMAL;
+            return java.math.BigDecimal.class;
         } else if (t.contains("clob")) {
-            return ColumnJavaType.CLOB;
+            return java.sql.Clob.class;
         } else if (t.contains("blob")) {
-            return ColumnJavaType.BLOB;
+            return java.sql.Blob.class;
         } else if (t.contains("float")) {
-            return ColumnJavaType.FLOAT;
+            return Float.class;
         } else if (t.contains("double")) {
-            return ColumnJavaType.DOUBLE;
+            return Double.class;
         } else if (t.contains("date") || t.contains("time") || t.contains("year")) {
             return this.parseDateType(dateType, t);
         }
-        return ColumnJavaType.STRING;
+        return String.class;
     }
 }

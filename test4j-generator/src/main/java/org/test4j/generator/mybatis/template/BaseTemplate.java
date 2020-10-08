@@ -55,13 +55,13 @@ public abstract class BaseTemplate {
      * @param table
      * @return
      */
-    public final void initContext(TableSetter table, Map<String, Object> templateContext) {
+    public final void initContext(TableSetter table, Map<String, Object> parent, Map<String, Object> ctx) {
         this.filePath = table.outputDir(this.outputDir) + this.fileNameReg.replace("*", table.getEntityPrefix());
 
-        templateContext.put(KEY_NAME, this.getFileName(table));
-        templateContext.put(KEY_PACKAGE, this.getPackage(table));
+        ctx.put(KEY_NAME, this.getFileName(table));
+        ctx.put(KEY_PACKAGE, this.getPackage(table));
 
-        this.templateConfigs(table, templateContext);
+        this.templateConfigs(table, parent, ctx);
     }
 
     /**
@@ -75,10 +75,10 @@ public abstract class BaseTemplate {
      * 模板自身的配置项
      *
      * @param table
-     * @param templateContext 模板自身构建的上下文
+     * @param ctx   模板自身构建的上下文
      * @return
      */
-    protected abstract void templateConfigs(TableSetter table, Map<String, Object> templateContext);
+    protected abstract void templateConfigs(TableSetter table, Map<String, Object> parent, Map<String, Object> ctx);
 
     protected String getFileName(TableSetter table) {
         int start = this.fileNameReg.lastIndexOf('/');

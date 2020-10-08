@@ -70,4 +70,12 @@ public interface IGlobalConfigSet {
      * @param basePackage
      */
     IGlobalConfigSet setBasePackage(String basePackage);
+
+    /**
+     * 生成dao类路径
+     *
+     * @param daoPackage
+     * @return
+     */
+    IGlobalConfigSet setDaoPackage(String daoPackage);
 }

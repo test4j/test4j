@@ -1,6 +1,5 @@
 package org.test4j.generator.mybatis.db.convert;
 
-import org.test4j.generator.mybatis.db.ColumnJavaType;
 import org.test4j.generator.mybatis.db.DateType;
 import org.test4j.generator.mybatis.db.ITypeConvert;
 
@@ -10,32 +9,32 @@ import org.test4j.generator.mybatis.db.ITypeConvert;
  */
 public abstract class BaseTypeConvert implements ITypeConvert {
 
-    protected ColumnJavaType parseDateType(DateType dateType, String columnType) {
+    protected Class parseDateType(DateType dateType, String columnType) {
         switch (dateType) {
             case SQL_PACK:
                 switch (columnType) {
                     case "date":
                     case "year":
-                        return ColumnJavaType.DATE_SQL;
+                        return java.sql.Date.class;
                     case "time":
-                        return ColumnJavaType.TIME;
+                        return java.sql.Time.class;
                     default:
-                        return ColumnJavaType.TIMESTAMP;
+                        return java.sql.Timestamp.class;
                 }
             case TIME_PACK:
                 switch (columnType) {
                     case "date":
-                        return ColumnJavaType.LOCAL_DATE;
+                        return java.time.LocalDate.class;
                     case "time":
-                        return ColumnJavaType.LOCAL_TIME;
+                        return java.time.LocalTime.class;
                     case "year":
-                        return ColumnJavaType.YEAR;
+                        return java.time.Year.class;
                     default:
-                        return ColumnJavaType.LOCAL_DATE_TIME;
+                        return java.time.LocalDateTime.class;
                 }
             case ONLY_DATE:
             default:
-                return ColumnJavaType.DATE;
+                return java.util.Date.class;
         }
     }
 }

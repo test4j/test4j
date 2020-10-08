@@ -1,7 +1,6 @@
 package org.test4j.generator.mybatis.config;
 
 import org.test4j.generator.mybatis.config.constant.DefinedColumn;
-import org.test4j.generator.mybatis.db.ColumnJavaType;
 
 import java.util.function.Consumer;
 
@@ -82,38 +81,18 @@ public interface ITableSetter {
     /**
      * 设置生成的base dao类需要实现的接口
      *
-     * @param interfaceFullName     接口类名称（包括package路径）
-     * @param parameterGenericTypes 接口泛型
-     * @return
-     */
-    ITableSetter addBaseDaoInterface(String interfaceFullName, String... parameterGenericTypes);
-
-    /**
-     * 设置生成的base dao类需要实现的接口
-     *
      * @param interfaceType         接口类型
-     * @param parameterGenericTypes 接口泛型
      * @return
      */
-    ITableSetter addBaseDaoInterface(Class interfaceType, String... parameterGenericTypes);
+    ITableSetter addBaseDaoInterface(Class interfaceType);
 
     /**
      * 增加Entity类的接口
      *
      * @param interfaceType
-     * @param parameterGenericTypes 接口泛型
      * @return
      */
-    ITableSetter addEntityInterface(String interfaceType, String... parameterGenericTypes);
-
-    /**
-     * 增加Entity类的接口
-     *
-     * @param interfaceType
-     * @param parameterGenericTypes 接口泛型
-     * @return
-     */
-    ITableSetter addEntityInterface(Class interfaceType, String... parameterGenericTypes);
+    ITableSetter addEntityInterface(Class interfaceType);
 
     /**
      * 设置生成的Mapper类的Spring bean名称前缀

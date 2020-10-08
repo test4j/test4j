@@ -11,6 +11,10 @@ import org.test4j.generator.mybatis.db.DbType;
 import org.test4j.generator.mybatis.db.ITypeConvert;
 import org.test4j.tools.commons.StringHelper;
 
+import java.util.Objects;
+
+import static org.test4j.tools.commons.StringHelper.isBlank;
+
 /**
  * 策略配置项
  *
@@ -40,8 +44,13 @@ public class GlobalConfig implements IGlobalConfigSet {
     @Getter(AccessLevel.NONE)
     private String basePackage;
 
+    private String daoPackage;
+
     @Setter(AccessLevel.NONE)
     private String packageDir;
+
+    @Setter(AccessLevel.NONE)
+    private String daoDir;
     /**
      * 代码生成路径
      */
@@ -74,11 +83,21 @@ public class GlobalConfig implements IGlobalConfigSet {
     public IGlobalConfigSet setBasePackage(String basePackage) {
         this.basePackage = basePackage;
         this.packageDir = '/' + basePackage.replace('.', '/') + '/';
+        if (isBlank(this.daoPackage)) {
+            this.setDaoPackage(basePackage);
+        }
+        return this;
+    }
+
+    @Override
+    public IGlobalConfigSet setDaoPackage(String daoPackage) {
+        this.daoPackage = daoPackage;
+        this.daoDir = '/' + daoPackage.replace('.', '/') + '/';
         return this;
     }
 
     public String getBasePackage() {
-        if (StringHelper.isBlank(basePackage)) {
+        if (isBlank(basePackage)) {
             throw new RuntimeException("the base package should be set.");
         }
         return basePackage;
@@ -130,10 +149,10 @@ public class GlobalConfig implements IGlobalConfigSet {
      * @param fieldType
      * @return
      */
-    public boolean needRemoveIsPrefix(String fieldName, String fieldType) {
+    public boolean needRemoveIsPrefix(String fieldName, Class fieldType) {
         if (!this.isRemoveIsPrefix()) {
             return false;
-        } else if (!boolean.class.getSimpleName().equalsIgnoreCase(fieldType)) {
+        } else if (!Objects.equals(boolean.class, fieldType)) {
             return false;
         } else {
             return fieldName.startsWith("is");

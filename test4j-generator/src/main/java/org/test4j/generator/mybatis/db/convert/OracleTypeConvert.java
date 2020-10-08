@@ -1,48 +1,45 @@
 package org.test4j.generator.mybatis.db.convert;
 
-import org.test4j.generator.mybatis.db.ColumnJavaType;
 import org.test4j.generator.mybatis.db.DateType;
 import org.test4j.generator.mybatis.db.ITypeConvert;
 
 /**
  * ORACLE 字段类型转换
- *
  */
 public class OracleTypeConvert implements ITypeConvert {
 
     @Override
-    public ColumnJavaType processTypeConvert(DateType dateType, String fieldType) {
+    public Class processTypeConvert(DateType dateType, String fieldType) {
         String t = fieldType.toLowerCase();
         if (t.contains("char")) {
-            return ColumnJavaType.STRING;
+            return String.class;
         } else if (t.contains("date") || t.contains("timestamp")) {
             switch (dateType) {
                 case ONLY_DATE:
-                    return ColumnJavaType.DATE;
+                    return java.util.Date.class;
                 case SQL_PACK:
-                    return ColumnJavaType.TIMESTAMP;
+                    return java.sql.Timestamp.class;
                 case TIME_PACK:
-                    return ColumnJavaType.LOCAL_DATE_TIME;
+                    return java.time.LocalDateTime.class;
             }
         } else if (t.contains("number")) {
             if (t.matches("number\\(+\\d\\)")) {
-                return ColumnJavaType.INTEGER;
+                return Integer.class;
             } else if (t.matches("number\\(+\\d{2}+\\)")) {
-                return ColumnJavaType.LONG;
+                return Long.class;
             }
-            return ColumnJavaType.BIG_DECIMAL;
+            return java.math.BigDecimal.class;
         } else if (t.contains("float")) {
-            return ColumnJavaType.FLOAT;
+            return Float.class;
         } else if (t.contains("clob")) {
-            return ColumnJavaType.STRING;
+            return String.class;
         } else if (t.contains("blob")) {
-            return ColumnJavaType.BLOB;
+            return java.sql.Blob.class;
         } else if (t.contains("binary")) {
-            return ColumnJavaType.BYTE_ARRAY;
+            return byte[].class;
         } else if (t.contains("raw")) {
-            return ColumnJavaType.BYTE_ARRAY;
+            return byte[].class;
         }
-        return ColumnJavaType.STRING;
+        return String.class;
     }
-
 }

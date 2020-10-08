@@ -4,8 +4,11 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.apache.ibatis.type.TypeHandler;
+import org.apache.ibatis.type.UnknownTypeHandler;
 import org.test4j.generator.mybatis.config.impl.TableField;
-import org.test4j.generator.mybatis.db.ColumnJavaType;
+
+import java.util.Objects;
 
 import static org.test4j.tools.commons.StringHelper.isNotBlank;
 
@@ -23,11 +26,11 @@ public class DefinedColumn {
 
     private String fieldName;
 
-    private ColumnJavaType javaType;
+    private Class javaType;
     /**
      * typeHandler
      */
-    private String typeHandler;
+    private Class<? extends TypeHandler> typeHandler;
     /**
      * 默认不是大字段
      */
@@ -47,7 +50,7 @@ public class DefinedColumn {
      */
     private String insert;
 
-    public DefinedColumn(String columnName, String fieldName, ColumnJavaType javaType) {
+    public DefinedColumn(String columnName, String fieldName, Class javaType) {
         this.columnName = columnName;
         this.fieldName = fieldName;
         this.javaType = javaType;
@@ -89,7 +92,7 @@ public class DefinedColumn {
         if (this.javaType != null) {
             field.setJavaType(this.javaType);
         }
-        if (isNotBlank(this.typeHandler)) {
+        if (this.typeHandler != null && !Objects.equals(UnknownTypeHandler.class, this.typeHandler)) {
             field.setTypeHandler(this.typeHandler);
         }
         if (this.notLarge == false) {

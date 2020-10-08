@@ -17,9 +17,9 @@ public interface ITypeConvert {
      * @param tableField 字段列信息
      * @return 字段类型
      */
-    default ColumnJavaType processTypeConvert(DateType dateType, TableField tableField) {
+    default Class processTypeConvert(DateType dateType, TableField tableField) {
         // 该方法提供重写
-        return processTypeConvert(dateType, tableField.getColumnType());
+        return processTypeConvert(dateType, tableField.getJdbcType());
     }
 
 
@@ -30,5 +30,5 @@ public interface ITypeConvert {
      * @param fieldType 字段类型
      * @return 字段类型
      */
-    ColumnJavaType processTypeConvert(DateType dateType, String fieldType);
+    Class processTypeConvert(DateType dateType, String fieldType);
 }

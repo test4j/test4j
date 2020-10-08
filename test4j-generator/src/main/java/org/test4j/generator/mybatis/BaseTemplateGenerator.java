@@ -138,7 +138,7 @@ public abstract class BaseTemplateGenerator implements IGlobalConfig, ITableConf
         this.getAllTemplates().forEach(template -> {
                 Map<String, Object> templateContext = new HashMap<>();
                 context.put(template.getTemplateId(), templateContext);
-                template.initContext(table, templateContext);
+                template.initContext(table, context, templateContext);
                 if (KEY_ENTITY.equals(template.getTemplateId())) {
                     context.put(KEY_ENTITY_NAME, templateContext.get(KEY_NAME));
                 }
@@ -146,7 +146,6 @@ public abstract class BaseTemplateGenerator implements IGlobalConfig, ITableConf
         );
         return context;
     }
-
 
     /**
      * 打开输出目录

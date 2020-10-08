@@ -1,48 +1,45 @@
 package org.test4j.generator.mybatis.db.convert;
 
-import org.test4j.generator.mybatis.db.ColumnJavaType;
 import org.test4j.generator.mybatis.db.DateType;
 import org.test4j.generator.mybatis.db.ITypeConvert;
 
+import java.math.BigDecimal;
+import java.sql.Blob;
+import java.sql.Clob;
+import java.util.Date;
+
 /**
  * DB2 字段类型转换
- *
  */
 public class DB2TypeConvert implements ITypeConvert {
 
     @Override
-    public ColumnJavaType processTypeConvert(DateType dateType, String fieldType) {
+    public Class processTypeConvert(DateType dateType, String fieldType) {
         String t = fieldType.toLowerCase();
-        if (t.contains("char")) {
-            return ColumnJavaType.STRING;
+        if (t.contains("char") || t.contains("text") || t.contains("json") || t.contains("enum")) {
+            return String.class;
         } else if (t.contains("bigint")) {
-            return ColumnJavaType.LONG;
-        } else if (t.contains("smallint")) {
-            return ColumnJavaType.BASE_SHORT;
-        } else if (t.contains("int")) {
-            return ColumnJavaType.INTEGER;
+            return Long.class;
+        } else if (t.contains("smallint") || t.contains("int")) {
+            return Integer.class;
         } else if (t.contains("date") || t.contains("time") || t.contains("year") || t.contains("timestamp")) {
-            return ColumnJavaType.DATE;
-        } else if (t.contains("text")) {
-            return ColumnJavaType.STRING;
+            return Date.class;
         } else if (t.contains("bit")) {
-            return ColumnJavaType.BOOLEAN;
+            return Boolean.class;
         } else if (t.contains("decimal")) {
-            return ColumnJavaType.BIG_DECIMAL;
+            return BigDecimal.class;
         } else if (t.contains("clob")) {
-            return ColumnJavaType.CLOB;
+            return Clob.class;
         } else if (t.contains("blob")) {
-            return ColumnJavaType.BLOB;
+            return Blob.class;
         } else if (t.contains("binary")) {
-            return ColumnJavaType.BYTE_ARRAY;
+            return byte[].class;
         } else if (t.contains("float")) {
-            return ColumnJavaType.FLOAT;
+            return Float.class;
         } else if (t.contains("double")) {
-            return ColumnJavaType.DOUBLE;
-        } else if (t.contains("json") || t.contains("enum")) {
-            return ColumnJavaType.STRING;
+            return Double.class;
+        } else {
+            return String.class;
         }
-        return ColumnJavaType.STRING;
     }
-
 }

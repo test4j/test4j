@@ -18,6 +18,6 @@ public class TableMapTemplate extends BaseTemplate {
     }
 
     @Override
-    protected void templateConfigs(TableSetter table, Map<String, Object> templateContext) {
+    protected void templateConfigs(TableSetter table, Map<String, Object> parent, Map<String, Object> templateContext) {
     }
 }

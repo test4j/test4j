@@ -10,7 +10,6 @@ import org.test4j.generator.mybatis.config.constant.Naming;
 import org.test4j.generator.mybatis.config.constant.OutputDir;
 import org.test4j.generator.mybatis.db.*;
 import org.test4j.generator.mybatis.db.query.H2Query;
-import org.test4j.tools.commons.StringHelper;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -49,6 +48,11 @@ public class TableSetter implements ITableSetter {
      */
     @Setter(AccessLevel.NONE)
     private String[] tablePrefix;
+    /**
+     * 当前表的去掉的前缀
+     */
+    private String matchedPrefix = "";
+
     /**
      * entity前缀部分
      */
@@ -186,7 +190,7 @@ public class TableSetter implements ITableSetter {
             return this;
         }
         this.logicDeleted = logicDeleted;
-        this.setColumn(this.logicDeleted, f -> f.setJavaType(ColumnJavaType.BOOLEAN).setInsert("0"));
+        this.setColumn(this.logicDeleted, f -> f.setJavaType(Boolean.class).setInsert("0"));
         return this;
     }
 
@@ -260,7 +264,9 @@ public class TableSetter implements ITableSetter {
      */
     public String getNoPrefixTableName() {
         if (this.hasPrefix()) {
-            return Naming.removePrefix(this.tableName, this.tablePrefix);
+            String noPrefix = Naming.removePrefix(this.tableName, this.tablePrefix);
+            this.matchedPrefix = this.tableName.substring(0, this.tableName.length() - noPrefix.length());
+            return noPrefix;
         } else {
             return this.tableName;
         }
@@ -348,7 +354,7 @@ public class TableSetter implements ITableSetter {
             }
             haveId = true;
         }
-        field.setColumnType(results.getString(dbQuery.fieldType()));
+        field.setJdbcType(results.getString(dbQuery.fieldType()));
         field.initNaming(results);
         return field;
     }
@@ -372,9 +378,9 @@ public class TableSetter implements ITableSetter {
         IDbQuery dbQuery = dbConfig.getDbQuery();
         String key = results.getString(dbQuery.fieldKey());
         if (DbType.DB2 == dbType || DbType.SQLITE == dbType) {
-            return !isBlank(key) && "1".equals(key);
+            return !isBlank(key) && "1" .equals(key);
         } else {
-            return !isBlank(key) && "PRI".equals(key.toUpperCase());
+            return !isBlank(key) && "PRI" .equals(key.toUpperCase());
         }
     }
 
@@ -427,21 +433,15 @@ public class TableSetter implements ITableSetter {
 
     /**
      * base dao 导入的自定义接口
-     * key: implements 接口完整定义，包含泛型
-     * value: 接口import完整路径
+     * key: 接口类
+     * value: 泛型
      */
     @Getter
-    private Map<String, String> baseDaoInterfaces = new HashMap<>();
+    private List<Class> baseDaoInterfaces = new ArrayList<>();
 
     @Override
-    public ITableSetter addBaseDaoInterface(Class interfaceType, String... parameterGenericTypes) {
-        return this.addBaseDaoInterface(interfaceType.getName(), parameterGenericTypes);
-    }
-
-    @Override
-    public ITableSetter addBaseDaoInterface(String interfaceFullName, String... parameterGenericTypes) {
-        String typeName = this.buildInterfaceName(interfaceFullName, parameterGenericTypes);
-        this.baseDaoInterfaces.put(typeName, interfaceFullName);
+    public ITableSetter addBaseDaoInterface(Class interfaceType) {
+        this.baseDaoInterfaces.add(interfaceType);
         return this;
     }
 
@@ -456,22 +456,16 @@ public class TableSetter implements ITableSetter {
 
     /**
      * Entity 导入的自定义接口
-     * key: implements 接口完整定义，包含泛型
-     * value: 接口import完整路径
+     * key: 接口类
+     * value: 泛型列表
      */
     @Getter
-    private Map<String, String> entityInterfaces = new HashMap<>();
+    private List<Class> entityInterfaces = new ArrayList<>();
 
     @Override
-    public ITableSetter addEntityInterface(String interfaceType, String... parameterGenericTypes) {
-        String typeName = this.buildInterfaceName(interfaceType, parameterGenericTypes);
-        this.entityInterfaces.put(typeName, interfaceType);
+    public ITableSetter addEntityInterface(Class interfaceType) {
+        this.entityInterfaces.add(interfaceType);
         return this;
-    }
-
-    @Override
-    public ITableSetter addEntityInterface(Class interfaceType, String... parameterGenericTypes) {
-        return this.addEntityInterface(interfaceType.getName(), parameterGenericTypes);
     }
 
     /**
@@ -489,7 +483,7 @@ public class TableSetter implements ITableSetter {
     public String outputDir(OutputDir dirType) {
         switch (dirType) {
             case Dao:
-                return this.globalConfig.getDaoOutputDir() + this.globalConfig.getPackageDir();
+                return this.globalConfig.getDaoOutputDir() + this.globalConfig.getDaoDir();
             case Test:
                 return this.globalConfig.getTestOutputDir() + this.globalConfig.getPackageDir();
             case Base:
@@ -500,6 +494,10 @@ public class TableSetter implements ITableSetter {
 
     public String getBasePackage() {
         return globalConfig.getBasePackage();
+    }
+
+    public String getDaoPackage() {
+        return globalConfig.getDaoPackage();
     }
 
     private Map<String, Object> context;
@@ -530,7 +528,7 @@ public class TableSetter implements ITableSetter {
         }
         {
             String types = this.fields.stream()
-                .map(field -> field.getJavaType().getImportName())
+                .map(field -> field.getJavaType().getName())
                 .filter(type -> type != null)
                 .distinct()
                 .sorted()

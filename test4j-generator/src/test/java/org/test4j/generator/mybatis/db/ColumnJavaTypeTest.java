@@ -9,15 +9,15 @@ class ColumnJavaTypeTest extends Test4J {
 
     @ParameterizedTest
     @MethodSource("data_getFieldType")
-    void getFieldType(ColumnJavaType columnType, String typeName) {
-        String type = columnType.getFieldType();
+    void getFieldType(Class javaType, String typeName) {
+        String type = javaType.getSimpleName();
         want.string(type).eq(typeName);
     }
 
     public static DataProvider data_getFieldType() {
         return new DataProvider()
-            .data(ColumnJavaType.BASE_BYTE, "byte")
-            .data(ColumnJavaType.BYTE_ARRAY, "byte[]")
+            .data(byte.class, "byte")
+            .data(byte[].class, "byte[]")
             ;
     }
 }
