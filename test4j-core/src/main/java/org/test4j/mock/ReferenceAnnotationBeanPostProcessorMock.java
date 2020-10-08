@@ -19,6 +19,10 @@ import org.test4j.tools.reflector.MethodAccessor;
 public class ReferenceAnnotationBeanPostProcessorMock extends MockUp<ReferenceAnnotationBeanPostProcessor> {
 
     static boolean hasMocked = false;
+    /**
+     * 要mock的class文件默认存在
+     */
+    static boolean classNotFound = false;
 
     public ReferenceAnnotationBeanPostProcessorMock() {
         hasMocked = true;

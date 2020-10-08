@@ -13,8 +13,13 @@ public class Mocker {
      * 处理spring获取数据源，替换为Test4J的数据源
      */
     public static void mockSpringDataSource() {
-        if (SpringMock.hasMock) {
+        if (SpringMock.hasMock || SpringMock.classNotFound) {
             return;
+        }
+        try {
+            Class.forName("org.springframework.beans.factory.support.AbstractBeanFactory");
+        } catch (ClassNotFoundException e) {
+            SpringMock.classNotFound = true;
         }
         Startup.initializing = true;
         new SpringMock();
@@ -26,7 +31,13 @@ public class Mocker {
      * 用于在测试中收集mybatis执行的语句
      */
     public static void mockMybatisConfiguration() {
-        if (MybatisConfigurationMock.hasMock) {
+        if (MybatisConfigurationMock.hasMock || MybatisConfigurationMock.classNotFound) {
+            return;
+        }
+        try {
+            Class.forName("org.apache.ibatis.session.Configuration");
+        } catch (ClassNotFoundException e) {
+            MybatisConfigurationMock.classNotFound = true;
             return;
         }
         Startup.initializing = true;
@@ -45,15 +56,16 @@ public class Mocker {
      * ]]></pre>
      */
     public static void mockDubboReference() {
-        if (ReferenceAnnotationBeanPostProcessorMock.hasMocked) {
+        if (ReferenceAnnotationBeanPostProcessorMock.hasMocked || ReferenceAnnotationBeanPostProcessorMock.classNotFound) {
             return;
+        }
+        try {
+            Class.forName("org.apache.dubbo.config.spring.beans.factory.annotation.ReferenceAnnotationBeanPostProcessor");
+        } catch (ClassNotFoundException e) {
+            ReferenceAnnotationBeanPostProcessorMock.classNotFound = true;
         }
         Startup.initializing = true;
         new ReferenceAnnotationBeanPostProcessorMock();
         Startup.initializing = false;
     }
-
-//    public void demo(){
-//        mockDubboReference();
-//    }
 }

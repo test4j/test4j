@@ -14,6 +14,10 @@ import org.test4j.tools.commons.ConfigHelper;
  */
 public class SpringMock extends MockUp<AbstractBeanFactory> {
     static boolean hasMock = false;
+    /**
+     * 要mock的class文件默认存在
+     */
+    static boolean classNotFound = false;
 
     public SpringMock() {
         hasMock = true;

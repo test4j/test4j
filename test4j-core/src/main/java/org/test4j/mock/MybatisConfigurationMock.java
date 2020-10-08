@@ -24,6 +24,10 @@ import static java.util.stream.Collectors.toList;
  */
 public class MybatisConfigurationMock extends MockUp<Configuration> {
     static boolean hasMock = false;
+    /**
+     * 要mock的class文件默认存在
+     */
+    static boolean classNotFound = false;
 
     public MybatisConfigurationMock() {
         hasMock = true;
@@ -49,10 +53,10 @@ public class MybatisConfigurationMock extends MockUp<Configuration> {
             return null;
         } else {
             return boundSql.getParameterMappings().stream()
-                    .filter(this::isInParameter)
-                    .map(parameterMapping -> parseParameterValue(configuration, typeHandlerRegistry, boundSql, parameterMapping))
-                    .collect(toList())
-                    .toArray();
+                .filter(this::isInParameter)
+                .map(parameterMapping -> parseParameterValue(configuration, typeHandlerRegistry, boundSql, parameterMapping))
+                .collect(toList())
+                .toArray();
         }
     }
 
