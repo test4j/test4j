@@ -95,20 +95,31 @@ public abstract class BaseTemplate {
         return table.getBasePackage() + "." + sub;
     }
 
-    protected String getConfig(Map<String, Object> context, String key) {
+    /**
+     * 从context中获取ongl配置值
+     *
+     * @param context  上下文
+     * @param key      ongl表达式 key1.key2
+     * @param _default 默认值
+     * @return 如果key值不存在, 且默认值为null, 则抛出异常
+     */
+    public static String getConfig(Map<String, Object> context, String key, String _default) {
         Object temp = context;
         String[] keys = key.split("\\.");
         for (String item : keys) {
             if (temp instanceof Map) {
                 temp = ((Map) temp).get(item);
             } else {
-                throw new RuntimeException("illegal operate:" + key);
+                throw new RuntimeException("the key[" + key + "] not found.");
             }
         }
         if (temp instanceof String) {
             return (String) temp;
+        }
+        if (temp == null && _default != null) {
+            return _default;
         } else {
-            throw new RuntimeException("illegal operate");
+            throw new RuntimeException("the key[" + key + "] not found.");
         }
     }
 
@@ -123,7 +134,7 @@ public abstract class BaseTemplate {
         String replaced = str;
         for (String var : vars) {
             if (VAR_MAPPING.containsKey(var)) {
-                replaced = replaced.replace(var, this.getConfig(context, VAR_MAPPING.get(var)));
+                replaced = replaced.replace(var, getConfig(context, VAR_MAPPING.get(var), null));
             }
         }
         return replaced;

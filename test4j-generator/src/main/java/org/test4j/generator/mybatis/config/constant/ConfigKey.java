@@ -33,4 +33,6 @@ public interface ConfigKey {
     String KEY_MAPPING = "mapping";
 
     String KEY_ENTITY = "entity";
+
+    String KEY_OVER_WRITE = "overWrite";
 }

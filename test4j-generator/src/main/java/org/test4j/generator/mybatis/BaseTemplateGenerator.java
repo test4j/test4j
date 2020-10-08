@@ -18,6 +18,7 @@ import org.test4j.generator.mybatis.template.BaseTemplate;
 import org.test4j.hamcrest.Assert;
 import org.test4j.tools.commons.StringHelper;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -117,14 +118,22 @@ public abstract class BaseTemplateGenerator implements IGlobalConfig, ITableConf
      * @param context
      */
     private void generateTemplates(TableSetter table, Map<String, Object> context) {
-        this.getAllTemplates().stream()
-            .filter(template -> !template.isPartition() || table.isPartition())
-            .forEach(template -> {
-                String filePath = template.getFilePath();
-                info("=========生成文件: " + template.getFileNameReg());
-                Assert.notNull(filePath, "文件路径不能为空,[table=%s,template=%s]", table.getTableName(), template.getTemplate());
-                templateEngine.output(template.getTemplate(), context, filePath);
-            });
+        for (BaseTemplate template : this.getAllTemplates()) {
+            if (template.isPartition() && !table.isPartition()) {
+                continue;
+            }
+            String filePath = template.getFilePath();
+            String key = template.getTemplateId() + "." + KEY_OVER_WRITE;
+            String overwrite = template.getConfig(context, key, Boolean.TRUE.toString());
+            File file = new File(filePath);
+            if (!Boolean.valueOf(overwrite) && file.exists()) {
+                info("=========跳过文件[" + file.getName() + "], 文件已经存在, 根据配置跳过重写");
+                continue;
+            }
+            info("=========生成文件[" + file.getName() + "]");
+            Assert.notNull(filePath, "文件路径不能为空,[table=%s,template=%s]", table.getTableName(), template.getTemplate());
+            templateEngine.output(template.getTemplate(), context, filePath);
+        }
     }
 
     /**
