@@ -3,11 +3,12 @@ package org.test4j.generator.db;
 import org.junit.Test;
 import org.test4j.generator.convert.UnderlineToCapital;
 
-class UnderlineToCapitalTest {
+public class UnderlineToCapitalTest {
 
     @Test
     public void convertPath() {
-        UnderlineToCapital.convertPath("/Users/darui.wu/workspace/fluent-mybatis-v1.3.0/fluent-mybatis-test/src/test/java/cn/org/atool/fluent/mybatis/method");
+        String path = "/Users/wudarui/workspace/github/fluent-mybatis/fluent-mybatis-test/src/test/java/cn/org/atool/fluent/mybatis";
+        UnderlineToCapital.convertPath(path);
     }
 
     @Test
