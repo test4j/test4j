@@ -18,7 +18,7 @@ public @interface ColumnDef {
      *
      * @return
      */
-    String value();
+    String value() default "";
 
     /**
      * 数据库字段类型

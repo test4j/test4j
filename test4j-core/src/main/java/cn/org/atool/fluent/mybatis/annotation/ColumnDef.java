@@ -15,6 +15,8 @@ import java.lang.annotation.Target;
 @Target(ElementType.FIELD)
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ColumnDef {
+
+    String value() default "";
     /**
      * 数据库字段类型
      *
