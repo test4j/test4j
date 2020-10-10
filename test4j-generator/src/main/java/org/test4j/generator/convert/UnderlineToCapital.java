@@ -52,7 +52,7 @@ public class UnderlineToCapital {
         return value;
     }
 
-    private static String reg = "(.*\\.)(\\w+_[\\w\\d_]+)(\\.(values|formatAutoIncrease)\\(.*\\)+;?(.*))";
+    private static String reg = "(.*\\.)(\\w+_[\\w\\d_]+)(\\.(values|formatAutoIncrease|autoIncrease)\\(.*\\)+;?(.*))";
 
     private static Pattern pattern = Pattern.compile(reg);
 
