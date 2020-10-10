@@ -1,14 +1,11 @@
 package org.test4j.module.database.utility;
 
-import cn.org.atool.fluent.mybatis.annotation.TableNameCompatible;
-import javafx.animation.KeyValue;
 import lombok.Setter;
 import org.test4j.module.database.annotations.ColumnDef;
 import org.test4j.module.database.annotations.ScriptTable;
 import org.test4j.module.database.utility.script.H2Script;
 import org.test4j.module.database.utility.script.MysqlScript;
 import org.test4j.tools.commons.AnnotationHelper;
-import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.commons.StringHelper;
 
 import java.lang.reflect.Field;
@@ -77,8 +74,6 @@ public abstract class EntityScriptParser {
         Set<Field> annotations = AnnotationHelper.getFieldsAnnotatedWith(klass, ColumnDef.class);
         if (annotations != null && !annotations.isEmpty()) {
             return annotations.stream().map(ColumnDefine::new).collect(toList());
-        } else if (ClazzHelper.isClassAvailable(TableNameCompatible.ColumnDef_Klass_Name)) {
-            return TableNameCompatible.findFields(klass);
         } else {
             throw new RuntimeException("the entity[" + klass.getName() + "] field should be defined by @ColumnDef");
         }
@@ -104,9 +99,6 @@ public abstract class EntityScriptParser {
     protected String getTableName() {
         ScriptTable annotation = AnnotationHelper.getClassLevelAnnotation(ScriptTable.class, klass);
         if (annotation == null) {
-            if (ClazzHelper.isClassAvailable(TableNameCompatible.TableName_Klass_Name)) {
-                return TableNameCompatible.getTableName(klass);
-            }
             throw new RuntimeException("the entity class[" + klass.getName() + "] should be defined by @ScriptTable");
         } else {
             return annotation.value();

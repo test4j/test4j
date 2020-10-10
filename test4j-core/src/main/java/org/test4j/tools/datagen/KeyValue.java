@@ -23,6 +23,13 @@ public class KeyValue<M extends IDataMap> {
 
     private final Supplier<Boolean> isTable;
 
+    public KeyValue(M map, String column) {
+        this.map = map;
+        this.column = column;
+        this.property = null;
+        this.isTable = () -> true;
+    }
+
     public KeyValue(M map, String column, String property, Supplier<Boolean> isTable) {
         this.map = map;
         this.column = column;
