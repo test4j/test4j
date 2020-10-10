@@ -1,0 +1,13 @@
+package ${basePackage};
+
+import ${basePackage}.dm.*;
+
+/**
+ * Table Data Map
+ */
+public interface DM {
+#foreach(${config} in ${configs})
+
+    ${config.dataMap.name}.Factory ${config.dataMap.instance} = new ${config.dataMap.name}.Factory();
+#end
+}

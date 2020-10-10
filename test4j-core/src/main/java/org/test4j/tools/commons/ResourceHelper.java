@@ -1,7 +1,6 @@
 package org.test4j.tools.commons;
 
 import ext.test4j.apache.commons.io.IOUtils;
-import org.test4j.exception.Test4JException;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.tools.cpdetector.CodepageDetectorProxy;
 import org.test4j.tools.cpdetector.JChardetFacade;
@@ -12,8 +11,6 @@ import java.net.URL;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
 import java.util.List;
-
-import static ext.test4j.apache.commons.io.IOUtils.closeQuietly;
 
 /**
  * ResourceHelper
@@ -49,8 +46,6 @@ public class ResourceHelper {
             return buffer.toString();
         } catch (IOException e) {
             throw new RuntimeException(e);
-        } finally {
-            closeQuietly(is);
         }
     }
 
@@ -86,8 +81,6 @@ public class ResourceHelper {
             return list.toArray(new String[0]);
         } catch (IOException e) {
             throw new RuntimeException(e);
-        } finally {
-            closeQuietly(is);
         }
     }
 
@@ -141,7 +134,7 @@ public class ResourceHelper {
              OutputStream fileOutputStream = new FileOutputStream(fileSystemResourceFile)) {
             IOUtils.copy(resourceInputStream, fileOutputStream);
         } catch (IOException e) {
-            throw new Test4JException(e);
+            throw new RuntimeException(e);
         }
     }
 
@@ -324,11 +317,15 @@ public class ResourceHelper {
      *
      * @param file
      * @return
-     * @throws FileNotFoundException
      */
-    public static String readFromFile(ClassLoader klassLoader, String file) throws FileNotFoundException {
-        InputStream stream = getResourceAsStream(klassLoader, file);
-        return readFromStream(stream);
+    public static String readFromFile(ClassLoader klassLoader, String file) {
+        try {
+            try (InputStream stream = getResourceAsStream(klassLoader, file)) {
+                return readFromStream(stream);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -340,11 +337,25 @@ public class ResourceHelper {
      *
      * @param file
      * @return
-     * @throws FileNotFoundException
      */
-    public static String readFromFile(String file) throws FileNotFoundException {
-        InputStream stream = getResourceAsStream(ResourceHelper.class.getClassLoader(), file);
-        return readFromStream(stream);
+    public static String readFromFile(String file) {
+        try {
+            try (InputStream stream = getResourceAsStream(ResourceHelper.class.getClassLoader(), file)) {
+                return readFromStream(stream);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public static String[] readLinesFromFile(File file) {
+        try {
+            try (InputStream stream = new FileInputStream(file)) {
+                return readLinesFromStream(stream);
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -376,9 +387,8 @@ public class ResourceHelper {
      * @param clazz    文件所在的class package
      * @param fileName
      * @return
-     * @throws FileNotFoundException
      */
-    public static String readFromFile(Class clazz, String fileName) throws FileNotFoundException {
+    public static String readFromFile(Class clazz, String fileName) {
         if (StringHelper.isBlank(fileName)) {
             throw new RuntimeException("file name can't be null.");
         }
@@ -386,10 +396,14 @@ public class ResourceHelper {
             String content = readFromFile(clazz.getClassLoader(), fileName);
             return content;
         } else {
-            InputStream is = getResourceAsStream(clazz, fileName);
-
-            String content = readFromStream(is);
-            return content;
+            try {
+                try (InputStream is = getResourceAsStream(clazz, fileName)) {
+                    String content = readFromStream(is);
+                    return content;
+                }
+            } catch (IOException e) {
+                throw new RuntimeException(e);
+            }
         }
     }
 
@@ -398,18 +412,27 @@ public class ResourceHelper {
      *
      * @param filePath
      * @return
-     * @throws FileNotFoundException
      */
-    public static String[] readLinesFromFile(ClassLoader klassLoader, String filePath) throws FileNotFoundException {
-        InputStream stream = getResourceAsStream(klassLoader, filePath);
-        String[] lines = readLinesFromStream(stream);
-        return lines;
+    public static String[] readLinesFromFile(ClassLoader klassLoader, String filePath) {
+        try {
+            try (InputStream stream = getResourceAsStream(klassLoader, filePath)) {
+                String[] lines = readLinesFromStream(stream);
+                return lines;
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
-    public static String[] readLinesFromFile(ClassLoader klassLoader, String filePath, String encoding) throws FileNotFoundException {
-        InputStream stream = getResourceAsStream(klassLoader, filePath);
-        String[] lines = readLinesFromStream(stream, encoding);
-        return lines;
+    public static String[] readLinesFromFile(ClassLoader klassLoader, String filePath, String encoding) {
+        try {
+            try (InputStream stream = getResourceAsStream(klassLoader, filePath)) {
+                String[] lines = readLinesFromStream(stream, encoding);
+                return lines;
+            }
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**

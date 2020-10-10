@@ -49,7 +49,7 @@ public class SqlRunner {
             for (String statement : statements) {
                 execute(env, statement);
             }
-        } catch (FileNotFoundException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
     }

@@ -1,6 +1,6 @@
 package cn.org.atool.fluent.mybatis.generator.demo;
 
-import cn.org.atool.fluent.mybatis.generator.demo.datamap.table.*;
+import cn.org.atool.fluent.mybatis.generator.demo.dm.*;
 import org.test4j.module.database.IDataSourceScript;
 
 import java.util.List;
@@ -14,10 +14,10 @@ public class DataSourceScript implements IDataSourceScript {
     @Override
     public List<Class> getTableKlass() {
         return list(
-            AddressTableMap.class,
-            UserTableMap.class,
-            NoPrimaryTableMap.class,
-            NoAutoIdTableMap.class
+            AddressDataMap.class,
+            NoPrimaryDataMap.class,
+            UserDataMap.class,
+            NoAutoIdDataMap.class
         );
     }
 

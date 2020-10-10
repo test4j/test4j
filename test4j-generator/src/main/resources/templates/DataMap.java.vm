@@ -1,0 +1,110 @@
+package ${dataMap.package};
+
+import org.test4j.module.database.annotations.ColumnDef;
+import org.test4j.module.database.annotations.ScriptTable;
+import org.test4j.module.ICore.DataMap;
+import org.test4j.tools.datagen.KeyValue;
+
+import java.util.Date;
+import java.util.function.Consumer;
+import java.util.function.Supplier;
+
+/**
+ * @ClassName ${dataMap.name}
+ * @Description ${dataMap.name}
+ *
+ * @author ${author}
+ */
+@ScriptTable("${table}")
+public class ${dataMap.name} extends DataMap<${dataMap.name}> {
+    private boolean isTable;
+
+    private Supplier<Boolean> supplier = () -> this.isTable;
+#foreach($field in ${fields})
+    #set($primary="")
+    #if(${field.primary})
+        #set($primary=", primary = true")
+        #if(${field.primaryId})
+            #set($primary=", primary = true, autoIncrease = true")
+        #end
+    #end
+
+    @ColumnDef(type = "${field.jdbcType}"${primary})
+    public transient final KeyValue<${dataMap.name}> ${field.name} = new KeyValue(this, "${field.columnName}", "${field.name}", supplier);
+#end
+
+    public ${dataMap.name}(boolean isTable) {
+        super();
+        this.isTable = isTable;
+    }
+
+    public ${dataMap.name}(boolean isTable, int size) {
+        super(size);
+        this.isTable = isTable;
+    }
+
+    /**
+     * 创建${dataMap.name}
+     * 并初始化主键和gmtCreate, gmtModified, isDeleted等特殊值
+     *
+     */
+    public ${dataMap.name} init() {
+#foreach($field in ${fields})
+    #if(${field.primaryId})
+        this.${field.name}.autoIncrease();
+    #elseif(${field.gmt})
+        this.${field.name}.values(new Date());
+    #elseif(${field.deleted} && ${field.type} == 'Boolean')
+        this.${field.name}.values(false);
+    #end
+#end
+        return this;
+    }
+
+    public ${dataMap.name} with(Consumer<${dataMap.name}> init) {
+        init.accept(this);
+        return this;
+    }
+
+    public static ${dataMap.name} table() {
+        return new ${dataMap.name}(true, 1);
+    }
+
+    public static ${dataMap.name} table(int size) {
+        return new ${dataMap.name}(true, size);
+    }
+
+    public static ${dataMap.name} entity() {
+        return new ${dataMap.name}(false);
+    }
+
+    public static ${dataMap.name} entity(int size) {
+        return new ${dataMap.name}(false, size);
+    }
+
+    public static class Factory {
+        public ${dataMap.name} table() {
+            return ${dataMap.name}.table();
+        }
+
+        public ${dataMap.name} table(int size) {
+            return ${dataMap.name}.table(size);
+        }
+
+        public ${dataMap.name} initTable() {
+            return ${dataMap.name}.table(1).init();
+        }
+
+        public ${dataMap.name} initTable(int size) {
+            return ${dataMap.name}.table(size).init();
+        }
+
+        public ${dataMap.name} entity() {
+            return ${dataMap.name}.entity();
+        }
+
+        public ${dataMap.name} entity(int size) {
+            return ${dataMap.name}.entity(size);
+        }
+    }
+}
