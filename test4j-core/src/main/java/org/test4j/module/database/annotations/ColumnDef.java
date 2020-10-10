@@ -14,6 +14,13 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface ColumnDef {
     /**
+     * 字段名称
+     *
+     * @return
+     */
+    String value();
+
+    /**
      * 数据库字段类型
      *
      * @return

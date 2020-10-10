@@ -1,7 +1,7 @@
 package org.test4j.module.database.dbop;
 
 import org.junit.jupiter.api.Test;
-import org.test4j.db.datamap.table.UserTableMap;
+import org.test4j.db.dm.UserDataMap;
 import org.test4j.hamcrest.matcher.string.StringMode;
 import org.test4j.junit5.Test4J;
 import org.test4j.tools.commons.ResourceHelper;
@@ -21,36 +21,36 @@ class TableOpTest_PrintDataMap extends Test4J {
 
     @Test
     void printAsDataMap() {
-        db.table(t_user).clean().insert(UserTableMap.create(4)
-                .id.autoIncrease()
-                .user_name.values("name1", "name2", "name3", "name4")
-                .age.values(null, 3, 5, null)
+        db.table(t_user).clean().insert(UserDataMap.table(4)
+            .id.autoIncrease()
+            .userName.values("name1", "name2", "name3", "name4")
+            .age.values(null, 3, 5, null)
         );
-        String text = db.printAsDataMap(t_user, UserTableMap.class.getSimpleName());
+        String text = db.printAsDataMap(t_user, UserDataMap.class.getSimpleName());
         want.string(text).eq(
-                "UserTableMap.create(4)" +
-                        "   .user_name.values('name1', 'name2', 'name3', 'name4')" +
-                        "   .id.values('1', '2', '3', '4')" +
-                        "   .age.values(null, '3', '5', null)"
-                , StringMode.IgnoreSpace, StringMode.SameAsQuato);
+            "UserDataMap.create(4)" +
+                "   .user_name.values('name1', 'name2', 'name3', 'name4')" +
+                "   .id.values('1', '2', '3', '4')" +
+                "   .age.values(null, '3', '5', null)"
+            , StringMode.IgnoreSpace, StringMode.SameAsQuato);
 
-        text = db.printAsDataMap("t_user where 1=1", UserTableMap.class.getSimpleName());
+        text = db.printAsDataMap("t_user where 1=1", UserDataMap.class.getSimpleName());
         want.string(text).eq(
-                "UserTableMap.create(4)" +
-                        "   .user_name.values('name1', 'name2', 'name3', 'name4')" +
-                        "   .id.values('1', '2', '3', '4')" +
-                        "   .age.values(null, '3', '5', null)"
-                , StringMode.IgnoreSpace, StringMode.SameAsQuato);
+            "UserDataMap.create(4)" +
+                "   .user_name.values('name1', 'name2', 'name3', 'name4')" +
+                "   .id.values('1', '2', '3', '4')" +
+                "   .age.values(null, '3', '5', null)"
+            , StringMode.IgnoreSpace, StringMode.SameAsQuato);
     }
 
     @Test
     void printAsJson() throws FileNotFoundException {
-        DataMap datas = UserTableMap.create(4)
-                .id.autoIncrease()
-                .user_name.values("name1", "name2", "name3", "name4")
-                .age.values(null, 3, 5, null)
-                .first_name.values("first1", "first2")
-                .last_name.values(null, "last2", "last3", "last4");
+        DataMap datas = UserDataMap.table(4)
+            .id.autoIncrease()
+            .userName.values("name1", "name2", "name3", "name4")
+            .age.values(null, 3, 5, null)
+            .firstName.values("first1", "first2")
+            .lastName.values(null, "last2", "last3", "last4");
         db.table(t_user).clean().insert(datas);
         String text = db.printAsJson(new String[]{t_user}, new String[]{"first_name", "last_name", "user_name"});
         String json = ResourceHelper.readFromFile(this.getClass(), "print_as_json.json");
@@ -64,7 +64,7 @@ class TableOpTest_PrintDataMap extends Test4J {
         db.insert(TableMap.fromFile(this.getClass(), "TableOpTest_PrintDataMap-column_is_json.json"), true);
         db.table(t_user).printAndAssert(null);
         db.table(t_user).query().eqReflect(DataMap.create(4)
-                .kv("user_name", "{\"name1\":\"ttt\"}")
+            .kv("user_name", "{\"name1\":\"ttt\"}")
         );
     }
 }

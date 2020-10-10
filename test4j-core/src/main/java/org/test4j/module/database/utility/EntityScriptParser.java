@@ -1,6 +1,7 @@
 package org.test4j.module.database.utility;
 
 import cn.org.atool.fluent.mybatis.annotation.TableNameCompatible;
+import javafx.animation.KeyValue;
 import lombok.Setter;
 import org.test4j.module.database.annotations.ColumnDef;
 import org.test4j.module.database.annotations.ScriptTable;
@@ -8,6 +9,7 @@ import org.test4j.module.database.utility.script.H2Script;
 import org.test4j.module.database.utility.script.MysqlScript;
 import org.test4j.tools.commons.AnnotationHelper;
 import org.test4j.tools.commons.ClazzHelper;
+import org.test4j.tools.commons.StringHelper;
 
 import java.lang.reflect.Field;
 import java.util.List;
@@ -15,6 +17,7 @@ import java.util.Set;
 
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
+import static org.test4j.tools.commons.StringHelper.isNotBlank;
 
 /**
  * 实体对应数据表脚本生成
@@ -146,7 +149,7 @@ public abstract class EntityScriptParser {
         }
 
         public ColumnDefine(Field field) {
-            this.name = field.getName();
+            this.name = StringHelper.camel(field.getName());
             ColumnDef def = field.getAnnotation(ColumnDef.class);
             if (def != null) {
                 this.init(def);
@@ -156,6 +159,9 @@ public abstract class EntityScriptParser {
         }
 
         private void init(ColumnDef def) {
+            if (isNotBlank(def.value())) {
+                this.name = def.value();
+            }
             this.type = def.type();
             this.primary = def.primary();
             this.autoIncrease = def.autoIncrease();

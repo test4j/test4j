@@ -21,10 +21,10 @@ public class NoPrimaryDataMap extends DataMap<NoPrimaryDataMap> {
 
     private Supplier<Boolean> supplier = () -> this.isTable;
 
-    @ColumnDef(type = "int(11)")
+    @ColumnDef(value = "column_1", type = "int(11)")
     public transient final KeyValue<NoPrimaryDataMap> column1 = new KeyValue(this, "column_1", "column1", supplier);
 
-    @ColumnDef(type = "varchar(100)")
+    @ColumnDef(value = "column_2", type = "varchar(100)")
     public transient final KeyValue<NoPrimaryDataMap> column2 = new KeyValue(this, "column_2", "column2", supplier);
 
     public NoPrimaryDataMap(boolean isTable) {

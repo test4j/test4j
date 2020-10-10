@@ -1,7 +1,7 @@
 package org.test4j.db;
 
-import org.test4j.db.datamap.table.AddressTableMap;
-import org.test4j.db.datamap.table.UserTableMap;
+import org.test4j.db.dm.AddressDataMap;
+import org.test4j.db.dm.UserDataMap;
 import org.test4j.module.database.IDataSourceScript;
 
 import java.util.List;
@@ -16,8 +16,8 @@ public class DataSourceScript implements IDataSourceScript {
     @Override
     public List<Class> getTableKlass() {
         return list(
-                AddressTableMap.class,
-                UserTableMap.class
+                AddressDataMap.class,
+                UserDataMap.class
         );
     }
 

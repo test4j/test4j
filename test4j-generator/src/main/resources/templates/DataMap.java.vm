@@ -29,7 +29,7 @@ public class ${dataMap.name} extends DataMap<${dataMap.name}> {
         #end
     #end
 
-    @ColumnDef(type = "${field.jdbcType}"${primary})
+    @ColumnDef(value = "${field.columnName}", type = "${field.jdbcType}"${primary})
     public transient final KeyValue<${dataMap.name}> ${field.name} = new KeyValue(this, "${field.columnName}", "${field.name}", supplier);
 #end
 

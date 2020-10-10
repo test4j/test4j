@@ -2,13 +2,11 @@ package org.test4j.module.database.dbop;
 
 import org.junit.jupiter.api.Test;
 import org.test4j.db.ITable;
-import org.test4j.db.datamap.table.UserTableMap;
+import org.test4j.db.dm.UserDataMap;
 import org.test4j.hamcrest.matcher.modes.EqMode;
 import org.test4j.junit5.Test4J;
 
 import java.io.File;
-
-import static org.test4j.db.mapping.UserMP.Column;
 
 
 @SuppressWarnings("serial")
@@ -16,10 +14,10 @@ public class DBOperatorTest extends Test4J {
 
     @Test
     public void testClean() {
-        db.table(ITable.t_user).clean().insert(new UserTableMap(3) {
+        db.table(ITable.t_user).clean().insert(new UserDataMap(true, 3) {
             {
-                this.kv(Column.id, 1, 2, 3);
-                this.kv(Column.first_name, "2323", "asdf", "adfe");
+                this.kv("id", 1, 2, 3);
+                this.kv("first_name", "2323", "asdf", "adfe");
             }
         });
         db.table(ITable.t_user).count().isEqualTo(3);
@@ -30,25 +28,25 @@ public class DBOperatorTest extends Test4J {
 
     @Test
     public void testQueryList() {
-        db.table(ITable.t_user).clean().insert(new UserTableMap(3) {
+        db.table(ITable.t_user).clean().insert(new UserDataMap(true, 3) {
             {
-                this.kv(Column.id, 1, 2, 3);
-                this.kv(Column.first_name, "2323", "asdf", "adfe");
+                this.kv("id", 1, 2, 3);
+                this.kv("first_name", "2323", "asdf", "adfe");
             }
         });
         db.table(ITable.t_user).count().isEqualTo(3);
         db.table(ITable.t_user)
-                .query()
-                .eqByProperties(Column.first_name, new String[]{"2323", "asdf", "adfe"},
-                        EqMode.IGNORE_ORDER);
+            .query()
+            .eqByProperties("first_name", new String[]{"2323", "asdf", "adfe"},
+                EqMode.IGNORE_ORDER);
     }
 
     @Test
     public void testCount() {
-        db.table(ITable.t_user).clean().insert(new UserTableMap(3) {
+        db.table(ITable.t_user).clean().insert(new UserDataMap(true, 3) {
             {
-                this.kv(Column.id, 1, 2, 3);
-                this.kv(Column.first_name, "2323", "asdf", "adfe");
+                this.kv("id", 1, 2, 3);
+                this.kv("first_name", "2323", "asdf", "adfe");
             }
         });
         db.table(ITable.t_user).count().isEqualTo(3);
@@ -57,10 +55,10 @@ public class DBOperatorTest extends Test4J {
 
     @Test
     public void testExecute() {
-        db.table(ITable.t_user).clean().insert(new UserTableMap(3) {
+        db.table(ITable.t_user).clean().insert(new UserDataMap(true, 3) {
             {
-                this.kv(Column.id, 1, 2, 3);
-                this.kv(Column.first_name, "2323", "asdf", "adfe");
+                this.kv("id", 1, 2, 3);
+                this.kv("first_name", "2323", "asdf", "adfe");
             }
         });
         db.table(ITable.t_user).count().isEqualTo(3);
@@ -83,7 +81,7 @@ public class DBOperatorTest extends Test4J {
     @Test
     public void testExecute_FromFile() {
         final String file = System.getProperty("user.dir")
-                + "/src/test/resources/org/test4j/module/database/sql-demo.sql";
+            + "/src/test/resources/org/test4j/module/database/sql-demo.sql";
         db.cleanTable(ITable.t_user).execute(new File(file));
         db.table(ITable.t_user).count().isEqualTo(2);
     }

@@ -37,6 +37,24 @@ public enum Naming {
         return result.toString();
     }
 
+    public static String capital2underline(String name) {
+        if (StringHelper.isBlank(name)) {
+            return "";
+        }
+        String tempName = name;
+        if (isCapitalMode(name) || isMixedMode(name)) {
+            tempName = name.toLowerCase();
+        }
+        String[] camels = tempName.split("_");
+        StringBuilder result = new StringBuilder();
+        for (String word : camels) {
+            if (!StringHelper.isBlank(word)) {
+                result.append(result.length() == 0 ? word : capitalFirst(word));
+            }
+        }
+        return result.toString();
+    }
+
     private static final Pattern CAPITAL_MODE = Pattern.compile("^[0-9A-Z/_]+$");
 
     public static boolean isCapitalMode(String word) {

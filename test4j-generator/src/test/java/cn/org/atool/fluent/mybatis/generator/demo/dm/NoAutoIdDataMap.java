@@ -21,10 +21,10 @@ public class NoAutoIdDataMap extends DataMap<NoAutoIdDataMap> {
 
     private Supplier<Boolean> supplier = () -> this.isTable;
 
-    @ColumnDef(type = "varchar(50)", primary = true)
+    @ColumnDef(value = "id", type = "varchar(50)", primary = true)
     public transient final KeyValue<NoAutoIdDataMap> id = new KeyValue(this, "id", "id", supplier);
 
-    @ColumnDef(type = "varchar(20)")
+    @ColumnDef(value = "column_1", type = "varchar(20)")
     public transient final KeyValue<NoAutoIdDataMap> column1 = new KeyValue(this, "column_1", "column1", supplier);
 
     public NoAutoIdDataMap(boolean isTable) {
