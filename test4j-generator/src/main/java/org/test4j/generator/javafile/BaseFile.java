@@ -1,7 +1,6 @@
 package org.test4j.generator.javafile;
 
 import com.squareup.javapoet.*;
-import org.springframework.scheduling.support.SimpleTriggerContext;
 import org.test4j.generator.config.impl.TableSetter;
 
 import javax.lang.model.element.Modifier;

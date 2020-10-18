@@ -21,7 +21,7 @@ public class GeneratorMain {
         url = url, username = "root", password = "password",
         srcDir = "test4j-generator/src/test/java",
         testDir = "test4j-generator/src/test/java",
-        daoDir = "test4j-generator/src/test/java",
+        //daoDir = "test4j-generator/src/test/java",
         basePack = "cn.org.atool.fluent.mybatis.generator.demo",
         tables = {
             @Table(value = "address"),

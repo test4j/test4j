@@ -1,18 +1,31 @@
 package org.test4j.generator.javafile;
 
 import com.squareup.javapoet.ClassName;
+import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 import org.test4j.generator.config.impl.TableSetter;
 
 public class DaoInterfaceFile extends BaseFile {
-    static ClassName Repository = ClassName.get("org.springframework.stereotype", "Repository");
 
     static ClassName IBaseDao = ClassName.get("cn.org.atool.fluent.mybatis.base", "IBaseDao");
 
     public DaoInterfaceFile(TableSetter table) {
         super(table);
-        this.packageName = table.getBasePackage() + ".dao.intf";
-        this.klassName = table.getEntityPrefix() + "Dao";
+        this.packageName = daoPackage(table);
+        this.klassName = daoClass(table);
+    }
+
+
+    public static TypeName daoInterfaceName(TableSetter table) {
+        return ClassName.get(daoPackage(table), daoClass(table));
+    }
+
+    public static String daoPackage(TableSetter table) {
+        return table.getBasePackage() + ".dao.intf";
+    }
+
+    public static String daoClass(TableSetter table) {
+        return table.getEntityPrefix() + "Dao";
     }
 
     @Override
