@@ -4,15 +4,15 @@ import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.test4j.generator.config.ITableSetter;
+import org.test4j.generator.config.constant.DefinedColumn;
+import org.test4j.generator.config.constant.Naming;
+import org.test4j.generator.config.constant.OutputDir;
 import org.test4j.generator.db.DateType;
 import org.test4j.generator.db.DbType;
 import org.test4j.generator.db.IDbQuery;
 import org.test4j.generator.db.IFieldCategory;
 import org.test4j.generator.db.query.H2Query;
-import org.test4j.generator.config.ITableSetter;
-import org.test4j.generator.config.constant.DefinedColumn;
-import org.test4j.generator.config.constant.Naming;
-import org.test4j.generator.config.constant.OutputDir;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -23,7 +23,7 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 import static org.test4j.generator.config.constant.ConfigKey.*;
-import static org.test4j.tools.commons.StringHelper.isBlank;
+import static org.test4j.generator.convert.Util.isBlank;
 
 /**
  * 表信息，关联到当前字段信息

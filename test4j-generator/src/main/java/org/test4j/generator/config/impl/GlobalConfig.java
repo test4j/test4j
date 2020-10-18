@@ -5,14 +5,14 @@ import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
+import org.test4j.generator.config.IGlobalConfigSet;
 import org.test4j.generator.config.constant.Naming;
 import org.test4j.generator.db.DbType;
 import org.test4j.generator.db.ITypeConvert;
-import org.test4j.generator.config.IGlobalConfigSet;
 
 import java.util.Objects;
 
-import static org.test4j.tools.commons.StringHelper.isBlank;
+import static org.test4j.generator.convert.Util.isBlank;
 
 /**
  * 策略配置项

@@ -9,10 +9,11 @@ import org.test4j.generator.config.constant.Naming;
 import org.test4j.generator.db.IDbQuery;
 import org.test4j.generator.db.IFieldCategory;
 import org.test4j.generator.db.ITypeConvert;
-import org.test4j.tools.commons.StringHelper;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import static org.test4j.generator.convert.Util.isBlank;
 
 /**
  * 表字段信息
@@ -101,7 +102,7 @@ public class TableField implements Comparable<TableField> {
     private void initFieldName() {
         GlobalConfig globalConfig = this.tableInfo.getGlobalConfig();
         // 如果字段名称没有预设
-        if (StringHelper.isBlank(this.name)) {
+        if (isBlank(this.name)) {
             Naming naming = globalConfig.getColumnNaming();
             if (naming == Naming.underline_to_camel) {
                 this.name = Naming.underlineToCamel(this.columnName);

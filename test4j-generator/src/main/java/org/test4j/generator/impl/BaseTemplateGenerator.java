@@ -13,7 +13,6 @@ import org.test4j.generator.config.impl.GlobalConfig;
 import org.test4j.generator.config.impl.TableConfigSet;
 import org.test4j.generator.config.impl.TableSetter;
 import org.test4j.generator.engine.AbstractTemplateEngine;
-import org.test4j.generator.engine.VelocityTemplateEngine;
 import org.test4j.generator.javafile.DaoImplementFile;
 import org.test4j.generator.javafile.DaoInterfaceFile;
 import org.test4j.generator.javafile.DataMapFile;
