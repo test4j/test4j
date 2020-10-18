@@ -18,7 +18,6 @@ public interface DataMapTemplateList {
     );
 
     List<BaseTemplate> entity_list = Arrays.asList(
-        new DaoIntfTemplate(),
         new DaoImplTemplate()
     );
 

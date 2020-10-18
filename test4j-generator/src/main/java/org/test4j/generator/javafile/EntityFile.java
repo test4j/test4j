@@ -36,8 +36,20 @@ public class EntityFile extends BaseFile {
 
     public EntityFile(TableSetter table) {
         super(table);
-        this.packageName = table.getBasePackage() + ".entity";
-        this.klassName = table.getEntityPrefix() + "Entity";
+        this.packageName = entityPackage(table);
+        this.klassName = entityClass(table);
+    }
+
+    public static TypeName entityName(TableSetter table) {
+        return ClassName.get(entityPackage(table), entityClass(table));
+    }
+
+    public static String entityPackage(TableSetter table) {
+        return table.getBasePackage() + ".entity";
+    }
+
+    public static String entityClass(TableSetter table) {
+        return table.getEntityPrefix() + "Entity";
     }
 
     @Override

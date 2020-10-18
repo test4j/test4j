@@ -1,6 +1,7 @@
 package org.test4j.generator.javafile;
 
 import com.squareup.javapoet.*;
+import org.springframework.scheduling.support.SimpleTriggerContext;
 import org.test4j.generator.config.impl.TableSetter;
 
 import javax.lang.model.element.Modifier;
@@ -31,16 +32,21 @@ public abstract class BaseFile {
      *
      * @param srcDir 代码src路径
      */
-    public final void javaFile(String srcDir) {
-        this.javaFile(new File(srcDir));
+    public final void javaFile(String srcDir, boolean forceWrite) {
+        this.javaFile(new File(srcDir), forceWrite);
     }
 
     /**
      * 生成java文件
      *
-     * @param srcDir 代码src路径
+     * @param srcDir     代码src路径
+     * @param forceWrite 重写
      */
-    public final void javaFile(File srcDir) {
+    public final void javaFile(File srcDir, boolean forceWrite) {
+        if (!forceWrite && new File(srcDir + this.filePath()).exists()) {
+            System.out.println("=========文件:" + this.klassName + ".java已经存在, 根据配置跳过重写=========");
+            return;
+        }
         TypeSpec.Builder builder;
         if (this.isInterface()) {
             builder = TypeSpec.interfaceBuilder(klassName).addModifiers(Modifier.PUBLIC);
@@ -57,11 +63,16 @@ public abstract class BaseFile {
         JavaFile.Builder javaBuilder = JavaFile.builder(packageName, builder.build());
         this.staticImport(javaBuilder);
         JavaFile javaFile = javaBuilder.build();
+
         try {
             javaFile.writeTo(srcDir);
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+    }
+
+    private String filePath() {
+        return "/" + this.packageName.replace('.', '/') + "/" + this.klassName + ".java";
     }
 
     protected void staticImport(JavaFile.Builder builder) {
