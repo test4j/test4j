@@ -1,7 +1,6 @@
 package org.test4j.generator.javafile;
 
 import com.squareup.javapoet.ClassName;
-import com.squareup.javapoet.TypeName;
 import com.squareup.javapoet.TypeSpec;
 import org.test4j.generator.config.impl.TableSetter;
 
@@ -15,8 +14,7 @@ public class DaoInterfaceFile extends BaseFile {
         this.klassName = daoClass(table);
     }
 
-
-    public static TypeName daoInterfaceName(TableSetter table) {
+    public static ClassName daoInterfaceName(TableSetter table) {
         return ClassName.get(daoPackage(table), daoClass(table));
     }
 

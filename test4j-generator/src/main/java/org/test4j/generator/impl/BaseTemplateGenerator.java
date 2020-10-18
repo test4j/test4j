@@ -17,6 +17,7 @@ import org.test4j.generator.config.impl.TableConfigSet;
 import org.test4j.generator.config.impl.TableSetter;
 import org.test4j.generator.javafile.DaoImplementFile;
 import org.test4j.generator.javafile.DaoInterfaceFile;
+import org.test4j.generator.javafile.DataMapFile;
 import org.test4j.generator.javafile.EntityFile;
 import org.test4j.generator.template.BaseTemplate;
 import org.test4j.hamcrest.Assert;
@@ -101,10 +102,13 @@ public abstract class BaseTemplateGenerator implements IGlobalConfig, ITableConf
                 this.generateTemplates(table, context);
                 allContext.add(context);
 
+                GlobalConfig gc = table.getGlobalConfig();
+                new EntityFile(table).javaFile(gc.getOutputDir(), true);
+                new DaoInterfaceFile(table).javaFile(gc.getDaoOutputDir(), false);
+                new DaoImplementFile(table).javaFile(gc.getDaoOutputDir(), false);
 
-                new EntityFile(table).javaFile(table.getGlobalConfig().getOutputDir(), true);
-                new DaoInterfaceFile(table).javaFile(table.getGlobalConfig().getDaoOutputDir(), false);
-                new DaoImplementFile(table).javaFile(table.getGlobalConfig().getDaoOutputDir(), false);
+                new DataMapFile(table).javaFile(gc.getTestOutputDir(), true);
+
             }
             info("===文件生成完成！！！");
         }
