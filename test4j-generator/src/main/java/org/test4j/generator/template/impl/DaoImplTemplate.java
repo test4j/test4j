@@ -22,7 +22,7 @@ public class DaoImplTemplate extends BaseTemplate {
     @Override
     protected void templateConfigs(TableSetter table, Map<String, Object> parent, Map<String, Object> context) {
         context.put("baseDaoName", table.getEntityPrefix() + "BaseDao");
-        context.put("baseDaoPack", table.getBasePackage() + ".dao");
+        context.put("baseDaoPack", table.getBasePackage() + ".dao.base");
         context.put(KEY_OVER_WRITE, Boolean.FALSE.toString());
     }
 

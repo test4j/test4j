@@ -10,6 +10,5 @@ import org.springframework.stereotype.Repository;
  *
  * @author ${author}
  */
-@Repository
 public interface ${daoIntf.name} extends IBaseDao<${entity.name}>  {
 }

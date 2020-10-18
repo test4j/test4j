@@ -42,6 +42,7 @@ public class EntityTemplate extends BaseTemplate {
             annotation.put(field.getName(), text);
         }
         ctx.put("annotation", annotation);
+
         StringBuffer buff = new StringBuffer();
         buff.append("table = ").append('"').append(table.getTableName()).append('"');
         if (isNotBlank(table.getMapperBeanPrefix())) {

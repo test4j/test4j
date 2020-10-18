@@ -19,7 +19,7 @@ public class GeneratorMain {
 
     @Tables(
         url = url, username = "root", password = "password",
-//        srcDir = "test4j-generator/src/test/java",
+        srcDir = "test4j-generator/src/test/java",
         testDir = "test4j-generator/src/test/java",
         basePack = "cn.org.atool.fluent.mybatis.generator.demo",
         tables = {

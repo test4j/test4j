@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
+import org.test4j.generator.config.constant.OutputDir;
 import org.test4j.generator.engine.AbstractTemplateEngine;
 import org.test4j.generator.engine.VelocityTemplateEngine;
 import org.test4j.generator.config.IGlobalConfig;
@@ -14,6 +15,7 @@ import org.test4j.generator.config.ITableConfigSet;
 import org.test4j.generator.config.impl.GlobalConfig;
 import org.test4j.generator.config.impl.TableConfigSet;
 import org.test4j.generator.config.impl.TableSetter;
+import org.test4j.generator.javafile.EntityFile;
 import org.test4j.generator.template.BaseTemplate;
 import org.test4j.hamcrest.Assert;
 import org.test4j.tools.commons.StringHelper;
@@ -96,6 +98,9 @@ public abstract class BaseTemplateGenerator implements IGlobalConfig, ITableConf
                 Map<String, Object> context = this.getAllTemplateContext(table);
                 this.generateTemplates(table, context);
                 allContext.add(context);
+
+
+                new EntityFile(table).javaFile(table.getGlobalConfig().getOutputDir());
             }
             info("===文件生成完成！！！");
         }
