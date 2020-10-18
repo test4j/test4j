@@ -5,9 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 import lombok.extern.slf4j.Slf4j;
-import org.test4j.generator.config.constant.OutputDir;
-import org.test4j.generator.engine.AbstractTemplateEngine;
-import org.test4j.generator.engine.VelocityTemplateEngine;
 import org.test4j.generator.config.IGlobalConfig;
 import org.test4j.generator.config.IGlobalConfigSet;
 import org.test4j.generator.config.ITableConfig;
@@ -15,13 +12,13 @@ import org.test4j.generator.config.ITableConfigSet;
 import org.test4j.generator.config.impl.GlobalConfig;
 import org.test4j.generator.config.impl.TableConfigSet;
 import org.test4j.generator.config.impl.TableSetter;
+import org.test4j.generator.engine.AbstractTemplateEngine;
+import org.test4j.generator.engine.VelocityTemplateEngine;
 import org.test4j.generator.javafile.DaoImplementFile;
 import org.test4j.generator.javafile.DaoInterfaceFile;
 import org.test4j.generator.javafile.DataMapFile;
 import org.test4j.generator.javafile.EntityFile;
 import org.test4j.generator.template.BaseTemplate;
-import org.test4j.hamcrest.Assert;
-import org.test4j.tools.commons.StringHelper;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -31,7 +28,7 @@ import java.util.Map;
 import java.util.function.Consumer;
 
 import static org.test4j.generator.config.constant.ConfigKey.*;
-import static org.test4j.module.core.utility.MessageHelper.info;
+import static org.test4j.generator.impl.GeneratorByAnnotation.isBlank;
 
 /**
  * @author darui.wu
@@ -116,6 +113,10 @@ public abstract class BaseTemplateGenerator implements IGlobalConfig, ITableConf
         this.open();
     }
 
+    private void info(String info) {
+        System.out.println(info);
+    }
+
     /**
      * 生成汇总文件
      *
@@ -144,7 +145,9 @@ public abstract class BaseTemplateGenerator implements IGlobalConfig, ITableConf
                 continue;
             }
             info("=========生成文件[" + file.getName() + "]");
-            Assert.notNull(filePath, "文件路径不能为空,[table=%s,template=%s]", table.getTableName(), template.getTemplate());
+            if (isBlank(filePath)) {
+                throw new RuntimeException(String.format("文件路径不能为空,[table=%s,template=%s]", table.getTableName(), template.getTemplate()));
+            }
             templateEngine.output(template.getTemplate(), context, filePath);
         }
     }
@@ -174,7 +177,7 @@ public abstract class BaseTemplateGenerator implements IGlobalConfig, ITableConf
      */
     private void open() {
         try {
-            if (globalConfig.isOpen() && !StringHelper.isBlank(globalConfig.getOutputDir())) {
+            if (globalConfig.isOpen() && !isBlank(globalConfig.getOutputDir())) {
                 String osName = System.getProperty("os.name");
                 if (osName != null) {
                     if (osName.contains("Mac")) {

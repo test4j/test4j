@@ -6,17 +6,19 @@ import lombok.experimental.Accessors;
 import org.test4j.generator.config.impl.TableField;
 import org.test4j.generator.config.impl.TableSetter;
 import org.test4j.generator.db.DbType;
-import org.test4j.tools.commons.StringHelper;
 
 import javax.lang.model.element.Modifier;
 import java.io.Serializable;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
-import java.util.*;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Objects;
+import java.util.Set;
 
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
-import static org.test4j.tools.commons.StringHelper.isNotBlank;
+import static org.test4j.generator.impl.GeneratorByAnnotation.isBlank;
 
 public class EntityFile extends BaseFile {
     static ClassName IEntity = ClassName.get(
@@ -90,10 +92,10 @@ public class EntityFile extends BaseFile {
     private AnnotationSpec getTableFieldAnnotation(TableField field) {
         AnnotationSpec.Builder builder = AnnotationSpec.builder(TableField)
             .addMember("value", "$S", field.getColumnName());
-        if (isNotBlank(field.getInsert())) {
+        if (!isBlank(field.getInsert())) {
             builder.addMember("insert", "$S", field.getInsert());
         }
-        if (isNotBlank(field.getUpdate())) {
+        if (!isBlank(field.getUpdate())) {
             builder.addMember("update", "$S", field.getUpdate());
         }
         if (field.getIsLarge() != null && !field.getIsLarge()) {
@@ -117,7 +119,7 @@ public class EntityFile extends BaseFile {
         if (!field.isPrimaryId()) {
             builder.addMember("auto", "$L", Boolean.FALSE.toString());
         }
-        if (!StringHelper.isBlank(table.getSeqName())) {
+        if (!isBlank(table.getSeqName())) {
             builder.addMember("seqName", "$S", table.getSeqName());
         }
         return builder.build();
@@ -186,7 +188,7 @@ public class EntityFile extends BaseFile {
             .builder(FluentMybatis);
 
         builder.addMember("table", "$S", table.getTableName());
-        if (isNotBlank(table.getMapperBeanPrefix())) {
+        if (!isBlank(table.getMapperBeanPrefix())) {
             builder.addMember("mapperBeanPrefix", "$S", table.getMapperBeanPrefix());
         }
         if (table.getBaseDaoInterfaces() != null && !table.getBaseDaoInterfaces().isEmpty()) {
