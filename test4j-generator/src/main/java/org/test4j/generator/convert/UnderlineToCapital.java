@@ -37,7 +37,7 @@ public class UnderlineToCapital {
      * @return
      */
     public static String convertFile(File file) {
-        String[] lines = ResourceHelper.readLinesFromFile(file);
+        String[] lines = Util.readLinesFromFile(file);
 
         StringBuilder buff = new StringBuilder();
         for (String line : lines) {
@@ -45,7 +45,7 @@ public class UnderlineToCapital {
             buff.append("\n");
         }
         String value = buff.toString();
-        ResourceHelper.writeStringToFile(file, value);
+        Util.writeStringToFile(file, value);
         return value;
     }
 
