@@ -1,6 +1,5 @@
 package org.test4j.generator.javafile;
 
-import cn.org.atool.fluent.mybatis.metadata.TableMeta;
 import com.squareup.javapoet.*;
 import org.test4j.generator.config.impl.TableSetter;
 

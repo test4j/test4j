@@ -13,10 +13,6 @@ import org.test4j.generator.db.IFieldCategory;
 import java.util.Objects;
 import java.util.function.Consumer;
 
-import static cn.org.atool.fluent.mybatis.If.notBlank;
-import static cn.org.atool.fluent.mybatis.mapper.StrConstant.NOT_DEFINED;
-import static org.test4j.tools.commons.StringHelper.isNotBlank;
-
 /**
  * 根据注解生成Entity文件
  *
@@ -94,13 +90,13 @@ public class GeneratorByAnnotation {
                 ts.setLogicDeleted(column.value());
             }
             /** 个性化设置 **/
-            if (notBlank(column.property())) {
+            if (!isBlank(column.property())) {
                 c.setFieldName(column.property());
             }
-            if (notBlank(column.insert())) {
+            if (!isBlank(column.insert())) {
                 c.setInsert(column.insert());
             }
-            if (notBlank(column.update())) {
+            if (!isBlank(column.update())) {
                 c.setUpdate(column.update());
             }
             if (column.isLarge()) {
@@ -116,7 +112,7 @@ public class GeneratorByAnnotation {
     }
 
     private IGlobalConfig globalConfig() {
-        return GeneratorByApi.build(isNotBlank(tables.srcDir()), isNotBlank(tables.testDir()));
+        return GeneratorByApi.build(!isBlank(tables.srcDir()), !isBlank(tables.testDir()));
     }
 
     private final Tables tables;
@@ -147,5 +143,18 @@ public class GeneratorByAnnotation {
 
     private boolean isDefined(String[] value) {
         return value.length != 1 || !Objects.equals(value[0], NOT_DEFINED);
+    }
+
+    /**
+     * 未定义
+     */
+    final static String NOT_DEFINED = "$$NOT_DEFINED$$";
+
+    public static boolean isBlank(String in) {
+        if (in == null) {
+            return true;
+        } else {
+            return in.trim().isEmpty();
+        }
     }
 }

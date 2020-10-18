@@ -159,7 +159,7 @@ public class EntityFile extends BaseFile {
     private static Set<String> Allow_Entity_Bounds = new HashSet<>();
 
     static {
-        Allow_Entity_Bounds.add(cn.org.atool.fluent.mybatis.base.IEntity.class.getName());
+        Allow_Entity_Bounds.add("cn.org.atool.fluent.mybatis.base.IEntity");
         Allow_Entity_Bounds.add(Object.class.getName());
         Allow_Entity_Bounds.add(Serializable.class.getName());
     }
