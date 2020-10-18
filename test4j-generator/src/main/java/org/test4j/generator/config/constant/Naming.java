@@ -1,8 +1,8 @@
 package org.test4j.generator.config.constant;
 
-import org.test4j.tools.commons.StringHelper;
-
 import java.util.regex.Pattern;
+
+import static org.test4j.generator.convert.Util.isBlank;
 
 /**
  * 数据库表到文件命名转换策略
@@ -20,7 +20,7 @@ public enum Naming {
     underline_to_camel;
 
     public static String underlineToCamel(String name) {
-        if (StringHelper.isBlank(name)) {
+        if (isBlank(name)) {
             return "";
         }
         String tempName = name;
@@ -30,7 +30,7 @@ public enum Naming {
         String[] camels = tempName.split("_");
         StringBuilder result = new StringBuilder();
         for (String word : camels) {
-            if (!StringHelper.isBlank(word)) {
+            if (!isBlank(word)) {
                 result.append(result.length() == 0 ? word : capitalFirst(word));
             }
         }
@@ -38,7 +38,7 @@ public enum Naming {
     }
 
     public static String capital2underline(String name) {
-        if (StringHelper.isBlank(name)) {
+        if (isBlank(name)) {
             return "";
         }
         String tempName = name;
@@ -48,7 +48,7 @@ public enum Naming {
         String[] camels = tempName.split("_");
         StringBuilder result = new StringBuilder();
         for (String word : camels) {
-            if (!StringHelper.isBlank(word)) {
+            if (!isBlank(word)) {
                 result.append(result.length() == 0 ? word : capitalFirst(word));
             }
         }
@@ -77,7 +77,7 @@ public enum Naming {
      * @return
      */
     public static String removePrefix(String name, String... prefix) {
-        if (StringHelper.isBlank(name)) {
+        if (isBlank(name)) {
             return "";
         }
         if (prefix == null) {
@@ -99,7 +99,7 @@ public enum Naming {
      * @return 转换后的字符串
      */
     public static String capitalFirst(String name) {
-        if (!StringHelper.isBlank(name)) {
+        if (!isBlank(name)) {
             return name.substring(0, 1).toUpperCase() + name.substring(1);
         } else {
             return "";

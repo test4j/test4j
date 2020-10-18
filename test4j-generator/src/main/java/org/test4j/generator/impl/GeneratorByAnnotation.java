@@ -13,6 +13,9 @@ import org.test4j.generator.db.IFieldCategory;
 import java.util.Objects;
 import java.util.function.Consumer;
 
+import static org.test4j.generator.convert.Util.NOT_DEFINED;
+import static org.test4j.generator.convert.Util.isBlank;
+
 /**
  * 根据注解生成Entity文件
  *
@@ -145,16 +148,4 @@ public class GeneratorByAnnotation {
         return value.length != 1 || !Objects.equals(value[0], NOT_DEFINED);
     }
 
-    /**
-     * 未定义
-     */
-    final static String NOT_DEFINED = "$$NOT_DEFINED$$";
-
-    public static boolean isBlank(String in) {
-        if (in == null) {
-            return true;
-        } else {
-            return in.trim().isEmpty();
-        }
-    }
 }

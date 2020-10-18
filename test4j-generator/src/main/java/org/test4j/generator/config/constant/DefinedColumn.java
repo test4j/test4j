@@ -10,7 +10,8 @@ import org.test4j.generator.config.impl.TableField;
 
 import java.util.Objects;
 
-import static org.test4j.tools.commons.StringHelper.isNotBlank;
+import static org.test4j.generator.convert.Util.isBlank;
+
 
 /**
  * 预定义好的字段
@@ -86,7 +87,7 @@ public class DefinedColumn {
      * @param field 字段映射
      */
     public void initField(TableField field) {
-        if (isNotBlank(this.fieldName)) {
+        if (!isBlank(this.fieldName)) {
             field.setName(this.fieldName);
         }
         if (this.javaType != null) {
@@ -98,10 +99,10 @@ public class DefinedColumn {
         if (this.notLarge == false) {
             field.setIsLarge(false);
         }
-        if (isNotBlank(this.insert)) {
+        if (!isBlank(this.insert)) {
             field.setInsert(this.insert);
         }
-        if (isNotBlank(this.update)) {
+        if (!isBlank(this.update)) {
             field.setUpdate(this.update);
         }
     }

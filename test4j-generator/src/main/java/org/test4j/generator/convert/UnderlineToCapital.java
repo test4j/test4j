@@ -1,8 +1,5 @@
 package org.test4j.generator.convert;
 
-import org.test4j.module.core.utility.MessageHelper;
-import org.test4j.tools.commons.ResourceHelper;
-
 import java.io.File;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -19,14 +16,14 @@ public class UnderlineToCapital {
      */
     public static void convertPath(File path) {
         if (!path.isDirectory() || !path.exists()) {
-            MessageHelper.info("文件夹不存在");
+            Util.info("文件夹不存在");
             return;
         }
         File[] files = path.listFiles();
         for (File file : files) {
             if (file.isFile()) {
                 convertFile(file);
-                MessageHelper.info("转换文件[" + file.getName() + "]成功");
+                Util.info("转换文件[" + file.getName() + "]成功");
             } else if (file.isDirectory()) {
                 convertPath(file);
             }
