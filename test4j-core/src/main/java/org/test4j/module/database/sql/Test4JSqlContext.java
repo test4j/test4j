@@ -6,14 +6,17 @@ import java.util.Optional;
 public class Test4JSqlContext {
     private static ThreadLocal<SqlList> sqlContext = new ThreadLocal<>();
     private static ThreadLocal<Boolean> hasRecord = new ThreadLocal<>();
-    private static ThreadLocal<Boolean> isTestOp = new ThreadLocal<>();
+    /**
+     * 是否在db操作
+     */
+    private static ThreadLocal<Boolean> IN_DB_OPERATOR = new ThreadLocal<>();
 
     public static void setRecordStatus(boolean status) {
         hasRecord.set(status);
     }
 
-    public static void setTestOpStatus(boolean status) {
-        isTestOp.set(status);
+    public static void setDbOpStatus(boolean status) {
+        IN_DB_OPERATOR.set(status);
     }
 
     public static void setNextRecordStatus() {
@@ -53,6 +56,6 @@ public class Test4JSqlContext {
     }
 
     private static boolean isTestOp() {
-        return isTestOp.get() == null ? false : isTestOp.get();
+        return IN_DB_OPERATOR.get() == null ? false : IN_DB_OPERATOR.get();
     }
 }

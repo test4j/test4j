@@ -10,7 +10,6 @@ import org.test4j.json.JSON;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.database.environment.DBEnvironment;
 import org.test4j.module.database.environment.DBEnvironmentFactory;
-import org.test4j.module.database.sql.Test4JSqlContext;
 import org.test4j.module.database.utility.DBHelper;
 import org.test4j.module.database.utility.SqlRunner;
 import org.test4j.tools.datagen.IDataMap;
@@ -18,7 +17,7 @@ import org.test4j.tools.datagen.IDataMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.test4j.module.database.dbop.DBOperator.IN_DB_OPERATOR;
+import static org.test4j.module.database.sql.Test4JSqlContext.setDbOpStatus;
 import static org.test4j.tools.commons.StringHelper.isBlank;
 
 /**
@@ -46,13 +45,13 @@ public class TableOp implements ITableOp {
 
     @Override
     public ITableOp clean() {
-        setDbOperator(true);
+        setDbOpStatus(true);
         try {
             String sql = "delete from " + table;
             SqlRunner.execute(env, sql);
             return this;
         } finally {
-            setDbOperator(false);
+            setDbOpStatus(false);
         }
     }
 
@@ -61,102 +60,102 @@ public class TableOp implements ITableOp {
         if (datas == null || datas.length == 0) {
             return this;
         }
-        setDbOperator(true);
+        setDbOpStatus(true);
         try {
             for (IDataMap map : datas) {
                 InsertOp.insertNoException(env, table, map);
             }
             return this;
         } finally {
-            setDbOperator(false);
+            setDbOpStatus(false);
         }
     }
 
     @Override
     public ICollectionAssert query() {
-        setDbOperator(true);
+        setDbOpStatus(true);
         try {
             List<Map<String, Object>> list = selectData(null);
             return new CollectionAssert(list);
         } finally {
-            setDbOperator(false);
+            setDbOpStatus(false);
         }
     }
 
     @Override
     public ICollectionAssert queryList(Class pojo) {
-        setDbOperator(true);
+        setDbOpStatus(true);
         try {
             String query = "select * from " + table;
             List list = SqlRunner.queryList(env, query, pojo);
             return new CollectionAssert(list);
         } finally {
-            setDbOperator(false);
+            setDbOpStatus(false);
         }
     }
 
     @Override
     public INumberAssert count() {
-        setDbOperator(true);
+        setDbOpStatus(true);
         try {
             String query = "select count(*) from " + table;
             Number number = (Number) SqlRunner.query(env, query, Object.class);
             return new IntegerAssert(number.intValue());
         } finally {
-            setDbOperator(false);
+            setDbOpStatus(false);
         }
     }
 
     @Override
     public ITableOp deleteWhere(String where) {
-        setDbOperator(true);
+        setDbOpStatus(true);
         try {
             String sql = String.format("delete from %s where %s", table, where);
             SqlRunner.execute(env, sql);
             return this;
         } finally {
-            setDbOperator(false);
+            setDbOpStatus(false);
         }
     }
 
     @Override
     public IObjectAssert queryAs(Class pojo) {
-        setDbOperator(true);
+        setDbOpStatus(true);
         try {
             String query = "select * from " + table;
             Object o = SqlRunner.query(env, query, pojo);
             return new ObjectAssert(o);
         } finally {
-            setDbOperator(false);
+            setDbOpStatus(false);
         }
     }
 
     @Override
     public ICollectionAssert queryWhere(String where) {
-        setDbOperator(true);
+        setDbOpStatus(true);
         try {
             List<Map<String, Object>> list = selectData(where);
             return new CollectionAssert(list);
         } finally {
-            setDbOperator(false);
+            setDbOpStatus(false);
         }
     }
 
     @Override
     public ICollectionAssert printAndAssert(String where) {
-        setDbOperator(true);
+        setDbOpStatus(true);
         try {
             List<Map<String, Object>> list = selectData(where);
             MessageHelper.info(JSON.toJSON(list, true));
             return new CollectionAssert(list);
         } finally {
-            setDbOperator(false);
+            setDbOpStatus(false);
         }
     }
 
     @Override
     public ICollectionAssert queryWhere(IDataMap dataMap) {
-        setDbOperator(true);
+        setDbOpStatus(true);
         try {
             Map<String, Object> param = dataMap.row(0);
             StringBuilder query = new StringBuilder("select * from ");
@@ -166,13 +165,8 @@ public class TableOp implements ITableOp {
             List list = SqlRunner.queryMapList(env, query.toString(), param);
             return new CollectionAssert(list);
         } finally {
-            setDbOperator(false);
+            setDbOpStatus(false);
         }
-    }
-
-    private static void setDbOperator(boolean bool) {
-        IN_DB_OPERATOR.set(bool);
-        Test4JSqlContext.setTestOpStatus(bool);
     }
 
     private List<Map<String, Object>> selectData(String where) {
@@ -182,7 +176,7 @@ public class TableOp implements ITableOp {
     }
 
     public static List<Map<String, Object>> queryData(DBEnvironment env, String tableAndWhere) {
-        setDbOperator(true);
+        setDbOpStatus(true);
         try {
             if (tableAndWhere.trim().toLowerCase().startsWith("select")) {
                 return SqlRunner.queryMapList(env, tableAndWhere);
@@ -191,7 +185,7 @@ public class TableOp implements ITableOp {
                 return SqlRunner.queryMapList(env, query);
             }
         } finally {
-            setDbOperator(false);
+            setDbOpStatus(false);
         }
     }
 }

@@ -24,20 +24,13 @@ import java.io.FileInputStream;
 import java.util.*;
 import java.util.stream.Collectors;
 
+import static org.test4j.module.database.sql.Test4JSqlContext.setDbOpStatus;
 import static org.test4j.module.database.utility.SqlKeyWord.COLUMN_ID;
 import static org.test4j.tools.commons.StringHelper.DOUBLE_QUOTATION;
 import static org.test4j.tools.commons.StringHelper.isBlank;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class DBOperator implements IDBOperator {
-    /**
-     * 是否在db操作
-     */
-    public static ThreadLocal<Boolean> IN_DB_OPERATOR = new ThreadLocal<Boolean>();
-
-    static {
-        IN_DB_OPERATOR.set(false);
-    }
 
     private final String dataSourceName;
 
@@ -60,7 +53,7 @@ public class DBOperator implements IDBOperator {
 
     @Override
     public IDBOperator cleanTable(String table, String... more) {
-        IN_DB_OPERATOR.set(true);
+        setDbOpStatus(true);
         try {
             SqlRunner.execute(env(), "delete from " + table);
             for (String item : more) {
@@ -68,24 +61,24 @@ public class DBOperator implements IDBOperator {
             }
             return this;
         } finally {
-            IN_DB_OPERATOR.set(false);
+            setDbOpStatus(false);
         }
     }
 
     @Override
     public IDBOperator execute(String sql) {
-        IN_DB_OPERATOR.set(true);
+        setDbOpStatus(true);
         try {
             SqlRunner.execute(env(), sql);
             return this;
         } finally {
-            IN_DB_OPERATOR.set(false);
+            setDbOpStatus(false);
         }
     }
 
     @Override
     public IDBOperator execute(File file) {
-        IN_DB_OPERATOR.set(true);
+        setDbOpStatus(true);
         try {
             try {
                 SqlRunner.executeFromStream(env(), new FileInputStream(file));
@@ -94,57 +87,57 @@ public class DBOperator implements IDBOperator {
             }
             return this;
         } finally {
-            IN_DB_OPERATOR.set(false);
+            setDbOpStatus(false);
         }
     }
 
     @Override
     public IDBOperator commit() {
-        IN_DB_OPERATOR.set(true);
+        setDbOpStatus(true);
         try {
             env().commit();
             return this;
         } finally {
-            IN_DB_OPERATOR.set(false);
+            setDbOpStatus(false);
         }
     }
 
     @Override
     public IDBOperator rollback() {
-        IN_DB_OPERATOR.set(true);
+        setDbOpStatus(true);
         try {
             env().rollback();
             return this;
         } finally {
-            IN_DB_OPERATOR.set(false);
+            setDbOpStatus(false);
         }
     }
 
     @Override
     public ICollectionAssert query(String sql) {
-        IN_DB_OPERATOR.set(true);
+        setDbOpStatus(true);
         try {
             List list = SqlRunner.queryMapList(env(), sql);
             return new CollectionAssert(list);
         } finally {
-            IN_DB_OPERATOR.set(false);
+            setDbOpStatus(false);
         }
     }
 
     @Override
     public ITableOp table(String table) {
-        IN_DB_OPERATOR.set(true);
+        setDbOpStatus(true);
         try {
             ITableOp tableOperator = new TableOp(env(), table);
             return tableOperator;
         } finally {
-            IN_DB_OPERATOR.set(false);
+            setDbOpStatus(false);
         }
     }
 
     @Override
     public IDBOperator execute(ISqlSet sqlSet) {
-        IN_DB_OPERATOR.set(true);
+        setDbOpStatus(true);
         try {
             if (sqlSet == null) {
                 throw new RuntimeException("the insert sqlSet can't be null.");
@@ -152,13 +145,13 @@ public class DBOperator implements IDBOperator {
             sqlSet.execute(env());
             return this;
         } finally {
-            IN_DB_OPERATOR.set(false);
+            setDbOpStatus(false);
         }
     }
 
     @Override
     public List<Object> returnList(String query, Class pojoClazz) {
-        IN_DB_OPERATOR.set(true);
+        setDbOpStatus(true);
         try {
             String _query = query.trim();
             if (!_query.toLowerCase().startsWith("select")) {
@@ -170,12 +163,12 @@ public class DBOperator implements IDBOperator {
                 return SqlRunner.queryList(env(), _query, pojoClazz);
             }
         } finally {
-            IN_DB_OPERATOR.set(false);
+            setDbOpStatus(false);
         }
     }
 
     private void deleteWhere(String table, String where) {
-        IN_DB_OPERATOR.set(true);
+        setDbOpStatus(true);
         try {
             String sql = "delete from " + table;
             if (!isBlank(where)) {
@@ -183,7 +176,7 @@ public class DBOperator implements IDBOperator {
             }
             SqlRunner.execute(env(), sql);
         } finally {
-            IN_DB_OPERATOR.set(false);
+            setDbOpStatus(false);
         }
     }
 

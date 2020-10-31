@@ -121,6 +121,7 @@ public abstract class AbstractDataMap<DM extends DataMap>
         row.add(value);
         if (values == null) {
             row.add(null);
+            this.put(key, row);
             return;
         }
         /**
