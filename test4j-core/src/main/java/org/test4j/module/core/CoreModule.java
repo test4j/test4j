@@ -21,10 +21,6 @@ public class CoreModule {
      */
     static boolean hasInitial = false;
 
-    static {
-        JMockitHelper.getJMockitJavaagentHit();
-    }
-
     private static CoreModule instance;
 
     /* Listener that observes the execution of tests */
