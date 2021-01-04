@@ -8,6 +8,8 @@ import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
 /**
+ * 对测试打标
+ *
  * @author wudarui
  */
 @Target(ElementType.TYPE)
