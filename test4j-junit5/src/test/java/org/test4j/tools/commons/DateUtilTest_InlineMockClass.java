@@ -1,9 +1,9 @@
 package org.test4j.tools.commons;
 
-import mockit.Mock;
-import mockit.MockUp;
 import org.junit.jupiter.api.Test;
 import org.test4j.junit5.Test4J;
+import org.test4j.mock.Mock;
+import org.test4j.mock.MockUp;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -40,7 +40,7 @@ public class DateUtilTest_InlineMockClass extends Test4J {
     public void testCurrDateTimeStr_format_Exception() {
         String str = DateHelper.currDateTimeStr("MM/dd/yy hh:mm:ss");
         want.exception(() ->
-                        want.string(str).isEqualTo("01/28/12 07:58:55")
-                , AssertionError.class);
+                want.string(str).isEqualTo("01/28/12 07:58:55")
+            , AssertionError.class);
     }
 }

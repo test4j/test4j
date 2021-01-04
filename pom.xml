@@ -38,9 +38,9 @@
     <properties>
         <spring.version>5.2.0.RELEASE</spring.version>
         <release.plugin.version>2.4.1</release.plugin.version>
-        <jmockit.version>1.48</jmockit.version>
+        <fluent-mock.version>1.0.0-SNAPSHOT</fluent-mock.version>
         <test.jvm.args>
-            <![CDATA[-javaagent:"${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar"]]></test.jvm.args>
+            <![CDATA[-javaagent:"${settings.localRepository}/org/test4j/fluent-mock/${fluent-mock.version}/fluent-mock-${fluent-mock.version}.jar"]]></test.jvm.args>
     </properties>
 
     <modules>
@@ -127,9 +127,9 @@
             <scope>provided</scope>
         </dependency>
         <dependency>
-            <groupId>org.jmockit</groupId>
-            <artifactId>jmockit</artifactId>
-            <version>${jmockit.version}</version>
+            <groupId>org.test4j</groupId>
+            <artifactId>fluent-mock</artifactId>
+            <version>${fluent-mock.version}</version>
             <scope>compile</scope>
         </dependency>
         <dependency>

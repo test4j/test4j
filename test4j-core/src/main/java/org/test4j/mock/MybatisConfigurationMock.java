@@ -1,8 +1,5 @@
 package org.test4j.mock;
 
-import mockit.Invocation;
-import mockit.Mock;
-import mockit.MockUp;
 import org.apache.ibatis.executor.Executor;
 import org.apache.ibatis.executor.statement.StatementHandler;
 import org.apache.ibatis.mapping.BoundSql;
@@ -42,7 +39,7 @@ public class MybatisConfigurationMock extends MockUp<Configuration> {
         }
         if (sql != null) {
             TypeHandlerRegistry typeHandlerRegistry = mappedStatement.getConfiguration().getTypeHandlerRegistry();
-            Object[] parameters = this.getParameters(it.getInvokedInstance(), sql, typeHandlerRegistry);
+            Object[] parameters = this.getParameters(it.getTarget(), sql, typeHandlerRegistry);
             Test4JSqlContext.addSql(StringHelper.removeBreakingWhiteSpace(sql.getSql()), parameters);
         }
         return statementHandler;

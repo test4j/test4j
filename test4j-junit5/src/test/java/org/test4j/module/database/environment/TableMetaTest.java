@@ -1,10 +1,10 @@
 package org.test4j.module.database.environment;
 
-import mockit.Mock;
-import mockit.MockUp;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.test4j.junit5.Test4J;
+import org.test4j.mock.Mock;
+import org.test4j.mock.MockUp;
 import org.test4j.tools.datagen.DataProvider;
 
 import java.util.Iterator;

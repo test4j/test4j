@@ -1,8 +1,5 @@
 package org.test4j.junit4;
 
-import mockit.Invocation;
-import mockit.Mock;
-import mockit.MockUp;
 import org.junit.runner.manipulation.Filter;
 import org.junit.runner.manipulation.NoTestsRemainException;
 import org.junit.runner.notification.RunNotifier;
@@ -11,6 +8,9 @@ import org.junit.runners.ParentRunner;
 import org.junit.runners.model.FrameworkMethod;
 import org.junit.runners.model.Statement;
 import org.junit.runners.model.TestClass;
+import org.test4j.mock.Invocation;
+import org.test4j.mock.Mock;
+import org.test4j.mock.MockUp;
 import org.test4j.module.spring.interal.SpringEnv;
 import org.test4j.tools.reflector.FieldAccessor;
 
@@ -18,7 +18,6 @@ import java.lang.annotation.Annotation;
 import java.util.*;
 
 import static org.test4j.tools.reflector.MethodAccessor.invoke;
-
 
 public class Test4JProxyRunner extends BlockJUnit4ClassRunner {
     private ITest4Runner proxy;
@@ -74,7 +73,7 @@ public class Test4JProxyRunner extends BlockJUnit4ClassRunner {
 
             @Mock
             public void filter(Invocation it, Filter filter) throws NoTestsRemainException {
-                ParentRunner runner = it.getInvokedInstance();
+                ParentRunner runner = it.getTarget();
                 synchronized (childrenLock) {
                     List children = new ArrayList((Collection) invoke(runner, "getFilteredChildren"));
                     for (Iterator iter = children.iterator(); iter.hasNext(); ) {

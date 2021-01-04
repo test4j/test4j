@@ -1,8 +1,5 @@
 package org.test4j.mock;
 
-import mockit.Invocation;
-import mockit.Mock;
-import mockit.MockUp;
 import org.apache.dubbo.config.annotation.Reference;
 import org.apache.dubbo.config.spring.beans.factory.annotation.ReferenceAnnotationBeanPostProcessor;
 import org.springframework.beans.factory.annotation.InjectionMetadata;
@@ -31,7 +28,7 @@ public class ReferenceAnnotationBeanPostProcessorMock extends MockUp<ReferenceAn
     @Mock
     public Object doGetInjectedBean(Invocation it, Reference reference, Object bean, String beanName, Class<?> injectedType,
                                     InjectionMetadata.InjectedElement injectedElement) throws Exception {
-        ReferenceAnnotationBeanPostProcessor processor = it.getInvokedInstance();
+        ReferenceAnnotationBeanPostProcessor processor = it.getTarget();
         ConfigurableListableBeanFactory factory = MethodAccessor.invoke(processor, "getBeanFactory");
         Object injected = factory.getBean(injectedType);
         return injected;

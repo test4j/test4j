@@ -1,9 +1,9 @@
 package org.test4j.tools.commons;
 
-import mockit.Mock;
-import mockit.MockUp;
 import org.junit.jupiter.api.Test;
 import org.test4j.junit5.Test4J;
+import org.test4j.mock.Mock;
+import org.test4j.mock.MockUp;
 import org.test4j.tools.commons.DateUtilTest.MockDateUtil;
 
 import java.util.Calendar;

@@ -1,10 +1,9 @@
 package org.test4j.junit4;
 
-
-import mockit.Mock;
-import mockit.MockUp;
 import org.junit.internal.builders.JUnit4Builder;
 import org.junit.runner.Runner;
+import org.test4j.mock.Mock;
+import org.test4j.mock.MockUp;
 import org.test4j.module.core.utility.MessageHelper;
 
 public class Test4JBuilder extends MockUp<JUnit4Builder> {

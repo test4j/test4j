@@ -1,8 +1,5 @@
 package org.test4j.mock;
 
-import mockit.Invocation;
-import mockit.Mock;
-import mockit.MockUp;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.support.AbstractBeanFactory;
 import org.test4j.module.core.utility.MessageHelper;
@@ -29,7 +26,7 @@ public class SpringMock extends MockUp<AbstractBeanFactory> {
                            Class<T> requiredType,
                            final Object[] args,
                            boolean typeCheckOnly)
-            throws BeansException {
+        throws BeansException {
         if (this.isDataSource(name, requiredType)) {
             MessageHelper.info("===========AbstractBeanFactoryMock===========");
             return (T) DataSourceCreatorFactory.create(name);

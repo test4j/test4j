@@ -1,6 +1,6 @@
 package org.test4j.module.spec.internal.mix;
 
-import mockit.Mock;
+import org.test4j.mock.Mock;
 import org.test4j.module.spec.IMix;
 import org.test4j.module.spec.annotations.Step;
 import org.test4j.module.spec.internal.stub.StubInterface2Stub;

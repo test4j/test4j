@@ -1,6 +1,6 @@
 package org.test4j.mock;
 
-import mockit.internal.startup.Startup;
+import org.test4j.mock.startup.Startup;
 
 /**
  * 触发test4j内置的mocker开关

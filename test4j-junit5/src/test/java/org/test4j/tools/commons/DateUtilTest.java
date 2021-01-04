@@ -1,11 +1,11 @@
 package org.test4j.tools.commons;
 
-import mockit.Mock;
-import mockit.MockUp;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
 import org.test4j.junit5.Test4J;
+import org.test4j.mock.Mock;
+import org.test4j.mock.MockUp;
 import org.test4j.tools.datagen.DataProvider;
 
 import java.util.Calendar;
@@ -139,7 +139,7 @@ public class DateUtilTest extends Test4J {
     @Test
     public void testParse_IllegalFormat() {
         want.exception(() ->
-                        DateHelper.parse("2010-10/20 18:20:36.231")
-                , RuntimeException.class);
+                DateHelper.parse("2010-10/20 18:20:36.231")
+            , RuntimeException.class);
     }
 }

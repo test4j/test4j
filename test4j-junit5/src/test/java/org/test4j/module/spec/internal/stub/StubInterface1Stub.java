@@ -1,7 +1,6 @@
 package org.test4j.module.spec.internal.stub;
 
-import mockit.Mock;
-import mockit.MockUp;
+import org.test4j.mock.MockUp;
 import org.springframework.stereotype.Component;
 import java.util.List;
 import java.util.Map;

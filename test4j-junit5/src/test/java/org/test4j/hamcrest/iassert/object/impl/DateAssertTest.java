@@ -1,8 +1,8 @@
 package org.test4j.hamcrest.iassert.object.impl;
 
-import mockit.Mocked;
 import org.junit.jupiter.api.Test;
 import org.test4j.junit5.Test4J;
+import org.test4j.mock.Stubs;
 import org.test4j.module.inject.Inject;
 import org.test4j.tools.commons.DateHelper;
 
@@ -32,9 +32,8 @@ public class DateAssertTest extends Test4J {
 
     private final TestAppClaz testApp = new TestAppClaz();
 
-    @Mocked
     @Inject(targets = "testApp")
-    private IDateTest idate;
+    private IDateTest idate = Stubs.stub(IDateTest.class);
 
     @Test
     public void yearIs() {
@@ -44,8 +43,8 @@ public class DateAssertTest extends Test4J {
     @Test
     public void yearIs_failure1() {
         want.exception(() ->
-                        want.calendar(cal).isYear(2009).isYear("20091"),
-                AssertionError.class);
+                want.calendar(cal).isYear(2009).isYear("20091"),
+            AssertionError.class);
     }
 
     @Test
