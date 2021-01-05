@@ -1,12 +1,12 @@
 package org.test4j.tools.reflector.imposteriser;
 
-import net.sf.cglib.core.CodeGenerationException;
-import net.sf.cglib.core.DefaultNamingPolicy;
-import net.sf.cglib.core.NamingPolicy;
-import net.sf.cglib.core.Predicate;
-import net.sf.cglib.proxy.*;
-import org.objenesis.Objenesis;
-import org.objenesis.ObjenesisStd;
+import g_cglib.net.sf.cglib.core.CodeGenerationException;
+import g_cglib.net.sf.cglib.core.DefaultNamingPolicy;
+import g_cglib.net.sf.cglib.core.NamingPolicy;
+import g_cglib.net.sf.cglib.core.Predicate;
+import g_cglib.net.sf.cglib.proxy.*;
+import g_objenesis.org.objenesis.Objenesis;
+import g_objenesis.org.objenesis.ObjenesisStd;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Method;

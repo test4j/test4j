@@ -8,7 +8,4 @@ import org.test4j.module.spring.ISpring;
 
 @RunWith(Test4JProxyRunner.class)
 public abstract class Test4J implements ICore, ISpring, IDatabase, IUtil {
-    static {
-        JMockitHelper.getJMockitJavaagentHit();
-    }
 }
