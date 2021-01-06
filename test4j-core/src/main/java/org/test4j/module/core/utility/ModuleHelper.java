@@ -10,7 +10,8 @@ import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
 
-import static ext.test4j.apache.commons.lang.ClassUtils.getShortClassName;
+import static org.test4j.mock.faking.util.TypeUtility.getShortClassName;
+
 
 @SuppressWarnings("rawtypes")
 public class ModuleHelper {

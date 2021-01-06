@@ -1,6 +1,6 @@
 package org.test4j.tools.commons;
 
-import ext.test4j.apache.commons.io.IOUtils;
+import ext.test4j.apache.commons.lang.text.IOUtils;
 import g_objenesis.org.objenesis.ObjenesisHelper;
 import org.test4j.exception.NewInstanceException;
 import org.test4j.exception.Test4JException;
