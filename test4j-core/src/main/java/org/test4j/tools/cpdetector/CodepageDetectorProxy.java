@@ -25,11 +25,11 @@ public class CodepageDetectorProxy extends AbstractCodepageDetector {
 	}
 
 	@Override
-	public Charset detectCodepage(URL url) throws IOException {
+	public Charset detectCodePage(URL url) throws IOException {
 		Charset ret = null;
 		Iterator<ICodepageDetector> detectorIt = this.detectors.iterator();
 		while (detectorIt.hasNext()) {
-			ret = ((ICodepageDetector) detectorIt.next()).detectCodepage(url);
+			ret = ((ICodepageDetector) detectorIt.next()).detectCodePage(url);
 			if ((ret != null) && (ret != UnknownCharset.getInstance()) && (!(ret instanceof UnsupportedCharset))) {
 				break;
 			}
@@ -40,7 +40,7 @@ public class CodepageDetectorProxy extends AbstractCodepageDetector {
 	}
 
 	@Override
-	public Charset detectCodepage(InputStream in, int length) throws IOException, IllegalArgumentException {
+	public Charset detectCodePage(InputStream in, int length) throws IOException, IllegalArgumentException {
 		if (!(in.markSupported())) {
 			throw new IllegalArgumentException("The given input stream (" + in.getClass().getName()
 					+ ") has to support marking.");
@@ -50,7 +50,7 @@ public class CodepageDetectorProxy extends AbstractCodepageDetector {
 		Iterator<ICodepageDetector> detectorIt = this.detectors.iterator();
 		while (detectorIt.hasNext()) {
 			in.mark(markLimit);
-			ret = ((ICodepageDetector) detectorIt.next()).detectCodepage(in, length);
+			ret = ((ICodepageDetector) detectorIt.next()).detectCodePage(in, length);
 			try {
 				in.reset();
 			} catch (IOException ioex) {

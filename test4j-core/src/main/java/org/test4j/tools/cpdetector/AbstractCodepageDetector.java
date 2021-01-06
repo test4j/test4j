@@ -9,28 +9,28 @@ import java.nio.charset.Charset;
 
 public abstract class AbstractCodepageDetector implements ICodepageDetector {
 
-	@Override
-	public Charset detectCodepage(URL url) throws IOException {
-		BufferedInputStream in = new BufferedInputStream(url.openStream());
-		Charset result = detectCodepage(in, 2147483647);
-		in.close();
-		return result;
-	}
+    @Override
+    public Charset detectCodePage(URL url) throws IOException {
+        BufferedInputStream in = new BufferedInputStream(url.openStream());
+        Charset result = detectCodePage(in, 2147483647);
+        in.close();
+        return result;
+    }
 
-	@Override
-	public final Reader open(URL url) throws IOException {
-		Reader ret = null;
-		Charset cs = detectCodepage(url);
-		if (cs != null) {
-			ret = new InputStreamReader(new BufferedInputStream(url.openStream()), cs);
-		}
-		return ret;
-	}
+    @Override
+    public final Reader open(URL url) throws IOException {
+        Reader ret = null;
+        Charset cs = detectCodePage(url);
+        if (cs != null) {
+            ret = new InputStreamReader(new BufferedInputStream(url.openStream()), cs);
+        }
+        return ret;
+    }
 
-	@Override
-	public int compareTo(ICodepageDetector o) {
-		String other = o.getClass().getName();
-		String mine = super.getClass().getName();
-		return mine.compareTo(other);
-	}
+    @Override
+    public int compareTo(ICodepageDetector o) {
+        String other = o.getClass().getName();
+        String mine = super.getClass().getName();
+        return mine.compareTo(other);
+    }
 }
