@@ -2,7 +2,7 @@ package org.test4j.module.database.dbop;
 
 import org.junit.jupiter.api.Test;
 import org.test4j.db.dm.UserDataMap;
-import org.test4j.hamcrest.matcher.string.StringMode;
+import org.test4j.asserts.matcher.string.StringMode;
 import org.test4j.junit5.Test4J;
 import org.test4j.tools.commons.ResourceHelper;
 import org.test4j.tools.datagen.TableMap;

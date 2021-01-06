@@ -1,7 +1,6 @@
 package org.test4j.module;
 
-import org.test4j.hamcrest.TheStyleAssertion;
-import org.test4j.hamcrest.WantStyleAssertion;
+import org.test4j.asserts.IAssertion;
 import org.test4j.tools.commons.ArrayHelper;
 import org.test4j.tools.commons.Reflector;
 import org.test4j.tools.datagen.AbstractDataGenerator;
@@ -12,11 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @SuppressWarnings("serial")
-public interface ICore {
-    WantStyleAssertion want = new WantStyleAssertion();
-
-    TheStyleAssertion the = new TheStyleAssertion();
-
+public interface ICore extends IAssertion {
     Reflector reflector = Reflector.instance;
 
     /**

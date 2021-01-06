@@ -6,8 +6,8 @@ import org.test4j.junit5.Test4J;
 import org.test4j.module.database.sql.DataSourceCreatorFactory;
 import org.test4j.module.spec.IStory;
 
+import static org.test4j.asserts.matcher.modes.EqMode.EQ_STRING;
 import static org.test4j.db.ITable.t_user;
-import static org.test4j.hamcrest.matcher.modes.EqMode.EQ_STRING;
 
 public class TableDataAroundTest extends Test4J implements IStory {
     @BeforeAll
@@ -24,9 +24,9 @@ public class TableDataAroundTest extends Test4J implements IStory {
     @Test
     void file_UnExisted() {
         want.exception(() -> TableDataAround.findFile(this.getClass(), "file_UnExisted")
-                , RuntimeException.class).contains(new String[]{
-                "org/test4j/tools/datagen/TableDataAroundTest.file_UnExisted.json",
-                "org/test4j/tools/datagen/TableDataAroundTest/file_UnExisted.json"
+            , RuntimeException.class).contains(new String[]{
+            "org/test4j/tools/datagen/TableDataAroundTest.file_UnExisted.json",
+            "org/test4j/tools/datagen/TableDataAroundTest/file_UnExisted.json"
         });
     }
 
@@ -34,23 +34,23 @@ public class TableDataAroundTest extends Test4J implements IStory {
     void test_around_data() {
         db.table(t_user).clean();
         story.scenario()
-                .dbAround()
-                .initAround(
-                        DataMap.create().kv("age", "35"),
-                        DataMap.create().kv("age", "35"),
-                        "t_user"
-                )
-                .handleAround(
-                        data -> data.apply(table -> table.kv("address_id", "23"), true, t_user),
-                        data -> data.dataMap(t_user).kv("address_id", "23")
-                )
-                .when("验证around功能", () -> {
-                });
+            .dbAround()
+            .initAround(
+                DataMap.create().kv("age", "35"),
+                DataMap.create().kv("age", "35"),
+                "t_user"
+            )
+            .handleAround(
+                data -> data.apply(table -> table.kv("address_id", "23"), true, t_user),
+                data -> data.dataMap(t_user).kv("address_id", "23")
+            )
+            .when("验证around功能", () -> {
+            });
         db.table(t_user).query().eqDataMap(DataMap.create(2)
-                        .kv("age", "35")
-                        .kv("address_id", "23")
-                        .kv("user_name", "nam1", "nam2")
-                , EQ_STRING
+                .kv("age", "35")
+                .kv("address_id", "23")
+                .kv("user_name", "nam1", "nam2")
+            , EQ_STRING
         );
     }
 }

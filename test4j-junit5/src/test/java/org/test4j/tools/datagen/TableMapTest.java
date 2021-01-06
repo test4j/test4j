@@ -2,7 +2,7 @@ package org.test4j.tools.datagen;
 
 import org.junit.jupiter.api.Test;
 import org.test4j.exception.ExtraMessageError;
-import org.test4j.hamcrest.matcher.modes.EqMode;
+import org.test4j.asserts.matcher.modes.EqMode;
 import org.test4j.junit5.Test4J;
 import org.test4j.tools.commons.ResourceHelper;
 

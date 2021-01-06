@@ -1,8 +1,8 @@
 package org.test4j.module.database.dbop;
 
-import org.test4j.hamcrest.iassert.intf.ICollectionAssert;
-import org.test4j.hamcrest.iassert.intf.INumberAssert;
-import org.test4j.hamcrest.iassert.intf.IObjectAssert;
+import org.test4j.asserts.iassert.intf.ICollectionAssert;
+import org.test4j.asserts.iassert.intf.INumberAssert;
+import org.test4j.asserts.iassert.intf.IObjectAssert;
 import org.test4j.tools.datagen.IDataMap;
 
 /**

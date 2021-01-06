@@ -1,11 +1,11 @@
 package org.test4j.module.database.sql;
 
-import org.test4j.hamcrest.iassert.impl.ArrayAssert;
-import org.test4j.hamcrest.iassert.impl.CollectionAssert;
-import org.test4j.hamcrest.iassert.impl.SqlAssert;
-import org.test4j.hamcrest.iassert.intf.IArrayAssert;
-import org.test4j.hamcrest.iassert.intf.ICollectionAssert;
-import org.test4j.hamcrest.iassert.intf.ISqlAssert;
+import org.test4j.asserts.iassert.impl.ArrayAssert;
+import org.test4j.asserts.iassert.impl.CollectionAssert;
+import org.test4j.asserts.iassert.impl.SqlAssert;
+import org.test4j.asserts.iassert.intf.IArrayAssert;
+import org.test4j.asserts.iassert.intf.ICollectionAssert;
+import org.test4j.asserts.iassert.intf.ISqlAssert;
 
 import java.util.ArrayList;
 import java.util.List;

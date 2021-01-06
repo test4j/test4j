@@ -1,0 +1,88 @@
+package org.test4j.asserts.iassert.object.impl;
+
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.test4j.asserts.matcher.modes.EqMode;
+import org.test4j.junit5.Test4J;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+public class MapAssertTest_ReflectProperty extends Test4J {
+    Map<String, String> maps = null;
+    List<Map<String, String>> list = null;
+
+    @BeforeEach
+    public void initData() {
+        maps = mockMap();
+
+        list = new ArrayList<Map<String, String>>();
+        list.add(mockMap());
+        Map<String, String> map2 = mockMap();
+        map2.put("one", "ddd");
+        list.add(map2);
+    }
+
+    @Test
+    public void testMapReflet() {
+        Map<String, String> maps = mockMap();
+
+        want.map(maps).eqByProperties("one", "my first value");
+        want.map(maps).eqByProperties("three", "my third value");
+    }
+
+    @Test
+    public void testMapReflet_matcher() {
+        Map<String, String> maps = mockMap();
+        want.map(maps).propertyMatch("one", the.string().isEqualTo("my first value"));
+    }
+
+    @Test
+    public void testMapRefletList() {
+        want.collection(list).eqByProperties("one", new String[]{"my first value", "ddd"});
+    }
+
+    @Test
+    public void testMapRefletList_PropertyCollection() {
+        want.collection(list).propertyMatch("one",
+                the.collection().eqReflect(new String[]{"ddd", "my first value"}, EqMode.IGNORE_ORDER));
+    }
+
+    @Test
+    public void testMapRefletList_PropertyCollection_order() {
+        try {
+            want.collection(list).propertyMatch("one",
+                    the.collection().eqReflect(new String[]{"ddd", "my first value"}));
+            want.fail();
+        } catch (Throwable e) {
+            String msg = e.getMessage();
+            want.string(msg).contains(new String[]{
+                    "$[0]", "expect=(String) ddd", "actual=(String) my first value",
+                    "$[1]", "expect=(String) my first value", "actual=(String) ddd"
+            });
+        }
+    }
+
+    @Test
+    public void testMapRefletList_lenientOrder() {
+        want.collection(list).propertyMatch("one",
+                the.collection().eqReflect(new String[]{"my first value", "ddd"}));
+    }
+
+    @Test
+    public void propertyCollectionRefEq() {
+        String[][] expecteds = new String[][]{{"my first value", "my third value"}, {"ddd", "my third value"}};
+        want.collection(list).eqByProperties(new String[]{"one", "three"}, expecteds, EqMode.IGNORE_ORDER);
+    }
+
+    Map<String, String> mockMap() {
+        Map<String, String> maps = new HashMap<String, String>();
+        maps.put("one", "my first value");
+        maps.put("two", "my second value");
+        maps.put("three", "my third value");
+
+        return maps;
+    }
+}

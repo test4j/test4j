@@ -1,11 +1,11 @@
 package org.test4j.module.database.dbop;
 
-import org.test4j.hamcrest.iassert.impl.CollectionAssert;
-import org.test4j.hamcrest.iassert.impl.IntegerAssert;
-import org.test4j.hamcrest.iassert.impl.ObjectAssert;
-import org.test4j.hamcrest.iassert.intf.ICollectionAssert;
-import org.test4j.hamcrest.iassert.intf.INumberAssert;
-import org.test4j.hamcrest.iassert.intf.IObjectAssert;
+import org.test4j.asserts.iassert.impl.CollectionAssert;
+import org.test4j.asserts.iassert.impl.IntegerAssert;
+import org.test4j.asserts.iassert.impl.ObjectAssert;
+import org.test4j.asserts.iassert.intf.ICollectionAssert;
+import org.test4j.asserts.iassert.intf.INumberAssert;
+import org.test4j.asserts.iassert.intf.IObjectAssert;
 import org.test4j.tools.json.JSON;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.database.environment.DBEnvironment;

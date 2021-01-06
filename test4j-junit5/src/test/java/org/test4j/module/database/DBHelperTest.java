@@ -3,7 +3,7 @@ package org.test4j.module.database;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.test4j.hamcrest.matcher.string.StringMode;
+import org.test4j.asserts.matcher.string.StringMode;
 import org.test4j.junit5.Test4J;
 import org.test4j.module.database.utility.DBHelper;
 import org.test4j.tools.commons.ResourceHelper;
