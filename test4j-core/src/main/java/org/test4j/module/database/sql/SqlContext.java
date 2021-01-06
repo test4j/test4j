@@ -5,8 +5,8 @@ import lombok.experimental.Accessors;
 
 import java.util.List;
 
-import static org.test4j.module.database.utility.SQLUtility.filterSpace;
 import static org.test4j.tools.commons.StringHelper.trim;
+import static org.test4j.tools.database.SQLUtility.filterSpace;
 
 @Data
 @Accessors(chain = true)

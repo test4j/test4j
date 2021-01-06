@@ -2,7 +2,7 @@ package org.test4j.hamcrest.iassert.intf;
 
 import org.test4j.hamcrest.iassert.impl.ArrayAssert;
 import org.test4j.hamcrest.iassert.impl.StringAssert;
-import org.test4j.module.database.utility.SQLUtility;
+import org.test4j.tools.database.SQLUtility;
 
 public interface ISqlAssert extends IStringAssert {
     /**

@@ -4,10 +4,6 @@ import org.test4j.exception.ExtraMessageError;
 import org.test4j.hamcrest.iassert.impl.CollectionAssert;
 import org.test4j.hamcrest.iassert.intf.ICollectionAssert;
 import org.test4j.hamcrest.matcher.modes.EqMode;
-import org.test4j.tools.commons.ExceptionWrapper;
-import org.test4j.tools.commons.ListHelper;
-import org.test4j.tools.commons.StringHelper;
-import org.test4j.tools.json.JSON;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.database.environment.DBEnvironment;
 import org.test4j.module.database.environment.DBEnvironmentFactory;
@@ -15,9 +11,13 @@ import org.test4j.module.database.sql.SqlList;
 import org.test4j.module.database.sql.Test4JSqlContext;
 import org.test4j.module.database.utility.SqlRunner;
 import org.test4j.tools.commons.ConfigHelper;
+import org.test4j.tools.commons.ExceptionWrapper;
+import org.test4j.tools.commons.ListHelper;
+import org.test4j.tools.commons.StringHelper;
 import org.test4j.tools.datagen.IDataMap;
-import org.test4j.tools.datagen.TableMap;
 import org.test4j.tools.datagen.TableData;
+import org.test4j.tools.datagen.TableMap;
+import org.test4j.tools.json.JSON;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,9 +25,9 @@ import java.util.*;
 import java.util.stream.Collectors;
 
 import static org.test4j.module.database.sql.Test4JSqlContext.setDbOpStatus;
-import static org.test4j.module.database.utility.SqlKeyWord.COLUMN_ID;
 import static org.test4j.tools.commons.StringHelper.DOUBLE_QUOTATION;
 import static org.test4j.tools.commons.StringHelper.isBlank;
+import static org.test4j.tools.database.SqlKeyWord.COLUMN_ID;
 
 @SuppressWarnings({"rawtypes", "unchecked"})
 public class DBOperator implements IDBOperator {
