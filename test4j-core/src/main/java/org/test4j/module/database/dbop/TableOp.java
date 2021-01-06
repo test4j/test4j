@@ -6,7 +6,7 @@ import org.test4j.hamcrest.iassert.impl.ObjectAssert;
 import org.test4j.hamcrest.iassert.intf.ICollectionAssert;
 import org.test4j.hamcrest.iassert.intf.INumberAssert;
 import org.test4j.hamcrest.iassert.intf.IObjectAssert;
-import org.test4j.json.JSON;
+import org.test4j.tools.json.JSON;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.database.environment.DBEnvironment;
 import org.test4j.module.database.environment.DBEnvironmentFactory;

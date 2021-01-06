@@ -4,7 +4,7 @@ import org.test4j.exception.ExtraMessageError;
 import org.test4j.hamcrest.iassert.impl.CollectionAssert;
 import org.test4j.hamcrest.iassert.intf.ICollectionAssert;
 import org.test4j.hamcrest.matcher.modes.EqMode;
-import org.test4j.json.JSON;
+import org.test4j.tools.json.JSON;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.database.environment.DBEnvironment;
 import org.test4j.module.database.environment.DBEnvironmentFactory;

@@ -1,6 +1,5 @@
 package org.test4j.tools.commons;
 
-import ext.test4j.apache.commons.lang.text.IOUtils;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.tools.cpdetector.CodePageDetector1Proxy;
 import org.test4j.tools.cpdetector.JChardetFacade;

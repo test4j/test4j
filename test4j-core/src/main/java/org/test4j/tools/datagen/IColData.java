@@ -3,7 +3,7 @@ package org.test4j.tools.datagen;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
-import org.test4j.json.JSON;
+import org.test4j.tools.json.JSON;
 
 import java.util.ArrayList;
 import java.util.List;

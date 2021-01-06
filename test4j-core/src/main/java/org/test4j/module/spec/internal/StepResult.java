@@ -1,7 +1,7 @@
 package org.test4j.module.spec.internal;
 
 import lombok.Getter;
-import org.test4j.json.JSON;
+import org.test4j.tools.json.JSON;
 import org.test4j.module.spec.IMix;
 import org.test4j.tools.commons.StringHelper;
 import org.test4j.tools.datagen.IDataMap;

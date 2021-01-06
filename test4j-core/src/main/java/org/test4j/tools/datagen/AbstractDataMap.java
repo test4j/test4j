@@ -1,7 +1,7 @@
 package org.test4j.tools.datagen;
 
 import lombok.Getter;
-import org.test4j.json.JSON;
+import org.test4j.tools.json.JSON;
 import org.test4j.module.ICore.DataMap;
 import org.test4j.tools.commons.ArrayHelper;
 import org.test4j.tools.datagen.IColData.MulRowValue;

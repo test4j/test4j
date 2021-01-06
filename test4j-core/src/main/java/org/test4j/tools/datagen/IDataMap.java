@@ -1,6 +1,6 @@
 package org.test4j.tools.datagen;
 
-import org.test4j.json.JSON;
+import org.test4j.tools.json.JSON;
 
 import java.util.List;
 import java.util.Map;

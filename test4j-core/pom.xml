@@ -19,6 +19,13 @@
             <groupId>com.google.code.gson</groupId>
             <artifactId>gson</artifactId>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/net.oschina.zcx7878/cicada.chardet -->
+        <dependency>
+            <groupId>org.test4j</groupId>
+            <artifactId>test4j-utils</artifactId>
+            <version>1.0.0-SNAPSHOT</version>
+        </dependency>
+
         <!-- database -->
         <dependency>
             <groupId>com.oracle.jdbc</groupId>

@@ -1,6 +1,6 @@
 package org.test4j.tools.commons;
 
-import org.test4j.json.JSON;
+import org.test4j.tools.json.JSON;
 
 import java.io.PrintWriter;
 import java.io.StringWriter;

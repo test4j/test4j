@@ -2,7 +2,7 @@ package org.test4j.tools.datagen;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.test4j.json.JSON;
+import org.test4j.tools.json.JSON;
 import org.test4j.tools.commons.ResourceHelper;
 
 import java.util.Arrays;

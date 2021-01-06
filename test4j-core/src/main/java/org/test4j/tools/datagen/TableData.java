@@ -1,7 +1,7 @@
 package org.test4j.tools.datagen;
 
 import lombok.experimental.Accessors;
-import org.test4j.json.JSON;
+import org.test4j.tools.json.JSON;
 import org.test4j.module.ICore.DataMap;
 import org.test4j.tools.commons.ArrayHelper;
 

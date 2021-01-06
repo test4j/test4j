@@ -6,7 +6,7 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 import org.hamcrest.Matcher;
 import org.test4j.hamcrest.matcher.LinkMatcher;
-import org.test4j.json.JSON;
+import org.test4j.tools.json.JSON;
 import org.test4j.module.core.utility.MessageHelper;
 
 import java.util.Collection;
