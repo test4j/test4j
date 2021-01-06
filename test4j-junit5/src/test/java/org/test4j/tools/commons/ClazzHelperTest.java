@@ -6,7 +6,7 @@ import org.junit.jupiter.params.provider.MethodSource;
 import org.test4j.junit5.Test4J;
 import org.test4j.model.TestedClazz;
 import org.test4j.model.TestedIntf;
-import org.test4j.tools.datagen.ConstructorArgsGenerator;
+import org.test4j.tools.reflector.ConstructorArgsGenerator;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationHandler;

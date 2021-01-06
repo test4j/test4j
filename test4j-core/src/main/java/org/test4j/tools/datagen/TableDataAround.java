@@ -2,10 +2,10 @@ package org.test4j.tools.datagen;
 
 import lombok.Data;
 import org.test4j.exception.ExtraMessageError;
+import org.test4j.tools.commons.ResourceHelper;
 import org.test4j.tools.json.JSON;
 import org.test4j.module.database.IDatabase;
 import org.test4j.module.spec.internal.StepResult;
-import org.test4j.tools.commons.ResourceHelper;
 
 import java.util.function.Consumer;
 

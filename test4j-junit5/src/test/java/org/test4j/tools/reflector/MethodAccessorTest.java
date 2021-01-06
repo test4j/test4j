@@ -5,9 +5,9 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.test4j.exception.NoSuchMethodRuntimeException;
 import org.test4j.junit5.Test4J;
 import org.test4j.reflector.TestObject;
+import org.test4j.tools.exception.NoSuchMethodRuntimeException;
 
 @SuppressWarnings({"rawtypes"})
 public class MethodAccessorTest extends Test4J {

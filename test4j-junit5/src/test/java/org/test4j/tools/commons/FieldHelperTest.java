@@ -3,9 +3,9 @@ package org.test4j.tools.commons;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.test4j.exception.NoSuchFieldRuntimeException;
 import org.test4j.junit5.Test4J;
 import org.test4j.model.Manager;
+import org.test4j.tools.exception.NoSuchFieldRuntimeException;
 
 import java.lang.reflect.Field;
 import java.util.List;

@@ -2,9 +2,9 @@ package org.test4j.tools.reflector;
 
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.test4j.exception.NoSuchFieldRuntimeException;
 import org.test4j.junit5.Test4J;
 import org.test4j.reflector.TestObject;
+import org.test4j.tools.exception.NoSuchFieldRuntimeException;
 
 public class FieldAccessorTest_StaticField extends Test4J {
 

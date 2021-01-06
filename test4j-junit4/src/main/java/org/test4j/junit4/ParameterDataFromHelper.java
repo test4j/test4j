@@ -1,10 +1,10 @@
 package org.test4j.junit4;
 
 import org.junit.runners.model.FrameworkMethod;
-import org.test4j.exception.NewInstanceException;
-import org.test4j.exception.NoSuchMethodRuntimeException;
 import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.tools.commons.Reflector;
+import org.test4j.tools.exception.NewInstanceException;
+import org.test4j.tools.exception.NoSuchMethodRuntimeException;
 import org.test4j.tools.reflector.MethodAccessor;
 
 import java.lang.reflect.Method;

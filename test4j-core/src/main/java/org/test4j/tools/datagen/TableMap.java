@@ -2,8 +2,8 @@ package org.test4j.tools.datagen;
 
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-import org.test4j.tools.json.JSON;
 import org.test4j.tools.commons.ResourceHelper;
+import org.test4j.tools.json.JSON;
 
 import java.util.Arrays;
 import java.util.LinkedHashMap;

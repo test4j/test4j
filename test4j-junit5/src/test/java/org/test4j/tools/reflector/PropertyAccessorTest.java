@@ -3,10 +3,10 @@ package org.test4j.tools.reflector;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.test4j.exception.NoSuchFieldRuntimeException;
 import org.test4j.junit5.Test4J;
 import org.test4j.model.User;
 import org.test4j.tools.datagen.DataProvider;
+import org.test4j.tools.exception.NoSuchFieldRuntimeException;
 
 import java.util.HashMap;
 import java.util.Iterator;
