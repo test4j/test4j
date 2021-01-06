@@ -19,7 +19,7 @@ public interface ICore extends IAssertion {
      *
      * @return
      */
-    default DataMap map() {
+    default AbstractDataMap map() {
         return DataMap.create();
     }
 
@@ -29,7 +29,7 @@ public interface ICore extends IAssertion {
      * @param colSize
      * @return
      */
-    default DataMap map(int colSize) {
+    default AbstractDataMap map(int colSize) {
         return DataMap.create(colSize);
     }
 
@@ -89,25 +89,6 @@ public interface ICore extends IAssertion {
          */
         public DataMap(int colSize) {
             super(colSize);
-        }
-
-        /**
-         * 创建一个普通的Map对象
-         *
-         * @return
-         */
-        public static DataMap create() {
-            return new DataMap();
-        }
-
-        /**
-         * 创建一个colSize行的行列式对象
-         *
-         * @param colSize
-         * @return
-         */
-        public static DataMap create(int colSize) {
-            return new DataMap<>(colSize);
         }
 
         /**

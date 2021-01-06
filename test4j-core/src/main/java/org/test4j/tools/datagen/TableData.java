@@ -21,9 +21,9 @@ public class TableData extends ArrayList<Map<String, Object>> {
     /**
      * 用来初始化所有record记录
      */
-    private DataMap init;
+    private AbstractDataMap init;
 
-    private DataMap data;
+    private AbstractDataMap data;
 
     public TableData() {
     }

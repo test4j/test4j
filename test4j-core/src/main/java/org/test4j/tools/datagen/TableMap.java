@@ -88,14 +88,14 @@ public class TableMap extends LinkedHashMap<String, TableData> {
      * @param tables
      * @return
      */
-    public TableMap apply(Consumer<DataMap> consumer, boolean skip, String... tables) {
+    public TableMap apply(Consumer<AbstractDataMap> consumer, boolean skip, String... tables) {
         Set<String> all = tables == null || tables.length == 0 ? this.keySet() : Arrays.stream(tables).collect(toSet());
         for (String table : all) {
             TableData data = this.get(table);
             if (data == null && skip) {
                 continue;
             }
-            consumer.accept((DataMap) data.findDataMap());
+            consumer.accept((AbstractDataMap) data.findDataMap());
         }
         return this;
     }
