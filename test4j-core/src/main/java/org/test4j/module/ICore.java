@@ -72,7 +72,7 @@ public interface ICore {
      *
      * @param <DM>
      */
-    class DataMap<DM extends DataMap> extends AbstractDataMap<DM> {
+    class DataMap<DM extends DataMap> extends AbstractDataMap {
         /**
          * 创建一个普通的Map对象
          */

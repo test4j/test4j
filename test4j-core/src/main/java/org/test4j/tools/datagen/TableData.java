@@ -32,7 +32,7 @@ public class TableData extends ArrayList<Map<String, Object>> {
         this.addAll(data);
     }
 
-    public TableData setInit(AbstractDataMap init) {
+    public TableData setInit(IDataMap init) {
         if (this.data != null) {
             throw new RuntimeException("the init DataMap should set first.");
         }
