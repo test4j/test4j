@@ -2,7 +2,7 @@ package org.test4j.tools.commons;
 
 import ext.test4j.apache.commons.lang.text.IOUtils;
 import org.test4j.module.core.utility.MessageHelper;
-import org.test4j.tools.cpdetector.CodepageDetectorProxy;
+import org.test4j.tools.cpdetector.CodePageDetectorProxy;
 import org.test4j.tools.cpdetector.JChardetFacade;
 
 import java.io.*;
@@ -156,13 +156,13 @@ public class ResourceHelper {
      */
     @SuppressWarnings("deprecation")
     public static String getFileEncodingCharset(File file) {
-        CodepageDetectorProxy detector = CodepageDetectorProxy.getInstance();
+        CodePageDetectorProxy detector = CodePageDetectorProxy.getInstance();
         detector.add(JChardetFacade.getInstance());
 
         try {
             Charset charset;
             try {
-                charset = detector.detectCodepage(file.toURL());
+                charset = detector.detectCodePage(file.toURL());
             } catch (IllegalArgumentException e) {
                 charset = Charset.forName(ResourceHelper.defaultFileEncoding());
                 MessageHelper.warn("get file encoding error:" + e.getMessage() + ", use default encoding:"
@@ -185,14 +185,14 @@ public class ResourceHelper {
      * @return
      */
     public static String getFileEncodingCharset(InputStream is) {
-        CodepageDetectorProxy detector = CodepageDetectorProxy.getInstance();
+        CodePageDetectorProxy detector = CodePageDetectorProxy.getInstance();
         detector.add(JChardetFacade.getInstance());
 
         try {
             Charset.forName(ResourceHelper.defaultFileEncoding());
             Charset charset;
             try {
-                charset = detector.detectCodepage(is, 2147483647);
+                charset = detector.detectCodePage(is, 2147483647);
             } catch (IllegalArgumentException e) {
                 charset = Charset.forName(ResourceHelper.defaultFileEncoding());
                 MessageHelper.warn("get file encoding error:" + e.getMessage() + ", use default encoding:"
