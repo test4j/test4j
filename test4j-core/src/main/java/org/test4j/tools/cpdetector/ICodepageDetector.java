@@ -9,7 +9,7 @@ import java.nio.charset.Charset;
 public interface ICodepageDetector extends Comparable<ICodepageDetector> {
 	Reader open(URL paramURL) throws IOException;
 
-	Charset detectCodepage(URL paramURL) throws IOException;
+	Charset detectCodePage(URL paramURL) throws IOException;
 
-	Charset detectCodepage(InputStream paramInputStream, int paramInt) throws IOException;
+	Charset detectCodePage(InputStream paramInputStream, int paramInt) throws IOException;
 }

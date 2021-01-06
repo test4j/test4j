@@ -2,7 +2,7 @@ package org.test4j.tools.commons;
 
 import ext.test4j.apache.commons.lang.text.IOUtils;
 import org.test4j.module.core.utility.MessageHelper;
-import org.test4j.tools.cpdetector.CodePageDetectorProxy;
+import org.test4j.tools.cpdetector.CodePageDetector1Proxy;
 import org.test4j.tools.cpdetector.JChardetFacade;
 
 import java.io.*;
@@ -156,7 +156,7 @@ public class ResourceHelper {
      */
     @SuppressWarnings("deprecation")
     public static String getFileEncodingCharset(File file) {
-        CodePageDetectorProxy detector = CodePageDetectorProxy.getInstance();
+        CodePageDetector1Proxy detector = CodePageDetector1Proxy.getInstance();
         detector.add(JChardetFacade.getInstance());
 
         try {
@@ -185,7 +185,7 @@ public class ResourceHelper {
      * @return
      */
     public static String getFileEncodingCharset(InputStream is) {
-        CodePageDetectorProxy detector = CodePageDetectorProxy.getInstance();
+        CodePageDetector1Proxy detector = CodePageDetector1Proxy.getInstance();
         detector.add(JChardetFacade.getInstance());
 
         try {

@@ -9,7 +9,7 @@ import java.io.InputStream;
 import java.nio.charset.Charset;
 import java.nio.charset.UnsupportedCharsetException;
 
-public class JChardetFacade extends AbstractCodePageDetector implements nsICharsetDetectionObserver {
+public class JChardetFacade extends AbstractCodePageDetector1 implements nsICharsetDetectionObserver {
     private static JChardetFacade instance = null;
     private static nsDetector det;
     private byte[] buf = new byte[4096];
