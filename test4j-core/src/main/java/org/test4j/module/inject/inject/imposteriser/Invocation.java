@@ -1,6 +1,6 @@
 /*  Copyright (c) 2000-2004 jMock.org
  */
-package org.test4j.module.inject.imposteriser;
+package org.test4j.module.inject.inject.imposteriser;
 
 import org.hamcrest.Description;
 import org.hamcrest.SelfDescribing;

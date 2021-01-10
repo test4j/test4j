@@ -1,9 +1,10 @@
 package org.test4j.module.inject;
 
 import org.junit.jupiter.api.Test;
-
 import org.test4j.Test4J;
-import org.test4j.model.User;
+import org.test4j.module.fortest.User;
+import org.test4j.module.inject.inject.Inject;
+import org.test4j.module.inject.inject.Injected;
 
 /**
  * 类InjectModuleTest.java的实现描述

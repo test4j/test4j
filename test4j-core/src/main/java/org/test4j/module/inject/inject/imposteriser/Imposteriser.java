@@ -1,4 +1,4 @@
-package org.test4j.module.inject.imposteriser;
+package org.test4j.module.inject.inject.imposteriser;
 
 /**
  * An object that can creates a proxy of the given type to capture

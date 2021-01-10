@@ -1,4 +1,4 @@
-package org.test4j.module.inject.imposteriser;
+package org.test4j.module.inject.inject.imposteriser;
 
 import org.test4j.Context;
 import org.test4j.tools.reflector.FieldAccessor;

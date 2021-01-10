@@ -1,4 +1,4 @@
-package org.test4j.module.inject.imposteriser;
+package org.test4j.module.inject.inject.imposteriser;
 
 import java.lang.reflect.Field;
 

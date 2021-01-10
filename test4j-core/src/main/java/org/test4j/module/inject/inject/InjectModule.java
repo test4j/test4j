@@ -1,10 +1,10 @@
-package org.test4j.module.inject;
+package org.test4j.module.inject.inject;
 
 import org.test4j.ITest4JListener;
 
 import java.lang.reflect.Method;
 
-import static org.test4j.module.inject.imposteriser.InjectHelper.injectIntoTestedObject;
+import static org.test4j.module.inject.inject.imposteriser.InjectHelper.injectIntoTestedObject;
 
 public class InjectModule implements ITest4JListener {
     @Override

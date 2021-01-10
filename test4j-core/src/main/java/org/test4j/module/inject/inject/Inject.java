@@ -1,4 +1,4 @@
-package org.test4j.module.inject;
+package org.test4j.module.inject.inject;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;

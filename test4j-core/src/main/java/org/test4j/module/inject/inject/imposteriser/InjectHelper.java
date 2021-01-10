@@ -1,7 +1,7 @@
-package org.test4j.module.inject.imposteriser;
+package org.test4j.module.inject.inject.imposteriser;
 
-import org.test4j.module.inject.Inject;
-import org.test4j.module.inject.Injected;
+import org.test4j.module.inject.inject.Inject;
+import org.test4j.module.inject.inject.Injected;
 import org.test4j.tools.Logger;
 import org.test4j.tools.commons.AnnotationHelper;
 import org.test4j.tools.reflector.Reflector;

@@ -1,9 +1,9 @@
 package org.test4j.module.inject;
 
 import org.junit.jupiter.api.Test;
-
 import org.test4j.Test4J;
-import org.test4j.model.User;
+import org.test4j.module.fortest.User;
+import org.test4j.module.inject.inject.Inject;
 
 public class InjectionModuleHelperTest implements Test4J {
     User user = new User();

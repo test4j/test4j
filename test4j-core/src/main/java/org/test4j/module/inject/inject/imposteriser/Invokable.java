@@ -1,4 +1,4 @@
-package org.test4j.module.inject.imposteriser;
+package org.test4j.module.inject.inject.imposteriser;
 
 
 public interface Invokable {

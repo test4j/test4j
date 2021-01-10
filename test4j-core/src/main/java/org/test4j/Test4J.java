@@ -1,6 +1,7 @@
 package org.test4j;
 
 import org.test4j.asserts.IWant;
+import org.test4j.integration.ISpring;
 import org.test4j.module.database.IDatabase;
 import org.test4j.tools.IUtils;
 import org.test4j.tools.commons.ArrayHelper;

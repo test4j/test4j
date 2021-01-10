@@ -32,7 +32,7 @@
     <properties>
         <spring.version>5.2.0.RELEASE</spring.version>
         <release.plugin.version>2.4.1</release.plugin.version>
-        <test4j-mock.version>1.0.0</test4j-mock.version>
+        <test4j-mock.version>1.0.1</test4j-mock.version>
         <test4j-utils.version>1.0.1</test4j-utils.version>
         <test4j-assert.version>1.0.0</test4j-assert.version>
     </properties>
@@ -40,7 +40,6 @@
     <modules>
         <module>test4j-core</module>
         <module>test4j-btest</module>
-        <module>test4j-junit5</module>
     </modules>
     <dependencyManagement>
         <dependencies>

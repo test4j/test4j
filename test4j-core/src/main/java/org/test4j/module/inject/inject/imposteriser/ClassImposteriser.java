@@ -1,4 +1,4 @@
-package org.test4j.module.inject.imposteriser;
+package org.test4j.module.inject.inject.imposteriser;
 
 import g_cglib.net.sf.cglib.core.CodeGenerationException;
 import g_cglib.net.sf.cglib.core.DefaultNamingPolicy;

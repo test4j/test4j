@@ -2,6 +2,7 @@ package org.test4j.module.inject;
 
 import org.junit.jupiter.api.Test;
 import org.test4j.Test4J;
+import org.test4j.module.inject.inject.Inject;
 
 
 public class InjectModuleTest2 implements Test4J {

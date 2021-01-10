@@ -1,4 +1,4 @@
-package org.test4j.model;
+package org.test4j.module.fortest;
 
 import lombok.Getter;
 import lombok.Setter;
