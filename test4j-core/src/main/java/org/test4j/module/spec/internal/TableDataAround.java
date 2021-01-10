@@ -1,11 +1,11 @@
-package org.test4j.module.database.datagen;
+package org.test4j.module.spec.internal;
 
 import lombok.Data;
-import org.test4j.IDatabase;
-import org.test4j.exception.ExtraMessageError;
-import org.test4j.module.spec.internal.StepResult;
+import org.test4j.module.database.IDatabase;
+import org.test4j.module.database.datagen.TableMap;
 import org.test4j.tools.commons.ResourceHelper;
 import org.test4j.tools.datagen.IDataMap;
+import org.test4j.tools.exception.ExtraMessageError;
 import org.test4j.tools.json.JSON;
 
 import java.util.function.Consumer;

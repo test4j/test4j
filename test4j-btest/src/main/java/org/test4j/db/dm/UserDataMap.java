@@ -3,6 +3,7 @@ package org.test4j.db.dm;
 import org.test4j.Test4J;
 import org.test4j.module.database.annotations.ColumnDef;
 import org.test4j.module.database.annotations.ScriptTable;
+import org.test4j.tools.datagen.DataMap;
 import org.test4j.tools.datagen.KeyValue;
 
 import java.util.Date;
@@ -15,7 +16,7 @@ import java.util.function.Supplier;
  * @Description UserDataMap
  */
 @ScriptTable("t_user")
-public class UserDataMap extends Test4J.DataMap<UserDataMap> {
+public class UserDataMap extends DataMap<UserDataMap> {
     private boolean isTable;
 
     private Supplier<Boolean> supplier = () -> this.isTable;

@@ -1,7 +1,7 @@
 package org.test4j.module.core;
 
-import org.test4j.module.core.internal.ConfigurationLoader;
 import org.test4j.module.core.internal.ModulesLoader;
+import org.test4j.tools.config.ConfigLoader;
 
 import java.util.List;
 
@@ -20,7 +20,7 @@ public class CoreModule {
         }
         try {
             hasInitial = true;
-            ConfigurationLoader.loading();
+            ConfigLoader.loading();
             List<Module> modules = ModulesLoader.loading();
             for (Module module : modules) {
                 module.afterInit();

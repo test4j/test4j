@@ -1,8 +1,8 @@
 package org.test4j.db.dm;
 
-import org.test4j.Test4J;
 import org.test4j.module.database.annotations.ColumnDef;
 import org.test4j.module.database.annotations.ScriptTable;
+import org.test4j.tools.datagen.DataMap;
 import org.test4j.tools.datagen.KeyValue;
 
 import java.util.function.Consumer;
@@ -14,7 +14,7 @@ import java.util.function.Supplier;
  * @Description AddressDataMap
  */
 @ScriptTable("address")
-public class AddressDataMap extends Test4J.DataMap<AddressDataMap> {
+public class AddressDataMap extends DataMap<AddressDataMap> {
     private boolean isTable;
 
     private Supplier<Boolean> supplier = () -> this.isTable;

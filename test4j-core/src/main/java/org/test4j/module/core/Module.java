@@ -1,7 +1,7 @@
 package org.test4j.module.core;
 
-import org.test4j.module.core.internal.IPropItem;
 import org.test4j.module.core.internal.ModuleListener;
+import org.test4j.tools.config.IPropItem;
 
 /**
  * A type for modules that offer services to tests. Before a module is used,

@@ -1,17 +1,17 @@
 package org.test4j.module.core.internal;
 
 import org.test4j.exception.Test4JException;
-import org.test4j.module.ConfigHelper;
 import org.test4j.module.core.Module;
 import org.test4j.tools.Logger;
 import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.commons.StringHelper;
+import org.test4j.tools.config.ConfigHelper;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.test4j.module.core.internal.IPropItem.PROPKEY_MODULES;
 import static org.test4j.tools.commons.ClazzHelper.createInstanceOfType;
+import static org.test4j.tools.config.IPropItem.PROPKEY_MODULES;
 
 /**
  * A class for loading test4j modules.

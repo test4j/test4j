@@ -3,9 +3,9 @@ package org.test4j.tools.datagen;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.test4j.Test4J;
-import org.test4j.module.database.datagen.TableDataAround;
-import org.test4j.module.database.sql.DataSourceCreatorFactory;
+import org.test4j.module.database.proxy.DataSourceCreatorFactory;
 import org.test4j.module.spec.IStory;
+import org.test4j.module.spec.internal.TableDataAround;
 
 import static org.test4j.asserts.matcher.modes.EqMode.EQ_STRING;
 import static org.test4j.db.ITable.t_user;
