@@ -1,6 +1,6 @@
 package org.test4j.db.dm;
 
-import org.test4j.ICore.DataMap;
+import org.test4j.Test4J;
 import org.test4j.module.database.annotations.ColumnDef;
 import org.test4j.module.database.annotations.ScriptTable;
 import org.test4j.tools.datagen.KeyValue;
@@ -10,13 +10,12 @@ import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
+ * @author generate code
  * @ClassName UserDataMap
  * @Description UserDataMap
- *
- * @author generate code
  */
 @ScriptTable("t_user")
-public class UserDataMap extends DataMap<UserDataMap> {
+public class UserDataMap extends Test4J.DataMap<UserDataMap> {
     private boolean isTable;
 
     private Supplier<Boolean> supplier = () -> this.isTable;
@@ -73,7 +72,6 @@ public class UserDataMap extends DataMap<UserDataMap> {
     /**
      * 创建UserDataMap
      * 并初始化主键和gmtCreate, gmtModified, isDeleted等特殊值
-     *
      */
     public UserDataMap init() {
         this.id.autoIncrease();

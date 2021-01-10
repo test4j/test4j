@@ -2,17 +2,17 @@ package org.test4j.module.database.environment;
 
 
 import org.junit.jupiter.api.Test;
+import org.test4j.IDatabase;
+import org.test4j.asserts.matcher.modes.EqMode;
 import org.test4j.db.ITable;
 import org.test4j.db.dm.UserDataMap;
-import org.test4j.asserts.matcher.modes.EqMode;
-import org.test4j.module.database.IDatabase;
 
 /**
  * 类BaseEnvironmentTest.java的实现描述：
  *
  * @author darui.wudr 2013-1-8 下午1:24:10
  */
-public class BaseEnvironmentTest implements IDatabase, ITable {
+public class BaseEnvironmentTest implements ITable, IDatabase {
 
     @Test
     public void testConvertToSqlValue_ValueIsEnum() throws Exception {

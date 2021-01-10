@@ -3,7 +3,6 @@ package org.test4j.junit5;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
-import org.test4j.ICore;
 import org.test4j.Test4J;
 import org.test4j.tools.datagen.DataProvider;
 
@@ -14,7 +13,7 @@ public class JUnitTestDemo implements Test4J {
     @Test
     public void demo() {
         int count = 10;
-        ICore.want.number(count).isEqualTo(10);
+        want.number(count).isEqualTo(10);
     }
 
     @ParameterizedTest

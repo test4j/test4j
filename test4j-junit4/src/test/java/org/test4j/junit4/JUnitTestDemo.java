@@ -3,7 +3,6 @@ package org.test4j.junit4;
 import org.junit.Test;
 import org.test4j.Test4J;
 import org.test4j.integration.junit4.DataFrom;
-import org.test4j.ICore;
 import org.test4j.tools.datagen.DataProvider;
 
 /**

@@ -3,7 +3,7 @@ package org.test4j.module.spec.internal;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
-import org.test4j.ICore;
+import org.test4j.Test4J;
 import org.test4j.integration.spring.SpringEnv;
 import org.test4j.module.spec.SpecModule;
 import org.test4j.module.spec.annotations.*;
@@ -117,7 +117,7 @@ public class MixProxy<T> implements MethodInterceptor {
     private boolean isSkipMethod(String method, String klass) {
         if (Ignore_Methods.contains(method)) {
             return true;
-        } else if (ICore.class.getName().equals(klass)) {
+        } else if (Test4J.class.getName().equals(klass)) {
             return true;
         } else {
             return false;

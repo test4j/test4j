@@ -1,7 +1,7 @@
 package org.test4j.module.database.datagen;
 
 import lombok.experimental.Accessors;
-import org.test4j.ICore.DataMap;
+import org.test4j.Test4J;
 import org.test4j.tools.commons.ArrayHelper;
 import org.test4j.tools.datagen.AbstractDataMap;
 import org.test4j.tools.datagen.IColData;
@@ -40,7 +40,7 @@ public class TableData extends ArrayList<Map<String, Object>> {
             throw new RuntimeException("the init DataMap should set first.");
         }
         if (this.init == null) {
-            this.init = new DataMap(1);
+            this.init = new Test4J.DataMap(1);
         }
         for (Map.Entry<String, IColData> entry : (Set<Map.Entry>) init.entrySet()) {
             this.init.put(entry.getKey(), entry.getValue());
@@ -50,7 +50,7 @@ public class TableData extends ArrayList<Map<String, Object>> {
 
     public IDataMap findDataMap() {
         if (data == null) {
-            this.data = DataMap.create(this.size());
+            this.data = Test4J.DataMap.create(this.size());
 
             Set<String> allKeys = this.stream().flatMap(map -> map.keySet().stream()).collect(toSet());
             for (int index = 0; index < this.size(); index++) {
