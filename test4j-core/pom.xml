@@ -30,18 +30,6 @@
             <artifactId>ojdbc14</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.test4j</groupId>
-            <artifactId>test4j-db-dep</artifactId>
-            <version>${project.version}</version>
-            <scope>provided</scope>
-            <exclusions>
-                <exclusion>
-                    <artifactId>mybatis-plus-annotation</artifactId>
-                    <groupId>com.baomidou</groupId>
-                </exclusion>
-            </exclusions>
-        </dependency>
-        <dependency>
             <groupId>org.apache.dubbo</groupId>
             <artifactId>dubbo</artifactId>
         </dependency>
