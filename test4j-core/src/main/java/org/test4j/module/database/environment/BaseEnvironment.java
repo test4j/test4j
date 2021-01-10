@@ -3,11 +3,10 @@ package org.test4j.module.database.environment;
 import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.test4j.function.EConsumer;
 import org.test4j.function.EFunction;
-import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.database.environment.typesmap.AbstractTypeMap;
 import org.test4j.module.database.sql.DataSourceCreatorFactory;
-import org.test4j.module.database.utility.DataSourceType;
-import org.test4j.tools.commons.ExceptionWrapper;
+import org.test4j.tools.Logger;
+import org.test4j.tools.exception.Exceptions;
 
 import javax.sql.DataSource;
 import java.sql.Connection;
@@ -17,19 +16,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public abstract class BaseEnvironment implements DBEnvironment {
-    protected final String dataSourceName;
 
     private final Map<String, TableMeta> metas = new HashMap<>();
-
-    protected DataSourceType dataSourceType;
 
     private DataSource dataSource;
 
     protected AbstractTypeMap typeMap;
 
-    protected BaseEnvironment(DataSourceType dataSourceType, String dataSourceName, String schema) {
-        this.dataSourceName = dataSourceName;
-        this.dataSourceType = dataSourceType;
+    protected BaseEnvironment(String dataSourceName) {
         this.dataSource = DataSourceCreatorFactory.create(dataSourceName);
     }
 
@@ -106,11 +100,11 @@ public abstract class BaseEnvironment implements DBEnvironment {
             return metas.get(table);
         }
         return this.query("select * from " + table + " where 1!=1",
-                rs -> {
-                    TableMeta meta = new TableMeta(table, rs.getMetaData(), this);
-                    metas.put(table, meta);
-                    return meta;
-                }
+            rs -> {
+                TableMeta meta = new TableMeta(table, rs.getMetaData());
+                metas.put(table, meta);
+                return meta;
+            }
         );
     }
 
@@ -126,8 +120,8 @@ public abstract class BaseEnvironment implements DBEnvironment {
             Object value = this.typeMap.toObjectByType(input, javaType);
             return value;
         } catch (Exception e) {
-            MessageHelper.info("convert input[" + input + "] to type[" + javaType + "] error, so return input value.\n"
-                    + e.getMessage());
+            Logger.info("convert input[" + input + "] to type[" + javaType + "] error, so return input value.\n"
+                + e.getMessage());
             return input;
         }
     }
@@ -150,8 +144,8 @@ public abstract class BaseEnvironment implements DBEnvironment {
         try {
             connection = DataSourceUtils.doGetConnection(dataSource);
             return function.apply(connection);
-        } catch (Exception e) {
-            throw ExceptionWrapper.getUndeclaredThrowableExceptionCaused(e);
+        } catch (Throwable e) {
+            throw Exceptions.getUndeclaredThrowableExceptionCaused(e);
         } finally {
             DataSourceUtils.releaseConnection(connection, dataSource);
         }
@@ -162,8 +156,8 @@ public abstract class BaseEnvironment implements DBEnvironment {
         try {
             connection = DataSourceUtils.doGetConnection(dataSource);
             consumer.accept(connection);
-        } catch (Exception e) {
-            throw ExceptionWrapper.getUndeclaredThrowableExceptionCaused(e);
+        } catch (Throwable e) {
+            throw Exceptions.getUndeclaredThrowableExceptionCaused(e);
         } finally {
             DataSourceUtils.releaseConnection(connection, dataSource);
         }

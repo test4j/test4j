@@ -1,6 +1,5 @@
 package org.test4j.module.database;
 
-import org.test4j.module.core.internal.ICoreInitial;
 import org.test4j.module.database.dbop.DBOperator;
 import org.test4j.module.database.dbop.IDBOperator;
 
@@ -10,7 +9,7 @@ import org.test4j.module.database.dbop.IDBOperator;
  * @author wudarui
  */
 public interface IDatabase {
-    IDBOperator db = ICoreInitial.initDBOperator();
+    IDBOperator db = new DBOperator();
 
     /**
      * 指定数据库执行

@@ -1,16 +1,17 @@
 package org.test4j.module.database.dbop;
 
 import org.junit.jupiter.api.Test;
+import org.test4j.Test4J;
 import org.test4j.db.ITable;
 import org.test4j.db.dm.UserDataMap;
-import org.test4j.junit5.Test4J;
+
 
 import java.sql.SQLException;
 import java.util.Date;
 
 
 @SuppressWarnings({"serial", "unchecked"})
-public class TableOpTest extends Test4J {
+public class TableOpTest implements Test4J {
 
     @Test
     public void testInsertData() throws SQLException {

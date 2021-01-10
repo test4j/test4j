@@ -17,9 +17,9 @@ public class TableMeta {
 
     Map<String, ColumnMeta> columns;
 
-    public TableMeta(String table, ResultSetMetaData meta, DBEnvironment dbEnvironment) throws Exception {
+    public TableMeta(String table, ResultSetMetaData meta) throws Exception {
         this.tableName = table;
-        this.columns = new HashMap<String, ColumnMeta>();
+        this.columns = new HashMap<>();
         int count = meta.getColumnCount();
         for (int index = 1; index <= count; index++) {
             ColumnMeta columnMeta = new ColumnMeta();
@@ -90,8 +90,8 @@ public class TableMeta {
 
     public void fillData(IDataMap data, DBEnvironment environment) {
         Set<String> keys = ((Set<String>) data.keySet()).stream()
-                .map(String::toUpperCase)
-                .collect(toSet());
+            .map(String::toUpperCase)
+            .collect(toSet());
         for (String key : this.columns.keySet()) {
             if (keys.contains(key.toUpperCase())) {
                 continue;
@@ -99,23 +99,6 @@ public class TableMeta {
             ColumnMeta column = this.columns.get(key);
             Object value = column.getDefaultValue(environment);
             data.kv(key, value);
-        }
-    }
-
-    /**
-     * 填充在data中未指定字段的默认值
-     *
-     * @param data
-     */
-    public void fillData(Map<String, Object> data, DBEnvironment environment) {
-        Set<String> keys = data.keySet().stream().map(String::toUpperCase).collect(toSet());
-        for (String key : this.columns.keySet()) {
-            if (keys.contains(key)) {
-                continue;
-            }
-            ColumnMeta column = this.columns.get(key);
-            Object value = column.getDefaultValue(environment);
-            data.put(key, value);
         }
     }
 
@@ -138,11 +121,6 @@ public class TableMeta {
         boolean isNullable;
 
         /**
-         * 默认值
-         */
-        Object defaultValue;
-
-        /**
          * 对应的java类型
          */
         String javaType;
@@ -150,7 +128,7 @@ public class TableMeta {
         @Override
         public String toString() {
             return "[columnName=" + columnName + ", size=" + size + ", typeName=" + typeName + ", isNullable="
-                    + isNullable + ", defaultValue=" + defaultValue + "]";
+                + isNullable + "]";
         }
 
         public Object getDefaultValue(DBEnvironment dbEnvironment) {
@@ -166,24 +144,9 @@ public class TableMeta {
             }
         }
 
-        public String getColumnName() {
-            return columnName;
-        }
-
-        public int getSize() {
-            return size;
-        }
-
-        public String getTypeName() {
-            return typeName;
-        }
-
         public boolean isNullable() {
             return isNullable;
         }
 
-        public Object getDefaultValue() {
-            return defaultValue;
-        }
     }
 }

@@ -1,13 +1,14 @@
 package org.test4j.module.database.dbop;
 
 import org.junit.jupiter.api.Test;
+import org.test4j.Test4J;
 import org.test4j.db.ITable;
-import org.test4j.junit5.Test4J;
+
 import org.test4j.module.database.environment.DBEnvironmentFactory;
 
 import java.io.File;
 
-public class SqlSetTest extends Test4J {
+public class SqlSetTest implements Test4J {
 
     @Test
     public void testReadFrom() {

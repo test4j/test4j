@@ -1,12 +1,12 @@
 package org.test4j.module.database.environment;
 
-import org.test4j.module.core.utility.MessageHelper;
+import org.test4j.module.ConfigHelper;
 import org.test4j.module.database.environment.types.DerbyEnvironment;
 import org.test4j.module.database.environment.types.MySqlEnvironment;
 import org.test4j.module.database.environment.types.OracleEnvironment;
 import org.test4j.module.database.environment.types.SqlServerEnvironment;
 import org.test4j.module.database.utility.DataSourceType;
-import org.test4j.tools.commons.ConfigHelper;
+import org.test4j.tools.Logger;
 
 import java.sql.SQLException;
 import java.util.HashMap;
@@ -38,13 +38,13 @@ public final class DBEnvironmentFactory {
             case MySql:
             case H2DB:
             case MariaDB4J:
-                return new MySqlEnvironment(dataSourceName, dataSourceSchema);
+                return new MySqlEnvironment(dataSourceName);
             case Oracle:
-                return new OracleEnvironment(dataSourceName, dataSourceSchema);
+                return new OracleEnvironment(dataSourceName);
             case SqlServer:
-                return new SqlServerEnvironment(dataSourceName, dataSourceSchema);
+                return new SqlServerEnvironment(dataSourceName);
             case DerbyDB:
-                return new DerbyEnvironment(dataSourceName, dataSourceSchema);
+                return new DerbyEnvironment(dataSourceName);
             default:
                 throw new RuntimeException("unsupport database type:" + dataSourceType.name());
         }
@@ -63,7 +63,7 @@ public final class DBEnvironmentFactory {
      */
     public static DBEnvironment getDBEnvironment(String dataSourceName) {
         return Optional.ofNullable(environments.get(dataSourceName))
-                .orElseGet(() -> createDBEnvironment(dataSourceName));
+            .orElseGet(() -> createDBEnvironment(dataSourceName));
     }
 
     /**
@@ -76,7 +76,7 @@ public final class DBEnvironmentFactory {
             try {
                 environment.getValue().commit();
             } catch (Throwable e) {
-                MessageHelper.warn("commit transactional error: " + e.getMessage());
+                Logger.warn("commit transactional error: " + e.getMessage());
             }
         }
     }

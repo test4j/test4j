@@ -1,13 +1,13 @@
 package org.test4j.module.database;
 
+import org.test4j.integration.spring.SpringEnv;
 import org.test4j.mock.Mocker;
+import org.test4j.module.ConfigHelper;
 import org.test4j.module.core.Module;
-import org.test4j.module.core.internal.TestListener;
+import org.test4j.module.core.internal.ModuleListener;
 import org.test4j.module.database.environment.DBEnvironmentFactory;
 import org.test4j.module.database.sql.DataSourceCreatorFactory;
 import org.test4j.module.database.sql.Test4JSqlContext;
-import org.test4j.module.spring.interal.SpringEnv;
-import org.test4j.tools.commons.ConfigHelper;
 
 import java.lang.reflect.Method;
 import java.util.List;
@@ -19,6 +19,7 @@ public class DatabaseModule implements Module {
 
     @Override
     public void init() {
+        Mocker.mockSpringDataSource();
         Mocker.mockMybatisConfiguration();
     }
 
@@ -27,19 +28,19 @@ public class DatabaseModule implements Module {
     }
 
     /**
-     * @return The {@link TestListener} associated with this module
+     * @return The {@link ModuleListener} associated with this module
      */
     @Override
-    public TestListener getTestListener() {
-        return new DatabaseTestListener();
+    public ModuleListener getTestListener() {
+        return new DatabaseModuleListener();
     }
 
     /**
-     * The {@link TestListener} for this module
+     * The {@link ModuleListener} for this module
      */
-    protected class DatabaseTestListener extends TestListener {
+    protected class DatabaseModuleListener extends ModuleListener {
         @Override
-        public void beforeClass(Class testClazz) {
+        public void beforeAll(Class testClazz) {
             if (!SpringEnv.isSpringEnv()) {
                 return;
             }
@@ -55,7 +56,7 @@ public class DatabaseModule implements Module {
          * {@inheritDoc}
          */
         @Override
-        public void beforeMethod(Object testObject, Method testMethod) {
+        public void beforeExecute(Object testObject, Method testMethod) {
             Test4JSqlContext.clean();
         }
 
@@ -65,7 +66,7 @@ public class DatabaseModule implements Module {
          * {@inheritDoc}
          */
         @Override
-        public void afterMethod(Object testObject, Method testMethod, Throwable testThrowable) {
+        public void afterExecute(Object testObject, Method testMethod, Throwable testThrowable) {
             DBEnvironmentFactory.closeDBEnvironment();
             Test4JSqlContext.clean();
         }

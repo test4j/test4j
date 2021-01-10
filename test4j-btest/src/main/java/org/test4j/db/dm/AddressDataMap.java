@@ -1,6 +1,6 @@
 package org.test4j.db.dm;
 
-import org.test4j.module.ICore.DataMap;
+import org.test4j.ICore.DataMap;
 import org.test4j.module.database.annotations.ColumnDef;
 import org.test4j.module.database.annotations.ScriptTable;
 import org.test4j.tools.datagen.KeyValue;

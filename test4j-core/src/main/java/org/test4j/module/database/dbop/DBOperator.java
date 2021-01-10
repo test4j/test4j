@@ -1,22 +1,22 @@
 package org.test4j.module.database.dbop;
 
-import org.test4j.exception.ExtraMessageError;
 import org.test4j.asserts.iassert.impl.CollectionAssert;
 import org.test4j.asserts.iassert.intf.ICollectionAssert;
 import org.test4j.asserts.matcher.modes.EqMode;
-import org.test4j.module.core.utility.MessageHelper;
+import org.test4j.exception.ExtraMessageError;
+import org.test4j.module.ConfigHelper;
+import org.test4j.module.database.datagen.TableData;
+import org.test4j.module.database.datagen.TableMap;
 import org.test4j.module.database.environment.DBEnvironment;
 import org.test4j.module.database.environment.DBEnvironmentFactory;
 import org.test4j.module.database.sql.SqlList;
 import org.test4j.module.database.sql.Test4JSqlContext;
 import org.test4j.module.database.utility.SqlRunner;
-import org.test4j.tools.commons.ConfigHelper;
-import org.test4j.tools.commons.ExceptionWrapper;
+import org.test4j.tools.Logger;
 import org.test4j.tools.commons.ListHelper;
 import org.test4j.tools.commons.StringHelper;
 import org.test4j.tools.datagen.IDataMap;
-import org.test4j.tools.datagen.TableData;
-import org.test4j.tools.datagen.TableMap;
+import org.test4j.tools.exception.Exceptions;
 import org.test4j.tools.json.JSON;
 
 import java.io.File;
@@ -83,7 +83,7 @@ public class DBOperator implements IDBOperator {
             try {
                 SqlRunner.executeFromStream(env(), new FileInputStream(file));
             } catch (Exception e) {
-                throw ExceptionWrapper.wrapWithRuntimeException(e);
+                throw Exceptions.wrapWithRuntimeException(e);
             }
             return this;
         } finally {
@@ -213,7 +213,7 @@ public class DBOperator implements IDBOperator {
             }
         }
         String text = buff.toString();
-        MessageHelper.info(text);
+        Logger.info(text);
         return text;
 
     }
@@ -231,7 +231,7 @@ public class DBOperator implements IDBOperator {
             map.put(table, data);
         }
         String text = JSON.toJSON(map, true);
-        MessageHelper.info("\n" + text + "\n");
+        Logger.info("\n" + text + "\n");
         return text;
     }
 

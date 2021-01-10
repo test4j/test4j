@@ -2,7 +2,7 @@ package org.test4j.module.database.dbop;
 
 import org.test4j.module.database.environment.DBEnvironment;
 import org.test4j.module.database.utility.SqlRunner;
-import org.test4j.tools.commons.ExceptionWrapper;
+import org.test4j.tools.exception.Exceptions;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -21,7 +21,7 @@ public class SqlSet implements ISqlSet {
         try {
             SqlRunner.executeFromFile(env, filename);
         } catch (Exception e) {
-            throw ExceptionWrapper.wrapWithRuntimeException(e);
+            throw Exceptions.wrapWithRuntimeException(e);
         }
     }
 
@@ -29,7 +29,7 @@ public class SqlSet implements ISqlSet {
         try {
             SqlRunner.executeFromStream(env, new FileInputStream(file));
         } catch (Exception e) {
-            throw ExceptionWrapper.wrapWithRuntimeException(e);
+            throw Exceptions.wrapWithRuntimeException(e);
         }
     }
 
@@ -37,7 +37,7 @@ public class SqlSet implements ISqlSet {
         try {
             SqlRunner.executeFromStream(env, stream);
         } catch (Exception e) {
-            throw ExceptionWrapper.wrapWithRuntimeException(e);
+            throw Exceptions.wrapWithRuntimeException(e);
         }
     }
 

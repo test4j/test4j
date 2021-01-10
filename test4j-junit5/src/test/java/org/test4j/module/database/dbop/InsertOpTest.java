@@ -2,15 +2,16 @@ package org.test4j.module.database.dbop;
 
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.test4j.Test4J;
 import org.test4j.db.dm.UserDataMap;
-import org.test4j.junit5.Test4J;
+
 import org.test4j.tools.datagen.DataProvider;
 
 import java.util.Iterator;
 
 
 @SuppressWarnings({"rawtypes", "serial"})
-public class InsertOpTest extends Test4J {
+public class InsertOpTest implements Test4J {
     @ParameterizedTest
     @MethodSource("testGetInsertCommandText_data")
     public void testGetInsertCommandText(DataMap data, String result) {

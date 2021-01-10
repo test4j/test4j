@@ -8,10 +8,10 @@ import org.springframework.jdbc.datasource.DataSourceUtils;
 import org.springframework.jdbc.datasource.init.ScriptException;
 import org.springframework.jdbc.datasource.init.UncategorizedScriptException;
 import org.springframework.util.Assert;
+import org.test4j.module.ConfigHelper;
 import org.test4j.module.database.IDataSourceScript;
 import org.test4j.module.database.utility.DataSourceType;
 import org.test4j.tools.commons.ClazzHelper;
-import org.test4j.tools.commons.ConfigHelper;
 import org.test4j.tools.commons.StringHelper;
 
 import javax.sql.DataSource;

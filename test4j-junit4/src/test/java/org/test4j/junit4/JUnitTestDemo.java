@@ -1,13 +1,15 @@
 package org.test4j.junit4;
 
 import org.junit.Test;
-import org.test4j.module.ICore;
+import org.test4j.Test4J;
+import org.test4j.integration.junit4.DataFrom;
+import org.test4j.ICore;
 import org.test4j.tools.datagen.DataProvider;
 
 /**
  * 简单junit4测试示例
  */
-public class JUnitTestDemo extends Test4J {
+public class JUnitTestDemo implements Test4J {
     @Test
     public void demo() {
         int count = 10;

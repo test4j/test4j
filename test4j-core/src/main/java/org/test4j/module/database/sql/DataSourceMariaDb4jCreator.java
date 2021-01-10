@@ -4,7 +4,7 @@ import ch.vorburger.exec.ManagedProcessException;
 import ch.vorburger.mariadb4j.DB;
 import ch.vorburger.mariadb4j.DBConfigurationBuilder;
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.test4j.tools.commons.ConfigHelper;
+import org.test4j.module.ConfigHelper;
 import org.test4j.tools.commons.DateHelper;
 import org.test4j.tools.commons.StringHelper;
 
@@ -12,7 +12,7 @@ import javax.sql.DataSource;
 
 import static ch.vorburger.mariadb4j.DB.newEmbeddedDB;
 import static ch.vorburger.mariadb4j.DBConfigurationBuilder.newBuilder;
-import static org.test4j.module.core.utility.MessageHelper.warn;
+import static org.test4j.tools.Logger.warn;
 
 /**
  * MariaDb4j数据源创建

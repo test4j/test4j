@@ -14,7 +14,7 @@ import java.util.Set;
 
 import static java.util.stream.Collectors.joining;
 import static java.util.stream.Collectors.toList;
-import static org.test4j.tools.commons.StringHelper.isNotBlank;
+import static org.test4j.tools.commons.StringHelper.notBlank;
 
 /**
  * 实体对应数据表脚本生成
@@ -137,9 +137,6 @@ public abstract class EntityScriptParser {
          */
         public String defaultValue;
 
-        public ColumnDefine() {
-        }
-
         public ColumnDefine(Field field) {
             this.name = StringHelper.camel(field.getName());
             ColumnDef def = field.getAnnotation(ColumnDef.class);
@@ -151,7 +148,7 @@ public abstract class EntityScriptParser {
         }
 
         private void init(ColumnDef def) {
-            if (isNotBlank(def.value())) {
+            if (notBlank(def.value())) {
                 this.name = def.value();
             }
             this.type = def.type();

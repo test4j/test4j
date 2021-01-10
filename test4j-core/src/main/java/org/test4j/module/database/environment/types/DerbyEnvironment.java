@@ -1,7 +1,6 @@
 package org.test4j.module.database.environment.types;
 
 import org.test4j.module.database.environment.BaseEnvironment;
-import org.test4j.module.database.utility.DataSourceType;
 
 /**
  * Encapsulates support for the Derby database (also known as JavaDB). Operates
@@ -9,8 +8,8 @@ import org.test4j.module.database.utility.DataSourceType;
  *
  */
 public class DerbyEnvironment extends BaseEnvironment {
-	public DerbyEnvironment(String dataSourceName, String dataSourceFrom) {
-		super(DataSourceType.DerbyDB, dataSourceName, dataSourceFrom);
+	public DerbyEnvironment(String dataSourceName) {
+		super(dataSourceName);
 		this.typeMap = null;// TODO
 	}
 

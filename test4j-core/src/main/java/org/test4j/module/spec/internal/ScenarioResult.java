@@ -5,8 +5,8 @@ import lombok.Getter;
 import lombok.Setter;
 import org.test4j.function.ReturnExecutor;
 import org.test4j.function.SExecutor;
+import org.test4j.module.database.datagen.TableDataAround;
 import org.test4j.tools.commons.StringHelper;
-import org.test4j.tools.datagen.TableDataAround;
 
 import java.io.Serializable;
 import java.util.ArrayList;

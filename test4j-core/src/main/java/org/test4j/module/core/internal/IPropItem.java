@@ -12,8 +12,6 @@ public interface IPropItem {
      */
     String PROPKEY_MODULES = "test4j.modules";
 
-    String LOG4J_XML_FILE = "log4j.xml.file";
-
     String DB_DATASOURCE_DEFAULT = "dataSource";
 
     String DB_DATASOURCE_DEFAULT_NAME = "db.dataSource.default.name";

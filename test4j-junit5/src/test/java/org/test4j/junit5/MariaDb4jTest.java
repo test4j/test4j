@@ -1,9 +1,10 @@
 package org.test4j.junit5;
 
 import org.junit.jupiter.api.Test;
+import org.test4j.Test4J;
 import org.test4j.db.dm.UserDataMap;
 
-public class MariaDb4jTest extends Test4J {
+public class MariaDb4jTest implements Test4J {
     @Test
     public void test() {
         db.table("t_user").clean()

@@ -3,10 +3,10 @@ package org.test4j.module.spec.internal;
 import org.springframework.cglib.proxy.Enhancer;
 import org.springframework.cglib.proxy.MethodInterceptor;
 import org.springframework.cglib.proxy.MethodProxy;
-import org.test4j.module.ICore;
+import org.test4j.ICore;
+import org.test4j.integration.spring.SpringEnv;
 import org.test4j.module.spec.SpecModule;
 import org.test4j.module.spec.annotations.*;
-import org.test4j.module.spring.interal.SpringModuleHelper;
 import org.test4j.tools.commons.AnnotationHelper;
 import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.reflector.FieldAccessor;
@@ -130,7 +130,7 @@ public class MixProxy<T> implements MethodInterceptor {
             if (injected == true) {
                 return;
             }
-            SpringModuleHelper.injectSpringBeans(obj);
+            SpringEnv.injectSpringBeans(obj);
         } finally {
             injected = true;
             lock.unlock();

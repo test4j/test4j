@@ -1,10 +1,10 @@
 package org.test4j.module.spec.internal;
 
 import lombok.Getter;
-import org.test4j.tools.commons.StringHelper;
-import org.test4j.tools.json.JSON;
 import org.test4j.module.spec.IMix;
+import org.test4j.tools.commons.StringHelper;
 import org.test4j.tools.datagen.IDataMap;
+import org.test4j.tools.json.JSON;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -70,12 +70,12 @@ public class StepResult {
         if (StringHelper.isBlank(description)) {
             buff.append(method);
         } else {
-            buff.append(buildMethodDesc(method, description, args, result));
+            buff.append(buildMethodDesc(description, args, result));
         }
         this.description = buff.toString();
     }
 
-    private String buildMethodDesc(String method, String description, Object[] args, Object result) {
+    private String buildMethodDesc(String description, Object[] args, Object result) {
         List<String> tokens = this.findTokenList(description);
         Map<Integer, String> paras = new HashMap<>();
         this.addPara(paras, 0, result);

@@ -1,7 +1,7 @@
 package org.test4j.module.spec.internal;
 
-import org.test4j.tools.datagen.TableMap;
-import org.test4j.tools.datagen.TableDataAround;
+import org.test4j.module.database.datagen.TableDataAround;
+import org.test4j.module.database.datagen.TableMap;
 
 import java.util.function.Consumer;
 

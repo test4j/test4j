@@ -1,7 +1,7 @@
 package org.test4j.module.database.utility;
 
 import org.test4j.exception.UnConfigDataBaseTypeException;
-import org.test4j.tools.commons.ConfigHelper;
+import org.test4j.module.ConfigHelper;
 import org.test4j.tools.commons.StringHelper;
 
 public enum DataSourceType {

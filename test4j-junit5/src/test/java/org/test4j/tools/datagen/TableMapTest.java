@@ -1,14 +1,16 @@
 package org.test4j.tools.datagen;
 
 import org.junit.jupiter.api.Test;
+import org.test4j.Test4J;
 import org.test4j.exception.ExtraMessageError;
 import org.test4j.asserts.matcher.modes.EqMode;
-import org.test4j.junit5.Test4J;
+
+import org.test4j.module.database.datagen.TableMap;
 import org.test4j.tools.commons.ResourceHelper;
 
 import java.io.FileNotFoundException;
 
-class TableMapTest extends Test4J {
+class TableMapTest implements Test4J {
 
     @Test
     void test_map_list() throws FileNotFoundException {

@@ -1,9 +1,9 @@
 package org.test4j.module.database.sql;
 
+import org.test4j.module.ConfigHelper;
 import org.test4j.module.database.IDataSourceCreator;
 import org.test4j.module.database.utility.DataSourceType;
 import org.test4j.tools.commons.ClazzHelper;
-import org.test4j.tools.commons.ConfigHelper;
 
 import javax.sql.DataSource;
 import java.util.HashMap;

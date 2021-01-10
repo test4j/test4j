@@ -1,7 +1,7 @@
 package org.test4j.module.spec;
 
 import org.test4j.module.core.Module;
-import org.test4j.module.core.internal.TestListener;
+import org.test4j.module.core.internal.ModuleListener;
 import org.test4j.module.spec.internal.MixProxy;
 import org.test4j.module.spec.internal.ScenarioResult;
 import org.test4j.module.spec.internal.StoryPrinter;
@@ -26,11 +26,11 @@ public class SpecModule implements Module {
     }
 
     @Override
-    public TestListener getTestListener() {
+    public ModuleListener getTestListener() {
         return new SpecListener();
     }
 
-    protected class SpecListener extends TestListener {
+    protected class SpecListener extends ModuleListener {
 
         @Override
         protected String getName() {
@@ -39,7 +39,7 @@ public class SpecModule implements Module {
 
 
         @Override
-        public void beforeMethod(Object testedObject, Method testMethod) {
+        public void beforeExecute(Object testedObject, Method testMethod) {
             if (testedObject instanceof IStory) {
                 MixProxy.createMixes(testedObject);
                 MixProxy.mix(testedObject);
@@ -48,7 +48,7 @@ public class SpecModule implements Module {
         }
 
         @Override
-        public void afterMethod(Object testObject, Method testMethod, Throwable testThrowable) {
+        public void afterExecute(Object testObject, Method testMethod, Throwable testThrowable) {
             if (testObject instanceof IStory) {
                 String scenarioPath = testObject.getClass().getName() + "__" + testMethod.getName();
                 String scenarioName = currScenario().getScenarioName();
@@ -59,7 +59,7 @@ public class SpecModule implements Module {
         }
 
         @Override
-        public void afterClass(Class testClass) {
+        public void afterAll(Class testClass) {
             StoryPrinter.printScenarioIndex(testClass.getSimpleName());
         }
     }

@@ -1,16 +1,17 @@
 package org.test4j.module.database.dbop;
 
 import org.junit.jupiter.api.Test;
+import org.test4j.Test4J;
 import org.test4j.db.ITable;
 import org.test4j.db.dm.UserDataMap;
 import org.test4j.asserts.matcher.modes.EqMode;
-import org.test4j.junit5.Test4J;
+
 
 import java.util.Date;
 
 
 @SuppressWarnings({"serial"})
-public class DataGeneratorTest extends Test4J {
+public class DataGeneratorTest implements Test4J {
 
     @Test
     public void testInsert_CountDataMap() {

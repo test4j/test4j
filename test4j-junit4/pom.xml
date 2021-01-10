@@ -13,10 +13,6 @@
     <artifactId>test4j-junit4</artifactId>
     <name>test4j junit4</name>
     <packaging>jar</packaging>
-    <properties>
-        <test.jvm.args>
-            <![CDATA[-javaagent:"${settings.localRepository}/org/test4j/fluent-mock/${fluent-mock.version}/fluent-mock-${fluent-mock.version}.jar" -Dfakes=org.test4j.junit4.Test4JBuilder]]></test.jvm.args>
-    </properties>
     <dependencies>
         <dependency>
             <groupId>org.test4j</groupId>

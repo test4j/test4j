@@ -3,8 +3,8 @@ package org.test4j.module.database;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.MethodSource;
+import org.test4j.Test4J;
 import org.test4j.asserts.matcher.string.StringMode;
-import org.test4j.junit5.Test4J;
 import org.test4j.module.database.utility.DBHelper;
 import org.test4j.tools.commons.ResourceHelper;
 import org.test4j.tools.datagen.DataProvider;
@@ -13,7 +13,7 @@ import java.io.FileNotFoundException;
 import java.util.Iterator;
 
 @SuppressWarnings({"rawtypes", "serial"})
-public class DBHelperTest extends Test4J {
+public class DBHelperTest implements Test4J {
 
     @Test
     public void testParseSQL() throws FileNotFoundException {

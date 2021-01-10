@@ -2,7 +2,6 @@ package org.test4j.module.database.environment.types;
 
 import org.test4j.module.database.environment.BaseEnvironment;
 import org.test4j.module.database.environment.typesmap.OracleTypeMap;
-import org.test4j.module.database.utility.DataSourceType;
 
 import static org.test4j.tools.commons.StringHelper.DOUBLE_QUOTATION;
 
@@ -12,8 +11,8 @@ import static org.test4j.tools.commons.StringHelper.DOUBLE_QUOTATION;
  * @author wudarui
  */
 public class OracleEnvironment extends BaseEnvironment {
-    public OracleEnvironment(String dataSourceName, String dataSourceFrom) {
-        super(DataSourceType.Oracle, dataSourceName, dataSourceFrom);
+    public OracleEnvironment(String dataSourceName) {
+        super(dataSourceName);
         typeMap = new OracleTypeMap();
     }
 

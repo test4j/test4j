@@ -1,7 +1,7 @@
 package org.test4j.module.spec.internal;
 
 import lombok.Getter;
-import org.test4j.module.core.utility.MessageHelper;
+import org.test4j.tools.Logger;
 
 import java.io.File;
 import java.io.FileWriter;
@@ -26,7 +26,7 @@ public class StoryPrinter {
     }
 
     public static void print(String scenarioPath, String scenarioName, String scenarioResult, Throwable testThrowable) {
-        MessageHelper.info(scenarioResult);
+        Logger.info(scenarioResult);
 
         String scenarioFile = scenarioPath + ".txt";
         try {
@@ -53,7 +53,7 @@ public class StoryPrinter {
             writer.write(String.format("<span class='badge %s'>%s</span>\n", ScenarioInfo.listStyle(scenarios), testKlassName));
             writer.write("<ul>\n");
             String context = scenarios.stream().map(StoryPrinter::printScenarioIndex)
-                    .collect(Collectors.joining("\n"));
+                .collect(Collectors.joining("\n"));
             writer.write(context);
             writer.write("</ul>\n");
             writer.write("</li>\n");
@@ -67,12 +67,12 @@ public class StoryPrinter {
 
     private static String printScenarioIndex(ScenarioInfo scenario) {
         return new StringBuilder()
-                .append("<li>")
-                .append(String.format("<a class='badge %s' href='javascript:doShow(\"%s\");'>", scenario.getStyle(), scenario.getScenarioPath()))
-                .append(scenario.getScenarioName())
-                .append("</a>")
-                .append("</li>")
-                .toString();
+            .append("<li>")
+            .append(String.format("<a class='badge %s' href='javascript:doShow(\"%s\");'>", scenario.getStyle(), scenario.getScenarioPath()))
+            .append(scenario.getScenarioName())
+            .append("</a>")
+            .append("</li>")
+            .toString();
     }
 
     private static void initIndexFile() {

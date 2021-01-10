@@ -1,6 +1,5 @@
 package org.test4j.module.database.sql;
 
-import java.util.List;
 import java.util.Optional;
 
 public class Test4JSqlContext {
@@ -38,11 +37,6 @@ public class Test4JSqlContext {
     }
 
     public static void addSql(String sql, Object... parameters) {
-        getSqlContext().add(new SqlContext(sql, parameters));
-        setRecordStatus(true);
-    }
-
-    public static void addSql(String sql, List parameters) {
         getSqlContext().add(new SqlContext(sql, parameters));
         setRecordStatus(true);
     }

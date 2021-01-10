@@ -14,7 +14,4 @@ public class NameNormaliser {
         return name.replaceAll(replaceIllegalCharactersWithSpacesRegex, "");
     }
 
-    public static String normaliseName(final String name) {
-        return name == null ? "" : replaceIllegalCharacters(name.toLowerCase());
-    }
 }

@@ -1,10 +1,11 @@
 package org.test4j.module.inject;
 
 import org.junit.jupiter.api.Test;
-import org.test4j.junit5.Test4J;
+
+import org.test4j.Test4J;
 import org.test4j.model.User;
 
-public class InjectionModuleHelperTest extends Test4J {
+public class InjectionModuleHelperTest implements Test4J {
     User user = new User();
 
     @Inject(targets = "user", properties = "first")

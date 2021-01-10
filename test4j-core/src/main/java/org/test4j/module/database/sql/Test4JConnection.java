@@ -1,6 +1,6 @@
 package org.test4j.module.database.sql;
 
-import org.test4j.module.spring.interal.IProxyMarker;
+import org.test4j.module.database.IProxyMarker;
 
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;

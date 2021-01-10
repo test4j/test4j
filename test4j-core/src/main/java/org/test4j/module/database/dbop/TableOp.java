@@ -6,13 +6,13 @@ import org.test4j.asserts.iassert.impl.ObjectAssert;
 import org.test4j.asserts.iassert.intf.ICollectionAssert;
 import org.test4j.asserts.iassert.intf.INumberAssert;
 import org.test4j.asserts.iassert.intf.IObjectAssert;
-import org.test4j.tools.json.JSON;
-import org.test4j.module.core.utility.MessageHelper;
 import org.test4j.module.database.environment.DBEnvironment;
 import org.test4j.module.database.environment.DBEnvironmentFactory;
 import org.test4j.module.database.utility.DBHelper;
 import org.test4j.module.database.utility.SqlRunner;
+import org.test4j.tools.Logger;
 import org.test4j.tools.datagen.IDataMap;
+import org.test4j.tools.json.JSON;
 
 import java.util.List;
 import java.util.Map;
@@ -146,7 +146,7 @@ public class TableOp implements ITableOp {
         setDbOpStatus(true);
         try {
             List<Map<String, Object>> list = selectData(where);
-            MessageHelper.info(JSON.toJSON(list, true));
+            Logger.info(JSON.toJSON(list, true));
             return new CollectionAssert(list);
         } finally {
             setDbOpStatus(false);

@@ -1,10 +1,10 @@
 package org.test4j.module.spec;
 
-import org.test4j.module.ICore;
+import org.test4j.ICore;
+import org.test4j.ISpring;
 import org.test4j.module.database.IDatabase;
 import org.test4j.module.spec.internal.IScenario;
 import org.test4j.module.spec.internal.Scenario;
-import org.test4j.module.spring.ISpring;
 
 import java.io.Serializable;
 

@@ -1,7 +1,8 @@
 package org.test4j.module.inject;
 
 import org.junit.jupiter.api.Test;
-import org.test4j.junit5.Test4J;
+
+import org.test4j.Test4J;
 import org.test4j.model.User;
 
 /**
@@ -9,7 +10,7 @@ import org.test4j.model.User;
  *
  * @author darui.wudr 2013-1-9 下午2:50:26
  */
-public class InjectModuleTest extends Test4J {
+public class InjectModuleTest implements Test4J {
     @Injected
     User user = new User();
 

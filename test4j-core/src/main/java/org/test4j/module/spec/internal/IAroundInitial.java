@@ -1,8 +1,8 @@
 package org.test4j.module.spec.internal;
 
-import org.test4j.module.core.internal.Test4JContext;
+import org.test4j.Context;
+import org.test4j.module.database.datagen.TableDataAround;
 import org.test4j.tools.datagen.IDataMap;
-import org.test4j.tools.datagen.TableDataAround;
 
 /**
  * IAroundInitial
@@ -20,7 +20,7 @@ public interface IAroundInitial extends IWhen, IAroundHandler {
      */
     default IAroundInitial dbAround() throws RuntimeException {
         try {
-            String file = TableDataAround.findFile(Test4JContext.currTestedClazz(), Test4JContext.currTestedMethod().getName());
+            String file = TableDataAround.findFile(Context.currTestClass(), Context.currTestMethod().getName());
             return this.dbAround(file);
         } catch (Throwable e) {
             throw new RuntimeException("步骤 - 数据库初始化数据和检查数据准备失败：" + e.getMessage(), e);

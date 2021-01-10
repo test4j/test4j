@@ -1,11 +1,12 @@
 package org.test4j.module.database.dbop;
 
 import org.junit.jupiter.api.Test;
+import org.test4j.Test4J;
 import org.test4j.db.dm.UserDataMap;
 import org.test4j.asserts.matcher.string.StringMode;
-import org.test4j.junit5.Test4J;
+
 import org.test4j.tools.commons.ResourceHelper;
-import org.test4j.tools.datagen.TableMap;
+import org.test4j.module.database.datagen.TableMap;
 
 import java.io.FileNotFoundException;
 
@@ -17,7 +18,7 @@ import static org.test4j.db.ITable.t_user;
  * @return:
  * @author:darui.wu Created by darui.wu on 2020/4/9.
  */
-class TableOpTest_PrintDataMap extends Test4J {
+class TableOpTest_PrintDataMap implements Test4J {
 
     @Test
     void printAsDataMap() {

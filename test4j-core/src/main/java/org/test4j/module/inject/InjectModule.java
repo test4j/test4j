@@ -1,13 +1,12 @@
 package org.test4j.module.inject;
 
 import org.test4j.module.core.Module;
-import org.test4j.module.core.internal.TestListener;
+import org.test4j.module.core.internal.ModuleListener;
 
 import java.lang.reflect.Method;
 
-import static org.test4j.module.inject.InjectHelper.injectIntoTestedObject;
+import static org.test4j.module.inject.imposteriser.InjectHelper.injectIntoTestedObject;
 
-@SuppressWarnings({"rawtypes", "unchecked"})
 public class InjectModule implements Module {
 
     @Override
@@ -28,13 +27,13 @@ public class InjectModule implements Module {
     }
 
     @Override
-    public TestListener getTestListener() {
-        return new InjectTestListener();
+    public ModuleListener getTestListener() {
+        return new InjectModuleListener();
     }
 
-    protected class InjectTestListener extends TestListener {
+    protected class InjectModuleListener extends ModuleListener {
         @Override
-        public void beforeMethod(Object testObject, Method testMethod) {
+        public void beforeExecute(Object testObject, Method testMethod) {
             injectInto(testObject);
         }
 

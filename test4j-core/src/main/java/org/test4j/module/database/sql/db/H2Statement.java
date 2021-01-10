@@ -2,9 +2,9 @@ package org.test4j.module.database.sql.db;
 
 import org.h2.command.Command;
 import org.h2.jdbc.JdbcPreparedStatement;
+import org.test4j.module.database.sql.Test4JSqlContext;
 import org.test4j.tools.commons.ClazzHelper;
 import org.test4j.tools.json.JSON;
-import org.test4j.module.database.sql.Test4JSqlContext;
 import org.test4j.tools.reflector.FieldAccessor;
 
 import java.sql.Statement;

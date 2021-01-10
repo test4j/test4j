@@ -1,9 +1,10 @@
 package org.test4j.junit5;
 
 import org.junit.jupiter.api.Test;
+import org.test4j.Test4J;
 import org.test4j.db.dm.UserDataMap;
 
-public class DatabaseTestDemo extends Test4J {
+public class DatabaseTestDemo implements Test4J {
     @Test
     void test() {
         String table = "t_user";

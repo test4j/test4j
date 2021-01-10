@@ -1,10 +1,10 @@
 package org.test4j.module.database.sql;
 
 import org.apache.commons.dbcp2.BasicDataSource;
-import org.test4j.module.core.utility.MessageHelper;
+import org.test4j.module.ConfigHelper;
 import org.test4j.module.database.IDataSourceCreator;
 import org.test4j.module.database.utility.DataSourceType;
-import org.test4j.tools.commons.ConfigHelper;
+import org.test4j.tools.Logger;
 
 import javax.sql.DataSource;
 import java.sql.Driver;
@@ -24,8 +24,8 @@ public class DataSourceDefaultCreator implements IDataSourceCreator {
 
         checkDoesTestDB(type, dataSourceName, schemaName);
         registerDriver(dataSourceName);
-        MessageHelper.info("Creating data source. Driver: " + driver(dataSourceName) + ", url: " + url(dataSourceName) + ", user: " + username(dataSourceName)
-                + ", password: <not shown>");
+        Logger.info("Creating data source. Driver: " + driver(dataSourceName) + ", url: " + url(dataSourceName) + ", user: " + username(dataSourceName)
+            + ", password: <not shown>");
 
         BasicDataSource dataSource = new BasicDataSource();
         {
@@ -57,7 +57,7 @@ public class DataSourceDefaultCreator implements IDataSourceCreator {
 
         if (!temp.endsWith("TEST") && !temp.startsWith("TEST")) {
             throw new RuntimeException("only local db or test db will be allowed to connect,url:" + url(dataSourceName)
-                    + ", schemas:" + schemaName);
+                + ", schemas:" + schemaName);
         }
     }
 
@@ -97,7 +97,7 @@ public class DataSourceDefaultCreator implements IDataSourceCreator {
         return ConfigHelper.getDataSourceKey(dataSourceName, PROP_KEY_DATASOURCE_PASSWORD);
     }
 
-    public static String schema(String dataSourceName){
+    public static String schema(String dataSourceName) {
         return ConfigHelper.getDataSourceKey(dataSourceName, PROP_KEY_DATASOURCE_SCHEMA);
     }
 }

@@ -1,9 +1,9 @@
 package org.test4j.module.spec.internal;
 
-import org.test4j.module.core.internal.Test4JContext;
+import org.test4j.Context;
 import org.test4j.module.spec.SpecModule;
 import org.test4j.tools.commons.StringHelper;
-import org.test4j.tools.reflector.MethodDisplayNameFinder;
+import org.test4j.tools.reflector.DisplayNameFinder;
 
 import java.lang.reflect.Method;
 
@@ -33,7 +33,7 @@ public interface IScenario {
      * @return
      */
     default IGiven scenario() {
-        Method method = Test4JContext.currTestedMethod();
-        return this.scenario(MethodDisplayNameFinder.displayName(method));
+        Method method = Context.currTestMethod();
+        return this.scenario(DisplayNameFinder.displayName(method));
     }
 }

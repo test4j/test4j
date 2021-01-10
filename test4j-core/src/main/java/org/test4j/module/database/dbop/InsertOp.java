@@ -3,8 +3,8 @@ package org.test4j.module.database.dbop;
 import org.test4j.module.database.environment.DBEnvironment;
 import org.test4j.module.database.environment.DBEnvironmentFactory;
 import org.test4j.module.database.environment.TableMeta;
-import org.test4j.tools.commons.ExceptionWrapper;
 import org.test4j.tools.datagen.IDataMap;
+import org.test4j.tools.exception.Exceptions;
 
 import java.io.InputStream;
 import java.sql.PreparedStatement;
@@ -35,7 +35,7 @@ public class InsertOp implements IInsertOp {
             InsertOp op = new InsertOp(env);
             op.insert(table, data);
         } catch (Exception e) {
-            throw ExceptionWrapper.getUndeclaredThrowableExceptionCaused(e);
+            throw Exceptions.getUndeclaredThrowableExceptionCaused(e);
         }
     }
 
