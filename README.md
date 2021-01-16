@@ -19,7 +19,7 @@ test4j项目作为一个总控集成框架继续存在, test4j提供了3个测�
 ```xml
 <project>
 <properties>
-    <fluent-mock.version>1.0.0</fluent-mock.version>
+    <fluent-mock.version>1.0.2</fluent-mock.version>
     <test4j.version>2.7.1</test4j.version>
 </properties>
 <dependencies>
@@ -60,7 +60,7 @@ test4j项目作为一个总控集成框架继续存在, test4j提供了3个测�
 dependencies {
     testCompile('org.test4j:test4j-junit5:2.7.1')
     //annotationProcessor('org.test4j:fluent-mock:${fluent-mock.version}')
-    testAnnotationProcessor('org.test4j:fluent-mock:1.0.0')
+    testAnnotationProcessor('org.test4j:fluent-mock:1.0.2')
 
     test {
         jvmArgs "-javaagent:${classpath.find { it.name.contains("fluent-mock") }.absolutePath}"
