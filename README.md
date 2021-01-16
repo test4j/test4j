@@ -1,40 +1,36 @@
 # Test4J
-[TOC]
 
 -------
-test4j是一个单元测试和集成测试的框架，它提供了以下特性
-- 和junit和testng的集成使用
-- 支持Spring和SpringBoot测试
-- 提供了fluent api形式的断言
-- 以java形式进行数据库准备和数据库断言
-- 对数据库执行sql语句进行断言
-- 场景化业务测试，模块化步骤
-- 和jmockit组合使用
+test4j是一个单元测试和集成测试的框架，目前已经分拆成4个子项目
+
+- [fluent-mock: mock框架](https://gitee.com/fluent-mybatis/fluent-mock.git)
+- [fluent-assert: 断言框架](https://gitee.com/fluent-mybatis/fluent-assert.git)
+- [fluent-dbtest: 数据库测试框架](https://gitee.com/fluent-mybatis/fluent-dbtest.git)
+- [fluent-story: BDD测试框架](https://gitee.com/fluent-mybatis/fluent-story.git)
+
+test4j项目作为一个总控集成框架继续存在, test4j提供了3个测试框架的总控集成
+- test4j-junit4 使用junit4进行测试
+- test4j-junit5 使用junit5进行测试
+- test4j-testng 使用testng进行测试
 
 ##使用##
 - maven pom.xml文件定义
 
 ```xml
+<project>
 <properties>
-    <jmockit.version>1.4.5</jmockit.version>
+    <fluent-mock.version>1.0.0</fluent-mock.version>
+    <test4j.version>2.7.1</test4j.version>
 </properties>
 <dependencies>
     <dependency>
         <groupId>org.test4j</groupId>
-        <artifactId>test4j</artifactId>
-        <version>2.5.0</version>
-        <scope>test</scope>
-    </dependency>
-    <dependency>
-        <groupId>org.jmockit</groupId>
-        <artifactId>jmockit</artifactId>
-        <version>${jmockit.version}</version>
-        <scope>test</scope>
-    </dependency>
-    <dependency>
-        <groupId>junit</groupId>
-        <artifactId>junit</artifactId>
-        <version>4.12</version>
+        <artifactId>test4j-junit4</artifactId>
+        <!-- 
+        <artifactId>test4j-junit5</artifactId>
+        <artifactId>test4j-testng</artifactId>
+        -->
+        <version>${test4j.version}</version>
         <scope>test</scope>
     </dependency>
 </dependencies>
@@ -48,12 +44,13 @@ test4j是一个单元测试和集成测试的框架，它提供了以下特性
                 <useSystemClassLoader>true</useSystemClassLoader>
                 <testFailureIgnore>true</testFailureIgnore>
                 <parallel>all</parallel>
-                <!-- 重要，argLine用于surefire插件启动jmockit和test4j -->
-                <argLine>-javaagent:"${settings.localRepository}/org/jmockit/jmockit/${jmockit.version}/jmockit-${jmockit.version}.jar -Dfakes=org.test4j.junit4.Test4JBuilder</argLine>
+                <!-- 重要，argLine用于surefire插件启动fluent-mock -->
+                <argLine>-javaagent:"${settings.localRepository}/org/test4j/fluent-mock/${fluent-mock.version}/fluent-mock-${fluent-mock.version}.jar</argLine>
                 <forkMode>always</forkMode>
                 <threadCount>1</threadCount>
             </configuration>
         </plugin>
     </plugins>
 </build>
+</project>
 ```
