@@ -13,8 +13,8 @@ test4j项目作为一个总控集成框架继续存在, test4j提供了3个测�
 - test4j-junit5 使用junit5进行测试
 - test4j-testng 使用testng进行测试
 
-##使用##
-- maven pom.xml文件定义
+## 使用
+- maven pom.xml
 
 ```xml
 <project>
@@ -53,4 +53,18 @@ test4j项目作为一个总控集成框架继续存在, test4j提供了3个测�
     </plugins>
 </build>
 </project>
+```
+
+- gradle
+```groovy
+dependencies {
+    testCompile('org.test4j:test4j-junit5:2.7.1')
+    //annotationProcessor('org.test4j:fluent-mock:${fluent-mock.version}')
+    testAnnotationProcessor('org.test4j:fluent-mock:1.0.0')
+
+    test {
+        jvmArgs "-javaagent:${classpath.find { it.name.contains("fluent-mock") }.absolutePath}"
+        useJUnitPlatform()
+    }
+}
 ```
