@@ -1,15 +1,16 @@
 package org.test4j.junit4;
 
-import org.junit.runner.RunWith;
-import org.test4j.module.ICore;
-import org.test4j.module.IUtil;
-import org.test4j.module.core.utility.JMockitHelper;
+import org.test4j.mock.startup.JavaAgentHits;
 import org.test4j.module.database.IDatabase;
-import org.test4j.module.spring.ISpring;
 
-@RunWith(Test4JProxyRunner.class)
-public abstract class Test4J implements ICore, ISpring, IDatabase, IUtil {
+/**
+ * use implements {@link org.test4j.Test4J}
+ *
+ * @author wudarui
+ */
+@Deprecated
+public class Test4J implements org.test4j.Test4J, IDatabase {
     static {
-        JMockitHelper.getJMockitJavaagentHit();
+        JavaAgentHits.message();
     }
 }

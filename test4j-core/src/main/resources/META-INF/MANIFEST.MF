@@ -1,3 +1,0 @@
-Premain-Class: org.test4j.core.Startup
-Agent-Class: org.test4j.core.Startup
-Can-Redefine-Classes: true

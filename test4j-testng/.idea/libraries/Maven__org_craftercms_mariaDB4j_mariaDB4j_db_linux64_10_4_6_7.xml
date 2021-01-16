@@ -1,0 +1,13 @@
+<component name="libraryTable">
+  <library name="Maven: org.craftercms.mariaDB4j:mariaDB4j-db-linux64:10.4.6.7">
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/craftercms/mariaDB4j/mariaDB4j-db-linux64/10.4.6.7/mariaDB4j-db-linux64-10.4.6.7.jar!/" />
+    </CLASSES>
+    <JAVADOC>
+      <root url="jar://$MAVEN_REPOSITORY$/org/craftercms/mariaDB4j/mariaDB4j-db-linux64/10.4.6.7/mariaDB4j-db-linux64-10.4.6.7-javadoc.jar!/" />
+    </JAVADOC>
+    <SOURCES>
+      <root url="jar://$MAVEN_REPOSITORY$/org/craftercms/mariaDB4j/mariaDB4j-db-linux64/10.4.6.7/mariaDB4j-db-linux64-10.4.6.7-sources.jar!/" />
+    </SOURCES>
+  </library>
+</component>
