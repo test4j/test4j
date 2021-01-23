@@ -4,11 +4,11 @@
     <parent>
         <groupId>com.github.atool</groupId>
         <artifactId>fluent-parent</artifactId>
-        <version>1.0.2</version>
+        <version>1.0.3</version>
     </parent>
     <groupId>org.test4j</groupId>
     <artifactId>test4j-parent</artifactId>
-    <version>2.7.1</version>
+    <version>2.7.3</version>
     <packaging>pom</packaging>
     <name>test4j-parent</name>
     <description>test4j parent</description>
@@ -21,9 +21,10 @@
         </developer>
     </developers>
     <properties>
-        <fluent-mock.version>1.0.2</fluent-mock.version>
+        <fluent-mock.version>1.0.7</fluent-mock.version>
         <fluent-assert.version>1.0.2</fluent-assert.version>
         <fluent-dbtest.version>1.0.0</fluent-dbtest.version>
+        <test4j-database-dep.version>1.0.1</test4j-database-dep.version>
         <fluent-story.version>1.0.0</fluent-story.version>
     </properties>
     <modules>
@@ -31,9 +32,6 @@
         <module>test4j-junit5</module>
         <module>test4j-testng</module>
     </modules>
-    <dependencyManagement>
-
-    </dependencyManagement>
     <dependencies>
         <dependency>
             <groupId>org.test4j</groupId>
@@ -44,16 +42,43 @@
             <groupId>org.test4j</groupId>
             <artifactId>fluent-assert</artifactId>
             <version>${fluent-assert.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.test4j</groupId>
+                    <artifactId>fluent-mock</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
         <dependency>
             <groupId>org.test4j</groupId>
             <artifactId>fluent-dbtest</artifactId>
             <version>${fluent-dbtest.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.test4j</groupId>
+                    <artifactId>fluent-mock</artifactId>
+                </exclusion>
+                <exclusion>
+                    <artifactId>database-dep</artifactId>
+                    <groupId>org.test4j</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.test4j</groupId>
+            <artifactId>database-dep</artifactId>
+            <version>${test4j-database-dep.version}</version>
         </dependency>
         <dependency>
             <groupId>org.test4j</groupId>
             <artifactId>fluent-story</artifactId>
             <version>${fluent-story.version}</version>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.test4j</groupId>
+                    <artifactId>fluent-mock</artifactId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 </project>
