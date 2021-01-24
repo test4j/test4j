@@ -8,7 +8,6 @@ import org.test4j.module.database.IDatabase;
  *
  * @author wudarui
  */
-@Deprecated
 public class Test4J implements org.test4j.Test4J, IDatabase {
     static {
         JavaAgentHits.message();
