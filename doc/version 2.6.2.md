@@ -1,4 +1,0 @@
-- 增加story.dbAround()特性，用于在when执行前准备数据，执行后验证数据
-- 增加TableMap和TableData数据结构，用户序列化和反序列化数据json
-- 增加把数据库数据打印为json格式，和DataMap格式功能
-- 重写了反射比较，list比较实现
