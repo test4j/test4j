@@ -38,6 +38,7 @@
             <groupId>org.test4j</groupId>
             <artifactId>fluent-mock</artifactId>
             <version>${fluent-mock.version}</version>
+            <scope>provided</scope>
         </dependency>
         <dependency>
             <groupId>com.github.atool</groupId>
