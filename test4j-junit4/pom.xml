@@ -6,10 +6,9 @@
     <parent>
         <groupId>org.test4j</groupId>
         <artifactId>test4j-parent</artifactId>
-        <version>2.7.8</version>
+        <version>2.7.9</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <groupId>org.test4j</groupId>
     <artifactId>test4j-junit4</artifactId>
     <properties>
         <junit4.version>4.13.2</junit4.version>
