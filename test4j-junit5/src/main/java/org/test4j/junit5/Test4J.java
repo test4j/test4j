@@ -9,6 +9,7 @@ import org.test4j.module.database.IDatabase;
  *
  * @author wudarui
  */
+@SuppressWarnings("unused")
 @Tag("test4j")
 public class Test4J implements org.test4j.Test4J, IDatabase {
     static {
