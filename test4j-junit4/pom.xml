@@ -9,15 +9,21 @@
         <version>2.7.11</version>
         <relativePath>../pom.xml</relativePath>
     </parent>
-    <artifactId>test4j-junit5</artifactId>
+    <artifactId>test4j-junit4</artifactId>
     <properties>
-        <junit5.version>5.8.1</junit5.version>
+        <junit4.version>4.13.2</junit4.version>
     </properties>
     <dependencies>
         <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter</artifactId>
-            <version>${junit5.version}</version>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>${junit4.version}</version>
+            <exclusions>
+                <exclusion>
+                    <artifactId>hamcrest-core</artifactId>
+                    <groupId>org.hamcrest</groupId>
+                </exclusion>
+            </exclusions>
         </dependency>
     </dependencies>
 </project>

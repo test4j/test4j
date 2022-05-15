@@ -1,2 +1,0 @@
-- 代码生成剥离为独立的jar包，供Test4J和FluentMybatis共用
-- test4j-btest设置为skip deploy

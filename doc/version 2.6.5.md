@@ -1,2 +1,0 @@
-- 修复test4j-generator生成DataMap文件bug
-- 优化generator调用接口顺序

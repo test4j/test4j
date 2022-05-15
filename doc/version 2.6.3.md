@@ -1,3 +1,0 @@
-- fix bug: DiffByReflect number compare
-- 增强gson反序列化int，long时的行为
-- 增加对when执行结果值的直接断言方式
