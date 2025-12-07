@@ -107,6 +107,13 @@
       <dependency>
         <groupId>org.test4j</groupId>
         <artifactId>database-dep</artifactId>
+        <version>${database-dep.version}</version>
+        <exclusions>
+          <exclusion>
+            <artifactId>commons-dbcp2</artifactId>
+            <groupId>org.apache.commons</groupId>
+          </exclusion>
+        </exclusions>
       </dependency>
     </dependencies>
   </dependencyManagement>
@@ -147,30 +154,20 @@
           <artifactId>jackson-databind</artifactId>
           <groupId>com.fasterxml.jackson.core</groupId>
         </exclusion>
+        <exclusion>
+          <artifactId>commons-io</artifactId>
+          <groupId>commons-io</groupId>
+        </exclusion>
+        <exclusion>
+          <artifactId>commons-lang3</artifactId>
+          <groupId>org.apache.commons</groupId>
+        </exclusion>
       </exclusions>
     </dependency>
     <dependency>
       <groupId>org.test4j</groupId>
       <artifactId>database-dep</artifactId>
-      <version>${database-dep.version}</version>
-      <exclusions>
-        <exclusion>
-          <artifactId>mariaDB4j</artifactId>
-          <groupId>org.craftercms.mariaDB4j</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>ojdbc8</artifactId>
-          <groupId>com.oracle.ojdbc</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>spring-jdbc</artifactId>
-          <groupId>org.springframework</groupId>
-        </exclusion>
-        <exclusion>
-          <artifactId>spring-orm</artifactId>
-          <groupId>org.springframework</groupId>
-        </exclusion>
-      </exclusions>
+
     </dependency>
     <dependency>
       <groupId>org.test4j</groupId>
