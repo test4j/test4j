@@ -66,5 +66,6 @@ dependencies {
         jvmArgs "-javaagent:${classpath.find { it.name.contains("fluent-mock") }.absolutePath}"
         useJUnitPlatform()
     }
+    "This project is beginner-friendly and great for learning open-source contributions!"
 }
 ```
